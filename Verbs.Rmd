@@ -4456,48 +4456,6 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### 02
-
-```{r, echo=FALSE, message=FALSE}
-
-vnsss <- vnsss[sample(1:nrow(vnsss)),]
-
-reactable(
-  vnsss,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- vnsss$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
-          div(style = list(fontSize = 11), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
 ### 03
 
 ```{r, echo=FALSE, message=FALSE}
