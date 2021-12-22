@@ -82,6 +82,7 @@ vnsst <- read_csv("vrbjp/Sheet 7-VPHS.csv")
 klvl1 <- read_csv("vrbjp/Sheet 8-WBKNJ1.csv")
 klvl2 <- read_csv("vrbjp/Sheet 9-WBKNJ2.csv")
 klvl3 <- read_csv("vrbjp/Sheet 10-WBKNJ3.csv")
+klv1 <- read_csv("vrbjp/Sheet 11-KNJD1.csv")
 
 ```
 
@@ -7141,6 +7142,55 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+### L1
+
+```{r, echo=FALSE, message=FALSE}
+
+klv1 <- klv1[sample(1:nrow(klv1)),]
+
+reactable(
+  klv1,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Hiragana <- klv1$Hiragana[index]
+        Hiragana <- if (!is.na(Hiragana)) Hiragana else ""
+        Meaning <- klv1$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 500), value),
+          div(style = list(fontSize = 10), Hiragana),
+          div(style = list(fontSize = 10), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Hiragana = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Kanji = colDef(show = FALSE),
+    Core = colDef(show = FALSE)
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 
 ------------------------------------------------------------------------
 
