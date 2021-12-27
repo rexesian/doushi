@@ -3302,7 +3302,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### LR
+### 11
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -5451,7 +5451,7 @@ reactable(
 jlgm <- jlgm[sample(1:nrow(jlgm)),]
 
 reactable(
-  na.omit(jlgm),
+  jlgm,
   columns = list(
     Grammar = colDef(
       cell = function(value, index) {
@@ -5468,6 +5468,10 @@ reactable(
       align = "center"
     ),
     Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
     Structure = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
@@ -5497,7 +5501,7 @@ reactable(
 jlgm <- jlgm[sample(1:nrow(jlgm)),]
 
 reactable(
-  na.omit(jlgm),
+  jlgm,
   columns = list(
     Grammar = colDef(
       cell = function(value, index) {
@@ -5514,6 +5518,10 @@ reactable(
       align = "center"
     ),
     Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
     Structure = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
@@ -5543,7 +5551,7 @@ reactable(
 jlgm <- jlgm[sample(1:nrow(jlgm)),]
 
 reactable(
-  na.omit(jlgm),
+  jlgm,
   columns = list(
     Grammar = colDef(
       cell = function(value, index) {
@@ -5560,6 +5568,10 @@ reactable(
       align = "center"
     ),
     Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
     Structure = colDef(show = FALSE)
   ),
   defaultPageSize = 6,
@@ -5589,7 +5601,7 @@ reactable(
 jlgm <- jlgm[sample(1:nrow(jlgm)),]
 
 reactable(
-  na.omit(jlgm),
+  jlgm,
   columns = list(
     Grammar = colDef(
       cell = function(value, index) {
@@ -5606,6 +5618,10 @@ reactable(
       align = "center"
     ),
     Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
     Structure = colDef(show = FALSE)
   ),
   defaultPageSize = 6,
@@ -5635,7 +5651,7 @@ reactable(
 jlgm <- jlgm[sample(1:nrow(jlgm)),]
 
 reactable(
-  na.omit(jlgm),
+  jlgm,
   columns = list(
     Grammar = colDef(
       cell = function(value, index) {
@@ -5652,6 +5668,10 @@ reactable(
       align = "center"
     ),
     Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
     Structure = colDef(show = FALSE)
   ),
   defaultPageSize = 8,
@@ -5681,7 +5701,7 @@ reactable(
 jlgm <- jlgm[sample(1:nrow(jlgm)),]
 
 reactable(
-  na.omit(jlgm),
+  jlgm,
   columns = list(
     Grammar = colDef(
       cell = function(value, index) {
@@ -5698,11 +5718,139 @@ reactable(
       align = "center"
     ),
     Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
     Structure = colDef(show = FALSE)
   ),
   defaultPageSize = 8,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### 07
+
+```{r, echo=FALSE, message=FALSE}
+
+# jlgm <- jlgm[sample(1:nrow(jlgm)),]
+
+reactable(
+  jlgm,
+  columns = list(
+    Grammar = colDef(
+      cell = function(value, index) {
+        Meaning <- jlgm$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Structure <- jlgm$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        S1 <- jlgm$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- jlgm$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T1 <- jlgm$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- jlgm$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Meaning),
+          div(style = list(fontSize = 11), Structure),
+          div(style = list(fontSize = 13), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 13), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    Structure = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### 08
+
+```{r, echo=FALSE, message=FALSE}
+
+jlgm <- jlgm[sample(1:nrow(jlgm)),]
+
+reactable(
+  jlgm,
+  columns = list(
+    Grammar = colDef(
+      cell = function(value, index) {
+        Meaning <- jlgm$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Structure <- jlgm$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        S1 <- jlgm$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- jlgm$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T1 <- jlgm$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- jlgm$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Meaning),
+          div(style = list(fontSize = 11), Structure),
+          div(style = list(fontSize = 13), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 13), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    Structure = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -5737,20 +5885,52 @@ reactable(
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- nlgm$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        S1 <- nlgm$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- nlgm$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- nlgm$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        S4 <- nlgm$S4[index]
+        S4 <- if (!is.na(S4)) S4 else ""
+        T1 <- nlgm$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- nlgm$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        T3 <- nlgm$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        T4 <- nlgm$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
         tagList(
           div(style = list(fontSize = 19, fontWeight = 600), value),
           div(style = list(fontSize = 11), Meaning),
           div(style = list(fontSize = 11), Structure),
+          div(style = list(fontSize = 13), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 13), S2),
+          div(style = list(fontSize = 9), T2),
+          div(style = list(fontSize = 13), S3),
+          div(style = list(fontSize = 9), T3),
+          div(style = list(fontSize = 13), S4),
+          div(style = list(fontSize = 9), T4),
         )
       },
       align = "center"
     ),
     Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    S4 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
     Structure = colDef(show = FALSE)
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -5783,15 +5963,203 @@ reactable(
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- nlgm$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        S1 <- nlgm$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- nlgm$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- nlgm$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        S4 <- nlgm$S4[index]
+        S4 <- if (!is.na(S4)) S4 else ""
+        T1 <- nlgm$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- nlgm$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        T3 <- nlgm$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        T4 <- nlgm$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
         tagList(
           div(style = list(fontSize = 19, fontWeight = 600), value),
           div(style = list(fontSize = 11), Meaning),
           div(style = list(fontSize = 11), Structure),
+          div(style = list(fontSize = 13), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 13), S2),
+          div(style = list(fontSize = 9), T2),
+          div(style = list(fontSize = 13), S3),
+          div(style = list(fontSize = 9), T3),
+          div(style = list(fontSize = 13), S4),
+          div(style = list(fontSize = 9), T4),
         )
       },
       align = "center"
     ),
     Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    S4 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
+    Structure = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### 03
+
+```{r, echo=FALSE, message=FALSE}
+
+nlgm <- nlgm[sample(1:nrow(nlgm)),]
+
+reactable(
+  nlgm,
+  columns = list(
+    Grammar = colDef(
+      cell = function(value, index) {
+        Meaning <- nlgm$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Structure <- nlgm$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        S1 <- nlgm$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- nlgm$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- nlgm$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        S4 <- nlgm$S4[index]
+        S4 <- if (!is.na(S4)) S4 else ""
+        T1 <- nlgm$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- nlgm$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        T3 <- nlgm$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        T4 <- nlgm$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Meaning),
+          div(style = list(fontSize = 11), Structure),
+          # div(style = list(fontSize = 11), S1),
+          # div(style = list(fontSize = 11), T1),
+          # div(style = list(fontSize = 11), S2),
+          # div(style = list(fontSize = 11), T2),
+          # div(style = list(fontSize = 11), S3),
+          # div(style = list(fontSize = 11), T3),
+          # div(style = list(fontSize = 11), S4),
+          # div(style = list(fontSize = 11), T4),
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    S4 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
+    Structure = colDef(show = FALSE)
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### 04
+
+```{r, echo=FALSE, message=FALSE}
+
+nlgm <- nlgm[sample(1:nrow(nlgm)),]
+
+reactable(
+  nlgm,
+  columns = list(
+    Grammar = colDef(
+      cell = function(value, index) {
+        Meaning <- nlgm$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Structure <- nlgm$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        S1 <- nlgm$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- nlgm$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- nlgm$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        S4 <- nlgm$S4[index]
+        S4 <- if (!is.na(S4)) S4 else ""
+        T1 <- nlgm$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- nlgm$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        T3 <- nlgm$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        T4 <- nlgm$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Meaning),
+          div(style = list(fontSize = 11), Structure),
+          # div(style = list(fontSize = 11), S1),
+          # div(style = list(fontSize = 11), T1),
+          # div(style = list(fontSize = 11), S2),
+          # div(style = list(fontSize = 11), T2),
+          # div(style = list(fontSize = 11), S3),
+          # div(style = list(fontSize = 11), T3),
+          # div(style = list(fontSize = 11), S4),
+          # div(style = list(fontSize = 11), T4),
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    S4 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
     Structure = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
@@ -5832,7 +6200,7 @@ reactable(
         Translation <- vnstc$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 19, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation)
         )
       },
@@ -5874,7 +6242,7 @@ reactable(
         Translation <- vnstc$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 19, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation)
         )
       },
@@ -5916,7 +6284,7 @@ reactable(
         Translation <- vnstc$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 19, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation)
         )
       },
@@ -5958,7 +6326,7 @@ reactable(
         Translation <- vnstc$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 19, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation)
         )
       },
@@ -6000,7 +6368,7 @@ reactable(
         Translation <- vnstc$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 19, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation)
         )
       },
@@ -6042,7 +6410,7 @@ reactable(
         Translation <- vnstc$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 19, fontWeight = 600), value),
           # div(style = list(fontSize = 11), Translation)
         )
       },
@@ -6084,7 +6452,7 @@ reactable(
         Translation <- vnstc$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 19, fontWeight = 600), value),
           # div(style = list(fontSize = 11), Translation)
         )
       },
@@ -6126,7 +6494,7 @@ reactable(
         Translation <- vnstc$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 19, fontWeight = 600), value),
           # div(style = list(fontSize = 11), Translation)
         )
       },
@@ -6168,7 +6536,7 @@ reactable(
         Translation <- vnstc$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 19, fontWeight = 600), value),
           # div(style = list(fontSize = 11), Translation)
         )
       },
@@ -6210,7 +6578,7 @@ reactable(
         Translation <- vnstc$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 19, fontWeight = 600), value),
           # div(style = list(fontSize = 11), Translation)
         )
       },
