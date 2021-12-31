@@ -8100,7 +8100,7 @@ reactable(
         tagList(
           div(style = list(fontSize = 21, fontWeight = 600), value),
           div(style = list(fontSize = 11), Meaning),
-          div(style = list(fontSize = 14), Sentences),
+          div(style = list(fontSize = 14, fontWeight = 600), Sentences),
           div(style = list(fontSize = 10), Translation),
         )
       },
@@ -8150,7 +8150,7 @@ reactable(
         tagList(
           div(style = list(fontSize = 21, fontWeight = 600), value),
           div(style = list(fontSize = 11), Meaning),
-          div(style = list(fontSize = 14), Sentences),
+          div(style = list(fontSize = 14, fontWeight = 600), Sentences),
           div(style = list(fontSize = 10), Translation),
         )
       },
@@ -8200,7 +8200,7 @@ reactable(
         tagList(
           div(style = list(fontSize = 21, fontWeight = 600), value),
           div(style = list(fontSize = 11), Meaning),
-          div(style = list(fontSize = 14), Sentences),
+          div(style = list(fontSize = 14, fontWeight = 600), Sentences),
           div(style = list(fontSize = 10), Translation),
         )
       },
@@ -8250,7 +8250,7 @@ reactable(
         tagList(
           div(style = list(fontSize = 21, fontWeight = 600), value),
           div(style = list(fontSize = 11), Meaning),
-          div(style = list(fontSize = 14), Sentences),
+          div(style = list(fontSize = 14, fontWeight = 600), Sentences),
           div(style = list(fontSize = 10), Translation),
         )
       },
@@ -8300,7 +8300,7 @@ reactable(
         tagList(
           div(style = list(fontSize = 21, fontWeight = 600), value),
           div(style = list(fontSize = 11), Meaning),
-          div(style = list(fontSize = 14), Sentences),
+          div(style = list(fontSize = 14, fontWeight = 600), Sentences),
           div(style = list(fontSize = 10), Translation),
         )
       },
@@ -8358,11 +8358,11 @@ reactable(
         tagList(
           div(style = list(fontSize = 21, fontWeight = 600), value),
           div(style = list(fontSize = 11), Meaning),
-          div(style = list(fontSize = 14), S1),
+          div(style = list(fontSize = 14, fontWeight = 600), S1),
           div(style = list(fontSize = 9), T1),
-          div(style = list(fontSize = 14), S2),
+          div(style = list(fontSize = 14, fontWeight = 600), S2),
           div(style = list(fontSize = 9), T2),
-          div(style = list(fontSize = 14), S3),
+          div(style = list(fontSize = 14, fontWeight = 600), S3),
           div(style = list(fontSize = 9), T3),
         )
       },
@@ -8397,6 +8397,68 @@ reactable(
 ------------------------------------------------------------------------
 
 ### Reference {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+mnlg <- mnlg[sample(1:nrow(mnlg)),]
+
+reactable(
+  mnlg,
+  columns = list(
+    Word = colDef(
+      cell = function(value, index) {
+        S1 <- mnlg$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- mnlg$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        M1 <- mnlg$M1[index]
+        M1 <- if (!is.na(M1)) M1 else ""
+        M2 <- mnlg$M2[index]
+        M2 <- if (!is.na(M2)) M2 else ""
+        M3 <- mnlg$M3[index]
+        M3 <- if (!is.na(M3)) M3 else ""
+        M4 <- mnlg$M4[index]
+        M4 <- if (!is.na(M4)) M4 else ""
+        M5 <- mnlg$M5[index]
+        M5 <- if (!is.na(M5)) M1 else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600), value),
+          div(style = list(fontSize = 13), M1),
+          div(style = list(fontSize = 13), M2),
+          div(style = list(fontSize = 13), M3),
+          div(style = list(fontSize = 13), M4),
+          div(style = list(fontSize = 13), M5),
+          div(style = list(fontSize = 13, fontWeight = 600), S1),
+          div(style = list(fontSize = 10), T1),
+        )
+      },
+      align = "center"
+    ),
+    S1 = colDef(show = FALSE),
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    M4 = colDef(show = FALSE),
+    M5 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
