@@ -98,6 +98,8 @@ cnmw4 <- read_csv("vrbjp/Sheet 25-CMNW.csv")
 cnmw5 <- read_csv("vrbjp/Sheet 26-CMNW.csv")
 cnmw6 <- read_csv("vrbjp/Sheet 27-CMNW.csv")
 cmpnd <- read_csv("vrbjp/Sheet 35-CMPWD.csv")
+cook <- read_csv("vrbjp/Sheet 20-MKOKT.csv")
+diary <- read_csv("vrbjp/Sheet 21-FTRD.csv")
 
 ```
 
@@ -9340,13 +9342,107 @@ reactable(
         Translation <- dlgm$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 18, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation)
         )
       },
       align = "center"
     ),
     Translation = colDef(show = FALSE),
+    Time = colDef(show = FALSE)
+  ),
+  defaultPageSize = 6,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### Cooking {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+cook <- cook[sample(1:nrow(cook)),]
+
+reactable(
+  cook,
+  columns = list(
+    Subtitle = colDef(
+      cell = function(value, index) {
+        T1 <- cook$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- cook$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 600), value),
+          div(style = list(fontSize = 11), T1),
+          div(style = list(fontSize = 11), T2)
+        )
+      },
+      align = "center"
+    ),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    Time = colDef(show = FALSE)
+  ),
+  defaultPageSize = 6,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### Diary {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+diary <- diary[sample(1:nrow(diary)),]
+
+reactable(
+  diary,
+  columns = list(
+    Subtitle = colDef(
+      cell = function(value, index) {
+        T1 <- diary$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- diary$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 600), value),
+          div(style = list(fontSize = 11), T1),
+          div(style = list(fontSize = 11), T2)
+        )
+      },
+      align = "center"
+    ),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
     Time = colDef(show = FALSE)
   ),
   defaultPageSize = 6,
