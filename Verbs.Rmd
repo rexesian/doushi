@@ -9365,7 +9365,7 @@ reactable(
         Translation <- cmwrdsn$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 18, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation),
           div(style = list(fontSize = 10), Remarks),
         )
@@ -9411,7 +9411,7 @@ reactable(
         Translation <- cmwrdsn$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 18, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation),
           div(style = list(fontSize = 10), Remarks),
         )
@@ -9457,7 +9457,7 @@ reactable(
         Translation <- cmwrdsn$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 18, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation),
           div(style = list(fontSize = 10), Remarks),
         )
@@ -9503,7 +9503,7 @@ reactable(
         Translation <- cmwrdsn$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 18, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation),
           div(style = list(fontSize = 10), Remarks),
         )
@@ -9549,7 +9549,7 @@ reactable(
         Translation <- cmwrdsn$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 18, fontWeight = 600), value),
           div(style = list(fontSize = 11), Translation),
           div(style = list(fontSize = 10), Remarks),
         )
@@ -9562,6 +9562,98 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### 27
+
+```{r, echo=FALSE, message=FALSE}
+
+cmwrdsn <- cmwrdsn[sample(1:nrow(cmwrdsn)),]
+
+reactable(
+  cmwrdsn,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Remarks <- cmwrdsn$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        Translation <- cmwrdsn$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 600), value),
+          # div(style = list(fontSize = 11), Translation),
+          # div(style = list(fontSize = 10), Remarks),
+        )
+      },
+      align = "center"
+    ),
+    Remarks = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### 28
+
+```{r, echo=FALSE, message=FALSE}
+
+cmwrdsn <- cmwrdsn[sample(1:nrow(cmwrdsn)),]
+
+reactable(
+  cmwrdsn,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Remarks <- cmwrdsn$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        Translation <- cmwrdsn$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 600), value),
+          # div(style = list(fontSize = 11), Translation),
+          # div(style = list(fontSize = 10), Remarks),
+        )
+      },
+      align = "center"
+    ),
+    Remarks = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 50),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
