@@ -105,6 +105,7 @@ expw<- read_csv("vrbjp/Sheet 36-EXPR.csv")
 adjadv<- read_csv("vrbjp/Sheet 37-ADVADJ.csv")
 cmwrdsn<- read_csv("vrbjp/Sheet 43-CMNWP.csv")
 exppw<- read_csv("vrbjp/Sheet 42-EXPRP.csv")
+jnrst <- read_csv("vrbjp/Sheet 44-JNRST.csv")
 
 ```
 
@@ -10646,6 +10647,53 @@ reactable(
         T1 <- diary$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         T2 <- diary$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 600), value),
+          div(style = list(fontSize = 11), T1),
+          div(style = list(fontSize = 11), T2)
+        )
+      },
+      align = "center"
+    ),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    Time = colDef(show = FALSE)
+  ),
+  defaultPageSize = 6,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### Journalist {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# jnrst <- jnrst[sample(1:nrow(jnrst)),]
+
+reactable(
+  jnrst,
+  columns = list(
+    Subtitle = colDef(
+      cell = function(value, index) {
+        T1 <- jnrst$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- jnrst$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
           div(style = list(fontSize = 18, fontWeight = 600), value),
