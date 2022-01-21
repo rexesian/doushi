@@ -10317,12 +10317,56 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### J
+
+```{r, echo=FALSE, message=FALSE}
+
+exppwj <- exppw %>% select(J.Words, J.Meaning)
+exppwj <- exppwj %>% slice(1:16)
+exppwj <- exppwj[sample(1:nrow(exppwj)),]
+
+reactable(
+  exppwj,
+  columns = list(
+    J.Words = colDef(
+      cell = function(value, index) {
+        J.Meaning <- exppwj$J.Meaning[index]
+        J.Meaning <- if (!is.na(J.Meaning)) J.Meaning else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600), J.Meaning),
+          div(style = list(fontSize = 10, fontWeight = 600), value),
+        )
+      },
+      align = "center"
+    ),
+    J.Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 #### Random
 
 ```{r, echo=FALSE, message=FALSE}
 
 exppwrn <- exppw %>% select(RN.Words, RN.Meaning)
-exppwrn <- exppwrn %>% slice(1:444)
+exppwrn <- exppwrn %>% slice(1:460)
 exppwrn <- exppwrn[sample(1:nrow(exppwrn)),]
 
 reactable(
@@ -10759,12 +10803,56 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### J
+
+```{r, echo=FALSE, message=FALSE}
+
+exppwj <- exppw %>% select(J.Words, J.Meaning)
+exppwj <- exppwj %>% slice(1:16)
+exppwj <- exppwj[sample(1:nrow(exppwj)),]
+
+reactable(
+  exppwj,
+  columns = list(
+    J.Words = colDef(
+      cell = function(value, index) {
+        J.Meaning <- exppwj$J.Meaning[index]
+        J.Meaning <- if (!is.na(J.Meaning)) J.Meaning else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 10, fontWeight = 600), J.Meaning),
+        )
+      },
+      align = "center"
+    ),
+    J.Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 #### Random
 
 ```{r, echo=FALSE, message=FALSE}
 
 exppwrn <- exppw %>% select(RN.Words, RN.Meaning)
-exppwrn <- exppwrn %>% slice(1:444)
+exppwrn <- exppwrn %>% slice(1:460)
 exppwrn <- exppwrn[sample(1:nrow(exppwrn)),]
 
 reactable(
