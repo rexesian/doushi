@@ -112,6 +112,7 @@ rvvrb <- read_csv("vrbjp/Sheet 179-VNLST.csv")
 rvwrd <- read_csv("vrbjp/Sheet 180-WRDSR.csv")
 rvsnt <- read_csv("vrbjp/Sheet 181-WRDST.csv")
 knjrvw <- read_csv("vrbjp/Sheet 50-WBKNRN.csv")
+knjwrdx <- read_csv("vrbjp/Sheet 51-KNJWRD.csv")
 
 ```
 
@@ -9755,6 +9756,90 @@ reactable(
   defaultPageSize = 7,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### 29
+
+```{r, echo=FALSE, message=FALSE}
+
+knjwrdx <- knjwrdx[sample(1:nrow(knjwrdx)),]
+
+reactable(
+  knjwrdx,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Translation <- knjwrdx$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 600), value),
+          div(style = list(fontSize = 10), Translation),
+        )
+      },
+      align = "center"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### 30
+
+```{r, echo=FALSE, message=FALSE}
+
+knjwrdx <- knjwrdx[sample(1:nrow(knjwrdx)),]
+
+reactable(
+  knjwrdx,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Translation <- knjwrdx$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 600), value),
+          div(style = list(fontSize = 10), Translation),
+        )
+      },
+      align = "center"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
