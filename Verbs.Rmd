@@ -114,7 +114,7 @@ rvsnt <- read_csv("vrbjp/Sheet 181-WRDST.csv")
 knjrvw <- read_csv("vrbjp/Sheet 50-WBKNRN.csv")
 knjwrdx <- read_csv("vrbjp/Sheet 51-KNJWRD.csv")
 icwrds <- read_csv("vrbjp/Sheet 128-VBPRHS.csv")
-
+lvlg2 <- read_csv("vrbjp/Sheet 52-LVLGR.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -7019,6 +7019,51 @@ reactable(
 ------------------------------------------------------------------------
 
 ### Advance {.tabset}
+
+------------------------------------------------------------------------
+
+## Level {.tabset}
+
+### L2 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+lvlg2 <- lvlg2[sample(1:nrow(lvlg2)),]
+
+reactable(
+  lvlg2,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Translation <- lvlg2$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Translation),
+        )
+      },
+      align = "center"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 
 ------------------------------------------------------------------------
 
