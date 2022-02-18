@@ -119,6 +119,7 @@ kjpen <- read_csv("vrbjp/Sheet 34-KJPEN.csv")
 cmnknj <- read_csv("vrbjp/Sheet 70-CMKNJ.csv")
 cmnknjv <- read_csv("vrbjp/Sheet 80-CMKNJV.csv")
 cmnknjp <- read_csv("vrbjp/Sheet 81-CMKNJW.csv")
+cmwpf <- read_csv("vrbjp/Sheet 90-CMKNJVM.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -9012,6 +9013,109 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### T1
+
+```{r, echo=FALSE, message=FALSE}
+
+cmwpf <- cmwpf[sample(1:nrow(cmwpf)),]
+
+reactable(
+  cmwpf,
+  columns = list(
+    W1 = colDef(
+      cell = function(value, index) {
+        T1 <- cmwpf$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T1),
+        )
+      },
+      align = "center"
+    ),
+    W2 = colDef(
+      cell = function(value, index) {
+        T2 <- cmwpf$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T2),
+        )
+      },
+      align = "center"
+    ),    
+    W3 = colDef(
+      cell = function(value, index) {
+        T3 <- cmwpf$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T3),
+        )
+      },
+      align = "center"
+    ),       
+    W4 = colDef(
+      cell = function(value, index) {
+        T4 <- cmwpf$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T4),
+        )
+      },
+      align = "center"
+    ),
+    W5 = colDef(
+      cell = function(value, index) {
+        T5 <- cmwpf$T5[index]
+        T5 <- if (!is.na(T5)) T5 else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T5),
+        )
+      },
+      align = "center"
+    ),    
+    W6 = colDef(
+      cell = function(value, index) {
+        T6 <- cmwpf$T6[index]
+        T6 <- if (!is.na(T6)) T6 else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T6),
+        )
+      },
+      align = "center"
+    ),      
+    
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
+    T5 = colDef(show = FALSE),
+    T6 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 47),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 ## Words {.tabset}
 
 ### Common {.tabset}
@@ -11043,12 +11147,56 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### K
+
+```{r, echo=FALSE, message=FALSE}
+
+exppwk <- exppw %>% select(K.Words, K.Meaning)
+exppwk <- exppwk %>% slice(1:12)
+exppwk <- exppwk[sample(1:nrow(exppwk)),]
+
+reactable(
+  exppwk,
+  columns = list(
+    K.Words = colDef(
+      cell = function(value, index) {
+        K.Meaning <- exppwk$K.Meaning[index]
+        K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600), K.Meaning),
+          div(style = list(fontSize = 10, fontWeight = 600), value),
+        )
+      },
+      align = "center"
+    ),
+    K.Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 #### Random
 
 ```{r, echo=FALSE, message=FALSE}
 
 exppwrn <- exppw %>% select(RN.Words, RN.Meaning)
-exppwrn <- exppwrn %>% slice(1:460)
+exppwrn <- exppwrn %>% slice(1:472)
 exppwrn <- exppwrn[sample(1:nrow(exppwrn)),]
 
 reactable(
@@ -11529,12 +11677,56 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### K
+
+```{r, echo=FALSE, message=FALSE}
+
+exppwk <- exppw %>% select(K.Words, K.Meaning)
+exppwk <- exppwk %>% slice(1:12)
+exppwk <- exppwk[sample(1:nrow(exppwk)),]
+
+reactable(
+  exppwk,
+  columns = list(
+    K.Words = colDef(
+      cell = function(value, index) {
+        K.Meaning <- exppwk$K.Meaning[index]
+        K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600), value),
+          div(style = list(fontSize = 10, fontWeight = 600), K.Meaning),
+        )
+      },
+      align = "center"
+    ),
+    K.Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 #### Random
 
 ```{r, echo=FALSE, message=FALSE}
 
 exppwrn <- exppw %>% select(RN.Words, RN.Meaning)
-exppwrn <- exppwrn %>% slice(1:460)
+exppwrn <- exppwrn %>% slice(1:472)
 exppwrn <- exppwrn[sample(1:nrow(exppwrn)),]
 
 reactable(
