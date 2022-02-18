@@ -120,6 +120,7 @@ cmnknj <- read_csv("vrbjp/Sheet 70-CMKNJ.csv")
 cmnknjv <- read_csv("vrbjp/Sheet 80-CMKNJV.csv")
 cmnknjp <- read_csv("vrbjp/Sheet 81-CMKNJW.csv")
 cmwpf <- read_csv("vrbjp/Sheet 90-CMKNJVM.csv")
+cmwpg <- read_csv("vrbjp/Sheet 92-VGRM.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -9198,6 +9199,74 @@ reactable(
     T4 = colDef(show = FALSE),
     T5 = colDef(show = FALSE),
     T6 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 47),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### N1
+
+```{r, echo=FALSE, message=FALSE}
+
+cmwpg <- cmwpg[sample(1:nrow(cmwpg)),]
+
+reactable(
+  cmwpg,
+  columns = list(
+    P1 = colDef(
+      cell = function(value, index) {
+        T1 <- cmwpg$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T1),
+        )
+      },
+      align = "center"
+    ),
+    P2 = colDef(
+      cell = function(value, index) {
+        T2 <- cmwpg$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T2),
+        )
+      },
+      align = "center"
+    ),    
+    P3 = colDef(
+      cell = function(value, index) {
+        T3 <- cmwpg$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T3),
+        )
+      },
+      align = "center"
+    ),       
+    
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE)
+
   ),
   defaultPageSize = 7,
   theme = reactableTheme(
