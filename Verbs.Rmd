@@ -2478,44 +2478,45 @@ future
 
 ```{r, echo=FALSE, message=FALSE}
 
-# vnstx <- vnstx[sample(1:nrow(vnstx)),]
+vnstx1 <- vnstx %>% slice(1:2421)
+# vnstx1 <- vnstx1[sample(1:nrow(vnstx1)),]
 
 reactable(
-  vnstx,
+  vnstx1,
   columns = list(
     Words = colDef(
       # Show species under character names
       cell = function(value, index) {
-        Meaning <- vnstx$Meaning[index]
+        Meaning <- vnstx1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Reading <- vnstx$Reading[index]
+        Reading <- vnstx1$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        W1 <- vnstx$W1[index]
+        W1 <- vnstx1$W1[index]
         W1 <- if (!is.na(W1)) W1 else ""
-        W2 <- vnstx$W2[index]
+        W2 <- vnstx1$W2[index]
         W2 <- if (!is.na(W2)) W2 else ""
-        W3 <- vnstx$W3[index]
+        W3 <- vnstx1$W3[index]
         W3 <- if (!is.na(W3)) W3 else ""
-        T1 <- vnstx$T1[index]
+        T1 <- vnstx1$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
-        T2 <- vnstx$T2[index]
+        T2 <- vnstx1$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
-        T3 <- vnstx$T3[index]
+        T3 <- vnstx1$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
-        S1 <- vnstx$S1[index]
+        S1 <- vnstx1$S1[index]
         S1 <- if (!is.na(S1)) S1 else ""
-        S2 <- vnstx$S2[index]
+        S2 <- vnstx1$S2[index]
         S2 <- if (!is.na(S2)) S2 else ""
-        S3 <- vnstx$S3[index]
+        S3 <- vnstx1$S3[index]
         S3 <- if (!is.na(S3)) S3 else ""
-        Type <- vnstx$Type[index]
+        Type <- vnstx1$Type[index]
         Type <- if (!is.na(Type)) Type else ""
         tagList(
           div(style = list(fontSize = 16, fontWeight = 600), value),
           # div(style = list(fontSize = 13), Reading),
           div(style = list(fontSize = 10), Meaning),
-          # div(style = list(fontSize = 14), S1),
-          # div(style = list(fontSize = 10), T1),
+          div(style = list(fontSize = 14), S1),
+          div(style = list(fontSize = 9), T1),
           # div(style = list(fontSize = 14), S2),
           # div(style = list(fontSize = 10), T2),
           # div(style = list(fontSize = 14), S3),
@@ -2539,10 +2540,10 @@ reactable(
     W2 = colDef(show = FALSE),
     W3 = colDef(show = FALSE)
   ),
-  defaultPageSize = 7,
+  defaultPageSize = 5,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 50),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 85),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -7311,7 +7312,7 @@ reactable(
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 80),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -7423,7 +7424,7 @@ reactable(
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 80),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -7551,7 +7552,7 @@ reactable(
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 80),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -7869,7 +7870,7 @@ reactable(
   defaultPageSize = 10,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 32),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 35),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -7970,7 +7971,7 @@ reactable(
   defaultPageSize = 10,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 32),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 35),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -13514,13 +13515,10 @@ reactable(
 
     あのう。	
     Umm..
-    
     あのう、すみませんが..
     Uh,  excuse  me  (but)..
-    
     あのう、失礼ですが..
     Uh,  excuse  me/(I  am)  sorry  to  be  rude  (but)..
-  
     ちょっと。	Say!
     ねえ。	Tell  you  what  /  Listen,
 	
@@ -13528,7 +13526,6 @@ reactable(
 
     はい、何でしょうか。	
     Yes,  what  is  it?
-    
     え、何？ 	
     What  is  it?
 	
@@ -13536,31 +13533,22 @@ reactable(
 
     ちょっとお話したいことがあるんですが、	
     I  have  something  I  would  like  to  talk  to  you  about.
-    
     ちょっと話があるんだけど、	
     I  have  something  I  want  to  tell  you.
-    
     今二、三分よろしいでしょうか。	
     Do  you  have  two  or  three  minutes  now?
-    
     今ちょっといい？ 	
     Are  you  free  right  now?
-    
     今お忙しいでしょうか。	
     Are  you  busy  now?
-    
     今忙しい？ 	
     Are  you  busy  now?
-    
     ちょっとお聞きしたいことがあるんですが、	
     I  have  something  I  would  like  to  ask  you.
-    
     ちょっと聞きたいんだけど、	
     I  want  to  ask  you  something.
-    
     お仕事中すみませんが、	
     I  am  sorry  to  bother  you  in  the  middle  of  your  work,
-    
     仕事中いんだけど、	
     I  am  sorry  to  bother  you  in  the  middle  of  your  work,
 	
@@ -13568,13 +13556,10 @@ reactable(
 
     では/じゃ、そろそろこのんで。
     Well.., I  should  be  going  soon..
-    
     では/じゃ、そろそろ。	
     Well.., (I  should  be  going  soon.)
-    
     では/じゃ、今日はこんなところで。	
     OK,  then,  this  is  it  for  today.
-    
     じゃあね。	
     Ok,  then.
 	
@@ -13582,7 +13567,6 @@ reactable(
 
     実は今度の試験のことなんですけど	
     Well  (lit.  actually),  it’s  about  the  upcoming  exam
-    
     実は今度の試験のことなんですが
     Well  (lit.  actually),  it’s  about  the  upcoming  exam
 
@@ -13590,16 +13574,12 @@ reactable(
 
     ところで	
     by  the  way,
-    
     話は変わりますが	
     not  to  change  the  subject,
-    
     それはそうと	
     be  that  as  it  may,
-    
     話は違うけど	
     not  to  change  the  topic,
-    
     ちなみに	
     by  the  way,
 
@@ -13607,13 +13587,10 @@ reactable(
 
     今日は~についてお話したいと思います。	
     Today  I  would  like  to  talk  about..
-    
     ~について述べたいと思います。	
     I  would  like  to  talk  about..
-    
     ~に関して考察をしたいと思います。	
     I  would  like  to  look  at..
-    
     本日は..につきましてお話をさせて戴きます。	
     I  should  like  to  talk  about..today.
 
@@ -13621,19 +13598,14 @@ reactable(
 
     まず始めに	
     first (of  all)
-    
     まず最初に	
     first (of  all)
-    
     次に	
     next
-    
     第一に	
     firstly
-    
     第二点として	
     as  my  second  point  /  secondly
-    
     最後に	
     lastly
 
@@ -13641,7 +13613,6 @@ reactable(
 
     例えば	
     for example
-    
     いくつか例をあげたいと思います。	
     I  would  like  to  give  a  few  examples.
 
@@ -13649,16 +13620,12 @@ reactable(
 
     結論を述べますと、	
     to  conclude,
-    
     結論として次のことが言えると思います。	
     As  a  conclusion,  I  can  say  the  following.
-    
     以上のことから~ということが明らかになると思います。	
     From  what  I’ve  said  so  far,  I  believe  it  is  clear  that..
-    
     以上のことをまとめますと	
     to  summarize  (what  I  have  said  so  far)
-    
     つまり~ということだと思います。	
     In  other  words,  it  means..
 
@@ -13666,7 +13633,6 @@ reactable(
 
     以上です。ご清聴ありがとうございました。	
     This  concludes  my  (presentation,  speech).  Thank  you  for  listening.
-    
     これで終わらせていただきたいと思います。	
     I  would  like  to  end  (my  presentation,  speech).
     
