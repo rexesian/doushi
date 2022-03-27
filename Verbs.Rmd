@@ -138,6 +138,7 @@ knjlst3 <- read_csv("vrbjp/KNJ3-WBKNJ3.csv")
 knjlst4 <- read_csv("vrbjp/KNJ4-WBKNJ4.csv")
 knjlst5 <- read_csv("vrbjp/KNJ5-WBKNJ5.csv")
 knjlstr <- read_csv("vrbjp/KNJR-RNDMWV.csv")
+spphr <- read_csv("vrbjp/SPPHR-HLPRS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -14317,6 +14318,75 @@ reactable(
     🆀 Where do you plan to stay?
     🅰 Fuji Ryokan.
 
+------------------------------------------------------------------------
+
+## Phrase
+
+```{r, echo=FALSE, message=FALSE}
+
+spphr <- spphr[sample(1:nrow(spphr)),]
+
+reactable(
+  spphr,
+  columns = list(
+    P1 = colDef(
+      cell = function(value, index) {
+        T1 <- spphr$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 14, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T1),
+        )
+      },
+      align = "center"
+    ),
+    P2 = colDef(
+      cell = function(value, index) {
+        T2 <- spphr$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T2),
+        )
+      },
+      align = "center"
+    ),    
+    P3 = colDef(
+      cell = function(value, index) {
+        T3 <- spphr$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        tagList(
+          div(style = list(fontSize = 14, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), T3),
+        )
+      },
+      align = "center"
+    ),   
+    
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE)
+
+  ), 
+  
+  
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
@@ -14334,7 +14404,7 @@ reactable(
         T1 <- smpsnt$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 14, fontWeight = 500), value),
           div(style = list(fontSize = 8, fontWeight = 500), T1),
         )
       },
@@ -14345,7 +14415,7 @@ reactable(
         T2 <- smpsnt$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
-          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 14, fontWeight = 500), value),
           div(style = list(fontSize = 8, fontWeight = 500), T2),
         )
       },
@@ -14356,7 +14426,7 @@ reactable(
         T3 <- smpsnt$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
-          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 14, fontWeight = 500), value),
           div(style = list(fontSize = 8, fontWeight = 500), T3),
         )
       },
@@ -14404,7 +14474,7 @@ reactable(
         T1 <- cmnknjp$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 14, fontWeight = 500), value),
           div(style = list(fontSize = 8, fontWeight = 500), T1),
         )
       },
@@ -14415,7 +14485,7 @@ reactable(
         T2 <- cmnknjp$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
-          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 14, fontWeight = 500), value),
           div(style = list(fontSize = 8, fontWeight = 500), T2),
         )
       },
@@ -14426,7 +14496,7 @@ reactable(
         T3 <- cmnknjp$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
-          div(style = list(fontSize = 13, fontWeight = 500), value),
+          div(style = list(fontSize = 14, fontWeight = 500), value),
           div(style = list(fontSize = 8, fontWeight = 500), T3),
         )
       },
