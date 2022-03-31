@@ -141,6 +141,7 @@ knjlstr <- read_csv("vrbjp/KNJR-RNDMWV.csv")
 spphr <- read_csv("vrbjp/SPPHR-HLPRS.csv")
 chnkw <- read_csv("vrbjp/CHNK-RLWRD.csv")
 lverbs <- read_csv("vrbjp/VERBS-VRBRNK.csv")
+rknj <- read_csv("vrbjp/RKJN-KNJ.csv")
 
 ```
 
@@ -2498,7 +2499,7 @@ future
 
 ```{r, echo=FALSE, message=FALSE}
 
-lverbs <- lverbs %>% slice(1:11)
+lverbs <- lverbs %>% slice(1:50)
 # lverbs <- lverbs[sample(1:nrow(lverbs)),]
 
 reactable(
@@ -8371,6 +8372,43 @@ reactable(
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
 
+  style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### Review {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+rknj <- rknj[sample(1:nrow(rknj)),]
+
+reactable(
+  rknj,
+
+  columns = list(
+    W1 = colDef(minWidth = 83, style = list(fontSize = 14, fontWeight = 500), align = "center"), 
+    W2 = colDef(minWidth = 83, style = list(fontSize = 14, fontWeight = 500), align = "center"), 
+    W3 = colDef(minWidth = 83, style = list(fontSize = 14, fontWeight = 500), align = "center"), 
+    W4 = colDef(minWidth = 83, style = list(fontSize = 14, fontWeight = 500), align = "center"), 
+    W5 = colDef(minWidth = 83, style = list(fontSize = 14, fontWeight = 500), align = "center")
+
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 40),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
   style = list(fontFamily = "Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
