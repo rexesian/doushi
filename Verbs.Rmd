@@ -157,6 +157,7 @@ v1hme <- read_csv("vrbjp/CATG-VCBT1.csv")
 wrd5ex <- read_csv("vrbjp/WRDN5-WRD5.csv")
 wrd4ex <- read_csv("vrbjp/WRDN4-WRD4.csv")
 wrd3ex <- read_csv("vrbjp/WRDN3-WRD3.csv")
+wrd2ex <- read_csv("vrbjp/WRDN2-WRD2.csv")
 qsn5 <- read_csv("vrbjp/QSNTN5-QSNT1.csv")
 knjcmm <- read_csv("vrbjp/CMPCH-KNJCMM.csv")
 
@@ -20218,7 +20219,8 @@ reactable(
 
 ## Words {.tabset}
 
-###### **Try to read each word in a fast pace**
+###### **Check if you know the words**  
+###### **Read each word in a fast pace**  
 
 ### N5
 
@@ -20329,6 +20331,38 @@ reactable(
 ------------------------------------------------------------------------
 
 ### N2
+
+```{r, echo=FALSE, message=FALSE}
+
+wrd2ex <- wrd2ex[sample(1:nrow(wrd2ex)),]
+
+reactable(
+  wrd2ex,
+  columns = list(
+    W1 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
+    W2 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
+    W3 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
+    W4 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
+    W5 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center")
+
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 55),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
