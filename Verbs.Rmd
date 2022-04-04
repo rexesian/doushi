@@ -162,8 +162,10 @@ wrd3ex <- read_csv("vrbjp/WRDN3-WRD3.csv")
 wrd2ex <- read_csv("vrbjp/WRDN2-WRD2.csv")
 wrd1ex <- read_csv("vrbjp/WRDN1-WRD1.csv")
 qsn5 <- read_csv("vrbjp/QSNTN5-QSNT5.csv")
+qsn4 <- read_csv("vrbjp/QSNTN4-QSNT4.csv")
 qsn3 <- read_csv("vrbjp/QSNTN3-QSNT3.csv")
 qsn2 <- read_csv("vrbjp/QSNTN2-QSNT2.csv")
+qsn1 <- read_csv("vrbjp/QSNTN1-QSNT1.csv")
 knjcmm <- read_csv("vrbjp/CMPCH-KNJCMM.csv")
 jyknj <- read_csv("vrbjp/JYKNJ-JYKNJI.csv")
 wrcll <- read_csv("vrbjp/RCLL-RCLL.csv")
@@ -6341,7 +6343,7 @@ reactable(
           div(style = list(fontSize = 9), T2),
           div(style = list(fontSize = 14, fontWeight = 500), S3),
           div(style = list(fontSize = 9), T3),
-          div(style = list(fontSize = 14, fontWeight = 500), W1,"。", W2,"。", W3),
+          div(style = list(fontSize = 14, fontWeight = 500), W1),
         )
       },
       align = "center"
@@ -16158,19 +16160,107 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Similar Words {.tabset}
-
-------------------------------------------------------------------------
-
 ## Grammar {.tabset}
 
 ------------------------------------------------------------------------
 
-## Similar Grammars {.tabset}
+## Similars {.tabset}
+
+### Words {.tabset}
+
+### Grammars {.tabset}
 
 ------------------------------------------------------------------------
 
-## Practice Questions {.tabset}
+## Sonkeigo {.tabset}
+
+**①　いらっしゃいます・おいでになります** `【行く】【来る】【いる】`
+
+    ・部長、お客様がおいでになりました。
+    ・山田さんは今そちらにいらっしゃいますか。
+
+<!-- <h> -->
+
+    ・To the manager, A customer is here.
+    ・Is Mr. Yamada there?
+
+**②　ご存知です** `【知っている】`
+
+    ・鈴木さんが結婚したことをご存知ですか。
+    ・Did you know that Mr. Suzuki has married?
+
+**③　ご覧になります** `【見る】`
+
+    ・どうぞ、ご覧になってください。
+    ・Please, feel free to take a look.
+
+**④　召し上がります** `【食べる】`
+
+    ・どうぞ、召し上がってください。
+    ・Please, help yourself.
+
+**⑤　おっしゃいます** `【言う】`
+
+    ・先生は、なんとおっしゃいましたか。
+    ・What did the professor say.
+
+**⑥　くださいます** `【くれる】`
+
+    ・田中さん奥さんが、お祝いをくださいました。
+    ・Mr. Tanaka's wife gave me her congratulations.
+
+**⑦　なさいます** `【する】`
+
+    ・課長、この書類はもう確認なさいますか。
+    ・To section chief, Have you alread check this documnet?
+
+------------------------------------------------------------------------
+
+## Kenjougo {.tabset}
+
+**①　伺います** `【聞く】【訪問する】`
+
+    ・ちっと、伺ってもいいですか。
+    ・来週、先生のお宅に伺います。
+
+<!-- <h> -->
+
+    ・Excuse me, could I ask you a question?
+    ・Next week I will visit teacher's home.
+
+**②　さし上げます** `【あげる】`
+
+    ・田中さの奥さんに、お祝いをさし上げました。
+    ・I gave my congratulations to Mr. Tanaka's wife.
+
+**③　拝見します** `【見る】`
+
+    ・先生からのお手紙を拝見しました。
+    ・To a teacher, I have read your letter
+
+**④　申し上げます** `【言う】`
+
+    ・残念ですが、今はこれしか申し上げられません。
+    ・I'm sorry, but this is all i can tell you at the moment.
+
+**⑤　参ります** `【行く】【来る】`
+
+    ・佐藤は、二時にこちらに参ります。
+    ・Mr. Sato will come at two o'clock.
+
+**⑥　おります** `【いる】`
+
+    ・息子はこちらの部屋におります。
+    ・My son is in this room.
+
+**⑦　いたします** `【する】`
+
+    ・申し訳ありません、すぐに確認いたします。
+    ・I'm sorry, I wil check it right away.
+
+------------------------------------------------------------------------
+
+## Questions {.tabset}
 
 ### N5
 
@@ -16243,6 +16333,72 @@ reactable(
 ------------------------------------------------------------------------
 
 ### N4
+
+```{r, echo=FALSE, message=FALSE}
+
+# set.seed(3841)
+qsn4 <- qsn4[sample(1:nrow(qsn4)),]
+
+reactable(
+  qsn4,
+  columns = list(
+       Question = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Question') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Question'] === prevRow['Question']) {
+            return { visibility: 'Question' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        A <- qsn4$A[index]
+        A  <- if (!is.na(A )) A  else "Unknown"
+        B <- qsn4$B[index]
+        B  <- if (!is.na(B )) B  else "Unknown"
+        C <- qsn4$C[index]
+        C  <- if (!is.na(C )) C  else "Unknown"
+        D <- qsn4$D[index]
+        D  <- if (!is.na(D )) D  else "Unknown"
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 12, fontWeight = 200), A),
+          div(style = list(fontSize = 12, fontWeight = 200), B),
+          div(style = list(fontSize = 12, fontWeight = 200), C),
+          div(style = list(fontSize = 12, fontWeight = 200), D)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      A = colDef(show = FALSE),
+      B = colDef(show = FALSE),
+      C = colDef(show = FALSE),
+      D = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 3, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 135),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+```
 
 ------------------------------------------------------------------------
 
@@ -16387,6 +16543,72 @@ reactable(
 ------------------------------------------------------------------------
 
 ### N1
+
+```{r, echo=FALSE, message=FALSE}
+
+# set.seed(3841)
+qsn1 <- qsn1[sample(1:nrow(qsn1)),]
+
+reactable(
+  qsn1,
+  columns = list(
+       Question = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Question') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Question'] === prevRow['Question']) {
+            return { visibility: 'Question' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        A <- qsn1$A[index]
+        A  <- if (!is.na(A )) A  else "Unknown"
+        B <- qsn1$B[index]
+        B  <- if (!is.na(B )) B  else "Unknown"
+        C <- qsn1$C[index]
+        C  <- if (!is.na(C )) C  else "Unknown"
+        D <- qsn1$D[index]
+        D  <- if (!is.na(D )) D  else "Unknown"
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 12, fontWeight = 200), A),
+          div(style = list(fontSize = 12, fontWeight = 200), B),
+          div(style = list(fontSize = 12, fontWeight = 200), C),
+          div(style = list(fontSize = 12, fontWeight = 200), D)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      A = colDef(show = FALSE),
+      B = colDef(show = FALSE),
+      C = colDef(show = FALSE),
+      D = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 3, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 135),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+```
 
 ------------------------------------------------------------------------
 
