@@ -158,7 +158,9 @@ wrd4ex <- read_csv("vrbjp/WRDN4-WRD4.csv")
 wrd3ex <- read_csv("vrbjp/WRDN3-WRD3.csv")
 wrd2ex <- read_csv("vrbjp/WRDN2-WRD2.csv")
 wrd1ex <- read_csv("vrbjp/WRDN1-WRD1.csv")
-qsn5 <- read_csv("vrbjp/QSNTN5-QSNT1.csv")
+qsn5 <- read_csv("vrbjp/QSNTN5-QSNT5.csv")
+qsn3 <- read_csv("vrbjp/QSNTN3-QSNT3.csv")
+qsn2 <- read_csv("vrbjp/QSNTN2-QSNT2.csv")
 knjcmm <- read_csv("vrbjp/CMPCH-KNJCMM.csv")
 jyknj <- read_csv("vrbjp/JYKNJ-JYKNJI.csv")
 ```
@@ -18576,7 +18578,7 @@ reactable(
         D <- qsn5$D[index]
         D  <- if (!is.na(D )) D  else "Unknown"
         tagList(
-          div(style = list(fontSize = 18, fontWeight = 500), value),
+          div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 12, fontWeight = 200), A),
           div(style = list(fontSize = 12, fontWeight = 200), B),
           div(style = list(fontSize = 12, fontWeight = 200), C),
@@ -18611,6 +18613,154 @@ reactable(
   )
 )
 ```
+
+------------------------------------------------------------------------
+
+### N4
+
+------------------------------------------------------------------------
+
+### N3
+
+```{r, echo=FALSE, message=FALSE}
+
+# set.seed(3841)
+qsn3 <- qsn3[sample(1:nrow(qsn3)),]
+
+reactable(
+  qsn3,
+  columns = list(
+       Question = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Question') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Question'] === prevRow['Question']) {
+            return { visibility: 'Question' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        A <- qsn3$A[index]
+        A  <- if (!is.na(A )) A  else "Unknown"
+        B <- qsn3$B[index]
+        B  <- if (!is.na(B )) B  else "Unknown"
+        C <- qsn3$C[index]
+        C  <- if (!is.na(C )) C  else "Unknown"
+        D <- qsn3$D[index]
+        D  <- if (!is.na(D )) D  else "Unknown"
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 12, fontWeight = 200), A),
+          div(style = list(fontSize = 12, fontWeight = 200), B),
+          div(style = list(fontSize = 12, fontWeight = 200), C),
+          div(style = list(fontSize = 12, fontWeight = 200), D)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      A = colDef(show = FALSE),
+      B = colDef(show = FALSE),
+      C = colDef(show = FALSE),
+      D = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 3, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 135),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+```
+
+------------------------------------------------------------------------
+
+### N2
+
+```{r, echo=FALSE, message=FALSE}
+
+# set.seed(3841)
+qsn2 <- qsn2[sample(1:nrow(qsn2)),]
+
+reactable(
+  qsn2,
+  columns = list(
+       Question = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Question') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Question'] === prevRow['Question']) {
+            return { visibility: 'Question' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        A <- qsn2$A[index]
+        A  <- if (!is.na(A )) A  else "Unknown"
+        B <- qsn2$B[index]
+        B  <- if (!is.na(B )) B  else "Unknown"
+        C <- qsn2$C[index]
+        C  <- if (!is.na(C )) C  else "Unknown"
+        D <- qsn2$D[index]
+        D  <- if (!is.na(D )) D  else "Unknown"
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 12, fontWeight = 200), A),
+          div(style = list(fontSize = 12, fontWeight = 200), B),
+          div(style = list(fontSize = 12, fontWeight = 200), C),
+          div(style = list(fontSize = 12, fontWeight = 200), D)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      A = colDef(show = FALSE),
+      B = colDef(show = FALSE),
+      C = colDef(show = FALSE),
+      D = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 3, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 135),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+```
+
+------------------------------------------------------------------------
+
+### N1
 
 ------------------------------------------------------------------------
 
