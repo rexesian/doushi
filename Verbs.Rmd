@@ -207,22 +207,6 @@ Version 🆅.2.1
 
 There are 3 writing system used in Japanese namely the **Kanji**, **Hiragana** and the **Katakana** scripts.
 
-## Hiragana {.tabset}
-
-**Hiragana** is a phonetic script used to represent Japanese sound.
-
-![](hh.jpg)
-
-------------------------------------------------------------------------
-
-## Katakana
-
-**Katakana** is a phonetic script used to represent Foreign loan words.
-
-![](hk.jpg)
-
-------------------------------------------------------------------------
-
 ## Kanji {.tabset}
 
 **Kanji** was based on Chinese characters which represents a word and a meaning.
@@ -719,6 +703,22 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+## Hiragana {.tabset}
+
+**Hiragana** is a phonetic script used to represent Japanese sound.
+
+![](hh.jpg)
+
+------------------------------------------------------------------------
+
+## Katakana
+
+**Katakana** is a phonetic script used to represent Foreign loan words.
+
+![](hk.jpg)
 
 ------------------------------------------------------------------------
 
@@ -14081,42 +14081,6 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Recall
-
-```{r, echo=FALSE, message=FALSE}
-
-wrcll <- wrcll[sample(1:nrow(wrcll)),]
-
-reactable(
-  wrcll,
-  columns = list(
-    W1 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W2 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W3 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W4 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W5 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center")
-
-  ),
-  defaultPageSize = 7,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 55),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
 <!-- ### Review {.tabset} -->
 
 <!-- ```{r, echo=FALSE, message=FALSE} -->
@@ -16689,6 +16653,109 @@ reactable(
 <!-- <h> -->
 
     ・水泳は男女を問わずできるスポーツとして人気がある。
+    
+------------------------------------------------------------------------
+
+## Recall
+
+```{r, echo=FALSE, message=FALSE}
+
+wrcll <- wrcll[sample(1:nrow(wrcll)),]
+
+reactable(
+  wrcll,
+  columns = list(
+    W1 = colDef(
+      cell = function(value, index) {
+        T1 <- wrcll$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 500), T1),
+          div(style = list(fontSize = 8, fontWeight = 300), value),
+        )
+      },
+      align = "center"
+    ),
+    W2 = colDef(
+      cell = function(value, index) {
+        T2 <- wrcll$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 500), T2),
+          div(style = list(fontSize = 8, fontWeight = 300), value),
+        )
+      },
+      align = "center"
+    ),    
+    W3 = colDef(
+      cell = function(value, index) {
+        T3 <- wrcll$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        tagList(
+          div(style = list(fontSize = 11, fontWeight = 500), T3),
+          div(style = list(fontSize = 8, fontWeight = 300), value),
+        )
+      },
+      align = "center"
+    ),       
+    W4 = colDef(
+      cell = function(value, index) {
+        T4 <- wrcll$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 500), T4),
+          div(style = list(fontSize = 8, fontWeight = 300), value),
+        )
+      },
+      align = "center"
+    ),
+    W5 = colDef(
+      cell = function(value, index) {
+        T5 <- wrcll$T5[index]
+        T5 <- if (!is.na(T5)) T5 else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 500), T5),
+          div(style = list(fontSize = 8, fontWeight = 300), value),
+        )
+      },
+      align = "center"
+    ),    
+    W6 = colDef(
+      cell = function(value, index) {
+        T6 <- wrcll$T6[index]
+        T6 <- if (!is.na(T6)) T6 else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 500), T6),
+          div(style = list(fontSize = 8, fontWeight = 300), value),
+        )
+      },
+      align = "center"
+    ),      
+    
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
+    T5 = colDef(show = FALSE),
+    T6 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
