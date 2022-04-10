@@ -6182,7 +6182,7 @@ Describes a habitual or repeated action.
 
 ```{r, echo=FALSE, message=FALSE}
 
-lverbs <- lverbs %>% slice(1:50)
+lverbs <- lverbs %>% slice(1:51)
 # lverbs <- lverbs[sample(1:nrow(lverbs)),]
 
 reactable(
@@ -6523,7 +6523,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-lverbs <- lverbs %>% slice(1:50)
+lverbs <- lverbs %>% slice(1:51)
 # lverbs <- lverbs[sample(1:nrow(lverbs)),]
 
 reactable(
@@ -6553,7 +6553,7 @@ reactable(
         Type <- lverbs$Type[index]
         Type <- if (!is.na(Type)) Type else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 500), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 10), Meaning),
           div(style = list(fontSize = 9), Type),
@@ -6561,9 +6561,9 @@ reactable(
           div(style = list(fontSize = 9), T1),
           div(style = list(fontSize = 15, fontWeight = 500), S2),
           div(style = list(fontSize = 9), T2),
-          # div(style = list(fontSize = 14), S3),
-          # div(style = list(fontSize = 10), T3),
-          div(style = list(fontSize = 13, fontWeight = 500), Words),
+          div(style = list(fontSize = 15, fontWeight = 500), S3),
+          div(style = list(fontSize = 9), T3),
+          # div(style = list(fontSize = 13, fontWeight = 500), Words),
         )
       },
       align = "center"
@@ -6638,7 +6638,7 @@ reactable(
         Type <- vnstx2$Type[index]
         Type <- if (!is.na(Type)) Type else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 500), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 10), Meaning),
           div(style = list(fontSize = 9), Type),
@@ -6648,7 +6648,7 @@ reactable(
           div(style = list(fontSize = 9), T2),
           div(style = list(fontSize = 15, fontWeight = 500), S3),
           div(style = list(fontSize = 9), T3),
-          div(style = list(fontSize = 13, fontWeight = 500), W1),
+          # div(style = list(fontSize = 13, fontWeight = 500), W1),
         )
       },
       align = "center"
@@ -6719,134 +6719,6 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 80),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-## Sentences {.tabset}
-
-### 1
-
-```{r, echo=FALSE, message=FALSE}
-
-vnstg <- vnstg[sample(1:nrow(vnstg)),]
-
-reactable(
-  vnstg,
-  columns = list(
-    Phrases = colDef(
-      cell = function(value, index) {
-        Translation <- vnstg$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-### 2
-
-```{r, echo=FALSE, message=FALSE}
-
-vnstb <- vnstb[sample(1:nrow(vnstb)),]
-
-reactable(
-  vnstb,
-  columns = list(
-    Phrase = colDef(
-      cell = function(value, index) {
-        Translation <- vnstb$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-### 3
-
-```{r, echo=FALSE, message=FALSE}
-
-sntv <- sntv[sample(1:nrow(sntv)),]
-
-reactable(
-  sntv,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- sntv$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -9700,9 +9572,9 @@ The **general concept** of **de** is setting a **limit** or a **boundary**.
 
 #### Request
 
-**①　morau** `get・have`
+**①　morau** `get・have・receive`
 
-###### to receive, to take
+###### to receive, to take, have someone to let you have or do
 
 ###### **⚭　Vte + itadakitai ndesu ga **
 
@@ -9725,12 +9597,12 @@ The **general concept** of **de** is setting a **limit** or a **boundary**.
 
 <!-- <h> -->
       
-    ・Could you take a picture for me?
+    ・Could I have you to take a picture for me?
     ・Can I borrow your pen?
 
 **②　kureru** `give (me)`
 
-###### to give, to let (one) have
+###### to give, to let someone have or do
 
 ###### **⚭　Vte + kudaimasen ka **
 
@@ -9745,7 +9617,7 @@ The **general concept** of **de** is setting a **limit** or a **boundary**.
 ###### **⚭　Vte + kure **
 
     ・日本語を教えてくれませんか
-    ・Can you please teach me Japanese?
+    ・Could you please teach me Japanese?
 
 **③　onegai** `please`
 
@@ -12567,7 +12439,7 @@ reactable(
 
 # fwkanji <- fwkanji[sample(1:nrow(fwkanji)),]
 
-fwkanji <- fwkanji %>% slice(1:25)
+fwkanji <- fwkanji %>% slice(1:30)
 
 reactable(
   fwkanji,
@@ -15145,6 +15017,132 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
+vnstg <- vnstg[sample(1:nrow(vnstg)),]
+
+reactable(
+  vnstg,
+  columns = list(
+    Phrases = colDef(
+      cell = function(value, index) {
+        Translation <- vnstg$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation)
+        )
+      },
+      align = "center"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### 5
+
+```{r, echo=FALSE, message=FALSE}
+
+vnstb <- vnstb[sample(1:nrow(vnstb)),]
+
+reactable(
+  vnstb,
+  columns = list(
+    Phrase = colDef(
+      cell = function(value, index) {
+        Translation <- vnstb$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation)
+        )
+      },
+      align = "center"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### 6
+
+```{r, echo=FALSE, message=FALSE}
+
+sntv <- sntv[sample(1:nrow(sntv)),]
+
+reactable(
+  sntv,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Translation <- sntv$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation)
+        )
+      },
+      align = "center"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### 7
+
+```{r, echo=FALSE, message=FALSE}
+
 cmwpg <- cmwpg[sample(1:nrow(cmwpg)),]
 
 reactable(
@@ -15209,7 +15207,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### 5
+### 8
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -17562,7 +17560,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Expressions
+## Expressions {.tabset}
 
 ```{r echo=FALSE, message=FALSE}
 
@@ -17683,6 +17681,96 @@ reactable(
 
 
 ```
+
+------------------------------------------------------------------------
+
+## Keigo {.tabset}
+
+### Sonkeigo {.tabset}
+
+**①　いらっしゃいます・おいでになります** `【行く】【来る】【いる】`
+
+    ・部長、お客様がおいでになりました。
+    ・山田さんは今そちらにいらっしゃいますか。
+
+<!-- <h> -->
+
+    ・To the manager, A customer is here.
+    ・Is Mr. Yamada there?
+
+**②　ご存知です** `【知っている】`
+
+    ・鈴木さんが結婚したことをご存知ですか。
+    ・Did you know that Mr. Suzuki has married?
+
+**③　ご覧になります** `【見る】`
+
+    ・どうぞ、ご覧になってください。
+    ・Please, feel free to take a look.
+
+**④　召し上がります** `【食べる】`
+
+    ・どうぞ、召し上がってください。
+    ・Please, help yourself.
+
+**⑤　おっしゃいます** `【言う】`
+
+    ・先生は、なんとおっしゃいましたか。
+    ・What did the professor say.
+
+**⑥　くださいます** `【くれる】`
+
+    ・田中さん奥さんが、お祝いをくださいました。
+    ・Mr. Tanaka's wife gave me her congratulations.
+
+**⑦　なさいます** `【する】`
+
+    ・課長、この書類はもう確認なさいますか。
+    ・To section chief, Have you alread check this documnet?
+
+------------------------------------------------------------------------
+
+### Kenjougo {.tabset}
+
+**①　伺います** `【聞く】【訪問する】`
+
+    ・ちっと、伺ってもいいですか。
+    ・来週、先生のお宅に伺います。
+
+<!-- <h> -->
+
+    ・Excuse me, could I ask you a question?
+    ・Next week I will visit teacher's home.
+
+**②　さし上げます** `【あげる】`
+
+    ・田中さの奥さんに、お祝いをさし上げました。
+    ・I gave my congratulations to Mr. Tanaka's wife.
+
+**③　拝見します** `【見る】`
+
+    ・先生からのお手紙を拝見しました。
+    ・To a teacher, I have read your letter
+
+**④　申し上げます** `【言う】`
+
+    ・残念ですが、今はこれしか申し上げられません。
+    ・I'm sorry, but this is all i can tell you at the moment.
+
+**⑤　参ります** `【行く】【来る】`
+
+    ・佐藤は、二時にこちらに参ります。
+    ・Mr. Sato will come at two o'clock.
+
+**⑥　おります** `【いる】`
+
+    ・息子はこちらの部屋におります。
+    ・My son is in this room.
+
+**⑦　いたします** `【する】`
+
+    ・申し訳ありません、すぐに確認いたします。
+    ・I'm sorry, I wil check it right away.
 
 ------------------------------------------------------------------------
 
@@ -18016,94 +18104,6 @@ reactable(
 ------------------------------------------------------------------------
 
 ### Grammars {.tabset}
-
-------------------------------------------------------------------------
-
-## Sonkeigo {.tabset}
-
-**①　いらっしゃいます・おいでになります** `【行く】【来る】【いる】`
-
-    ・部長、お客様がおいでになりました。
-    ・山田さんは今そちらにいらっしゃいますか。
-
-<!-- <h> -->
-
-    ・To the manager, A customer is here.
-    ・Is Mr. Yamada there?
-
-**②　ご存知です** `【知っている】`
-
-    ・鈴木さんが結婚したことをご存知ですか。
-    ・Did you know that Mr. Suzuki has married?
-
-**③　ご覧になります** `【見る】`
-
-    ・どうぞ、ご覧になってください。
-    ・Please, feel free to take a look.
-
-**④　召し上がります** `【食べる】`
-
-    ・どうぞ、召し上がってください。
-    ・Please, help yourself.
-
-**⑤　おっしゃいます** `【言う】`
-
-    ・先生は、なんとおっしゃいましたか。
-    ・What did the professor say.
-
-**⑥　くださいます** `【くれる】`
-
-    ・田中さん奥さんが、お祝いをくださいました。
-    ・Mr. Tanaka's wife gave me her congratulations.
-
-**⑦　なさいます** `【する】`
-
-    ・課長、この書類はもう確認なさいますか。
-    ・To section chief, Have you alread check this documnet?
-
-------------------------------------------------------------------------
-
-## Kenjougo {.tabset}
-
-**①　伺います** `【聞く】【訪問する】`
-
-    ・ちっと、伺ってもいいですか。
-    ・来週、先生のお宅に伺います。
-
-<!-- <h> -->
-
-    ・Excuse me, could I ask you a question?
-    ・Next week I will visit teacher's home.
-
-**②　さし上げます** `【あげる】`
-
-    ・田中さの奥さんに、お祝いをさし上げました。
-    ・I gave my congratulations to Mr. Tanaka's wife.
-
-**③　拝見します** `【見る】`
-
-    ・先生からのお手紙を拝見しました。
-    ・To a teacher, I have read your letter
-
-**④　申し上げます** `【言う】`
-
-    ・残念ですが、今はこれしか申し上げられません。
-    ・I'm sorry, but this is all i can tell you at the moment.
-
-**⑤　参ります** `【行く】【来る】`
-
-    ・佐藤は、二時にこちらに参ります。
-    ・Mr. Sato will come at two o'clock.
-
-**⑥　おります** `【いる】`
-
-    ・息子はこちらの部屋におります。
-    ・My son is in this room.
-
-**⑦　いたします** `【する】`
-
-    ・申し訳ありません、すぐに確認いたします。
-    ・I'm sorry, I wil check it right away.
 
 ------------------------------------------------------------------------
 
