@@ -181,6 +181,7 @@ tnkwrd <- read_csv("vrbjp/WTNK-WRDS.csv")
 cmnvrb <- read_csv("vrbjp/CMVRB-CMVRB.csv")
 sylvrb <- read_csv("vrbjp/WVRBSYL-WVBSYL.csv")
 vrcll <- read_csv("vrbjp/VRCLL-WVBRN.csv")
+vrbxt <- read_csv("vrbjp/VRBXT-VWRBXT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -7135,6 +7136,75 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+
+------------------------------------------------------------------------
+
+## Extended {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbxt <- vrbxt[sample(1:nrow(vrbxt)),]
+
+reactable(
+  vrbxt,
+  columns = list(
+    W1 = colDef(
+      cell = function(value, index) {
+        T1 <- vrbxt$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 500), value),
+          div(style = list(fontSize = 8), T1),
+        )
+      },
+      align = "center"
+    ),
+    W2 = colDef(
+      cell = function(value, index) {
+        T2 <- vrbxt$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 500), value),
+          div(style = list(fontSize = 8), T2),
+        )
+      },
+      align = "center"
+    ),    
+    W3 = colDef(
+      cell = function(value, index) {
+        T3 <- vrbxt$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 500), value),
+          div(style = list(fontSize = 8), T3),
+        )
+      },
+      align = "center"
+    ),       
+    
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 60),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
