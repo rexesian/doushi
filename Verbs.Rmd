@@ -182,6 +182,7 @@ cmnvrb <- read_csv("vrbjp/CMVRB-CMVRB.csv")
 sylvrb <- read_csv("vrbjp/WVRBSYL-WVBSYL.csv")
 vrcll <- read_csv("vrbjp/VRCLL-WVBRN.csv")
 vrbxt <- read_csv("vrbjp/VRBXT-VWRBXT.csv")
+dlyknj <- read_csv("vrbjp/DLYKNJ-JYKDL.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -4926,6 +4927,12 @@ future
 
 ## Forms {.tabset}
 
+### Table
+
+![](tvrb.jpg)
+
+------------------------------------------------------------------------
+
 ### V1 {.tabset}
 
 #### Stem
@@ -6203,22 +6210,249 @@ reactable(
         Reading <- if (!is.na(Reading)) Reading else ""
         Words <- lverbs$Words[index]
         Words <- if (!is.na(Words)) Words else ""
-        T1 <- lverbs$T1[index]
-        T1 <- if (!is.na(T1)) T1 else ""
-        T2 <- lverbs$T2[index]
-        T2 <- if (!is.na(T2)) T2 else ""
-        T3 <- lverbs$T3[index]
-        T3 <- if (!is.na(T3)) T3 else ""
-        S1 <- lverbs$S1[index]
-        S1 <- if (!is.na(S1)) S1 else ""
-        S2 <- lverbs$S2[index]
-        S2 <- if (!is.na(S2)) S2 else ""
-        S3 <- lverbs$S3[index]
-        S3 <- if (!is.na(S3)) S3 else ""
+        # T1 <- lverbs$T1[index]
+        # T1 <- if (!is.na(T1)) T1 else ""
+        # T2 <- lverbs$T2[index]
+        # T2 <- if (!is.na(T2)) T2 else ""
+        # T3 <- lverbs$T3[index]
+        # T3 <- if (!is.na(T3)) T3 else ""
+        # S1 <- lverbs$S1[index]
+        # S1 <- if (!is.na(S1)) S1 else ""
+        # S2 <- lverbs$S2[index]
+        # S2 <- if (!is.na(S2)) S2 else ""
+        # S3 <- lverbs$S3[index]
+        # S3 <- if (!is.na(S3)) S3 else ""
         Type <- lverbs$Type[index]
         Type <- if (!is.na(Type)) Type else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 500), value),
+          div(style = list(fontSize = 21, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Reading),
+          div(style = list(fontSize = 9.2), Meaning),
+          # div(style = list(fontSize = 14), S1),
+          # div(style = list(fontSize = 9), T1),
+          # div(style = list(fontSize = 14), S2),
+          # div(style = list(fontSize = 10), T2),
+          # div(style = list(fontSize = 14), S3),
+          # div(style = list(fontSize = 10), T3),
+          # div(style = list(fontSize = 11), Type),
+          # div(style = list(fontSize = 14), Words),
+        )
+      },
+      align = "center"
+    ),
+    
+    S1 = colDef(
+      minWidth = 155,
+      # Show species under character names
+      cell = function(value, index) {
+        T1 <- lverbs$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 14, fontWeight = 500), value),
+          div(style = list(fontSize = 9), T1),
+        )
+      },
+      align = "center"
+    ),
+    S2 = colDef(
+      minWidth = 155,
+      # Show species under character names
+      cell = function(value, index) {
+        T2 <- lverbs$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14, fontWeight = 500), value),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "center"
+    ),   
+    
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Type = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    Words = colDef(show = FALSE),
+    Rank = colDef(show = FALSE)
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### Syllable {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+vnstxp <- vnstx %>% slice(1:1054)
+# vnstxp <- vnstxp[sample(1:nrow(vnstxp)),]
+
+reactable(
+  vnstxp,
+  columns = list(
+    Words = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Meaning <- vnstxp$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- vnstxp$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        # W1 <- vnstxp$W1[index]
+        # W1 <- if (!is.na(W1)) W1 else ""
+        # W2 <- vnstxp$W2[index]
+        # W2 <- if (!is.na(W2)) W2 else ""
+        # W3 <- vnstxp$W3[index]
+        # W3 <- if (!is.na(W3)) W3 else ""
+        # T1 <- vnstxp$T1[index]
+        # T1 <- if (!is.na(T1)) T1 else ""
+        # T2 <- vnstxp$T2[index]
+        # T2 <- if (!is.na(T2)) T2 else ""
+        # T3 <- vnstxp$T3[index]
+        # T3 <- if (!is.na(T3)) T3 else ""
+        # S1 <- vnstxp$S1[index]
+        # S1 <- if (!is.na(S1)) S1 else ""
+        # S2 <- vnstxp$S2[index]
+        # S2 <- if (!is.na(S2)) S2 else ""
+        # S3 <- vnstxp$S3[index]
+        # S3 <- if (!is.na(S3)) S3 else ""
+        Type <- vnstxp$Type[index]
+        Type <- if (!is.na(Type)) Type else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Reading),
+          div(style = list(fontSize = 9.2), Meaning),
+          # div(style = list(fontSize = 14), S1),
+          # div(style = list(fontSize = 9), T1),
+          # div(style = list(fontSize = 14), S2),
+          # div(style = list(fontSize = 10), T2),
+          # div(style = list(fontSize = 14), S3),
+          # div(style = list(fontSize = 10), T3),
+          # div(style = list(fontSize = 11), Type),
+          # div(style = list(fontSize = 14), W1," ", W2," ", W3),
+        )
+      },
+      align = "center"
+    ),
+    
+    S1 = colDef(
+      minWidth = 155,
+      # Show species under character names
+      cell = function(value, index) {
+        T1 <- vnstxp$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 14, fontWeight = 500), value),
+          div(style = list(fontSize = 9), T1),
+        )
+      },
+      align = "center"
+    ),
+    S2 = colDef(
+      minWidth = 155,
+      # Show species under character names
+      cell = function(value, index) {
+        T2 <- vnstxp$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14, fontWeight = 500), value),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "center"
+    ),   
+    
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Type = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    W1 = colDef(show = FALSE),
+    W2 = colDef(show = FALSE),
+    W3 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### Random {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+vnstx1 <- vnstx %>% slice(1353:2221)
+vnstx1 <- vnstx1[sample(1:nrow(vnstx1)),]
+
+reactable(
+  vnstx1,
+  columns = list(
+    Words = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Meaning <- vnstx1$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- vnstx1$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        W1 <- vnstx1$W1[index]
+        W1 <- if (!is.na(W1)) W1 else ""
+        W2 <- vnstx1$W2[index]
+        W2 <- if (!is.na(W2)) W2 else ""
+        W3 <- vnstx1$W3[index]
+        W3 <- if (!is.na(W3)) W3 else ""
+        T1 <- vnstx1$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- vnstx1$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        T3 <- vnstx1$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        S1 <- vnstx1$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- vnstx1$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- vnstx1$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        Type <- vnstx1$Type[index]
+        Type <- if (!is.na(Type)) Type else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 10), Meaning),
           div(style = list(fontSize = 14), S1),
@@ -6228,7 +6462,7 @@ reactable(
           # div(style = list(fontSize = 14), S3),
           # div(style = list(fontSize = 10), T3),
           # div(style = list(fontSize = 11), Type),
-          # div(style = list(fontSize = 14), Words),
+          # div(style = list(fontSize = 14), W1," ", W2," ", W3),
         )
       },
       align = "center"
@@ -6242,10 +6476,11 @@ reactable(
     T1 = colDef(show = FALSE),
     T2 = colDef(show = FALSE),
     T3 = colDef(show = FALSE),
-    Words = colDef(show = FALSE),
-    Rank = colDef(show = FALSE)
+    W1 = colDef(show = FALSE),
+    W2 = colDef(show = FALSE),
+    W3 = colDef(show = FALSE)
   ),
-  defaultPageSize = 3,
+  defaultPageSize = 4,
   theme = reactableTheme(
     # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 120),
@@ -6310,178 +6545,6 @@ reactable(
           div(style = list(fontSize = 9), T1),
           # div(style = list(fontSize = 9), S2),
           div(style = list(fontSize = 9), T2),
-          # div(style = list(fontSize = 14), S3),
-          # div(style = list(fontSize = 10), T3),
-          # div(style = list(fontSize = 11), Type),
-          # div(style = list(fontSize = 14), W1," ", W2," ", W3),
-        )
-      },
-      align = "center"
-    ),
-    Reading = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Type = colDef(show = FALSE),
-    S1 = colDef(show = FALSE),
-    S2 = colDef(show = FALSE),
-    S3 = colDef(show = FALSE),
-    T1 = colDef(show = FALSE),
-    T2 = colDef(show = FALSE),
-    T3 = colDef(show = FALSE),
-    W1 = colDef(show = FALSE),
-    W2 = colDef(show = FALSE),
-    W3 = colDef(show = FALSE)
-  ),
-  defaultPageSize = 3,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 120),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-### Syllable {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-vnstxp <- vnstx %>% slice(1:1054)
-# vnstxp <- vnstxp[sample(1:nrow(vnstxp)),]
-
-reactable(
-  vnstxp,
-  columns = list(
-    Words = colDef(
-      # Show species under character names
-      cell = function(value, index) {
-        Meaning <- vnstxp$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Reading <- vnstxp$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        W1 <- vnstxp$W1[index]
-        W1 <- if (!is.na(W1)) W1 else ""
-        W2 <- vnstxp$W2[index]
-        W2 <- if (!is.na(W2)) W2 else ""
-        W3 <- vnstxp$W3[index]
-        W3 <- if (!is.na(W3)) W3 else ""
-        T1 <- vnstxp$T1[index]
-        T1 <- if (!is.na(T1)) T1 else ""
-        T2 <- vnstxp$T2[index]
-        T2 <- if (!is.na(T2)) T2 else ""
-        T3 <- vnstxp$T3[index]
-        T3 <- if (!is.na(T3)) T3 else ""
-        S1 <- vnstxp$S1[index]
-        S1 <- if (!is.na(S1)) S1 else ""
-        S2 <- vnstxp$S2[index]
-        S2 <- if (!is.na(S2)) S2 else ""
-        S3 <- vnstxp$S3[index]
-        S3 <- if (!is.na(S3)) S3 else ""
-        Type <- vnstxp$Type[index]
-        Type <- if (!is.na(Type)) Type else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Reading),
-          div(style = list(fontSize = 10), Meaning),
-          div(style = list(fontSize = 14), S1),
-          div(style = list(fontSize = 9), T1),
-          # div(style = list(fontSize = 14), S2),
-          # div(style = list(fontSize = 10), T2),
-          # div(style = list(fontSize = 14), S3),
-          # div(style = list(fontSize = 10), T3),
-          # div(style = list(fontSize = 11), Type),
-          # div(style = list(fontSize = 14), W1," ", W2," ", W3),
-        )
-      },
-      align = "center"
-    ),
-    Reading = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Type = colDef(show = FALSE),
-    S1 = colDef(show = FALSE),
-    S2 = colDef(show = FALSE),
-    S3 = colDef(show = FALSE),
-    T1 = colDef(show = FALSE),
-    T2 = colDef(show = FALSE),
-    T3 = colDef(show = FALSE),
-    W1 = colDef(show = FALSE),
-    W2 = colDef(show = FALSE),
-    W3 = colDef(show = FALSE)
-  ),
-  defaultPageSize = 3,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 120),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-### Random {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-vnstx1 <- vnstx %>% slice(1353:2221)
-vnstx1 <- vnstx1[sample(1:nrow(vnstx1)),]
-
-reactable(
-  vnstx1,
-  columns = list(
-    Words = colDef(
-      # Show species under character names
-      cell = function(value, index) {
-        Meaning <- vnstx1$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Reading <- vnstx1$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        W1 <- vnstx1$W1[index]
-        W1 <- if (!is.na(W1)) W1 else ""
-        W2 <- vnstx1$W2[index]
-        W2 <- if (!is.na(W2)) W2 else ""
-        W3 <- vnstx1$W3[index]
-        W3 <- if (!is.na(W3)) W3 else ""
-        T1 <- vnstx1$T1[index]
-        T1 <- if (!is.na(T1)) T1 else ""
-        T2 <- vnstx1$T2[index]
-        T2 <- if (!is.na(T2)) T2 else ""
-        T3 <- vnstx1$T3[index]
-        T3 <- if (!is.na(T3)) T3 else ""
-        S1 <- vnstx1$S1[index]
-        S1 <- if (!is.na(S1)) S1 else ""
-        S2 <- vnstx1$S2[index]
-        S2 <- if (!is.na(S2)) S2 else ""
-        S3 <- vnstx1$S3[index]
-        S3 <- if (!is.na(S3)) S3 else ""
-        Type <- vnstx1$Type[index]
-        Type <- if (!is.na(Type)) Type else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Reading),
-          div(style = list(fontSize = 10), Meaning),
-          div(style = list(fontSize = 14), S1),
-          div(style = list(fontSize = 9), T1),
-          # div(style = list(fontSize = 14), S2),
-          # div(style = list(fontSize = 10), T2),
           # div(style = list(fontSize = 14), S3),
           # div(style = list(fontSize = 10), T3),
           # div(style = list(fontSize = 11), Type),
@@ -13247,7 +13310,7 @@ reactable(
         W1 <- jyknjon$W1[index]
         W1 <- if (!is.na(W1)) W1 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M1),
           div(style = list(fontSize = 9, fontWeight = 400), S1),
           div(style = list(fontSize = 13, fontWeight = 400), W1),
@@ -13264,7 +13327,7 @@ reactable(
         W2 <- jyknjon$W2[index]
         W2 <- if (!is.na(W2)) W2 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M2),
           div(style = list(fontSize = 9, fontWeight = 400), S2),
           div(style = list(fontSize = 13, fontWeight = 400), W2),
@@ -13281,7 +13344,7 @@ reactable(
         W3 <- jyknjon$W3[index]
         W3 <- if (!is.na(W3)) W3 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M3),
           div(style = list(fontSize = 9, fontWeight = 400), S3),
           div(style = list(fontSize = 13, fontWeight = 400), W3),
@@ -13298,7 +13361,7 @@ reactable(
         W4 <- jyknjon$W4[index]
         W4 <- if (!is.na(W4)) W4 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M4),
           div(style = list(fontSize = 9, fontWeight = 400), S4),
           div(style = list(fontSize = 13, fontWeight = 400), W4),
@@ -13315,7 +13378,7 @@ reactable(
         W5 <- jyknjon$W5[index]
         W5 <- if (!is.na(W5)) W5 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M5),
           div(style = list(fontSize = 9, fontWeight = 400), S5),
           div(style = list(fontSize = 13, fontWeight = 400), W5),
@@ -13332,7 +13395,7 @@ reactable(
         W6 <- jyknjon$W6[index]
         W6 <- if (!is.na(W6)) W6 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M6),
           div(style = list(fontSize = 9, fontWeight = 400), S6),
           div(style = list(fontSize = 13, fontWeight = 400), W6),
@@ -13349,7 +13412,7 @@ reactable(
         W7 <- jyknjon$W7[index]
         W7 <- if (!is.na(W7)) W7 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M7),
           div(style = list(fontSize = 9, fontWeight = 400), S7),
           div(style = list(fontSize = 13, fontWeight = 400), W7),
@@ -13366,7 +13429,7 @@ reactable(
         W8 <- jyknjon$W8[index]
         W8 <- if (!is.na(W8)) W8 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M8),
           div(style = list(fontSize = 9, fontWeight = 400), S8),
           div(style = list(fontSize = 13, fontWeight = 400), W8),
@@ -13438,7 +13501,7 @@ reactable(
         W1 <- jyknjkn$W1[index]
         W1 <- if (!is.na(W1)) W1 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M1),
           div(style = list(fontSize = 9, fontWeight = 400), S1),
           div(style = list(fontSize = 13, fontWeight = 400), W1),
@@ -13455,7 +13518,7 @@ reactable(
         W2 <- jyknjkn$W2[index]
         W2 <- if (!is.na(W2)) W2 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M2),
           div(style = list(fontSize = 9, fontWeight = 400), S2),
           div(style = list(fontSize = 13, fontWeight = 400), W2),
@@ -13472,7 +13535,7 @@ reactable(
         W3 <- jyknjkn$W3[index]
         W3 <- if (!is.na(W3)) W3 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M3),
           div(style = list(fontSize = 9, fontWeight = 400), S3),
           div(style = list(fontSize = 13, fontWeight = 400), W3),
@@ -13489,7 +13552,7 @@ reactable(
         W4 <- jyknjkn$W4[index]
         W4 <- if (!is.na(W4)) W4 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M4),
           div(style = list(fontSize = 9, fontWeight = 400), S4),
           div(style = list(fontSize = 13, fontWeight = 400), W4),
@@ -13506,7 +13569,7 @@ reactable(
         W5 <- jyknjkn$W5[index]
         W5 <- if (!is.na(W5)) W5 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M5),
           div(style = list(fontSize = 9, fontWeight = 400), S5),
           div(style = list(fontSize = 13, fontWeight = 400), W5),
@@ -13523,7 +13586,7 @@ reactable(
         W6 <- jyknjkn$W6[index]
         W6 <- if (!is.na(W6)) W6 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M6),
           div(style = list(fontSize = 9, fontWeight = 400), S6),
           div(style = list(fontSize = 13, fontWeight = 400), W6),
@@ -13540,7 +13603,7 @@ reactable(
         W7 <- jyknjkn$W7[index]
         W7 <- if (!is.na(W7)) W7 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M7),
           div(style = list(fontSize = 9, fontWeight = 400), S7),
           div(style = list(fontSize = 13, fontWeight = 400), W7),
@@ -13557,7 +13620,7 @@ reactable(
         W8 <- jyknjkn$W8[index]
         W8 <- if (!is.na(W8)) W8 else "."
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 400), value),
+          div(style = list(fontSize = 25, fontWeight = 500), value),
           # div(style = list(fontSize = 8, fontWeight = 500), M8),
           div(style = list(fontSize = 9, fontWeight = 400), S8),
           div(style = list(fontSize = 13, fontWeight = 400), W8),
@@ -14575,6 +14638,182 @@ reactable(
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### Daily {.tabset}
+
+
+```{r, echo=FALSE, message=FALSE}
+
+# dlyknj <- dlyknj[sample(1:nrow(dlyknj)),]
+
+reactable(
+  dlyknj,
+  columns = list(
+    K1 = colDef(
+      cell = function(value, index) {
+        M1 <- dlyknj$M1[index]
+        M1 <- if (!is.na(M1)) M1 else "."
+        R1 <- dlyknj$R1[index]
+        R1 <- if (!is.na(R1)) R1 else "."
+        S1 <- dlyknj$S1[index]
+        S1 <- if (!is.na(S1)) S1 else "."
+        W1 <- dlyknj$W1[index]
+        W1 <- if (!is.na(W1)) W1 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M1),
+          div(style = list(fontSize = 9, fontWeight = 400), R1),
+          div(style = list(fontSize = 9, fontWeight = 400), S1),
+          div(style = list(fontSize = 13, fontWeight = 400), W1),
+        )
+      },
+      align = "center"
+    ),
+    K2 = colDef(
+      cell = function(value, index) {
+        M2 <- dlyknj$M2[index]
+        M2 <- if (!is.na(M2)) M2 else "."
+        R2 <- dlyknj$R2[index]
+        R2 <- if (!is.na(R2)) R2 else "."
+        S2 <- dlyknj$S2[index]
+        S2 <- if (!is.na(S2)) S2 else "."
+        W2 <- dlyknj$W2[index]
+        W2 <- if (!is.na(W2)) W2 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M2),
+          div(style = list(fontSize = 9, fontWeight = 400), R2),
+          div(style = list(fontSize = 9, fontWeight = 400), S2),
+          div(style = list(fontSize = 13, fontWeight = 400), W2),
+        )
+      },
+      align = "center"
+    ),    
+    K3 = colDef(
+      cell = function(value, index) {
+        M3 <- dlyknj$M3[index]
+        M3 <- if (!is.na(M3)) M3 else "."
+        R3 <- dlyknj$R3[index]
+        R3 <- if (!is.na(R3)) R3 else "."
+        S3 <- dlyknj$S3[index]
+        S3 <- if (!is.na(S3)) S3 else "."
+        W3 <- dlyknj$W3[index]
+        W3 <- if (!is.na(W3)) W3 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M3),
+          div(style = list(fontSize = 9, fontWeight = 400), R3),
+          div(style = list(fontSize = 9, fontWeight = 400), S3),
+          div(style = list(fontSize = 13, fontWeight = 400), W3),
+        )
+      },
+      align = "center"
+    ),       
+    K4 = colDef(
+      cell = function(value, index) {
+        M4 <- dlyknj$M4[index]
+        M4 <- if (!is.na(M4)) M4 else "."
+        R4 <- dlyknj$R4[index]
+        R4 <- if (!is.na(R4)) R4 else "."
+        S4 <- dlyknj$S4[index]
+        S4 <- if (!is.na(S4)) S4 else "."
+        W4 <- dlyknj$W4[index]
+        W4 <- if (!is.na(W4)) W4 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M4),
+          div(style = list(fontSize = 9, fontWeight = 400), R4),
+          div(style = list(fontSize = 9, fontWeight = 400), S4),
+          div(style = list(fontSize = 13, fontWeight = 400), W4),
+        )
+      },
+      align = "center"
+    ),
+    K5 = colDef(
+      cell = function(value, index) {
+        M5 <- dlyknj$M5[index]
+        M5 <- if (!is.na(M5)) M5 else "."
+        R5 <- dlyknj$R5[index]
+        R5 <- if (!is.na(R5)) R5 else "."
+        S5 <- dlyknj$S5[index]
+        S5 <- if (!is.na(S5)) S5 else "."
+        W5 <- dlyknj$W5[index]
+        W5 <- if (!is.na(W5)) W5 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M5),
+          div(style = list(fontSize = 9, fontWeight = 400), R5),
+          div(style = list(fontSize = 9, fontWeight = 400), S5),
+          div(style = list(fontSize = 13, fontWeight = 400), W5),
+        )
+      },
+      align = "center"
+    ),    
+    K6 = colDef(
+      cell = function(value, index) {
+        M6 <- dlyknj$M6[index]
+        M6 <- if (!is.na(M6)) M6 else "."
+        R6 <- dlyknj$R6[index]
+        R6 <- if (!is.na(R6)) R6 else "."
+        S6 <- dlyknj$S6[index]
+        S6 <- if (!is.na(S6)) S6 else "."
+        W6 <- dlyknj$W6[index]
+        W6 <- if (!is.na(W6)) W6 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M6),
+          div(style = list(fontSize = 9, fontWeight = 400), R6),
+          div(style = list(fontSize = 9, fontWeight = 400), S6),
+          div(style = list(fontSize = 13, fontWeight = 400), W6),
+        )
+      },
+      align = "center"
+    ),       
+
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    M4 = colDef(show = FALSE),
+    M5 = colDef(show = FALSE),
+    M6 = colDef(show = FALSE),
+    R1 = colDef(show = FALSE),
+    R2 = colDef(show = FALSE),
+    R3 = colDef(show = FALSE),
+    R4 = colDef(show = FALSE),
+    R5 = colDef(show = FALSE),
+    R6 = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    S4 = colDef(show = FALSE),
+    S5 = colDef(show = FALSE),
+    S6 = colDef(show = FALSE),
+    W1 = colDef(show = FALSE),
+    W2 = colDef(show = FALSE),
+    W3 = colDef(show = FALSE),
+    W4 = colDef(show = FALSE),
+    W5 = colDef(show = FALSE),
+    W6 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 110),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
     )
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
