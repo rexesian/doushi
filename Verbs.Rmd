@@ -183,6 +183,7 @@ sylvrb <- read_csv("vrbjp/WVRBSYL-WVBSYL.csv")
 vrcll <- read_csv("vrbjp/VRCLL-WVBRN.csv")
 vrbxt <- read_csv("vrbjp/VRBXT-VWRBXT.csv")
 dlyknj <- read_csv("vrbjp/DLYKNJ-JYKDL.csv")
+vrbrvws <- read_csv("vrbjp/VRWK-KRVW.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -7348,6 +7349,40 @@ reactable(
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+## Review
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbrvws <- vrbrvws[sample(1:nrow(vrbrvws)),]
+
+reactable(
+  vrbrvws,
+  columns = list(
+    W1 = colDef(minWidth = 140, style = list(fontSize = 25, fontWeight = 600), align = "center"), 
+    W2 = colDef(minWidth = 140, style = list(fontSize = 25, fontWeight = 600), align = "center"), 
+    W3 = colDef(minWidth = 140, style = list(fontSize = 25, fontWeight = 600), align = "center")
+
+  ),
+  defaultPageSize = 3,fullWidth = FALSE,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 130),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Klee One, Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
 ```
