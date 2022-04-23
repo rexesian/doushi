@@ -186,6 +186,7 @@ sylvrb <- read_csv("vrbjp/WVRBSYL-WVBSYL.csv")
 vrcll <- read_csv("vrbjp/VRCLL-WVBRN.csv")
 vrbxt <- read_csv("vrbjp/VRBXT-VWRBXT.csv")
 dlyknj <- read_csv("vrbjp/DLYKNJ-JYKDL.csv")
+bscknj <- read_csv("vrbjp/BSCKNJ-JYKDL.csv")
 vrbrvws <- read_csv("vrbjp/VRWK-KRVW.csv")
 ```
 
@@ -6787,7 +6788,7 @@ reactable(
         T1 <- vwrbst$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 14, fontWeight = 500), R1),
+          div(style = list(fontSize = 15, fontWeight = 500), R1),
           div(style = list(fontSize = 8, fontWeight = 300), T1),
           div(style = list(fontSize = 9, fontWeight = 300), value),
         )
@@ -6801,7 +6802,7 @@ reactable(
         R2 <- vwrbst$R2[index]
         R2 <- if (!is.na(R2)) R2 else ""
         tagList(
-          div(style = list(fontSize = 14, fontWeight = 500), R2),
+          div(style = list(fontSize = 15, fontWeight = 500), R2),
           div(style = list(fontSize = 8, fontWeight = 300), T2),
           div(style = list(fontSize = 9, fontWeight = 300), value),
         )
@@ -6815,7 +6816,7 @@ reactable(
         R3 <- vwrbst$R3[index]
         R3 <- if (!is.na(R3)) R3 else ""
         tagList(
-          div(style = list(fontSize = 14, fontWeight = 500), R3),
+          div(style = list(fontSize = 15, fontWeight = 500), R3),
           div(style = list(fontSize = 8, fontWeight = 300), T3),
           div(style = list(fontSize = 9, fontWeight = 300), value),
         )
@@ -6829,7 +6830,7 @@ reactable(
         R4 <- vwrbst$R4[index]
         R4 <- if (!is.na(R4)) R4 else ""
         tagList(
-          div(style = list(fontSize = 14, fontWeight = 500), R4),
+          div(style = list(fontSize = 15, fontWeight = 500), R4),
           div(style = list(fontSize = 8, fontWeight = 300), T4),
           div(style = list(fontSize = 9, fontWeight = 300), value),
         )
@@ -6843,7 +6844,7 @@ reactable(
         R5 <- vwrbst$R5[index]
         R5 <- if (!is.na(R5)) R5 else ""
         tagList(
-          div(style = list(fontSize = 14, fontWeight = 500), R5),
+          div(style = list(fontSize = 15, fontWeight = 500), R5),
           div(style = list(fontSize = 8, fontWeight = 300), T5),
           div(style = list(fontSize = 9, fontWeight = 300), value),
         )
@@ -6970,6 +6971,97 @@ reactable(
     R3 = colDef(show = FALSE),
     R4 = colDef(show = FALSE),
     R5 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 80),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Common
+
+```{r, echo=FALSE, message=FALSE}
+
+# cmnvrb <- cmnvrb[sample(1:nrow(cmnvrb)),]
+
+reactable(
+  cmnvrb,
+  columns = list(
+    W1 = colDef(
+      cell = function(value, index) {
+        # R1 <- cmnvrb$R1[index]
+        # R1 <- if (!is.na(R1)) R1 else ""
+        T1 <- cmnvrb$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 500), value),
+          # div(style = list(fontSize = 8), R1),
+          div(style = list(fontSize = 8), T1),
+        )
+      },
+      align = "center"
+    ),
+    W2 = colDef(
+      cell = function(value, index) {
+        T2 <- cmnvrb$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        # R2 <- cmnvrb$R2[index]
+        # R2 <- if (!is.na(R2)) R2 else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 500), value),
+          # div(style = list(fontSize = 8), R2),
+          div(style = list(fontSize = 8), T2),
+        )
+      },
+      align = "center"
+    ),
+    W3 = colDef(
+      cell = function(value, index) {
+        T3 <- cmnvrb$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        # R3 <- cmnvrb$R3[index]
+        # R3 <- if (!is.na(R3)) R3 else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 500), value),
+          # div(style = list(fontSize = 8), R3),
+          div(style = list(fontSize = 8), T3),
+        )
+      },
+      align = "center"
+    ),
+    W4 = colDef(
+      cell = function(value, index) {
+        T4 <- cmnvrb$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
+        # R4 <- cmnvrb$R4[index]
+        # R4 <- if (!is.na(R4)) R4 else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 500), value),
+          # div(style = list(fontSize = 8), R4),
+          div(style = list(fontSize = 8), T4),
+        )
+      },
+      align = "center"
+    ),
+
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -14935,6 +15027,159 @@ reactable(
 
 ------------------------------------------------------------------------
 
+### Basic {.tabset}
+
+
+```{r, echo=FALSE, message=FALSE}
+
+# bscknj <- bscknj[sample(1:nrow(bscknj)),]
+
+reactable(
+  bscknj,
+  columns = list(
+    K1 = colDef(
+      cell = function(value, index) {
+        M1 <- bscknj$M1[index]
+        M1 <- if (!is.na(M1)) M1 else "."
+        R1 <- bscknj$R1[index]
+        R1 <- if (!is.na(R1)) R1 else "."
+        S1 <- bscknj$S1[index]
+        S1 <- if (!is.na(S1)) S1 else "."
+        W1 <- bscknj$W1[index]
+        W1 <- if (!is.na(W1)) W1 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M1),
+          div(style = list(fontSize = 9, fontWeight = 400), R1),
+          div(style = list(fontSize = 9, fontWeight = 400), S1),
+          div(style = list(fontSize = 13, fontWeight = 400), W1),
+        )
+      },
+      align = "center"
+    ),
+    K2 = colDef(
+      cell = function(value, index) {
+        M2 <- bscknj$M2[index]
+        M2 <- if (!is.na(M2)) M2 else "."
+        R2 <- bscknj$R2[index]
+        R2 <- if (!is.na(R2)) R2 else "."
+        S2 <- bscknj$S2[index]
+        S2 <- if (!is.na(S2)) S2 else "."
+        W2 <- bscknj$W2[index]
+        W2 <- if (!is.na(W2)) W2 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M2),
+          div(style = list(fontSize = 9, fontWeight = 400), R2),
+          div(style = list(fontSize = 9, fontWeight = 400), S2),
+          div(style = list(fontSize = 13, fontWeight = 400), W2),
+        )
+      },
+      align = "center"
+    ),    
+    K3 = colDef(
+      cell = function(value, index) {
+        M3 <- bscknj$M3[index]
+        M3 <- if (!is.na(M3)) M3 else "."
+        R3 <- bscknj$R3[index]
+        R3 <- if (!is.na(R3)) R3 else "."
+        S3 <- bscknj$S3[index]
+        S3 <- if (!is.na(S3)) S3 else "."
+        W3 <- bscknj$W3[index]
+        W3 <- if (!is.na(W3)) W3 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M3),
+          div(style = list(fontSize = 9, fontWeight = 400), R3),
+          div(style = list(fontSize = 9, fontWeight = 400), S3),
+          div(style = list(fontSize = 13, fontWeight = 400), W3),
+        )
+      },
+      align = "center"
+    ),       
+    K4 = colDef(
+      cell = function(value, index) {
+        M4 <- bscknj$M4[index]
+        M4 <- if (!is.na(M4)) M4 else "."
+        R4 <- bscknj$R4[index]
+        R4 <- if (!is.na(R4)) R4 else "."
+        S4 <- bscknj$S4[index]
+        S4 <- if (!is.na(S4)) S4 else "."
+        W4 <- bscknj$W4[index]
+        W4 <- if (!is.na(W4)) W4 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M4),
+          div(style = list(fontSize = 9, fontWeight = 400), R4),
+          div(style = list(fontSize = 9, fontWeight = 400), S4),
+          div(style = list(fontSize = 13, fontWeight = 400), W4),
+        )
+      },
+      align = "center"
+    ),
+    K5 = colDef(
+      cell = function(value, index) {
+        M5 <- bscknj$M5[index]
+        M5 <- if (!is.na(M5)) M5 else "."
+        R5 <- bscknj$R5[index]
+        R5 <- if (!is.na(R5)) R5 else "."
+        S5 <- bscknj$S5[index]
+        S5 <- if (!is.na(S5)) S5 else "."
+        W5 <- bscknj$W5[index]
+        W5 <- if (!is.na(W5)) W5 else "."
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 500), M5),
+          div(style = list(fontSize = 9, fontWeight = 400), R5),
+          div(style = list(fontSize = 9, fontWeight = 400), S5),
+          div(style = list(fontSize = 13, fontWeight = 400), W5),
+        )
+      },
+      align = "center"
+    ),    
+
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    M4 = colDef(show = FALSE),
+    M5 = colDef(show = FALSE),
+    R1 = colDef(show = FALSE),
+    R2 = colDef(show = FALSE),
+    R3 = colDef(show = FALSE),
+    R4 = colDef(show = FALSE),
+    R5 = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    S4 = colDef(show = FALSE),
+    S5 = colDef(show = FALSE),
+    W1 = colDef(show = FALSE),
+    W2 = colDef(show = FALSE),
+    W3 = colDef(show = FALSE),
+    W4 = colDef(show = FALSE),
+    W5 = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 110),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 <!-- ### Review {.tabset} -->
 
 <!-- ```{r, echo=FALSE, message=FALSE} -->
@@ -15791,7 +16036,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-# cmnvrb <- cmnvrb[sample(1:nrow(cmnvrb)),]
+cmnvrb <- cmnvrb[sample(1:nrow(cmnvrb)),]
 
 reactable(
   cmnvrb,
@@ -15875,7 +16120,6 @@ reactable(
 )
 
 ```
-
 
 ------------------------------------------------------------------------
 
@@ -16021,7 +16265,7 @@ reactable(
         Knj2 <- if (!is.na(Knj2)) Knj2 else "Unknown"
         tagList(
           div(style = list(fontSize = 12), Knj1, "・", Knj2),
-          div(style = list(fontSize = 22, fontWeight = 500), value),
+          div(style = list(fontSize = 21, fontWeight = 500), value),
           div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 11), Meaning)
         )
@@ -18332,7 +18576,69 @@ reactable(
 ### N
 
 <p style="font-size:14.5px; font-family: Yomogi;">
-選んで　erande—chose  
+なので　na node—therefore; because of that  
+など　nado—etc; and so forth  
+長い間　nagai aida—for a long time  
+流されてしまって　nagasarete shimatte—washed away  
+なかなか　nakanaka—by no means (with the negative)  
+なくなってしまいました　nakunatte shimaimashita—lost it all  
+なんですか　nan desu ka—what is it  
+なにも　nani mo—nothing (used with a negative verb)  
+なにも見えるはずがありません　nani mo mieru hazu ga arimasen—shouldn’t be able to see anything  
+なにか　nanika—something  
+何時間待っても　nanjikan mattemo—however long (he) waited  
+なんと　nanto—how! [shows emotion]  
+なら　nara—if (you exchange)  
+な　na—sentence ender indicating emotion or emphasis  
+なぜ　naze—why  
+ね　ne—sentence ender indicating emphasis and agreement  
+寝てしまいました　nete shimaimashita—fell asleep [theしまいました　shows later regret]  
+にしました　ni shimashita—decided upon  
+につられて　ni tsurarete—being enticed (by his words)  
+になってしまった　ni natte shimatta—became  
+になっても　ni natte mo—even becoming  
+になりました　ni narimashita—happened; became  
+には　ni wa—was for on   
+に出かける　ni dekakeru—went out for (hanami)  
+に成功 ni seikou—success with (the prank)  
+に行って　ni itte—went to (a bar)  
+に感心して　ni kanshin shite—become interested in; grab one’s attention  
+逃げ出しました　nige dashimashita—escaped  
+逃げているうちに　nigeteiru uchi ni—while escaping  
+握り飯　nigiri meshi—rice ball; onigiri  
+二階の軒先に　nikai no nokisaki ni—on the edge of the eaves of the second floor  
+二階 nikai—second floor of a building  
+にっこりと　nikkori to—smiling  
+にっこり　nikkori—smiling; grin  
+荷物 nimotsu—luggage; baggage  
+にやりと笑って　niyarito waratte—grin; a broad smile  
+のかどうか　no ka dou ka—whether it is so or not  
+のくせに　no kuse ni—although; despite  
+のでした　no deshita—was [theの　indicates the preceding is an explanation]  
+のです　no desu—[explanatory ender plus copula]  
+のところにも　no tokoro ni mo—even at (the lord’s) place  
+のは　no wa—as for (when the last feeding)  
+のほう　no hou—that direction  
+の中に　no naka ni—inside (the chest)  
+の間で　no aida de—among (the townspeople)  
+城の中shiro no naka—inside the castle  
+ので　node—therefore  
+の　no—indicates a conclusion of thought or question  
+軒先 noki saki—edge of the eaves  
+残った灰　nokkota hai—the remaining ashes  
+残ったぞ　nokotta zo—is left  
+残った　nokotta—what was left; remainder  
+残っていませんでした　nokotte imasen deshita—wasn’t any left  
+残っている　nokotteiru—still exists  
+飲み始めました　nomi hajimemashita—began to drink  
+飲むときに　nomu toki ni—while drinking  
+のに　noni—although; even though  
+の　no—possessive marker  
+のぞいてみたくなった　nozoite mitaku natta—began to want to peek  
+のぞいてみました　nozoite mimashita—took a peek  
+のぞいて　nozoite—to look (through the pipe)  
+覗き込みました　nozoki komimashita—peeked; looked at… [to see if it were so]  
+塗ってみました　nutte mimashita—spread; smeared  
 </p>
 
 ------------------------------------------------------------------------
@@ -18340,7 +18646,23 @@ reactable(
 ### O
 
 <p style="font-size:14.5px; font-family: Yomogi;">
-選んで　erande—chose  
+お荷物 o nimotsu—luggage; baggage (polite)  
+をしておるの　o shite oru no—has [oru is more formal (humble form) than iru]  
+お化け　obake—ghost  
+お弁当 obentou—lunch box; bento  
+お茶　ocha—(green) tea  
+落ちてしまった　ochite shimatta—had fallen  
+落ちて　ochite—falling  
+大声で　ogoe de—with a big voice   
+お花見 ohanami—hanami; flower viewing  
+追い回され　oi mawasare—was chased (by the owner)  
+おいしい　oishii—delicious  
+お帰りにならば　okaeri ni naraba—if we return (this way)  
+おかげで　okage de—because of that; due to that  
+お金を払え　okane wo harae—pay the bill!; pay with money  
+お金　okane—money  
+起きてきた　okitekita—awaken; woke up  
+怒ってしまい　okotte shimai—became angry  
 </p>
 
 ------------------------------------------------------------------------
