@@ -6230,8 +6230,8 @@ reactable(
         Type <- lverbs$Type[index]
         Type <- if (!is.na(Type)) Type else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 500), value),
-          div(style = list(fontSize = 9.5), Reading),
+          div(style = list(fontSize = 28, fontWeight = 500), value),
+          div(style = list(fontSize = 12), Reading),
           div(style = list(fontSize = 9.2, fontWeight = 500), Meaning),
           # div(style = list(fontSize = 14), S1),
           # div(style = list(fontSize = 9), T1),
@@ -6361,8 +6361,8 @@ reactable(
         Type <- vnstxp$Type[index]
         Type <- if (!is.na(Type)) Type else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 500), value),
-          div(style = list(fontSize = 9.5), Reading),
+          div(style = list(fontSize = 28, fontWeight = 500), value),
+          div(style = list(fontSize = 12), Reading),
           div(style = list(fontSize = 9.2, fontWeight = 500), Meaning),
           # div(style = list(fontSize = 14), S1),
           # div(style = list(fontSize = 9), T1),
@@ -6493,8 +6493,8 @@ reactable(
         Type <- vnstx1$Type[index]
         Type <- if (!is.na(Type)) Type else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 500), value),
-          div(style = list(fontSize = 9.5), Reading),
+          div(style = list(fontSize = 28, fontWeight = 500), value),
+          div(style = list(fontSize = 12), Reading),
           div(style = list(fontSize = 9.2, fontWeight = 500), Meaning),
           # div(style = list(fontSize = 14), S1),
           # div(style = list(fontSize = 9), T1),
@@ -8840,7 +8840,7 @@ The **general concept** of **de** is setting a **limit** or a **boundary**.
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggng <- vnsgg %>% slice(1:34)
+vnsggng <- vnsgg %>% slice(1:28)
 # vnsggng <- vnsggng[sample(1:nrow(vnsggng)),]
 
 reactable(
@@ -8848,34 +8848,62 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggng$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggng$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggng$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggng$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggng$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggng$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggng$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggng$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggng$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggng$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -8897,7 +8925,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggps <- vnsgg %>% slice(35:47)
+vnsggps <- vnsgg %>% slice(29:34)
 # vnsggps <- vnsggps[sample(1:nrow(vnsggps)),]
 
 reactable(
@@ -8905,34 +8933,62 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggps$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggps$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggps$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggps$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggps$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggps$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggps$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggps$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggps$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggps$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -8954,7 +9010,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggcs <- vnsgg %>% slice(48:76)
+vnsggcs <- vnsgg %>% slice(35:50)
 # vnsggcs <- vnsggcs[sample(1:nrow(vnsggcs)),]
 
 reactable(
@@ -8962,34 +9018,63 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggcs$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggcs$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggcs$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggcs$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggcs$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggcs$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggcs$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggcs$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggcs$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggcs$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -9011,7 +9096,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggcsps <- vnsgg %>% slice(77:80)
+vnsggcsps <- vnsgg %>% slice(51:53)
 # vnsggcsps <- vnsggcsps[sample(1:nrow(vnsggcsps)),]
 
 reactable(
@@ -9019,30 +9104,59 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggcsps$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggcsps$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggcsps$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggcsps$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggcsps$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggcsps$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggcsps$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggcsps$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggcsps$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggcsps$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
@@ -9068,7 +9182,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggnn <- vnsgg %>% slice(81:142)
+vnsggnn <- vnsgg %>% slice(54:115)
 # vnsggnn <- vnsggnn[sample(1:nrow(vnsggnn)),]
 
 reactable(
@@ -9076,30 +9190,59 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggnn$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggnn$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggnn$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggnn$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggnn$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggnn$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggnn$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggnn$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggnn$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggnn$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
@@ -9125,7 +9268,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggd <- vnsgg %>% slice(190:274)
+vnsggd <- vnsgg %>% slice(164:247)
 # vnsggd <- vnsggd[sample(1:nrow(vnsggd)),]
 
 reactable(
@@ -9133,34 +9276,63 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggd$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggd$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggd$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggd$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggd$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggd$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggd$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggd$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggd$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggd$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -9182,7 +9354,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggba <- vnsgg %>% slice(275:284)
+vnsggba <- vnsgg %>% slice(248:252)
 # vnsggba <- vnsggba[sample(1:nrow(vnsggba)),]
 
 reactable(
@@ -9190,34 +9362,63 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggba$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggba$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggba$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggba$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggba$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggba$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggba$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggba$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggba$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggba$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -9239,7 +9440,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggpt <- vnsgg %>% slice(285:298)
+vnsggpt <- vnsgg %>% slice(253:264)
 # vnsggpt <- vnsggpt[sample(1:nrow(vnsggpt)),]
 
 reactable(
@@ -9247,34 +9448,63 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggpt$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggpt$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggpt$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggpt$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggpt$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggpt$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggpt$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggpt$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggpt$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggpt$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -9296,7 +9526,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggvl <- vnsgg %>% slice(299:315)
+vnsggvl <- vnsgg %>% slice(265:281)
 # vnsggvl <- vnsggvl[sample(1:nrow(vnsggvl)),]
 
 reactable(
@@ -9304,34 +9534,63 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggvl$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggvl$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggvl$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggvl$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggvl$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggvl$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggvl$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggvl$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggvl$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggvl$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -9353,7 +9612,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggte <- vnsgg %>% slice(348:421)
+vnsggte <- vnsgg %>% slice(314:387)
 # vnsggte <- vnsggte[sample(1:nrow(vnsggte)),]
 
 reactable(
@@ -9361,30 +9620,59 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggte$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggte$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggte$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggte$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggte$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggte$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggte$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggte$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggte$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggte$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
@@ -9410,7 +9698,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggta <- vnsgg %>% slice(316:347)
+vnsggta <- vnsgg %>% slice(282:313)
 # vnsggta <- vnsggta[sample(1:nrow(vnsggta)),]
 
 reactable(
@@ -9418,34 +9706,63 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggta$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggta$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggta$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggta$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggta$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggta$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggta$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggta$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggta$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggta$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -9467,7 +9784,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggpl <- vnsgg %>% slice(143:189)
+vnsggpl <- vnsgg %>% slice(117:163)
 # vnsggpl <- vnsggpl[sample(1:nrow(vnsggpl)),]
 
 reactable(
@@ -9475,34 +9792,63 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggpl$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggpl$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggpl$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggpl$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggpl$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggpl$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggpl$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggpl$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggpl$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggpl$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -9524,7 +9870,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnsggth <- vnsgg %>% slice(423:458)
+vnsggth <- vnsgg %>% slice(388:424)
 vnsggth <- vnsggth[sample(1:nrow(vnsggth)),]
 
 reactable(
@@ -9532,34 +9878,63 @@ reactable(
   columns = list(
     Concept = colDef(
       cell = function(value, index) {
-        Sentences <- vnsggth$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsggth$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- vnsggth$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- vnsggth$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- vnsggth$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9), Remarks),
           div(style = list(fontSize = 10), Structure),
-          
-          div(style = list(fontSize = 14, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- vnsggth$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- vnsggth$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        T1 <- vnsggth$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- vnsggth$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- vnsggth$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          div(style = list(fontSize = 14.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S1),
+          div(style = list(fontSize = 9), T1),
+          div(style = list(fontSize = 2), " "),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 14.5, fontWeight = 500), S2),
+          div(style = list(fontSize = 9), T2),
+        )
+      },
+      align = "left"
+    ),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE)
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
