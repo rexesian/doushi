@@ -196,6 +196,7 @@ vrbrvws <- read_csv("vrbjp/VRWK-KRVW.csv")
 ivrbs <- read_csv("vrbjp/IVRBS-IVRBS.csv")
 gvrbs <- read_csv("vrbjp/GVRBS-GVRBS.csv")
 vfrsyl <- read_csv("vrbjp/WVFRSYL-WVBRN.csv")
+corew <- read_csv("vrbjp/CRWRD-CRSWRD.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -245,15 +246,15 @@ reactable(
       cell = function(value, index) {
         Meaning <- scknj5$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        # Reading <- scknj5$Reading[index]
-        # Reading <- if (!is.na(Reading)) Reading else ""
-        # Asso <- scknj5$Asso[index]
-        # Asso <- if (!is.na(Asso)) Asso else ""
+        NR <- scknj5$NR[index]
+        NR <- if (!is.na(NR)) NR else ""
+        KR <- scknj5$KR[index]
+        KR <- if (!is.na(KR)) KR else ""
         tagList(
           div(style = list(fontSize = 30, fontWeight = 500), value),
-          # div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 9), Meaning),
-          # div(style = list(fontSize = 13, fontWeight = 600), value, Asso),
+          div(style = list(fontSize = 9), NR),
+          div(style = list(fontSize = 9), KR),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
         )
       },
       align = "center"
@@ -306,13 +307,13 @@ reactable(
     M1 = colDef(show = FALSE),
     M2 = colDef(show = FALSE),
     M3 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-    # Reading = colDef(show = FALSE),
-    # Asso = colDef(show = FALSE)
+    Meaning = colDef(show = FALSE),
+    NR = colDef(show = FALSE),
+    KR = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -344,15 +345,15 @@ reactable(
       cell = function(value, index) {
         Meaning <- scknj4$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        # Reading <- scknj4$Reading[index]
-        # Reading <- if (!is.na(Reading)) Reading else ""
-        # Asso <- scknj4$Asso[index]
-        # Asso <- if (!is.na(Asso)) Asso else ""
+        NR <- scknj4$NR[index]
+        NR <- if (!is.na(NR)) NR else ""
+        KR <- scknj4$KR[index]
+        KR <- if (!is.na(KR)) KR else ""
         tagList(
           div(style = list(fontSize = 30, fontWeight = 500), value),
-          # div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 9), Meaning),
-          # div(style = list(fontSize = 13, fontWeight = 600), value, Asso),
+          div(style = list(fontSize = 9), NR),
+          div(style = list(fontSize = 9), KR),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
         )
       },
       align = "center"
@@ -405,13 +406,13 @@ reactable(
     M1 = colDef(show = FALSE),
     M2 = colDef(show = FALSE),
     M3 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-    # Reading = colDef(show = FALSE),
-    # Asso = colDef(show = FALSE)
+    Meaning = colDef(show = FALSE),
+    NR = colDef(show = FALSE),
+    KR = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -16484,6 +16485,73 @@ reactable(
 ## Words {.tabset}
 
 ### Core {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+corew <- corew %>% slice(1:200)
+# corew <- corew[sample(1:nrow(corew)),]
+
+reactable(
+  corew,
+  columns = list(
+    Words = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Reading <- corew$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        M1 <- corew$M1[index]
+        M1 <- if (!is.na(M1)) M1 else ""
+        M2 <- corew$M2[index]
+        M2 <- if (!is.na(M2)) M2 else ""
+        M3 <- corew$M3[index]
+        M3 <- if (!is.na(M3)) M3 else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 500), value),
+          div(style = list(fontSize = 10), Reading),
+          div(style = list(fontSize = 9), M1),
+          div(style = list(fontSize = 9), M2),
+          div(style = list(fontSize = 9), M3)
+        )
+      },
+      align = "center"
+    ),
+
+    S1 = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
+        T1 <- corew$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 9), T1)
+        )
+      },
+      align = "left"
+    ),
+
+    T1 = colDef(show = FALSE),
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 105, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
 
 ------------------------------------------------------------------------
 
