@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>🦠</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="mystyle.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">🐳</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="Verbs.html">Japanese</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="exerpts.html">Exerpts</a>
+</li>
+<li>
+  <a href="notes.html">Notes</a>
+</li>
+<li>
+  <a href="links.html">Links</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">🦠</h1>
+
+</div>
+
+
+<style type="text/css">
+
+body {
+      font-size: 13px;
+      font-family: "Anonymous Pro", "Helvetica Neue", "Roboto";
+}
+
+.hljs {
+    font-size: 18px;
+    font-family: 'Yomogi', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+</style>
+
+<p><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Klee+One:wght@400;600&family=New+Tegomin&family=Sawarabi+Gothic&family=Shippori+Mincho+B1:wght@400;500&family=Yomogi&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet"></p>
+<style type="text/css">
+.toc-content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+</style>
+<style type="text/css">
+@media(prefers-color-scheme: light) {
+  body {
+    background-color: black;
+    filter: invert(1);
+  }
+}
+</style>
+<div id="concise" class="section level1 tabset">
+<h1 class="tabset">Concise</h1>
+<div id="section" class="section level2">
+<h2>1</h2>
+<pre><code>屋で店が混んできたら、足の幅を狭めて詰めてあげるのが通立ち食いそばの通を気取りたいなら、毎日食べているとか、なじみの店があるというだけではまだまだだ。やはり、立ち食いそばの通たるもの、立ち食いそば独特のエチケットを知っているところを見せたいものだ。それは、店が混雑してきたとき、左右の足の幅を狭めて、ひとりでもたくさんの人が入れるように詰めてあげること。体を左斜めにして詰め込むと、スマートだし、食べやすい。そして、それ以上に、長居はしないこと。五分以内で食べることを心がけよう。ちなみに、おいしい立ち食いそば屋を探したいなら、かけそばやうどんをわかりやすく表示してある店を探す。また、天ぷら、とくにかき揚げがおいしい店は、どのメニューもおいしいことが多い。</code></pre>
+<p style="font-size:12px; font-family: Klee One;">
+If you want to be a connoisseur of tachiki-yaki soba, it is not enough
+to say that you eat there every day or that you are familiar with the
+restaurant. A standing-only noodle connoisseur needs to show that he or
+she knows the etiquette of standing-only noodle shops. When a restaurant
+becomes crowded, you should narrow the width of your legs on either side
+of you so that as many people as possible can enter. Cramming your body
+at an angle to the left is smart and easy to eat. And more than that,
+don’t stay too long. Try to eat within five minutes. Incidentally, if
+you want to find a good standing noodle shop, look for one that clearly
+displays kakesoba and udon. Also, restaurants that serve good tempura,
+especially kakiage (deep fried tempura), tend to have good tempura on
+all their menus.
+</p>
+<hr />
+</div>
+<div id="section-1" class="section level2">
+<h2>2</h2>
+<pre><code>寿司にしょう油をつけるときはネタにつける握り寿司を食べるとき、シャリのほうにしょう油をつけていないだろうか。ごはんには、ふつう、しょう油をつけて食べないが、刺身にはしょう油をつけて食べる。だから、握り寿司も、シャリではなく、ネタのほうに少ししょう油をつけて食べるのが通といえる。しょう油のつけ方は、手や箸で持ってつけるのが一般的だが、ガリをハケのように使って、しょう油をネタにつけてもよい。とくに、軍艦巻きの寿司にしょう油をつけたいときは、このつけ方がやりやすい。食べるときは、一口で食べるのが通の食べ方。でもどうしても一口で食べきれなかったら、箸でシャリを二つに分け、先にシャリの半分だけ食べて、あとの半分のシャリをネタで包んで食べるとよい。</code></pre>
+<p style="font-size:12px; font-family: Klee One;">
+When you put shoyu on sushi, you put it on the main dish. Normally, we
+do not eat rice with soy sauce, but we do eat sashimi with soy sauce.
+Therefore, it is customary to eat nigirizushi with a little shoyu on the
+neta (the fish), not on the rice. The usual way of dipping sushi is to
+dip it in shoyu with your hands or chopsticks, but you can also dip the
+neta in shoyu using a gari (a small piece of pickled ginger) like a
+brush. This is especially easy when you want to dip sushi wrapped in a
+gunkan-maki. When eating the sushi, it is customary to eat it in one
+bite. If you can’t finish the sushi in one bite, use chopsticks to
+divide the rice into two halves, eat only half of the rice first, and
+then wrap the other half around the neta and eat it.
+</p>
+<hr />
+</div>
+<div id="section-2" class="section level2">
+<h2>3</h2>
+<pre><code>桜島を望む絶景温泉！贅沢な夕食と朝食ビュッフェも魅力の「霧島観光ホテル」【宿泊レポ】
+鹿児島空港から車で約30分。霧島錦江湾国立公園の雄大な自然の中にあるのが「霧島観光ホテル」です。最上階の展望大浴場からは、霧島の大自然と晴れた日には桜島の絶景を満喫できます。地元の食材と鹿児島産黒豚を使った夕食や、約35種の料理が並ぶ朝食ビュッフェも魅力。神話の大地でもある霧島を、思いきり満喫できる宿に滞在してきました。</code></pre>
+<p style="font-size:12px; font-family: Klee One;">
+Spectacular hot spring with a view of Sakurajima! Kirishima Kanko Hotel”
+also offers a sumptuous dinner and breakfast buffet [Accommodation
+Report]. About 30 minutes by car from Kagoshima Airport. Kirishima Kanko
+Hotel is located in the magnificent nature of Kirishima Kinko Bay
+National Park. From the large bath on the top floor, you can enjoy the
+magnificent view of Kirishima’s nature and Sakurajima on a clear day.
+Dinner featuring local ingredients and Kagoshima Kurobuta pork, and a
+breakfast buffet with about 35 different dishes are also attractive. We
+have stayed at an inn where you can enjoy Kirishima, the land of myths,
+to the fullest.
+</p>
+<hr />
+</div>
+<div id="section-3" class="section level2">
+<h2>4</h2>
+<pre><code>ビールをおいしく飲むなら、泡はグラスの二～三割が目安ビールをおいしく飲むヒケツは、注ぐときに、泡をうまく作ることにある。泡は、ビールに含まれる炭酸ガスが外に逃げるのを防ぐ働きをするからだ。泡の量は、グラス全体の二～三割ぐらいの厚さになるのがいい。それぐらいの泡を作るには、グラスをまっすぐに立て、はじめはゆっくり、しだいに勢いよく注ぐ。泡が立ちはじめたら、その泡を下から持ち上げるように静かに注ぐ。グラスが泡だらけになりそうなら、ビールを半分ぐらい注いだところでいったん止め、四～五秒おいてから注ぐとよい。泡が消えないうちに飲んでしまうのが、おいしいビールの飲み方だ。</code></pre>
+<p style="font-size:12px; font-family: Klee One;">
+The key to good beer drinking lies in creating the right amount of foam
+when pouring. This is because foam prevents the carbon dioxide gas
+contained in the beer from escaping. The amount of foam should be about
+20 to 30% of the thickness of the entire glass. To create that amount of
+foam, hold the glass upright and pour slowly at first, then more and
+more vigorously. When bubbles begin to form, pour gently, lifting the
+bubbles from below. If the glass seems full of bubbles, stop pouring
+when the beer is about half-full and let it sit for four or five seconds
+before pouring. Drink the beer before the bubbles disappear.
+</p>
+<hr />
+</div>
+<div id="section-4" class="section level2">
+<h2>5</h2>
+<pre><code>天ぷらに最適の油の温度を確かめるには、衣を油に落としてみる天ぷらやフライは、一般的に、油の温度が180℃ぐらいのとき、カラッとおいしく揚げることができる。この最適温度になっているかどうかを確かめるには、衣を少し油のなかに落としてみるとわかる。油の温度が低すぎると、衣は底に沈んで、なかなか浮き上がってこない。逆に、温度が高すぎると、はじめから浮いたままで、沈まない。衣が底に着くかつかないかというところで、浮き上がってくるのが、170～180℃。揚げ物に最適の温度だ。ただし、海苔やシソや三ツ葉などは厚みがないので、すぐになかまで火が通るから、少し低めの160℃ぐらいが最適。これは、衣が底に沈んでから、ゆっくり浮き上がってくる温度だ。</code></pre>
+<p style="font-size:12px; font-family: Klee One;">
+To check the optimum oil temperature for tempura, drop the batter into
+the oil. To check if the temperature is at the optimum level, try
+dropping the batter into the oil a little. If the oil temperature is too
+low, the batter will sink to the bottom and not rise to the surface. On
+the other hand, if the temperature is too high, the batter will stay
+floating and not sink. The temperature at which the batter floats to the
+bottom is 170-180℃. This is the optimal temperature for deep frying.
+However, nori, shiso and mitsuba are not as thick, so they are cooked
+right through, so a slightly lower temperature of about 160°C is
+optimal. This is the temperature at which the batter sinks to the bottom
+and then slowly rises to the top.
+</p>
+<hr />
+</div>
+</div>
+<div id="moderate" class="section level1 tabset">
+<h1 class="tabset">Moderate</h1>
+<div id="section-5" class="section level2">
+<h2>1</h2>
+<pre><code>中国で生まれ、日本で育ち、世界に進出した「ラーメン」世界に数多ある料理の中で、「ラーメン」という料理ほど独特な存在はなく、同時に「ラーメン店」という業態も他の飲食店には見られない独特な業態である。 ラーメンの源流が中国の麺料理にあることは、客観的に見ても間違いのないところである。日本で最初にラーメンを出したと言われる『来々軒』（浅草・1910年創業）は、焼売（シューマイ）や中華丼なども提供する大衆向けの中華料理店であった。ラーメン店のルーツは大衆中華料理店だったのだ。 戦後になると日本蕎麦（そば）の流れをくむラーメン店も登場するようになった。つけ麺発祥の『大勝軒』のルーツでもある『丸長中華そば店』（荻窪・1948年創業）や、東京ラーメンの代表格として知られる『春木屋』（荻窪・1948年創業）などは、いずれも蕎麦の名産地である信州出身者が創業した店であり、中華料理の文脈は入って来ない。ラーメンのアイコンとしても知られる「なると」は、元来日本蕎麦に用いられていた具材の転用だ。 さらに日本全国の土地土地の文化と密接につながった「ご当地ラーメン」の存在も見逃せない。地域ごとに異なる歴史を経て生み出されたラーメンの数々は、インターネットの普及とともに全国に知れ渡り、一躍「ご当地ラーメンブーム」が興った。 中国で生まれた麺料理が日本の食文化と融合し、今ではフレンチやイタリアン、あるいは東南アジアの料理などの技術も包含しながら加速度的に進化し続けている。ヴィーガン（完全菜食主義者）やSDGs（持続可能な開発目標）などライフスタイルや時代のトレンドもキャッチしつつ、世界各国で人気となり、代表的日本食としての地位を獲得した。それでいて、麺もスープも具材も一つとして同じラーメンはない多様性を持つ。このようにものすごいスピードで進化、変化し続けて、バリエーションも無限にある料理はラーメンしかないと言っても良いだろう。</code></pre>
+<p style="font-size:12px; font-family: Klee One;">
+“Born in China, Raised in Japan, Ramen” Makes Its Way Around the World
+Among the many cuisines in the world, none is more unique than “ramen,”
+and at the same time, the “ramen restaurant” is a unique type of
+business not found in any other restaurant. There is no doubt that ramen
+originated in Chinese noodle cuisine, even if one looks at it
+objectively. Rairaiken” (Asakusa, established in 1910), which is said to
+be the first restaurant in Japan to serve ramen, was a Chinese
+restaurant for the masses that also served shao mai (fried pork
+dumplings) and Chinese rice bowls. Ramen restaurants had their roots in
+popular Chinese restaurants. In the postwar period, ramen restaurants
+that were derived from Japanese soba (buckwheat noodles) also began to
+appear. Marunaga Chinese Ramen Shop” (Ogikubo, established in 1948),
+which is also the root of “Daisho-ken,” the birthplace of tsukemen, and
+“Harukiya” (Ogikubo, established in 1948), known as a representative of
+Tokyo ramen, were both founded by people from Shinshu, a famous soba
+noodle production area, and do not include Chinese cuisine in their
+context. Naruto, also known as the iconic ramen, is a diversion of an
+ingredient originally used in Japanese soba noodles. Furthermore, one
+cannot overlook the existence of “local ramen,” which is closely
+connected to the local culture of each region throughout Japan. The
+ramen that has been created in different regions through different
+histories became well known throughout Japan with the spread of the
+Internet, and a “local ramen boom” was born. Noodle cuisine, which
+originated in China, has fused with Japanese food culture and is now
+evolving at an accelerated pace, incorporating techniques from French,
+Italian, and Southeast Asian cuisines. It has also caught on to
+lifestyle and current trends such as veganism and the Sustainable
+Development Goals (SDGs), becoming popular in countries around the world
+and gaining a position as a representative Japanese food. Yet, no two
+ramen dishes are alike in terms of noodles, soup, and ingredients. It is
+safe to say that ramen is the only cuisine that continues to evolve and
+change at such a rapid pace and offers unlimited variations.
+</p>
+<hr />
+</div>
+<div id="section-6" class="section level2">
+<h2>2</h2>
+<pre><code>豚骨ラーメンが世界を制した理由とは そのような背景がありつつも、やはりラーメンやラーメン店自体に魅力がなければ、飲食店が多いニューヨークの街で受け入れられることはなかっただろう。その魅力の一つとして考えられるのは「豚骨スープ」が持つ圧倒的な旨味だ。 豚の骨を炊いたスープはイノシン酸を豊富に含んでいる。そこに昆布などのグルタミン酸やシイタケなどのグアニル酸を含んだタレを加えることで、旨味の相乗効果が生まれる。旨味こそ日本食最大のアドバンテージであり、他の料理ではなかなかまねのできないことだ。 実際、前述した『IPPUDO』をはじめ、海外に進出している日本のラーメンチェーンの多くは豚骨ラーメン店である。また、宗教上などの理由で豚骨スープを出せないエリアでは鶏を白濁するまで煮込んだ「鶏白湯（とりぱいたん）」と呼ばれるスープで提供している店が多い。今でこそ白濁していないスープを出すラーメン店も増えているが、ブレイクスルーするタイミングで豚骨スープや鶏白湯などの「白濁スープ」が与えた影響は少なくないと考えられる。 豚骨スープとは、その名の通り豚の骨を煮込んで白濁乳化させたものだ。これは他の料理には見られないスープであり、しかも一杯あたり300cc以上もの量が提供されるような料理はなかなかない。そのため当初米国や欧州では、ラーメンは麺料理というよりもスープ料理として認知されていた。日本では麺は全て食べてスープを残すことがあるが、欧米ではスープは全て飲み干されて麺が残されることもある。 これまで海外では日本のラーメンを模倣したり、日本のラーメン店が進出したりするケースがほとんどであったが、最近では、その国オリジナルのラーメン店も生まれている。日本各地のご当地ラーメンのように、その国の文化や食生活に根付いた、その国ならではの個性豊かなラーメンが、今後急速に増えていくことだろう。</code></pre>
+<p style="font-size:12px; font-family: Klee One;">
+What is the reason why Tonkotsu Ramen has conquered the world? Even with
+this background, if ramen and ramen restaurants themselves were not
+appealing, they would not have been accepted in New York City, where
+there are many restaurants and eateries. One of the possible reasons is
+the overwhelming flavor of the “pork bone soup. Soup made from cooked
+pork bones is rich in inosinic acid. The addition of a sauce containing
+glutamic acid from kelp and guanylic acid from shiitake mushrooms
+creates a synergistic effect of umami. Umami is the greatest advantage
+of Japanese cuisine, and it is something that is difficult to imitate in
+other cuisines. In fact, many of the Japanese ramen chains that have
+expanded overseas, including the aforementioned”IPPUDO,” are pork-based
+ramen restaurants. In areas where pork bone broth cannot be served for
+religious or other reasons, many restaurants use a soup called
+“toripaitan,” in which chicken is boiled until it becomes cloudy.
+Although there are now an increasing number of ramen stores that serve
+soup that is not cloudy, the influence of “cloudy soups” such as pork
+bone soup and chicken white soup on the timing of breakthroughs is not
+small. Pork bone soup, as the name implies, is made by boiling pork
+bones and emulsifying them into a cloudy white emulsion. This is a soup
+that cannot be found in any other dish, and it is not easy to find a
+dish in which more than 300 cc of soup is served per serving. For this
+reason, ramen was initially recognized in the United States and Europe
+as a soup dish rather than a noodle dish. In Japan, the noodles are
+sometimes eaten in their entirety and the soup is left behind, whereas
+in the West, the soup is sometimes drunk in its entirety and the noodles
+are left behind. In the past, most ramen restaurants in other countries
+have imitated Japanese ramen or Japanese ramen restaurants have expanded
+into other countries, but recently, original ramen restaurants in those
+countries have been created. Like the local ramen of other parts of
+Japan, we can expect to see a rapid increase in the number of unique
+ramen restaurants that are rooted in the culture and dietary habits of
+the country in which they are located.
+</p>
+<hr />
+</div>
+</div>
+<div id="section-7" class="section level1">
+<h1></h1>
+<p>ϞϞ(๑⚈ ․̫ ⚈๑)∩</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
