@@ -2624,27 +2624,41 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-adv1 <- adv1 %>% slice(1:300)
-adv1 <- adv1[sample(1:nrow(adv1)),]
+adv1 <- adv1 %>% slice(1:369)
+# adv1 <- adv1[sample(1:nrow(adv1)),]
 
 reactable(
   adv1,
   columns = list(
     Word = colDef(
-      # Show species under character names
       cell = function(value, index) {
         Reading <- adv1$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- adv1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 600), value),
+          div(style = list(fontSize = 22, fontWeight = 500), value),
           div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
       },
       align = "center"
     ),
+    
+    S1 = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
+        T1 <- adv1$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 9), T1)
+        )
+      },
+      align = "left"
+    ),
+    
+    T1 = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
     Reading = colDef(show = FALSE)
 
@@ -2652,7 +2666,7 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 85, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 90, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -2662,7 +2676,7 @@ reactable(
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers",
   
-  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 ```
 
