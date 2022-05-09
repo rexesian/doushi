@@ -197,6 +197,7 @@ ivrbs <- read_csv("vrbjp/IVRBS-IVRBS.csv")
 gvrbs <- read_csv("vrbjp/GVRBS-GVRBS.csv")
 vfrsyl <- read_csv("vrbjp/WVFRSYL-WVBRN.csv")
 corew <- read_csv("vrbjp/CRWRD-CRSWRD.csv")
+sndknj <- read_csv("vrbjp/KNSND-KNSND.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -444,9 +445,9 @@ reactable(
       cell = function(value, index) {
         Meaning <- scknj3$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        NR <- scknj4$NR[index]
+        NR <- scknj3$NR[index]
         NR <- if (!is.na(NR)) NR else ""
-        KR <- scknj4$KR[index]
+        KR <- scknj3$KR[index]
         KR <- if (!is.na(KR)) KR else ""
         tagList(
           div(style = list(fontSize = 30, fontWeight = 500), value),
@@ -544,15 +545,15 @@ reactable(
       cell = function(value, index) {
         Meaning <- scknj2$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        # Reading <- scknj2$Reading[index]
-        # Reading <- if (!is.na(Reading)) Reading else ""
-        # Asso <- scknj2$Asso[index]
-        # Asso <- if (!is.na(Asso)) Asso else ""
+        NR <- scknj2$NR[index]
+        NR <- if (!is.na(NR)) NR else ""
+        KR <- scknj2$KR[index]
+        KR <- if (!is.na(KR)) KR else ""
         tagList(
           div(style = list(fontSize = 30, fontWeight = 500), value),
-          # div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 9), Meaning),
-          # div(style = list(fontSize = 13, fontWeight = 600), value, Asso),
+          div(style = list(fontSize = 9), NR),
+          div(style = list(fontSize = 9), KR),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
         )
       },
       align = "center"
@@ -605,13 +606,13 @@ reactable(
     M1 = colDef(show = FALSE),
     M2 = colDef(show = FALSE),
     M3 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-    # Reading = colDef(show = FALSE),
-    # Asso = colDef(show = FALSE)
+    Meaning = colDef(show = FALSE),
+    NR = colDef(show = FALSE),
+    KR = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -643,15 +644,15 @@ reactable(
       cell = function(value, index) {
         Meaning <- scknj1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        # Reading <- scknj1$Reading[index]
-        # Reading <- if (!is.na(Reading)) Reading else ""
-        # Asso <- scknj1$Asso[index]
-        # Asso <- if (!is.na(Asso)) Asso else ""
+        NR <- scknj1$NR[index]
+        NR <- if (!is.na(NR)) NR else ""
+        KR <- scknj1$KR[index]
+        KR <- if (!is.na(KR)) KR else ""
         tagList(
           div(style = list(fontSize = 30, fontWeight = 500), value),
-          # div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 9), Meaning),
-          # div(style = list(fontSize = 13, fontWeight = 600), value, Asso),
+          div(style = list(fontSize = 9), NR),
+          div(style = list(fontSize = 9), KR),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
         )
       },
       align = "center"
@@ -704,13 +705,13 @@ reactable(
     M1 = colDef(show = FALSE),
     M2 = colDef(show = FALSE),
     M3 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-    # Reading = colDef(show = FALSE),
-    # Asso = colDef(show = FALSE)
+    Meaning = colDef(show = FALSE),
+    NR = colDef(show = FALSE),
+    KR = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -15210,7 +15211,7 @@ reactable(
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -15343,7 +15344,119 @@ reactable(
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Sound {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# sndknj <- sndknj[sample(1:nrow(sndknj)),]
+
+reactable(
+  sndknj,
+  columns = list(
+    Kanji = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Meaning <- sndknj$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        NR <- sndknj$NR[index]
+        NR <- if (!is.na(NR)) NR else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 500), value),
+          div(style = list(fontSize = 9), NR),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    W1 = colDef(
+      cell = function(value, index) {
+        M1 <- sndknj$M1[index]
+        M1 <- if (!is.na(M1)) M1 else ""
+        R1 <- sndknj$R1[index]
+        R1 <- if (!is.na(R1)) R1 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 9, fontWeight = 400), R1),
+          div(style = list(fontSize = 9, fontWeight = 400), M1),
+        )
+      },
+      align = "center"
+    ),
+    W2 = colDef(
+      cell = function(value, index) {
+        M2 <- sndknj$M2[index]
+        M2 <- if (!is.na(M2)) M2 else ""
+        R2 <- sndknj$R2[index]
+        R2 <- if (!is.na(M2)) R2 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 9, fontWeight = 400), R2),
+          div(style = list(fontSize = 9, fontWeight = 400), M2),
+        )
+      },
+      align = "center"
+    ),
+    W3 = colDef(
+      cell = function(value, index) {
+        M3 <- sndknj$M3[index]
+        M3 <- if (!is.na(M3)) M3 else ""
+        R3 <- sndknj$R3[index]
+        R3 <- if (!is.na(R3)) R3 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 9, fontWeight = 400), R3),
+          div(style = list(fontSize = 9, fontWeight = 400), M3),
+        )
+      },
+      align = "center"
+    ),
+    W4 = colDef(
+      cell = function(value, index) {
+        M4 <- sndknj$M4[index]
+        M4 <- if (!is.na(M4)) M4 else ""
+        R4 <- sndknj$R4[index]
+        R4 <- if (!is.na(R4)) R4 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 9, fontWeight = 400), R4),
+          div(style = list(fontSize = 9, fontWeight = 400), M4),
+        )
+      },
+      align = "center"
+    ),   
+    R1 = colDef(show = FALSE),
+    R2 = colDef(show = FALSE),
+    R3 = colDef(show = FALSE),
+    R4 = colDef(show = FALSE),
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    M4 = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    NR = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -15387,78 +15500,6 @@ reactable(
     ・強固な意志        strong will
     ・強固な基礎        strong foundation
     ・軟弱な外交        weak-kneed diplomacy
-
-------------------------------------------------------------------------
-
-#### Pronounciation {.tabset}
-
-##### an
-
-**安【アン】**  
-    
-    ・安定    stability  
-    ・安全    safety  
-    ・安心    relief, peace of mind  
-    ・不安    anxiety, worry  
-    ・安易    easy, simple   
-    ・安静    rest, quite  
-    ・安価    low-priced  
-
-**案【アン】**  
-
-    ・案内    guidance  
-    ・案外    unexpected  
-    ・提案    proposal  
-    ・答案    examination paper  
-
-**安【やす】**  
-
-    ・目安    standard, yardstick  
-    ・安い    cheap  
-    ・割安    economical  
-
-------------------------------------------------------------------------
-
-##### i
-
-**偉【イ】**  
-
-    ・偉大    great  
-    ・偉業    great work  
-
-**違【イ】**  
-
-    ・違反    violation  
-    ・違法    illegal   
-    ・相違    difference   
-
-**偉【えら】**
-
-    ・偉い    great, excellent  
-
-**違【ちが】**
-
-    ・違う    to be different
-
-------------------------------------------------------------------------
-
-##### ei
-
-**永【エイ】**  
-
-    ・永遠    eternity  
-    ・永久    eternity  
-    ・永続    permanence  
-    ・永住    permanent residence  
-
-**泳【エイ】**  
-
-    ・水泳    swimming  
-    ・競泳    swimming race  
-
-**泳【およ】**  
-
-    ・泳ぐ    to swim
 
 ------------------------------------------------------------------------
 
