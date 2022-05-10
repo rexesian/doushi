@@ -7895,26 +7895,40 @@ reactable(
       cell = function(value, index) {
         Meaning <- cmpnd$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentences <- cmpnd$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- cmpnd$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
+        # Sentences <- cmpnd$Sentences[index]
+        # Sentences <- if (!is.na(Sentences)) Sentences else ""
+        # Translation <- cmpnd$Translation[index]
+        # Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 500), value),
-          div(style = list(fontSize = 10), Meaning),
-          div(style = list(fontSize = 16, fontWeight = 500), Sentences),
-          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 9), Meaning)
+          # div(style = list(fontSize = 16, fontWeight = 500), Sentences),
+          # div(style = list(fontSize = 9), Translation),
         )
       },
       align = "center"
     ),
+    
+    Sentences = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
+        Translation <- cmpnd$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+        )
+      },
+      align = "left"
+    ),
+    
     Meaning = colDef(show = FALSE),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 140),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 150),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -7947,7 +7961,7 @@ reactable(
         T1 <- vrbxt$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 15, fontWeight = 500), value),
+          div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 8), T1),
         )
       },
@@ -7958,7 +7972,7 @@ reactable(
         T2 <- vrbxt$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
-          div(style = list(fontSize = 15, fontWeight = 500), value),
+          div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 8), T2),
         )
       },
@@ -7969,7 +7983,7 @@ reactable(
         T3 <- vrbxt$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
-          div(style = list(fontSize = 15, fontWeight = 500), value),
+          div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 8), T3),
         )
       },
