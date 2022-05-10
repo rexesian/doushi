@@ -7961,8 +7961,8 @@ reactable(
         T1 <- vrbxt$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8), T1),
+          div(style = list(fontSize = 15.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), T1),
         )
       },
       align = "center"
@@ -7972,8 +7972,8 @@ reactable(
         T2 <- vrbxt$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8), T2),
+          div(style = list(fontSize = 15.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), T2),
         )
       },
       align = "center"
@@ -7983,8 +7983,8 @@ reactable(
         T3 <- vrbxt$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8), T3),
+          div(style = list(fontSize = 15.5, fontWeight = 500), value),
+          div(style = list(fontSize = 9), T3),
         )
       },
       align = "center"
@@ -16851,22 +16851,32 @@ reactable(
         Translation <- cnmw$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Meaning),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 14, fontWeight = 400), Sentences),
-          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 21, fontWeight = 500), value),
+          div(style = list(fontSize = 10), Meaning),
         )
       },
       align = "center"
+    ),
+    
+    Sentences = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
+        Translation <- cnmw$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+        )
+      },
+      align = "left"
     ),
     Meaning = colDef(show = FALSE),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
-  defaultPageSize = 4,
+  defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 110),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 105),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -16893,7 +16903,20 @@ cmwrdsn <- cmwrdsn[sample(1:nrow(cmwrdsn)),]
 reactable(
   cmwrdsn,
   columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Note <- cmwrdsn$Note[index]
+        Note <- if (!is.na(Note)) Note else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 500), value),
+          div(style = list(fontSize = 10), Note),
+        )
+      },
+      align = "center"
+    ),
+    
     Sentences = colDef(
+      minWidth = 180,
       cell = function(value, index) {
         Remarks <- cmwrdsn$Remarks[index]
         Remarks <- if (!is.na(Remarks)) Remarks else ""
@@ -16901,20 +16924,21 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 10), Translation),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 9, fontWeight = 500), Remarks),
+          div(style = list(fontSize = 9), Translation),
+          # div(style = list(fontSize = 9, fontWeight = 500), Remarks),
         )
       },
-      align = "center"
+      align = "left"
     ),
+    
+    Rank = colDef(show = FALSE),
+    Note = colDef(show = FALSE),
     Remarks = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
-  defaultPageSize = 4,
+  defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 110),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 105),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -17119,8 +17143,19 @@ reactable(
         M2 <- if (!is.na(M2)) M2 else ""
         M3 <- onmp$M3[index]
         M3 <- if (!is.na(M3)) M3 else ""
-        S1 <- onmp$S1[index]
-        S1 <- if (!is.na(S1)) S1 else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 500), value),
+          div(style = list(fontSize = 10), M1),
+          div(style = list(fontSize = 10), M2),
+          div(style = list(fontSize = 10), M3),
+        )
+      },
+      align = "center"
+    ),
+    
+    S1 = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
         S2 <- onmp$S2[index]
         S2 <- if (!is.na(S2)) S2 else ""
         S3 <- onmp$S3[index]
@@ -17132,22 +17167,21 @@ reactable(
         T3 <- onmp$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
-          div(style = list(fontSize = 18, fontWeight = 500), value),
-          div(style = list(fontSize = 10), M1),
-          div(style = list(fontSize = 10), M2),
-          div(style = list(fontSize = 10), M3),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 14, fontWeight = 500), S1),
+          div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 9), T1),
-          div(style = list(fontSize = 14, fontWeight = 500), S2),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 16, fontWeight = 500), S2),
           div(style = list(fontSize = 9), T2),
-          div(style = list(fontSize = 14, fontWeight = 500), S3),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 16, fontWeight = 500), S3),
           div(style = list(fontSize = 9), T3),
         )
       },
-      align = "center"
+      align = "left"
     ),
+    
     M1 = colDef(show = FALSE),
     M2 = colDef(show = FALSE),
     M3 = colDef(show = FALSE),
@@ -17158,9 +17192,9 @@ reactable(
     T2 = colDef(show = FALSE),
     T3 = colDef(show = FALSE)
   ),
-  defaultPageSize = 1,
+  defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 150),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
