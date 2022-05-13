@@ -200,6 +200,7 @@ corew <- read_csv("vrbjp/CRWRD-CRSWRD.csv")
 sndknj <- read_csv("vrbjp/KNSND-KNSND.csv")
 vrbxte <- read_csv("vrbjp/VRBXTE-VWRBXT.csv")
 mem <- read_csv("vrbjp/MEM-MEM.csv")
+dct <- read_csv("vrbjp/DCT-MEM.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -235,7 +236,7 @@ Version 🆅.2.2
 
 ```{r, echo=FALSE, message=FALSE}
 
-memb <- mem %>% slice(120:122)
+memb <- mem %>% slice(120:123)
 
 reactable(
   memb,
@@ -335,7 +336,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-memb <- mem %>% slice(124:136)
+memb <- mem %>% slice(125:137)
 
 reactable(
   memb,
@@ -6680,7 +6681,7 @@ Describes a habitual or repeated action.
 
 ```{r, echo=FALSE, message=FALSE}
 
-lverbs <- lverbs %>% slice(1:174)
+lverbs <- lverbs %>% slice(1:180)
 # lverbs <- lverbs[sample(1:nrow(lverbs)),]
 
 reactable(
@@ -8285,7 +8286,7 @@ reactable(
         Remarks <- vrbxte$Remarks[index]
         Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 18, fontWeight = 500), value),
           div(style = list(fontSize = 9), Translation),
           div(style = list(fontSize = 2), "."),
           # div(style = list(fontSize = 1), "."),
@@ -23117,7 +23118,9 @@ reactable(
 
 # Reading {.tabset}
 
-## 1
+## Exerpts {.tabset}
+
+### 1
 
 <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
 東日本、東海、西日本のJR各社は、新台特急「あさかぜ」を２００５年３月１日のダイヤ改正で廃止することにした。「あさかぜ」は１９５６年に登場、５８年に新型の各社が導入され、日本で初めて全室冷暖房完備の個室新台を連結し、食堂車も備えて「走るホテル」と言われたが、最近は新幹線や飛行機に押されて乗車率は減少し、ここ数年は約３０％にさがっていた。また、上り列車が首都圏に乗り入れるのが朝のラッシュ時に重なり、遅れた場合は通勤電車の過密ダイヤに影響するため、改正が考えられていた。</p>
@@ -23127,9 +23130,39 @@ reactable(
 <p style="font-size:12px; font-family: Klee One;">
 East Japan, Tokai, and West Japan JR companies have decided to discontinue the new platform express "Asakaze" with the March 1, 2005 timetable revision. The "Asakaze" was introduced in 1956, and in 1958, a new model of each company was introduced, and for the first time in Japan, a new private car with air-conditioning and heating in all rooms was connected to the train, which was also equipped with a dining car and was called a "running hotel. Recently, ridership has been declining due to the Shinkansen and airplanes, and has dropped to about 30% in the past few years. In addition, the up trains enter the Tokyo metropolitan area during the morning rush hour, and any delays would affect the overcrowded commuter train schedule, so a revision was contemplated.</p>
 
+```{r, echo=FALSE, message=FALSE}
+
+dctb <- dct %>% slice(1:12)
+
+reactable(
+  dctb,
+  columns = list(
+    Words = colDef(align = "left"),
+    Reading = colDef(align = "left"),
+    Meaning = colDef(minWidth = 250,align = "left")
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 ------------------------------------------------------------------------
 
-## 2
+### 2
 
 <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
 ｢ハクトウワシ｣米国ワイオミング州, グランドティトン国立公園
@@ -23144,7 +23177,7 @@ The bald eagle is a large bird with a wingspan of over two meters. It usually li
 
 ------------------------------------------------------------------------
 
-## 3
+### 3
 
 <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
 訪日外国人に「日本で一番お気に入りの場所はどこか」質問すると多くの人が「居酒屋」と答えます。私たち日本人も居酒屋はよく利用します。居酒屋では飲み放題プランや宴会プランなどがあるので、大勢での食事会などで利用することが多いです。
@@ -23160,7 +23193,7 @@ Izakaya are cheaper than restaurants, and the decor is Japanese, so you can enjo
 
 ------------------------------------------------------------------------
 
-## 4
+### 4
 
 <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
 日本の観光名所の一つである奈良公園。毎日たくさんの観光客が訪れます。奈良公園には公園に住んでいる自然の鹿がたくさんいます。観光客は鹿たちに鹿用のせんべいをあげることが出来ます。鹿も観光客からせんべいをもらえる事を知っているので、たくさんの鹿が観光客に寄ってきます。
@@ -23176,7 +23209,7 @@ However, the number of tourists has decreased drastically in recent months due t
 
 ------------------------------------------------------------------------
 
-## 5
+### 5
 
 <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
 長野県の北部に上信越高原国立公園の地獄谷があります。標高８５０メートルのところに雪と雪に覆われた崖と渓谷の高原にあります。この場所は、1年のほぼ３分の１が雪に覆われています。そこにはたくさんの天然温泉があります。
@@ -23194,7 +23227,7 @@ Even today, Japanese monkeys still come to take a bath in the hot spring to warm
 
 ------------------------------------------------------------------------
 
-## 6
+### 6
 
 <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
 冬の寒い日は、鍋料理を食べて体を温めたくなります。鍋料理の一つであるちゃんこ鍋は、お相撲さんが毎日食べる料理として知られています。
@@ -23212,7 +23245,7 @@ The word “chan” means “father” and “ko” means "child. It is a nabe t
 
 ------------------------------------------------------------------------
 
-## 7
+### 7
 
 <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
 登山家は、山にある小屋で暮らしています。一人で元気に暮らしています。毎朝、三時間山を登ります。そして、野菜を育てて、食べています。登山家は、病院に行ったことがありません。とても元気なので、病気になったことがありません。今日も昼にキノコをとりに行きます。登山家は、キノコについてよく知っています。食べられるキノコと食べられないキノコがあります。その夜、登山家は病気になって、初めて救急車を電話で呼びました。病院に着いたとき、医者は言いました。「食べられないキノコを食べましたか?キノコはとても危険なので、気を付けてください。でも、もう大丈夫です。でも、目が悪くなっています。知っていましたか?休んだ方がいいですよ。」そして、登山家は毎年病院に行って、健康診断を受けます。
@@ -23226,7 +23259,7 @@ A mountaineer lives in his hut in the mountains. He lives alone and has a very h
 
 ------------------------------------------------------------------------
 
-## 8
+### 8
 
 <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
 車の排気ガス規制が強化されている東京で、光化学スモッグが増えている。光化学スモッグの原因となる光化学オキシダンとは、喉や目の痛みなどを引き起こす。都で原因を究明した結果、猛暑の影響に加えて、排気ガス対策で減ってきた窒素酸化物と、あまり減っていないVOC（揮発性有機化合物）の濃度バランスが変化して、光化学オキシダントが発生しやすくなっていることがわかった。VOCの排出源は塗料や印刷インキ、衣服のクリーニングのドライ液などで、これらを使う中小企業での対策は手付かずなのが現状だ。
@@ -23240,7 +23273,7 @@ Photochemical smog is increasing in Tokyo, where vehicle emission regulations ar
 
 ------------------------------------------------------------------------
 
-## 9
+### 9
 
 <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
 食品を選ぶとき気にするのは生産地より賞味期限。東洋大学が食生活について１０月に１、２年生の学生を対象に調査し１００人の回答をまとめた結果である。回答者は男女ほぼ半数ずつで、自宅通学は５６％だった。食品を選ぶとき気にしている点では「賞味期限」が７３％だった。社会心通学の稲木教授は「最近の若者は安全なものしか口にしないので、五感で確かめることができないのではないか。数字にゆだねるのは、自分の判断への自信のなさの表れ。安全か安全ではないか、という二者択一的感覚が背景にある」と分析している。
@@ -23254,7 +23287,7 @@ When choosing food products, expiration dates are more important than the place 
 
 ------------------------------------------------------------------------
 
-## 10
+### 10
 
 <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
 青森大学では、新年度から講義への学生の出欠を携帯電話で確認するシステムを導入する。特定の講義で携帯電話で出欠を確認する例はあるが、全学で導入するのはめずらしい。講義中、教員の指定があった時点で、学生が携帯電話から大学の専用サイトにアクセスする。教員がその場で告げる数字を入力すれば出席が記録される。記録されるのは数字が指示されてから約１分間なのので、外部にいる欠席者に数字を伝えても、時間差のため出席を装うことはできない。
@@ -23265,6 +23298,14 @@ When choosing food products, expiration dates are more important than the place 
 <p style="font-size:12px; font-family: Klee One;">
 Aomori University will introduce a system to check students' attendance at lectures by cell phone from the new academic year. While there have been cases of students using their cell phones to check attendance at specific lectures, it is rare for the entire university to introduce such a system. During a lecture, students access the university's dedicated website from their cell phones at the time designated by the instructor. The attendance is recorded by entering a number that the instructor tells them on the spot. Since attendance is only recorded for approximately one minute after the number is entered, it is not possible to fake attendance even if the number is given to an absent student outside of the lecture due to the time difference.
 </p>
+
+------------------------------------------------------------------------
+
+## Dialogue
+
+------------------------------------------------------------------------
+
+## Series
 
 ------------------------------------------------------------------------
 
