@@ -200,6 +200,8 @@ sndknj <- read_csv("vrbjp/KNSND-KNSND.csv")
 vrbxte <- read_csv("vrbjp/VRBXTE-VWRBXT.csv")
 mem <- read_csv("vrbjp/MEM-MEM.csv")
 dct <- read_csv("vrbjp/DCT-MEM.csv")
+kana <- read_csv("vrbjp/KANA-CHR.csv")
+kcmb <- read_csv("vrbjp/CMBD-CHR.csv")
 
 ```
 
@@ -1387,9 +1389,104 @@ reactable(
 
 ## Hiragana {.tabset}
 
+<center>
+```{r, echo=FALSE, message=FALSE}
+
+kanah <- kana %>% select(HN)  %>% rename(Characters = HN)
+kanah <- kanah[sample(1:nrow(kanah)),]
+
+reactable(
+  kanah,
+  columns = list(
+    Characters = colDef(align = "center", style = list(fontSize = 60, fontWeight = 700))
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 220),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "jump", fullWidth = FALSE, width = 300, 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+</center>
+
 ------------------------------------------------------------------------
 
 ## Katakana {.tabset}
+
+<center>
+```{r, echo=FALSE, message=FALSE}
+
+kanak <- kana %>% select(KN)  %>% rename(Characters = KN)
+kanak <- kanak[sample(1:nrow(kanak)),]
+
+reactable(
+  kanak,
+  columns = list(
+    Characters = colDef(align = "center", style = list(fontSize = 60, fontWeight = 700))
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 220),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "jump", fullWidth = FALSE, width = 300, 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+</center>
+
+------------------------------------------------------------------------
+
+## Combined {.tabset}
+
+
+```{r, echo=FALSE, message=FALSE}
+
+kcmb5 <- kcmb %>% select(L5)  %>% rename(Words = L5)
+kcmb5 <- kcmb5[sample(1:nrow(kcmb5)),]
+
+reactable(
+  kcmb5,
+  columns = list(
+    Words = colDef(align = "center", style = list(fontSize = 32, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 220),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
@@ -21540,6 +21637,8 @@ reactable(
 
 ## Words {.tabset}
 
+### NR
+
 ```{r, echo=FALSE, message=FALSE}
 
 # wjlpt <- wjlpt[sample(1:nrow(wjlpt)),]
@@ -21649,8 +21748,187 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Phrases {.tabset}
+### N5
 
+```{r, echo=FALSE, message=FALSE}
+
+wrd5ex <- wrd5ex[sample(1:nrow(wrd5ex)),]
+
+reactable(
+  wrd5ex,
+  columns = list(
+    W1 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W2 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W3 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W4 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W5 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center")
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### N4
+
+```{r, echo=FALSE, message=FALSE}
+
+wrd4ex <- wrd4ex[sample(1:nrow(wrd4ex)),]
+
+reactable(
+  wrd4ex,
+  columns = list(
+    W1 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W2 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W3 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W4 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W5 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center")
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### N3
+
+```{r, echo=FALSE, message=FALSE}
+
+wrd3ex <- wrd3ex[sample(1:nrow(wrd3ex)),]
+
+reactable(
+  wrd3ex,
+  columns = list(
+    W1 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W2 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W3 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W4 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W5 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center")
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### N2
+
+```{r, echo=FALSE, message=FALSE}
+
+wrd2ex <- wrd2ex[sample(1:nrow(wrd2ex)),]
+
+reactable(
+  wrd2ex,
+  columns = list(
+    W1 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W2 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W3 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W4 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W5 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center")
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### N1
+
+```{r, echo=FALSE, message=FALSE}
+
+wrd1ex <- wrd1ex[sample(1:nrow(wrd1ex)),]
+
+reactable(
+  wrd1ex,
+  columns = list(
+    W1 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W2 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W3 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W4 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center"), 
+    W5 = colDef(minWidth = 83, style = list(fontSize = 17, fontWeight = 500), align = "center")
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+## Phrases {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -23343,190 +23621,6 @@ reactable(
 ------------------------------------------------------------------------
 
 ## Readings {.tabset}
-
-### Words {.tabset}
-
-#### N5
-
-```{r, echo=FALSE, message=FALSE}
-
-wrd5ex <- wrd5ex[sample(1:nrow(wrd5ex)),]
-
-reactable(
-  wrd5ex,
-  columns = list(
-    W1 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W2 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W3 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W4 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W5 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center")
-
-  ),
-  defaultPageSize = 7,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 55),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-#### N4
-
-```{r, echo=FALSE, message=FALSE}
-
-wrd4ex <- wrd4ex[sample(1:nrow(wrd4ex)),]
-
-reactable(
-  wrd4ex,
-  columns = list(
-    W1 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W2 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W3 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W4 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W5 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center")
-
-  ),
-  defaultPageSize = 7,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 55),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-#### N3
-
-```{r, echo=FALSE, message=FALSE}
-
-wrd3ex <- wrd3ex[sample(1:nrow(wrd3ex)),]
-
-reactable(
-  wrd3ex,
-  columns = list(
-    W1 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W2 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W3 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W4 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W5 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center")
-
-  ),
-  defaultPageSize = 7,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 55),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-#### N2
-
-```{r, echo=FALSE, message=FALSE}
-
-wrd2ex <- wrd2ex[sample(1:nrow(wrd2ex)),]
-
-reactable(
-  wrd2ex,
-  columns = list(
-    W1 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W2 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W3 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W4 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W5 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center")
-
-  ),
-  defaultPageSize = 7,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 55),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-#### N1
-
-```{r, echo=FALSE, message=FALSE}
-
-wrd1ex <- wrd1ex[sample(1:nrow(wrd1ex)),]
-
-reactable(
-  wrd1ex,
-  columns = list(
-    W1 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W2 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W3 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W4 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center"), 
-    W5 = colDef(minWidth = 83, style = list(fontSize = 16, fontWeight = 500), align = "center")
-
-  ),
-  defaultPageSize = 7,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 55),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-### Scripts
 
 ------------------------------------------------------------------------
 
