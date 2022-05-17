@@ -204,7 +204,7 @@ kana <- read_csv("vrbjp/KANA-CHR.csv")
 kcmb <- read_csv("vrbjp/CMBD-CHR.csv")
 verbrw <- read_csv("vrbjp/VRBRVS-WRB.csv")
 dictny <- read_csv("vrbjp/DCTNY-MEM.csv")
-
+wrdmm <- read_csv("vrbjp/WRDMM-MEM.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -18062,8 +18062,6 @@ reactable(
 
 ### Common {.tabset}
 
-#### List
-
 ```{r, echo=FALSE, message=FALSE}
 
 cnmw <- cnmw[sample(1:nrow(cnmw)),]
@@ -18123,7 +18121,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Random
+### Random
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -18185,7 +18183,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Verbs
+### Verbs
 
 <!-- ```{r, echo=FALSE, message=FALSE} -->
 
@@ -18311,7 +18309,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Adj-Adv {.tabset}
+### Adj-Adv {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -18353,7 +18351,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Onomatope {.tabset}
+### Onomatope {.tabset}
 
 <!-- #### Various-Situations {.tabset} -->
 
@@ -18441,7 +18439,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Characters
+### Characters
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -19093,6 +19091,40 @@ reactable(
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
 
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### Review {.tabset}
+
+<!-- ### Sentences {.tabset} -->
+
+```{r, echo=FALSE, message=FALSE}
+
+wrdmm <- wrdmm %>% select(Words)
+wrdmm <- wrdmm[sample(1:nrow(wrdmm)),]
+
+reactable(
+  wrdmm,
+  columns = list(
+    Words = colDef(align = "center", style = list(fontSize = 34, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "jump",
+  
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
