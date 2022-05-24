@@ -196,6 +196,7 @@ wrdmm <- read_csv("vrbjp/WRDMM-MEM.csv")
 exwrd <- read_csv("vrbjp/EXRVW-EXWRD.csv")
 mcmndc <- read_csv("vrbjp/MNWRDC-CMNWRDS.csv")
 tchwrd <- read_csv("vrbjp/TCWRDS-NWRDS.csv")
+expvcb <- read_csv("vrbjp/EXPTB-EXPTB.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -26978,7 +26979,7 @@ reactable(
 
 ### Attention
 
-**Calling someone's attention**
+**Different ways to attract someone’s attention**
 
     ・あのう、すみませんが　　・uh, excuse me but
     ・あのう、失礼ですが　　　・uh, I am sorry to be rude but
@@ -26990,7 +26991,7 @@ reactable(
 
 ### Response
 
-**Response when someone is calling your attention**
+**How to respond if some is calling your attention**
 
     ・はい、何でしょうか？　　・yes, what is it?
     ・え、何？　　　　　　　　・what is it?
@@ -26999,7 +27000,7 @@ reactable(
 
 ### Start a Conversation
 
-**How to start a conversation**
+**How to initiate a conversation**
 
     ・ちょっとお話したいことがあるんですが　　　　　　・I have something I would like to talk to you about
     ・ちょっと話があるんだけど　　　　　　　　　　　　・I have something I want to tell you
@@ -27057,7 +27058,7 @@ reactable(
 
 ### Sequence
 
-**Sequencing**
+**How to establishing a sequence**
 
     ・まず始めに　　・first of all
     ・まず最初に　　・first of all
@@ -27070,7 +27071,7 @@ reactable(
 
 ### Examples
 
-**Citing examples**
+**How to cite examples**
 
     ・例えば　　　　　　　　　　　　　　・for example
     ・いくつか例をあげたいと思います　　・I would like to give a few examples
@@ -27079,7 +27080,7 @@ reactable(
 
 ### Summarize
 
-**How to summarize**
+**How to summarise and conclude a statement**
 
     ・結論を述べますと　　　　　　　　　　　　　　　　　　・to conclude
     ・結論として次のことが言えると思います　　　　　　　　・as a conclusion, I can say the following
@@ -28418,6 +28419,75 @@ Generally at the university level, the structure of a presentation is as follows
 
     ・申し訳ありません、すぐに確認いたします。
     ・I'm sorry, I will check it right away.
+
+------------------------------------------------------------------------
+
+# Experience {.tabset}
+
+## Places {.tabset}
+
+### Aizu-Wakamatsu
+
+**Aizu-Wakamatsu**
+
+<div class = "row">
+<div class = "col-sm-4">
+[Aizu-Wakamatsu](https://www.japan-guide.com/e/e7700.html) [【会津若松】](https://www.city.aizuwakamatsu.fukushima.jp/zokusei/kanko/) is a castle town in the interior of Fukushima Prefecture which is known for its award-winning sake and its samurai tradition.
+
+**Vocabularies:**  
+
+```{r, echo=FALSE, message=FALSE}
+
+# expvcba <- expvcb %>% slice(1:10)
+
+reactable(
+  expvcb,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- expvcb$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        tagList(
+          div(style = list(fontSize = 7), Reading),
+          div(style = list(fontSize = 14), value),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(minWidth = 130,align = "left"),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+![](aizuposter.png){width=600px}
+<br>
+<center>**Visit** the official website of [**Aizu-Wakamatsu**](https://www.japan-guide.com/e/e7700.html) for more information.</center>
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+## Food {.tabset}
 
 ------------------------------------------------------------------------
 
