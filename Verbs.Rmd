@@ -27189,6 +27189,73 @@ What is the reason why Tonkotsu Ramen has conquered the world? Even with this ba
 
 # Listening {.tabset}
 
+## Video {.tabset}
+
+### Weather-News {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+**Weather-News**
+
+```{r, echo=FALSE, message=FALSE}
+
+expvcba <- expvcb %>% slice(21:63)
+
+reactable(
+  expvcba,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- expvcba$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        tagList(
+          div(style = list(fontSize = 7), Reading),
+          div(style = list(fontSize = 13.5), value),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(minWidth = 115,align = "left"),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+<div align="center">
+<iframe width="600" height="337.5" src="https://www.youtube.com/embed/qLhie_9RSq4" frameborder="0" allowfullscreen>
+</iframe>
+</div>
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+### Food {.tabset}
+
+------------------------------------------------------------------------
+
+### Travel {.tabset}
+
 ------------------------------------------------------------------------
 
 # Speaking {.tabset}
