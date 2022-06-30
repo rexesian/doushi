@@ -21208,7 +21208,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -21255,7 +21255,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -21269,10 +21269,12 @@ reactable(
 
 #### L4 {.tabset}
 
+<div class = "row">
+<div class = "col-sm-4">
+
 ```{r, echo=FALSE, message=FALSE}
 
 mwrdslvl4 <- mwrdslvl %>% slice(2054:2722)
-# mwrdslvl4 <- mwrdslvl4[sample(1:nrow(mwrdslvl4)),]
 
 reactable(
   mwrdslvl4,
@@ -21286,7 +21288,7 @@ reactable(
         tagList(
           div(style = list(fontSize = 30, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
-          div(style = list(fontSize = 8), Meaning),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
       },
       align = "center"
@@ -21307,25 +21309,73 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
 ```
 
-<!-- </div> -->
+</div>
+<div class = "col-sm-8">
 
-<!-- <div class = "col-sm-4"> -->
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl4 <- mwrdslvl4[sample(1:nrow(mwrdslvl4)),]
+
+reactable(
+  mwrdslvl4,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl4$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- mwrdslvl4$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          # div(style = list(fontSize = 9), Reading),
+          # div(style = list(fontSize = 8), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
 #### L3 {.tabset}
 
+<div class = "row">
+<div class = "col-sm-4">
+
 ```{r, echo=FALSE, message=FALSE}
 
 mwrdslvl3 <- mwrdslvl %>% slice(2723:4861)
-# mwrdslvl3 <- mwrdslvl3[sample(1:nrow(mwrdslvl3)),]
 
 reactable(
   mwrdslvl3,
@@ -21339,7 +21389,54 @@ reactable(
         tagList(
           div(style = list(fontSize = 30, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
-          div(style = list(fontSize = 8), Meaning),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl3 <- mwrdslvl3[sample(1:nrow(mwrdslvl3)),]
+
+reactable(
+  mwrdslvl3,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl3$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- mwrdslvl3$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          # div(style = list(fontSize = 9), Reading),
+          # div(style = list(fontSize = 8), Meaning),
         )
       },
       align = "center"
@@ -21367,20 +21464,19 @@ reactable(
 
 ```
 
-<!-- </div> -->
-<!-- </div> -->
-
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-4"> -->
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
 #### L2 {.tabset}
 
+<div class = "row">
+<div class = "col-sm-4">
+
 ```{r, echo=FALSE, message=FALSE}
 
 mwrdslvl2 <- mwrdslvl %>% slice(4862:6609)
-# mwrdslvl2 <- mwrdslvl2[sample(1:nrow(mwrdslvl2)),]
 
 reactable(
   mwrdslvl2,
@@ -21394,7 +21490,7 @@ reactable(
         tagList(
           div(style = list(fontSize = 30, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
-          div(style = list(fontSize = 8), Meaning),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
       },
       align = "center"
@@ -21415,25 +21511,73 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
 ```
 
-<!-- </div> -->
+</div>
+<div class = "col-sm-8">
 
-<!-- <div class = "col-sm-4"> -->
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl2 <- mwrdslvl2[sample(1:nrow(mwrdslvl2)),]
+
+reactable(
+  mwrdslvl2,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- mwrdslvl2$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          # div(style = list(fontSize = 9), Reading),
+          # div(style = list(fontSize = 8), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
 #### L1 {.tabset}
 
+<div class = "row">
+<div class = "col-sm-4">
+
 ```{r, echo=FALSE, message=FALSE}
 
 mwrdslvl1 <- mwrdslvl %>% slice(6610:9307)
-# mwrdslvl1 <- mwrdslvl1[sample(1:nrow(mwrdslvl1)),]
 
 reactable(
   mwrdslvl1,
@@ -21447,7 +21591,7 @@ reactable(
         tagList(
           div(style = list(fontSize = 30, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
-          div(style = list(fontSize = 8), Meaning),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
       },
       align = "center"
@@ -21468,7 +21612,54 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl1 <- mwrdslvl1[sample(1:nrow(mwrdslvl1)),]
+
+reactable(
+  mwrdslvl1,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl1$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- mwrdslvl1$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          # div(style = list(fontSize = 9), Reading),
+          # div(style = list(fontSize = 8), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -21524,8 +21715,8 @@ reactable(
 
 <!-- ``` -->
 
-<!-- </div> -->
-<!-- </div> -->
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
