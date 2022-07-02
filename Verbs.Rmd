@@ -204,6 +204,7 @@ knjrndx <- read_csv("vrbjp/RNMDKNJX-TBL.csv")
 dlywrds <- read_csv("vrbjp/DLYWD-TBL.csv")
 mwrdslvl <- read_csv("vrbjp/JLPTWD-JLPT.csv")
 spksnt <- read_csv("vrbjp/SPKSNT-TBLSNT.csv")
+vrbrwq <- read_csv("vrbjp/VRBRVWS-VRB.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1834,7 +1835,7 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 knjrndx2 <- knjrndx %>% slice(1:468)
-knjrndx3 <- knjrndx %>% slice(469:2066)
+knjrndx3 <- knjrndx %>% slice(469:2120)
 knjrndx2 <- knjrndx2[sample(1:nrow(knjrndx2)),]
 knjrndx3 <- knjrndx3[sample(1:nrow(knjrndx3)),]
 knjrndx4 <- bind_rows(knjrndx2, knjrndx3) 
@@ -8707,7 +8708,7 @@ Describes a habitual or repeated action.
 
 ```{r, echo=FALSE, message=FALSE}
 
-lverbs <- lverbs %>% slice(1:195)
+lverbs <- lverbs %>% slice(1:201)
 # lverbs <- lverbs[sample(1:nrow(lverbs)),]
 
 reactable(
@@ -9257,6 +9258,108 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+### Review {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbrwq <- vrbrwq[sample(1:nrow(vrbrwq)),]
+
+reactable(
+  vrbrwq,
+  columns = list(
+    Verb = colDef(
+      cell = function(value, index) {
+        Reading <- vrbrwq$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- vrbrwq$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 9), Reading),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbrwq <- vrbrwq[sample(1:nrow(vrbrwq)),]
+
+reactable(
+  vrbrwq,
+  columns = list(
+    Verb = colDef(
+      cell = function(value, index) {
+        Reading <- vrbrwq$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- vrbrwq$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Sentence <- vrbrwq$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          # div(style = list(fontSize = 9), Reading),
+          # div(style = list(fontSize = 9, fontWeight = 500), Meaning)
+          div(style = list(fontSize = 20, fontWeight = 400), Sentence)
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
@@ -29053,82 +29156,82 @@ What is the reason why Tonkotsu Ramen has conquered the world? Even with this ba
 
 ------------------------------------------------------------------------
 
-# Listening {.tabset}
+<!-- # Listening {.tabset} -->
 
-## Video {.tabset}
+<!-- ## Video {.tabset} -->
 
-### Weather {.tabset}
+<!-- ### Weather {.tabset} -->
 
-**Weather**
+<!-- **Weather** -->
 
-<div>
-<center>
-<iframe width="714px" height="400px" src="https://www.youtube.com/embed/qLhie_9RSq4" frameborder="0" allowfullscreen>
-</iframe>
-</center>
-</div>
-<br>
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-4"> -->
-
-```{r, echo=FALSE, message=FALSE}
-
-expvcba <- expvcb %>% slice(21:63)
-
-reactable(
-  expvcba,
-  columns = list(
-    Words = colDef(
-      cell = function(value, index) {
-        Reading <- expvcba$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        tagList(
-          div(style = list(fontSize = 7), Reading),
-          div(style = list(fontSize = 13.5), value),
-        )
-      },
-      align = "left"
-    ),
-    Meaning = colDef(minWidth = 300,align = "left"),
-    Reading = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- </div> -->
-<!-- <div class = "col-sm-8"> -->
-<!-- <div align="center"> -->
-<!-- <iframe width="550" height="309.375" src="https://www.youtube.com/embed/qLhie_9RSq4" frameborder="0" allowfullscreen> -->
+<!-- <div> -->
+<!-- <center> -->
+<!-- <iframe width="714px" height="400px" src="https://www.youtube.com/embed/qLhie_9RSq4" frameborder="0" allowfullscreen> -->
 <!-- </iframe> -->
+<!-- </center> -->
 <!-- </div> -->
-<!-- </div> -->
-<!-- </div> -->
+<!-- <br> -->
+<!-- <!-- <div class = "row"> --> -->
+<!-- <!-- <div class = "col-sm-4"> --> -->
 
-------------------------------------------------------------------------
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-### Food {.tabset}
+<!-- expvcba <- expvcb %>% slice(21:63) -->
 
-------------------------------------------------------------------------
+<!-- reactable( -->
+<!--   expvcba, -->
+<!--   columns = list( -->
+<!--     Words = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Reading <- expvcba$Reading[index] -->
+<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 7), Reading), -->
+<!--           div(style = list(fontSize = 13.5), value), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ), -->
+<!--     Meaning = colDef(minWidth = 300,align = "left"), -->
+<!--     Reading = colDef(show = FALSE) -->
 
-### Travel {.tabset}
+<!--   ), -->
+<!--   defaultPageSize = 5, -->
+<!--   theme = reactableTheme( -->
+<!--     # Vertically center cells -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", -->
 
-------------------------------------------------------------------------
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- <!-- </div> --> -->
+<!-- <!-- <div class = "col-sm-8"> --> -->
+<!-- <!-- <div align="center"> --> -->
+<!-- <!-- <iframe width="550" height="309.375" src="https://www.youtube.com/embed/qLhie_9RSq4" frameborder="0" allowfullscreen> --> -->
+<!-- <!-- </iframe> --> -->
+<!-- <!-- </div> --> -->
+<!-- <!-- </div> --> -->
+<!-- <!-- </div> --> -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ### Food {.tabset} -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ### Travel {.tabset} -->
+
+<!-- ------------------------------------------------------------------------ -->
 
 # Speaking {.tabset}
 
