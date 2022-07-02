@@ -9268,6 +9268,19 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
+vrbrwq1 <- vrbrwq %>% slice(2237:4237)
+vrbrwq2 <- vrbrwq %>% slice(1370:1781)
+vrbrwq3 <- vrbrwq %>% slice(1:1369)
+vrbrwq4 <- vrbrwq %>% slice(1782:2236)
+vrbrwq1 <- vrbrwq1[sample(1:nrow(vrbrwq1)),]
+vrbrwq2 <- vrbrwq2[sample(1:nrow(vrbrwq2)),]
+vrbrwq3 <- vrbrwq3[sample(1:nrow(vrbrwq3)),]
+vrbrwq4 <- vrbrwq4[sample(1:nrow(vrbrwq4)),]
+
+vrbrwq5 <- bind_rows(vrbrwq1, vrbrwq2) 
+vrbrwq5 <- bind_rows(vrbrwq5, vrbrwq3) 
+vrbrwq5 <- bind_rows(vrbrwq5, vrbrwq4) 
+
 vrbrwq <- vrbrwq[sample(1:nrow(vrbrwq)),]
 
 reactable(
@@ -9314,18 +9327,16 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vrbrwq <- vrbrwq[sample(1:nrow(vrbrwq)),]
-
 reactable(
-  vrbrwq,
+  vrbrwq5,
   columns = list(
     Verb = colDef(
       cell = function(value, index) {
-        Reading <- vrbrwq$Reading[index]
+        Reading <- vrbrwq5$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- vrbrwq$Meaning[index]
+        Meaning <- vrbrwq5$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentence <- vrbrwq$Sentence[index]
+        Sentence <- vrbrwq5$Sentence[index]
         Sentence <- if (!is.na(Sentence)) Sentence else ""
         tagList(
           div(style = list(fontSize = 30, fontWeight = 600), value),
