@@ -4178,7 +4178,7 @@ A word or groups of words that modifies a noun comes before the noun.
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadj1 <- nadj1 %>% slice(1:200)
+nadj1 <- nadj1 %>% slice(1:200) %>% rename(Sentences = S1)
 # nadj1 <- nadj1[sample(1:nrow(nadj1)),]
 
 reactable(
@@ -4200,7 +4200,7 @@ reactable(
       align = "center"
     ),
 
-    S1 = colDef(
+    Sentences = colDef(
       minWidth = 180,
       cell = function(value, index) {
         T1 <- nadj1$T1[index]
@@ -4309,8 +4309,10 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-# nadj2 <- nadj2 %>% slice(1:60)
+# nadj2 <- nadj2 %>% slice(1:60) %>% rename(Sentences = S1)
 # nadj2 <- nadj2[sample(1:nrow(nadj2)),]
+
+nadj2 <- nadj2  %>% rename(Sentences = S1)
 
 reactable(
   nadj2,
@@ -4331,7 +4333,7 @@ reactable(
       align = "center"
     ),
     
-    S1 = colDef(
+    Sentences = colDef(
       minWidth = 180,
       cell = function(value, index) {
         T1 <- nadj2$T1[index]
@@ -4540,7 +4542,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-adv1 <- adv1 %>% slice(1:369)
+adv1 <- adv1 %>% slice(1:369) %>% rename(Sentences = S1)
 # adv1 <- adv1[sample(1:nrow(adv1)),]
 
 reactable(
@@ -4561,7 +4563,7 @@ reactable(
       align = "center"
     ),
     
-    S1 = colDef(
+    Sentences = colDef(
       minWidth = 180,
       cell = function(value, index) {
         T1 <- adv1$T1[index]
@@ -21117,7 +21119,7 @@ reactable(
 
 ## Sentences {.tabset}
 
-### 1
+<!-- ### 1 -->
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -21131,7 +21133,7 @@ reactable(
         Translation <- vnlr$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 24, fontWeight =600), value),
           div(style = list(fontSize = 9), Translation),
         )
       },
@@ -21139,9 +21141,9 @@ reactable(
     ),
     Translation = colDef(show = FALSE)
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21157,299 +21159,299 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### 2
+<!-- ### 2 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-icwrds <- icwrds[sample(1:nrow(icwrds)),]
+<!-- icwrds <- icwrds[sample(1:nrow(icwrds)),] -->
 
-reactable(
-  icwrds,
-  columns = list(
-    Script = colDef(
-      cell = function(value, index) {
-        Translation <- icwrds$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation),
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   icwrds, -->
+<!--   columns = list( -->
+<!--     Script = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- icwrds$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 17, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 5, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### 3
+<!-- ### 3 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-expw <- expw[sample(1:nrow(expw)),]
+<!-- expw <- expw[sample(1:nrow(expw)),] -->
 
-reactable(
-  expw,
-  columns = list(
-    Expression = colDef(
-      cell = function(value, index) {
-        Translation <- expw$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation),
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   expw, -->
+<!--   columns = list( -->
+<!--     Expression = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- expw$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 17, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 5, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### 4
+<!-- ### 4 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-vnstg <- vnstg[sample(1:nrow(vnstg)),]
+<!-- vnstg <- vnstg[sample(1:nrow(vnstg)),] -->
 
-reactable(
-  vnstg,
-  columns = list(
-    Phrases = colDef(
-      cell = function(value, index) {
-        Translation <- vnstg$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   vnstg, -->
+<!--   columns = list( -->
+<!--     Phrases = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- vnstg$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 17, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 5, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### 5
+<!-- ### 5 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-vnstb <- vnstb[sample(1:nrow(vnstb)),]
+<!-- vnstb <- vnstb[sample(1:nrow(vnstb)),] -->
 
-reactable(
-  vnstb,
-  columns = list(
-    Phrase = colDef(
-      cell = function(value, index) {
-        Translation <- vnstb$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   vnstb, -->
+<!--   columns = list( -->
+<!--     Phrase = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- vnstb$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 17, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 5, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### 6
+<!-- ### 6 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-sntv <- sntv[sample(1:nrow(sntv)),]
+<!-- sntv <- sntv[sample(1:nrow(sntv)),] -->
 
-reactable(
-  sntv,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- sntv$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   sntv, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- sntv$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 17, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 5, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### 7
+<!-- ### 7 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-cmwpg <- cmwpg[sample(1:nrow(cmwpg)),]
+<!-- cmwpg <- cmwpg[sample(1:nrow(cmwpg)),] -->
 
-reactable(
-  cmwpg,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- cmwpg$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   cmwpg, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- cmwpg$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 17, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 5, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### 8
+<!-- ### 8 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-cmwpc <- cmwpc[sample(1:nrow(cmwpc)),]
+<!-- cmwpc <- cmwpc[sample(1:nrow(cmwpc)),] -->
 
-reactable(
-  cmwpc,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- cmwpc$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   cmwpc, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- cmwpc$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 17, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 5, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
 ------------------------------------------------------------------------
 
@@ -21473,7 +21475,7 @@ reactable(
         Transcript <- v1hme1$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21482,10 +21484,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21520,7 +21522,7 @@ reactable(
         Transcript <- v1hme3$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21529,10 +21531,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21567,7 +21569,7 @@ reactable(
         Transcript <- v1hme6$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21576,10 +21578,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21614,7 +21616,7 @@ reactable(
         Transcript <- v1hme2$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21623,10 +21625,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21661,7 +21663,7 @@ reactable(
         Transcript <- v1hme7$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21670,10 +21672,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21708,7 +21710,7 @@ reactable(
         Transcript <- v1hme4$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21717,10 +21719,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21755,7 +21757,7 @@ reactable(
         Transcript <- v1hme8$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21764,10 +21766,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21802,7 +21804,7 @@ reactable(
         Transcript <- v1hme5$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21811,10 +21813,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height =70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height =250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21849,7 +21851,7 @@ reactable(
         Transcript <- v1hme9$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21858,10 +21860,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21896,7 +21898,7 @@ reactable(
         Transcript <- v1hme10$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21905,10 +21907,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21943,7 +21945,7 @@ reactable(
         Transcript <- v1hme11$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21952,10 +21954,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21990,7 +21992,7 @@ reactable(
         Transcript <- v1hme13$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 260, fontWeight = 500), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -21999,10 +22001,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -22037,7 +22039,7 @@ reactable(
         Transcript <- v1hme15$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -22046,10 +22048,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -22084,7 +22086,7 @@ reactable(
         Transcript <- v1hme14$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -22093,10 +22095,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -22131,7 +22133,7 @@ reactable(
         Transcript <- v1hme16$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -22140,10 +22142,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -22178,7 +22180,7 @@ reactable(
         Transcript <- v1hme12$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -22187,10 +22189,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -22225,7 +22227,7 @@ reactable(
         Transcript <- v1hme18$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 26, fontWeight = 600), value),
           div(style = list(fontSize = 10), Transcript)
         )
       },
@@ -22234,10 +22236,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -22301,7 +22303,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### Random {.tabset}
+### Review {.tabset}
 
 <!-- #### Words/Phras-&Meaning -->
 
@@ -22322,8 +22324,8 @@ reactable(
         Transcript <- v1hmec$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
-          div(style = list(fontSize = 10), Transcript)
+          div(style = list(fontSize = 26, fontWeight = 600), value),
+          # div(style = list(fontSize = 10), Transcript)
         )
       },
       align = "center"
@@ -22331,10 +22333,10 @@ reactable(
     Transcript = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -22349,41 +22351,41 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-## Dictionary {.tabset}
+<!-- ## Dictionary {.tabset} -->
 
 <!-- <h6 style="color: #00000000">**.**</h6> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-# dictny <- dictny %>% slice(1:40)
+<!-- # dictny <- dictny %>% slice(1:40) -->
 
-reactable(
-  dictny,
-  columns = list(
-    Words = colDef(style = list(fontFamily = "Yomogi", fontSize = 14, fontWeight = 400), align = "left"),
-    Reading = colDef(align = "left"),
-    Meaning = colDef(minWidth = 250, align = "left")
+<!-- reactable( -->
+<!--   dictny, -->
+<!--   columns = list( -->
+<!--     Words = colDef(style = list(fontFamily = "Yomogi", fontSize = 14, fontWeight = 400), align = "left"), -->
+<!--     Reading = colDef(align = "left"), -->
+<!--     Meaning = colDef(minWidth = 250, align = "left") -->
 
-  ),
-  defaultPageSize = 10,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   ), -->
+<!--   defaultPageSize = 10, -->
+<!--   theme = reactableTheme( -->
+<!--     # Vertically center cells -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 ------------------------------------------------------------------------
 
@@ -23515,37 +23517,37 @@ What is the reason why Tonkotsu Ramen has conquered the world? Even with this ba
 
 ### 1
 
-<p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020">
-サービス係：いらっしゃいませ。ご用を承りましょうか？
-女性：こんにちは。ええ、あの……私、20分前ぐらいに子ども服売り場にいたんですけど、そこから移動した後で、バッグをなくしたことに気づいたんです。うっかりそこに置き忘れてしまったのかなと思って。何か届いていませんか？
-サ：ちょっとお待ちください、お調べしますね。もう少し詳しく教えていただけますか？　なくされたのはハンドバッグですか？
-女：いいえ。大きなビニールのバッグです。無地の白いバッグで、男物のシャツが２枚入っているはずです。
-サ：４階に電話して、見つかったかどうか聞いてみますね。
-女：そうしてくれると助かるわ、ありがとう。
+<!-- <p style="font-size:20px; line-height: 1.4; font-family: Yomogi; color: #202020"> -->
+<!-- サービス係：いらっしゃいませ。ご用を承りましょうか？ -->
+<!-- 女性：こんにちは。ええ、あの……私、20分前ぐらいに子ども服売り場にいたんですけど、そこから移動した後で、バッグをなくしたことに気づいたんです。うっかりそこに置き忘れてしまったのかなと思って。何か届いていませんか？ -->
+<!-- サ：ちょっとお待ちください、お調べしますね。もう少し詳しく教えていただけますか？　なくされたのはハンドバッグですか？ -->
+<!-- 女：いいえ。大きなビニールのバッグです。無地の白いバッグで、男物のシャツが２枚入っているはずです。 -->
+<!-- サ：４階に電話して、見つかったかどうか聞いてみますね。 -->
+<!-- 女：そうしてくれると助かるわ、ありがとう。 -->
 
-サ：朗報です。あるお客様が子ども服売り場のスタッフに届けてくださったそうです。お客様のバッグのようですよ。そちらでお預かりしております。
-女：ああ、よかった！　午前中に行ったお店を全部回らなければならないかと心配していたの！
-サ：誰でも結構ですので、４階のスタッフにお声を掛けてください。
-女：探していただいて本当にありがとう。
-サ：どういたしまして。
-</p>
+<!-- サ：朗報です。あるお客様が子ども服売り場のスタッフに届けてくださったそうです。お客様のバッグのようですよ。そちらでお預かりしております。 -->
+<!-- 女：ああ、よかった！　午前中に行ったお店を全部回らなければならないかと心配していたの！ -->
+<!-- サ：誰でも結構ですので、４階のスタッフにお声を掛けてください。 -->
+<!-- 女：探していただいて本当にありがとう。 -->
+<!-- サ：どういたしまして。 -->
+<!-- </p> -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-<p style="font-size:12px; font-family: Klee One;">
-Service: Good afternoon. How may I help you, madam?
-Woman: Hello. Yes, umm ... I was here maybe 20 minutes ago, in your children’s clothing department and when I left, I realised that I was missing a bag. I was wondering if I’d left it up there by mistake. Has anything been handed in?
-S: Just a moment and I’ll check for you. Can I ask for a few more details? Is it a handbag you’ve lost?
-W: No. ①It’s a large plastic bag. It’s plain white and ②there should be two men’s shirts in it.
-S: I’ll just call up to the third floor for you and ask if it has been found.
-W: That would be great, thanks.
+<!-- <p style="font-size:12px; font-family: Klee One;"> -->
+<!-- Service: Good afternoon. How may I help you, madam? -->
+<!-- Woman: Hello. Yes, umm ... I was here maybe 20 minutes ago, in your children’s clothing department and when I left, I realised that I was missing a bag. I was wondering if I’d left it up there by mistake. Has anything been handed in? -->
+<!-- S: Just a moment and I’ll check for you. Can I ask for a few more details? Is it a handbag you’ve lost? -->
+<!-- W: No. ①It’s a large plastic bag. It’s plain white and ②there should be two men’s shirts in it. -->
+<!-- S: I’ll just call up to the third floor for you and ask if it has been found. -->
+<!-- W: That would be great, thanks. -->
 
-S: Good news. ③A customer handed a bag in to staff in the children’s department. It sounds like yours. They’re holding it up there for you.
-W: Phew. What a relief! I thought I was going to have to go back to every shop I’ve been in this morning!
-S: Just ask any member of staff on the third floor.
-W: Thanks very much for your help.
-S: You’re welcome.
-</p>
+<!-- S: Good news. ③A customer handed a bag in to staff in the children’s department. It sounds like yours. They’re holding it up there for you. -->
+<!-- W: Phew. What a relief! I thought I was going to have to go back to every shop I’ve been in this morning! -->
+<!-- S: Just ask any member of staff on the third floor. -->
+<!-- W: Thanks very much for your help. -->
+<!-- S: You’re welcome. -->
+<!-- </p> -->
 
 ------------------------------------------------------------------------
 
@@ -23610,8 +23612,8 @@ S: You’re welcome.
 <!-- </center> -->
 <!-- </div> -->
 <!-- <br> -->
-<!-- <!-- <div class = "row"> --> -->
-<!-- <!-- <div class = "col-sm-4"> --> -->
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-4"> -->
 
 <!-- ```{r, echo=FALSE, message=FALSE} -->
 
@@ -23653,14 +23655,14 @@ S: You’re welcome.
 
 <!-- ``` -->
 
-<!-- <!-- </div> --> -->
-<!-- <!-- <div class = "col-sm-8"> --> -->
-<!-- <!-- <div align="center"> --> -->
-<!-- <!-- <iframe width="550" height="309.375" src="https://www.youtube.com/embed/qLhie_9RSq4" frameborder="0" allowfullscreen> --> -->
-<!-- <!-- </iframe> --> -->
-<!-- <!-- </div> --> -->
-<!-- <!-- </div> --> -->
-<!-- <!-- </div> --> -->
+<!-- </div> -->
+<!-- <div class = "col-sm-8"> -->
+<!-- <div align="center"> -->
+<!-- <iframe width="550" height="309.375" src="https://www.youtube.com/embed/qLhie_9RSq4" frameborder="0" allowfullscreen> -->
+<!-- </iframe> -->
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
 
 <!-- ------------------------------------------------------------------------ -->
 
