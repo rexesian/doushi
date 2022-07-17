@@ -84,6 +84,8 @@ vnsst <- read_csv("vrbjp/Sheet 7-VPHS.csv")
 klvl1 <- read_csv("vrbjp/Sheet 8-WBKNJ1.csv")
 klvl2 <- read_csv("vrbjp/Sheet 9-WBKNJ2.csv")
 klvl3 <- read_csv("vrbjp/Sheet 10-WBKNJ3.csv")
+klvl4 <- read_csv("vrbjp/Sheet 211-WBKNJ4.csv")
+klvl5 <- read_csv("vrbjp/Sheet 212-WBKNJ5.csv")
 klv1 <- read_csv("vrbjp/Sheet 11-KNJD1.csv")
 klv2 <- read_csv("vrbjp/Sheet 12-KNJD2.csv")
 vnlr <- read_csv("vrbjp/Sheet 14-VNLST.csv")
@@ -754,7 +756,7 @@ reactable(
         KR <- scknj5r$KR[index]
         KR <- if (!is.na(KR)) KR else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 500), value),
+          div(style = list(fontSize = 32, fontWeight = 600), value),
           div(style = list(fontSize = 9), NR),
           div(style = list(fontSize = 9), KR),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning)
@@ -898,7 +900,7 @@ reactable(
         KR <- scknj4r$KR[index]
         KR <- if (!is.na(KR)) KR else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 500), value),
+          div(style = list(fontSize = 32, fontWeight = 600), value),
           div(style = list(fontSize = 9), NR),
           div(style = list(fontSize = 9), KR),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning)
@@ -1042,7 +1044,7 @@ reactable(
         KR <- scknj3r$KR[index]
         KR <- if (!is.na(KR)) KR else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 500), value),
+          div(style = list(fontSize = 32, fontWeight = 600), value),
           div(style = list(fontSize = 9), NR),
           div(style = list(fontSize = 9), KR),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning)
@@ -1187,7 +1189,7 @@ reactable(
         KR <- scknj2r$KR[index]
         KR <- if (!is.na(KR)) KR else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 500), value),
+          div(style = list(fontSize = 32, fontWeight = 600), value),
           div(style = list(fontSize = 9), NR),
           div(style = list(fontSize = 9), KR),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning)
@@ -1331,7 +1333,7 @@ reactable(
         KR <- scknj1r$KR[index]
         KR <- if (!is.na(KR)) KR else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 500), value),
+          div(style = list(fontSize = 32, fontWeight = 600), value),
           div(style = list(fontSize = 9), NR),
           div(style = list(fontSize = 9), KR),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning)
@@ -1786,6 +1788,76 @@ klvl3w <- klvl3w[sample(1:nrow(klvl3w)),]
 
 reactable(
   klvl3w,
+  columns = list(
+    Kanji = colDef(align = "center", style = list(fontSize = 32, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### L2 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl4w <- klvl4 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
+klvl4w <- klvl4w %>% pivot_longer(everything())
+klvl4w <- klvl4w %>% rename(Kanji = value)
+klvl4w <- na.omit(klvl4w) %>% select(Kanji)
+klvl4w <- klvl4w[sample(1:nrow(klvl4w)),]
+
+reactable(
+  klvl4w,
+  columns = list(
+    Kanji = colDef(align = "center", style = list(fontSize = 32, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### L1 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl5w <- klvl5 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
+klvl5w <- klvl5w %>% pivot_longer(everything())
+klvl5w <- klvl5w %>% rename(Kanji = value)
+klvl5w <- na.omit(klvl5w) %>% select(Kanji)
+klvl5w <- klvl5w[sample(1:nrow(klvl5w)),]
+
+reactable(
+  klvl5w,
   columns = list(
     Kanji = colDef(align = "center", style = list(fontSize = 32, fontWeight = 600))
   ),
