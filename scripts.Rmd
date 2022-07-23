@@ -208,6 +208,7 @@ mwrdslvl <- read_csv("vrbjp/JLPTWD-JLPT.csv")
 spksnt <- read_csv("vrbjp/SPKSNT-TBLSNT.csv")
 vrbrwq <- read_csv("vrbjp/VRBRVWS-VRB.csv")
 kn5wrds <- read_csv("vrbjp/KN5WRDS-WBKNJ1.csv")
+kn4wrds <- read_csv("vrbjp/KN4WRDS-WBKNJ2.csv")
 ```
 
 # Scripts {.tabset}
@@ -1582,6 +1583,38 @@ reactable(
 ------------------------------------------------------------------------
 
 ##### L4 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+kn4wrdsi <- kn4wrds %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
+kn4wrdsi <- kn4wrdsi %>% pivot_longer(everything())
+kn4wrdsi <- kn4wrdsi %>% rename(Kanji = value)
+kn4wrdsi <- na.omit(kn4wrdsi) %>% select(Kanji)
+kn4wrdsi <- kn4wrdsi[sample(1:nrow(kn4wrdsi)),]
+# kn5wrds <- kn5wrds[sample(1:nrow(kn5wrds)),]
+
+reactable(
+  kn4wrdsi,
+  columns = list(
+    Kanji = colDef(align = "center", style = list(fontSize = 32, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
