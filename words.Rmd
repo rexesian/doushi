@@ -207,6 +207,7 @@ spksnt <- read_csv("vrbjp/SPKSNT-TBLSNT.csv")
 vrbrwq <- read_csv("vrbjp/VRBRVWS-VRB.csv")
 
 ontp <- read_csv("vrbjp/ONTPE-ONP.csv")
+gwrds <- read_csv("vrbjp/WGRMR-LST.csv")
 ```
 
 # Words {.tabset}
@@ -1513,6 +1514,113 @@ reactable(
     T1 = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
     Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+### Grammar {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+gwrds <- gwrds[sample(1:nrow(gwrds)),]
+
+reactable(
+  gwrds,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        # Reading <- gwrds$Reading[index]
+        # Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- gwrds$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 11), Reading),
+          div(style = list(fontSize = 10), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    
+    # S1 = colDef(show = FALSE),
+    # T1 = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+    # Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+gwrds <- gwrds[sample(1:nrow(gwrds)),]
+
+reactable(
+  gwrds,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        # Reading <- gwrds$Reading[index]
+        # Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- gwrds$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        # S1 <- gwrds$S1[index]
+        # S1 <- if (!is.na(S1)) S1 else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 18, fontWeight = 500), S1),
+        )
+      },
+      align = "center"
+    ),
+    
+    # S1 = colDef(show = FALSE),
+    # T1 = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+    # Reading = colDef(show = FALSE)
 
   ),
   defaultPageSize = 1,
