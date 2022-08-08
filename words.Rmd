@@ -222,6 +222,7 @@ gwrds <- read_csv("vrbjp/WGRMR-LST.csv")
 ```{r, echo=FALSE, message=FALSE}
 
 mwrdslvl5 <- mwrdslvl %>% slice(1:2053)
+mwrdslvl5 <- mwrdslvl5[sample(1:nrow(mwrdslvl5)),]
 
 reactable(
   mwrdslvl5,
@@ -323,6 +324,7 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 mwrdslvl4 <- mwrdslvl %>% slice(2054:2722)
+mwrdslvl4 <- mwrdslvl4[sample(1:nrow(mwrdslvl4)),]
 
 reactable(
   mwrdslvl4,
@@ -424,6 +426,7 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 mwrdslvl3 <- mwrdslvl %>% slice(2723:4861)
+mwrdslvl3 <- mwrdslvl3[sample(1:nrow(mwrdslvl3)),]
 
 reactable(
   mwrdslvl3,
@@ -525,6 +528,7 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 mwrdslvl2 <- mwrdslvl %>% slice(4862:6609)
+mwrdslvl2 <- mwrdslvl2[sample(1:nrow(mwrdslvl2)),]
 
 reactable(
   mwrdslvl2,
@@ -626,6 +630,7 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 mwrdslvl1 <- mwrdslvl %>% slice(6610:9307)
+mwrdslvl1 <- mwrdslvl1[sample(1:nrow(mwrdslvl1)),]
 
 reactable(
   mwrdslvl1,
@@ -1568,7 +1573,8 @@ reactable(
     
     # S1 = colDef(show = FALSE),
     # T1 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
+    Meaning = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE)
     # Reading = colDef(show = FALSE)
 
   ),
@@ -1607,10 +1613,13 @@ reactable(
         # Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- gwrds$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Sentence <- gwrds$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
         # S1 <- gwrds$S1[index]
         # S1 <- if (!is.na(S1)) S1 else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 19, fontWeight = 500), Sentence),
           # div(style = list(fontSize = 18, fontWeight = 500), S1),
         )
       },
@@ -1619,7 +1628,8 @@ reactable(
     
     # S1 = colDef(show = FALSE),
     # T1 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
+    Meaning = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE)
     # Reading = colDef(show = FALSE)
 
   ),
