@@ -12832,14 +12832,11 @@ reactable(
         Reading <- ckanji$Reading[index]
         Konyumi <- ckanji$Konyumi[index]
         Konyumi <- if (!is.na(Konyumi)) Konyumi else ""
-        Asso <- ckanji$Asso[index]
-        Asso <- if (!is.na(Asso)) Asso else ""
         tagList(
           div(style = list(fontSize = 30, fontWeight = 500), value),
           div(style = list(fontSize = 9, color = '#008000'), Reading),
           div(style = list(fontSize = 9, color = '#800000'), Konyumi),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
-          # div(style = list(fontSize = 13, fontWeight = 600), value, Asso),
         )
       },
       align = "center"
@@ -12926,8 +12923,7 @@ reactable(
     # M5 = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
     Reading = colDef(show = FALSE),
-    Konyumi = colDef(show = FALSE),
-    Asso = colDef(show = FALSE)
+    Konyumi = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -12951,98 +12947,98 @@ reactable(
 
 ### Freq {.tabset}
 
-#### Intro
+<!-- #### Intro -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-# fkanji <- fkanji[sample(1:nrow(fkanji)),]
+<!-- # fkanji <- fkanji[sample(1:nrow(fkanji)),] -->
 
-reactable(
-  fkanji,
-  columns = list(
-    K1 = colDef(
-      cell = function(value, index) {
-        M1 <- fkanji$M1[index]
-        M1 <- if (!is.na(M1)) M1 else ""
-        tagList(
-          div(style = list(fontSize = 25, fontWeight = 500), value),
-          div(style = list(fontSize = 9, fontWeight = 400), M1),
-        )
-      },
-      align = "center"
-    ),
-    K2 = colDef(
-      cell = function(value, index) {
-        M2 <- fkanji$M2[index]
-        M2 <- if (!is.na(M2)) M2 else ""
-        tagList(
-          div(style = list(fontSize = 25, fontWeight = 500), value),
-          div(style = list(fontSize = 9, fontWeight = 400), M2),
-        )
-      },
-      align = "center"
-    ),    
-    K3 = colDef(
-      cell = function(value, index) {
-        M3 <- fkanji$M3[index]
-        M3 <- if (!is.na(M3)) M3 else ""
-        tagList(
-          div(style = list(fontSize = 25, fontWeight = 500), value),
-          div(style = list(fontSize = 9, fontWeight = 400), M3),
-        )
-      },
-      align = "center"
-    ),       
-    K4 = colDef(
-      cell = function(value, index) {
-        M4 <- fkanji$M4[index]
-        M4 <- if (!is.na(M4)) M4 else ""
-        tagList(
-          div(style = list(fontSize = 25, fontWeight = 500), value),
-          div(style = list(fontSize = 9, fontWeight = 400), M4),
-        )
-      },
-      align = "center"
-    ),
-    K5 = colDef(
-      cell = function(value, index) {
-        M5 <- fkanji$M5[index]
-        M5 <- if (!is.na(M5)) M5 else ""
-        tagList(
-          div(style = list(fontSize = 25, fontWeight = 500), value),
-          div(style = list(fontSize = 9, fontWeight = 400), M5),
-        )
-      },
-      align = "center"
-    ),    
-    
-    M1 = colDef(show = FALSE),
-    M2 = colDef(show = FALSE),
-    M3 = colDef(show = FALSE),
-    M4 = colDef(show = FALSE),
-    M5 = colDef(show = FALSE)
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   fkanji, -->
+<!--   columns = list( -->
+<!--     K1 = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         M1 <- fkanji$M1[index] -->
+<!--         M1 <- if (!is.na(M1)) M1 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 25, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400), M1), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     K2 = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         M2 <- fkanji$M2[index] -->
+<!--         M2 <- if (!is.na(M2)) M2 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 25, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400), M2), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ),     -->
+<!--     K3 = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         M3 <- fkanji$M3[index] -->
+<!--         M3 <- if (!is.na(M3)) M3 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 25, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400), M3), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ),        -->
+<!--     K4 = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         M4 <- fkanji$M4[index] -->
+<!--         M4 <- if (!is.na(M4)) M4 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 25, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400), M4), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     K5 = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         M5 <- fkanji$M5[index] -->
+<!--         M5 <- if (!is.na(M5)) M5 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 25, fontWeight = 500), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400), M5), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ),     -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--     M1 = colDef(show = FALSE), -->
+<!--     M2 = colDef(show = FALSE), -->
+<!--     M3 = colDef(show = FALSE), -->
+<!--     M4 = colDef(show = FALSE), -->
+<!--     M5 = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 5, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-------------------------------------------------------------------------
+<!-- ``` -->
 
-#### W/Words
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- #### W/Words -->
 
 ```{r, echo=FALSE, message=FALSE}
 
