@@ -12830,13 +12830,15 @@ reactable(
         Meaning <- ckanji$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Reading <- ckanji$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
+        Konyumi <- ckanji$Konyumi[index]
+        Konyumi <- if (!is.na(Konyumi)) Konyumi else ""
         Asso <- ckanji$Asso[index]
         Asso <- if (!is.na(Asso)) Asso else ""
         tagList(
           div(style = list(fontSize = 30, fontWeight = 500), value),
-          div(style = list(fontSize = 10), Reading),
-          div(style = list(fontSize = 9), Meaning),
+          div(style = list(fontSize = 9, color = '#008000'), Reading),
+          div(style = list(fontSize = 9, color = '#800000'), Konyumi),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
           # div(style = list(fontSize = 13, fontWeight = 600), value, Asso),
         )
       },
@@ -12924,11 +12926,12 @@ reactable(
     # M5 = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
     Reading = colDef(show = FALSE),
+    Konyumi = colDef(show = FALSE),
     Asso = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 110),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
