@@ -205,6 +205,8 @@ dlywrds <- read_csv("vrbjp/DLYWD-TBL.csv")
 mwrdslvl <- read_csv("vrbjp/JLPTWD-JLPT.csv")
 spksnt <- read_csv("vrbjp/SPKSNT-TBLSNT.csv")
 vrbrwq <- read_csv("vrbjp/VRBRVWS-VRB.csv")
+
+sntdly <- read_csv("vrbjp/DLYSNT-TBLSNT.csv")
 ```
 
 # Sentences {.tabset}
@@ -316,6 +318,48 @@ reactable(
       align = "center"
     ),
     Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+## Daily {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+sntdly <- sntdly[sample(1:nrow(sntdly)),]
+
+reactable(
+  sntdly,
+  columns = list(
+    Sentence = colDef(
+      cell = function(value, index) {
+        Meaning <- sntdly$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else "Unknown"
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 9, color = '#787878'), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
