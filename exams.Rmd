@@ -211,6 +211,8 @@ vrbrwq <- read_csv("vrbjp/VRBRVWS-VRB.csv")
 
 ## Kanji {.tabset}
 
+### Learn {.tabset}
+
 ```{r, echo=FALSE, message=FALSE}
 
 # kjlpt <- kjlpt[sample(1:nrow(kjlpt)),]
@@ -333,6 +335,41 @@ reactable(
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
 
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Review {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+kjlptw <- kjlpt %>% select(W1, W2, W3, W4)
+kjlptw <- kjlptw %>% pivot_longer(everything())
+kjlptw <- kjlptw %>% rename(Kanji = value)
+kjlptw <- na.omit(kjlptw) %>% select(Kanji)
+kjlptw <- kjlptw[sample(1:nrow(kjlptw)),]
+
+reactable(
+  kjlptw,
+  columns = list(
+    Kanji = colDef(align = "center", style = list(fontSize = 32, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
@@ -3086,34 +3123,107 @@ reactable(
 
 #### report
 
-    報告 ・report, information  
-    申告 ・report, return, statement, declaration  
-    報道 ・report, reporting, news, information  
-    記事 ・article, news story, report, account  
-    通報 ・report, notification, tip, bulletin  
-    特集 ・feature, special edition, report   
-    情報 ・information, news, intelligence, advices     
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 報告・ほうこく**</p>
+
+###### **・report, information**
+
+    ・結果が分かったらこちらから報告します
+    ・We will report back here when we know the results
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② 申告・しんこく**</p>
+
+###### **・report, return, statement, declaration**
+
+    ・申告するものは何も持っていません
+    ・I have nothing to declare
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ 報道・ほうどう**</p>
+
+###### **・report, reporting, news, information**
+
+    ・その報道はまだ確認されてない
+    ・That report has not yet been confirmed
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ 記事・きじ**</p>
+
+###### **・article, news story, report, account**
+
+    ・いつも記事を書いています
+    ・I always write articles
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑤ 通報・つうほう**</p>
+
+###### **・report, notification, tip, bulletin**
+
+    ・すぐ警察に通報してください
+    ・You should notify the police at once
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑥ 特集・とくしゅう**</p>
+
+###### **・feature, special edition, report**
+
+    ・その週刊誌は今週は総選挙特集を組んだ
+    ・That weekly magazine ran a general election special this week
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑦ 情報 ・じょうほう**</p>
+
+###### **・information, news, intelligence, advices**
+
+    ・株のうまい情報を漏らしてくれた
+    ・He leaked some good information about the stock
 
 <!-- ------------------------------------------------------------------------ -->
 
 #### cooking
 
-    料理 ・cooking, cookery, cuisine, meal, food, dish  
-    調理 ・cooking, food preparation  
-    炊事 ・cooking, kitchen work  
-    自炊 ・cooking for oneself, cooking one's own food  
-    割烹 ・cooking especially Japanese style, cuisine  
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 料理・りょうり**</p>
 
-<!-- <h> -->
+###### **・cooking, cookery, cuisine, meal, food, dish**
 
-    煮炊き ・cooking   
-    炊さん ・cooking of rice or grains   
-    手料理 ・home cooking    
+    ・当店はフランス料理を得意としています
+    ・We specialize in French cuisine
 
-<!-- <h> -->
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② 調理・ちょうり**</p>
 
-    日本料理 ・Japanese cooking    
-    中華料理 ・Chinese cooking    
+###### **・cooking, food preparation**
+
+    ・卵はどのように調理しましょうか
+    ・How should we cook the eggs?
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ 炊事・すいじ**</p>
+
+###### **・cooking, kitchen work, culinary arts**
+
+    ・私は炊事が全然できない
+    ・I can't cook at all
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ 自炊・じすい**</p>
+
+###### **・cooking for oneself, cooking one's own food**
+
+    ・私は自炊に慣れている
+    ・I am used to cooking for myself
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑤ 割烹・かっぽう**</p>
+
+###### **・cooking, cuisine**
+
+    ・実際にフレンチ割烹をやると決めたのは5年前くらいです
+    ・I actually decided to open a French kappo restaurant about five years ago
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑥ 煮炊き・にたき**</p>
+
+###### **・cooking**
+
+    ・自分で煮炊きするのに慣れている
+    ・I'm used to cooking my own food
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑦ 手料理 ・てりょうり**</p>
+
+###### **・home cooking**
+
+    ・君の手料理がきっと恋しくなると思うよ
+    ・I'm sure I'll miss your home-cooked meals
 
 <!-- ------------------------------------------------------------------------ -->
 
