@@ -205,6 +205,8 @@ dlywrds <- read_csv("vrbjp/DLYWD-TBL.csv")
 mwrdslvl <- read_csv("vrbjp/JLPTWD-JLPT.csv")
 spksnt <- read_csv("vrbjp/SPKSNT-TBLSNT.csv")
 vrbrwq <- read_csv("vrbjp/VRBRVWS-VRB.csv")
+
+smlrwrds <- read_csv("vrbjp/SMLR-WRDS.csv")
 ```
 
 # Exams {.tabset}
@@ -344,18 +346,92 @@ reactable(
 
 ### Review {.tabset}
 
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+kjlpt1w <- kjlpt %>% select(W1, R1, M1)
+kjlpt1w <- kjlpt1w %>% rename(Words = W1)
+kjlpt1w <- kjlpt1w %>% rename(Reading = R1)
+kjlpt1w <- kjlpt1w %>% rename(Meaning = M1)
+
+kjlpt2w <- kjlpt %>% select(W2, R2, M2)
+kjlpt2w <- kjlpt2w %>% rename(Words = W2)
+kjlpt2w <- kjlpt2w %>% rename(Reading = R2)
+kjlpt2w <- kjlpt2w %>% rename(Meaning = M2)
+
+kjlpt3w <- kjlpt %>% select(W3, R3, M3)
+kjlpt3w <- kjlpt3w %>% rename(Words = W3)
+kjlpt3w <- kjlpt3w %>% rename(Reading = R3)
+kjlpt3w <- kjlpt3w %>% rename(Meaning = M3)
+
+kjlpt4w <- kjlpt %>% select(W4, R4, M4)
+kjlpt4w <- kjlpt4w %>% rename(Words = W4)
+kjlpt4w <- kjlpt4w %>% rename(Reading = R4)
+kjlpt4w <- kjlpt4w %>% rename(Meaning = M4)
+
+kjlpttw <- bind_rows(kjlpt1w, kjlpt2w)
+kjlpttw <- bind_rows(kjlpttw, kjlpt3w)
+kjlpttw <- bind_rows(kjlpttw, kjlpt4w)
+
+kjlpttw <- kjlpttw[sample(1:nrow(kjlpttw)),]
+
+reactable(
+  kjlpttw,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- kjlpttw$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- kjlpttw$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600), value),
+          div(style = list(fontSize = 10), Reading),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
 ```{r, echo=FALSE, message=FALSE}
 
 kjlptw <- kjlpt %>% select(W1, W2, W3, W4)
 kjlptw <- kjlptw %>% pivot_longer(everything())
-kjlptw <- kjlptw %>% rename(Kanji = value)
-kjlptw <- na.omit(kjlptw) %>% select(Kanji)
+kjlptw <- kjlptw %>% rename(Words = value)
+kjlptw <- na.omit(kjlptw) %>% select(Words)
 kjlptw <- kjlptw[sample(1:nrow(kjlptw)),]
 
 reactable(
   kjlptw,
   columns = list(
-    Kanji = colDef(align = "center", style = list(fontSize = 32, fontWeight = 600))
+    Words = colDef(align = "center", style = list(fontSize = 32, fontWeight = 600))
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
@@ -374,6 +450,9 @@ reactable(
 )
 
 ```
+
+</div>
+</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -2769,7 +2848,7 @@ reactable(
 ###### **・development, growth**
 
     ・スポーツは筋肉の発達に役立つ
-    ・She was fooled by his attitude
+    ・Sports help muscle development
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ 展開・てんかい**</p>
 
@@ -3097,27 +3176,103 @@ reactable(
 
 #### establish
 
-    設定 ・establishment, creation, posing, setting  
-    設立 ・establishment, founding, incorporation  
-    創立 ・establishment, founding, organization  
-    確立 ・establishment, settlement  
-    樹立 ・establishment, founding, setting a record  
-    設置 ・establishment, institution, installation   
-    建設 ・establishment, construction     
-    成立 ・establishment, formation, materialization   
-    施設 ・establishment, institution, facility  
-    創設 ・establishment, founding, organization  
-    制定 ・establishment, enactment, creation  
-    開設 ・establishment, opening, setting up, inauguration   
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 設定・せってい**</p>
 
-<!-- <h> -->
+###### **・establishment, creation, posing, setting, scene, option setting, configuration, set up**
 
-    新設 ・establishing, founding, setting up, organizing  
-    為す ・establish, build up, form, accomplish, achieve  
+    ・新しい運営法を設定する
+    ・Set up a new operating method
 
-<!-- <h> -->
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② 設立・せつりつ**</p>
 
-    構える ・set up, build, establish, run, prepare in advance
+###### **・establishment, founding, incorporation**
+
+    ・この協会は自然保護のために設立された
+    ・This association was founded to protect nature
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ 創立・そうりつ**</p>
+
+###### **・establishment, founding, organization**
+
+    ・この学校は1900年に創立された
+    ・This school was founded in 1900
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ 確立・かくりつ**</p>
+
+###### **・establishment, settlement**
+
+    ・独自の外交方針を確立することだ
+    ・It's about establishing our own foreign policy
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑤ 樹立・じゅりつ**</p>
+
+###### **・establishment, founding, setting a record**
+
+    ・マラソンで新記録を樹立した
+    ・He set a new record in the marathon
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑥ 設置・せっち**</p>
+
+###### **・establishment, institution, installation**
+
+    ・集中暖房を事務所に設置した
+    ・Centralized heating was installed in the office
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑦ 建設・けんせつ**</p>
+
+###### **・establishment, construction, build**
+
+    ・彼らは工場を建設するだけの資金を持っている
+    ・They have enough money to build a factory
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑧ 成立・せいりつ**</p>
+
+###### **・establishment, formation, materialization, coming into existence**
+
+    ・新しい委員会の成立は彼の熱意に負うところが大きい
+    ・The formation of the new committee owes much to his enthusiasm
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑨ 施設・しせつ**</p>
+
+###### **・establishment, institution, facility**
+
+    ・私達の町にはすばらしいスポーツ施設がある
+    ・Our town has great sports facilities
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑩ 創設・そうせつ**</p>
+
+###### **・establishment, founding, organization**
+
+    ・この大学は1843年に創設された
+    ・The college was founded in 1843
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑪ 制定・せいてい**</p>
+
+###### **・establishment, enactment, creation**
+
+    ・その法律は明治時代に制定された
+    ・That law was enacted during the Meiji era
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑫ 開設・かいせつ**</p>
+
+###### **・establishment, opening, setting up, inauguration**
+
+    ・新しい診療所がこの町に開設された
+    ・A new clinic has opened in this town
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑬ 新設・しんせつ**</p>
+
+###### **・establishing, founding, setting up, organizing**
+
+    ・大学院新設の提案である
+    ・It is a proposal to establish a new graduate school
+
+<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑭ 構える・かまえる**</p>
+
+###### **・set up, build, establish, run, prepare in advance**
+
+    ・彼は大通りに店を構えている
+    ・He has a store on Main Street
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -3453,6 +3608,107 @@ reactable(
 
     ・Cooking classes for men are very popular these days
     ・This is a dormitory for female students, so men are not allowed
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Review {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+smlrwrds <- smlrwrds[sample(1:nrow(smlrwrds)),]
+
+reactable(
+  smlrwrds,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- smlrwrds$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- smlrwrds$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600), value),
+          div(style = list(fontSize = 10), Reading),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+smlrwrds <- smlrwrds[sample(1:nrow(smlrwrds)),]
+
+reactable(
+  smlrwrds,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- smlrwrds$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- smlrwrds$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600), value),
+          # div(style = list(fontSize = 10), Reading),
+          # div(style = list(fontSize = 9), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
