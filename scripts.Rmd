@@ -1942,24 +1942,27 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-knjrndx2 <- knjrndx %>% slice(1:498)
-knjrndx3 <- knjrndx %>% slice(499:2244)
+knjrndx2 <- knjrndx %>% slice(1:116)
+knjrndx3 <- knjrndx %>% slice(117:615)
+knjrndx4 <- knjrndx %>% slice(616:2360)
 knjrndx2 <- knjrndx2[sample(1:nrow(knjrndx2)),]
 knjrndx3 <- knjrndx3[sample(1:nrow(knjrndx3)),]
-knjrndx4 <- bind_rows(knjrndx2, knjrndx3) 
+knjrndx4 <- knjrndx4[sample(1:nrow(knjrndx4)),]
+knjrndx5 <- bind_rows(knjrndx2, knjrndx3) 
+knjrndx5 <- bind_rows(knjrndx5, knjrndx4) 
 
 reactable(
-  knjrndx4,
+  knjrndx5,
   columns = list(
     Kanji = colDef(
       cell = function(value, index) {
-        Reading <- knjrndx4$Reading[index]
+        Reading <- knjrndx5$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- knjrndx4$Meaning[index]
+        Meaning <- knjrndx5$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentence <- knjrndx4$Sentence[index]
+        Sentence <- knjrndx5$Sentence[index]
         Sentence <- if (!is.na(Sentence)) Sentence else ""
-        Translation <- knjrndx4$Translation[index]
+        Translation <- knjrndx5$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 32, fontWeight = 600), value),
