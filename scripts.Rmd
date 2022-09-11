@@ -1433,42 +1433,14 @@ reactable(
 
 ##### L5 {.tabset}
 
-<!-- ```{r, echo=FALSE, message=FALSE} -->
-
-<!-- kn5wrdsi <- kn5wrds %>% select(W1, W2, W3, W4, W5, W6, W7, W8) -->
-<!-- kn5wrdsi <- kn5wrdsi %>% pivot_longer(everything()) -->
-<!-- kn5wrdsi <- kn5wrdsi %>% rename(Kanji = value) -->
-<!-- kn5wrdsi <- na.omit(kn5wrdsi) %>% select(Kanji) -->
-<!-- kn5wrdsi <- kn5wrdsi[sample(1:nrow(kn5wrdsi)),] -->
-<!-- kn5wrdsi <- kn5wrdsi[sample(1:nrow(kn5wrdsi)),] -->
-
-<!-- reactable( -->
-<!--   kn5wrdsi, -->
-<!--   columns = list( -->
-<!--     Kanji = colDef(align = "center", style = list(fontSize = 32, fontWeight = 600)) -->
-<!--   ), -->
-<!--   defaultPageSize = 1, -->
-<!--   theme = reactableTheme( -->
-<!--     # Vertically center cells -->
-<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250), -->
-<!--     searchInputStyle = list( -->
-<!--       paddingLeft = "8px", -->
-<!--       paddingTop = "8px", -->
-<!--       paddingBottom = "8px", -->
-<!--       width = "100%" -->
-<!--     ) -->
-<!--   ), -->
-<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",  -->
-
-<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
-<!-- ) -->
-
-<!-- ``` -->
-
-
-
 <div class = "row">
 <div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+lvlext5 <- lvlext5 %>% rename(Words = W1)
+
+```
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1477,7 +1449,7 @@ lvlext5 <- lvlext5[sample(1:nrow(lvlext5)),]
 reactable(
   lvlext5,
   columns = list(
-    Kanji = colDef(
+    Words = colDef(
       cell = function(value, index) {
         NR <- lvlext5$NR[index]
         NR <- if (!is.na(NR)) NR else ""
@@ -1485,17 +1457,18 @@ reactable(
         KR <- if (!is.na(KR)) KR else ""
         Meaning <- lvlext5$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        W1 <- lvlext5$W1[index]
-        W1 <- if (!is.na(W1)) W1 else ""
+        Kanji <- lvlext5$Kanji[index]
+        Kanji <- if (!is.na(Kanji)) Kanji else ""
         R1 <- lvlext5$R1[index]
         R1 <- if (!is.na(R1)) R1 else ""
         M1 <- lvlext5$M1[index]
-        M1 <- if (!is.na(W1)) M1 else ""
+        M1 <- if (!is.na(M1)) M1 else ""
         tagList(
-          div(style = list(fontSize = 32, fontWeight = 600), W1),
+          div(style = list(fontSize = 32, fontWeight = 600), value),
           div(style = list(fontSize = 9, fontWeight = 400), R1),
           div(style = list(fontSize = 9, fontWeight = 400), M1),
-          div(style = list(fontSize = 20, fontWeight = 400), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 20, fontWeight = 400), Kanji),
           div(style = list(fontSize = 9), NR),
           div(style = list(fontSize = 9), KR),
           div(style = list(fontSize = 9, fontWeight = 400), Meaning),
@@ -1508,7 +1481,7 @@ reactable(
     KR = colDef(show = FALSE),
     M1 = colDef(show = FALSE),
     R1 = colDef(show = FALSE),
-    W1 = colDef(show = FALSE),
+    Kanji = colDef(show = FALSE),
     Meaning = colDef(show = FALSE)
 
   ),
@@ -1541,7 +1514,7 @@ lvlext5 <- lvlext5[sample(1:nrow(lvlext5)),]
 reactable(
   lvlext5,
   columns = list(
-    Kanji = colDef(
+    Words = colDef(
       cell = function(value, index) {
         NR <- lvlext5$NR[index]
         NR <- if (!is.na(NR)) NR else ""
@@ -1549,14 +1522,14 @@ reactable(
         KR <- if (!is.na(KR)) KR else ""
         Meaning <- lvlext5$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        W1 <- lvlext5$W1[index]
-        W1 <- if (!is.na(W1)) W1 else ""
+        Kanji <- lvlext5$Kanji[index]
+        Kanji <- if (!is.na(Kanji)) Kanji else ""
         R1 <- lvlext5$R1[index]
         R1 <- if (!is.na(R1)) R1 else ""
         M1 <- lvlext5$M1[index]
-        M1 <- if (!is.na(W1)) M1 else ""
+        M1 <- if (!is.na(M1)) M1 else ""
         tagList(
-          div(style = list(fontSize = 32, fontWeight = 600), W1),
+          div(style = list(fontSize = 32, fontWeight = 600), value),
           # div(style = list(fontSize = 9, fontWeight = 400), R1),
           # div(style = list(fontSize = 9, fontWeight = 400), M1),
           # div(style = list(fontSize = 20, fontWeight = 400), value),
@@ -1572,7 +1545,7 @@ reactable(
     KR = colDef(show = FALSE),
     M1 = colDef(show = FALSE),
     R1 = colDef(show = FALSE),
-    W1 = colDef(show = FALSE),
+    Kanji = colDef(show = FALSE),
     Meaning = colDef(show = FALSE)
 
   ),
