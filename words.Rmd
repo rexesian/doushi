@@ -202,6 +202,8 @@ vrbrwq <- read_csv("vrbjp/VRBRVWS-VRB.csv")
 ontp <- read_csv("vrbjp/ONTPE-ONP.csv")
 gwrds <- read_csv("vrbjp/WGRMR-LST.csv")
 ewrds <- read_csv("vrbjp/WEXPRS-LST.csv")
+
+jlptw5 <- read_csv("jpdb/JLPT5-VRN5.csv")
 ```
 
 # Words {.tabset}
@@ -1759,3 +1761,124 @@ reactable(
 
 </div>
 </div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Jlpt {.tabset}
+
+#### L5 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+jlptw5 <- jlptw5 %>% slice(1:50)
+# jlptw5 <- jlptw5[sample(1:nrow(jlptw5)),]
+
+reactable(
+  jlptw5,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- jlptw5$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- jlptw5$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 9), Reading),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+jlptw5 <- jlptw5[sample(1:nrow(jlptw5)),]
+
+reactable(
+  jlptw5,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- jlptw5$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- jlptw5$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          # div(style = list(fontSize = 9), Reading),
+          # div(style = list(fontSize = 8), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L4 {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L3 {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L2 {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L1 {.tabset}
+
