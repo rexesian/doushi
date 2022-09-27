@@ -205,6 +205,8 @@ ewrds <- read_csv("vrbjp/WEXPRS-LST.csv")
 
 jlptw5 <- read_csv("jpdb/JLPT5-VRN5.csv")
 jlptw4 <- read_csv("jpdb/JLPT4-VRN4.csv")
+jlptw3 <- read_csv("jpdb/JLPT3-VRN3.csv")
+jlptw2 <- read_csv("jpdb/JLPT2-VRN2.csv")
 ```
 
 # Words {.tabset}
@@ -1774,7 +1776,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-jlptw5 <- jlptw5 %>% slice(1:130)
+jlptw5 <- jlptw5 %>% slice(1:150)
 # jlptw5 <- jlptw5[sample(1:nrow(jlptw5)),]
 
 reactable(
@@ -1876,7 +1878,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-jlptw4 <- jlptw4 %>% slice(1:100)
+jlptw4 <- jlptw4 %>% slice(1:120)
 # jlptw4 <- jlptw4[sample(1:nrow(jlptw4)),]
 
 reactable(
@@ -1973,9 +1975,205 @@ reactable(
 
 #### L3 {.tabset}
 
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+jlptw3 <- jlptw3 %>% slice(1:100)
+# jlptw3 <- jlptw3[sample(1:nrow(jlptw3)),]
+
+reactable(
+  jlptw3,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- jlptw3$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- jlptw3$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 9), Reading),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+jlptw3 <- jlptw3[sample(1:nrow(jlptw3)),]
+
+reactable(
+  jlptw3,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- jlptw3$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- jlptw3$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          # div(style = list(fontSize = 9), Reading),
+          # div(style = list(fontSize = 8), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
 <!-- ------------------------------------------------------------------------ -->
 
 #### L2 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+jlptw2 <- jlptw2 %>% slice(1:130)
+# jlptw2 <- jlptw2[sample(1:nrow(jlptw2)),]
+
+reactable(
+  jlptw2,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- jlptw2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- jlptw2$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 9), Reading),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+jlptw2 <- jlptw2[sample(1:nrow(jlptw2)),]
+
+reactable(
+  jlptw2,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- jlptw2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- jlptw2$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600), value),
+          # div(style = list(fontSize = 9), Reading),
+          # div(style = list(fontSize = 8), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
