@@ -207,6 +207,7 @@ cmpnd <- read_csv("jpdb/VRBCMP-CMPWD.csv")
 lverbs <- read_csv("jpdb/VERBFRQ-VERBS.csv")
 vnstx <- read_csv("jpdb/VERBSYL-VERBS.csv")
 verbrw <- read_csv("jpdb/VERBSNTW-VERBS.csv")
+verbrev <- read_csv("jpdb/VERBSRVW-VERBS.csv")
 ```
 
 # Verbs {.tabset}
@@ -2046,48 +2047,169 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+<!-- ### Review {.tabset} -->
+
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-4"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- vrbrwq1 <- vrbrwq %>% slice(2237:2437) -->
+<!-- vrbrwq2 <- vrbrwq %>% slice(1370:1781) -->
+<!-- vrbrwq3 <- vrbrwq %>% slice(1:1369) -->
+<!-- vrbrwq4 <- vrbrwq %>% slice(1782:2236) -->
+<!-- vrbrwq1 <- vrbrwq1[sample(1:nrow(vrbrwq1)),] -->
+<!-- vrbrwq2 <- vrbrwq2[sample(1:nrow(vrbrwq2)),] -->
+<!-- vrbrwq3 <- vrbrwq3[sample(1:nrow(vrbrwq3)),] -->
+<!-- vrbrwq4 <- vrbrwq4[sample(1:nrow(vrbrwq4)),] -->
+
+<!-- vrbrwq5 <- bind_rows(vrbrwq1, vrbrwq2)  -->
+<!-- vrbrwq5 <- bind_rows(vrbrwq5, vrbrwq3)  -->
+<!-- vrbrwq5 <- bind_rows(vrbrwq5, vrbrwq4)  -->
+
+<!-- vrbrwq <- vrbrwq[sample(1:nrow(vrbrwq)),] -->
+
+<!-- reactable( -->
+<!--   vrbrwq, -->
+<!--   columns = list( -->
+<!--     Verb = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Reading <- vrbrwq$Reading[index] -->
+<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         Meaning <- vrbrwq$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 30, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 9), Reading), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 500), Meaning) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Sentence = colDef(show = FALSE), -->
+<!--     Reading = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- <div class = "col-sm-8"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- reactable( -->
+<!--   vrbrwq5, -->
+<!--   columns = list( -->
+<!--     Verb = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Reading <- vrbrwq5$Reading[index] -->
+<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         Meaning <- vrbrwq5$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Sentence <- vrbrwq5$Sentence[index] -->
+<!--         Sentence <- if (!is.na(Sentence)) Sentence else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 30, fontWeight = 600), value), -->
+<!--           # div(style = list(fontSize = 9), Reading), -->
+<!--           # div(style = list(fontSize = 9, fontWeight = 500), Meaning) -->
+<!--           div(style = list(fontSize = 18, fontWeight = 400), Sentence) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Sentence = colDef(show = FALSE), -->
+<!--     Reading = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- ------------------------------------------------------------------------ -->
+
 ### Review {.tabset}
+
+#### Syllable {.tabset}
 
 <div class = "row">
 <div class = "col-sm-4">
 
 ```{r, echo=FALSE, message=FALSE}
 
-vrbrwq1 <- vrbrwq %>% slice(2237:2437)
-vrbrwq2 <- vrbrwq %>% slice(1370:1781)
-vrbrwq3 <- vrbrwq %>% slice(1:1369)
-vrbrwq4 <- vrbrwq %>% slice(1782:2236)
-vrbrwq1 <- vrbrwq1[sample(1:nrow(vrbrwq1)),]
-vrbrwq2 <- vrbrwq2[sample(1:nrow(vrbrwq2)),]
-vrbrwq3 <- vrbrwq3[sample(1:nrow(vrbrwq3)),]
-vrbrwq4 <- vrbrwq4[sample(1:nrow(vrbrwq4)),]
+verbrev1 <- verbrev %>% slice(1:1071)
+# verbrev1 <- verbrev1 %>% na.omit(verbrev1)
 
-vrbrwq5 <- bind_rows(vrbrwq1, vrbrwq2) 
-vrbrwq5 <- bind_rows(vrbrwq5, vrbrwq3) 
-vrbrwq5 <- bind_rows(vrbrwq5, vrbrwq4) 
+# vrbrwq2 <- vrbrwq %>% slice(1370:1781)
+# vrbrwq3 <- vrbrwq %>% slice(1:1369)
+# vrbrwq4 <- vrbrwq %>% slice(1782:2236)
+# vrbrwq1 <- vrbrwq1[sample(1:nrow(vrbrwq1)),]
+# vrbrwq2 <- vrbrwq2[sample(1:nrow(vrbrwq2)),]
+# vrbrwq3 <- vrbrwq3[sample(1:nrow(vrbrwq3)),]
+# vrbrwq4 <- vrbrwq4[sample(1:nrow(vrbrwq4)),]
+# 
+# vrbrwq5 <- bind_rows(vrbrwq1, vrbrwq2) 
+# vrbrwq5 <- bind_rows(vrbrwq5, vrbrwq3) 
+# vrbrwq5 <- bind_rows(vrbrwq5, vrbrwq4) 
 
-vrbrwq <- vrbrwq[sample(1:nrow(vrbrwq)),]
+verbrev1 <- verbrev1[sample(1:nrow(verbrev1)),]
 
 reactable(
-  vrbrwq,
+  verbrev1,
   columns = list(
-    Verb = colDef(
+    Words = colDef(
       cell = function(value, index) {
-        Reading <- vrbrwq$Reading[index]
+        Reading <- verbrev1$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- vrbrwq$Meaning[index]
+        Meaning <- verbrev1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
+
         tagList(
           div(style = list(fontSize = 30, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
-          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
+
         )
       },
       align = "center"
     ),
+    Type = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
-    Reading = colDef(show = FALSE)
+    Reading = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
@@ -2112,29 +2234,36 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
+verbrev1 <- verbrev1[sample(1:nrow(verbrev1)),]
+
 reactable(
-  vrbrwq5,
+  verbrev1,
   columns = list(
-    Verb = colDef(
+    Words = colDef(
       cell = function(value, index) {
-        Reading <- vrbrwq5$Reading[index]
+        Reading <- verbrev1$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- vrbrwq5$Meaning[index]
+        Meaning <- verbrev1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentence <- vrbrwq5$Sentence[index]
+        Sentence <- verbrev1$Sentence[index]
         Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Translation <- verbrev1$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 30, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 9, fontWeight = 500), Meaning)
-          div(style = list(fontSize = 18, fontWeight = 400), Sentence)
+          div(style = list(fontSize = 18, fontWeight = 400), Sentence),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), Translation)
         )
       },
       align = "center"
     ),
+    Type = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
-    Reading = colDef(show = FALSE)
+    Reading = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
