@@ -1500,6 +1500,112 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+### Personality {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.personality <- wordsw %>% select(Personality, Personality.Read, Personality.Trans)
+
+reactable(
+  na.omit(wordsw.personality),
+  columns = list(
+    Personality = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Personality.Read <- wordsw.personality$Personality.Read[index]
+        Personality.Read <- if (!is.na(Personality.Read)) Personality.Read else ""
+        Personality.Trans <- wordsw.personality$Personality.Trans[index]
+        Personality.Trans <- if (!is.na(Personality.Trans)) Personality.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Personality.Read ),
+          div(style = list(fontSize = 10), Personality.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Personality.Read  = colDef(show = FALSE),
+    Personality.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.personality <- wordsw.personality %>% na.omit(wordsw.personality)
+wordsw.personality <- wordsw.personality[sample(1:nrow(wordsw.personality)),]
+
+reactable(
+  wordsw.personality,
+  columns = list(
+    Personality = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Personality.Read <- wordsw.personality$Personality.Read[index]
+        Personality.Read <- if (!is.na(Personality.Read)) Personality.Read else ""
+        Personality.Trans <- wordsw.personality$Personality.Trans[index]
+        Personality.Trans <- if (!is.na(Personality.Trans)) Personality.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 11), Personality.Read ),
+          # div(style = list(fontSize = 10), Personality.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Personality.Read  = colDef(show = FALSE),
+    Personality.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## Category {.tabset}
 
 ### Na.Adjective {.tabset}
@@ -1509,7 +1615,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadja <- nadj1 %>% slice(1:210)
+nadja <- nadj1 %>% slice(1:235)
 nadja <- nadja[sample(1:nrow(nadja)),]
 
 reactable(
@@ -1561,7 +1667,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadjb <- nadj1 %>% slice(1:210)
+nadjb <- nadj1 %>% slice(1:235)
 nadjb <- nadjb[sample(1:nrow(nadjb)),]
 
 reactable(
