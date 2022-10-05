@@ -85,6 +85,7 @@ jlptw4 <- read_csv("jpdb/JLPT4-VRN4.csv")
 jlptw3 <- read_csv("jpdb/JLPT3-VRN3.csv")
 jlptw2 <- read_csv("jpdb/JLPT2-VRN2.csv")
 jlptw1 <- read_csv("jpdb/JLPT1-VRN1.csv")
+wordsw <- read_csv("jpdb/WRDSS-WORDS.csv")
 ```
 
 # Words {.tabset}
@@ -968,13 +969,531 @@ reactable(
 
 ### Time {.tabset}
 
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.time <- wordsw %>% select(Time, Time.Read, Time.Trans)
+
+reactable(
+  na.omit(wordsw.time),
+  columns = list(
+    Time = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Time.Read <- wordsw.time$Time.Read[index]
+        Time.Read <- if (!is.na(Time.Read)) Time.Read else ""
+        Time.Trans <- wordsw.time$Time.Trans[index]
+        Time.Trans <- if (!is.na(Time.Trans)) Time.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Time.Read ),
+          div(style = list(fontSize = 10), Time.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Time.Read  = colDef(show = FALSE),
+    Time.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.time <- wordsw.time %>% na.omit(wordsw.time)
+wordsw.time <- wordsw.time[sample(1:nrow(wordsw.time)),]
+
+reactable(
+  wordsw.time,
+  columns = list(
+    Time = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Time.Read <- wordsw.time$Time.Read[index]
+        Time.Read <- if (!is.na(Time.Read)) Time.Read else ""
+        Time.Trans <- wordsw.time$Time.Trans[index]
+        Time.Trans <- if (!is.na(Time.Trans)) Time.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 11), Time.Read ),
+          # div(style = list(fontSize = 10), Time.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Time.Read  = colDef(show = FALSE),
+    Time.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+
+```
+
+</div>
+</div>
+
 <!-- ------------------------------------------------------------------------ -->
 
-### Body Parts {.tabset}
+### House {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.house <- wordsw %>% select(House, House.Read, House.Trans)
+
+reactable(
+  na.omit(wordsw.house),
+  columns = list(
+    House = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        House.Read <- wordsw.house$House.Read[index]
+        House.Read <- if (!is.na(House.Read)) House.Read else ""
+        House.Trans <- wordsw.house$House.Trans[index]
+        House.Trans <- if (!is.na(House.Trans)) House.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 11), House.Read ),
+          div(style = list(fontSize = 10), House.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    House.Read  = colDef(show = FALSE),
+    House.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.house <- wordsw.house %>% na.omit(wordsw.house)
+wordsw.house <- wordsw.house[sample(1:nrow(wordsw.house)),]
+
+reactable(
+  wordsw.house,
+  columns = list(
+    House = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        House.Read <- wordsw.house$House.Read[index]
+        House.Read <- if (!is.na(House.Read)) House.Read else ""
+        House.Trans <- wordsw.house$House.Trans[index]
+        House.Trans <- if (!is.na(House.Trans)) House.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 11), House.Read ),
+          # div(style = list(fontSize = 10), House.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    House.Read  = colDef(show = FALSE),
+    House.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+
+```
+
+</div>
+</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
 ### Person {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.person <- wordsw %>% select(Person, Person.Read, Person.Trans)
+
+reactable(
+  na.omit(wordsw.person),
+  columns = list(
+    Person = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Person.Read <- wordsw.person$Person.Read[index]
+        Person.Read <- if (!is.na(Person.Read)) Person.Read else ""
+        Person.Trans <- wordsw.person$Person.Trans[index]
+        Person.Trans <- if (!is.na(Person.Trans)) Person.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Person.Read ),
+          div(style = list(fontSize = 10), Person.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Person.Read  = colDef(show = FALSE),
+    Person.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.person <- wordsw.person %>% na.omit(wordsw.person)
+wordsw.person <- wordsw.person[sample(1:nrow(wordsw.person)),]
+
+reactable(
+  wordsw.person,
+  columns = list(
+    Person = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Person.Read <- wordsw.person$Person.Read[index]
+        Person.Read <- if (!is.na(Person.Read)) Person.Read else ""
+        Person.Trans <- wordsw.person$Person.Trans[index]
+        Person.Trans <- if (!is.na(Person.Trans)) Person.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 11), Person.Read ),
+          # div(style = list(fontSize = 10), Person.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Person.Read  = colDef(show = FALSE),
+    Person.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Family {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.family <- wordsw %>% select(Family, Family.Read, Family.Trans)
+
+reactable(
+  na.omit(wordsw.family),
+  columns = list(
+    Family = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Family.Read <- wordsw.family$Family.Read[index]
+        Family.Read <- if (!is.na(Family.Read)) Family.Read else ""
+        Family.Trans <- wordsw.family$Family.Trans[index]
+        Family.Trans <- if (!is.na(Family.Trans)) Family.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Family.Read ),
+          div(style = list(fontSize = 10), Family.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Family.Read  = colDef(show = FALSE),
+    Family.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.family <- wordsw.family %>% na.omit(wordsw.family)
+wordsw.family <- wordsw.family[sample(1:nrow(wordsw.family)),]
+
+reactable(
+  wordsw.family,
+  columns = list(
+    Family = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Family.Read <- wordsw.family$Family.Read[index]
+        Family.Read <- if (!is.na(Family.Read)) Family.Read else ""
+        Family.Trans <- wordsw.family$Family.Trans[index]
+        Family.Trans <- if (!is.na(Family.Trans)) Family.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 11), Family.Read ),
+          # div(style = list(fontSize = 10), Family.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Family.Read  = colDef(show = FALSE),
+    Family.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Body {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.body <- wordsw %>% select(Body, Body.Read, Body.Trans)
+
+reactable(
+  na.omit(wordsw.body),
+  columns = list(
+    Body = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Body.Read <- wordsw.body$Body.Read[index]
+        Body.Read <- if (!is.na(Body.Read)) Body.Read else ""
+        Body.Trans <- wordsw.body$Body.Trans[index]
+        Body.Trans <- if (!is.na(Body.Trans)) Body.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Body.Read ),
+          div(style = list(fontSize = 10), Body.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Body.Read  = colDef(show = FALSE),
+    Body.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.body <- wordsw.body %>% na.omit(wordsw.body)
+wordsw.body <- wordsw.body[sample(1:nrow(wordsw.body)),]
+
+reactable(
+  wordsw.body,
+  columns = list(
+    Body = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Body.Read <- wordsw.body$Body.Read[index]
+        Body.Read <- if (!is.na(Body.Read)) Body.Read else ""
+        Body.Trans <- wordsw.body$Body.Trans[index]
+        Body.Trans <- if (!is.na(Body.Trans)) Body.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 11), Body.Read ),
+          # div(style = list(fontSize = 10), Body.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Body.Read  = colDef(show = FALSE),
+    Body.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+
+```
+
+</div>
+</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
