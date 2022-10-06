@@ -89,6 +89,7 @@ lvlext5 <- read_csv("jpdb/SCRPTEX5-KNJD5.csv")
 lvlext4 <- read_csv("jpdb/SCRPTEX4-KNJD4.csv")
 lvlext3 <- read_csv("jpdb/SCRPTEX3-KNJD3.csv")
 knjspcl <- read_csv("jpdb/SCRPTSPC-KNJSPC.csv")
+scrptrdng <- read_csv("jpdb/RDNGS-SCRPTS.csv")
 ```
 
 # Scripts {.tabset}
@@ -2687,4 +2688,52 @@ reactable(
 </div>
 </div>
 
+<!-- ------------------------------------------------------------------------ -->
 
+### Readings {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+scrptrdng <- scrptrdng[sample(1:nrow(scrptrdng)),]
+
+reactable(
+  scrptrdng,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- scrptrdng$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 350),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
