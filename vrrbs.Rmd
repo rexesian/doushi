@@ -208,6 +208,7 @@ lverbs <- read_csv("jpdb/VERBFRQ-VERBS.csv")
 vnstx <- read_csv("jpdb/VERBSYL-VERBS.csv")
 verbrw <- read_csv("jpdb/VERBSNTW-VERBS.csv")
 verbrev <- read_csv("jpdb/VERBSRVW-VERBS.csv")
+verbphr <- read_csv("jpdb/VERBSPHR-VERBS.csv")
 ```
 
 # Verbs {.tabset}
@@ -1489,7 +1490,7 @@ Describes a habitual or repeated action.
 
 ```{r, echo=FALSE, message=FALSE}
 
-lverbs <- lverbs %>% slice(1:207)
+lverbs <- lverbs %>% slice(1:222)
 lverbs <- lverbs %>% rename(Sentences = S1)
 # lverbs <- lverbs[sample(1:nrow(lverbs)),]
 
@@ -1864,7 +1865,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-vnstx1 <- vnstx %>% slice(1370:2238)
+vnstx1 <- vnstx %>% slice(1372:2238)
 vnstx1 <- vnstx1 %>% rename(Sentences = S1)
 # vnstx1 <- vnstx1[sample(1:nrow(vnstx1)),]
 
@@ -2673,7 +2674,53 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+## Casual&Simple {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+verbphr <- verbphr %>% na.omit(verbphr)
+verbphr <- verbphr[sample(1:nrow(verbphr)),]
+reactable(
+  verbphr,
+  columns = list(
+    Phrases = colDef(
+      cell = function(value, index) {
+        Translation <- verbphr$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 9, color = '#787878'), Translation)
+        )
+      },
+      align = "center"
+    ),
+    
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## Review {.tabset}
+
+### Words {.tabset}
 
 <div class = "row">
 <div class = "col-sm-4">
@@ -2781,6 +2828,10 @@ reactable(
 
 </div>
 </div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Sentences {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
