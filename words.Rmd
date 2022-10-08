@@ -82,14 +82,13 @@ verbsw <- read_csv("jpdb/VRBS-VERBS.csv")
 connector <- read_csv("jpdb/CONNECT-CONNECTORS.csv")
 ontp <- read_csv("jpdb/ONTPE-ONP.csv")
 gwrds <- read_csv("jpdb/WGRMR-LST.csv")
-ewrds <- read_csv("vrbjp/WEXPRS-LST.csv")
+ewrds <- read_csv("jpdb/WRDSEXP-EXPR.csv")
 jlptw5 <- read_csv("jpdb/JLPT5-VRN5.csv")
 jlptw4 <- read_csv("jpdb/JLPT4-VRN4.csv")
 jlptw3 <- read_csv("jpdb/JLPT3-VRN3.csv")
 jlptw2 <- read_csv("jpdb/JLPT2-VRN2.csv")
 jlptw1 <- read_csv("jpdb/JLPT1-VRN1.csv")
 wordsw <- read_csv("jpdb/WRDSS-WORDS.csv")
-
 tblw1 <- read_csv("jpdb/TBL1-TBWRDS.csv")
 tblw2 <- read_csv("jpdb/TBL2-TBWRDS.csv")
 tblw3 <- read_csv("jpdb/TBL3-TBWRDS.csv")
@@ -2538,24 +2537,21 @@ reactable(
   columns = list(
     Expression = colDef(
       cell = function(value, index) {
-        # Reading <- ewrds$Reading[index]
-        # Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- ewrds$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Translation <- ewrds$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
-          # div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
       },
       align = "center"
     ),
     
-    # S1 = colDef(show = FALSE),
-    # T1 = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE)
-    # Reading = colDef(show = FALSE)
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
 
   ),
   defaultPageSize = 1,
@@ -2589,29 +2585,25 @@ reactable(
   columns = list(
     Expression = colDef(
       cell = function(value, index) {
-        # Reading <- ewrds$Reading[index]
-        # Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- ewrds$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Sentence <- ewrds$Sentence[index]
         Sentence <- if (!is.na(Sentence)) Sentence else ""
-        # S1 <- ewrds$S1[index]
-        # S1 <- if (!is.na(S1)) S1 else ""
+        Translation <- ewrds$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 19, fontWeight = 500), Sentence),
-          # div(style = list(fontSize = 18, fontWeight = 500), S1),
+          div(style = list(fontSize = 18, fontWeight = 500), Sentence),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878' ), Translation),
         )
       },
       align = "center"
     ),
     
-    # S1 = colDef(show = FALSE),
-    # T1 = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE)
-    # Reading = colDef(show = FALSE)
-
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+    
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
