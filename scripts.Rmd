@@ -2214,65 +2214,6 @@ reactable(
 <div class = "row">
 <div class = "col-sm-4">
 
-<!-- ```{r, echo=FALSE, message=FALSE} -->
-
-<!-- scknj5gh <- scknj5 %>% select(Kanji, NR, KR, Meaning) -->
-<!-- scknj4gh <- scknj4 %>% select(Kanji, NR, KR, Meaning) -->
-<!-- scknj3gh <- scknj3 %>% select(Kanji, NR, KR, Meaning) -->
-<!-- scknj2gh <- scknj2 %>% select(Kanji, NR, KR, Meaning) -->
-<!-- scknj1gh <- scknj1 %>% select(Kanji, NR, KR, Meaning) -->
-
-<!-- scknjtgh <- bind_rows(scknj5gh, scknj4gh) -->
-<!-- scknjtgh <- bind_rows(scknjtgh, scknj3gh) -->
-<!-- scknjtgh <- bind_rows(scknjtgh, scknj2gh) -->
-<!-- scknjtgh <- bind_rows(scknjtgh, scknj1gh) -->
-
-<!-- reactable( -->
-<!--   scknjtgh, -->
-<!--   columns = list( -->
-<!--     Kanji = colDef( -->
-<!--       # Show species under character names -->
-<!--       cell = function(value, index) { -->
-<!--         Meaning <- scknjtgh$Meaning[index] -->
-<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
-<!--         NR <- scknjtgh$NR[index] -->
-<!--         NR <- if (!is.na(NR)) NR else "" -->
-<!--         KR <- scknjtgh$KR[index] -->
-<!--         KR <- if (!is.na(KR)) KR else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 30, fontWeight = 500), value), -->
-<!--           div(style = list(fontSize = 9), NR), -->
-<!--           div(style = list(fontSize = 9), KR), -->
-<!--           div(style = list(fontSize = 9, fontWeight = 500), Meaning) -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-<!--     Meaning = colDef(show = FALSE), -->
-<!--     NR = colDef(show = FALSE), -->
-<!--     KR = colDef(show = FALSE) -->
-<!--   ), -->
-<!--   defaultPageSize = 1, -->
-<!--   theme = reactableTheme( -->
-<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
-<!--     searchInputStyle = list( -->
-<!--       paddingLeft = "8px", -->
-<!--       paddingTop = "8px", -->
-<!--       paddingBottom = "8px", -->
-<!--       width = "100%", -->
-<!--       fontSize = "11px" -->
-<!--     ) -->
-<!--   ), -->
-<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
-
-<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
-<!-- ) -->
-
-<!-- ``` -->
-
-<!-- </div> -->
-<!-- <div class = "col-sm-4"> -->
-
 ```{r, echo=FALSE, message=FALSE}
 
 knjrndx1 <- knjrndx[sample(1:nrow(knjrndx)),]
@@ -2288,7 +2229,7 @@ reactable(
         Meaning <- knjrndx1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 32, fontWeight = 600), value),
+          div(style = list(fontSize = 28, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -2326,30 +2267,46 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-knjrndx2 <- knjrndx %>% slice(1:187)
-knjrndx3 <- knjrndx %>% slice(188:631)
-knjrndx4 <- knjrndx %>% slice(632:2428)
+knjrndx2 <- knjrndx %>% slice(1:116)
+knjrndx3 <- knjrndx %>% slice(117:442)
+knjrndx4 <- knjrndx %>% slice(443:634)
+knjrndx5 <- knjrndx %>% slice(635:762)
+knjrndx6 <- knjrndx %>% slice(763:1367)
+knjrndx7 <- knjrndx %>% slice(1368:1616)
+knjrndx8 <- knjrndx %>% slice(1617:2428)
+knjrndx9 <- knjrndx %>% slice(2429:2595)
+
 knjrndx2 <- knjrndx2[sample(1:nrow(knjrndx2)),]
 knjrndx3 <- knjrndx3[sample(1:nrow(knjrndx3)),]
 knjrndx4 <- knjrndx4[sample(1:nrow(knjrndx4)),]
-knjrndx5 <- bind_rows(knjrndx2, knjrndx3) 
-knjrndx5 <- bind_rows(knjrndx5, knjrndx4) 
+knjrndx5 <- knjrndx4[sample(1:nrow(knjrndx5)),]
+knjrndx6 <- knjrndx4[sample(1:nrow(knjrndx6)),]
+knjrndx7 <- knjrndx4[sample(1:nrow(knjrndx7)),]
+knjrndx8 <- knjrndx4[sample(1:nrow(knjrndx8)),]
+knjrndx9 <- knjrndx4[sample(1:nrow(knjrndx9)),]
+knjrndxa <- bind_rows(knjrndx2, knjrndx3) 
+knjrndxa <- bind_rows(knjrndxa, knjrndx4) 
+knjrndxa <- bind_rows(knjrndxa, knjrndx5) 
+knjrndxa <- bind_rows(knjrndxa, knjrndx6) 
+knjrndxa <- bind_rows(knjrndxa, knjrndx7) 
+knjrndxa <- bind_rows(knjrndxa, knjrndx8) 
+knjrndxa <- bind_rows(knjrndxa, knjrndx9) 
 
 reactable(
-  knjrndx5,
+  knjrndxa,
   columns = list(
     Kanji = colDef(
       cell = function(value, index) {
-        Reading <- knjrndx5$Reading[index]
+        Reading <- knjrndxa$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- knjrndx5$Meaning[index]
+        Meaning <- knjrndxa$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentence <- knjrndx5$Sentence[index]
+        Sentence <- knjrndxa$Sentence[index]
         Sentence <- if (!is.na(Sentence)) Sentence else ""
-        Translation <- knjrndx5$Translation[index]
+        Translation <- knjrndxa$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 32, fontWeight = 600), value),
+          div(style = list(fontSize = 28, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
           div(style = list(fontSize = 15), Sentence),
