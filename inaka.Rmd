@@ -1,5 +1,5 @@
 ---
-title: "田舎学校"
+title: "<b> 田舎学校 </b>"
 output:
   html_document:
     theme: sandstone
@@ -77,17 +77,26 @@ scknj3 <- read_csv("jpdb/SCRPT3-KNJD3.csv")
 scknj2 <- read_csv("jpdb/SCRPT4-KNJD2.csv")
 scknj1 <- read_csv("jpdb/SCRPT5-KNJD1.csv")
 knjsnt <- read_csv("jpdb/SCRPTSNV2-SNT.csv")
-
+knjsnt <- read_csv("jpdb/SCRPTSNV2-SNT.csv")
+inkwrds <- read_csv("jpdb/INKSITWRD-WRDS.csv")
+inkexpr <- read_csv("jpdb/INKSITEXP-EXP.csv")
 expspk <- read_csv("vrbjp/Sheet 77-ESNEXP.csv")
 ```
 
 ------------------------------------------------------------------------
 
-# Introduction {.tabset}
+# <b> Introduction </b> {.tabset}
 
 ## Foreword
 
 School in the countryside.
+
+------------------------------------------------------------------------
+
+## Scope
+
+Intended for: Beginner to Intermediate  
+Not for: Total Beginner
 
 ------------------------------------------------------------------------
 
@@ -97,7 +106,7 @@ Version 🆅.1.0
 
 ------------------------------------------------------------------------
 
-# Learning {.tabset}
+# <b> Learning </b> {.tabset}
 
 ## Terms
 
@@ -402,7 +411,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-# Scripts {.tabset}
+# <b> Scripts </b> {.tabset}
 
 There are 3 writing system used in Japanese namely the **Kanji**, **Hiragana** and the **Katakana** scripts.
 
@@ -941,7 +950,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#787878'), Translation)
+          div(style = list(fontSize = 8, fontWeight = 400, color = '#787878'), Translation)
         )
       },
       align = "center"
@@ -985,7 +994,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#787878'), Translation)
+          div(style = list(fontSize = 8, fontWeight = 400, color = '#787878'), Translation)
         )
       },
       align = "center"
@@ -1029,7 +1038,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#787878'), Translation)
+          div(style = list(fontSize = 8, fontWeight = 400, color = '#787878'), Translation)
         )
       },
       align = "center"
@@ -1073,7 +1082,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#787878'), Translation)
+          div(style = list(fontSize = 8, fontWeight = 400, color = '#787878'), Translation)
         )
       },
       align = "center"
@@ -1117,7 +1126,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#787878'), Translation)
+          div(style = list(fontSize = 8, fontWeight = 400, color = '#787878'), Translation)
         )
       },
       align = "center"
@@ -1144,45 +1153,393 @@ reactable(
 
 ------------------------------------------------------------------------
 
-# Situation
+# <b> Situation </b>
 
-## House Visit {.tabset}
+### Chap.01: House Visit {.tabset}
+
+#### Vocabularies
+
+```{r, echo=FALSE, message=FALSE}
+
+inkwrds.1 <- inkwrds %>% slice(1:100)
+
+reactable(
+  na.omit(inkwrds.1),
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- inkwrds.1$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        tagList(
+          div(style = list(fontSize = 7), Reading),
+          div(style = list(fontSize = 13.5), value),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(minWidth = 200,align = "left"),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 40),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
-## Outside Meeting {.tabset}
+#### Expression
+
+```{r, echo=FALSE, message=FALSE}
+
+inkexpr.1 <- inkexpr %>% slice(1:100)
+
+reactable(
+  na.omit(inkexpr.1),
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Translation <- inkexpr.1$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          # div(style = list(fontSize = 7), Translation),
+          div(style = list(fontSize = 13.5), value),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(minWidth = 200,align = "left")
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 40),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
-## Side Trip {.tabset}
+#### Dialogue
 
 ------------------------------------------------------------------------
 
-## Store Order {.tabset}
+#### Narration
 
 ------------------------------------------------------------------------
 
-## Sending Parcel {.tabset}
+#### Interview
 
 ------------------------------------------------------------------------
 
-## Apartment Searching {.tabset}
+### Chap.02: Meeting Outside {.tabset}
+
+#### Vocabularies
 
 ------------------------------------------------------------------------
 
-## Talking Experience {.tabset}
+#### Expression
 
 ------------------------------------------------------------------------
 
-## Habits Customs {.tabset}
+#### Dialogue
 
 ------------------------------------------------------------------------
 
-# Verbs {.tabset}
+#### Narration
 
 ------------------------------------------------------------------------
 
-# Communication {.tabset}
+#### Interview
+
+------------------------------------------------------------------------
+
+### Chap.03: Side Trip {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Dialogue
+
+------------------------------------------------------------------------
+
+#### Narration
+
+------------------------------------------------------------------------
+
+#### Interview
+
+------------------------------------------------------------------------
+
+### Chap.04: Store Order {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Dialogue
+
+------------------------------------------------------------------------
+
+#### Narration
+
+------------------------------------------------------------------------
+
+#### Interview
+
+------------------------------------------------------------------------
+
+### Chap.05: Sending Parcel {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Dialogue
+
+------------------------------------------------------------------------
+
+#### Narration
+
+------------------------------------------------------------------------
+
+#### Interview
+
+------------------------------------------------------------------------
+
+### Chap.06: Apartment Searching {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Dialogue
+
+------------------------------------------------------------------------
+
+#### Narration
+
+------------------------------------------------------------------------
+
+#### Interview
+
+------------------------------------------------------------------------
+
+### Chap.07: Talking Experience {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Dialogue
+
+------------------------------------------------------------------------
+
+#### Narration
+
+------------------------------------------------------------------------
+
+#### Interview
+
+------------------------------------------------------------------------
+
+### Chap.08: Habits Customs {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Dialogue
+
+------------------------------------------------------------------------
+
+#### Narration
+
+------------------------------------------------------------------------
+
+#### Interview
+
+------------------------------------------------------------------------
+
+### Chap.16: Directions {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Sentences
+
+------------------------------------------------------------------------
+
+### Chap.17: Restaurant {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Sentences
+
+------------------------------------------------------------------------
+
+### Chap.18: Cooking {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Sentences
+
+------------------------------------------------------------------------
+
+### Chap.19: Travel {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Sentences
+
+------------------------------------------------------------------------
+
+### Chap.20: Ticket Buying {.tabset}
+
+#### Vocabularies
+
+------------------------------------------------------------------------
+
+#### Expression
+
+------------------------------------------------------------------------
+
+#### Sentences
+
+------------------------------------------------------------------------
+
+# <b> Verbs </b>
+
+### V1.0: Negative Stem {.tabset}
+
+------------------------------------------------------------------------
+
+### V1.1: Passive Form {.tabset}
+
+------------------------------------------------------------------------
+
+### V1.2: Causative Form {.tabset}
+
+------------------------------------------------------------------------
+
+### V1.3: Causative Passive Form {.tabset}
+
+------------------------------------------------------------------------
+
+### V2.0: Noun Stem {.tabset}
+
+------------------------------------------------------------------------
+
+### V2.1: Masu Form {.tabset}
+
+------------------------------------------------------------------------
+
+### V3.0: Dictionary Form {.tabset}
+
+------------------------------------------------------------------------
+
+### V4.0: Command Stem {.tabset}
+
+------------------------------------------------------------------------
+
+### V4.1: Potential Form {.tabset}
+
+------------------------------------------------------------------------
+
+### V5.0: Volitional Form {.tabset}
+
+------------------------------------------------------------------------
+
+### V6.0: Te Form {.tabset}
+
+------------------------------------------------------------------------
+
+### V7.0: Ta Form {.tabset}
+
+------------------------------------------------------------------------
+
+### V8.0: Condional Form {.tabset}
+
+------------------------------------------------------------------------
+
+### V9.0: Others {.tabset}
+
+------------------------------------------------------------------------
+
+# <b> Communication </b> {.tabset}
+
+## Communication Skill {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1213,7 +1570,7 @@ reactable(
 
 ```
 
-## Attention
+### Attention
 
 **Different ways to attract someone’s attention**
 
@@ -1227,7 +1584,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Response
+### Response
 
 **How to respond if some is calling your attention**
 
@@ -1238,7 +1595,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Start a Conversation
+### Start a Conversation
 
 **How to initiate a conversation**
 
@@ -1257,7 +1614,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## End a Conversation
+### End a Conversation
 
 **How to end a conversation**
 
@@ -1270,14 +1627,14 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Topic Introduction
+### Topic Introduction
 
 **How to introduce a topic**
 
     ・実は今度の試験のことなんですけど　　・well, it’s about the upcoming exam
     ・実は今度の試験のことなんですが　　　・well, it’s about the upcoming exam
 
-## Topic Change
+### Topic Change
 
 **How to change a topic**
 
@@ -1291,7 +1648,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Opening
+### Opening
 
 **Make an opening remarks**
 
@@ -1304,7 +1661,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Sequence
+### Sequence
 
 **How to establishing a sequence**
 
@@ -1319,7 +1676,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Examples
+### Examples
 
 **How to cite examples**
 
@@ -1330,7 +1687,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Summarize
+### Summarize
 
 **How to summarise and conclude a statement**
 
@@ -1344,7 +1701,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## End a presentation
+### End a presentation
 
 **How to end a presentation**
 
@@ -1355,7 +1712,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Vague or Indirect
+### Vague or Indirect
 
 **Being vague or indirect**
 
@@ -1383,7 +1740,33 @@ reactable(
 
 ------------------------------------------------------------------------
 
-# Expressions {.tabset}
+## Construction {.tabset}
+
+------------------------------------------------------------------------
+
+## Casual {.tabset}
+
+------------------------------------------------------------------------
+
+# <b> Comprehension </b>
+
+### PT1.0: Particles {.tabset}
+
+------------------------------------------------------------------------
+
+### PT2.0: Noun Phrase {.tabset}
+
+------------------------------------------------------------------------
+
+### PT3.0: Verb Extensions {.tabset}
+
+------------------------------------------------------------------------
+
+### PT4.0: Grammar Points {.tabset}
+
+------------------------------------------------------------------------
+
+# <b> Expressions </b> {.tabset}
 
 ```{r echo=FALSE, message=FALSE}
 
@@ -1438,39 +1821,47 @@ reactable(
           div(style = list(fontSize = 11, fontWeight = 300), Trans),
           div("•"),
           div(style = list(fontSize = 15, fontWeight = 500), Convo1),
-          div(style = list(fontSize = 9, fontWeight = 400), T1),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1),
+          div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 15, fontWeight = 500), Convo2),
-          div(style = list(fontSize = 9, fontWeight = 400), T2),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T2),
+          div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 15, fontWeight = 500), Convo3),
-          div(style = list(fontSize = 9, fontWeight = 400), T3),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T3),
+          div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 15, fontWeight = 500), Convo4),
-          div(style = list(fontSize = 9, fontWeight = 400), T4),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T4),
+          div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 15, fontWeight = 500), Convo5),
-          div(style = list(fontSize = 9, fontWeight = 400), T5),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T5),
+          div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 15, fontWeight = 500), Convo6),
-          div(style = list(fontSize = 9, fontWeight = 400), T6),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T6),
+          div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 15, fontWeight = 500), Convo7),
-          div(style = list(fontSize = 9, fontWeight = 400), T7),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T7),
+          div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 15, fontWeight = 500), Convo8),
-          div(style = list(fontSize = 9, fontWeight = 400), T8),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T8),
+          div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 15, fontWeight = 500), Convo9),
-          div(style = list(fontSize = 9, fontWeight = 400), T9),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T9),
         )
       },
       align = "left", minWidth = 400
@@ -1502,7 +1893,7 @@ reactable(
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
     theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 490),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 500),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
