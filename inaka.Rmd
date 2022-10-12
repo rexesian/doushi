@@ -88,6 +88,7 @@ dct <- read_csv("jpdb/RDNSHRT-WRDS.csv")
 nadj2 <- read_csv("jpdb/ADJI-ADJI.csv")
 nadj1 <- read_csv("jpdb/ADJNA-ADJNA.csv")
 adv1 <- read_csv("jpdb/ADV-ADV.csv")
+grmrref <- read_csv("jpdb/GRMRREF-GRMR.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -6656,7 +6657,7 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
 
 ------------------------------------------------------------------------
 
-### PT4.0: Grammar Points {.tabset}
+### PT4.0: Grammar {.tabset}
 
 #### Concept {.tabset}
 
@@ -7949,7 +7950,7 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
 
 ------------------------------------------------------------------------
 
-#### Situational {.tabset}
+#### Situation {.tabset}
 
 ##### Request
 
@@ -8309,7 +8310,7 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
 
 ------------------------------------------------------------------------
 
-#### Special Topics {.tabset}
+#### Special {.tabset}
 
 ##### あいだ
 
@@ -8915,6 +8916,8 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
     ・The job of translating manga is fun
     ・There was an incident in which a man died
 
+------------------------------------------------------------------------
+
 **①　Naming** `Called・Named`
 
 ###### **⚭　N1 + toiu + N2**
@@ -9013,6 +9016,8 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
     ・There is a rule in this company that you have to work until 5 o'clock
     ・Mr. Yamada says he's an artist, but there are rumours that he's really a company manager 
     ・A message came that she would be arriving a day late  
+
+------------------------------------------------------------------------
 
 **①　というか** `or rather・or perhaps I should say・I mean`
 
@@ -9451,6 +9456,185 @@ You can replace **nanka** with **nante** The meaning and nuances are pretty exac
     ・Our lives will be made more difficult because of consumption tax hike
 
 <h6> </h6>
+
+------------------------------------------------------------------------
+
+####  Reference {.tabset}
+
+#####  Time.Situation
+
+```{r, echo=FALSE, message=FALSE}
+
+# grmrref <- grmrref[sample(1:nrow(grmrref)),]
+grmrrefx <- grmrref  %>% slice(1:13) %>% rename(Sentences = S1)
+
+reactable(
+  grmrrefx,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Situation <- grmrrefx$Situation[index]
+        Situation <- if (!is.na(Situation)) Situation else ""
+        Meaning <- grmrrefx$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Usage <- grmrrefx$Usage[index]
+        Usage <- if (!is.na(Usage)) Usage else ""
+        Sentences <- grmrrefx$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
+        Situation <- grmrrefx$Situation [index]
+        Situation  <- if (!is.na(Situation )) Situation  else ""
+        S2 <- grmrrefx$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- grmrrefx$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600), value),
+          div(style = list(fontSize = 11, fontWeight = 500), Meaning),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 9, fontWeight = 400), Usage),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 9, fontWeight = 400), "【", Situation, "】"),
+        )
+      },
+      align = "center"
+    ),
+    Sentences = colDef(
+      minWidth = 200,
+      cell = function(value, index) {
+        S2 <- grmrrefx$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- grmrrefx$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        tagList(
+          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 17, fontWeight = 500), S2),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 17, fontWeight = 500), S3),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE),
+    Usage = colDef(show = FALSE),
+    Situation = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 150),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#####  Time.Order
+
+
+```{r, echo=FALSE, message=FALSE}
+
+# grmrref <- grmrref[sample(1:nrow(grmrref)),]
+grmrrefx <- grmrref  %>% slice(14:17) %>% rename(Sentences = S1)
+
+reactable(
+  grmrrefx,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Situation <- grmrrefx$Situation[index]
+        Situation <- if (!is.na(Situation)) Situation else ""
+        Meaning <- grmrrefx$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Usage <- grmrrefx$Usage[index]
+        Usage <- if (!is.na(Usage)) Usage else ""
+        Sentences <- grmrrefx$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
+        Situation <- grmrrefx$Situation [index]
+        Situation  <- if (!is.na(Situation )) Situation  else ""
+        S2 <- grmrrefx$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- grmrrefx$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600), value),
+          div(style = list(fontSize = 11, fontWeight = 500), Meaning),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 9, fontWeight = 400), Usage),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 9, fontWeight = 400), "【", Situation, "】"),
+        )
+      },
+      align = "center"
+    ),
+    Sentences = colDef(
+      minWidth = 200,
+      cell = function(value, index) {
+        S2 <- grmrrefx$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- grmrrefx$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        tagList(
+          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 17, fontWeight = 500), S2),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 17, fontWeight = 500), S3),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE),
+    Usage = colDef(show = FALSE),
+    Situation = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 150),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 <!-- ------------------------------------------------------------------------ -->
 
