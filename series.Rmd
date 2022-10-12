@@ -75,13 +75,14 @@ btkri <- read_csv("jpim/BTKRI-BTKRI.csv")
 dlg1 <- read_csv("jpim/DLG1-SNT.csv")
 dlg2 <- read_csv("jpim/DLG2-SNT.csv")
 exrpt <- read_csv("jpim/EXRPT-SNT.csv")
+psycps <- read_csv("jpim/PSYPSS-SCRPT.csv")
 ```
 
 # <b> Immersion </b> {.tabset}
 
 ## <b> Series </b> {.tabset}
 
-### S01: Yuru-Camp  {.tabset}
+### S01: Yuru.Camp  {.tabset}
 
 #### S1.EP2
 
@@ -98,7 +99,7 @@ reactable(
         Meaning.EP2 <- if (!is.na(Meaning.EP2)) Meaning.EP2 else "Unknown"
         tagList(
           div(style = list(fontSize = 18, fontWeight = 500), value),
-          # div(style = list(fontSize = 9, color = '#787878'), Meaning.EP2),
+          div(style = list(fontSize = 8, color = '#787878'), Meaning.EP2),
           # div(style = list(fontSize = 2), ".")
         )
       },
@@ -110,7 +111,7 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 40),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 45),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -142,7 +143,7 @@ reactable(
         Meaning.EP3 <- if (!is.na(Meaning.EP3)) Meaning.EP3 else "Unknown"
         tagList(
           div(style = list(fontSize = 18, fontWeight = 500), value),
-          # div(style = list(fontSize = 9, color = '#787878'), Meaning.EP3),
+          div(style = list(fontSize = 8, color = '#787878'), Meaning.EP3),
           # div(style = list(fontSize = 2), ".")
         )
       },
@@ -154,7 +155,7 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 40),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 45),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -186,7 +187,7 @@ reactable(
         Meaning.EP4 <- if (!is.na(Meaning.EP4)) Meaning.EP4 else "Unknown"
         tagList(
           div(style = list(fontSize = 18, fontWeight = 500), value),
-          # div(style = list(fontSize = 9, color = '#787878'), Meaning.EP4),
+          div(style = list(fontSize = 8, color = '#787878'), Meaning.EP4),
           # div(style = list(fontSize = 2), ".")
         )
       },
@@ -198,7 +199,7 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 40),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 45),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -232,7 +233,7 @@ reactable(
         Meaning.EP1 <- if (!is.na(Meaning.EP1)) Meaning.EP1 else "Unknown"
         tagList(
           div(style = list(fontSize = 18, fontWeight = 500), value),
-          # div(style = list(fontSize = 9, color = '#787878'), Meaning.EP1),
+          div(style = list(fontSize = 8, color = '#787878'), Meaning.EP1),
           # div(style = list(fontSize = 2), ".")
         )
       },
@@ -244,7 +245,52 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 40),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 45),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+<!-- ------------------------------------------------------------------------ -->
+
+### S03: Psyco.Pass {.tabset}
+
+#### S1.EP1
+
+```{r, echo=FALSE, message=FALSE}
+
+psycps.a <- psycps %>% select(Script.EP1, Meaning.EP1)
+
+reactable(
+  na.omit(psycps.a),
+  columns = list(
+    Script.EP1 = colDef(
+      cell = function(value, index) {
+        Meaning.EP1 <- psycps.a$Meaning.EP1[index]
+        Meaning.EP1 <- if (!is.na(Meaning.EP1)) Meaning.EP1 else "Unknown"
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 500), value),
+          div(style = list(fontSize = 8, color = '#787878'), Meaning.EP1),
+          # div(style = list(fontSize = 2), ".")
+        )
+      },
+      align = "left"
+    ),
+    Meaning.EP1 = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 45),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
