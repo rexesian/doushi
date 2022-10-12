@@ -10645,11 +10645,11 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-knjlst.rcl5 <- scknj5 %>% select(Kanji, Meaning)
-knjlst.rcl4 <- scknj4 %>% select(Kanji, Meaning)
-knjlst.rcl3 <- scknj3 %>% select(Kanji, Meaning)
-knjlst.rcl2 <- scknj2 %>% select(Kanji, Meaning)
-knjlst.rcl1 <- scknj1 %>% select(Kanji, Meaning)
+knjlst.rcl5 <- scknj5 %>% select(Kanji, Meaning, NR, KR)
+knjlst.rcl4 <- scknj4 %>% select(Kanji, Meaning, NR, KR)
+knjlst.rcl3 <- scknj3 %>% select(Kanji, Meaning, NR, KR)
+knjlst.rcl2 <- scknj2 %>% select(Kanji, Meaning, NR, KR)
+knjlst.rcl1 <- scknj1 %>% select(Kanji, Meaning, NR, KR)
 
 knjlst.rcl <- bind_rows(knjlst.rcl5, knjlst.rcl4)
 knjlst.rcl <- bind_rows(knjlst.rcl, knjlst.rcl3)
@@ -10666,14 +10666,22 @@ reactable(
       cell = function(value, index) {
         Meaning <- knjlst.rcl$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
+        NR <- scknj5$NR[index]
+        NR <- if (!is.na(NR)) NR else ""
+        KR <- scknj5$KR[index]
+        KR <- if (!is.na(KR)) KR else ""
         tagList(
           div(style = list(fontSize = 45, fontWeight = 600), value),
-          div(style = list(fontSize = 8, fontWeight = 400, color = '#787878'), Meaning)
+          div(style = list(fontSize = 9, color = '#008000'), NR),
+          div(style = list(fontSize = 9, color = '#800000'), KR),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
         )
       },
       align = "center"
     ),
-    Meaning = colDef(show = FALSE)
+    Meaning = colDef(show = FALSE),
+    NR = colDef(show = FALSE),
+    KR = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
@@ -10808,7 +10816,7 @@ reactable(
         tagList(
           div(style = list(fontSize = 30, fontWeight = 600), value),
           div(style = list(fontSize = 10, fontWeight = 400), Reading),
-          div(style = list(fontSize = 8, fontWeight = 400, color = '#787878'), Meaning)
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
         )
       },
       align = "center"
