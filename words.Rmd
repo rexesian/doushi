@@ -1611,6 +1611,112 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+### Food {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.food <- wordsw %>% select(Food, Food.Read, Food.Trans)
+
+reactable(
+  na.omit(wordsw.food),
+  columns = list(
+    Food = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Food.Read <- wordsw.food$Food.Read[index]
+        Food.Read <- if (!is.na(Food.Read)) Food.Read else ""
+        Food.Trans <- wordsw.food$Food.Trans[index]
+        Food.Trans <- if (!is.na(Food.Trans)) Food.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Food.Read ),
+          div(style = list(fontSize = 10), Food.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Food.Read  = colDef(show = FALSE),
+    Food.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.food <- wordsw.food %>% na.omit(wordsw.food)
+wordsw.food <- wordsw.food[sample(1:nrow(wordsw.food)),]
+
+reactable(
+  wordsw.food,
+  columns = list(
+    Food = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Food.Read <- wordsw.food$Food.Read[index]
+        Food.Read <- if (!is.na(Food.Read)) Food.Read else ""
+        Food.Trans <- wordsw.food$Food.Trans[index]
+        Food.Trans <- if (!is.na(Food.Trans)) Food.Trans else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 11), Food.Read ),
+          # div(style = list(fontSize = 10), Food.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Food.Read  = colDef(show = FALSE),
+    Food.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## Category {.tabset}
 
 ### Na.Adjective {.tabset}
