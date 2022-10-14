@@ -2524,16 +2524,16 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-gwrds <- gwrds[sample(1:nrow(gwrds)),]
+gwrds.na <- gwrds[sample(1:nrow(gwrds)),]
 
 reactable(
-  gwrds,
+  gwrds.na,
   columns = list(
     Words = colDef(
       cell = function(value, index) {
-        # Reading <- gwrds$Reading[index]
+        # Reading <- gwrds.na$Reading[index]
         # Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- gwrds$Meaning[index]
+        Meaning <- gwrds.na$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
           div(style = list(fontSize = 25, fontWeight = 600), value),
@@ -2575,18 +2575,32 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-gwrds <- gwrds[sample(1:nrow(gwrds)),]
+gwrds.n2 <- gwrds %>% slice(339:470)
+gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
+gwrds.n3 <- gwrds %>% slice(196:338)
+gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
+gwrds.n4 <- gwrds %>% slice(43:195)
+gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
+gwrds.n5 <- gwrds %>% slice(1:42)
+gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
+gwrds.ex <- gwrds %>% slice(471:519)
+gwrds.ex <- gwrds.ex[sample(1:nrow(gwrds.ex)),]
+
+gwrds.na <- bind_rows(gwrds.n2, gwrds.n3)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n4)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n5)
+gwrds.na <- bind_rows(gwrds.na, gwrds.ex)
 
 reactable(
-  gwrds,
+  gwrds.na,
   columns = list(
     Words = colDef(
       cell = function(value, index) {
-        # Reading <- gwrds$Reading[index]
+        # Reading <- gwrds.na$Reading[index]
         # Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- gwrds$Meaning[index]
+        Meaning <- gwrds.na$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentence <- gwrds$Sentence[index]
+        Sentence <- gwrds.na$Sentence[index]
         Sentence <- if (!is.na(Sentence)) Sentence else ""
         # S1 <- gwrds$S1[index]
         # S1 <- if (!is.na(S1)) S1 else ""
