@@ -90,7 +90,7 @@ verbphr <- read_csv("jpdb/VERBSPHR-VERBS.csv")
 
 ### Table
 
-![](tvrb.jpg)
+![](verbtable.png)
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -2034,71 +2034,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-## Compounds {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-cmpnd <- cmpnd[sample(1:nrow(cmpnd)),]
-
-reactable(
-  cmpnd,
-  columns = list(
-    Words = colDef(
-      cell = function(value, index) {
-        Meaning <- cmpnd$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        # Sentences <- cmpnd$Sentences[index]
-        # Sentences <- if (!is.na(Sentences)) Sentences else ""
-        # Translation <- cmpnd$Translation[index]
-        # Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 24, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Meaning)
-          # div(style = list(fontSize = 16, fontWeight = 500), Sentences),
-          # div(style = list(fontSize = 9), Translation),
-        )
-      },
-      align = "center"
-    ),
-    
-    Sentences = colDef(
-      minWidth = 180,
-      cell = function(value, index) {
-        Translation <- cmpnd$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation),
-        )
-      },
-      align = "left"
-    ),
-    
-    Meaning = colDef(show = FALSE),
-    Sentences = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 3,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 150),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-## Phrases {.tabset}
+## Auxiliaries {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2120,7 +2056,7 @@ reactable(
         Remarks <- vrbxte$Remarks[index]
         Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 10, fontWeight = 500), Meaning),
           # div(style = list(fontSize = 2), "."),
@@ -2142,7 +2078,7 @@ reactable(
         Remarks <- vrbxte$Remarks[index]
         Remarks <- if (!is.na(Remarks)) Remarks else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 17, fontWeight = 500), value),
           div(style = list(fontSize = 9), Translation),
           div(style = list(fontSize = 2), "."),
           # div(style = list(fontSize = 1), "."),
@@ -2182,7 +2118,71 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-## Casual.Simple {.tabset}
+## Compounds {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+cmpnd <- cmpnd[sample(1:nrow(cmpnd)),]
+
+reactable(
+  cmpnd,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- cmpnd$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        # Sentences <- cmpnd$Sentences[index]
+        # Sentences <- if (!is.na(Sentences)) Sentences else ""
+        # Translation <- cmpnd$Translation[index]
+        # Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 9), Meaning)
+          # div(style = list(fontSize = 16, fontWeight = 500), Sentences),
+          # div(style = list(fontSize = 9), Translation),
+        )
+      },
+      align = "center"
+    ),
+    
+    Sentences = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
+        Translation <- cmpnd$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 17, fontWeight = 500), value),
+          div(style = list(fontSize = 9), Translation),
+        )
+      },
+      align = "left"
+    ),
+    
+    Meaning = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 150),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+## Sentences {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
