@@ -94,6 +94,7 @@ inkrdngs <- read_csv("jpdb/INKRDNGS-SCRPTS.csv")
 inkspkng <- read_csv("jpdb/INKSPKNG-SSTNC.csv")
 # vnsgg <- read_csv("jpdb/VRB1-VGRM.csv")
 vnsgg <- read_csv("jpdb/GRMRVRB-VGRM.csv")
+cmpvrbs <- read_csv("jpdb/VRBCOMPD-WRDS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -8300,9 +8301,117 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
 
 ###### **⚭　Verb**
 
+    ・彼はボーナスを当て込んでいた
+    ・彼は実験に基づいて学説を打ち立てた
+    ・彼は５０００万円を複数の口座に分けて預け入れていた
+
+<!-- <h> -->
+
+    ・He was counting on the bonus
+    ・He formulated his theories based on experiments
+    ・He deposited 50 million yen in several separate accounts
+
+<h6> </h6>
+
 ------------------------------------------------------------------------
 
 ##### Examples
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+cmpvrbs <- cmpvrbs[sample(1:nrow(cmpvrbs)),]
+
+reactable(
+  cmpvrbs,
+  columns = list(
+      Compound.Verb = colDef(
+      cell = function(value, index) {
+        Meaning <- cmpvrbs$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- cmpvrbs$Reading[index]
+        Reading <- if (!is.na(Meaning)) Reading else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 10, fontWeight = 400), Reading),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+cmpvrbs <- cmpvrbs[sample(1:nrow(cmpvrbs)),]
+
+reactable(
+  cmpvrbs,
+  columns = list(
+      Sentence = colDef(
+      cell = function(value, index) {
+        Compound.Verb <- cmpvrbs$Compound.Verb[index]
+        Compound.Verb <- if (!is.na(Compound.Verb)) Compound.Verb else ""
+        Translation <- cmpvrbs$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), Compound.Verb),
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 8, fontWeight = 400, color = '#787878'), Translation)
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Compound.Verb = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
