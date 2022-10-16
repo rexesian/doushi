@@ -92,6 +92,7 @@ lvlext2 <- read_csv("jpdb/SCRPTEX2-KNJD2.csv")
 knjspcl <- read_csv("jpdb/SCRPTSPC-KNJSPC.csv")
 scrptrdng <- read_csv("jpdb/RDNGS-SCRPTS.csv")
 kanjivrb <- read_csv("jpdb/SCRPTVRB-KNJVRB.csv")
+kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
 ```
 
 # Scripts {.tabset}
@@ -2925,6 +2926,71 @@ reactable(
     )
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+<!-- ------------------------------------------------------------------------ -->
+
+### Recall {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+kanjinmq <- kanjinmq[sample(1:nrow(kanjinmq)),]
+
+reactable(
+  kanjinmq,
+  columns = list(
+    Kanji = colDef(
+      cell = function(value, index) {
+        Expression <- kanjinmq$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        Author <- kanjinmq$Author[index]
+        Author <- if (!is.na(Author)) Author else ""
+        Name <- kanjinmq$Name[index]
+        Name <- if (!is.na(Name)) Name else ""
+        Words <- kanjinmq$Words[index]
+        Words <- if (!is.na(Words)) Words else "" 
+        tagList(
+          div(style = list(fontSize = 50, fontWeight = 600, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 13, fontWeight = 600, color = '#202020', fontFamily = 'Klee One'), Expression),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 13, fontWeight = 500, color = '#202020', fontFamily = 'Klee One'), "by: ", Author, "。", Name),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 18, fontWeight = 600, color = '#202020', fontFamily = 'Klee One'), Words),
+        )
+      },
+      align = "center"
+    ),
+    Expression = colDef(show = FALSE),
+    Author = colDef(show = FALSE),
+    Name = colDef(show = FALSE),
+    Words = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
