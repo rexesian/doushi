@@ -95,6 +95,7 @@ inkspkng <- read_csv("jpdb/INKSPKNG-SSTNC.csv")
 # vnsgg <- read_csv("jpdb/VRB1-VGRM.csv")
 vnsgg <- read_csv("jpdb/GRMRVRB-VGRM.csv")
 cmpvrbs <- read_csv("jpdb/VRBCOMPD-WRDS.csv")
+kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1377,6 +1378,72 @@ reactable(
     )
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+## Recall {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+kanjinmq <- kanjinmq[sample(1:nrow(kanjinmq)),]
+
+reactable(
+  kanjinmq,
+  columns = list(
+    Kanji = colDef(
+      cell = function(value, index) {
+        Expression <- kanjinmq$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        Author <- kanjinmq$Author[index]
+        Author <- if (!is.na(Author)) Author else ""
+        Name <- kanjinmq$Name[index]
+        Name <- if (!is.na(Name)) Name else ""
+        Words <- kanjinmq$Words[index]
+        Words <- if (!is.na(Words)) Words else "" 
+        tagList(
+          div(style = list(fontSize = 50, fontWeight = 600, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 13, fontWeight = 600, color = '#202020', fontFamily = 'Klee One'), Expression),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 13, fontWeight = 500, color = '#202020', fontFamily = 'Klee One'), "by: ", Author, "。", Name),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 18, fontWeight = 600, color = '#202020', fontFamily = 'Klee One'), Words),
+        )
+      },
+      align = "center"
+    ),
+    Expression = colDef(show = FALSE),
+    Author = colDef(show = FALSE),
+    Name = colDef(show = FALSE),
+    Words = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3093,7 +3160,7 @@ reactable(
     ・手紙を出した。しかし返事はこなかった    
     ・息子は出掛けたと思っていた。ところが２階で昼寝していたんだ
     ・二時間待った。けれども、一郎は姿を現さなかった   
-    ・雨が激しく降っています。それでも私は行かなければならない。
+    ・雨が激しく降っています。それでも私は行かなければならない
 
 <!-- <h> -->
 
@@ -3268,63 +3335,65 @@ reactable(
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Forms**</p>
 
-###### **I-Adj (Plain Form - Non Past)**
+![](iadj.png)
 
-    ・yasui  ⇢   yasui
+<!-- ###### **I-Adj (Plain Form - Non Past)** -->
 
-###### **I-Adj (Polite Form - Non Past)**
+<!--     ・yasui  ⇢   yasui -->
 
-    ・yasui  ⇢   yasui desu
+<!-- ###### **I-Adj (Polite Form - Non Past)** -->
 
-###### **I-Adj (Plain Form - Past Tense)**
+<!--     ・yasui  ⇢   yasui desu -->
 
-    ・yasui  ⇢   yasukatta
+<!-- ###### **I-Adj (Plain Form - Past Tense)** -->
 
-###### **I-Adj (Polite Form - Past Tense)**
+<!--     ・yasui  ⇢   yasukatta -->
 
-    ・yasui  ⇢   yasukatta desu
+<!-- ###### **I-Adj (Polite Form - Past Tense)** -->
 
-###### **I-Adj (Plain Form - Negative)**
+<!--     ・yasui  ⇢   yasukatta desu -->
 
-    ・yasui  ⇢   yasukunai
+<!-- ###### **I-Adj (Plain Form - Negative)** -->
 
-###### **I-Adj (Polite Form - Negative)**
+<!--     ・yasui  ⇢   yasukunai -->
 
-    ・yasui  ⇢   yasukunai desu
-    ・yasui  ⇢   yasuku arimasen
+<!-- ###### **I-Adj (Polite Form - Negative)** -->
 
-###### **I-Adj (Plain Form - Past Negative)**
+<!--     ・yasui  ⇢   yasukunai desu -->
+<!--     ・yasui  ⇢   yasuku arimasen -->
 
-    ・yasui  ⇢   yasuku nakatta
+<!-- ###### **I-Adj (Plain Form - Past Negative)** -->
 
-###### **I-Adj (Polite Form - Past Negative)**
+<!--     ・yasui  ⇢   yasuku nakatta -->
 
-    ・yasui  ⇢   yasuku nakatta desu
-    ・yasui  ⇢   yasuku arimasen deshita
+<!-- ###### **I-Adj (Polite Form - Past Negative)** -->
 
-###### **I-Adj.ad (Adverbial Form)**
+<!--     ・yasui  ⇢   yasuku nakatta desu -->
+<!--     ・yasui  ⇢   yasuku arimasen deshita -->
 
-    ・yasui  ⇢   yasuku
+<!-- ###### **I-Adj.ad (Adverbial Form)** -->
 
-###### **I-Adj (Connective Form)**
+<!--     ・yasui  ⇢   yasuku -->
 
-    ・yasui  ⇢   yasukute
+<!-- ###### **I-Adj (Connective Form)** -->
 
-###### **I-Adj (Connective Form - Negative)**
+<!--     ・yasui  ⇢   yasukute -->
 
-    ・yasui  ⇢   yasuku nakute
+<!-- ###### **I-Adj (Connective Form - Negative)** -->
 
-###### **I-Adj (Conditional Form - ba)**
+<!--     ・yasui  ⇢   yasuku nakute -->
 
-    ・yasui  ⇢   yasukereba
+<!-- ###### **I-Adj (Conditional Form - ba)** -->
 
-###### **I-Adj (Conditional Form - tara)**
+<!--     ・yasui  ⇢   yasukereba -->
 
-    ・yasui  ⇢   yasukattara
+<!-- ###### **I-Adj (Conditional Form - tara)** -->
 
-###### **I-Adj (Root)**
+<!--     ・yasui  ⇢   yasukattara -->
 
-    ・yasu
+<!-- ###### **I-Adj (Root)** -->
+
+<!--     ・yasu -->
 
 <h6> </h6>
 
@@ -3334,17 +3403,17 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadj2 <- nadj2  %>% rename(Sentences = S1)
-# nadj2 <- nadj2[sample(1:nrow(nadj2)),]
+nadj2.a <- nadj2  %>% rename(Sentences = S1)
+nadj2.a <- nadj2.a[sample(1:nrow(nadj2.a)),]
 
 reactable(
-  nadj2,
+  nadj2.a,
   columns = list(
     Words = colDef(
       cell = function(value, index) {
-        Reading <- nadj2$Reading[index]
+        Reading <- nadj2.a$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- nadj2$Meaning[index]
+        Meaning <- nadj2.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
           div(style = list(fontSize = 22, fontWeight = 500), value),
@@ -3358,7 +3427,7 @@ reactable(
     Sentences = colDef(
       minWidth = 180,
       cell = function(value, index) {
-        T1 <- nadj2$T1[index]
+        T1 <- nadj2.a$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
           div(style = list(fontSize = 16, fontWeight = 500), value),
@@ -3401,56 +3470,58 @@ reactable(
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Forms**</p>
 
-###### **Na-Adj (Plain Form - Non Past)**
+![](naadj.png)
 
-    ・genki  ⇢   genki da
+<!-- ###### **Na-Adj (Plain Form - Non Past)** -->
 
-###### **Na-Adj (Polite Form - Non Past)**
+<!--     ・genki  ⇢   genki da -->
 
-    ・genki  ⇢   genki desu
+<!-- ###### **Na-Adj (Polite Form - Non Past)** -->
 
-###### **Na-Adj (Plain Form - Past)**
+<!--     ・genki  ⇢   genki desu -->
 
-    ・genki  ⇢   genki datta
+<!-- ###### **Na-Adj (Plain Form - Past)** -->
 
-###### **Na-Adj (Polite Form - Past)**
+<!--     ・genki  ⇢   genki datta -->
 
-    ・genki  ⇢   genki deshita
+<!-- ###### **Na-Adj (Polite Form - Past)** -->
 
-###### **Na-Adj (Plain Form - Negative)**
+<!--     ・genki  ⇢   genki deshita -->
 
-    ・genki  ⇢   genki ja nai
+<!-- ###### **Na-Adj (Plain Form - Negative)** -->
 
-###### **Na-Adj (Polite Form - Negative)**
+<!--     ・genki  ⇢   genki ja nai -->
 
-    ・genki  ⇢   genki dewa nai
-    ・genki  ⇢   genki dewa arimasen
+<!-- ###### **Na-Adj (Polite Form - Negative)** -->
 
-###### **Na-Adj (Plain Form - Past Negative)**
+<!--     ・genki  ⇢   genki dewa nai -->
+<!--     ・genki  ⇢   genki dewa arimasen -->
 
-    ・genki  ⇢   genki ja nakatta
+<!-- ###### **Na-Adj (Plain Form - Past Negative)** -->
 
-###### **Na-Adj (Polite Form - Past Negative)**
+<!--     ・genki  ⇢   genki ja nakatta -->
 
-    ・genki  ⇢   genki dewa nakatta
-    ・genki  ⇢   genki dewa arimasen deshita
+<!-- ###### **Na-Adj (Polite Form - Past Negative)** -->
 
-###### **Na-Adj (Connective Form)**
+<!--     ・genki  ⇢   genki dewa nakatta -->
+<!--     ・genki  ⇢   genki dewa arimasen deshita -->
 
-    ・genki  ⇢   genki de
+<!-- ###### **Na-Adj (Connective Form)** -->
 
-###### **Na-Adj (Connective Form - Negative)**
+<!--     ・genki  ⇢   genki de -->
 
-    ・genki  ⇢   genki ja nakute
-    ・genki  ⇢   genki dewa nakute
+<!-- ###### **Na-Adj (Connective Form - Negative)** -->
 
-###### **Na-Adj (Adverbial Form)**
+<!--     ・genki  ⇢   genki ja nakute -->
+<!--     ・genki  ⇢   genki dewa nakute -->
 
-    ・genki  ⇢   genki ni
+<!-- ###### **Na-Adj (Adverbial Form)** -->
 
-###### **Na-Adj (Adjectival Form)**
+<!--     ・genki  ⇢   genki ni -->
 
-    ・genki  ⇢   genki na
+<!-- ###### **Na-Adj (Adjectival Form)** -->
+
+<!--     ・genki  ⇢   genki na -->
 
 <h6> </h6>
 
@@ -3528,48 +3599,50 @@ reactable(
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Forms**</p>
 
-###### **Noun (Plain Form - Non Past)**
+![](iadj.png)
 
-    ・hana  ⇢   hana da
+<!-- ###### **Noun (Plain Form - Non Past)** -->
 
-###### **Noun (Polite Form - Non Past)**
+<!--     ・hana  ⇢   hana da -->
 
-    ・hana  ⇢   hana desu
+<!-- ###### **Noun (Polite Form - Non Past)** -->
 
-###### **Noun (Plain Form - Past)**
+<!--     ・hana  ⇢   hana desu -->
 
-    ・hana  ⇢   hana datta
+<!-- ###### **Noun (Plain Form - Past)** -->
 
-###### **Noun (Polite Form - Past)**
+<!--     ・hana  ⇢   hana datta -->
 
-    ・hana  ⇢   hana deshita
+<!-- ###### **Noun (Polite Form - Past)** -->
 
-###### **Noun (Plain Form - Negative)**
+<!--     ・hana  ⇢   hana deshita -->
 
-    ・hana  ⇢   hana ja nai
+<!-- ###### **Noun (Plain Form - Negative)** -->
 
-###### **Noun (Polite Form - Negative)**
+<!--     ・hana  ⇢   hana ja nai -->
 
-    ・hana  ⇢   hana dewa nai
-    ・hana  ⇢   hana dewa arimasen
+<!-- ###### **Noun (Polite Form - Negative)** -->
 
-###### **Noun (Plain Form - Past Negative)**
+<!--     ・hana  ⇢   hana dewa nai -->
+<!--     ・hana  ⇢   hana dewa arimasen -->
 
-    ・hana  ⇢   hana ja nakatta
+<!-- ###### **Noun (Plain Form - Past Negative)** -->
 
-###### **Noun (Polite Form - Past Negative)**
+<!--     ・hana  ⇢   hana ja nakatta -->
 
-    ・hana  ⇢   hana dewa nakatta
-    ・hana  ⇢   hana dewa arimasen deshita
+<!-- ###### **Noun (Polite Form - Past Negative)** -->
 
-###### **Noun (Connective Form)**
+<!--     ・hana  ⇢   hana dewa nakatta -->
+<!--     ・hana  ⇢   hana dewa arimasen deshita -->
 
-    ・hana  ⇢   hana de
+<!-- ###### **Noun (Connective Form)** -->
 
-###### **Noun(Connective Form - Negative)**
+<!--     ・hana  ⇢   hana de -->
 
-    ・hana  ⇢   hana ja nakute
-    ・hana  ⇢   hana dewa nakute
+<!-- ###### **Noun(Connective Form - Negative)** -->
+
+<!--     ・hana  ⇢   hana ja nakute -->
+<!--     ・hana  ⇢   hana dewa nakute -->
 
 <h6> </h6>
 
@@ -7896,9 +7969,9 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
 
 ------------------------------------------------------------------------
 
-#### Combined Particles {.tabset}
+#### Phrasal Particles {.tabset}
 
-**Combined particles** are short functional words which indicates grammatical relations between sentence elements or propositional relations between statements.
+**Phrasal particles** are short functional words which indicates grammatical relations between sentence elements or propositional relations between statements.
 
 ##### Structure
 
@@ -7924,7 +7997,7 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Modifier: Pre-Nominal Form**</p>
 
-###### **Noun・Verb + Compound Particle + Noun**
+###### **Noun・Verb + Phrasal Particle + Noun**
 
     ・将来についての夢を語った
     ・この仕事をするに当たっての注意がある
@@ -7940,7 +8013,7 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Modifier: Pre-Verbal Form**</p>
 
-###### **Noun・Verb + Compound Particle + .. + Verb**
+###### **Noun・Verb + Phrasal Particle + .. + Verb**
 
     ・人は年を取るにつれて記憶力が衰える  
     ・店員さんはお客様に対して丁寧な言葉を使います
@@ -7951,18 +8024,6 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
     ・As people get older, their memory declines
     ・With the customers, the shop assistant uses polite language
     ・Depending on a teacher, the teacher method differs
-
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Topic Marker**</p>
-
-###### **Noun・Verb + Compound Particle + Wa**
-
-    ・ブドウ糖消費にかけては脳は少し貪欲です
-    ・当ウェブサイトのご利用にあたっては以下の事項にご留意下さい
-
-<!-- <h> -->
-
-    ・The brain is a little greedy when it comes to glucose consumption
-    ・Please note the following when using this website
 
 <h6> </h6>
 
@@ -7991,6 +8052,72 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
 
 #### Modifier {.tabset}
 
+##### Referencing
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Demonstratives + Noun: Referencing a Noun**</p>
+
+###### **⚭　kono・sono・ano・dono + Noun** → this・that・which Noun
+
+###### **⚭　kouiu・souiu・auiu・douiu + Noun** → this・that・what kind of Noun
+
+###### **⚭　konna・sonna・anna・donna + Noun** → this・that・what kind of Noun
+
+    ・この本は普通の読者向けだ
+    ・あの学生はとても積極的だ
+    ・そんな場所は愛するに値しない
+    ・その時にはすべてが変わります
+
+<!-- <h> -->
+
+    ・This book is for the average reader
+    ・That student is very active
+    ・A place like that doesn't deserve to be loved
+    ・At that time everything will change
+
+<h6> </h6>
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Noun + Particle + Noun: Referencing a Noun**</p>
+
+###### **⚭　Noun + Particle + no + Noun**
+
+    ・先生からの手紙
+    ・図書化での勉強
+    ・駅までのバス
+
+<!-- <h> -->
+
+    ・Letter from the teacher
+    ・Study in the library
+    ・Bus to the station
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
+##### Possession
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Pronoun + Noun: Possessing a Noun**</p>
+
+###### **⚭　watashi・boku・ore + no + Noun**  → my Noun
+
+###### **⚭　watashitachi + no + Noun** → our Noun
+
+###### **⚭　anata・kimi + no + Noun** → your Noun
+
+    ・私の車
+    ・あなたの荷物
+    ・私たちの家
+
+<!-- <h> -->
+
+    ・My car
+    ・Your luggage
+    ・Our home
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
 ##### Affiliation 
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Noun + Noun: Affiliation of Noun**</p>
@@ -8012,6 +8139,67 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
     ・Catching the 3 o'clock train
     ・The owner of this house
     ・Flats in Tokyo are very expensive
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
+##### Apposition 
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Noun + Noun: Apposition of Noun**</p>
+
+###### **⚭　Noun① + no + Noun②**
+
+    ・大学生の娘
+    ・高校生の二男
+    ・建築家の田中さん
+
+<!-- <h> -->
+
+    ・My daughter, a university student
+    ・My second son, a high-schoolstudent
+    ・Mr. Tanaka, the architect
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
+##### Characterization
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Specialized Noun + Noun: Characterize a Noun**</p>
+
+###### **⚭　arayuru + Noun** → every possible Noun
+
+###### **⚭　iwayuru + Noun**  → so-called Noun
+
+###### **⚭　onaji + Noun** → the same Noun
+
+###### **⚭　saru + Noun** → the past・last Noun
+
+    ・私たちはあらゆる問題を話しった
+    ・彼はいわゆる立派な紳士だ
+    ・同じ年の夫とは三円前に知り合った
+    ・さる六月に私の姉は高校の教師と結婚した
+
+<!-- <h> -->
+
+    ・We have talked about all possible problems
+    ・He's what we call a fine gentleman
+    ・She met her husband of the same age three yen ago
+    ・In June last year my sister married a high school teacher
+
+<h6> </h6>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Counter + Noun: Characterizing a Noun**</p>
+
+###### **⚭　Number + Counter + no + Noun**
+
+    ・一つの地域
+    ・レンズ一枚の価格
+
+<!-- <h> -->
+
+    ・One region
+    ・Price per lens
 
 <h6> </h6>
 
@@ -8130,113 +8318,6 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
     ・Dry hair
     ・Feelings of frustration
     ・Hot food
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-##### Characterization
-
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Specialized Noun + Noun: Characterize a Noun**</p>
-
-###### **⚭　arayuru + Noun** → every possible Noun
-
-###### **⚭　iwayuru + Noun**  → so-called Noun
-
-###### **⚭　onaji + Noun** → the same Noun
-
-###### **⚭　saru + Noun** → the past・last Noun
-
-    ・私たちはあらゆる問題を話しった
-    ・彼はいわゆる立派な紳士だ
-    ・同じ年の夫とは三円前に知り合った
-    ・さる六月に私の姉は高校の教師と結婚した
-
-<!-- <h> -->
-
-    ・We have talked about all possible problems
-    ・He's what we call a fine gentleman
-    ・She met her husband of the same age three yen ago
-    ・In June last year my sister married a high school teacher
-
-<h6> </h6>
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Counter + Noun: Characterizing a Noun**</p>
-
-###### **⚭　Number + Counter + no + Noun**
-
-    ・一つの地域
-    ・レンズ一枚の価格
-
-<!-- <h> -->
-
-    ・One region
-    ・Price per lens
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-##### Referencing
-
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Demonstratives + Noun: Referencing a Noun**</p>
-
-###### **⚭　kono・sono・ano・dono + Noun** → this・that・which Noun
-
-###### **⚭　kouiu・souiu・auiu・douiu + Noun** → this・that・what kind of Noun
-
-###### **⚭　konna・sonna・anna・donna + Noun** → this・that・what kind of Noun
-
-    ・この本は普通の読者向けだ
-    ・あの学生はとても積極的だ
-    ・そんな場所は愛するに値しない
-    ・その時にはすべてが変わります
-
-<!-- <h> -->
-
-    ・This book is for the average reader
-    ・That student is very active
-    ・A place like that doesn't deserve to be loved
-    ・At that time everything will change
-
-<h6> </h6>
-
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Noun + Particle + Noun: Referencing a Noun**</p>
-
-###### **⚭　Noun + Particle + no + Noun**
-
-    ・先生からの手紙
-    ・図書化での勉強
-    ・駅までのバス
-
-<!-- <h> -->
-
-    ・Letter from the teacher
-    ・Study in the library
-    ・Bus to the station
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-##### Possession
-
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Pronoun + Noun: Possessing a Noun**</p>
-
-###### **⚭　watashi・boku・ore + no + Noun**  → my Noun
-
-###### **⚭　watashitachi + no + Noun** → our Noun
-
-###### **⚭　anata・kimi + no + Noun** → your Noun
-
-    ・私の車
-    ・あなたの荷物
-    ・私たちの家
-
-<!-- <h> -->
-
-    ・My car
-    ・Your luggage
-    ・Our home
 
 <h6> </h6>
 
@@ -8449,38 +8530,9 @@ The **general concept** of **ga** particle is that it marks the **main actor** o
 ##### Auxiliaries
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Auxiliaries** are attached to a verb to create a more specific meaning.</p>
 
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Verb: + Auxiliary: Structure**</p>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Verb + Auxiliary: Structure**</p>
 
-###### **⚭　Vnoun-stem + Auxiliary**
-
-###### **⚭　Vru + Auxiliary**
-
-------------------------------------------------------------------------
-
-##### Compounds
-<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">A **Compound Verb** is a verb that consists of two verbs creating a specific meaning.</p>
-
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**①  Compound Verb: Structure**</p>
-
-###### **⚭　Vnoun-stem + Verb**
-
-###### **⚭　Vte + Verb**
-
-###### **⚭　Prefix + Verb**
-
-###### **⚭　Verb**
-
-    ・彼はボーナスを当て込んでいた
-    ・彼は実験に基づいて学説を打ち立てた
-    ・彼は５０００万円を複数の口座に分けて預け入れていた
-
-<!-- <h> -->
-
-    ・He was counting on the bonus
-    ・He formulated his theories based on experiments
-    ・He deposited 50 million yen in several separate accounts
-
-<h6> </h6>
+###### **⚭　Vneg-stem・Vnoun-stem・Vru・Vcmd-stem・Vte・Vta + Auxiliary**
 
 ------------------------------------------------------------------------
 
@@ -8584,7 +8636,76 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### PT4.0: Auxiliaries {.tabset}
+### PT4.0: Compunds {.tabset}
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Compounds** are group of words combined together to form a single word.</p>
+
+#### Nominal {.tabset}
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① General Structure**</p>
+
+###### **⚭　N① + N②**
+
+    ・本棚　　　　　・Bookshelves
+    ・物事　　　　　・Things
+    ・草木　　　　　・Plants
+    ・食品部門　　　・Food department
+
+###### **⚭　V-stem + N**
+
+    ・生け花　　　　・Flower arrangement
+    ・飲み物　　　　・Beverage
+    ・食べ方　　　　・Way of eating
+    ・挿絵　　　　　・Illustration
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
+#### Adjectival {.tabset}
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① General Structure**</p>
+
+###### **⚭　N + Adj**
+
+    ・心細い　　　　・Insecure
+    ・生ぬるい　　　・Lukewarm
+    ・涙もろい　　　・Easy to cry
+    ・根深い　　　　・Deep-rooted
+
+###### **⚭　V-stem + N**
+
+    ・書きやすい　　・Easy to write
+    ・歩きにくい　　・Difficult to walk
+    ・待ち遠しい　　・Long awaited
+    ・寝苦しい　　　・Unable to sleep
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
+#### Verbal {.tabset}
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**①  Compound Verb: Structure**</p>
+
+###### **⚭　V① + V②**   `Equally contributes・V② is the Main Verb`
+
+    ・持ち出す　　　・Take out: Hold + Take out
+    ・飛び出す　　　・Jump out: Jump + Go out
+    ・書き写す　　　・Transcribe: Write + Copy
+    ・作り直す　　　・Remake： Make + Fix
+
+###### **⚭　V① + V②**   `V1 is the Main Verb・V② is the Auxiliary Verb`
+
+    ・食べかける　　・Start eating: Eat + Hang
+    ・飲みすぎる　　・Over drink: Drink + Exceed
+    ・押し込む　　　・Push into: Push + Go into
+    ・書き上げる　　・Finish writing: Write + Raise
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
+### PT5.0: Auxiliaries {.tabset}
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Auxiliaries** are attached at the end of a word or a sentence to give nuance.</p>
 
 #### Concept {.tabset}
@@ -8595,7 +8716,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### PT5.0: Structure {.tabset}
+### PT6.0: Structure {.tabset}
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Basic Pattern Structure** of a japanese sentence.</p>
 
 ![](corestructure.png)
@@ -8604,7 +8725,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### PT6.0: Grammar {.tabset}
+### PT7.0: Grammar {.tabset}
 
 #### Concept {.tabset}
 
