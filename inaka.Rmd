@@ -89,6 +89,7 @@ dct <- read_csv("jpdb/RDNSHRT-WRDS.csv")
 nadj2 <- read_csv("jpdb/ADJI-ADJI.csv")
 nadj1 <- read_csv("jpdb/ADJNA-ADJNA.csv")
 adv1 <- read_csv("jpdb/ADV-ADV.csv")
+nounw <- read_csv("jpdb/NOUN-NOUN.csv")
 grmrref <- read_csv("jpdb/GRMRREF-GRMR.csv")
 inkrdngs <- read_csv("jpdb/INKRDNGS-SCRPTS.csv")
 inkspkng <- read_csv("jpdb/INKSPKNG-SSTNC.csv")
@@ -3650,6 +3651,64 @@ reactable(
 
 #### Examples
 
+```{r, echo=FALSE, message=FALSE}
+
+nounw.a <- nounw %>% slice(1:200) %>% rename(Sentences = S1)
+nounw.a <- nounw.a[sample(1:nrow(nounw.a)),]
+
+reactable(
+  nounw.a,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- nounw.a$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- nounw.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500), value),
+          div(style = list(fontSize = 11), Reading),
+          div(style = list(fontSize = 10), Meaning)
+        )
+      },
+      align = "center"
+    ),
+
+    Sentences = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
+        T1 <- nounw.a$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 9), T1)
+        )
+      },
+      align = "left"
+    ),
+
+    T1 = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 90, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
+
 ------------------------------------------------------------------------
 
 ### MC.4.0: Adverbs {.tabset}
@@ -6987,6 +7046,11 @@ reactable(
     ・I'm studying Japanese in order to study in Japan
 
 <h6> </h6>
+
+------------------------------------------------------------------------
+
+### Sentence Types {.tabset}
+
 ------------------------------------------------------------------------
 
 ### Sample Sentences {.tabset}
@@ -11703,6 +11767,24 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+####  Level {.tabset}
+
+#####  Daily
+
+------------------------------------------------------------------------
+
+#####  Basic
+
+------------------------------------------------------------------------
+
+#####  Intermediate
+
+------------------------------------------------------------------------
+
+#####  Advance
 
 ------------------------------------------------------------------------
 
