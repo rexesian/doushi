@@ -405,7 +405,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-scknj2.a <- scknj2 %>% slice(201:230)
+scknj2.a <- scknj2 %>% slice(201:240)
 scknj2.b <- scknj2 %>% slice(1:200)
 scknj2.a <- scknj2.a[sample(1:nrow(scknj2.a)),]
 scknj2.b <- scknj2.b[sample(1:nrow(scknj2.b)),]
@@ -1181,11 +1181,15 @@ scknj2w.a <- scknj2.a[sample(1:nrow(scknj2.a)),]
 scknj2w.b <- scknj2.b[sample(1:nrow(scknj2.b)),]
 
 scknj2w.a <- scknj2w.a %>% select(W1, W2, W3)
+scknj2w.a <- scknj2w.a %>% pivot_longer(everything())
+scknj2w.a <- scknj2w.a[sample(1:nrow(scknj2w.a)),]
 scknj2w.b <- scknj2w.b %>% select(W1, W2, W3)
+scknj2w.b <- scknj2w.b %>% pivot_longer(everything())
+scknj2w.b <- scknj2w.b[sample(1:nrow(scknj2w.b)),]
 scknj2w <- bind_rows(scknj2w.a, scknj2w.b)
 
 # scknj2w <- scknj2 %>% select(W1, W2, W3)
-scknj2w <- scknj2w %>% pivot_longer(everything())
+# scknj2w <- scknj2w %>% pivot_longer(everything())
 scknj2w <- scknj2w %>% rename(Kanji = value)
 scknj2w <- na.omit(scknj2w) %>% select(Kanji)
 # scknj2w <- scknj2w[sample(1:nrow(scknj2w)),]
