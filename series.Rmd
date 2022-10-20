@@ -4,7 +4,7 @@ output:
   html_document:
     theme: sandstone
     css: "mystyle.css"
-    toc: false
+    toc: true
     toc_float:
       collapsed: true
       smooth_scroll: true
@@ -77,15 +77,18 @@ dlg2 <- read_csv("jpim/DLG2-SNT.csv")
 exrpt <- read_csv("jpim/EXRPT-SNT.csv")
 psycps <- read_csv("jpim/PSYPSS-SCRPT.csv")
 dlgcom <- read_csv("jpim/DLGCOM-DLG.csv")
+shrty <- read_csv("jpim/SHRTSTRY-SNT.csv")
 ```
 
-# <b> Immersion </b> {.tabset}
+# <b> Immersion </b>
 
-## <b> Series </b> {.tabset}
+------------------------------------------------------------------------
 
-### S01: Yuru.Camp  {.tabset}
+# <b> Series </b> {.tabset}
 
-#### S1.EP2
+## S01:Yuru.Camp  {.tabset}
+
+### S1.EP2
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -99,7 +102,7 @@ reactable(
         Meaning.EP2 <- yrcmp2$Meaning.EP2[index]
         Meaning.EP2 <- if (!is.na(Meaning.EP2)) Meaning.EP2 else "Unknown"
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 400), value),
+          div(style = list(fontSize = 16, fontWeight = 600), value),
           div(style = list(fontSize = 9, color = '#787878'), Meaning.EP2),
         )
       },
@@ -126,9 +129,9 @@ reactable(
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
-#### S1.EP3
+### S1.EP3
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -142,7 +145,7 @@ reactable(
         Meaning.EP3 <- yrcmp3$Meaning.EP3[index]
         Meaning.EP3 <- if (!is.na(Meaning.EP3)) Meaning.EP3 else "Unknown"
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 400), value),
+          div(style = list(fontSize = 16, fontWeight = 600), value),
           div(style = list(fontSize = 9, color = '#787878'), Meaning.EP3),
         )
       },
@@ -169,9 +172,9 @@ reactable(
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
-#### S1.EP4
+### S1.EP4
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -212,11 +215,11 @@ reactable(
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
-### S02: Bottakuri {.tabset}
+## S02:Bottakuri {.tabset}
 
-#### S1.EP1
+### S1.EP1
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -230,7 +233,7 @@ reactable(
         Meaning.EP1 <- btkri1$Meaning.EP1[index]
         Meaning.EP1 <- if (!is.na(Meaning.EP1)) Meaning.EP1 else "Unknown"
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 400), value),
+          div(style = list(fontSize = 16, fontWeight = 600), value),
           div(style = list(fontSize = 9, color = '#787878'), Meaning.EP1),
           # div(style = list(fontSize = 2), ".")
         )
@@ -257,11 +260,56 @@ reactable(
 )
 
 ```
-<!-- ------------------------------------------------------------------------ -->
 
-### S03: Psyco.Pass {.tabset}
+------------------------------------------------------------------------
 
-#### S1.EP1
+### S1.EP2
+
+```{r, echo=FALSE, message=FALSE}
+
+btkri2 <- btkri %>% select(Script.EP2, Meaning.EP2)
+
+reactable(
+  na.omit(btkri2),
+  columns = list(
+    Script.EP2 = colDef(
+      cell = function(value, index) {
+        Meaning.EP2 <- btkri2$Meaning.EP2[index]
+        Meaning.EP2 <- if (!is.na(Meaning.EP2)) Meaning.EP2 else "Unknown"
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600), value),
+          div(style = list(fontSize = 9, color = '#787878'), Meaning.EP2),
+          # div(style = list(fontSize = 2), ".")
+        )
+      },
+      align = "left"
+    ),
+    Meaning.EP2 = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 6,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+## S03:Psyco.Pass {.tabset}
+
+### S1.EP1
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -275,7 +323,7 @@ reactable(
         Meaning.EP1 <- psycps.a$Meaning.EP1[index]
         Meaning.EP1 <- if (!is.na(Meaning.EP1)) Meaning.EP1 else "Unknown"
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 400), value),
+          div(style = list(fontSize = 16, fontWeight = 600), value),
           div(style = list(fontSize = 9, color = '#787878'), Meaning.EP1),
         )
       },
@@ -302,15 +350,15 @@ reactable(
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
-## <b> Exerpts </b> {.tabset}
+# <b> Exerpts </b> {.tabset}
 
-### E01: Ramen {.tabset}
+## E01 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
-# exrpt <- exrpt[sample(1:nrow(exrpt)),]
+exrpt <- exrpt[sample(1:nrow(exrpt)),]
 exrpt.a <- exrpt  %>% slice(1:1)
 
 reactable(
@@ -360,13 +408,12 @@ reactable(
 
 <h6> </h6>
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
-### E02: Tonkotsu {.tabset}
+## E02 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
-# exrpt <- exrpt[sample(1:nrow(exrpt)),]
 exrpt.a <- exrpt  %>% slice(2:2)
 
 reactable(
@@ -416,34 +463,37 @@ reactable(
 
 <h6> </h6>
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
-## <b> Stories </b> {.tabset}
+# <b> Stories </b> {.tabset}
 
-### S01: Train {.tabset}
-
-<!-- ------------------------------------------------------------------------ -->
-
-## <b> Dialogues </b> {.tabset}
-
-### Random {.tabset}
-
-#### D01: Restaurant {.tabset}
+## S01 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
-dlg1 <- dlg1 %>% select(Dialogue, Translation)
+shrty <- shrty[sample(1:nrow(shrty)),]
+shrty.a <- shrty  %>% slice(1:1)
 
 reactable(
-  na.omit(dlg1),
+  shrty.a,
   columns = list(
-    Dialogue = colDef(
+    Script = colDef(
+      minWidth = 280,
       cell = function(value, index) {
-        Translation <- dlg1$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        Translation <- shrty.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 400), value),
-          div(style = list(fontSize = 9, color = '#787878'), Translation),
+          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
         )
       },
       align = "left"
@@ -451,10 +501,10 @@ reactable(
     Translation = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 6,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 50),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -462,31 +512,43 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = TRUE,
-
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+<h6> </h6>
 
-#### D02: Icecream {.tabset}
+------------------------------------------------------------------------
+
+## S02 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
-dlg2 <- dlg2 %>% select(Dialogue, Translation)
+shrty.a <- shrty  %>% slice(2:2)
 
 reactable(
-  na.omit(dlg2),
+  shrty.a,
   columns = list(
-    Dialogue = colDef(
+    Script = colDef(
+      minWidth = 280,
       cell = function(value, index) {
-        Translation <- dlg2$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        Translation <- shrty.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 400), value),
-          div(style = list(fontSize = 9, color = '#787878'), Translation),
+          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
         )
       },
       align = "left"
@@ -494,10 +556,10 @@ reactable(
     Translation = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 6,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 50),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -505,18 +567,77 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = TRUE,
-
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+<h6> </h6>
 
-### Japan Life {.tabset}
+------------------------------------------------------------------------
 
-#### D01: Arrival in Japan {.tabset}
+## S03 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+shrty.a <- shrty  %>% slice(3:3)
+
+reactable(
+  shrty.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- shrty.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
+# <b> Dialogues </b> {.tabset}
+
+## Japan Life {.tabset}
+
+### D01:Arrival {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -546,7 +667,7 @@ reactable(
         Translation <- dlgcom.1$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 400), value),
+          div(style = list(fontSize = 16, fontWeight = 600), value),
           div(style = list(fontSize = 9, color = '#787878'), Translation),
         )
       },
@@ -573,3 +694,93 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+## Random {.tabset}
+
+### D01:Restaurant {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+dlg1 <- dlg1 %>% select(Dialogue, Translation)
+
+reactable(
+  na.omit(dlg1),
+  columns = list(
+    Dialogue = colDef(
+      cell = function(value, index) {
+        Translation <- dlg1$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600), value),
+          div(style = list(fontSize = 9, color = '#787878'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 6,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### D02:Icecream {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+dlg2 <- dlg2 %>% select(Dialogue, Translation)
+
+reactable(
+  na.omit(dlg2),
+  columns = list(
+    Dialogue = colDef(
+      cell = function(value, index) {
+        Translation <- dlg2$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600), value),
+          div(style = list(fontSize = 9, color = '#787878'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 6,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
