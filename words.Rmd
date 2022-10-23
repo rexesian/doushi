@@ -94,6 +94,7 @@ tblw2 <- read_csv("jpdb/TBL2-TBWRDS.csv")
 tblw3 <- read_csv("jpdb/TBL3-TBWRDS.csv")
 tblw4 <- read_csv("jpdb/TBL4-TBWRDS.csv")
 tblw5 <- read_csv("jpdb/TBL5-TBWRDS.csv")
+techw <- read_csv("jpdb/WRDSTCH-WRD.csv")
 ```
 
 # Words {.tabset}
@@ -2723,6 +2724,115 @@ reactable(
     ),
     
     Meaning = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+    
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Tech {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+techw <- techw[sample(1:nrow(techw)),]
+
+reactable(
+  techw,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- techw$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- techw$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 10), Reading),
+          div(style = list(fontSize = 10), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+techw <- techw[sample(1:nrow(techw)),]
+
+reactable(
+  techw,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- techw$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- techw$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Sentence <- techw$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Translation <- techw$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 17, fontWeight = 400), Sentence),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878' ), Translation),
+        )
+      },
+      align = "center"
+    ),
+    
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
     

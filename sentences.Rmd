@@ -220,16 +220,17 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-sntdly <- sntdly[sample(1:nrow(sntdly)),]
-sntdly <- bind_rows(sntdly, comdly)
-sntdly <- sntdly[sample(1:nrow(sntdly)),]
+# sntdly <- sntdly[sample(1:nrow(sntdly)),]
+# sntdly <- bind_rows(sntdly, comdly)
+# sntdly <- sntdly[sample(1:nrow(sntdly)),]
+comdly <- comdly[sample(1:nrow(comdly)),]
 
 reactable(
-  sntdly,
+  comdly,
   columns = list(
     Sentence = colDef(
       cell = function(value, index) {
-        Meaning <- sntdly$Meaning[index]
+        Meaning <- comdly$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else "Unknown"
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
