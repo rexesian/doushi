@@ -98,6 +98,8 @@ kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
 cvnptn <- read_csv("jpdb/SPKPTNB-GRML.csv")
 phrslprt <- read_csv("jpdb/PHRPARTCL-GRMR.csv")
 gwrds <- read_csv("jpdb/WGRMR-LST.csv")
+prefixs <- read_csv("jpdb/PREFX-WRD.csv")
+elemnts <- read_csv("jpdb/ELMNTRCL-WRD.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1857,9 +1859,9 @@ reactable(
         Meaning <- nadj2.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 500), value),
-          div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 10), Meaning)
+          div(style = list(fontSize = 22, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 11, color = '#404040'), Reading),
+          div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
       },
       align = "center"
@@ -1871,8 +1873,8 @@ reactable(
         T1 <- nadj2.a$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 9), T1)
+          div(style = list(fontSize = 16, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 9, color = '#404040'), T1)
         )
       },
       align = "left"
@@ -1986,9 +1988,9 @@ reactable(
         Meaning <- nadj1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 500), value),
-          div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 10), Meaning)
+          div(style = list(fontSize = 22, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 11, color = '#404040'), Reading),
+          div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
       },
       align = "center"
@@ -2000,8 +2002,8 @@ reactable(
         T1 <- nadj1$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 9), T1)
+          div(style = list(fontSize = 16, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 9, color = '#404040'), T1)
         )
       },
       align = "left"
@@ -2106,9 +2108,9 @@ reactable(
         Meaning <- nounw.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 500), value),
-          div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 10), Meaning)
+          div(style = list(fontSize = 22, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 11, color = '#404040'), Reading),
+          div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
       },
       align = "center"
@@ -2120,8 +2122,8 @@ reactable(
         T1 <- nounw.a$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 9), T1)
+          div(style = list(fontSize = 16, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 9, color = '#404040'), T1)
         )
       },
       align = "left"
@@ -2195,13 +2197,17 @@ reactable(
     ・はじめる　⇢　はじめて　◦ first time
     ・きわめる　⇢　きわめて　◦ extremely, exceedingly
     ・すぐれる　⇢　すぐれて　◦ exceedingly
+    ・いそぐ　　⇢　いそいで　◦ quickly
     ・追う　　　⇢　おって　　◦ later on, shortly, in due course
+    ・かくれる　⇢　かくれて　◦ secretly
 
 ###### **Verbs (Duplication) ⇢ Adverb**
 
     ・おそれる　⇢　おそる-おそる　◦ timidly 
     ・かわる　　⇢　かわる-がわる　◦ in-turn
-    ・みる　　　⇢　みる-みる　　　◦ as you look on
+    ・ます　　　⇢　ます-ます　　　◦ increasingly
+    ・なく　　　⇢　なく-なく　　　◦ in tears
+    ・みる　　　⇢　みる-みる　　　◦ as you look on, very fast, in a twinkle
 
 ###### **Nouns (Adverbial Nouns) ⇢ Adverb**
 
@@ -2254,7 +2260,7 @@ reactable(
     ・ぶじ　　　⇢　ぶじに　　◦ safely
     ・さっそく　⇢　さっそく　◦ immediately      
 
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Adverbs of Degree**</p>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Adverbs of Degree and Quantity**</p>
 
 ###### **Indicates the degree to which the word it modifies**
 
@@ -2281,6 +2287,7 @@ reactable(
     ・あまり　　⇢　あまり　　　◦ (not) very much
     ・ぜんぜん　⇢　ぜんぜん　　◦ (not) at all
     ・なかなか　⇢　なかなか　　◦ pretty, fairly
+    ・たっぷり　⇢　たっぷり　　◦ full, plenty, ample
     ・まあまあ　⇢　まあまあ　　◦ so-so
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Adverbial Nouns of Time and Frequency**</p>
@@ -2320,6 +2327,78 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### Endings
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Affirmative**</p>
+
+    ・まれに・ぜひ
+ 
+<!-- <h> -->
+   
+    ・そういうことも稀にある
+    ・コンサートと併せてぜひお越しください
+ 
+<!-- <h> -->
+     
+    ・Rarely does that happen
+    ・Please come along with the concert
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Negative**</p>
+
+    ・あまり・けっして・たいして・めったに
+ 
+<!-- <h> -->
+   
+    ・あまり幸せそうに見えなかったな
+    ・この矛盾はけっして解かれなかった
+    ・彼女はめったに間違えない
+    ・今の状況もその当時とたいして変わっていません
+ 
+<!-- <h> -->
+     
+    ・He didn't seem very happy
+    ・This contradiction was never resolved
+    ・She rarely makes mistakes
+    ・The situation today is much the same as it was then
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Conjecture**</p>
+
+    ・おそらく・たぶん・ひょっとすると・もしすると
+ 
+<!-- <h> -->
+   
+    ・娘はおそらくもう到着しただろう
+    ・もしかすると来月休みがとれるかもしれない
+    ・たぶんこんな景色が見られるでしょう
+    ・ひょっとすると、正しいモジュールがロードできていないかもしれません
+ 
+<!-- <h> -->
+     
+    ・She's probably already there
+    ・Maybe we can take a vacation next month
+    ・Maybe we'll see a view like this
+    ・Maybe the correct module is not loaded
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ Conditional**</p>
+
+    ・もし・まんがいち・たとえ
+ 
+<!-- <h> -->
+   
+    ・もし何か良い物を見つけたら、お知らせしますね
+    ・たとえ優勝するのは無理でも、やってみます
+    ・万が一できれば、手を貸してくれないか
+ 
+<!-- <h> -->
+
+    ・If I find something good, I'll let you know
+    ・Even if I can't win, I'll try
+    ・If you can, please lend me a hand
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
 #### Examples
 
 ```{r, echo=FALSE, message=FALSE}
@@ -2337,9 +2416,9 @@ reactable(
         Meaning <- adv1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 500), value),
-          div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 10), Meaning)
+          div(style = list(fontSize = 22, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 11, color = '#404040'), Reading),
+          div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
       },
       align = "center"
@@ -2351,8 +2430,8 @@ reactable(
         T1 <- adv1$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 9), T1)
+          div(style = list(fontSize = 16, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 9, color = '#404040'), T1)
         )
       },
       align = "left"
@@ -3130,9 +3209,9 @@ reactable(
 
 ### MC.10: Affixes {.tabset}
 
-#### Prefix
+#### Prefix {.tabset}
 
-A **prefix** is a short element that is attached to the beginning of a word to add an additional meaning to or to change the meaning of the word.
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">A **prefix** is a short element that is attached to the beginning of a word to add an additional meaning to or to change the meaning of the word.</p>
 
     ・お　　olite prefix      
     ・可　　able, ible        
@@ -3147,28 +3226,66 @@ A **prefix** is a short element that is attached to the beginning of a word to a
     ・総　　grand, general     
     ・数　　several, a number of     
 
-<!-- <h> -->
-
-    ・お手紙・letter・お上手・skillful・お忙しい・busy
-    ・可燃物・flammable thing・可溶性・solubility
-    ・各国・each country・各部屋・each room
-    ・片手・one hand・片一方・one of the two・片時・a monent
-    ・逆効果・counter productive・逆コース・reverse course
-    ・ご家族・your family・ご結婚・marriage
-    ・準決勝・semi-final・準会員・associate member
-    ・諸設備・many facilities・諸物価・various prices
-    ・素足・bare foot・素焼き・unglazed pottery
-    ・全国民・the whole nation・全人口・entire population
-    ・総選挙・general election・総合計・grand total
-    ・数多く・in large numbers・数校・several schools
-
 <h6> </h6>
+
+```{r, echo=FALSE, message=FALSE}
+
+prefixs <- prefixs[sample(1:nrow(prefixs)),]
+
+reactable(
+  prefixs,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- prefixs$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 10, color = '#404040'), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    #
+    Sentence = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
+        Translation <- prefixs$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 9, color = '#404040'), Translation)
+        )
+      },
+      align = "left"
+    ),
+
+    Translation = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 90, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+     paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
 
 ------------------------------------------------------------------------
 
-#### Suffix
+#### Suffix {.tabset}
 
-A **suffix** is a short element that is attached to the end of a word to change the meaning of or to add an additional meaning to the word.
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">A **suffix** is a short element that is attached to the end of a word to change the meaning of or to add an additional meaning to the word.</p>
 
     ・家　　er, ian, ist      
     ・限り　limited to, only  
@@ -3189,8 +3306,6 @@ A **suffix** is a short element that is attached to the end of a word to change 
     ・箱型・box type・A型・type A・1990年型・1990 model
     ・忘れがち・tend to・病気がち・often get ill
     ・太りぎみ・verging on obesity・風邪ぎみ・have a slight cold
-
-<h6> </h6>
 
 ------------------------------------------------------------------------
 
@@ -10485,6 +10600,80 @@ reactable(
 
 ------------------------------------------------------------------------
 
+####  Level {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+gwrds.n2 <- gwrds %>% slice(339:470)
+gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
+gwrds.n3 <- gwrds %>% slice(196:338)
+gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
+gwrds.n4 <- gwrds %>% slice(43:195)
+gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
+gwrds.n5 <- gwrds %>% slice(1:42)
+gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
+gwrds.ex <- gwrds %>% slice(471:519)
+gwrds.ex <- gwrds.ex[sample(1:nrow(gwrds.ex)),]
+
+gwrds.na <- bind_rows(gwrds.n2, gwrds.n3)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n4)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n5)
+gwrds.na <- bind_rows(gwrds.na, gwrds.ex)
+
+reactable(
+  gwrds.na,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- gwrds.na$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Sentence <- gwrds.na$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Translation <- gwrds.na$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        Level <- gwrds.na$Level[index]
+        Level <- if (!is.na(Level)) Level else ""
+        tagList(
+          div(style = list(fontSize = 23, fontWeight = 600, color = '#404040'), value),
+          div(style = list(fontSize = 12, fontWeight = 500, color = '#404040'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#404040'), "Level: ", Level),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 19, fontWeight = 500, color = '#404040'), Sentence),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#404040'), Translation),
+        )
+      },
+      align = "center"
+    ),
+    
+    Meaning = colDef(show = FALSE),
+    Level = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 ####  Verb {.tabset}
 
 ##### V1.0
@@ -11653,76 +11842,6 @@ reactable(
 
 ------------------------------------------------------------------------
 
-####  Recall {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-gwrds.n2 <- gwrds %>% slice(339:470)
-gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
-gwrds.n3 <- gwrds %>% slice(196:338)
-gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
-gwrds.n4 <- gwrds %>% slice(43:195)
-gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
-gwrds.n5 <- gwrds %>% slice(1:42)
-gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
-gwrds.ex <- gwrds %>% slice(471:519)
-gwrds.ex <- gwrds.ex[sample(1:nrow(gwrds.ex)),]
-
-gwrds.na <- bind_rows(gwrds.n2, gwrds.n3)
-gwrds.na <- bind_rows(gwrds.na, gwrds.n4)
-gwrds.na <- bind_rows(gwrds.na, gwrds.n5)
-gwrds.na <- bind_rows(gwrds.na, gwrds.ex)
-
-reactable(
-  gwrds.na,
-  columns = list(
-    Words = colDef(
-      cell = function(value, index) {
-        Meaning <- gwrds.na$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentence <- gwrds.na$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else ""
-        Level <- gwrds.na$Level[index]
-        Level <- if (!is.na(Level)) Level else ""
-        tagList(
-          div(style = list(fontSize = 27, fontWeight = 600, color = '#202020', fontFamily = 'Yomogi'), value),
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#202020', fontFamily = 'Klee One'), Meaning),
-          div(style = list(fontSize = 11, fontWeight = 400, color = '#202020', fontFamily = 'Klee One'), "Level: ", Level),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#202020', fontFamily = 'Yomogi'), Sentence),
-        )
-      },
-      align = "center"
-    ),
-    
-    Meaning = colDef(show = FALSE),
-    Level = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
 # <b> Evaluation </b>
 
 ### Recognition {.tabset}
@@ -12278,6 +12397,101 @@ reactable(
       align = "center"
     ),
     Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+#### Elements {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+elemnts <- elemnts %>% na.omit(elemnts)
+elemnts <- elemnts[sample(1:nrow(elemnts)),]
+
+reactable(
+  elemnts,
+  columns = list(
+      Meaning = colDef(
+      cell = function(value, index) {
+        Words <- elemnts$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
+        Reading <- elemnts$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        tagList(
+          div(style = list(fontSize = 23, fontWeight = 600), Words),
+          # div(style = list(fontSize = 10, fontWeight = 400), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500), value)
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Words = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+elemnts <- elemnts[sample(1:nrow(elemnts)),]
+
+reactable(
+  elemnts,
+  columns = list(
+      Words = colDef(
+      cell = function(value, index) {
+        Meaning <- elemnts$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          # div(style = list(fontSize = 13, fontWeight = 600), value),
+          div(style = list(fontSize = 12, fontWeight = 600), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
