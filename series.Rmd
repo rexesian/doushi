@@ -4,7 +4,7 @@ output:
   html_document:
     theme: sandstone
     css: "mystyle.css"
-    toc: true
+    toc: false
     toc_float:
       collapsed: true
       smooth_scroll: true
@@ -20,6 +20,9 @@ body{
 </style>
 ```
 <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Klee+One:wght@400;600&family=New+Tegomin&family=Sawarabi+Gothic&family=Shippori+Mincho+B1:wght@400;500&family=Yomogi&display=swap" rel="stylesheet"> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet"> <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700&display=swap" rel="stylesheet"> <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;1,700&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 ```{css, echo=FALSE}
 .my-tbl {
@@ -80,15 +83,14 @@ dlgcom <- read_csv("jpim/DLGCOM-DLG.csv")
 shrty <- read_csv("jpim/SHRTSTRY-SNT.csv")
 ```
 
-# <b> Immersion </b>
+# <b> Immersion </b> {.tabset}
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Immersion** is the act of fully submerging something within another.</p>
 
-------------------------------------------------------------------------
+## <b> Series </b> {.tabset}
 
-# <b> Series </b> {.tabset}
+### S01:Yuru.Camp  {.tabset}
 
-## S01:Yuru.Camp  {.tabset}
-
-### S1.EP2
+#### S1.EP2
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -129,9 +131,9 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### S1.EP3
+#### S1.EP3
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -172,9 +174,9 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### S1.EP4
+#### S1.EP4
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -215,11 +217,11 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-## S02:Bottakuri {.tabset}
+### S02:Bottakuri {.tabset}
 
-### S1.EP1
+#### S1.EP1
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -261,9 +263,9 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### S1.EP2
+#### S1.EP2
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -305,11 +307,11 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-## S03:Psyco.Pass {.tabset}
+### S03:Psyco.Pass {.tabset}
 
-### S1.EP1
+#### S1.EP1
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -350,294 +352,13 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-# <b> Exerpts </b> {.tabset}
+## <b> Dialogues </b> {.tabset}
 
-## E01 {.tabset}
+### Japan Life {.tabset}
 
-```{r, echo=FALSE, message=FALSE}
-
-exrpt <- exrpt[sample(1:nrow(exrpt)),]
-exrpt.a <- exrpt  %>% slice(1:1)
-
-reactable(
-  exrpt.a,
-  columns = list(
-    Script = colDef(
-      minWidth = 280,
-      cell = function(value, index) {
-        Translation <- exrpt.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-        )
-      },
-      align = "left"
-    ),
-    Translation = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-## E02 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-exrpt.a <- exrpt  %>% slice(2:2)
-
-reactable(
-  exrpt.a,
-  columns = list(
-    Script = colDef(
-      minWidth = 280,
-      cell = function(value, index) {
-        Translation <- exrpt.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-        )
-      },
-      align = "left"
-    ),
-    Translation = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-# <b> Stories </b> {.tabset}
-
-## S01 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-shrty <- shrty[sample(1:nrow(shrty)),]
-shrty.a <- shrty  %>% slice(1:1)
-
-reactable(
-  shrty.a,
-  columns = list(
-    Script = colDef(
-      minWidth = 280,
-      cell = function(value, index) {
-        Translation <- shrty.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-        )
-      },
-      align = "left"
-    ),
-    Translation = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-## S02 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-shrty.a <- shrty  %>% slice(2:2)
-
-reactable(
-  shrty.a,
-  columns = list(
-    Script = colDef(
-      minWidth = 280,
-      cell = function(value, index) {
-        Translation <- shrty.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-        )
-      },
-      align = "left"
-    ),
-    Translation = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-## S03 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-shrty.a <- shrty  %>% slice(3:3)
-
-reactable(
-  shrty.a,
-  columns = list(
-    Script = colDef(
-      minWidth = 280,
-      cell = function(value, index) {
-        Translation <- shrty.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-        )
-      },
-      align = "left"
-    ),
-    Translation = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-# <b> Dialogues </b> {.tabset}
-
-## Japan Life {.tabset}
-
-### D01:Arrival {.tabset}
+#### D01:Arrival {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -695,11 +416,11 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-## Random {.tabset}
+### Random {.tabset}
 
-### D01:Restaurant {.tabset}
+#### D01:Restaurant {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -740,9 +461,9 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### D02:Icecream {.tabset}
+#### D02:Icecream {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -783,4 +504,285 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Exerpts </b> {.tabset}
+
+### E01 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+exrpt <- exrpt[sample(1:nrow(exrpt)),]
+exrpt.a <- exrpt  %>% slice(1:1)
+
+reactable(
+  exrpt.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- exrpt.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### E02 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+exrpt.a <- exrpt  %>% slice(2:2)
+
+reactable(
+  exrpt.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- exrpt.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Stories </b> {.tabset}
+
+### S01 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+shrty <- shrty[sample(1:nrow(shrty)),]
+shrty.a <- shrty  %>% slice(1:1)
+
+reactable(
+  shrty.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- shrty.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### S02 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+shrty.a <- shrty  %>% slice(2:2)
+
+reactable(
+  shrty.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- shrty.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### S03 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+shrty.a <- shrty  %>% slice(3:3)
+
+reactable(
+  shrty.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- shrty.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+<!-- ------------------------------------------------------------------------ -->

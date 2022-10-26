@@ -259,6 +259,53 @@ reactable(
 
 ```
 
+
+<!-- ------------------------------------------------------------------------ -->
+
+## Casual {.tabset}
+
+### Sayachi
+
+```{r, echo=FALSE, message=FALSE}
+
+sntcas.sayachi <- sntcas %>% select(Sayachi.Sentences, Sayachi.Translation) %>% rename(Sentences = Sayachi.Sentences)
+sntcas.sayachi <- sntcas.sayachi %>% na.omit(sntcas.sayachi)
+sntcas.sayachi <- sntcas.sayachi[sample(1:nrow(sntcas.sayachi)),]
+
+reactable(
+  sntcas.sayachi,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Sayachi.Translation <- sntcas.sayachi$Sayachi.Translation[index]
+        Sayachi.Translation <- if (!is.na(Sayachi.Translation)) Sayachi.Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 9, color = '#787878'), Sayachi.Translation)
+        )
+      },
+      align = "center"
+    ),
+    Sayachi.Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 <!-- ------------------------------------------------------------------------ -->
 
 ## Random {.tabset}
@@ -618,56 +665,9 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-## Casual {.tabset}
-
-### Sayachi
-
-```{r, echo=FALSE, message=FALSE}
-
-sntcas.sayachi <- sntcas %>% select(Sayachi.Sentences, Sayachi.Translation)
-sntcas.sayachi <- sntcas.sayachi %>% na.omit(sntcas.sayachi)
-sntcas.sayachi <- sntcas.sayachi[sample(1:nrow(sntcas.sayachi)),]
-
-reactable(
-  sntcas.sayachi,
-  columns = list(
-    Sayachi.Sentences = colDef(
-      cell = function(value, index) {
-        Sayachi.Translation <- sntcas.sayachi$Sayachi.Translation[index]
-        Sayachi.Translation <- if (!is.na(Sayachi.Translation)) Sayachi.Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 9, color = '#787878'), Sayachi.Translation)
-        )
-      },
-      align = "center"
-    ),
-    Sayachi.Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-## English {.tabset}
+## Recall {.tabset}
 
 ### 1
-
 
 ```{r, echo=FALSE, message=FALSE}
 

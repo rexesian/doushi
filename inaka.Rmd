@@ -20,6 +20,9 @@ body{
 </style>
 ```
 <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Klee+One:wght@400;600&family=New+Tegomin&family=Sawarabi+Gothic&family=Shippori+Mincho+B1:wght@400;500&family=Yomogi&display=swap" rel="stylesheet"> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap" rel="stylesheet"> <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700&display=swap" rel="stylesheet"> <link rel="preconnect" href="https://fonts.gstatic.com"> <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;1,700&display=swap" rel="stylesheet"> <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 ```{css, echo=FALSE}
 .my-tbl {
@@ -100,6 +103,7 @@ cvnptn <- read_csv("jpdb/SPKPTNB-GRML.csv")
 phrslprt <- read_csv("jpdb/PHRPARTCL-GRMR.csv")
 gwrds <- read_csv("jpdb/WGRMR-LST.csv")
 prefixs <- read_csv("jpdb/PREFX-WRD.csv")
+sufixs <- read_csv("jpdb/SUFX-WRD.csv")
 elemnts <- read_csv("jpdb/ELMNTRCL-WRD.csv")
 dailycom <- read_csv("jpdb/COMMSTRGY-STRGY.csv")
 ```
@@ -3196,16 +3200,60 @@ reactable(
     ・がち　tend to, often    
     ・ぎみ　verging on        
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・音楽家・musician・専門家・specialist・資本家・capilist
-    ・今週限り・limited to this week・一度限り・only once
-    ・読み方・how to read・way of reading
-    ・あなた方・you・先生方・the teachers
-    ・卵形・egg-shaped・三日月形・cresent
-    ・箱型・box type・A型・type A・1990年型・1990 model
-    ・忘れがち・tend to・病気がち・often get ill
-    ・太りぎみ・verging on obesity・風邪ぎみ・have a slight cold
+```{r, echo=FALSE, message=FALSE}
+
+sufixs <- sufixs[sample(1:nrow(sufixs)),]
+
+reactable(
+  sufixs,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- sufixs$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 10, color = '#404040'), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    #
+    Sentence = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
+        Translation <- sufixs$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 500, color = '#404040'), value),
+          div(style = list(fontSize = 9, color = '#404040'), Translation)
+        )
+      },
+      align = "left"
+    ),
+
+    Translation = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 90, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+     paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
 
 ------------------------------------------------------------------------
 
@@ -3213,7 +3261,7 @@ reactable(
 
 #### Years
 
-**Nan nen(kan) desu ka?**`How many weeks?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Nan nen(kan) desu ka?** How many weeks?</p>
 
     ・一年(間)　　・ichi-nen(kan)
     ・二年(間)　　・ni-nen(kan)
@@ -3233,7 +3281,7 @@ reactable(
 
 #### Months
 
-**Nan kagetsu(kan) desu ka?**`How many months?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Nan kagetsu(kan) desu ka?** How many months?</p>
 
     ・一か月(間)　　・ik-kagetsu(kan)
     ・二か月(間)　　・ni-kagetsu(kan)
@@ -3253,7 +3301,7 @@ reactable(
 
 #### Weeks
 
-**Nan shuu(kan) desu ka?**`How many weeks?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Nan shuu(kan) desu ka?** How many weeks?</p>
 
     ・一週(間)　　・is-shuu(kan)
     ・二週(間)　　・ni-shuu(kan)
@@ -3273,7 +3321,7 @@ reactable(
 
 #### Days
 
-**Nan nichi(kan) desu ka?**`How many days?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Nan nichi(kan) desu ka?** How many weeks?</p>
 
     ・一日(間)　　・ichi-nichi(kan)
     ・二日(間)　　・futsu-ka(kan)
@@ -3305,7 +3353,7 @@ reactable(
 
 #### Hours
 
-**Nan jikan desu ka?**`How many hours?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Nan jikan desu ka?** How many hours?</p>
 
     ・一時間　　・ichi-jikan
     ・二時間　　・ni-jikan
@@ -3326,7 +3374,7 @@ reactable(
 
 #### Minutes
 
-**Nan pun desu ka?**`How many minutes?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Nan pun desu ka?** How many minutes?</p>
 
     ・一分　　・ip-pun
     ・二分　　・ni-fun
@@ -3349,7 +3397,7 @@ reactable(
 
 #### Seconds
 
-**Nan byou desu ka?**`How many seconds?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Nan byou desu ka?** How many seconds?</p>
 
     ・一秒　　・ichi-byou
     ・二秒　　・ni-byou
@@ -3372,7 +3420,7 @@ reactable(
 
 ##### Time of the day
 
-**Nan ji desu ka?**`What time is it?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Nan ji desu ka?** What time is it?</p>
 
     ・１時　　　　　　　　　・いちじ　　　　　　　・1 o'clock
     ・２時　　　　　　　　　・にじ　　　　　　　　・2 o'clock
@@ -3410,7 +3458,7 @@ reactable(
 
 ##### Days of the week
 
-**Kyou wa nan youbi desu ka?**`What day is today?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Kyou wa nan youbi desu ka?** What day is today?</p>
 
     ・月曜日　　・げつようび　　　・Monday
     ・火曜日　　・かようび　　　　・Tuesday
@@ -3426,7 +3474,7 @@ reactable(
 
 ##### Days of the month
 
-**Kyou wa nan nichi desu ka?**`What is the date today?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Kyou wa nan nichi desu ka?** What is the date today?</p>
 
 ![](cal.png)
 
@@ -3436,7 +3484,7 @@ reactable(
 
 ##### Months of a year
 
-**Nan gatsu desu ka?**`What month is it?`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020">**① Nan gatsu desu ka?** What month is it?</p>
 
     ・一月　　　・いちがつ　　　　・January
     ・二月　　　・にがつ　　　　　・Febuary
@@ -3459,7 +3507,7 @@ reactable(
 
 #### Existence
 
-**Place of existence**
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Place of Existence**</p>
 
     ・机の上に本があります
     ・駅の前にお店があります
@@ -3475,7 +3523,7 @@ reactable(
 
 #### Location
 
-**Place of location**
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Place of Location**</p>
 
     ・私の家族は香港にいます
     ・私たちは東京駅の近くに住んでいます
@@ -3491,7 +3539,7 @@ reactable(
 
 #### Action
 
-**Place of action**
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Place of Action**</p>
 
     ・図書館で勉強しています
     ・喫茶店で話しています
@@ -3511,7 +3559,7 @@ reactable(
 
 #### Recipient
 
-**Place of recipient of the object acted upon**
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Place of Recipient of the object acted upon**</p>
 
     ・ペンをテーブルの上に置く
     ・財布にお金入れます
@@ -3529,7 +3577,7 @@ reactable(
 
 #### Occurrence
 
-**Place of occurrence of an event**
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Place of Occurrence of an event**</p>
 
     ・明日このホールで説明会があります
     ・体育館でスポーツ大会があります
@@ -3545,7 +3593,7 @@ reactable(
 
 #### Destination
 
-**Place of destination**
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Place of Destination**</p>
 
     ・私は日本に行きます
     ・ヨーロッパに行きたいです
@@ -3565,7 +3613,7 @@ reactable(
 
 #### Direction
 
-**Place of direction**
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Place of Direction**</p>
 
     ・こちらへどうぞ
     ・日本へ来てください
@@ -3585,7 +3633,7 @@ reactable(
 
 #### Relative 
 
-**Relative position**
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Relative Position**</p>
 
     ・中　　　　　　　・inside
     ・外　　　　　　　・outside
@@ -3688,7 +3736,6 @@ reactable(
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Verbs** are a words that expresses the physical or mental activities carried out by the subject of a sentence.</p>
 
 #### Structure
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Forms**</p>
 
 ![](verbtable.png)
 
@@ -12880,7 +12927,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Yomogi'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -12936,7 +12983,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Yomogi'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -12992,7 +13039,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Yomogi'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -13048,7 +13095,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Yomogi'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -13104,7 +13151,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Yomogi'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -13160,7 +13207,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Yomogi'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -13216,7 +13263,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Yomogi'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -13272,7 +13319,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Yomogi'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -13328,7 +13375,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Yomogi'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -13384,7 +13431,292 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 300, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+
+------------------------------------------------------------------------
+
+##### 11
+
+```{r, echo=FALSE, message=FALSE}
+
+# inkrdngs <- inkrdngs[sample(1:nrow(inkrdngs)),]
+inkrdngs.a <- inkrdngs  %>% slice(11:11)
+
+reactable(
+  inkrdngs.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- inkrdngs.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+
+------------------------------------------------------------------------
+
+##### 12
+
+```{r, echo=FALSE, message=FALSE}
+
+# inkrdngs <- inkrdngs[sample(1:nrow(inkrdngs)),]
+inkrdngs.a <- inkrdngs  %>% slice(12:12)
+
+reactable(
+  inkrdngs.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- inkrdngs.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+
+------------------------------------------------------------------------
+
+##### 13
+
+```{r, echo=FALSE, message=FALSE}
+
+# inkrdngs <- inkrdngs[sample(1:nrow(inkrdngs)),]
+inkrdngs.a <- inkrdngs  %>% slice(13:13)
+
+reactable(
+  inkrdngs.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- inkrdngs.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+
+------------------------------------------------------------------------
+
+##### 14
+
+```{r, echo=FALSE, message=FALSE}
+
+# inkrdngs <- inkrdngs[sample(1:nrow(inkrdngs)),]
+inkrdngs.a <- inkrdngs  %>% slice(14:14)
+
+reactable(
+  inkrdngs.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- inkrdngs.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+
+------------------------------------------------------------------------
+
+##### 15
+
+```{r, echo=FALSE, message=FALSE}
+
+# inkrdngs <- inkrdngs[sample(1:nrow(inkrdngs)),]
+inkrdngs.a <- inkrdngs  %>% slice(15:15)
+
+reactable(
+  inkrdngs.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- inkrdngs.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -14079,51 +14411,51 @@ reactable(
         T9 <- expspk$T9[index]
         T9 <- if (!is.na(T9)) T9 else ""
         tagList(
-          div(style = list(fontSize = 26, fontWeight = 800, fontFamily = 'Yomogi'), value),
+          div(style = list(fontSize = 26, fontWeight = 800, fontFamily = 'Zen Maru Gothic'), value),
           div(style = list(fontSize = 15, fontWeight = 500), Expn),
           div(style = list(fontSize = 11, fontWeight = 300), Trans),
           div("•"),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Yomogi'), Convo1),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo1),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Yomogi'), Convo2),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo2),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T2),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Yomogi'), Convo3),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo3),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T3),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Yomogi'), Convo4),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo4),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T4),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Yomogi'), Convo5),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo5),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T5),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Yomogi'), Convo6),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo6),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T6),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Yomogi'), Convo7),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo7),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T7),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Yomogi'), Convo8),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo8),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T8),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Yomogi'), Convo9),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo9),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T9),
         )
       },
