@@ -94,7 +94,7 @@ grmrref <- read_csv("jpdb/GRMRREF-GRMR.csv")
 inkrdngs <- read_csv("jpdb/INKRDNGS-SCRPTS.csv")
 inkspkng <- read_csv("jpdb/INKSPKNG-SSTNC.csv")
 vnsgg <- read_csv("jpdb/GRMRVRB-VGRM.csv")
-cmpvrbs <- read_csv("jpdb/VRBCOMPD-WRDS.csv")
+cmpvrbs <- read_csv("jpdb/VRBCMP-CMPWD.csv")
 kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
 cvnptn <- read_csv("jpdb/SPKPTNB-GRML.csv")
 phrslprt <- read_csv("jpdb/PHRPARTCL-GRMR.csv")
@@ -6312,9 +6312,9 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### PT2.0: Phrasal Noun {.tabset}
+### PT2.0: Noun Phrase {.tabset}
 
-<p style="font-size:11px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020;">**Phrasal Noun** are modified nouns. Modifiers precedes the noun it modifies.</p>
+<p style="font-size:11px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020;">**Noun Phrase** are modified nouns. Modifiers precedes the noun it modifies.</p>
 
 #### Concept {.tabset}
 
@@ -6686,9 +6686,9 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### PT3.0: Phrasal Verb {.tabset}
+### PT3.0: Verb Phrase {.tabset}
 
-<p style="font-size:11px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020;">**Phrasal Verb** are modified verbs. A more specific nuance added to its original meaning.</p>
+<p style="font-size:11px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020;">**Verb Phrase** are modified verbs. A more specific nuance added to its original meaning.</p>
 
 #### Concept {.tabset}
 
@@ -6806,12 +6806,23 @@ reactable(
 
 ------------------------------------------------------------------------
 
-##### Auxiliaries
-<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Auxiliaries** are attached to a verb to create a more specific meaning.</p>
+##### Compounds
 
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Verb + Auxiliary: Structure**</p>
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Compounds** are words combined together to create a new word with a more specific meaning.</p>
 
-###### **⚭　Vneg-stem・Vnoun-stem・Vru・Vcmd-stem・Vte・Vta + Auxiliary**
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Verb + Verb: Compound**</p>
+
+###### **⚭　Vnoun-stem + Verb**
+
+    ・書き直す・飛び出す・持ち出す・作り直す
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Verb + Auxiliary-Verb: Auxiliary**</p>
+
+###### **⚭　Vnoun-stem・Vte + Auxiliary**
+
+    ・食べかける・教えてあげる・連れていく・歩いている
+
+<h6> </h6>
 
 ------------------------------------------------------------------------
 
@@ -6827,7 +6838,7 @@ cmpvrbs <- cmpvrbs[sample(1:nrow(cmpvrbs)),]
 reactable(
   cmpvrbs,
   columns = list(
-      Phrasal.Verb = colDef(
+      Words = colDef(
       cell = function(value, index) {
         Meaning <- cmpvrbs$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -6843,7 +6854,7 @@ reactable(
     ),
     Reading = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
@@ -6874,14 +6885,14 @@ cmpvrbs <- cmpvrbs[sample(1:nrow(cmpvrbs)),]
 reactable(
   cmpvrbs,
   columns = list(
-      Sentence = colDef(
+      Sentences = colDef(
       cell = function(value, index) {
-        Phrasal.Verb <- cmpvrbs$Phrasal.Verb[index]
-        Phrasal.Verb <- if (!is.na(Phrasal.Verb)) Phrasal.Verb else ""
+        Words <- cmpvrbs$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
         Translation <- cmpvrbs$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 24, fontWeight = 600), Phrasal.Verb),
+          div(style = list(fontSize = 24, fontWeight = 600), Words),
           div(style = list(fontSize = 16, fontWeight = 500), value),
           div(style = list(fontSize = 8, fontWeight = 400, color = '#787878'), Translation)
         )
@@ -6890,7 +6901,7 @@ reactable(
     ),
     Reading = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Phrasal.Verb = colDef(show = FALSE),
+    Words = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
