@@ -87,6 +87,7 @@ spphr <- read_csv("jpdb/NHGSPKPHR-PHRS.csv")
 smpsnt <- read_csv("jpdb/NHGSPKSMP-SNTS.csv")
 cmnknjp <- read_csv("jpdb/SPKCSL-CSLSNT.csv")
 expspk <- read_csv("jpdb/EXPTSN-EXP.csv")
+expswd <- read_csv("jpdb/EXPTSNS-EXP.csv")
 dct <- read_csv("jpdb/RDNSHRT-WRDS.csv")
 nadj2 <- read_csv("jpdb/ADJI-ADJI.csv")
 nadj1 <- read_csv("jpdb/ADJNA-ADJNA.csv")
@@ -16216,6 +16217,8 @@ reactable(
 
 # <b> Expressions </b> {.tabset}
 
+## Expressions
+
 ```{r echo=FALSE, message=FALSE}
 
 reactable(
@@ -16264,51 +16267,51 @@ reactable(
         T9 <- expspk$T9[index]
         T9 <- if (!is.na(T9)) T9 else ""
         tagList(
-          div(style = list(fontSize = 26, fontWeight = 800, fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 26, fontWeight = 800), value),
           div(style = list(fontSize = 15, fontWeight = 500), Expn),
           div(style = list(fontSize = 11, fontWeight = 300), Trans),
           div("•"),
-          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo1),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), Convo1),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo2),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), Convo2),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T2),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo3),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), Convo3),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T3),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo4),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), Convo4),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T4),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo5),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), Convo5),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T5),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo6),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), Convo6),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T6),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo7),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), Convo7),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T7),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo8),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), Convo8),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T8),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), Convo9),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), Convo9),
           div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T9),
         )
       },
@@ -16359,232 +16362,100 @@ reactable(
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
-<!-- # <b> Target <b/> {.tabset} -->
+## Review
 
-<!-- ### Verb -->
+```{r echo=FALSE, message=FALSE}
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-4"> -->
+expswd <- expswd[sample(1:nrow(na.omit(expswd))),]
 
-<!-- ```{r, echo=FALSE, message=FALSE} -->
+reactable(
+  expswd,
+  columns = list(
+      Translation = colDef(
+       cell = function(value, index) {
+        Expression <- expswd$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600), Expression),
+          # div(style = list(fontSize = 15, fontWeight = 500), value),
+        )
+      },
+      align = "center"
+      ),
+      Expression = colDef(show = FALSE)
+  ),
+  outlined = TRUE, defaultPageSize = 1, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px"
+    )
+  )
+)
 
-<!-- lverbs.a <- lverbs %>% slice(1:100) -->
-<!-- lverbs.a <- lverbs.a %>% rename(Sentences = S1) -->
+```
 
-<!-- reactable( -->
-<!--   lverbs.a, -->
-<!--   columns = list( -->
-<!--     Verbs = colDef( -->
-<!--       cell = function(value, index) { -->
-<!--         Meaning <- lverbs.a$Meaning[index] -->
-<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
-<!--         Reading <- lverbs.a$Reading[index] -->
-<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
-<!--         Words <- lverbs.a$Words[index] -->
-<!--         Words <- if (!is.na(Words)) Words else "" -->
-<!--         Type <- lverbs.a$Type[index] -->
-<!--         Type <- if (!is.na(Type)) Type else "" -->
-<!--         Sentences <- lverbs.a$Sentences[index] -->
-<!--         Sentences <- if (!is.na(Sentences)) Sentences else "" -->
-<!--         T1 <- lverbs.a$T1[index] -->
-<!--         T1 <- if (!is.na(T1)) T1 else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 28, fontWeight = 500), value), -->
-<!--           div(style = list(fontSize = 12), Reading), -->
-<!--           div(style = list(fontSize = 9.2, fontWeight = 500), Meaning), -->
-<!--           div(style = list(fontSize = 9), Type), -->
-<!--           div(style = list(fontSize = 14.5, fontWeight = 500), Sentences), -->
-<!--           div(style = list(fontSize = 9), T1) -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
+------------------------------------------------------------------------
 
-<!--     Reading = colDef(show = FALSE), -->
-<!--     Meaning = colDef(show = FALSE), -->
-<!--     Type = colDef(show = FALSE), -->
-<!--     Sentences = colDef(show = FALSE), -->
-<!--     S2 = colDef(show = FALSE), -->
-<!--     S3 = colDef(show = FALSE), -->
-<!--     T1 = colDef(show = FALSE), -->
-<!--     T2 = colDef(show = FALSE), -->
-<!--     T3 = colDef(show = FALSE), -->
-<!--     Words = colDef(show = FALSE), -->
-<!--     Rank = colDef(show = FALSE) -->
-<!--   ), -->
-<!--   defaultPageSize = 1, -->
-<!--   theme = reactableTheme( -->
-<!--     # Vertically center cells -->
-<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250), -->
-<!--     searchInputStyle = list( -->
-<!--       paddingLeft = "8px", -->
-<!--       paddingTop = "8px", -->
-<!--       paddingBottom = "8px", -->
-<!--       width = "100%" -->
-<!--     ) -->
-<!--   ), -->
-<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
+## Recall
 
-<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
-<!-- ) -->
 
-<!-- ``` -->
+```{r echo=FALSE, message=FALSE}
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-4"> -->
+expswd <- expswd[sample(1:nrow(na.omit(expswd))),]
 
-<!-- ```{r, echo=FALSE, message=FALSE} -->
+reactable(
+  expswd,
+  columns = list(
+      Expression = colDef(
+       cell = function(value, index) {
+        Translation <- expswd$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          # div(style = list(fontSize = 21, fontWeight = 600), Expression),
+          div(style = list(fontSize = 12, fontWeight = 600), Translation)
+        )
+      },
+      align = "center"
+      ),
+      Translation = colDef(show = FALSE)
+  ),
+  outlined = TRUE, defaultPageSize = 1, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px"
+    )
+  )
+)
 
-<!-- lverbs.b <- lverbs %>% slice(1:100) -->
-<!-- lverbs.b <- lverbs.b %>% rename(Sentences = S1) -->
-<!-- lverbs.b <- lverbs.b[sample(1:nrow(lverbs.b)),] -->
-
-<!-- reactable( -->
-<!--   lverbs.b, -->
-<!--   columns = list( -->
-<!--     Verbs = colDef( -->
-<!--       cell = function(value, index) { -->
-<!--         Meaning <- lverbs.b$Meaning[index] -->
-<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
-<!--         Reading <- lverbs.b$Reading[index] -->
-<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
-<!--         Words <- lverbs.b$Words[index] -->
-<!--         Words <- if (!is.na(Words)) Words else "" -->
-<!--         Type <- lverbs.b$Type[index] -->
-<!--         Type <- if (!is.na(Type)) Type else "" -->
-<!--         Sentences <- lverbs.b$Sentences[index] -->
-<!--         Sentences <- if (!is.na(Sentences)) Sentences else "" -->
-<!--         T1 <- lverbs.b$T1[index] -->
-<!--         T1 <- if (!is.na(T1)) T1 else "" -->
-<!--         tagList( -->
-<!--           # div(style = list(fontSize = 28, fontWeight = 500), value), -->
-<!--           # div(style = list(fontSize = 12), Reading), -->
-<!--           # div(style = list(fontSize = 9.2, fontWeight = 500), Meaning), -->
-<!--           # div(style = list(fontSize = 9), Type), -->
-<!--           div(style = list(fontSize = 14.5, fontWeight = 500), Sentences), -->
-<!--           # div(style = list(fontSize = 9), T1) -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-
-<!--     Reading = colDef(show = FALSE), -->
-<!--     Meaning = colDef(show = FALSE), -->
-<!--     Type = colDef(show = FALSE), -->
-<!--     Sentences = colDef(show = FALSE), -->
-<!--     S2 = colDef(show = FALSE), -->
-<!--     S3 = colDef(show = FALSE), -->
-<!--     T1 = colDef(show = FALSE), -->
-<!--     T2 = colDef(show = FALSE), -->
-<!--     T3 = colDef(show = FALSE), -->
-<!--     Words = colDef(show = FALSE), -->
-<!--     Rank = colDef(show = FALSE) -->
-<!--   ), -->
-<!--   defaultPageSize = 1, -->
-<!--   theme = reactableTheme( -->
-<!--     # Vertically center cells -->
-<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250), -->
-<!--     searchInputStyle = list( -->
-<!--       paddingLeft = "8px", -->
-<!--       paddingTop = "8px", -->
-<!--       paddingBottom = "8px", -->
-<!--       width = "100%" -->
-<!--     ) -->
-<!--   ), -->
-<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
-
-<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
-<!-- ) -->
-
-<!-- ``` -->
-
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-4"> -->
-
-<!-- ```{r, echo=FALSE, message=FALSE} -->
-
-<!-- lverbs.c <- lverbs %>% slice(1:100) -->
-<!-- lverbs.c <- lverbs.c %>% rename(Sentences = S1) -->
-
-<!-- reactable( -->
-<!--   lverbs.c, -->
-<!--   columns = list( -->
-<!--     Verbs = colDef( -->
-<!--       cell = function(value, index) { -->
-<!--         Meaning <- lverbs.c$Meaning[index] -->
-<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
-<!--         Reading <- lverbs.c$Reading[index] -->
-<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
-<!--         Words <- lverbs.c$Words[index] -->
-<!--         Words <- if (!is.na(Words)) Words else "" -->
-<!--         Type <- lverbs.c$Type[index] -->
-<!--         Type <- if (!is.na(Type)) Type else "" -->
-<!--         Sentences <- lverbs.c$Sentences[index] -->
-<!--         Sentences <- if (!is.na(Sentences)) Sentences else "" -->
-<!--         T1 <- lverbs.c$T1[index] -->
-<!--         T1 <- if (!is.na(T1)) T1 else "" -->
-<!--         tagList( -->
-<!--           # div(style = list(fontSize = 28, fontWeight = 500), value), -->
-<!--           # div(style = list(fontSize = 12), Reading), -->
-<!--           # div(style = list(fontSize = 9.2, fontWeight = 500), Meaning), -->
-<!--           # div(style = list(fontSize = 9), Type), -->
-<!--           # div(style = list(fontSize = 14.5), Sentences), -->
-<!--           div(style = list(fontSize = 11, fontWeight = 600), T1) -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-
-<!--     Reading = colDef(show = FALSE), -->
-<!--     Meaning = colDef(show = FALSE), -->
-<!--     Type = colDef(show = FALSE), -->
-<!--     Sentences = colDef(show = FALSE), -->
-<!--     S2 = colDef(show = FALSE), -->
-<!--     S3 = colDef(show = FALSE), -->
-<!--     T1 = colDef(show = FALSE), -->
-<!--     T2 = colDef(show = FALSE), -->
-<!--     T3 = colDef(show = FALSE), -->
-<!--     Words = colDef(show = FALSE), -->
-<!--     Rank = colDef(show = FALSE) -->
-<!--   ), -->
-<!--   defaultPageSize = 1, -->
-<!--   theme = reactableTheme( -->
-<!--     # Vertically center cells -->
-<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250), -->
-<!--     searchInputStyle = list( -->
-<!--       paddingLeft = "8px", -->
-<!--       paddingTop = "8px", -->
-<!--       paddingBottom = "8px", -->
-<!--       width = "100%" -->
-<!--     ) -->
-<!--   ), -->
-<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
-
-<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
-<!-- ) -->
-
-<!-- ``` -->
-
-<!-- </div> -->
-<!-- </div> -->
-
-<!-- ------------------------------------------------------------------------ -->
-
-<!-- ### Na-Adj -->
-
-<!-- ------------------------------------------------------------------------ -->
-
-<!-- ### I-Adj -->
-
-<!-- ------------------------------------------------------------------------ -->
-
-<!-- ### Adverb -->
-
-<!-- ------------------------------------------------------------------------ -->
-
-<!-- ### Grammar -->
+```
 
 ------------------------------------------------------------------------
 
