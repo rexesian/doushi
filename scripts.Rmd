@@ -405,7 +405,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-scknj2.a <- scknj2 %>% slice(201:310)
+scknj2.a <- scknj2 %>% slice(201:320)
 scknj2.b <- scknj2 %>% slice(1:200)
 scknj2.a <- scknj2.a[sample(1:nrow(scknj2.a)),]
 scknj2.b <- scknj2.b[sample(1:nrow(scknj2.b)),]
@@ -948,48 +948,6 @@ reactable(
       },
       align = "center"
     ),
-    # W1 = colDef(
-    #   cell = function(value, index) {
-    #     M1 <- scknj3r$M1[index]
-    #     M1 <- if (!is.na(M1)) M1 else ""
-    #     R1 <- scknj3r$R1[index]
-    #     R1 <- if (!is.na(R1)) R1 else ""
-    #     tagList(
-    #       div(style = list(fontSize = 19, fontWeight = 500), value),
-    #       # div(style = list(fontSize = 9, fontWeight = 400), R1),
-    #       # div(style = list(fontSize = 9, fontWeight = 400), M1),
-    #     )
-    #   },
-    #   align = "center"
-    # ),
-    # W2 = colDef(
-    #   cell = function(value, index) {
-    #     M2 <- scknj3r$M2[index]
-    #     M2 <- if (!is.na(M2)) M2 else ""
-    #     R2 <- scknj3r$R2[index]
-    #     R2 <- if (!is.na(M2)) R2 else ""
-    #     tagList(
-    #       div(style = list(fontSize = 19, fontWeight = 500), value),
-    #       # div(style = list(fontSize = 9, fontWeight = 400), R2),
-    #       # div(style = list(fontSize = 9, fontWeight = 400), M2),
-    #     )
-    #   },
-    #   align = "center"
-    # ),
-    # W3 = colDef(
-    #   cell = function(value, index) {
-    #     M3 <- scknj3r$M3[index]
-    #     M3 <- if (!is.na(M3)) M3 else ""
-    #     R3 <- scknj3r$R3[index]
-    #     R3 <- if (!is.na(R3)) R3 else ""
-    #     tagList(
-    #       div(style = list(fontSize = 19, fontWeight = 500), value),
-    #       # div(style = list(fontSize = 9, fontWeight = 400), R3),
-    #       # div(style = list(fontSize = 9, fontWeight = 400), M3),
-    #     )
-    #   },
-    #   align = "center"
-    # ),
     R1 = colDef(show = FALSE),
     R2 = colDef(show = FALSE),
     R3 = colDef(show = FALSE),
@@ -1028,11 +986,27 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-scknj3w <- scknj3 %>% select(W1, W2, W3)
-scknj3w <- scknj3w %>% pivot_longer(everything())
-scknj3w <- scknj3w %>% rename(Kanji = value)
+scknj3w.a <- scknj3 %>% slice(1:25) %>% select(W1, W2, W3)
+scknj3w.b <- scknj3 %>% slice(26:50) %>% select(W1, W2, W3)
+scknj3w.c <- scknj3 %>% slice(51:370) %>% select(W1, W2, W3)
+
+scknj3w.a <- scknj3w.a %>% pivot_longer(everything())
+scknj3w.b <- scknj3w.b %>% pivot_longer(everything())
+scknj3w.c <- scknj3w.c %>% pivot_longer(everything())
+
+scknj3w.a <- scknj3w.a %>% rename(Kanji = value)
+scknj3w.b <- scknj3w.b %>% rename(Kanji = value)
+scknj3w.c <- scknj3w.c %>% rename(Kanji = value)
+
+scknj3w.a <- scknj3w.a[sample(1:nrow(scknj3w.a)),]
+scknj3w.b <- scknj3w.b[sample(1:nrow(scknj3w.b)),]
+scknj3w.c <- scknj3w.c[sample(1:nrow(scknj3w.c)),]
+
+scknj3w <- bind_rows(scknj3w.a, scknj3w.b)
+scknj3w <- bind_rows(scknj3w, scknj3w.c)
+
 scknj3w <- na.omit(scknj3w) %>% select(Kanji)
-scknj3w <- scknj3w[sample(1:nrow(scknj3w)),]
+# scknj3w <- scknj3w[sample(1:nrow(scknj3w)),]
 
 reactable(
   scknj3w,
