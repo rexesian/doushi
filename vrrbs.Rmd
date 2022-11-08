@@ -989,7 +989,7 @@ Describes a habitual or repeated action.
 
 ```{r, echo=FALSE, message=FALSE}
 
-lverbs.w <- lverbs %>% slice(1:459)
+lverbs.w <- lverbs %>% slice(1:501)
 lverbs.w <- lverbs.w %>% rename(Sentences = S1)
 # lverbs <- lverbs[sample(1:nrow(lverbs)),]
 
@@ -1791,7 +1791,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-verbrwords.freq <- lverbs %>% slice(1:459) %>% select(Verbs, Reading, Meaning, Type)
+verbrwords.freq <- lverbs %>% slice(1:501) %>% select(Verbs, Reading, Meaning, Type)
 verbrwords.freq <- verbrwords.freq  %>% rename(Words = Verbs)
 verbrwords.freq <- verbrwords.freq[sample(1:nrow(verbrwords.freq)),]
 
@@ -2132,7 +2132,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-verbrsent.freq <- lverbs %>% slice(1:459) %>% select(S1, T1)
+verbrsent.freq <- lverbs %>% slice(1:501) %>% select(S1, T1)
 verbrsent.freq <- verbrsent.freq[sample(1:nrow(verbrsent.freq)),]
 verbrsent.freq <- verbrsent.freq  %>% rename(Sentences = S1)
 verbrsent.freq <- verbrsent.freq %>% na.omit(verbrsent.freq)
@@ -2436,32 +2436,32 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-verbrwords.freqrc <- lverbs %>% slice(1:459) %>% select(Verbs, Reading, Meaning, Type)
-verbrwords.freqrc <- verbrwords.freqrc  %>% rename(Words = Verbs)
+verbrwords.freqrc <- lverbs %>% slice(1:501) %>% select(Verbs, Reading, Meaning, Type)
+verbrwords.freqrc <- verbrwords.freqrc %>% rename(Words = Verbs)
 verbrwords.freqrc <- verbrwords.freqrc[sample(1:nrow(verbrwords.freqrc)),]
 
 reactable(
   verbrwords.freqrc,
   columns = list(
-    Words = colDef(
+    Meaning = colDef(
       cell = function(value, index) {
         Reading <- verbrwords.freqrc$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- verbrwords.freqrc$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Words <- verbrwords.freqrc$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
         Type <- verbrwords.freqrc$Type[index]
         Type <- if (!is.na(Type)) Type else ""
         tagList(
-          div(style = list(fontSize = 26, fontWeight = 600), value),
+          div(style = list(fontSize = 26, fontWeight = 600), Words),
           div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 10), Meaning),
+          div(style = list(fontSize = 10), value),
           div(style = list(fontSize = 10), Type)
         )
       },
       align = "center"
     ),
 
-    Meaning = colDef(show = FALSE),
+    Words = colDef(show = FALSE),
     Reading = colDef(show = FALSE),
     Type = colDef(show = FALSE)
 
@@ -2499,7 +2499,7 @@ reactable(
       cell = function(value, index) {
         Reading <- verbrwords.freqrc$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- verbrwords.s$Meaning[index]
+        Meaning <- verbrwords.freqrc$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Type <- verbrwords.freqrc$Type[index]
         Type <- if (!is.na(Type)) Type else ""
@@ -2554,25 +2554,25 @@ verbrwords.sylrc <- verbrwords.sylrc[sample(1:nrow(verbrwords.sylrc)),]
 reactable(
   verbrwords.sylrc,
   columns = list(
-    Words = colDef(
+    Meaning = colDef(
       cell = function(value, index) {
         Reading <- verbrwords.sylrc$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- verbrwords.sylrc$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Words <- verbrwords.sylrc$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
         Type <- verbrwords.sylrc$Type[index]
         Type <- if (!is.na(Type)) Type else ""
         tagList(
-          div(style = list(fontSize = 26, fontWeight = 600), value),
+          div(style = list(fontSize = 26, fontWeight = 600), Words),
           div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 10), Meaning),
+          div(style = list(fontSize = 10), value),
           div(style = list(fontSize = 10), Type)
         )
       },
       align = "center"
     ),
 
-    Meaning = colDef(show = FALSE),
+    Words = colDef(show = FALSE),
     Reading = colDef(show = FALSE),
     Type = colDef(show = FALSE)
 
@@ -2659,7 +2659,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-verbrwords.a <- lverbs %>% slice(1:234) %>% select(Verbs, Reading, Meaning, Type)
+verbrwords.a <- lverbs %>% slice(1:501) %>% select(Verbs, Reading, Meaning, Type)
 verbrwords.a <- verbrwords.a  %>% rename(Words = Verbs)
 verbrwords.b <- vnstx %>% slice(1:1071) %>% select(Words, Reading, Meaning, Type)
 verbrwords.c <- vnstr %>% select(Words, Reading, Meaning, Type)
@@ -2673,25 +2673,25 @@ verbrwords.s <- verbrwords.s[sample(1:nrow(verbrwords.s)),]
 reactable(
   verbrwords.s,
   columns = list(
-    Words = colDef(
+    Meaning = colDef(
       cell = function(value, index) {
         Reading <- verbrwords.s$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- verbrwords.s$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Words <- verbrwords.s$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
         Type <- verbrwords.s$Type[index]
         Type <- if (!is.na(Type)) Type else ""
         tagList(
-          div(style = list(fontSize = 26, fontWeight = 600), value),
+          div(style = list(fontSize = 26, fontWeight = 600), Words),
           div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 10), Meaning),
+          div(style = list(fontSize = 10), value),
           div(style = list(fontSize = 10), Type)
         )
       },
       align = "center"
     ),
 
-    Meaning = colDef(show = FALSE),
+    Words = colDef(show = FALSE),
     Reading = colDef(show = FALSE),
     Type = colDef(show = FALSE)
 
@@ -2780,7 +2780,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-verbrsent.freqrc <- lverbs %>% slice(1:459) %>% select(S1, T1)
+verbrsent.freqrc <- lverbs %>% slice(1:501) %>% select(S1, T1)
 verbrsent.freqrc <- verbrsent.freqrc[sample(1:nrow(verbrsent.freqrc)),]
 verbrsent.freqrc <- verbrsent.freqrc  %>% rename(Sentences = S1)
 verbrsent.freqrc <- verbrsent.freqrc %>% na.omit(verbrsent.freqrc)
@@ -2973,7 +2973,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-verbrsent.a <- lverbs %>% slice(1:234) %>% select(S1, T1)
+verbrsent.a <- lverbs %>% slice(1:501) %>% select(S1, T1)
 verbrsent.b <- vnstx %>% slice(1:1071) %>% select(S1, T1)
 verbrsent.c <- vnstr %>% select(S1, T1)
 verbrsent.d <- vnsts %>% select(S3, T3)
