@@ -259,7 +259,6 @@ reactable(
 
 ```
 
-
 <!-- ------------------------------------------------------------------------ -->
 
 ## <b> Casual </b> {.tabset}
@@ -669,7 +668,7 @@ reactable(
 
 ### Level {.tabset}
 
-### Beginner
+#### Beginner
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -711,7 +710,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Intermediate
+#### Intermediate
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -754,7 +753,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Advance
+#### Advance
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -794,6 +793,91 @@ reactable(
 
 ```
 
+<!-- ------------------------------------------------------------------------ -->
+
+### Daily {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+comdly <- comdly[sample(1:nrow(comdly)),]
+
+reactable(
+  comdly,
+  columns = list(
+    Sentence = colDef(
+      cell = function(value, index) {
+        Meaning <- comdly$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else "Unknown"
+        tagList(
+          # div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 12, fontWeight = 600), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Casual {.tabset}
+
+#### Sayachi
+
+```{r, echo=FALSE, message=FALSE}
+
+sntcas.sayachi <- sntcas.sayachi[sample(1:nrow(sntcas.sayachi)),]
+
+reactable(
+  sntcas.sayachi,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Sayachi.Translation <- sntcas.sayachi$Sayachi.Translation[index]
+        Sayachi.Translation <- if (!is.na(Sayachi.Translation)) Sayachi.Translation else "Unknown"
+        tagList(
+          # div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 12, fontWeight = 600), Sayachi.Translation)
+        )
+      },
+      align = "center"
+    ),
+    Sayachi.Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -825,7 +909,7 @@ reactable(
           # div(style = list(fontSize = 10), Structure),
           
           # div(style = list(fontSize = 24, fontWeight = 600), Sentences),
-          div(style = list(fontSize = 13, fontWeight = 600), Translation),
+          div(style = list(fontSize = 12, fontWeight = 600), Translation),
         )
       },
       align = "center"
@@ -876,7 +960,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 13, fontWeight = 600), Translation),
+          div(style = list(fontSize = 12, fontWeight = 600), Translation),
         )
       },
       align = "center"
@@ -918,7 +1002,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 13, fontWeight = 600), Translation),
+          div(style = list(fontSize = 12, fontWeight = 600), Translation),
         )
       },
       align = "center"
@@ -960,7 +1044,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
           # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 13, fontWeight = 600), Translation)
+          div(style = list(fontSize = 12, fontWeight = 600), Translation)
         )
       },
       align = "center"
@@ -1002,7 +1086,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
           # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 13, fontWeight = 600), Translation)
+          div(style = list(fontSize = 12, fontWeight = 600), Translation)
         )
       },
       align = "center"
@@ -1044,7 +1128,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
           # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 13, fontWeight = 600), Translation)
+          div(style = list(fontSize = 12, fontWeight = 600), Translation)
         )
       },
       align = "center"
@@ -1086,7 +1170,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
           # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 13, fontWeight = 600), Translation)
+          div(style = list(fontSize = 12, fontWeight = 600), Translation)
         )
       },
       align = "center"
@@ -1128,7 +1212,7 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
           # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 13, fontWeight = 600), Translation)
+          div(style = list(fontSize = 12, fontWeight = 600), Translation)
         )
       },
       align = "center"
