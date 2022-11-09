@@ -93,7 +93,7 @@ kitchen <- read_csv("jpim/KTCHN-SCRPT.csv")
 
 ## <b> Series </b> {.tabset}
 
-### S01:Yuru.Camp  {.tabset}
+### Yuru.Camp  {.tabset}
 
 #### S1.EP1
 
@@ -439,7 +439,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### S02:Bottakuri {.tabset}
+### Bottakuri {.tabset}
 
 #### S1.EP1
 
@@ -529,7 +529,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### S03:Psyco.Pass {.tabset}
+### Psyco.Pass {.tabset}
 
 #### S1.EP1
 
@@ -574,7 +574,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### S04:Heroine {.tabset}
+### Heroine {.tabset}
 
 #### S1.EP1
 
@@ -662,7 +662,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### S05:Flying.Witch {.tabset}
+### Flying.Witch {.tabset}
 
 #### S1.EP1
 
@@ -750,7 +750,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### S06:Love.Blind {.tabset}
+### Love.Blind {.tabset}
 
 #### S1.EP1
 
@@ -795,7 +795,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### S07:Future.Diary {.tabset}
+### Future.Diary {.tabset}
 
 #### S1.EP1
 
@@ -841,7 +841,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### S08:Mocos.Kitchen {.tabset}
+### Mocos.Kitchen {.tabset}
 
 #### S1.EP1
 
@@ -1099,6 +1099,61 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 exrpt.a <- exrpt  %>% slice(2:2)
+
+reactable(
+  exrpt.a,
+  columns = list(
+    Script = colDef(
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- exrpt.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 400, color = '#202020', fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### E03 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+exrpt.a <- exrpt  %>% slice(3:3)
 
 reactable(
   exrpt.a,
