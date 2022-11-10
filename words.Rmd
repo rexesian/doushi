@@ -2593,7 +2593,7 @@ gwrds.n4 <- gwrds %>% slice(43:195)
 gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
 gwrds.n5 <- gwrds %>% slice(1:42)
 gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
-gwrds.ex <- gwrds %>% slice(471:519)
+gwrds.ex <- gwrds %>% slice(471:534)
 gwrds.ex <- gwrds.ex[sample(1:nrow(gwrds.ex)),]
 
 gwrds.na <- bind_rows(gwrds.n2, gwrds.n3)
@@ -5016,6 +5016,101 @@ reactable(
 
     House.Read  = colDef(show = FALSE),
     House.Trans = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### Person
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.person <- wordsw.person[sample(1:nrow(wordsw.person)),]
+
+reactable(
+  wordsw.person,
+  columns = list(
+    Person.Trans = colDef(
+      cell = function(value, index) {
+        Person.Read <- wordsw.person$Person.Read[index]
+        Person.Read <- if (!is.na(Person.Read)) Person.Read else ""
+        Person <- wordsw.person$Person[index]
+        Person <- if (!is.na(Person)) Person else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 600), Person),
+        )
+      },
+      align = "center"
+    ),
+
+    Person.Read  = colDef(show = FALSE),
+    Person = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.person <- wordsw.person[sample(1:nrow(wordsw.person)),]
+
+reactable(
+  wordsw.person,
+  columns = list(
+    Person = colDef(
+      cell = function(value, index) {
+        Person.Read <- wordsw.person$Person.Read[index]
+        Person.Read <- if (!is.na(Person.Read)) Person.Read else ""
+        Person.Trans <- wordsw.person$Person.Trans[index]
+        Person.Trans <- if (!is.na(Person.Trans)) Person.Trans else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Person.Trans),
+        )
+      },
+      align = "center"
+    ),
+
+    Person.Read  = colDef(show = FALSE),
+    Person.Trans = colDef(show = FALSE)
 
   ),
   defaultPageSize = 1,
