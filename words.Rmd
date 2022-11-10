@@ -121,7 +121,7 @@ reactable(
         Meaning <- mwrdslvl5$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -168,7 +168,7 @@ reactable(
         Meaning <- mwrdslvl5$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
         )
@@ -223,7 +223,7 @@ reactable(
         Meaning <- mwrdslvl4$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -270,7 +270,7 @@ reactable(
         Meaning <- mwrdslvl4$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
         )
@@ -325,7 +325,7 @@ reactable(
         Meaning <- mwrdslvl3$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -372,7 +372,7 @@ reactable(
         Meaning <- mwrdslvl3$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
         )
@@ -427,7 +427,7 @@ reactable(
         Meaning <- mwrdslvl2$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -474,7 +474,7 @@ reactable(
         Meaning <- mwrdslvl2$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
         )
@@ -529,7 +529,7 @@ reactable(
         Meaning <- mwrdslvl1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -576,7 +576,7 @@ reactable(
         Meaning <- mwrdslvl1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
         )
@@ -680,7 +680,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-corewz <- corew %>% slice(1:200) %>% rename(Sentences = S1)
+corewz <- corew %>% slice(1:200) %>% rename(Sentences = S1, Translation = T1)
 corewz <- corewz[sample(1:nrow(corewz)),]
 
 reactable(
@@ -699,22 +699,23 @@ reactable(
         M2 <- if (!is.na(M2)) M2 else ""
         M3 <- corewz$M3[index]
         M3 <- if (!is.na(M3)) M3 else ""
-        T1 <- corewz$T1[index]
-        T1 <- if (!is.na(T1)) T1 else ""
+        Translation <- corewz$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 18, fontWeight = 600), Sentences),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 17, fontWeight = 400), Sentences),
           # div(style = list(fontSize = 10), Reading),
           # div(style = list(fontSize = 9), M1),
           # div(style = list(fontSize = 9), M2),
           # div(style = list(fontSize = 9), M3),
-          div(style = list(fontSize = 9, color = '#404040'), T1)
+          # div(style = list(fontSize = 9, color = '#404040'), Translation)
         )
       },
       align = "center"
     ),
 
-    T1 = colDef(show = FALSE),
+    Translation = colDef(show = FALSE),
     M1 = colDef(show = FALSE),
     M2 = colDef(show = FALSE),
     M3 = colDef(show = FALSE),
@@ -823,10 +824,11 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 18, fontWeight = 600), Sentences),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 17, fontWeight = 400), Sentences),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 10), Meaning),
-          div(style = list(fontSize = 9, color = '#404040'), Translation)
+          # div(style = list(fontSize = 9, color = '#404040'), Translation)
         )
       },
       align = "center"
@@ -945,8 +947,9 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 18, fontWeight = 600), Sentences),
-          div(style = list(fontSize = 9, color = '#404040'), Translation),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 17, fontWeight = 400), Sentences),
+          # div(style = list(fontSize = 9, color = '#404040'), Translation),
         )
       },
       align = "center"
@@ -1725,7 +1728,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-## <b> Categories </b> {.tabset}
+## <b> Category </b> {.tabset}
 
 ### Na.Adj {.tabset}
 
@@ -1748,7 +1751,7 @@ reactable(
         Meaning <- nadja$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
@@ -1804,9 +1807,9 @@ reactable(
         T1 <- nadjb$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
-          div(style = list(fontSize = 17, fontWeight = 400), S1),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 17, fontWeight = 400), S1),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
         )
       },
       align = "center"
@@ -1863,7 +1866,7 @@ reactable(
         Meaning <- nadja$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
@@ -1919,9 +1922,9 @@ reactable(
         T1 <- nadjb$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
-          div(style = list(fontSize = 17, fontWeight = 400), S1),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 17, fontWeight = 400), S1),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
         )
       },
       align = "center"
@@ -1976,7 +1979,7 @@ reactable(
         Meaning <- adva$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
@@ -2031,9 +2034,9 @@ reactable(
         T1 <- advb$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
-          div(style = list(fontSize = 17, fontWeight = 400), S1),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 17, fontWeight = 400), S1),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
         )
       },
       align = "center"
@@ -2089,7 +2092,7 @@ reactable(
         Meaning <- noun$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
@@ -2145,9 +2148,9 @@ reactable(
         T1 <- noun$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
-          div(style = list(fontSize = 17, fontWeight = 400), S1),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 17, fontWeight = 400), S1),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
         )
       },
       align = "center"
@@ -2203,7 +2206,7 @@ reactable(
         Meaning <- ontp$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
@@ -2258,9 +2261,9 @@ reactable(
         T1 <- ontp$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
-          div(style = list(fontSize = 17, fontWeight = 400), S1),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)     
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 17, fontWeight = 400), S1),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)     
         )
       },
       align = "center"
@@ -2316,7 +2319,7 @@ reactable(
         Meaning <- verbsw$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
@@ -2372,9 +2375,9 @@ reactable(
         T1 <- verbsw$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
-          div(style = list(fontSize = 17, fontWeight = 400), S1),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 17, fontWeight = 400), S1),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
         )
       },
       align = "center"
@@ -2431,7 +2434,7 @@ reactable(
         Meaning <- connector$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
@@ -2487,9 +2490,9 @@ reactable(
         T1 <- connector$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
-          div(style = list(fontSize = 17, fontWeight = 400), S1),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 17, fontWeight = 400), S1),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#787878'), T1)
         )
       },
       align = "center"
@@ -2544,7 +2547,7 @@ reactable(
         Meaning <- gwrds.na$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 11), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
@@ -2615,9 +2618,9 @@ reactable(
         Translation <- gwrds.na$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
-          div(style = list(fontSize = 17, fontWeight = 500), Sentence),
-          div(style = list(fontSize = 9, fontWeight = 400), Translation),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 17, fontWeight = 500), Sentence),
+          # div(style = list(fontSize = 9, fontWeight = 400), Translation),
         )
       },
       align = "center"
@@ -2670,7 +2673,7 @@ reactable(
         Translation <- ewrds$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 10), Meaning)
         )
       },
@@ -2720,9 +2723,9 @@ reactable(
         Translation <- ewrds$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
-          div(style = list(fontSize = 17, fontWeight = 400), Sentence),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878' ), Translation),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 17, fontWeight = 400), Sentence),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#787878' ), Translation),
         )
       },
       align = "center"
@@ -2775,7 +2778,7 @@ reactable(
         Reading <- techw$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 10), Reading),
           div(style = list(fontSize = 10), Meaning)
         )
@@ -2828,9 +2831,9 @@ reactable(
         Translation <- techw$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 25, fontWeight = 600), value),
-          div(style = list(fontSize = 17, fontWeight = 400), Sentence),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#787878' ), Translation),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          # div(style = list(fontSize = 17, fontWeight = 400), Sentence),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#787878' ), Translation),
         )
       },
       align = "center"
@@ -2887,7 +2890,7 @@ reactable(
         Meaning <- jlptw5$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -2934,7 +2937,7 @@ reactable(
         Meaning <- jlptw5$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
         )
@@ -2989,7 +2992,7 @@ reactable(
         Meaning <- jlptw4$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -3036,7 +3039,7 @@ reactable(
         Meaning <- jlptw4$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
         )
@@ -3091,7 +3094,7 @@ reactable(
         Meaning <- jlptw3$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -3138,7 +3141,7 @@ reactable(
         Meaning <- jlptw3$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
         )
@@ -3193,7 +3196,7 @@ reactable(
         Meaning <- jlptw2$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -3240,7 +3243,7 @@ reactable(
         Meaning <- jlptw2$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
         )
@@ -3295,7 +3298,7 @@ reactable(
         Meaning <- jlptw1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           div(style = list(fontSize = 9), Reading),
           div(style = list(fontSize = 9, fontWeight = 500), Meaning),
         )
@@ -3342,7 +3345,7 @@ reactable(
         Meaning <- jlptw1$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600), value),
+          div(style = list(fontSize = 24, fontWeight = 600), value),
           # div(style = list(fontSize = 9), Reading),
           # div(style = list(fontSize = 8), Meaning),
         )
@@ -3884,11 +3887,873 @@ reactable(
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+<!-- <!-- ------------------------------------------------------------------------ --> -->
 
-## <b> Review </b> {.tabset}
+<!-- ## <b> Review </b> {.tabset} -->
+
+<!-- ### Basic {.tabset} -->
+
+<!-- #### Core -->
+
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- corewz <- corewz[sample(1:nrow(corewz)),] -->
+
+<!-- reactable( -->
+<!--   corewz, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Reading <- corewz$Reading[index] -->
+<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         Translation <- corewz$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         M1 <- corewz$M1[index] -->
+<!--         M1 <- if (!is.na(M1)) M1 else "" -->
+<!--         M2 <- corewz$M2[index] -->
+<!--         M2 <- if (!is.na(M2)) M2 else "" -->
+<!--         M3 <- corewz$M3[index] -->
+<!--         M3 <- if (!is.na(M3)) M3 else "" -->
+<!--         Words <- corewz$Words[index] -->
+<!--         Words <- if (!is.na(Words)) Words else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+
+<!--     Words = colDef(show = FALSE), -->
+<!--     M1 = colDef(show = FALSE), -->
+<!--     M2 = colDef(show = FALSE), -->
+<!--     M3 = colDef(show = FALSE), -->
+<!--     Translation = colDef(show = FALSE), -->
+<!--     Reading = colDef(show = FALSE) -->
+
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- corewz <- corewz[sample(1:nrow(corewz)),] -->
+
+<!-- reactable( -->
+<!--   corewz, -->
+<!--   columns = list( -->
+<!--     Translation = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Reading <- corewz$Reading[index] -->
+<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         Sentences <- corewz$Sentences[index] -->
+<!--         Sentences <- if (!is.na(Sentences)) Sentences else "" -->
+<!--         M1 <- corewz$M1[index] -->
+<!--         M1 <- if (!is.na(M1)) M1 else "" -->
+<!--         M2 <- corewz$M2[index] -->
+<!--         M2 <- if (!is.na(M2)) M2 else "" -->
+<!--         M3 <- corewz$M3[index] -->
+<!--         M3 <- if (!is.na(M3)) M3 else "" -->
+<!--         Words <- corewz$Words[index] -->
+<!--         Words <- if (!is.na(Words)) Words else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 20, fontWeight = 600), Sentences) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+
+<!--     Words = colDef(show = FALSE), -->
+<!--     M1 = colDef(show = FALSE), -->
+<!--     M2 = colDef(show = FALSE), -->
+<!--     M3 = colDef(show = FALSE), -->
+<!--     Sentences = colDef(show = FALSE), -->
+<!--     Reading = colDef(show = FALSE) -->
+
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     # Vertically center cells -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- <!-- ------------------------------------------------------------------------ --> -->
+
+<!-- #### Common -->
+
+<!-- <!-- ------------------------------------------------------------------------ --> -->
+
+<!-- #### Random -->
+
+<!-- <!-- ------------------------------------------------------------------------ --> -->
+
+<!-- ### Daily {.tabset} -->
 
 <!-- ------------------------------------------------------------------------ -->
 
 ## <b> Recall </b> {.tabset}
 
+### Level {.tabset}
+
+#### L5
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl5 <- mwrdslvl5[sample(1:nrow(mwrdslvl5)),]
+
+reactable(
+  mwrdslvl5,
+  columns = list(
+    Meaning = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl5$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Expression <- mwrdslvl5$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600), Expression),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Expression = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl5 <- mwrdslvl5[sample(1:nrow(mwrdslvl5)),]
+
+reactable(
+  mwrdslvl5,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl5$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- mwrdslvl5$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L4
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl4 <- mwrdslvl4[sample(1:nrow(mwrdslvl4)),]
+
+reactable(
+  mwrdslvl4,
+  columns = list(
+    Meaning = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl4$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Expression <- mwrdslvl4$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600), Expression),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Expression = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl4 <- mwrdslvl4[sample(1:nrow(mwrdslvl4)),]
+
+reactable(
+  mwrdslvl4,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl4$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- mwrdslvl4$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L3
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl3 <- mwrdslvl3[sample(1:nrow(mwrdslvl3)),]
+
+reactable(
+  mwrdslvl3,
+  columns = list(
+    Meaning = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl3$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Expression <- mwrdslvl3$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600), Expression),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Expression = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl3 <- mwrdslvl3[sample(1:nrow(mwrdslvl3)),]
+
+reactable(
+  mwrdslvl3,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl3$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- mwrdslvl3$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L2
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl2 <- mwrdslvl2[sample(1:nrow(mwrdslvl2)),]
+
+reactable(
+  mwrdslvl2,
+  columns = list(
+    Meaning = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Expression <- mwrdslvl2$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600), Expression),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Expression = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl2 <- mwrdslvl2[sample(1:nrow(mwrdslvl2)),]
+
+reactable(
+  mwrdslvl2,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- mwrdslvl2$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L1
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl1 <- mwrdslvl1[sample(1:nrow(mwrdslvl1)),]
+
+reactable(
+  mwrdslvl1,
+  columns = list(
+    Meaning = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl1$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Expression <- mwrdslvl1$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600), Expression),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Expression = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+mwrdslvl1 <- mwrdslvl1[sample(1:nrow(mwrdslvl1)),]
+
+reactable(
+  mwrdslvl1,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Reading <- mwrdslvl1$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- mwrdslvl1$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Meaning),
+        )
+      },
+      align = "center"
+    ),
+
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Basic {.tabset}
+
+#### Core
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+corewz <- corewz[sample(1:nrow(corewz)),]
+
+reactable(
+  corewz,
+  columns = list(
+    Translation = colDef(
+      cell = function(value, index) {
+        Reading <- corewz$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Sentences <- corewz$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
+        M1 <- corewz$M1[index]
+        M1 <- if (!is.na(M1)) M1 else ""
+        M2 <- corewz$M2[index]
+        M2 <- if (!is.na(M2)) M2 else ""
+        M3 <- corewz$M3[index]
+        M3 <- if (!is.na(M3)) M3 else ""
+        Words <- corewz$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 600), Sentences)
+        )
+      },
+      align = "center"
+    ),
+
+    Words = colDef(show = FALSE),
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+corewz <- corewz[sample(1:nrow(corewz)),]
+
+reactable(
+  corewz,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Reading <- corewz$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Translation <- corewz$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        M1 <- corewz$M1[index]
+        M1 <- if (!is.na(M1)) M1 else ""
+        M2 <- corewz$M2[index]
+        M2 <- if (!is.na(M2)) M2 else ""
+        M3 <- corewz$M3[index]
+        M3 <- if (!is.na(M3)) M3 else ""
+        Words <- corewz$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Translation)
+        )
+      },
+      align = "center"
+    ),
+
+    Words = colDef(show = FALSE),
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    Translation = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### Common
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+cnmw <- cnmw[sample(1:nrow(cnmw)),]
+
+reactable(
+  cnmw,
+  columns = list(
+    Translation = colDef(
+      cell = function(value, index) {
+        Meaning <- cnmw$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- cnmw$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Sentences <- cnmw$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
+        Words <- cnmw$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 600), Sentences),
+        )
+      },
+      align = "center"
+    ),
+    
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
+    Words = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+cnmw <- cnmw[sample(1:nrow(cnmw)),]
+
+reactable(
+  cnmw,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Meaning <- cnmw$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- cnmw$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Translation <- cnmw$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        Words <- cnmw$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Translation),
+        )
+      },
+      align = "center"
+    ),
+    
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Translation = colDef(show = FALSE),
+    Words = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### Random
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Daily {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Category {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Random {.tabset}
