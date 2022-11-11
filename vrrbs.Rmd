@@ -79,6 +79,7 @@ verbrw <- read_csv("jpdb/VERBSNTW-VERBS.csv")
 verbrev <- read_csv("jpdb/VERBSRVW-VERBS.csv")
 verbphr <- read_csv("jpdb/VERBSPHR-VERBS.csv")
 vrbxte <- read_csv("jpdb/VRBEXT-WRDS.csv")
+vrbexpr <- read_csv("jpdb/VRBEXPR-WRDS.csv")
 ```
 
 # <b> Verbs </b> {.tabset}
@@ -625,41 +626,7 @@ vrbxte <- read_csv("jpdb/VRBEXT-WRDS.csv")
 
 #### Vvol
 
-**Volitional-Form**
-
-<p style="font-size:12px;">
-
-(❖) **Godan Verb (Volitional Form)**
-
-</p>
-
-    ・買う　　⇢   買おう
-    ・待つ　　⇢   待おう
-    ・知る　　⇢   知ろう
-    ・書く　　⇢   書こう
-    ・泳ぐ　　⇢   泳ごう
-    ・話す　　⇢   話そう
-    ・死ぬ　　⇢   死のう
-    ・読む　　⇢   読もう
-    ・遊ぶ　　⇢   遊ぼう
-
-<p style="font-size:12px;">
-
-(❖) **Ichidan Verb (Volitional Form)**
-
-</p>
-
-    ・食べる　⇢   食べよう
-    ・見る　　⇢   見よう
-
-<p style="font-size:12px;">
-
-(❖) **Irregular Verb (Volitional Form)**
-
-</p>
-
-    ・来る　　⇢   来よう
-    ・する　　⇢   しよう
+![](Vvol.png){width=60%}
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -1404,6 +1371,78 @@ reactable(
     Meaning = colDef(show = FALSE),
     Ext = colDef(show = FALSE),
     Approx = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 150),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Expression </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbexpr <- vrbexpr[sample(1:nrow(vrbexpr)),]
+
+reactable(
+  vrbexpr,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- vrbexpr$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- vrbexpr$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Ext <- vrbexpr$Ext[index]
+        Ext <- if (!is.na(Ext)) Ext else ""
+        Remarks <- vrbexpr$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 9), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Expression = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
+        Translation <- vrbexpr$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        Ext <- vrbexpr$Ext[index]
+        Ext <- if (!is.na(Ext)) Ext else ""
+        Remarks <- vrbexpr$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 600), value),
+          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 10.5, fontWeight = 500), Ext),
+          div(style = list(fontSize = 10.5), Remarks),
+        )
+      },
+      align = "center"
+    ),    
+    Ext = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
     Remarks = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
