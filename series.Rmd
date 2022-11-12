@@ -86,6 +86,7 @@ witch <- read_csv("jpim/WITCH-SCRPT.csv")
 blind <- read_csv("jpim/LSBLND-SCRPT.csv")
 diary <- read_csv("jpim/DRY-SCRPT.csv")
 kitchen <- read_csv("jpim/KTCHN-SCRPT.csv")
+thausnd <- read_csv("jpim/TRHAUSND-SCRPT.csv")
 ```
 
 # <b> Immersion </b> {.tabset}
@@ -901,7 +902,6 @@ reactable(
 
 ```
 
-
 <!-- ------------------------------------------------------------------------ -->
 
 ### Mocos.Kitchen {.tabset}
@@ -918,6 +918,55 @@ reactable(
     Script.EP1 = colDef(
       cell = function(value, index) {
         Meaning.EP1 <- kitchen.a$Meaning.EP1[index]
+        Meaning.EP1 <- if (!is.na(Meaning.EP1)) Meaning.EP1 else "Unknown"
+        tagList(
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 9, color = '#787878'), Meaning.EP1),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Meaning.EP1 = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 6,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Terrace.House {.tabset}
+
+#### S6.EP1
+
+```{r, echo=FALSE, message=FALSE}
+
+thausnd.a <- thausnd %>% select(Script.EP1, Meaning.EP1)
+
+reactable(
+  na.omit(thausnd.a),
+  columns = list(
+    Script.EP1 = colDef(
+      cell = function(value, index) {
+        Meaning.EP1 <- thausnd.a$Meaning.EP1[index]
         Meaning.EP1 <- if (!is.na(Meaning.EP1)) Meaning.EP1 else "Unknown"
         tagList(
           div(style = list(fontSize = 2), "."),
