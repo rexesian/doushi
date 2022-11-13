@@ -351,6 +351,50 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+### Ikechan
+
+```{r, echo=FALSE, message=FALSE}
+
+sntcas.ikechan <- sntcas %>% select(Ikechan.Sentences, Ikechan.Translation) %>% rename(Sentences = Ikechan.Sentences)
+sntcas.ikechan <- sntcas.ikechan %>% na.omit(sntcas.ikechan)
+sntcas.ikechan <- sntcas.ikechan[sample(1:nrow(sntcas.ikechan)),]
+
+reactable(
+  sntcas.ikechan,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Ikechan.Translation <- sntcas.ikechan$Ikechan.Translation[index]
+        Ikechan.Translation <- if (!is.na(Ikechan.Translation)) Ikechan.Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 9, color = '#787878'), Ikechan.Translation)
+        )
+      },
+      align = "center"
+    ),
+    Ikechan.Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## <b> Random </b> {.tabset}
 
 ### 1
