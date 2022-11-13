@@ -307,6 +307,50 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+### Kakochin
+
+```{r, echo=FALSE, message=FALSE}
+
+sntcas.kakochin <- sntcas %>% select(Kakochin.Sentences, Kakochin.Translation) %>% rename(Sentences = Kakochin.Sentences)
+sntcas.kakochin <- sntcas.kakochin %>% na.omit(sntcas.kakochin)
+sntcas.kakochin <- sntcas.kakochin[sample(1:nrow(sntcas.kakochin)),]
+
+reactable(
+  sntcas.kakochin,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Kakochin.Translation <- sntcas.kakochin$Kakochin.Translation[index]
+        Kakochin.Translation <- if (!is.na(Kakochin.Translation)) Kakochin.Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 9, color = '#787878'), Kakochin.Translation)
+        )
+      },
+      align = "center"
+    ),
+    Kakochin.Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## <b> Random </b> {.tabset}
 
 ### 1
