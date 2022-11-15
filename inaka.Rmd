@@ -113,6 +113,7 @@ spkrefw <- read_csv("jpdb/RCLCNV-WRDS.csv")
 lverbs <- read_csv("jpdb/VERBFRQ-VERBS.csv")
 adjimre <- read_csv("jpdb/ADJCR-SNT.csv")
 cnntvmre <- read_csv("jpdb/CNNTVCR-SNT.csv")
+advlmre <- read_csv("jpdb/ADVLCR-SNT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1816,7 +1817,7 @@ reactable(
 ### IC.2.0: Adverials {.tabset}
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Adverbials** usually appears in the beginning of a sentence.</p>
 
-<h6> </h6>
+#### Examples
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① あいかわらず**</p>
 
@@ -1903,6 +1904,93 @@ reactable(
     ・As expected, he did not come
 
 <h6> </h6>
+
+------------------------------------------------------------------------
+
+#### Extra
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+advlmre <- advlmre[sample(1:nrow(advlmre)),]
+
+reactable(
+  advlmre,
+  columns = list(
+    Translation = colDef(
+      cell = function(value, index) {
+        Sentences <- advlmre$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600, color = '#404040'), Sentences),
+        )
+      },
+      align = "center"
+    ),
+    Sentences = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+advlmre <- advlmre[sample(1:nrow(advlmre)),]
+
+reactable(
+  advlmre,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Translation <- advlmre$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#404040'), Translation),
+        )
+      },
+      align = "center"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
+
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
