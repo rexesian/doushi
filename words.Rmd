@@ -95,6 +95,7 @@ tblw3 <- read_csv("jpdb/TBL3-TBWRDS.csv")
 tblw4 <- read_csv("jpdb/TBL4-TBWRDS.csv")
 tblw5 <- read_csv("jpdb/TBL5-TBWRDS.csv")
 techw <- read_csv("jpdb/WRDSTCH-WRD.csv")
+related <- read_csv("jpdb/RLWRDS-WRDS.csv")
 ```
 
 # <b> Words </b> {.tabset}
@@ -3869,6 +3870,104 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 90),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Related </b> {.tabset}
+
+
+```{r, echo=FALSE, message=FALSE}
+related.a <- related %>% rename(Related.Words = Related.Words.1A)
+related.a <- related.a[sample(1:nrow(related.a)),]
+
+reactable(
+  related.a,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- related.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- related.a$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 11), Reading),
+          div(style = list(fontSize = 10), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    
+    Related.Words = colDef(
+      cell = function(value, index) {
+        Related.Words.1B <- related.a$Related.Words.1B[index]
+        Related.Words.1B <- if (!is.na(Related.Words.1B)) Related.Words.1B else ""
+        Related.Words.2A <- related.a$Related.Words.2A[index]
+        Related.Words.2A <- if (!is.na(Related.Words.2A)) Related.Words.2A else ""
+        Related.Words.2B <- related.a$Related.Words.2B[index]
+        Related.Words.2B <- if (!is.na(Related.Words.2B)) Related.Words.2B else ""
+        Related.Words.3A <- related.a$Related.Words.3A[index]
+        Related.Words.3A <- if (!is.na(Related.Words.3A)) Related.Words.3A else ""
+        Related.Words.3B <- related.a$Related.Words.3B[index]
+        Related.Words.3B <- if (!is.na(Related.Words.3B)) Related.Words.3B else ""
+        Related.Words.4A <- related.a$Related.Words.4A[index]
+        Related.Words.4A <- if (!is.na(Related.Words.4A)) Related.Words.4A else ""
+        Related.Words.4B <- related.a$Related.Words.4B[index]
+        Related.Words.4B <- if (!is.na(Related.Words.4B)) Related.Words.4B else ""
+        Related.Words.5A <- related.a$Related.Words.5A[index]
+        Related.Words.5A <- if (!is.na(Related.Words.5A)) Related.Words.5A else ""
+        Related.Words.5B <- related.a$Related.Words.5B[index]
+        Related.Words.5B <- if (!is.na(Related.Words.5B)) Related.Words.5B else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), value),
+          div(style = list(fontSize = 10), Related.Words.1B),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.2A),
+          div(style = list(fontSize = 10), Related.Words.2B),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.3A),
+          div(style = list(fontSize = 10), Related.Words.3B),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.4A),
+          div(style = list(fontSize = 10), Related.Words.4B),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.5A),
+          div(style = list(fontSize = 10), Related.Words.5B),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "center"
+    ),
+    
+    Related.Words.1B = colDef(show = FALSE),
+    Related.Words.2A = colDef(show = FALSE),
+    Related.Words.2B = colDef(show = FALSE),
+    Related.Words.3A = colDef(show = FALSE),
+    Related.Words.3B = colDef(show = FALSE),
+    Related.Words.4A = colDef(show = FALSE),
+    Related.Words.4B = colDef(show = FALSE),
+    Related.Words.5A = colDef(show = FALSE),
+    Related.Words.5B = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
