@@ -25,6 +25,9 @@ body{
 <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500&display=swap" rel="stylesheet">
 
 ```{css, echo=FALSE}
 .toc-content {
@@ -34,7 +37,7 @@ body{
 ```
 
 ```{css, echo=FALSE}
-@media(prefers-color-scheme: light) {
+@media(prefers-color-scheme: dark) {
   body {
     background-color: black;
     filter: invert(1);
@@ -55,6 +58,7 @@ library(purrr)
 
 ```{r, echo=FALSE, message=FALSE, error=FALSE}
 snds <- read_csv("itln/APHB-SND.csv")
+krnexprsn <- read_csv("notedb/KRNEXP-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -209,9 +213,53 @@ snds <- read_csv("itln/APHB-SND.csv")
 
 #### 1 {.tabset}
 
-<p style="font-size:20px;"> 안녕하세요・여기요・감사함니다・네・아니요・커피좋아하세요</p>
-<p style="font-size:20px;"> 커피안좋아하세요・커피좋아하요・커피안좋아하요・네맞아요</p>
-<p style="font-size:20px;"> 안녕히계세요・안녕히가세요・잠시만요・잠깐만요・죄송함니다</p>
+
+```{r, echo=FALSE, message=FALSE}
+
+krnexprsn <- krnexprsn[sample(1:nrow(krnexprsn)),]
+
+reactable(
+  krnexprsn,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Meaning <- krnexprsn$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- krnexprsn$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Japanese <- krnexprsn$Japanese[index]
+        Japanese <- if (!is.na(Japanese)) Japanese else ""
+        tagList(
+          div(style = list(fontSize = 26, fontWeight = 600), value),
+          div(style = list(fontSize = 9, fontWeight = 400), Reading),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 10, fontWeight = 500), Meaning),
+          div(style = list(fontSize = 16, fontWeight = 600), Japanese)
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Japanese = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ---
 
