@@ -84,6 +84,7 @@ cmwpg <- read_csv("jpdb/SNTSR7-SSTNC.csv")
 cmwpc <- read_csv("jpdb/SNTSR8-SSTNC.csv")
 sntcas <- read_csv("jpdb/SNTCASL-SSTNC.csv")
 comdly <- read_csv("jpdb/COMMSTRGY-STRGY.csv")
+sntmre <- read_csv("jpdb/SNTMRE-SNT.csv")
 ```
 
 # <b> Sentences </b> {.tabset}
@@ -752,6 +753,98 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+## <b> Review </b> {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+sntmre.a <- sntmre %>% select(Sentences, Translation)
+sntmre.a <- sntmre.a[sample(1:nrow(sntmre.a)),]
+
+reactable(
+  sntmre.a,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Translation <- sntmre.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Translation),
+        )
+      },
+      align = "center"
+    ),
+
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+sntmre.a <- sntmre.a[sample(1:nrow(sntmre.a)),]
+
+reactable(
+  sntmre.a,
+  columns = list(
+    Translation = colDef(
+      cell = function(value, index) {
+        Sentences <- sntmre.a$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600, color = '#404040'), Sentences),
+        )
+      },
+      align = "center"
+    ),
+
+    Sentences = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## <b> Recall </b> {.tabset}
 
 ### Level {.tabset}
@@ -1324,4 +1417,5 @@ reactable(
 )
 
 ```
+
 

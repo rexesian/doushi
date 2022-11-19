@@ -87,6 +87,7 @@ blind <- read_csv("jpim/LSBLND-SCRPT.csv")
 diary <- read_csv("jpim/DRY-SCRPT.csv")
 kitchen <- read_csv("jpim/KTCHN-SCRPT.csv")
 thausnd <- read_csv("jpim/TRHAUSND-SCRPT.csv")
+sntmre <- read_csv("jpdb/SNTMRE-SNT.csv")
 ```
 
 # <b> Immersion </b> {.tabset}
@@ -1011,6 +1012,54 @@ reactable(
     )
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Sentences </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+sntmre.a <- sntmre %>% select(Sentences, Translation)
+sntmre.a <- sntmre.a[sample(1:nrow(sntmre.a)),]
+
+reactable(
+  na.omit(sntmre.a),
+  columns = list(
+    Sentences = colDef(
+      minWidth = 160,
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Hiragino Maru Gothic ProN'), value),
+        )
+      },
+      align = "left",
+    ),
+    Translation = colDef(
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 10, color = '#555555'), value),
+        )
+      },
+      align = "left",
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 35),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, wrap = TRUE, resizable = TRUE, striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
