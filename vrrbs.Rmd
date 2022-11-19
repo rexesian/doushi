@@ -3219,6 +3219,100 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+## <b> ExtExp </b> {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbxte.rcl <- vrbxte %>% select(Expression, Translation)
+vrbexpr.rcl <- vrbexpr %>% select(Expression, Translation)
+vrbext.exp <- bind_rows(vrbxte.rcl, vrbexpr.rcl)
+vrbext.exp <- vrbext.exp[sample(1:nrow(vrbext.exp)),]
+
+reactable(
+  vrbext.exp,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Translation <- vrbext.exp$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Translation),
+        )
+      },
+      align = "center"
+    ),
+
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbext.exp <- vrbext.exp[sample(1:nrow(vrbext.exp)),]
+
+reactable(
+  vrbext.exp,
+  columns = list(
+    Translation = colDef(
+      cell = function(value, index) {
+        Expression <- vrbext.exp$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600, color = '#404040'), Expression),
+        )
+      },
+      align = "center"
+    ),
+
+    Expression = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## <b> Current </b> {.tabset}
 
 ### 01 {.tabset}
