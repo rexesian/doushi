@@ -737,6 +737,101 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+### Recall {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+sndknj.a <- sndknj %>% select(W1, M1) %>% rename(Words = W1, Meaning = M1) 
+sndknj.b <- sndknj %>% select(W2, M2) %>% rename(Words = W2, Meaning = M2) 
+sndknj.c <- sndknj %>% select(W3, M3) %>% rename(Words = W3, Meaning = M3) 
+sndknj.d <- sndknj %>% select(W4, M4) %>% rename(Words = W4, Meaning = M4) 
+sndknj.s <- bind_rows(sndknj.a, sndknj.b)
+sndknj.s <- bind_rows(sndknj.s, sndknj.c)
+sndknj.s <- bind_rows(sndknj.s, sndknj.d)
+sndknj.s <- sndknj.s[sample(1:nrow(sndknj.s)),]
+
+reactable(
+  sndknj.s,
+  columns = list(
+    Meaning = colDef(
+      cell = function(value, index) {
+        Words <- sndknj.s$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
+        tagList(
+          div(style = list(fontSize = 28, fontWeight = 600), Words),
+        )
+      },
+      align = "center"
+    ),
+    Words = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+sndknj.s <- sndknj.s[sample(1:nrow(sndknj.s)),]
+
+reactable(
+  sndknj.s,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- sndknj.s$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## <b> Category </b> {.tabset}
 
 ### Movement
@@ -4078,7 +4173,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
