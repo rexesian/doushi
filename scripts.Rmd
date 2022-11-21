@@ -95,6 +95,8 @@ knjspcl <- read_csv("jpdb/SCRPTSPC-KNJSPC.csv")
 scrptrdng <- read_csv("jpdb/RDNGS-SCRPTS.csv")
 kanjivrb <- read_csv("jpdb/SCRPTVRB-KNJVRB.csv")
 kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
+sndknj <- read_csv("jpdb/SCRPTSNDON-KNJSND.csv")
+knjdu <- read_csv("jpdb/SCRPTCAT-KNJCAT.csv")
 ```
 
 # <b> Scripts </b> {.tabset}
@@ -619,6 +621,583 @@ reactable(
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Katakana** is a phonetic script used to represent Foreign loan words.</p>
 
 ![](hk.jpg)
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Groups </b> {.tabset}
+
+### Sound {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# sndknj <- sndknj[sample(1:nrow(sndknj)),]
+
+reactable(
+  sndknj,
+  columns = list(
+    Kanji = colDef(
+      cell = function(value, index) {
+        Meaning <- sndknj$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        NR <- sndknj$NR[index]
+        NR <- if (!is.na(NR)) NR else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 500), value),
+          div(style = list(fontSize = 9), NR),
+          div(style = list(fontSize = 9, fontWeight = 500), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    W1 = colDef(
+      cell = function(value, index) {
+        M1 <- sndknj$M1[index]
+        M1 <- if (!is.na(M1)) M1 else ""
+        R1 <- sndknj$R1[index]
+        R1 <- if (!is.na(R1)) R1 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 9, fontWeight = 400), R1),
+          div(style = list(fontSize = 9, fontWeight = 400), M1),
+        )
+      },
+      align = "center"
+    ),
+    W2 = colDef(
+      cell = function(value, index) {
+        M2 <- sndknj$M2[index]
+        M2 <- if (!is.na(M2)) M2 else ""
+        R2 <- sndknj$R2[index]
+        R2 <- if (!is.na(M2)) R2 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 9, fontWeight = 400), R2),
+          div(style = list(fontSize = 9, fontWeight = 400), M2),
+        )
+      },
+      align = "center"
+    ),
+    W3 = colDef(
+      cell = function(value, index) {
+        M3 <- sndknj$M3[index]
+        M3 <- if (!is.na(M3)) M3 else ""
+        R3 <- sndknj$R3[index]
+        R3 <- if (!is.na(R3)) R3 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 9, fontWeight = 400), R3),
+          div(style = list(fontSize = 9, fontWeight = 400), M3),
+        )
+      },
+      align = "center"
+    ),
+    W4 = colDef(
+      cell = function(value, index) {
+        M4 <- sndknj$M4[index]
+        M4 <- if (!is.na(M4)) M4 else ""
+        R4 <- sndknj$R4[index]
+        R4 <- if (!is.na(R4)) R4 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 500), value),
+          div(style = list(fontSize = 9, fontWeight = 400), R4),
+          div(style = list(fontSize = 9, fontWeight = 400), M4),
+        )
+      },
+      align = "center"
+    ),   
+    R1 = colDef(show = FALSE),
+    R2 = colDef(show = FALSE),
+    R3 = colDef(show = FALSE),
+    R4 = colDef(show = FALSE),
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    M4 = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    NR = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Category </b> {.tabset}
+
+### Movement
+
+```{r echo=FALSE, message=FALSE}
+
+knjdu1 <- knjdu  %>% slice(1:184)
+
+reactable(
+  knjdu1,
+  columns = list(
+       Kanji = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Kanji') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Kanji'] === prevRow['Kanji']) {
+            return { visibility: 'hidden' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        Reading <- knjdu1$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else "Unknown"
+        Script <- knjdu1$Script[index]
+        Script <- if (!is.na(Script)) Script else "Unknown"
+        Translation <- knjdu1$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 35, fontWeight = 800), value),
+          div(style = list(fontSize = 13, fontWeight = 400), Reading),
+          div(style = list(fontSize = 22, fontWeight = 800), Script),
+          div(style = list(fontSize = 9, fontWeight = 400), Translation)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      Reading = colDef(show = FALSE),
+      Translation = colDef(show = FALSE),
+      Script = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 1, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Sense
+
+```{r echo=FALSE, message=FALSE}
+
+knjdu2 <-  knjdu  %>% slice(185:481)
+
+reactable(
+  knjdu2,
+  columns = list(
+       Kanji = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Kanji') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Kanji'] === prevRow['Kanji']) {
+            return { visibility: 'hidden' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        Reading <- knjdu2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else "Unknown"
+        Script <- knjdu2$Script[index]
+        Script <- if (!is.na(Script)) Script else "Unknown"
+        Translation <- knjdu2$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 35, fontWeight = 800), value),
+          div(style = list(fontSize = 13, fontWeight = 400), Reading),
+          div(style = list(fontSize = 22, fontWeight = 800), Script),
+          div(style = list(fontSize = 9, fontWeight = 400), Translation)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      Reading = colDef(show = FALSE),
+      Translation = colDef(show = FALSE),
+      Script = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 1, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Relation
+
+```{r echo=FALSE, message=FALSE}
+
+knjdu2 <-  knjdu  %>% slice(482:513)
+
+reactable(
+  knjdu2,
+  columns = list(
+       Kanji = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Kanji') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Kanji'] === prevRow['Kanji']) {
+            return { visibility: 'hidden' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        Reading <- knjdu2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else "Unknown"
+        Script <- knjdu2$Script[index]
+        Script <- if (!is.na(Script)) Script else "Unknown"
+        Translation <- knjdu2$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 35, fontWeight = 800), value),
+          div(style = list(fontSize = 13, fontWeight = 400), Reading),
+          div(style = list(fontSize = 22, fontWeight = 800), Script),
+          div(style = list(fontSize = 9, fontWeight = 400), Translation)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      Reading = colDef(show = FALSE),
+      Translation = colDef(show = FALSE),
+      Script = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 1, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Health
+
+```{r echo=FALSE, message=FALSE}
+
+knjdu2 <-  knjdu  %>% slice(612:631)
+
+reactable(
+  knjdu2,
+  columns = list(
+       Kanji = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Kanji') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Kanji'] === prevRow['Kanji']) {
+            return { visibility: 'hidden' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        Reading <- knjdu2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else "Unknown"
+        Script <- knjdu2$Script[index]
+        Script <- if (!is.na(Script)) Script else "Unknown"
+        Translation <- knjdu2$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 35, fontWeight = 800), value),
+          div(style = list(fontSize = 13, fontWeight = 400), Reading),
+          div(style = list(fontSize = 22, fontWeight = 800), Script),
+          div(style = list(fontSize = 9, fontWeight = 400), Translation)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      Reading = colDef(show = FALSE),
+      Translation = colDef(show = FALSE),
+      Script = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 1, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Deed
+
+```{r echo=FALSE, message=FALSE}
+
+knjdu2 <-  knjdu  %>% slice(840:894)
+
+reactable(
+  knjdu2,
+  columns = list(
+       Kanji = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Kanji') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Kanji'] === prevRow['Kanji']) {
+            return { visibility: 'hidden' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        Reading <- knjdu2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else "Unknown"
+        Script <- knjdu2$Script[index]
+        Script <- if (!is.na(Script)) Script else "Unknown"
+        Translation <- knjdu2$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 35, fontWeight = 800), value),
+          div(style = list(fontSize = 13, fontWeight = 400), Reading),
+          div(style = list(fontSize = 22, fontWeight = 800), Script),
+          div(style = list(fontSize = 9, fontWeight = 400), Translation)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      Reading = colDef(show = FALSE),
+      Translation = colDef(show = FALSE),
+      Script = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 1, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Culture
+
+```{r echo=FALSE, message=FALSE}
+
+knjdu2 <-  knjdu  %>% slice(3710:3722)
+
+reactable(
+  knjdu2,
+  columns = list(
+       Kanji = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Kanji') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Kanji'] === prevRow['Kanji']) {
+            return { visibility: 'hidden' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        Reading <- knjdu2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else "Unknown"
+        Script <- knjdu2$Script[index]
+        Script <- if (!is.na(Script)) Script else "Unknown"
+        Translation <- knjdu2$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 35, fontWeight = 800), value),
+          div(style = list(fontSize = 13, fontWeight = 400), Reading),
+          div(style = list(fontSize = 22, fontWeight = 800), Script),
+          div(style = list(fontSize = 9, fontWeight = 400), Translation)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      Reading = colDef(show = FALSE),
+      Translation = colDef(show = FALSE),
+      Script = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 1, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Education
+
+```{r echo=FALSE, message=FALSE}
+
+knjdu2 <-  knjdu  %>% slice(3840:3845)
+
+reactable(
+  knjdu2,
+  columns = list(
+       Kanji = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Kanji') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Kanji'] === prevRow['Kanji']) {
+            return { visibility: 'hidden' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        Reading <- knjdu2$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else "Unknown"
+        Script <- knjdu2$Script[index]
+        Script <- if (!is.na(Script)) Script else "Unknown"
+        Translation <- knjdu2$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 35, fontWeight = 800), value),
+          div(style = list(fontSize = 13, fontWeight = 400), Reading),
+          div(style = list(fontSize = 22, fontWeight = 800), Script),
+          div(style = list(fontSize = 9, fontWeight = 400), Translation)
+        )
+      },
+      align = "center", minWidth = 400
+      ),
+      Reading = colDef(show = FALSE),
+      Translation = colDef(show = FALSE),
+      Script = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 1, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+
+```
 
 <!-- ------------------------------------------------------------------------ -->
 
