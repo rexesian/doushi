@@ -8131,7 +8131,6 @@ reactable(
 
 ```
 
-
 ------------------------------------------------------------------------
 
 ##### Dining
@@ -8139,6 +8138,47 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 commsynrgy.a <- commsynrgy %>% select(Dining.Sentences, Dining.Translation) %>% rename(Sentences = Dining.Sentences, Translation = Dining.Translation)
+commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
+commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
+
+reactable(
+  commsynrgy.a,
+  columns = list(
+    Sentences = colDef(
+      minWidth = 130,
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 13.5), value),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(minWidth = 115,align = "left")
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### Shopping
+
+```{r, echo=FALSE, message=FALSE}
+
+commsynrgy.a <- commsynrgy %>% select(Shopping.Sentences, Shopping.Translation) %>% rename(Sentences = Shopping.Sentences, Translation = Shopping.Translation)
 commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
 commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
 
