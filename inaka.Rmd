@@ -114,6 +114,7 @@ lverbs <- read_csv("jpdb/VERBFRQ-VERBS.csv")
 adjimre <- read_csv("jpdb/ADJCR-SNT.csv")
 cnntvmre <- read_csv("jpdb/CNNTVCR-SNT.csv")
 advlmre <- read_csv("jpdb/ADVLCR-SNT.csv")
+commsynrgy <- read_csv("jpdb/CMMSYNRGY-SIT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1492,7 +1493,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Recall {.tabset}
+## Recognize {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1727,7 +1728,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Recall
+#### Sentences
 
 <div class = "row">
 <div class = "col-sm-6">
@@ -1907,7 +1908,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Recall
+#### Sentences
 
 <div class = "row">
 <div class = "col-sm-6">
@@ -2065,7 +2066,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Review
+#### Recognize
 
 <div class = "row">
 <div class = "col-sm-4">
@@ -2278,108 +2279,16 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadj2.a <- nadj2.a[sample(1:nrow(nadj2.a)),]
+nadj2.b <- nadj2.a %>% select(Sentences, Translation)
+nadj2.b <- nadj2.b[sample(1:nrow(nadj2.b)),]
+nadj2.c <- bind_rows(nadj2.b, adjimre)
 
 reactable(
-  nadj2.a,
+  nadj2.c,
   columns = list(
     Translation = colDef(
       cell = function(value, index) {
-        Sentences <- nadj2.a$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#404040'), Sentences),
-        )
-      },
-      align = "center"
-    ),
-    Words = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Reading = colDef(show = FALSE),
-    Sentences = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
-```
-
-</div>
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-
-nadj2.a <- nadj2.a[sample(1:nrow(nadj2.a)),]
-
-reactable(
-  nadj2.a,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- nadj2.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#404040'), Translation),
-        )
-      },
-      align = "center"
-    ),
-    Words = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Reading = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
-```
-
-</div>
-</div>
-
-------------------------------------------------------------------------
-
-#### Sentences-Ext
-
-<div class = "row">
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-adjimre <- adjimre[sample(1:nrow(adjimre)),]
-
-reactable(
-  adjimre,
-  columns = list(
-    Translation = colDef(
-      cell = function(value, index) {
-        Sentences <- adjimre$Sentences[index]
+        Sentences <- nadj2.c$Sentences[index]
         Sentences <- if (!is.na(Sentences)) Sentences else ""
         tagList(
           div(style = list(fontSize = 21, fontWeight = 600, color = '#404040'), Sentences),
@@ -2412,14 +2321,14 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-adjimre <- adjimre[sample(1:nrow(adjimre)),]
+nadj2.c <- nadj2.c[sample(1:nrow(nadj2.c)),]
 
 reactable(
-  adjimre,
+  nadj2.c,
   columns = list(
     Sentences = colDef(
       cell = function(value, index) {
-        Translation <- adjimre$Translation[index]
+        Translation <- nadj2.c$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 12, fontWeight = 600, color = '#404040'), Translation),
@@ -3047,7 +2956,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Review
+#### Recognize
 
 <div class = "row">
 <div class = "col-sm-4">
@@ -4059,7 +3968,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Review
+#### Reconize
 
 <div class = "row">
 <div class = "col-sm-4">
@@ -4663,7 +4572,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Review
+#### Recognize
 
 <div class = "row">
 <div class = "col-sm-4">
@@ -8096,6 +8005,173 @@ reactable(
     🆀 Yurikamome at Shinbashi, right? Thank you.
 
 <h6> </h6>
+
+------------------------------------------------------------------------
+
+#### More {.tabset}
+
+##### Health
+
+```{r, echo=FALSE, message=FALSE}
+
+commsynrgy.a <- commsynrgy %>% select(Health.Sentences, Health.Translation) %>% rename(Sentences = Health.Sentences, Translation = Health.Translation)
+commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
+commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
+
+reactable(
+  commsynrgy.a,
+  columns = list(
+    Sentences = colDef(
+      minWidth = 130,
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 13.5), value),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(minWidth = 115,align = "left")
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### Tours
+
+```{r, echo=FALSE, message=FALSE}
+
+commsynrgy.a <- commsynrgy %>% select(Sight.Sentences, Sight.Translation) %>% rename(Sentences = Sight.Sentences, Translation = Sight.Translation)
+commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
+commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
+
+reactable(
+  commsynrgy.a,
+  columns = list(
+    Sentences = colDef(
+      minWidth = 130,
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 13.5), value),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(minWidth = 115,align = "left")
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### Travel
+
+```{r, echo=FALSE, message=FALSE}
+
+commsynrgy.a <- commsynrgy %>% select(Travel.Sentences, Travel.Translation) %>% rename(Sentences = Travel.Sentences, Translation = Travel.Translation)
+commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
+commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
+
+reactable(
+  commsynrgy.a,
+  columns = list(
+    Sentences = colDef(
+      minWidth = 130,
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 13.5), value),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(minWidth = 115,align = "left")
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+
+------------------------------------------------------------------------
+
+##### Dining
+
+```{r, echo=FALSE, message=FALSE}
+
+commsynrgy.a <- commsynrgy %>% select(Dining.Sentences, Dining.Translation) %>% rename(Sentences = Dining.Sentences, Translation = Dining.Translation)
+commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
+commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
+
+reactable(
+  commsynrgy.a,
+  columns = list(
+    Sentences = colDef(
+      minWidth = 130,
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 13.5), value),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(minWidth = 115,align = "left")
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
