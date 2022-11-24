@@ -105,6 +105,7 @@ thausnd <- read_csv("jpim/TRHAUSND-SCRPT.csv")
 krmukro <- read_csv("jpim/KRMUKRO-SCRPT.csv")
 sntmre <- read_csv("jpdb/SNTMRE-SNT.csv")
 htspcy <- read_csv("jpim/HTSPCY-SCRPT.csv")
+wdnsdy <- read_csv("jpim/WDNSDY-SCRPT.csv")
 ```
 
 # <b> Immersion </b> {.tabset}
@@ -1277,6 +1278,110 @@ reactable(
       align = "left"
     ), 
     Meaning.EP3 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, wrap = TRUE, resizable = TRUE, striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Wednesday {.tabset}
+
+#### S1.EP1
+
+```{r, echo=FALSE, message=FALSE}
+
+wdnsdy.a <- wdnsdy %>% select(Script.EP1, Meaning.EP1)
+
+reactable(
+  na.omit(wdnsdy.a),
+  columns = list(
+    Script.EP1 = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Meaning.EP1 <- wdnsdy.a$Meaning.EP1[index]
+        Meaning.EP1 <- if (!is.na(Meaning.EP1)) Meaning.EP1 else "Unknown"
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), value),
+          # div(style = list(fontSize = 9, color = '#787878'), Meaning.EP1),
+        )
+      },
+      align = "left"
+    ),
+    Meaning.EP1 = colDef(
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 10, color = '#555555'), value),
+        )
+      },
+      align = "left"
+    ), 
+    Meaning.EP1 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, wrap = TRUE, resizable = TRUE, striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### S1.EP2
+
+```{r, echo=FALSE, message=FALSE}
+
+wdnsdy.a <- wdnsdy %>% select(Script.EP2, Meaning.EP2)
+
+reactable(
+  na.omit(wdnsdy.a),
+  columns = list(
+    Script.EP2 = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Meaning.EP2 <- wdnsdy.a$Meaning.EP2[index]
+        Meaning.EP2 <- if (!is.na(Meaning.EP2)) Meaning.EP2 else "Unknown"
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 500, fontFamily = 'Zen Maru Gothic'), value),
+          # div(style = list(fontSize = 9, color = '#787878'), Meaning.EP2),
+        )
+      },
+      align = "left"
+    ),
+    Meaning.EP2 = colDef(
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 10, color = '#555555'), value),
+        )
+      },
+      align = "left"
+    ), 
+    Meaning.EP2 = colDef(show = FALSE)
   ),
   defaultPageSize = 8,
   theme = reactableTheme(
