@@ -23,6 +23,9 @@ body{
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
 
 ```{css, echo=FALSE}
 .my-tbl {
@@ -115,6 +118,7 @@ adjimre <- read_csv("jpdb/ADJCR-SNT.csv")
 cnntvmre <- read_csv("jpdb/CNNTVCR-SNT.csv")
 advlmre <- read_csv("jpdb/ADVLCR-SNT.csv")
 commsynrgy <- read_csv("jpdb/CMMSYNRGY-SIT.csv")
+phrsaux <- read_csv("jpdb/PHRSAUX-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1699,7 +1703,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#202020', fontFamily = 'Zen Maru Gothic'), Words),
+          div(style = list(fontSize = 21, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), Words),
         )
       },
       align = "center"
@@ -10716,18 +10720,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### PT5.0: Auxiliaries {.tabset}
-<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Auxiliaries** are attached at the end of a word or a sentence to give nuance.</p>
-
-#### Concept {.tabset}
-
-------------------------------------------------------------------------
-
-#### Examples {.tabset}
-
-------------------------------------------------------------------------
-
-### PT6.0: Structure {.tabset}
+### PT5.0: Structure {.tabset}
 
 #### Basic Structure
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Basic Pattern Structure** of a japanese sentence.</p>
@@ -11164,7 +11157,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### PT7.0: Grammar {.tabset}
+### PT6.0: Grammar {.tabset}
 
 #### Concept {.tabset}
 
@@ -15823,6 +15816,99 @@ reactable(
 ------------------------------------------------------------------------
 
 ####  Noun
+
+
+------------------------------------------------------------------------
+
+### PT7.0: Collection {.tabset}
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Collection** of words grouped together in order to express Japanese easily.</p>
+
+#### Concept {.tabset}
+
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">Basically these are collections of noun phrases, verb phrases, compounds, verbs plus extensions or conjugations, grammar, expressions, etc.</p>
+
+------------------------------------------------------------------------
+
+#### Examples {.tabset}
+
+
+```{r, echo=FALSE, message=FALSE}
+
+phrsaux <- phrsaux[sample(1:nrow(na.omit(phrsaux))),]
+
+reactable(
+  phrsaux,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Translation <- phrsaux$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 34, fontWeight = 600, color = '#6495BF', fontFamily = 'Georgia'), value),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 9, color = '#6495BF'), Translation)
+        )
+      },
+      align = "center"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### List {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+phrsaux <- phrsaux[sample(1:nrow(na.omit(phrsaux))),]
+
+reactable(
+  phrsaux,
+  columns = list(
+    Expression = colDef(align = "left", style = list(fontSize = 16, fontWeight = 500, fontFamily = 'Noto Sans JP', color = '#555555')),
+    Translation = colDef(minWidth = 100,align = "left")
+
+  ),
+  defaultPageSize = 9,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
