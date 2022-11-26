@@ -85,6 +85,7 @@ cmwpc <- read_csv("jpdb/SNTSR8-SSTNC.csv")
 sntcas <- read_csv("jpdb/SNTCASL-SSTNC.csv")
 comdly <- read_csv("jpdb/COMMSTRGY-STRGY.csv")
 sntmre <- read_csv("jpdb/SNTMRE-SNT.csv")
+smplsnt <- read_csv("jpdb/SMPLSNT-SNT.csv")
 ```
 
 # <b> Sentences </b> {.tabset}
@@ -375,6 +376,48 @@ reactable(
       align = "center"
     ),
     Ikechan.Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Easy </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+smplsnt <- smplsnt[sample(1:nrow(smplsnt)),]
+
+reactable(
+  smplsnt,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Translation <- smplsnt$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 9, color = '#787878'), Translation)
+        )
+      },
+      align = "center"
+    ),
+    Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
