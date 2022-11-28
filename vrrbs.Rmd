@@ -1,5 +1,5 @@
 ---
-title: "<b> 賞味期限 </b>"
+title: "<b> 動詞賞味期限 </b>"
 output:
   html_document:
     theme: sandstone
@@ -1286,8 +1286,8 @@ reactable(
         Translation <- cmpnd$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 500), value),
-          div(style = list(fontSize = 9), Translation),
+          div(style = list(fontSize = 18, fontWeight = 500), value),
+          div(style = list(fontSize = 10), Translation),
         )
       },
       align = "left"
@@ -1295,6 +1295,78 @@ reactable(
     Reading = colDef(show = FALSE),   
     Meaning = colDef(show = FALSE),
     Sentences = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 150),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Expression </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbexpr <- vrbexpr[sample(1:nrow(vrbexpr)),]
+
+reactable(
+  vrbexpr,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- vrbexpr$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- vrbexpr$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Ext <- vrbexpr$Ext[index]
+        Ext <- if (!is.na(Ext)) Ext else ""
+        Remarks <- vrbexpr$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600), value),
+          div(style = list(fontSize = 9), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Expression = colDef(
+      minWidth = 180,
+      cell = function(value, index) {
+        Translation <- vrbexpr$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        Ext <- vrbexpr$Ext[index]
+        Ext <- if (!is.na(Ext)) Ext else ""
+        Remarks <- vrbexpr$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 600), value),
+          div(style = list(fontSize = 10), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 10.5, fontWeight = 500), Ext),
+          div(style = list(fontSize = 10.5, fontWeight = 500), Remarks),
+        )
+      },
+      align = "center"
+    ),    
+    Ext = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 3,
@@ -1362,7 +1434,7 @@ reactable(
           div(style = list(fontSize = 9), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 10.5, fontWeight = 500), Ext, "▫︎" , Approx),
-          div(style = list(fontSize = 10.5), Remarks),
+          div(style = list(fontSize = 10.5, fontWeight = 500), Remarks),
         )
       },
       align = "center"
@@ -1371,78 +1443,6 @@ reactable(
     Meaning = colDef(show = FALSE),
     Ext = colDef(show = FALSE),
     Approx = colDef(show = FALSE),
-    Remarks = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 3,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 150),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-## <b> Expression </b> {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-vrbexpr <- vrbexpr[sample(1:nrow(vrbexpr)),]
-
-reactable(
-  vrbexpr,
-  columns = list(
-    Words = colDef(
-      cell = function(value, index) {
-        Reading <- vrbexpr$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- vrbexpr$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Ext <- vrbexpr$Ext[index]
-        Ext <- if (!is.na(Ext)) Ext else ""
-        Remarks <- vrbexpr$Remarks[index]
-        Remarks <- if (!is.na(Remarks)) Remarks else ""
-        tagList(
-          div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 9), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500), Meaning),
-        )
-      },
-      align = "center"
-    ),
-    Expression = colDef(
-      minWidth = 180,
-      cell = function(value, index) {
-        Translation <- vrbexpr$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        Ext <- vrbexpr$Ext[index]
-        Ext <- if (!is.na(Ext)) Ext else ""
-        Remarks <- vrbexpr$Remarks[index]
-        Remarks <- if (!is.na(Remarks)) Remarks else ""
-        tagList(
-          div(style = list(fontSize = 18, fontWeight = 600), value),
-          div(style = list(fontSize = 9), Translation),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 10.5, fontWeight = 500), Ext),
-          div(style = list(fontSize = 10.5), Remarks),
-        )
-      },
-      align = "center"
-    ),    
-    Ext = colDef(show = FALSE),
-    Reading = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
     Remarks = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
