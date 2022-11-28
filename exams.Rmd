@@ -609,77 +609,66 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-<!-- ## Phrases {.tabset} -->
+## <b> Grammar </b> {.tabset}
 
-<!-- ```{r, echo=FALSE, message=FALSE} -->
+### LS
 
-<!-- grphrs <- grphrs[sample(1:nrow(grphrs)),] -->
+```{r, echo=FALSE, message=FALSE}
 
-<!-- reactable( -->
-<!--   grphrs, -->
-<!--   columns = list( -->
-<!--     S1 = colDef( -->
-<!--       cell = function(value, index) { -->
-<!--         T1 <- grphrs$T1[index] -->
-<!--         T1 <- if (!is.na(T1)) T1 else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 15, fontWeight = 500), value), -->
-<!--           div(style = list(fontSize = 8), T1), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-<!--     S2 = colDef( -->
-<!--       cell = function(value, index) { -->
-<!--         T2 <- grphrs$T2[index] -->
-<!--         T2 <- if (!is.na(T2)) T2 else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 15, fontWeight = 500), value), -->
-<!--           div(style = list(fontSize = 8), T2), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ),     -->
-<!--     S3 = colDef( -->
-<!--       cell = function(value, index) { -->
-<!--         T3 <- grphrs$T3[index] -->
-<!--         T3 <- if (!is.na(T3)) T3 else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 15, fontWeight = 500), value), -->
-<!--           div(style = list(fontSize = 8), T3), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ),    -->
+gwrds.n5 <- gwrds %>% slice(1:42)
+gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
+gwrds.n4 <- gwrds %>% slice(43:195)
+gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
+gwrds.n3 <- gwrds %>% slice(196:338)
+gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
+gwrds.n2 <- gwrds %>% slice(339:572)
+gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
+gwrds.n1 <- gwrds %>% slice(573:581)
+gwrds.n1 <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
 
-<!--     T1 = colDef(show = FALSE), -->
-<!--     T2 = colDef(show = FALSE), -->
-<!--     T3 = colDef(show = FALSE) -->
+gwrds.lst <- bind_rows(gwrds.n5, gwrds.n4)
+gwrds.lst <- bind_rows(gwrds.lst, gwrds.n3)
+gwrds.lst <- bind_rows(gwrds.lst, gwrds.n2)
+gwrds.lst <- bind_rows(gwrds.lst, gwrds.n1)
 
-<!--   ),  -->
+reactable(
+  gwrds.lst,
+  columns = list(
+    Words = colDef(minWidth = 32, align = "left" , style = list(fontSize = 13.5, fontFamily = 'Noto Sans JP'), sticky = "left"),
+    Meaning = colDef(minWidth = 50, align = "left", style = list(fontSize = 10, fontFamily = 'Noto Sans JP')),
+    Sentence = colDef(minWidth = 70,
+      cell = function(value, index) {
+        Translation <- gwrds.lst$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 13.5, color = '#404040', fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 9, color = '#404040'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE),
+    Level = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
 
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
 
-<!--   defaultPageSize = 5, -->
-<!--   theme = reactableTheme( -->
-<!--     # Vertically center cells -->
-<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70), -->
-<!--     searchInputStyle = list( -->
-<!--       paddingLeft = "8px", -->
-<!--       paddingTop = "8px", -->
-<!--       paddingBottom = "8px", -->
-<!--       width = "100%" -->
-<!--     ) -->
-<!--   ), -->
-<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
-
-<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
-<!-- ) -->
-
-<!-- ``` -->
+```
 
 <!-- ------------------------------------------------------------------------ -->
-
-## <b> Grammar </b> {.tabset}
 
 ###  L5
 
