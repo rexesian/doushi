@@ -91,6 +91,14 @@ qsn1 <- read_csv("jpdb/EXMQTN1-QSNT1.csv")
 smlrwrds <- read_csv("jpdb/EXMSMLW-WRDS.csv")
 exmrdng <- read_csv("jpdb/EXMRDNG-SCRPTS.csv")
 gwrds <- read_csv("jpdb/WGRMR-LST.csv")
+cnctr <- read_csv("jpdb/CONNECT-CONNECTORS.csv")
+advls <- read_csv("jpdb/ADVBLS-ADVERBIALS.csv")
+nadj2 <- read_csv("jpdb/ADJI-ADJI.csv")
+nadj1 <- read_csv("jpdb/ADJNA-ADJNA.csv")
+advv1 <- read_csv("jpdb/ADV-ADV.csv")
+ontpe <- read_csv("jpdb/ONTPE-ONP.csv")
+nounw <- read_csv("jpdb/NOUN-NOUN.csv")
+rdgsnt <- read_csv("jpdb/EXMSNTRDG-SNT.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -227,7 +235,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Review {.tabset}
+### Recognize {.tabset}
 
 <div class = "row">
 <div class = "col-sm-4">
@@ -2365,6 +2373,54 @@ reactable(
 
 ## <b> Category </b> {.tabset}
 
+### List {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+exwrds.cn <- cnctr %>% select(Words, Reading, Meaning)
+exwrds.ad <- advls %>% select(Words, Reading, Meaning)
+exwrds.na <- nadj2 %>% select(Words, Reading, Meaning)
+exwrds.id <- nadj1 %>% select(Words, Reading, Meaning)
+exwrds.vl <- advv1 %>% select(Word, Reading, Meaning) %>% rename(Words = Word)
+exwrds.on <- ontpe %>% select(Word, Reading, Meaning) %>% rename(Words = Word)
+exwrds.nn <- nounw %>% select(Words, Reading, Meaning)
+
+exwrds.lst <- bind_rows(exwrds.cn, exwrds.ad)
+exwrds.lst <- bind_rows(exwrds.lst, exwrds.na)
+exwrds.lst <- bind_rows(exwrds.lst, exwrds.id)
+exwrds.lst <- bind_rows(exwrds.lst, exwrds.on)
+exwrds.lst <- bind_rows(exwrds.lst, exwrds.nn)
+
+exwrds.lst <- na.omit(exwrds.lst)
+exwrds.lst <- exwrds.lst[sample(1:nrow(exwrds.lst)),]
+
+reactable(
+  exwrds.lst,
+  columns = list(
+    Words = colDef(minWidth = 22,align = "left", style = list(fontSize = 13.5, fontFamily = 'Rounded Mplus 1c')),
+    Reading = colDef(minWidth = 25,align = "left"),
+    Meaning = colDef(minWidth = 100,align = "left") 
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
 ### Connectives {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
@@ -2559,9 +2615,48 @@ reactable(
 
 ## <b> Readings </b> {.tabset}
 
-### N5 {.tabset}
+### Sentences {.tabset}
 
-#### 01 {.tabset}
+```{r, echo=FALSE, message=FALSE}
+
+rdgsnt <- rdgsnt %>% select(Sentences)
+rdgsnt <- na.omit(rdgsnt)
+rdgsnt <- rdgsnt[sample(1:nrow(rdgsnt)),]
+
+reactable(
+  rdgsnt,
+  columns = list(
+    Sentences = colDef(minWidth = 300,align = "left", style = list(fontSize = 13.5, fontFamily = 'Rounded Mplus 1c'))
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Articles {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Jlpt {.tabset}
+
+#### N5 {.tabset}
+
+##### 01 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2626,7 +2721,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 02 {.tabset}
+##### 02 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2689,7 +2784,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 03 {.tabset}
+##### 03 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2750,7 +2845,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 04 {.tabset}
+##### 04 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2814,7 +2909,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 05 {.tabset}
+##### 05 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2883,9 +2978,9 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### N4 {.tabset}
+#### N4 {.tabset}
 
-#### 01 {.tabset}
+##### 01 {.tabset}
 
 <pre>
 <code style="font-size:20px; line-height: 1.4; font-family:  Noto Sans JP; font-weight: 300; color: #202020">北東京市中央図書館は、８月１０日から８月２４日⓵＿＿、本の整理のため休館します。休館する1週間前の８月３日から本の貸し出しは、いつもの２倍、２０冊までに⓶＿＿。また、休館中に、借りている本を返したい場合は、返却ボックスが図書館南側入り口にあります。⓷＿＿A駅のエレベーター前にもありますので、そちらも⓸＿＿。
@@ -2911,7 +3006,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 02 {.tabset}
+##### 02 {.tabset}
 
 <pre>
 <code style="font-size:20px; line-height: 1.4; font-family:  Noto Sans JP; font-weight: 300; color: #202020">朝アルバイトに行くとき、いつも　おじいさんに会います。⓵＿＿わかりません。おじいさん　はじめて⓶＿＿とき、何も言いませんでした。つぎの朝、　おじいさんが「おはよう」と言いました。私はびっくりして、「おはようございます」小さい声で言いました。
@@ -2936,13 +3031,13 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### N3 {.tabset}
+#### N3 {.tabset}
 
 <!-- ------------------------------------------------------------------------ -->
 
-### N2 {.tabset}
+#### N2 {.tabset}
 
-#### 01 {.tabset}
+##### 01 {.tabset}
 
 <pre>
 <code style="font-size:18px; line-height: 1.4; font-family:  Noto Sans JP; font-weight: 300; color: #202020">この地方のスキー場はコース大部分は整備されており、滑りにくいうことはあまりありません。⓵＿＿、風が強く、⓶＿＿降った雪も積もるか積もらないかのうちに飛ばされてしまうことが多いのです。</code>
@@ -2958,11 +3053,11 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 02 {.tabset}
+##### 02 {.tabset}
 
 <!-- ------------------------------------------------------------------------ -->
 
-### N1 {.tabset}
+#### N1 {.tabset}
 
 <!-- ------------------------------------------------------------------------ -->
 
