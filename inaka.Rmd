@@ -130,6 +130,7 @@ inkexpr <- read_csv("cpdb/INKSITEXP-EXP.csv")
 inkdlywrd <- read_csv("cpdb/DLYLFEWRD-WRDS.csv")
 inkdlyexp <- read_csv("cpdb/DLYLFEXP-EXP.csv")
 cnvexp <- read_csv("cpdb/CNVEXP-EXP.csv")
+hnrtbl <- read_csv("cpdb/HNRFCTBL-TBL.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -8643,6 +8644,56 @@ reactable(
 
     ・申し訳ありません、すぐに確認いたします。
     ・I'm sorry, I will check it right away.
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
+#### Table {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# hnrtbl <- hnrtbl[sample(1:nrow(hnrtbl)),]
+
+reactable(
+  na.omit(hnrtbl),
+  columns = list(
+    普通語 = colDef(align = "center", minWidth = 45, style = list(fontSize = 15, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans')),
+    丁寧語 = colDef(align = "center", minWidth = 60, style = list(fontSize = 15, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans')),
+    尊敬語 = colDef(align = "center", minWidth = 70, style = list(fontSize = 15, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans')),
+    謙譲語 = colDef(align = "center", minWidth = 90, style = list(fontSize = 15, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'))
+
+
+  ),
+  defaultPageSize = 13,
+  
+  
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      color = '#404040',
+      fontSize = 20,
+      fontWeight = 600,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      "&:hover, &:focus" = list(color = '#800000')
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 <h6> </h6>
 
