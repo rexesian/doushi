@@ -110,6 +110,7 @@ inkspkng <- read_csv("jpdb/INKSPKNG-SSTNC.csv")
 vnsgg <- read_csv("jpdb/GRMRVRB-VGRM.csv")
 cmpvrbs <- read_csv("jpdb/VRBCMP-CMPWD.csv")
 kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
+kanjilst <- read_csv("jpdb/SCRPTNMQLST-NMQ.csv")
 cvnptn <- read_csv("jpdb/SPKPTNB-GRML.csv")
 phrslprt <- read_csv("jpdb/PHRPARTCL-GRMR.csv")
 gwrds <- read_csv("jpdb/WGRMR-LST.csv")
@@ -1621,7 +1622,7 @@ reactable(
   defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -1641,6 +1642,10 @@ reactable(
 ## Recognize {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
+
+kanjilst <- kanjilst[sample(1:nrow(kanjilst)),]
+kanjilst.a <- kanjilst %>% slice(1:300)
+kanjilst.b <- kanjilst %>% slice(301:664)
 
 scknj5.w1 <- scknj5 %>% select(W1) %>% rename(Words = W1)
 scknj5.w2 <- scknj5 %>% select(W2) %>% rename(Words = W2)
@@ -1666,12 +1671,15 @@ scknjt.wd <- bind_rows(scknjt.wd, scknj4.w3)
 scknjt.wd <- bind_rows(scknjt.wd, scknj3.w1)
 scknjt.wd <- bind_rows(scknjt.wd, scknj3.w2)
 scknjt.wd <- bind_rows(scknjt.wd, scknj3.w3)
+scknjt.wd <- bind_rows(scknjt.wd, kanjilst.a)
 scknjt.wd <- scknjt.wd[sample(1:nrow(scknjt.wd)),]
+
 scknjt.we <- bind_rows(scknj2.w1, scknj2.w2)
 scknjt.we <- bind_rows(scknjt.we, scknj2.w3)
 scknjt.we <- bind_rows(scknjt.we, scknj1.w1)
 scknjt.we <- bind_rows(scknjt.we, scknj1.w2)
 scknjt.we <- bind_rows(scknjt.we, scknj1.w3)
+scknjt.we <- bind_rows(scknjt.we, kanjilst.b)
 scknjt.we <- scknjt.we[sample(1:nrow(scknjt.we)),]
 
 scknjt.wrds <- bind_rows(scknjt.wd, scknjt.we)
@@ -1681,7 +1689,7 @@ reactable(
   columns = list(
     Words = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600, color = '#202020', fontFamily = 'Noto Sans JP'))
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 3,
   theme = reactableTheme(
     # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
