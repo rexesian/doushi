@@ -103,6 +103,7 @@ kanjivrb <- read_csv("jpdb/SCRPTVRB-KNJVRB.csv")
 kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
 sndknj <- read_csv("jpdb/SCRPTSNDON-KNJSND.csv")
 knjdu <- read_csv("jpdb/SCRPTCAT-KNJCAT.csv")
+kanjilst <- read_csv("jpdb/SCRPTNMQLST-NMQ.csv")
 ```
 
 # <b> Scripts </b> {.tabset}
@@ -2091,17 +2092,26 @@ reactable(
 
 #### All {.tabset}
 
+<div class = "row">
+<div class = "col-sm-6">
+
 ```{r, echo=FALSE, message=FALSE}
+
+kanjilst <- kanjilst[sample(1:nrow(kanjilst)),]
+kanjilst.a <- kanjilst %>% slice(1:300)
+kanjilst.b <- kanjilst %>% slice(301:664)
 
 scknj5.w1 <- scknj5 %>% select(W1) %>% rename(Words = W1)
 scknj5.w2 <- scknj5 %>% select(W2) %>% rename(Words = W2)
 scknj5.w3 <- scknj5 %>% select(W3) %>% rename(Words = W3)
+
 scknj4.w1 <- scknj4 %>% select(W1) %>% rename(Words = W1)
 scknj4.w2 <- scknj4 %>% select(W2) %>% rename(Words = W2)
 scknj4.w3 <- scknj4 %>% select(W3) %>% rename(Words = W3)
 scknj3.w1 <- scknj3 %>% select(W1) %>% rename(Words = W1)
 scknj3.w2 <- scknj3 %>% select(W2) %>% rename(Words = W2)
 scknj3.w3 <- scknj3 %>% select(W3) %>% rename(Words = W3)
+
 scknj2.w1 <- scknj2 %>% select(W1) %>% rename(Words = W1)
 scknj2.w2 <- scknj2 %>% select(W2) %>% rename(Words = W2)
 scknj2.w3 <- scknj2 %>% select(W3) %>% rename(Words = W3)
@@ -2109,23 +2119,29 @@ scknj1.w1 <- scknj1 %>% select(W1) %>% rename(Words = W1)
 scknj1.w2 <- scknj1 %>% select(W2) %>% rename(Words = W2)
 scknj1.w3 <- scknj1 %>% select(W3) %>% rename(Words = W3)
 
+
+scknjt.wf <- bind_rows(scknj4.w1, scknj4.w2)
+scknjt.wf <- bind_rows(scknjt.wf, scknj4.w3)
+scknjt.wf <- bind_rows(scknjt.wf, scknj3.w1)
+scknjt.wf <- bind_rows(scknjt.wf, scknj3.w2)
+scknjt.wf <- bind_rows(scknjt.wf, scknj3.w3)
+scknjt.wf <- scknjt.wf[sample(1:nrow(scknjt.wf)),]
+
 scknjt.wd <- bind_rows(scknj5.w1, scknj5.w2)
 scknjt.wd <- bind_rows(scknjt.wd, scknj5.w3)
-scknjt.wd <- bind_rows(scknjt.wd, scknj4.w1)
-scknjt.wd <- bind_rows(scknjt.wd, scknj4.w2)
-scknjt.wd <- bind_rows(scknjt.wd, scknj4.w3)
-scknjt.wd <- bind_rows(scknjt.wd, scknj3.w1)
-scknjt.wd <- bind_rows(scknjt.wd, scknj3.w2)
-scknjt.wd <- bind_rows(scknjt.wd, scknj3.w3)
+scknjt.wd <- bind_rows(scknjt.wd, kanjilst.a)
 scknjt.wd <- scknjt.wd[sample(1:nrow(scknjt.wd)),]
+
 scknjt.we <- bind_rows(scknj2.w1, scknj2.w2)
 scknjt.we <- bind_rows(scknjt.we, scknj2.w3)
 scknjt.we <- bind_rows(scknjt.we, scknj1.w1)
 scknjt.we <- bind_rows(scknjt.we, scknj1.w2)
 scknjt.we <- bind_rows(scknjt.we, scknj1.w3)
+scknjt.we <- bind_rows(scknjt.we, kanjilst.b)
 scknjt.we <- scknjt.we[sample(1:nrow(scknjt.we)),]
 
-scknjt.wrds <- bind_rows(scknjt.wd, scknjt.we)
+scknjt.wrds <- bind_rows(scknjt.wf, scknjt.wd)
+scknjt.wrds <- bind_rows(scknjt.wrds, scknjt.we)
 
 reactable(
   scknjt.wrds,
@@ -2149,6 +2165,39 @@ reactable(
 )
 
 ```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+scknjt.wrds <- scknjt.wrds[sample(1:nrow(scknjt.wrds)),]
+
+reactable(
+  scknjt.wrds,
+  columns = list(
+    Words = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600, color = '#202020', fontFamily = 'Noto Sans JP'))
+  ),
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
