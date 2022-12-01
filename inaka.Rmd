@@ -1649,6 +1649,9 @@ reactable(
 
 ## Recognize {.tabset}
 
+<div class = "row">
+<div class = "col-sm-6">
+
 ```{r, echo=FALSE, message=FALSE}
 
 kanjilst <- kanjilst[sample(1:nrow(kanjilst)),]
@@ -1658,12 +1661,14 @@ kanjilst.b <- kanjilst %>% slice(301:664)
 scknj5.w1 <- scknj5 %>% select(W1) %>% rename(Words = W1)
 scknj5.w2 <- scknj5 %>% select(W2) %>% rename(Words = W2)
 scknj5.w3 <- scknj5 %>% select(W3) %>% rename(Words = W3)
+
 scknj4.w1 <- scknj4 %>% select(W1) %>% rename(Words = W1)
 scknj4.w2 <- scknj4 %>% select(W2) %>% rename(Words = W2)
 scknj4.w3 <- scknj4 %>% select(W3) %>% rename(Words = W3)
 scknj3.w1 <- scknj3 %>% select(W1) %>% rename(Words = W1)
 scknj3.w2 <- scknj3 %>% select(W2) %>% rename(Words = W2)
 scknj3.w3 <- scknj3 %>% select(W3) %>% rename(Words = W3)
+
 scknj2.w1 <- scknj2 %>% select(W1) %>% rename(Words = W1)
 scknj2.w2 <- scknj2 %>% select(W2) %>% rename(Words = W2)
 scknj2.w3 <- scknj2 %>% select(W3) %>% rename(Words = W3)
@@ -1671,14 +1676,15 @@ scknj1.w1 <- scknj1 %>% select(W1) %>% rename(Words = W1)
 scknj1.w2 <- scknj1 %>% select(W2) %>% rename(Words = W2)
 scknj1.w3 <- scknj1 %>% select(W3) %>% rename(Words = W3)
 
+
+scknjt.wf <- bind_rows(scknj4.w1, scknj4.w2)
+scknjt.wf <- bind_rows(scknjt.wf, scknj4.w3)
+scknjt.wf <- bind_rows(scknjt.wf, scknj3.w1)
+scknjt.wf <- bind_rows(scknjt.wf, scknj3.w2)
+scknjt.wf <- bind_rows(scknjt.wf, scknj3.w3)
+
 scknjt.wd <- bind_rows(scknj5.w1, scknj5.w2)
 scknjt.wd <- bind_rows(scknjt.wd, scknj5.w3)
-scknjt.wd <- bind_rows(scknjt.wd, scknj4.w1)
-scknjt.wd <- bind_rows(scknjt.wd, scknj4.w2)
-scknjt.wd <- bind_rows(scknjt.wd, scknj4.w3)
-scknjt.wd <- bind_rows(scknjt.wd, scknj3.w1)
-scknjt.wd <- bind_rows(scknjt.wd, scknj3.w2)
-scknjt.wd <- bind_rows(scknjt.wd, scknj3.w3)
 scknjt.wd <- bind_rows(scknjt.wd, kanjilst.a)
 scknjt.wd <- scknjt.wd[sample(1:nrow(scknjt.wd)),]
 
@@ -1690,7 +1696,8 @@ scknjt.we <- bind_rows(scknjt.we, scknj1.w3)
 scknjt.we <- bind_rows(scknjt.we, kanjilst.b)
 scknjt.we <- scknjt.we[sample(1:nrow(scknjt.we)),]
 
-scknjt.wrds <- bind_rows(scknjt.wd, scknjt.we)
+scknjt.wrds <- bind_rows(scknjt.wf, scknjt.wd)
+scknjt.wrds <- bind_rows(scknjt.wrds, scknjt.we)
 
 reactable(
   scknjt.wrds,
@@ -1714,6 +1721,39 @@ reactable(
 )
 
 ```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+scknjt.wrds <- scknjt.wrds[sample(1:nrow(scknjt.wrds)),]
+
+reactable(
+  scknjt.wrds,
+  columns = list(
+    Words = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600, color = '#202020', fontFamily = 'Noto Sans JP'))
+  ),
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
@@ -2169,6 +2209,7 @@ reactable(
 
 nadj2.a <- nadj2  %>% slice(1:235) %>% rename(Sentences = S1, Translation = T1)
 nadj2.a <- nadj2.a[sample(1:nrow(nadj2.a)),]
+nadj2.z <- nadj2.a 
 
 reactable(
   nadj2.a,
@@ -2529,8 +2570,8 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadj2.b <- nadj2 %>% slice(1:230) %>% rename(Sentences = S1, Translation = T1)
-nadj2.c <- nadj2.b %>% slice(1:50)
+# nadj2.b <- nadj2 %>% slice(1:230) %>% rename(Sentences = S1, Translation = T1)
+nadj2.c <- nadj2.z %>% slice(1:50)
 nadj2.c <- nadj2.c[sample(1:nrow(nadj2.c)),]
 
 reactable(
@@ -2634,7 +2675,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadj2.c <- nadj2.b %>% slice(51:100)
+nadj2.c <- nadj2.z %>% slice(51:100)
 nadj2.c <- nadj2.c[sample(1:nrow(nadj2.c)),]
 
 reactable(
@@ -2683,7 +2724,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadj2.c <- nadj2.c[sample(1:nrow(nadj2.c)),]
+nadj2.c <- nadj2.z[sample(1:nrow(nadj2.c)),]
 
 reactable(
   nadj2.c,
@@ -2738,7 +2779,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadj2.c <- nadj2.b %>% slice(101:150)
+nadj2.c <- nadj2.z %>% slice(101:150)
 nadj2.c <- nadj2.c[sample(1:nrow(nadj2.c)),]
 
 reactable(
@@ -2842,7 +2883,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadj2.c <- nadj2.b %>% slice(151:200)
+nadj2.c <- nadj2.z %>% slice(151:200)
 nadj2.c <- nadj2.c[sample(1:nrow(nadj2.c)),]
 
 reactable(
@@ -2946,7 +2987,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-nadj2.c <- nadj2.b %>% slice(201:235)
+nadj2.c <- nadj2.z %>% slice(201:235)
 nadj2.c <- nadj2.c[sample(1:nrow(nadj2.c)),]
 
 reactable(
@@ -14133,10 +14174,10 @@ reactable(
   grmrref.a, 
   onClick = "expand",
   columns = list(
-    Expression = colDef(align = "left", style = list(fontSize = 15, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans')),
+    Expression = colDef(minWidth = 40, align = "left", style = list(fontSize = 15, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans')),
     Meaning = colDef(align = "left"),
     Usage = colDef(align = "left"),
-    Category = colDef(align = "left"),
+    Category = colDef(minWidth = 40, align = "left"),
     
     S1 = colDef(show = FALSE),
     S2 = colDef(show = FALSE),
@@ -18509,7 +18550,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-い#### Expression
+#### Expression
 
 ```{r, echo=FALSE, message=FALSE}
 
