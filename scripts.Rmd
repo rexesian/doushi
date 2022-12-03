@@ -103,6 +103,7 @@ kanjivrb <- read_csv("jpdb/SCRPTVRB-KNJVRB.csv")
 kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
 sndknj <- read_csv("jpdb/SCRPTSNDON-KNJSND.csv")
 knjdu <- read_csv("jpdb/SCRPTCAT-KNJCAT.csv")
+knjduv2 <- read_csv("jpdb/SCRPTCATV2-KNJCAT.csv")
 kanjilst <- read_csv("jpdb/SCRPTNMQLST-NMQ.csv")
 ```
 
@@ -538,6 +539,7 @@ reactable(
           div(style = list(fontSize = 30, fontWeight = 500), value),
           div(style = list(fontSize = 9, color = '#008000'), NR),
           div(style = list(fontSize = 9, color = '#800000'), KR),
+          # div(span(style = list(fontSize = 9, fontWeight = 500), Meaning), span(style = list(fontSize = 9, fontWeight = 500), "・", Meaning))
           div(style = list(fontSize = 9, fontWeight = 500), Meaning)
         )
       },
@@ -744,6 +746,18 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+### Shape {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Usage {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Meaning {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
 ### Remember {.tabset}
 
 <div class = "row">
@@ -840,6 +854,116 @@ reactable(
 <!-- ------------------------------------------------------------------------ -->
 
 ## <b> Category </b> {.tabset}
+
+### Sample
+
+```{r echo=FALSE, message=FALSE}
+
+knjduv2.a <- knjduv2
+
+reactable(
+  knjduv2.a,
+  columns = list(
+       Kanji = colDef(
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+        style = JS("function(rowInfo, colInfo, state) {
+        var firstSorted = state.sorted[0]
+        if (!firstSorted || firstSorted.id === 'Kanji') {
+          var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+          if (prevRow && rowInfo.row['Kanji'] === prevRow['Kanji']) {
+            return { visibility: 'hidden' }
+          }
+        }
+      }"),
+      cell = function(value, index) {
+        Reading <- knjduv2.a$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else "Unknown"
+        tagList(
+          div(style = list(fontSize = 35, fontWeight = 800), value),
+          div(style = list(fontSize = 13, fontWeight = 400), Reading)
+        )
+      },
+      align = "center", minWidth = 40
+      ),
+
+      Script = colDef(
+      cell = function(value, index) {
+        Translation <- knjduv2.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        S1 <- knjduv2.a$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- knjduv2.a$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- knjduv2.a$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        S4 <- knjduv2.a$S4[index]
+        S4 <- if (!is.na(S4)) S4 else ""
+        S5 <- knjduv2.a$S5[index]
+        S5 <- if (!is.na(S5)) S5 else ""
+        T1 <- knjduv2.a$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- knjduv2.a$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        T3 <- knjduv2.a$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        T4 <- knjduv2.a$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
+        T5 <- knjduv2.a$T5[index]
+        T5 <- if (!is.na(T5)) T5 else ""
+        tagList(
+          div(span(style = list(fontSize = 21, fontWeight = 600), value), span(style = list(fontSize = 9, color = '#008000'), " ", Translation)),
+          div(span(style = list(fontSize = 21, fontWeight = 600), S1), span(style = list(fontSize = 9, color = '#008000'), " ",T1)),
+          div(span(style = list(fontSize = 21, fontWeight = 600), S2), span(style = list(fontSize = 9, color = '#008000'), " ",T2)),
+          div(span(style = list(fontSize = 21, fontWeight = 600), S3), span(style = list(fontSize = 9, color = '#008000'), " ",T3)),
+          div(span(style = list(fontSize = 21, fontWeight = 600), S4), span(style = list(fontSize = 9, color = '#008000'), " ",T4)),
+          div(span(style = list(fontSize = 21, fontWeight = 600), S5), span(style = list(fontSize = 9, color = '#008000'), " ",T5)),
+        )
+      },
+      align = "left"
+    ),    
+      
+      Reading = colDef(show = FALSE),
+      Translation = colDef(show = FALSE),
+      Script = colDef(show = FALSE),
+      S1 = colDef(show = FALSE),
+      S2 = colDef(show = FALSE),
+      S3 = colDef(show = FALSE),
+      S4 = colDef(show = FALSE),
+      S5 = colDef(show = FALSE),
+      S6 = colDef(show = FALSE),
+      S7 = colDef(show = FALSE),
+      T1 = colDef(show = FALSE),
+      T2 = colDef(show = FALSE),
+      T3 = colDef(show = FALSE),
+      T4 = colDef(show = FALSE),
+      T5 = colDef(show = FALSE),
+      T6 = colDef(show = FALSE),
+      T7 = colDef(show = FALSE)
+  ),
+    outlined = TRUE, defaultPageSize = 1, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
 
 ### Movement
 
