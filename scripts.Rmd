@@ -767,7 +767,7 @@ reactable(
           div(style = list(fontSize = 25, fontWeight = 500), value),
           div(style = list(fontSize = 9, fontWeight = 400), M1),
           div(style = list(fontSize = 9, fontWeight = 400), N1),
-          div(style = list(fontSize = 13, fontWeight = 400), W1),
+          div(style = list(fontSize = 14, fontWeight = 500), W1),
         )
       },
       align = "center"
@@ -784,7 +784,7 @@ reactable(
           div(style = list(fontSize = 25, fontWeight = 500), value),
           div(style = list(fontSize = 9, fontWeight = 400), M2),
           div(style = list(fontSize = 9, fontWeight = 400), N2),
-          div(style = list(fontSize = 13, fontWeight = 400), W2),
+          div(style = list(fontSize = 14, fontWeight = 500), W2),
         )
       },
       align = "center"
@@ -801,7 +801,7 @@ reactable(
           div(style = list(fontSize = 25, fontWeight = 500), value),
           div(style = list(fontSize = 9, fontWeight = 400), M3),
           div(style = list(fontSize = 9, fontWeight = 400), N3),
-          div(style = list(fontSize = 13, fontWeight = 400), W3),
+          div(style = list(fontSize = 14, fontWeight = 500), W3),
         )
       },
       align = "center"
@@ -818,7 +818,7 @@ reactable(
           div(style = list(fontSize = 25, fontWeight = 500), value),
           div(style = list(fontSize = 9, fontWeight = 400), M4),
           div(style = list(fontSize = 9, fontWeight = 400), N4),
-          div(style = list(fontSize = 13, fontWeight = 400), W4),
+          div(style = list(fontSize = 14, fontWeight = 500), W4),
         )
       },
       align = "center"
@@ -835,7 +835,7 @@ reactable(
           div(style = list(fontSize = 25, fontWeight = 500), value),
           div(style = list(fontSize = 9, fontWeight = 400), M5),
           div(style = list(fontSize = 9, fontWeight = 400), N5),
-          div(style = list(fontSize = 13, fontWeight = 400), W5),
+          div(style = list(fontSize = 14, fontWeight = 500), W5),
         )
       },
       align = "center"
@@ -4296,76 +4296,34 @@ reactable(
 #### L3 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
-scknj3w.aa <- scknj3 %>% select(W1, M1, R1) %>% rename (Words = W1, Meaning = M1, Reading = R1)
-scknj3w.ab <- scknj3 %>% select(W2, M2, R2) %>% rename (Words = W2, Meaning = M2, Reading = R2)
-scknj3w.ac <- scknj3 %>% select(W3, M3, R3) %>% rename (Words = W3, Meaning = M3, Reading = R3)
-scknj3w.cc <- bind_rows(scknj3w.aa, scknj3w.ab)
-scknj3w.cc <- bind_rows(scknj3w.cc, scknj3w.ac)
-scknj3w.cc <- scknj3w.cc[sample(1:nrow(scknj3w.cc)),]
+kcmbv2.a <- kcmbv2 %>% select(L3, T3) %>% rename(Sentences = L3, Translation = T3)
+kcmbv2.a <- kcmbv2.a %>% na.omit(kcmbv2.a)
+kcmbv2.a <- kcmbv2.a[sample(1:nrow(kcmbv2.a)),]
 
 reactable(
-  scknj3w.cc,
+  kcmbv2.a,
   columns = list(
-    Meaning = colDef(
+    Translation = colDef(
       cell = function(value, index) {
-        Words <- scknj3w.cc$Words[index]
-        Words <- if (!is.na(Words)) Words else ""
-        Reading <- scknj3w.cc$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
+        Sentences <- kcmbv2.a$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
         tagList(
-          div(style = list(fontSize = 24, fontWeight = 600), Words),
-          div(style = list(fontSize = 10, fontWeight = 400), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500), value),
+          div(style = list(fontSize = 21, fontWeight = 600), Sentences),
         )
       },
       align = "center"
     ),
+
+    Sentences = colDef(show = FALSE)
     
-    Words = colDef(show = FALSE),
-    Reading = colDef(show = FALSE)
-
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-</div>
-
-<div class = "col-sm-8">
-
-```{r, echo=FALSE, message=FALSE}
-
-scknj3w.a <- scknj3 %>% select(M1, M2, M3)
-scknj3w.a <- scknj3w.a %>% pivot_longer(everything())
-scknj3w.a <- scknj3w.a %>% rename(Kanji = value)
-scknj3w.a <- na.omit(scknj3w.a) %>% select(Kanji)
-scknj3w.a <- scknj3w.a[sample(1:nrow(scknj3w.a)),]
-
-reactable(
-  scknj3w.a,
-  columns = list(
-    Kanji = colDef(align = "center", style = list(fontSize = 12, fontWeight = 600))
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
+    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -4374,7 +4332,49 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+kcmbv2.a <- kcmbv2.a[sample(1:nrow(kcmbv2.a)),]
+
+reactable(
+  kcmbv2.a,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Translation <- kcmbv2.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600), Translation),
+        )
+      },
+      align = "center"
+    ),
+
+    Translation = colDef(show = FALSE)
+    
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
