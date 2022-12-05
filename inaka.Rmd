@@ -137,7 +137,9 @@ adgrmexp <- read_csv("jpdb/AGRMEXP-GRMEXP.csv")
 vbgrmexp <- read_csv("jpdb/VGRMEXP-GRMEXP.csv")
 exvdeo <- read_csv("cpdb/EXMPLS-EXP.csv")
 exvdsn <- read_csv("cpdb/SNPTS-EXP.csv")
+exvdvg <- read_csv("cpdb/VLGVD-EXP.csv")
 exvdnw <- read_csv("cpdb/NWSL-EXP.csv")
+exvdnh <- read_csv("cpdb/NHGVD-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -18539,6 +18541,8 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 exvdeo.a <- exvdeo %>% rename(Ted.Talks = Expression)
+exvdeo.a <- exvdeo.a[sample(1:nrow(exvdeo.a)),]
+
 
 reactable(
   exvdeo.a,
@@ -18573,17 +18577,98 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Vlogs {.tabset}
+#### Snippets {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
-exvdsn.a <- exvdsn %>% rename(Rnd.Vlogs = Expression)
+exvdsn.a <- exvdsn %>% rename(Rnd.Snippets = Expression)
+exvdsn.a <- exvdsn.a[sample(1:nrow(exvdsn.a)),]
 
 reactable(
   exvdsn.a,
   columns = list(
     Scripts = colDef(show = FALSE),
+    Rnd.Snippets = colDef(minWidth = 500,align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 500),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px",
+      align = "center"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Vlogs {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+exvdvg.a <- exvdvg %>% rename(Rnd.Vlogs = Expression)
+exvdvg.a <- exvdvg.a[sample(1:nrow(exvdvg.a)),]
+
+reactable(
+  exvdvg.a,
+  columns = list(
+    Scripts = colDef(show = FALSE),
     Rnd.Vlogs = colDef(minWidth = 500,align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 500),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px",
+      align = "center"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Nihongo {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+exvdnh.a <- exvdnh %>% rename(Rnd.Nihongo = Expression)
+exvdnh.a <- exvdnh.a[sample(1:nrow(exvdnh.a)),]
+
+reactable(
+  exvdnh.a,
+  columns = list(
+    Scripts = colDef(show = FALSE),
+    Rnd.Nihongo = colDef(minWidth = 500,align = "left", html = TRUE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
@@ -18617,6 +18702,7 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 exvdnw.a <- exvdnw %>% rename(Rnd.News = Expression)
+exvdnw.a <- exvdnw.a[sample(1:nrow(exvdnw.a)),]
 
 reactable(
   exvdnw.a,
