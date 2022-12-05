@@ -135,6 +135,9 @@ hnrexp <- read_csv("cpdb/HNREXP-EXP.csv")
 nngrmexp <- read_csv("jpdb/NGRMEXP-GRMEXP.csv")
 adgrmexp <- read_csv("jpdb/AGRMEXP-GRMEXP.csv")
 vbgrmexp <- read_csv("jpdb/VGRMEXP-GRMEXP.csv")
+exvdeo <- read_csv("cpdb/EXMPLS-EXP.csv")
+exvdsn <- read_csv("cpdb/SNPTS-EXP.csv")
+exvdnw <- read_csv("cpdb/NWSL-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -18523,79 +18526,128 @@ reactable(
 
 ### EV5.0: Listening {.tabset}
 
+#### Concept {.tabset}
 
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Listening and Hearing:** Be able to listen and hear the words clearly is the way to proficiency.</p>
+
+<h6> </h6>
+
+------------------------------------------------------------------------
 
 #### Talks {.tabset}
 
-##### Vision
+```{r, echo=FALSE, message=FALSE}
 
-<div class = "containervideo">
-<center>
-<iframe class = "responsive-iframevideo" src="https://www.youtube.com/embed/-IhtF44fZoA" frameborder="0" allowfullscreen>
-</iframe>
-</center>
-</div>
+exvdeo.a <- exvdeo %>% rename(Ted.Talks = Expression)
 
-------------------------------------------------------------------------
+reactable(
+  exvdeo.a,
+  columns = list(
+    Scripts = colDef(show = FALSE),
+    Ted.Talks = colDef(minWidth = 500,align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 500),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px",
+      align = "center"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
 
-##### Coffee
-
-<div class = "containervideo">
-<center>
-<iframe class = "responsive-iframevideo" src="https://www.youtube.com/embed/X7AKyI7FRpA" frameborder="0" allowfullscreen>
-</iframe>
-</center>
-</div>
-
-------------------------------------------------------------------------
-
-##### Carbon
-
-<div class = "containervideo">
-<center>
-<iframe class = "responsive-iframevideo" src="https://www.youtube.com/embed/0Di7braNxD4" frameborder="0" allowfullscreen>
-</iframe>
-</center>
-</div>
-
-------------------------------------------------------------------------
-
-#### Snippets {.tabset}
-
-##### Sayachi
-
-<div class = "containervideo">
-<center>
-<iframe class = "responsive-iframevideo" src="https://www.youtube.com/embed/qLhie_9RSq4" frameborder="0" allowfullscreen>
-</iframe>
-</center>
-</div>
+```
 
 ------------------------------------------------------------------------
 
 #### Vlogs {.tabset}
 
-##### NikoLife
+```{r, echo=FALSE, message=FALSE}
 
-<div class = "containervideo">
-<center>
-<iframe class = "responsive-iframevideo" src="https://www.youtube.com/embed/CFQg3oFhnI0" frameborder="0" allowfullscreen>
-</iframe>
-</center>
-</div>
+exvdsn.a <- exvdsn %>% rename(Rnd.Vlogs = Expression)
+
+reactable(
+  exvdsn.a,
+  columns = list(
+    Scripts = colDef(show = FALSE),
+    Rnd.Vlogs = colDef(minWidth = 500,align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 500),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px",
+      align = "center"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
 #### News {.tabset}
 
-##### Fnn-Fall
+```{r, echo=FALSE, message=FALSE}
 
-<div class = "containervideo">
-<center>
-<iframe class = "responsive-iframevideo" src="https://www.youtube.com/embed/CXxB1SDl-rU" frameborder="0" allowfullscreen>
-</iframe>
-</center>
-</div>
+exvdnw.a <- exvdnw %>% rename(Rnd.News = Expression)
+
+reactable(
+  exvdnw.a,
+  columns = list(
+    Scripts = colDef(show = FALSE),
+    Rnd.News = colDef(minWidth = 500,align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 500),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px",
+      align = "center"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 <!-- ------------------------------------------------------------------------ -->
 
