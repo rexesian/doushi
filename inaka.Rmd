@@ -140,6 +140,7 @@ exvdsn <- read_csv("cpdb/SNPTS-EXP.csv")
 exvdvg <- read_csv("cpdb/VLGVD-EXP.csv")
 exvdnw <- read_csv("cpdb/NWSL-EXP.csv")
 exvdnh <- read_csv("cpdb/NHGVD-EXP.csv")
+exvdam <- read_csv("cpdb/ANIME-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -3004,46 +3005,31 @@ reactable(
 
 ##### All {.tabset}
 
+<div class = "row">
+<div class = "col-sm-6">
+
 ```{r, echo=FALSE, message=FALSE}
 
 nadj2.a <- nadj2  %>% slice(1:235) %>% rename(Sentences = S1, Translation = T1)
 nadj2.a <- nadj2.a[sample(1:nrow(nadj2.a)),]
-nadj2.z <- nadj2.a 
 
 reactable(
   nadj2.a,
   columns = list(
-    Words = colDef(
+    Meaning = colDef(
       cell = function(value, index) {
-        Reading <- nadj2.a$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- nadj2.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Words <- nadj2.a$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
         tagList(
-          div(style = list(fontSize = 35, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), value),
-          # div(style = list(fontSize = 10, color = '#404040'), Reading),
-          # div(style = list(fontSize = 10, fontWeight = 500, color = '#404040'), Meaning)
+          div(style = list(fontSize = 35, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), Words),
         )
       },
       align = "center"
     ),
-    
-    # Sentences = colDef(
-    #   minWidth = 200,
-    #   cell = function(value, index) {
-    #     Translation <- nadj2.a$Translation[index]
-    #     Translation <- if (!is.na(Translation)) Translation else ""
-    #     tagList(
-    #       div(style = list(fontSize = 16, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), value),
-    #       div(style = list(fontSize = 9, color = '#404040'), Translation)
-    #     )
-    #   },
-    #   align = "left"
-    # ),
 
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
+    Words = colDef(show = FALSE),
     Reading = colDef(show = FALSE)
 
   ),
@@ -3063,6 +3049,51 @@ reactable(
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 ```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+reactable(
+  nadj2.a,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- nadj2.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#404040'), Meaning)
+        )
+      },
+      align = "center"
+    ),
+
+    Sentences = colDef(show = FALSE),
+    Translation = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 65),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
+
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
@@ -3442,101 +3473,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Sentences
-
-<div class = "row">
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-nadj1.a <- nadj1.a[sample(1:nrow(nadj1.a)),]
-
-reactable(
-  nadj1.a,
-  columns = list(
-    Translation = colDef(
-      cell = function(value, index) {
-        Sentences <- nadj1.a$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), Sentences),
-        )
-      },
-      align = "center"
-    ),
-    Words = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Reading = colDef(show = FALSE),
-    Sentences = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
-```
-
-</div>
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-
-nadj1.a <- nadj1.a[sample(1:nrow(nadj1.a)),]
-
-reactable(
-  nadj1.a,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- nadj1.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#404040'), Translation),
-        )
-      },
-      align = "center"
-    ),
-    Words = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Reading = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
-```
-
-</div>
-</div>
-
-------------------------------------------------------------------------
-
-#### Current {.tabset}
+#### Remember {.tabset}
 
 ##### 01 
 
@@ -4160,6 +4097,100 @@ reactable(
     )
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+#### Sentences
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+nadj1.a <- nadj1.a[sample(1:nrow(nadj1.a)),]
+
+reactable(
+  nadj1.a,
+  columns = list(
+    Translation = colDef(
+      cell = function(value, index) {
+        Sentences <- nadj1.a$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), Sentences),
+        )
+      },
+      align = "center"
+    ),
+    Words = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+
+nadj1.a <- nadj1.a[sample(1:nrow(nadj1.a)),]
+
+reactable(
+  nadj1.a,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Translation <- nadj1.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#404040'), Translation),
+        )
+      },
+      align = "center"
+    ),
+    Words = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -15983,8 +16014,11 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Examples {.tabset}
+#### Phrases {.tabset}
 
+------------------------------------------------------------------------
+
+#### Expressions {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -15998,14 +16032,7 @@ reactable(
         Translation <- phrsaux$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 36, fontWeight = 800, color = '#2F3F3F', fontFamily = 'New Tegomin'), value),
-          # div(style = list(fontSize = 2), "."),
-          # div(style = list(fontSize = 2), "."),
-          # div(style = list(fontSize = 2), "."),
-          # div(style = list(fontSize = 2), "."),
-          # div(style = list(fontSize = 2), "."),
-          # div(style = list(fontSize = 2), "."),
-          # div(style = list(fontSize = 9, color = '#6495BF'), Translation)
+          div(style = list(fontSize = 36, fontWeight = 800, color = '#2F3F3F', fontFamily = 'Open Sans'), value),
         )
       },
       align = "center"
@@ -16042,7 +16069,7 @@ phrsaux <- phrsaux[sample(1:nrow(na.omit(phrsaux))),]
 reactable(
   phrsaux,
   columns = list(
-    Expression = colDef(align = "left", style = list(fontSize = 15, fontWeight = 500, fontFamily = 'Noto Sans JP', color = '#555555')),
+    Expression = colDef(align = "left", style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#555555')),
     Translation = colDef(minWidth = 100,align = "left")
 
   ),
@@ -18709,6 +18736,46 @@ reactable(
   columns = list(
     Scripts = colDef(show = FALSE),
     Rnd.News = colDef(minWidth = 500,align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 500),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px",
+      align = "center"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Manga-Anime {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+exvdam.a <- exvdam %>% rename(Rnd.Manga.Anime = Expression)
+exvdam.a <- exvdam.a[sample(1:nrow(exvdam.a)),]
+
+reactable(
+  exvdam.a,
+  columns = list(
+    Scripts = colDef(show = FALSE),
+    Rnd.Manga.Anime = colDef(minWidth = 500,align = "left", html = TRUE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
