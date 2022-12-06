@@ -141,6 +141,7 @@ exvdvg <- read_csv("cpdb/VLGVD-EXP.csv")
 exvdnw <- read_csv("cpdb/NWSL-EXP.csv")
 exvdnh <- read_csv("cpdb/NHGVD-EXP.csv")
 exvdam <- read_csv("cpdb/ANIME-EXP.csv")
+vrbslstnk <- read_csv("jpdb/VRBSLSTNK-VRBS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -6872,6 +6873,165 @@ Can be either be a active or punctual verb.
     ・wear・take・change・order
 
 <h6> </h6>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### Examples {.tabset}
+
+##### List
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbslstnk.0 <- vrbslstnk %>% slice(1:250)
+vrbslstnk.1 <- vrbslstnk %>% slice(251:500)
+vrbslstnk.2 <- vrbslstnk %>% slice(501:750)
+vrbslstnk.3 <- vrbslstnk %>% slice(751:1000)
+vrbslstnk.4 <- vrbslstnk %>% slice(1001:1250)
+vrbslstnk.5 <- vrbslstnk %>% slice(1251:1500)
+vrbslstnk.6 <- vrbslstnk %>% slice(1501:1750)
+vrbslstnk.7 <- vrbslstnk %>% slice(1751:2000)
+vrbslstnk.8 <- vrbslstnk %>% slice(2001:2250)
+vrbslstnk.9 <- vrbslstnk %>% slice(2251:2500)
+
+vrbslstnk.0 <- vrbslstnk.0[sample(1:nrow(vrbslstnk.0)),]
+vrbslstnk.1 <- vrbslstnk.1[sample(1:nrow(vrbslstnk.1)),]
+vrbslstnk.2 <- vrbslstnk.2[sample(1:nrow(vrbslstnk.2)),]
+vrbslstnk.3 <- vrbslstnk.3[sample(1:nrow(vrbslstnk.3)),]
+vrbslstnk.4 <- vrbslstnk.4[sample(1:nrow(vrbslstnk.4)),]
+vrbslstnk.5 <- vrbslstnk.5[sample(1:nrow(vrbslstnk.5)),]
+vrbslstnk.6 <- vrbslstnk.6[sample(1:nrow(vrbslstnk.6)),]
+vrbslstnk.7 <- vrbslstnk.7[sample(1:nrow(vrbslstnk.7)),]
+vrbslstnk.8 <- vrbslstnk.8[sample(1:nrow(vrbslstnk.8)),]
+vrbslstnk.9 <- vrbslstnk.9[sample(1:nrow(vrbslstnk.9)),]
+
+vrbslstnk.a <- bind_rows(vrbslstnk.0, vrbslstnk.1)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.2)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.3)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.4)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.5)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.6)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.7)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.8)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.9)
+
+reactable(
+  vrbslstnk.a,
+  columns = list(
+    Verbs = colDef(
+      cell = function(value, index) {
+        Reading <- vrbslstnk.a$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- vrbslstnk.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(span(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value), span(style = list(fontSize = 13, fontWeight = 600, color = '#007000'), Reading), span(style = list(fontSize = 11, fontWeight = 600, color = '#800000'), Meaning))
+        )
+      },
+      align = "left"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbslstnk.0 <- vrbslstnk %>% slice(1:250)
+vrbslstnk.1 <- vrbslstnk %>% slice(251:500)
+vrbslstnk.2 <- vrbslstnk %>% slice(501:750)
+vrbslstnk.3 <- vrbslstnk %>% slice(751:1000)
+vrbslstnk.4 <- vrbslstnk %>% slice(1001:1250)
+vrbslstnk.5 <- vrbslstnk %>% slice(1251:1500)
+vrbslstnk.6 <- vrbslstnk %>% slice(1501:1750)
+vrbslstnk.7 <- vrbslstnk %>% slice(1751:2000)
+vrbslstnk.8 <- vrbslstnk %>% slice(2001:2250)
+vrbslstnk.9 <- vrbslstnk %>% slice(2251:2500)
+
+vrbslstnk.0 <- vrbslstnk.0[sample(1:nrow(vrbslstnk.0)),]
+vrbslstnk.1 <- vrbslstnk.1[sample(1:nrow(vrbslstnk.1)),]
+vrbslstnk.2 <- vrbslstnk.2[sample(1:nrow(vrbslstnk.2)),]
+vrbslstnk.3 <- vrbslstnk.3[sample(1:nrow(vrbslstnk.3)),]
+vrbslstnk.4 <- vrbslstnk.4[sample(1:nrow(vrbslstnk.4)),]
+vrbslstnk.5 <- vrbslstnk.5[sample(1:nrow(vrbslstnk.5)),]
+vrbslstnk.6 <- vrbslstnk.6[sample(1:nrow(vrbslstnk.6)),]
+vrbslstnk.7 <- vrbslstnk.7[sample(1:nrow(vrbslstnk.7)),]
+vrbslstnk.8 <- vrbslstnk.8[sample(1:nrow(vrbslstnk.8)),]
+vrbslstnk.9 <- vrbslstnk.9[sample(1:nrow(vrbslstnk.9)),]
+
+vrbslstnk.a <- bind_rows(vrbslstnk.0, vrbslstnk.1)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.2)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.3)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.4)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.5)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.6)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.7)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.8)
+vrbslstnk.a <- bind_rows(vrbslstnk.a, vrbslstnk.9)
+
+reactable(
+  vrbslstnk.a,
+  columns = list(
+    Verbs = colDef(
+      cell = function(value, index) {
+        Reading <- vrbslstnk.a$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- vrbslstnk.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(span(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value))
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+##### Phrases
 
 <!-- ------------------------------------------------------------------------ -->
 
