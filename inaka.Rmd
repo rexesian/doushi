@@ -141,6 +141,7 @@ exvdvg <- read_csv("cpdb/VLGVD-EXP.csv")
 exvdnw <- read_csv("cpdb/NWSL-EXP.csv")
 exvdnh <- read_csv("cpdb/NHGVD-EXP.csv")
 exvdam <- read_csv("cpdb/ANIME-EXP.csv")
+exvded <- read_csv("cpdb/EDCTNL-EXP.csv")
 vrbslstnk <- read_csv("jpdb/VRBSLSTNK-VRBS.csv")
 ```
 
@@ -19208,6 +19209,45 @@ reactable(
 
 ```
 
+------------------------------------------------------------------------
+
+#### Educational {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+exvded.a <- exvded %>% rename(Rnd.Educational = Expression)
+exvded.a <- exvded.a[sample(1:nrow(exvded.a)),]
+
+reactable(
+  exvded.a,
+  columns = list(
+    Scripts = colDef(show = FALSE),
+    Rnd.Educational = colDef(minWidth = 500,align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px",
+      align = "center"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 <!-- ------------------------------------------------------------------------ -->
 
 <!-- #### Reference {.tabset} -->
