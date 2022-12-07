@@ -49,7 +49,7 @@ options(readr.show_col_types = FALSE)
 ```
 
 ```{r, echo=FALSE, message=FALSE, error=FALSE}
-nadj2 <- read_csv("jpdb/ADJI-ADJI.csv")
+# nadj2 <- read_csv("jpdb/ADJI-ADJI.csv")
 ```
 
 <p style="font-size:12px; line-height: 1; font-family: Noto Sans JP;  color: #787878;">**Notes for Japanese Language Learning**</p>
@@ -58,65 +58,4 @@ nadj2 <- read_csv("jpdb/ADJI-ADJI.csv")
 
 ------------------------------------------------------------------------
 
-<h6> </h6>
-
-```{r, echo=FALSE, message=FALSE}
-
-nadj2.a <- nadj2  %>% slice(1:235) %>% rename(Sentences = S1, Translation = T1)
-nadj2.a <- nadj2.a[sample(1:nrow(nadj2.a)),]
-nadj2.z <- nadj2.a 
-
-reactable(
-  nadj2.a,
-  columns = list(
-    Words = colDef(
-      cell = function(value, index) {
-        Reading <- nadj2.a$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- nadj2.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        tagList(
-          div(style = list(fontSize = 35, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), value),
-          # div(style = list(fontSize = 10, color = '#404040'), Reading),
-          # div(style = list(fontSize = 10, fontWeight = 500, color = '#404040'), Meaning)
-        )
-      },
-      align = "center"
-    ),
-    
-    # Sentences = colDef(
-    #   minWidth = 200,
-    #   cell = function(value, index) {
-    #     Translation <- nadj2.a$Translation[index]
-    #     Translation <- if (!is.na(Translation)) Translation else ""
-    #     tagList(
-    #       div(style = list(fontSize = 16, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), value),
-    #       div(style = list(fontSize = 9, color = '#404040'), Translation)
-    #     )
-    #   },
-    #   align = "left"
-    # ),
-
-    Sentences = colDef(show = FALSE),
-    Translation = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Reading = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
-```
 
