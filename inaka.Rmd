@@ -143,6 +143,7 @@ exvdnh <- read_csv("cpdb/NHGVD-EXP.csv")
 exvdam <- read_csv("cpdb/ANIME-EXP.csv")
 exvded <- read_csv("cpdb/EDCTNL-EXP.csv")
 vrbslstnk <- read_csv("jpdb/VRBSLSTNK-VRBS.csv")
+grmrusl <- read_csv("jpdb/SPKPTNI-GRM.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -11872,7 +11873,59 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Advance {.tabset}
+#### Usual {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# grmrusl <- grmrusl[sample(1:nrow(grmrusl)),]
+
+reactable(
+  grmrusl,
+  columns = list(
+    Expression = colDef(
+      minWidth = 80,
+      cell = function(value, index) {
+        Meaning <- grmrusl$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 500), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Sentence = colDef(
+      minWidth = 150,
+      cell = function(value, index) {
+        Translation <- grmrusl$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, color = '#787878'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
