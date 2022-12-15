@@ -142,6 +142,7 @@ exvdnw <- read_csv("cpdb/NWSL-EXP.csv")
 exvdnh <- read_csv("cpdb/NHGVD-EXP.csv")
 exvdam <- read_csv("cpdb/ANIME-EXP.csv")
 exvded <- read_csv("cpdb/EDCTNL-EXP.csv")
+exvdkw <- read_csv("cpdb/EIKAIWA-EXP.csv")
 vrbslstnk <- read_csv("jpdb/VRBSLSTNK-VRBS.csv")
 grmrusl <- read_csv("jpdb/SPKPTNI-GRM.csv")
 ```
@@ -19344,7 +19345,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Open Sans'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -19400,7 +19401,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Open Sans'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -19456,7 +19457,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Open Sans'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -19512,7 +19513,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Open Sans'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -19568,7 +19569,7 @@ reactable(
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Open Sans'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -19970,6 +19971,46 @@ reactable(
   columns = list(
     Scripts = colDef(show = FALSE),
     Rnd.Educational = colDef(minWidth = 500,align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px",
+      align = "center"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Eikaiwa {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+exvdkw.a <- exvdkw %>% rename(Rnd.Eikaiwa = Expression)
+exvdkw.a <- exvdkw.a[sample(1:nrow(exvdkw.a)),]
+
+reactable(
+  exvdkw.a,
+  columns = list(
+    Scripts = colDef(show = FALSE),
+    Rnd.Eikaiwa = colDef(minWidth = 500,align = "left", html = TRUE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
