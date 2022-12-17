@@ -108,6 +108,7 @@ kanjilst <- read_csv("jpdb/SCRPTNMQLST-NMQ.csv")
 knjshp <- read_csv("jpdb/KNJSHP-SHP.csv")
 knjusg <- read_csv("jpdb/KNJUSG-USG.csv")
 knjsnt <- read_csv("jpdb/SCRPTSNV2-SNT.csv")
+knjent <- read_csv("jpdb/SCRPTSNV3-SNT.csv")
 ```
 
 # <b> Scripts </b> {.tabset}
@@ -6114,6 +6115,63 @@ reactable(
 <!-- ------------------------------------------------------------------------ -->
 
 ### Sentences {.tabset}
+
+#### L5 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+knjent.l5 <- knjent %>% select(L5, T5)  %>% rename(Sentences = L5, Translation = T5)
+knjent.l4 <- knjent %>% select(L4, T4)  %>% rename(Sentences = L4, Translation = T4)
+knjent.l3 <- knjent %>% select(L3, T3)  %>% rename(Sentences = L3, Translation = T3)
+knjent.l2 <- knjent %>% select(L2, T2)  %>% rename(Sentences = L2, Translation = T2)
+knjent.l1 <- knjent %>% select(L1, T1)  %>% rename(Sentences = L1, Translation = T1)
+
+knjent.l5 <- knjent.l5 %>% na.omit(knjent.l5)
+knjent.l4 <- knjent.l4 %>% na.omit(knjent.l4)
+knjent.l3 <- knjent.l3 %>% na.omit(knjent.l3)
+knjent.l2 <- knjent.l2 %>% na.omit(knjent.l2)
+knjent.l1 <- knjent.l1 %>% na.omit(knjent.l1)
+
+knjent.l5 <- knjent.l5[sample(1:nrow(knjent.l5)),]
+
+reactable(
+  knjent.l5,
+  columns = list(
+    Sentences = colDef(minWidth = 90,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans')),
+    Translation = colDef(minWidth = 80,align = "left", style = list(fontSize = 10))
+  ),
+  defaultPageSize = 9,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L4 {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L3 {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L2 {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L1 {.tabset}
 
 <!-- ------------------------------------------------------------------------ -->
 
