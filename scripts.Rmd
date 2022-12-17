@@ -107,6 +107,7 @@ knjduv2 <- read_csv("jpdb/SCRPTCATV2-KNJCAT.csv")
 kanjilst <- read_csv("jpdb/SCRPTNMQLST-NMQ.csv")
 knjshp <- read_csv("jpdb/KNJSHP-SHP.csv")
 knjusg <- read_csv("jpdb/KNJUSG-USG.csv")
+knjsnt <- read_csv("jpdb/SCRPTSNV2-SNT.csv")
 ```
 
 # <b> Scripts </b> {.tabset}
@@ -611,6 +612,77 @@ reactable(
     )
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### LS {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+scknj5.w1 <- scknj5 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+scknj5.w2 <- scknj5 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+scknj5.w3 <- scknj5 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+scknj4.w1 <- scknj4 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+scknj4.w2 <- scknj4 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+scknj4.w3 <- scknj4 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+scknj3.w1 <- scknj3 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+scknj3.w2 <- scknj3 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+scknj3.w3 <- scknj3 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+scknj2.w1 <- scknj2 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+scknj2.w2 <- scknj2 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+scknj2.w3 <- scknj2 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+scknj1.w1 <- scknj1 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+scknj1.w2 <- scknj1 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+scknj1.w3 <- scknj1 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+
+scknj5.wa <- bind_rows(scknj5.w1, scknj5.w2)
+scknj5.wa <- bind_rows(scknj5.wa, scknj5.w3)
+scknj4.wa <- bind_rows(scknj4.w1, scknj4.w2)
+scknj4.wa <- bind_rows(scknj4.wa, scknj4.w3)
+scknj3.wa <- bind_rows(scknj3.w1, scknj3.w2)
+scknj3.wa <- bind_rows(scknj3.wa, scknj3.w3)
+scknj2.wa <- bind_rows(scknj2.w1, scknj2.w2)
+scknj2.wa <- bind_rows(scknj2.wa, scknj2.w3)
+scknj1.wa <- bind_rows(scknj1.w1, scknj1.w2)
+scknj1.wa <- bind_rows(scknj1.wa, scknj1.w3)
+
+scknj5.wa <- scknj5.wa[sample(1:nrow(scknj5.wa)),]
+scknj4.wa <- scknj4.wa[sample(1:nrow(scknj4.wa)),]
+scknj3.wa <- scknj3.wa[sample(1:nrow(scknj3.wa)),]
+scknj2.wa <- scknj2.wa[sample(1:nrow(scknj2.wa)),]
+scknj1.wa <- scknj1.wa[sample(1:nrow(scknj1.wa)),]
+
+scknja.wa <- bind_rows(scknj5.wa, scknj4.wa)
+scknja.wa <- bind_rows(scknja.wa, scknj3.wa)
+scknja.wa <- bind_rows(scknja.wa, scknj2.wa)
+scknja.wa <- bind_rows(scknja.wa, scknj1.wa)
+
+scknja.wa <- scknja.wa %>% na.omit(scknja.wa)
+
+reactable(
+  scknja.wa,
+  columns = list(
+    Words = colDef(minWidth = 22,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans')),
+    Reading = colDef(minWidth = 25,align = "left", style = list(fontFamily = 'Open Sans')),
+    Meaning = colDef(minWidth = 100,align = "left") 
+  ),
+  defaultPageSize = 9,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -1928,72 +2000,6 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-## <b> Mnemonics </b> {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-kanjinmq <- kanjinmq[sample(1:nrow(kanjinmq)),]
-
-reactable(
-  kanjinmq,
-  columns = list(
-    Kanji = colDef(
-      cell = function(value, index) {
-        Expression <- kanjinmq$Expression[index]
-        Expression <- if (!is.na(Expression)) Expression else ""
-        Author <- kanjinmq$Author[index]
-        Author <- if (!is.na(Author)) Author else ""
-        Name <- kanjinmq$Name[index]
-        Name <- if (!is.na(Name)) Name else ""
-        Words <- kanjinmq$Words[index]
-        Words <- if (!is.na(Words)) Words else "" 
-        tagList(
-          div(style = list(fontSize = 60, fontWeight = 600, color = '#202020', fontFamily = 'Noto Sans JP'), value),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 13, fontWeight = 600, color = '#202020', fontFamily = 'Klee One'), Expression),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 13, fontWeight = 500, color = '#202020', fontFamily = 'Klee One'), "by: ", Author, "。", Name),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), Words),
-        )
-      },
-      align = "center"
-    ),
-    Expression = colDef(show = FALSE),
-    Author = colDef(show = FALSE),
-    Name = colDef(show = FALSE),
-    Words = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
 ## <b> Recognize </b> {.tabset}
 
 ### Kanji {.tabset}
@@ -2105,7 +2111,6 @@ reactable(
 ```
 
 </div>
-
 <div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
@@ -2251,7 +2256,6 @@ reactable(
 ```
 
 </div>
-
 <div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
@@ -2355,7 +2359,6 @@ reactable(
 ```
 
 </div>
-
 <div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
@@ -2520,7 +2523,6 @@ reactable(
 ```
 
 </div>
-
 <div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
@@ -2676,7 +2678,6 @@ reactable(
 ```
 
 </div>
-
 <div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
@@ -2715,7 +2716,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### All {.tabset}
+#### LS {.tabset}
 
 <div class = "row">
 <div class = "col-sm-6">
@@ -2743,7 +2744,6 @@ scknj2.w3 <- scknj2 %>% select(W3) %>% rename(Words = W3)
 scknj1.w1 <- scknj1 %>% select(W1) %>% rename(Words = W1)
 scknj1.w2 <- scknj1 %>% select(W2) %>% rename(Words = W2)
 scknj1.w3 <- scknj1 %>% select(W3) %>% rename(Words = W3)
-
 
 scknjt.wf <- bind_rows(scknj4.w1, scknj4.w2)
 scknjt.wf <- bind_rows(scknjt.wf, scknj4.w3)
@@ -2773,10 +2773,10 @@ reactable(
   columns = list(
     Words = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600, color = '#202020', fontFamily = 'Noto Sans JP'))
   ),
-  defaultPageSize = 3,
+  defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 305),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -2796,26 +2796,68 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-scknjt.wrds <- scknjt.wrds[sample(1:nrow(scknjt.wrds)),]
+scknj5.w1 <- scknj5 %>% select(W1) %>% rename(Words = W1)
+scknj5.w2 <- scknj5 %>% select(W2) %>% rename(Words = W2)
+scknj5.w3 <- scknj5 %>% select(W3) %>% rename(Words = W3)
+scknj4.w1 <- scknj4 %>% select(W1) %>% rename(Words = W1)
+scknj4.w2 <- scknj4 %>% select(W2) %>% rename(Words = W2)
+scknj4.w3 <- scknj4 %>% select(W3) %>% rename(Words = W3)
+scknj3.w1 <- scknj3 %>% select(W1) %>% rename(Words = W1)
+scknj3.w2 <- scknj3 %>% select(W2) %>% rename(Words = W2)
+scknj3.w3 <- scknj3 %>% select(W3) %>% rename(Words = W3)
+scknj2.w1 <- scknj2 %>% select(W1) %>% rename(Words = W1)
+scknj2.w2 <- scknj2 %>% select(W2) %>% rename(Words = W2)
+scknj2.w3 <- scknj2 %>% select(W3) %>% rename(Words = W3)
+scknj1.w1 <- scknj1 %>% select(W1) %>% rename(Words = W1)
+scknj1.w2 <- scknj1 %>% select(W2) %>% rename(Words = W2)
+scknj1.w3 <- scknj1 %>% select(W3) %>% rename(Words = W3)
+
+scknj5.wa <- bind_rows(scknj5.w1, scknj5.w2)
+scknj5.wa <- bind_rows(scknj5.wa, scknj5.w3)
+scknj4.wa <- bind_rows(scknj4.w1, scknj4.w2)
+scknj4.wa <- bind_rows(scknj4.wa, scknj4.w3)
+scknj3.wa <- bind_rows(scknj3.w1, scknj3.w2)
+scknj3.wa <- bind_rows(scknj3.wa, scknj3.w3)
+scknj2.wa <- bind_rows(scknj2.w1, scknj2.w2)
+scknj2.wa <- bind_rows(scknj2.wa, scknj2.w3)
+scknj1.wa <- bind_rows(scknj1.w1, scknj1.w2)
+scknj1.wa <- bind_rows(scknj1.wa, scknj1.w3)
+
+scknj5.wa <- scknj5.wa[sample(1:nrow(scknj5.wa)),]
+scknj4.wa <- scknj4.wa[sample(1:nrow(scknj4.wa)),]
+scknj3.wa <- scknj3.wa[sample(1:nrow(scknj3.wa)),]
+scknj2.wa <- scknj2.wa[sample(1:nrow(scknj2.wa)),]
+scknj1.wa <- scknj1.wa[sample(1:nrow(scknj1.wa)),]
+
+scknja.wa <- bind_rows(scknj5.wa, scknj4.wa)
+scknja.wa <- bind_rows(scknja.wa, scknj3.wa)
+scknja.wa <- bind_rows(scknja.wa, scknj2.wa)
+scknja.wa <- bind_rows(scknja.wa, scknj1.wa)
+
+scknja.wa <- scknja.wa %>% na.omit(scknja.wa)
+scknja.wa <- bind_rows(scknja.wa, kanjilst.a)
+scknja.wa <- bind_rows(scknja.wa, kanjilst.b)
+
+scknj1.wa <- scknj1.wa[sample(1:nrow(scknj1.wa)),]
 
 reactable(
-  scknjt.wrds,
+  scknja.wa,
   columns = list(
-    Words = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600, color = '#202020', fontFamily = 'Noto Sans JP'))
+    Words = colDef(minWidth = 22,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans'))
   ),
-  defaultPageSize = 3,
+  defaultPageSize = 9,
   theme = reactableTheme(
-    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
       paddingBottom = "8px",
-      width = "100%"
+      width = "100%",
+      fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",striped = TRUE,
-  
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
@@ -2985,7 +3027,6 @@ reactable(
 ```
 
 </div>
-
 <div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
@@ -3495,183 +3536,6 @@ reactable(
 
 ##### L1 {.tabset}
 
-<!-- ------------------------------------------------------------------------ -->
-
-#### Extended {.tabset}
-
-##### L5 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-klvl1w <- klvl1 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
-klvl1w <- klvl1w %>% pivot_longer(everything())
-klvl1w <- klvl1w %>% rename(Kanji = value)
-klvl1w <- na.omit(klvl1w) %>% select(Kanji)
-klvl1w <- klvl1w[sample(1:nrow(klvl1w)),]
-klvl1w <- klvl1w[sample(1:nrow(klvl1w)),]
-
-reactable(
-  klvl1w,
-  columns = list(
-    Kanji = colDef(align = "center", style = list(fontSize = 28, fontWeight = 600))
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-##### L4 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-klvl2w <- klvl2 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
-klvl2w <- klvl2w %>% pivot_longer(everything())
-klvl2w <- klvl2w %>% rename(Kanji = value)
-klvl2w <- na.omit(klvl2w) %>% select(Kanji)
-klvl2w <- klvl2w[sample(1:nrow(klvl2w)),]
-
-reactable(
-  klvl2w,
-  columns = list(
-    Kanji = colDef(align = "center", style = list(fontSize = 28, fontWeight = 600))
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-##### L3 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-klvl3w <- klvl3 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
-klvl3w <- klvl3w %>% pivot_longer(everything())
-klvl3w <- klvl3w %>% rename(Kanji = value)
-klvl3w <- na.omit(klvl3w) %>% select(Kanji)
-klvl3w <- klvl3w[sample(1:nrow(klvl3w)),]
-
-reactable(
-  klvl3w,
-  columns = list(
-    Kanji = colDef(align = "center", style = list(fontSize = 28, fontWeight = 600))
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-##### L2 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-klvl4w <- klvl4 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
-klvl4w <- klvl4w %>% pivot_longer(everything())
-klvl4w <- klvl4w %>% rename(Kanji = value)
-klvl4w <- na.omit(klvl4w) %>% select(Kanji)
-klvl4w <- klvl4w[sample(1:nrow(klvl4w)),]
-
-reactable(
-  klvl4w,
-  columns = list(
-    Kanji = colDef(align = "center", style = list(fontSize = 28, fontWeight = 600))
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-##### L1 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-klvl5w <- klvl5 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
-klvl5w <- klvl5w %>% pivot_longer(everything())
-klvl5w <- klvl5w %>% rename(Kanji = value)
-klvl5w <- na.omit(klvl5w) %>% select(Kanji)
-klvl5w <- klvl5w[sample(1:nrow(klvl5w)),]
-
-reactable(
-  klvl5w,
-  columns = list(
-    Kanji = colDef(align = "center", style = list(fontSize = 28, fontWeight = 600))
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -4783,6 +4647,59 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+#### LS {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+knjsnt.l5 <- knjsnt %>% select(L5, T5)  %>% rename(Sentences = L5, Translation = T5)
+knjsnt.l4 <- knjsnt %>% select(L4, T4)  %>% rename(Sentences = L4, Translation = T4)
+knjsnt.l3 <- knjsnt %>% select(L3, T3)  %>% rename(Sentences = L3, Translation = T3)
+knjsnt.l2 <- knjsnt %>% select(L2, T2)  %>% rename(Sentences = L2, Translation = T2)
+knjsnt.l1 <- knjsnt %>% select(L1, T1)  %>% rename(Sentences = L1, Translation = T1)
+
+knjsnt.l5 <- knjsnt.l5 %>% na.omit(knjsnt.l5)
+knjsnt.l4 <- knjsnt.l4 %>% na.omit(knjsnt.l4)
+knjsnt.l3 <- knjsnt.l3 %>% na.omit(knjsnt.l3)
+knjsnt.l2 <- knjsnt.l2 %>% na.omit(knjsnt.l2)
+knjsnt.l1 <- knjsnt.l1 %>% na.omit(knjsnt.l1)
+
+knjsnt.l5 <- knjsnt.l5[sample(1:nrow(knjsnt.l5)),]
+knjsnt.l4 <- knjsnt.l4[sample(1:nrow(knjsnt.l4)),]
+knjsnt.l3 <- knjsnt.l3[sample(1:nrow(knjsnt.l3)),]
+knjsnt.l2 <- knjsnt.l2[sample(1:nrow(knjsnt.l2)),]
+knjsnt.l1 <- knjsnt.l1[sample(1:nrow(knjsnt.l1)),]
+
+knjsnt.la <- bind_rows(knjsnt.l5, knjsnt.l4)
+knjsnt.la <- bind_rows(knjsnt.la, knjsnt.l3)
+knjsnt.la <- bind_rows(knjsnt.la, knjsnt.l2)
+knjsnt.la <- bind_rows(knjsnt.la, knjsnt.l1)
+
+reactable(
+  knjsnt.la,
+  columns = list(
+    Sentences = colDef(minWidth = 90,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans')),
+    Translation = colDef(minWidth = 80,align = "left", style = list(fontSize = 10))
+  ),
+  defaultPageSize = 9,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## <b> Recall </b> {.tabset}
 
 ### Words {.tabset}
@@ -5833,6 +5750,436 @@ reactable(
 
 </div>
 </div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Extended </b> {.tabset}
+
+### Words {.tabset}
+
+#### L5 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl1w <- klvl1 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
+klvl1w <- klvl1w %>% pivot_longer(everything())
+klvl1w <- klvl1w %>% rename(Kanji = value)
+klvl1w <- na.omit(klvl1w) %>% select(Kanji)
+klvl1w <- klvl1w[sample(1:nrow(klvl1w)),]
+klvl1w <- klvl1w[sample(1:nrow(klvl1w)),]
+
+reactable(
+  klvl1w,
+  columns = list(
+    Kanji = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 305),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl1w <- klvl1w[sample(1:nrow(klvl1w)),]
+
+reactable(
+  klvl1w,
+  columns = list(
+    Kanji = colDef(minWidth = 22,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans'))
+  ),
+  defaultPageSize = 9,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L4 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl2w <- klvl2 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
+klvl2w <- klvl2w %>% pivot_longer(everything())
+klvl2w <- klvl2w %>% rename(Kanji = value)
+klvl2w <- na.omit(klvl2w) %>% select(Kanji)
+klvl2w <- klvl2w[sample(1:nrow(klvl2w)),]
+
+reactable(
+  klvl2w,
+  columns = list(
+    Kanji = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 305),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl2w <- klvl2w[sample(1:nrow(klvl2w)),]
+
+reactable(
+  klvl2w,
+  columns = list(
+    Kanji = colDef(minWidth = 22,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans'))
+  ),
+  defaultPageSize = 9,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L3 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl3w <- klvl3 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
+klvl3w <- klvl3w %>% pivot_longer(everything())
+klvl3w <- klvl3w %>% rename(Kanji = value)
+klvl3w <- na.omit(klvl3w) %>% select(Kanji)
+klvl3w <- klvl3w[sample(1:nrow(klvl3w)),]
+
+reactable(
+  klvl3w,
+  columns = list(
+    Kanji = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 305),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl3w <- klvl3w[sample(1:nrow(klvl3w)),]
+
+reactable(
+  klvl3w,
+  columns = list(
+    Kanji = colDef(minWidth = 22,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans'))
+  ),
+  defaultPageSize = 9,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L2 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl4w <- klvl4 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
+klvl4w <- klvl4w %>% pivot_longer(everything())
+klvl4w <- klvl4w %>% rename(Kanji = value)
+klvl4w <- na.omit(klvl4w) %>% select(Kanji)
+klvl4w <- klvl4w[sample(1:nrow(klvl4w)),]
+
+reactable(
+  klvl4w,
+  columns = list(
+    Kanji = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 305),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl4w <- klvl4w[sample(1:nrow(klvl4w)),]
+
+reactable(
+  klvl4w,
+  columns = list(
+    Kanji = colDef(minWidth = 22,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans'))
+  ),
+  defaultPageSize = 9,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### L1 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl5w <- klvl5 %>% select(W1, W2, W3, W4, W5, W6, W7, W8)
+klvl5w <- klvl5w %>% pivot_longer(everything())
+klvl5w <- klvl5w %>% rename(Kanji = value)
+klvl5w <- na.omit(klvl5w) %>% select(Kanji)
+klvl5w <- klvl5w[sample(1:nrow(klvl5w)),]
+
+reactable(
+  klvl5w,
+  columns = list(
+    Kanji = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 305),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+klvl5w <- klvl5w[sample(1:nrow(klvl5w)),]
+
+reactable(
+  klvl5w,
+  columns = list(
+    Kanji = colDef(minWidth = 22,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans'))
+  ),
+  defaultPageSize = 9,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Sentences {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Mnemonics </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+kanjinmq <- kanjinmq[sample(1:nrow(kanjinmq)),]
+
+reactable(
+  kanjinmq,
+  columns = list(
+    Kanji = colDef(
+      cell = function(value, index) {
+        Expression <- kanjinmq$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        Author <- kanjinmq$Author[index]
+        Author <- if (!is.na(Author)) Author else ""
+        Name <- kanjinmq$Name[index]
+        Name <- if (!is.na(Name)) Name else ""
+        Words <- kanjinmq$Words[index]
+        Words <- if (!is.na(Words)) Words else "" 
+        tagList(
+          div(style = list(fontSize = 60, fontWeight = 600, color = '#202020', fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 13, fontWeight = 600, color = '#202020', fontFamily = 'Klee One'), Expression),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 13, fontWeight = 500, color = '#202020', fontFamily = 'Klee One'), "by: ", Author, "。", Name),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 21, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), Words),
+        )
+      },
+      align = "center"
+    ),
+    Expression = colDef(show = FALSE),
+    Author = colDef(show = FALSE),
+    Name = colDef(show = FALSE),
+    Words = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 <!-- ------------------------------------------------------------------------ -->
 
