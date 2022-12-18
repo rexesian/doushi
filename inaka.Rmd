@@ -79,7 +79,7 @@ library(dplyr)
 library(purrr)
 library(readr)
 library(vembedr)
-options(readr.show_col_types = FALSE)
+options(readr.show_col_types = FALSE, max.print=100000)
 ```
 
 ```{r, echo=FALSE, message=FALSE, error=FALSE}
@@ -146,6 +146,7 @@ exvdkw <- read_csv("cpdb/EIKAIWA-EXP.csv")
 vrbslstnk <- read_csv("jpdb/VRBSLSTNK-VRBS.csv")
 grmrusl <- read_csv("jpdb/SPKPTNI-GRM.csv")
 architbl <- read_csv("jpdb/ARCHITBL-TBL.csv")
+synwrds <- read_csv("jpdb/SYNWRD-WRD.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -20269,6 +20270,24 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### Reference {.tabset}
+
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Graded-Reader:**   
+❊ [**TADOKU**](https://tadoku.org/japanese/free-books/)  
+❊ [**YOMUJP**](https://yomujp.com)   
+
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Travel-Sites:**   
+❊ [**RETRIP**](https://retrip.jp/)    
+❊ [**COTRIP**](https://co-trip.jp/)     
+
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Japan-Places:**    
+❊ [**NARA**](https://www.city.nara.lg.jp)    
+❊ [**KOBE**](https://www.city.kobe.lg.jp)     
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
 ### EV4.0: Speaking {.tabset}
 
 #### Concept {.tabset}
@@ -21344,23 +21363,63 @@ reactable(
 
 <!-- #### Sentences -->
 
+------------------------------------------------------------------------
+
+### Chap.08: 同義類義 {.tabset}
+
+#### Vocabularies
+
+```{r, echo=FALSE, message=FALSE}
+
+synwrds <- synwrds[sample(1:nrow(synwrds)),]
+
+reactable(
+  synwrds,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Reading <- synwrds$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- synwrds$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Related.Words <- synwrds$Related.Words[index]
+        Related.Words <- if (!is.na(Related.Words)) Related.Words else ""
+        tagList(
+          div(span(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans', color = '#11111F'), value, " "), span(style = list(fontSize = 11, fontWeight = 600, color = '#00906F'), Reading, " "), span(style = list(fontSize = 11, fontWeight = 600, color = '#800000'), Meaning)),
+          div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#10111F'), Related.Words)
+        )
+      },
+      align = "left"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Related.Words = colDef(show = FALSE)
+  ),
+  defaultPageSize = 4,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Sentences
+
 <!-- ------------------------------------------------------------------------ -->
 
-<!-- ### Chap.19: Health {.tabset} -->
-
-<!-- #### Vocabularies -->
-
-<!-- ------------------------------------------------------------------------ -->
-
-<!-- #### Expression -->
-
-<!-- ------------------------------------------------------------------------ -->
-
-<!-- #### Sentences -->
-
-<!-- ------------------------------------------------------------------------ -->
-
-### Chap.08: 日常種類 {.tabset}
+### Chap.09: 日常種類 {.tabset}
 
 #### Vocabularies {.tabset}
 
