@@ -147,6 +147,8 @@ vrbslstnk <- read_csv("jpdb/VRBSLSTNK-VRBS.csv")
 grmrusl <- read_csv("jpdb/SPKPTNI-GRM.csv")
 architbl <- read_csv("jpdb/ARCHITBL-TBL.csv")
 synwrds <- read_csv("jpdb/SYNWRD-WRD.csv")
+scrptrvw <- read_csv("jpdb/SCRPTRVW-KNJD5.csv")
+audiolist <- read_csv("cpdb/ADEXER-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1733,6 +1735,106 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+### LR {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+scrptrvw <- scrptrvw[sample(1:nrow(scrptrvw)),]
+
+reactable(
+  scrptrvw,
+  columns = list(
+    Kanji = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Meaning <- scrptrvw$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        NR <- scrptrvw$NR[index]
+        NR <- if (!is.na(NR)) NR else ""
+        KR <- scrptrvw$KR[index]
+        KR <- if (!is.na(KR)) KR else ""
+        tagList(
+          div(style = list(fontSize = 50, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 9, color = '#008000'), NR),
+          # div(style = list(fontSize = 9, color = '#800000'), KR),
+          # div(style = list(fontSize = 9, fontWeight = 500), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    R1 = colDef(show = FALSE),
+    R2 = colDef(show = FALSE),
+    R3 = colDef(show = FALSE),
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    W1 = colDef(show = FALSE),
+    W2 = colDef(show = FALSE),
+    W3 = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    NR = colDef(show = FALSE),
+    KR = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+scrptrvw.a <- scrptrvw %>% select(W1, W2, W3)
+scrptrvw.a <- scrptrvw.a %>% pivot_longer(everything())
+scrptrvw.a <- scrptrvw.a %>% rename(Kanji = value)
+scrptrvw.a <- na.omit(scrptrvw.a) %>% select(Kanji)
+scrptrvw.a <- scrptrvw.a[sample(1:nrow(scrptrvw.a)),]
+
+reactable(
+  scrptrvw.a,
+  columns = list(
+    Kanji = colDef(align = "center", style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
@@ -10175,7 +10277,61 @@ reactable(
 
 <p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Reporting a statement**</p>
 
+<div class = "row">
+<div class = "col-sm-6">
+
+    ・友達が手伝ってくれると言いました
+    ・友達が手伝ってくれるって言いました
+    ・台風で停電になったと新聞に書いてありました
+    ・田中さんはアメリカに行くとか言っていました
+    ・助詞の間違いが多いなんて言われました
+    ・スミスさんは日本に留学すると言っていました
+    ・スミスさんは日本に􏰵学すると言いました
+    ・天気予報によるとあしたは雨だそうです
+    ・新聞によると働く女性が増えているそうだ
+    ・ある調査によると国際結婚が増えているとのこと
+
+</div>
+<div class = "col-sm-6">
+
+    ・My friend said he would help me
+    ・My friend said he would help me
+    ・Written in the newspaper that the typhoon caused a power outage
+    ・Mr. Tanaka said something like he was going to America
+    ・I was told like I made too many mistakes with particles
+    ・Mr. Smith was saying the he was going to study in Japan
+    ・Mr. Smith said he was going to study in Japan
+    ・According to the weather forecast, it's supposed to rain tomorrow
+    ・According to the newspaper, working women is increasing
+    ・According to one survey, international marriages are on the rise
+
+</div>
+</div>
+
 <p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ Reporting questions and answers**</p>
+
+<div class = "row">
+<div class = "col-sm-6">
+
+    ・友達に宿題があるかどうかと聞いたが、友達も知らなかった
+    ・どんな日本食が好きかと聞かれて、答えに困った
+    ・おすしを食べたことがあるかどうかと聞かれた
+    ・試験はいつか先生に伺いましょう
+    ・日本人にも敬語が難しいかという質問をよくされる
+    ・友達から出席できないという返事をもらった
+
+</div>
+<div class = "col-sm-6">
+
+    ・I asked my friends if we had homework, but they didn't know also
+    ・When asked what kind of Japanese food I like, An answer is at loss
+    ・I was asked if I had ever eaten sushi
+    ・Let’s ask our teacher when the exam is
+    ・I'm often asked if honorifics are difficult even for Japanese
+    ・I received a reply from a friend that he could not attend
+
+</div>
+</div>
 
 <p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑤ Reporting commands and requests**</p>
  
@@ -21513,6 +21669,46 @@ reactable(
 )
 
 ```
+
+
+------------------------------------------------------------------------
+
+#### Audio {.tabset}
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- audiolist.a <- audiolist %>% rename(Rnd.Listen = Expression) -->
+<!-- audiolist.a <- audiolist.a[sample(1:nrow(audiolist.a)),] -->
+
+<!-- reactable( -->
+<!--   audiolist.a, -->
+<!--   columns = list( -->
+<!--     Rnd.Listen = colDef(minWidth = 500,align = "left", html = TRUE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     # Vertically center cells -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"), -->
+<!--       # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"), -->
+<!--       # borderColor = "#555", -->
+<!--       height = 30, fontSize = "11px", -->
+<!--       align = "center" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 ------------------------------------------------------------------------
 
