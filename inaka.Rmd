@@ -142,6 +142,7 @@ exvdnw <- read_csv("cpdb/NWSL-EXP.csv")
 exvdnh <- read_csv("cpdb/NHGVD-EXP.csv")
 exvdam <- read_csv("cpdb/ANIME-EXP.csv")
 exvded <- read_csv("cpdb/EDCTNL-EXP.csv")
+exvdcm <- read_csv("cpdb/DOCMNT-EXP.csv")
 exvdkw <- read_csv("cpdb/EIKAIWA-EXP.csv")
 vrbslstnk <- read_csv("jpdb/VRBSLSTNK-VRBS.csv")
 grmrusl <- read_csv("jpdb/SPKPTNI-GRM.csv")
@@ -149,6 +150,7 @@ architbl <- read_csv("jpdb/ARCHITBL-TBL.csv")
 synwrds <- read_csv("jpdb/SYNWRD-WRD.csv")
 scrptrvw <- read_csv("jpdb/SCRPTRVW-KNJD5.csv")
 audiolist <- read_csv("cpdb/ADEXER-EXP.csv")
+scrptwrdx <- read_csv("jpdb/SCRPTWRD-EXT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1806,14 +1808,19 @@ reactable(
 
 scrptrvw.a <- scrptrvw %>% select(W1, W2, W3)
 scrptrvw.a <- scrptrvw.a %>% pivot_longer(everything())
-scrptrvw.a <- scrptrvw.a %>% rename(Kanji = value)
-scrptrvw.a <- na.omit(scrptrvw.a) %>% select(Kanji)
+scrptrvw.a <- scrptrvw.a %>% rename(Word = value)
+scrptrvw.a <- na.omit(scrptrvw.a) %>% select(Word)
 scrptrvw.a <- scrptrvw.a[sample(1:nrow(scrptrvw.a)),]
 
+scrptwrdx.a <- scrptwrdx %>% select(Word)
+scrptwrdx.a <- scrptwrdx.a[sample(1:nrow(scrptwrdx.a)),]
+scrptrvw.b <- bind_rows(scrptrvw.a, scrptwrdx.a)
+scrptrvw.b <- scrptrvw.b[sample(1:nrow(scrptrvw.b)),]
+
 reactable(
-  scrptrvw.a,
+  scrptrvw.b,
   columns = list(
-    Kanji = colDef(align = "center", style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans'))
+    Word = colDef(align = "center", style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans'))
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
@@ -21592,15 +21599,55 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Educational {.tabset}
+#### Technical {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
-exvded.a <- exvded %>% rename(Rnd.Educational = Expression)
+exvded.a <- exvded %>% rename(Rnd.Technical = Expression)
 exvded.a <- exvded.a[sample(1:nrow(exvded.a)),]
 
 reactable(
   exvded.a,
+  columns = list(
+    Scripts = colDef(show = FALSE),
+    Rnd.Technical = colDef(minWidth = 500,align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px",
+      align = "center"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Educational {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+exvdcm.a <- exvdcm %>% rename(Rnd.Educational = Expression)
+exvdcm.a <- exvdcm.a[sample(1:nrow(exvdcm.a)),]
+
+reactable(
+  exvdcm.a,
   columns = list(
     Scripts = colDef(show = FALSE),
     Rnd.Educational = colDef(minWidth = 500,align = "left", html = TRUE)
@@ -21688,6 +21735,22 @@ reactable(
 
 ------------------------------------------------------------------------
 
+##### Graded {.tabset}
+
+段階的L1　![](audio/levelone/01 onna no ko.m4a)    
+段階的L1　![](audio/levelone/02 hachi no hanashi.m4a)    
+段階的L1　![](audio/levelone/03 jonsan nihon e.m4a)    
+段階的L1　![](audio/levelone/04 urashima tarou.m4a)    
+段階的L1　![](audio/levelone/05 warai hanashi.m4a)    
+段階的L2　![](audio/levelone/Houi to chana.mp3)    
+段階的L2　![](audio/levelone/Nihon no ofuro.mp3)    
+段階的L4　![](audio/levelone/Toshishun.mp3)    
+段階的L4　![](audio/levelone/Yuki onna.mp3)    
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
 ##### Mimikara-Bunpou {.tabset}
 
 文法N3　![](audio/mimikarabunpo_n3/Track No02.mp3)   
@@ -21716,7 +21779,7 @@ reactable(
 聴解N3　![](audio/mimikarachoukai_n3a/08 Track 8.mp3)   
 聴解N3　![](audio/mimikarachoukai_n3a/09 Track 9.mp3)   
 聴解N3　![](audio/mimikarachoukai_n3a/10 Track 10.mp3)   
- 
+
 <h6> </h6>
 
 ------------------------------------------------------------------------
