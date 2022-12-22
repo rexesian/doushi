@@ -151,6 +151,7 @@ synwrds <- read_csv("jpdb/SYNWRD-WRD.csv")
 scrptrvw <- read_csv("jpdb/SCRPTRVW-KNJD5.csv")
 audiolist <- read_csv("cpdb/ADEXER-EXP.csv")
 scrptwrdx <- read_csv("jpdb/SCRPTWRD-EXT.csv")
+exmnoter <- read_csv("jpdb/EXMNTSR-NTS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -22483,9 +22484,65 @@ reactable(
 
 #### Sentences
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
-### Chap.09: 日常種類 {.tabset}
+### Chap.09: 試験筆記 {.tabset}
+
+#### Reading {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# exmnoter <- exmnoter[sample(1:nrow(exmnoter)),]
+
+reactable(
+  na.omit(exmnoter),
+  columns = list(
+    Notes = colDef(
+      cell = function(value, index) {
+        Meaning <- exmnoter$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 400, color = '#404040', fontFamily = 'Open Sans'), value),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(minWidth = 100, align = "left")
+
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 40),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Listening {.tabset}
+
+------------------------------------------------------------------------
+
+#### Grammar {.tabset}
+
+------------------------------------------------------------------------
+
+#### Questions {.tabset}
+
+------------------------------------------------------------------------
+
+### Chap.10: 日常種類 {.tabset}
 
 #### Vocabularies {.tabset}
 
