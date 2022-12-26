@@ -64,7 +64,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{css, echo=FALSE}
 @media(prefers-color-scheme: light) {
   body {
-    background-color: black;
+    <!-- background-color: black; -->
     filter: invert(0);
   }
 }
@@ -156,6 +156,8 @@ rvwadjna <- read_csv("jpdb/WRDCMPSN-CMP.csv")
 rvwadjnatb <- read_csv("jpdb/WRDCMPSNC-CMP.csv")
 verbtbl <- read_csv("jpdb/VRBSLSTBL-VRBS.csv")
 spclkjn <- read_csv("jpdb/SCRPTSP-EXT.csv")
+scrptexps <- read_csv("jpdb/SCRPTEXPS-EXPTBL.csv")
+scrptrdgn <- read_csv("jpdb/SCRPTRDG-EXPTBL.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1935,6 +1937,49 @@ reactable(
 
 ------------------------------------------------------------------------
 
+### LN {.tabset}
+
+```{r echo=FALSE, message=FALSE}
+
+scrptexps <- scrptexps[sample(1:nrow(scrptexps)),]
+
+reactable(
+  scrptexps,
+  columns = list(
+      Expression = colDef(
+      cell = function(value, index) {
+        Meaning <- scrptexps$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(span(style = list(fontSize = 18, fontWeight = 600), value), span(style = list(fontSize = 9, color = '#008000'), " ", Meaning))
+        )
+      },
+      align = "left"
+    ),    
+      Meaning = colDef(show = FALSE)
+  ),
+    outlined = TRUE, borderless = TRUE, defaultPageSize = 7, compact = FALSE, highlight = FALSE, fullWidth = TRUE, striped = FALSE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    # backgroundColor = "#FF4577",
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+
+```
+
+------------------------------------------------------------------------
+
 ## Hiragana {.tabset}
 
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Hiragana** is a phonetic script used to represent Japanese sound.</p>
@@ -2755,6 +2800,42 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+## Readings {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+scrptrdgn <- scrptrdgn[sample(1:nrow(scrptrdgn)),]
+# scrptrdgn <- scrptrdgn  %>% slice(1:1)
+
+reactable(
+  scrptrdgn,
+  columns = list(
+    Excerpts = colDef(minWidth = 350, align = "left", html = TRUE, style = list(fontSize = 17, fontWeight = 200, color = '#0F2040', fontFamily = 'Helvetica Neue')),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", height = 800, resizable = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<h6> </h6>
 
 ------------------------------------------------------------------------
 
