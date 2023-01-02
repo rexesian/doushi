@@ -1978,7 +1978,7 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 spclkjn.x <- spclkjn %>% select(Words, Reading, Meaning) %>% slice(1:42)
-spclkjn.z <- spclkjn %>% select(Words, Reading, Meaning) %>% slice(43:56)
+spclkjn.z <- spclkjn %>% select(Words, Reading, Meaning) %>% slice(43:70)
 spclkjn.x <- spclkjn.x[sample(1:nrow(spclkjn.x)),]
 spclkjn.z <- spclkjn.z[sample(1:nrow(spclkjn.z)),]
 spclkjn.a <- bind_rows(spclkjn.z, spclkjn.x)
@@ -2072,7 +2072,7 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 spclkjn.x <- spclkjn %>% select(Words) %>% slice(1:42)
-spclkjn.z <- spclkjn %>% select(Words) %>% slice(43:56)
+spclkjn.z <- spclkjn %>% select(Words) %>% slice(43:70)
 spclkjn.x <- spclkjn.x[sample(1:nrow(spclkjn.x)),]
 spclkjn.z <- spclkjn.z[sample(1:nrow(spclkjn.z)),]
 spclkjn.a <- bind_rows(spclkjn.z, spclkjn.x)
@@ -2156,7 +2156,7 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 spclkjn.x <- spclkjn %>% select(Words) %>% slice(1:42)
-spclkjn.z <- spclkjn %>% select(Words) %>% slice(43:56)
+spclkjn.z <- spclkjn %>% select(Words) %>% slice(43:70)
 spclkjn.x <- spclkjn.x[sample(1:nrow(spclkjn.x)),]
 spclkjn.z <- spclkjn.z[sample(1:nrow(spclkjn.z)),]
 spclkjn.a <- bind_rows(spclkjn.z, spclkjn.x)
@@ -3322,18 +3322,18 @@ reactable(
         Sentences <- cnntvmre$Sentences[index]
         Sentences <- if (!is.na(Sentences)) Sentences else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), Sentences),
+          div(style = list(fontSize = 13.5, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), Sentences),
         )
       },
-      align = "center"
+      align = "left"
     ),
     Sentences = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 1,
+  defaultPageSize = 20,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -3341,7 +3341,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE, height = 484,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -3352,7 +3352,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-cnntvmre <- cnntvmre[sample(1:nrow(cnntvmre)),]
+# cnntvmre <- cnntvmre[sample(1:nrow(cnntvmre)),]
 
 reactable(
   cnntvmre,
@@ -3362,18 +3362,18 @@ reactable(
         Translation <- cnntvmre$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#404040'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 400, color = '#404040'), Translation),
         )
       },
-      align = "center"
+      align = "left"
     ),
     Translation = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 1,
+  defaultPageSize = 20,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -3381,7 +3381,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE, height = 484,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -21241,18 +21241,18 @@ reactable(
         Sentences <- if (!is.na(Sentences)) Sentences else ""
         tagList(
           # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 24, fontWeight = 600), Sentences),
+          div(style = list(fontSize = 13.5, fontWeight = 400, color = '#0F2040'), Sentences),
           # div(style = list(fontSize = 8, fontWeight = 400, color = '#787878'), value)
         )
       },
-      align = "center"
+      align = "left"
     ),
     Sentences = colDef(show = FALSE)
   ),
-  defaultPageSize = 1,
+  defaultPageSize = 50,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21260,7 +21260,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, height = 486,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -21688,37 +21688,7 @@ reactable(
 
 #### Audio {.tabset}
 
-##### Kikitori {.tabset}
-
-風呂敷　![](audio/kikitori_na/02 Track 2.mp3)   
-出前は　![](audio/kikitori_na/07 Track 7.mp3)   
-小さな　![](audio/kikitori_na/09 Track 9.mp3)    
-犬です　![](audio/kikitori_na/11 Track 11.mp3)    
-もしも　![](audio/kikitori_nb/01 トラック 1.mp3)     
-旗のデ　![](audio/kikitori_nb/04 トラック 4.mp3)     
-海から　![](audio/kikitori_nb/06 トラック 6.mp3)     
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-##### Graded {.tabset}
-
-段階的L1　![](audio/levelone/01 onna no ko.m4a)    
-段階的L1　![](audio/levelone/02 hachi no hanashi.m4a)    
-段階的L1　![](audio/levelone/03 jonsan nihon e.m4a)    
-段階的L1　![](audio/levelone/04 urashima tarou.m4a)    
-段階的L1　![](audio/levelone/05 warai hanashi.m4a)    
-段階的L2　![](audio/levelone/Houi to chana.mp3)    
-段階的L2　![](audio/levelone/Nihon no ofuro.mp3)    
-段階的L4　![](audio/levelone/Toshishun.mp3)    
-段階的L4　![](audio/levelone/Yuki onna.mp3)    
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-##### BasicI {.tabset}
+##### Basic01 {.tabset}
 
 001　![](audio/basicleveln5n4/1 UNIT 01 数字.mp3)    
 002　![](audio/basicleveln5n4/2 UNIT 02 時間1.mp3)    
@@ -21764,7 +21734,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-##### BasicII {.tabset}
+##### Basic02 {.tabset}
 
 001　![](audio/basicleveln5n4_2/1 UNIT 32 人と人.mp3)    
 002　![](audio/basicleveln5n4_2/2 UNIT 33 気持ち.mp3)    
@@ -21775,7 +21745,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-##### MidI {.tabset}
+##### Inter01 {.tabset}
 
 001　![](audio/midleveln3/1 Unit 1-1時間.mp3)    
 002　![](audio/midleveln3/2 Unit 1-2時間.mp3)    
@@ -21786,46 +21756,13 @@ reactable(
 
 ------------------------------------------------------------------------
 
-##### MidII {.tabset}
+##### Inter02 {.tabset}
 
 001　![](audio/midleveln3_2/1 Unit 1_ こそあ.mp3)    
 002　![](audio/midleveln3_2/2 Unit 2_ 含む表現.mp3)    
 003　![](audio/midleveln3_2/3 Unit 3_ 否定表現.mp3)    
 004　![](audio/midleveln3_2/4 Unit 4_ 前に付く語.mp3)    
 005　![](audio/midleveln3_2/5 Unit 5_ 後ろに付く語.mp3)    
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-##### Mimikara-Bunpou {.tabset}
-
-文法N3　![](audio/mimikarabunpo_n3/Track No02.mp3)   
-文法N3　![](audio/mimikarabunpo_n3/Track No03.mp3)   
-文法N3　![](audio/mimikarabunpo_n3/Track No04.mp3)   
-文法N3　![](audio/mimikarabunpo_n3/Track No05.mp3)   
-文法N3　![](audio/mimikarabunpo_n3/Track No06.mp3)   
-文法N3　![](audio/mimikarabunpo_n3/Track No07.mp3)   
-文法N3　![](audio/mimikarabunpo_n3/Track No08.mp3)   
-文法N3　![](audio/mimikarabunpo_n3/Track No09.mp3)   
-文法N3　![](audio/mimikarabunpo_n3/Track No10.mp3)   
-文法N3　![](audio/mimikarabunpo_n3/Track No11.mp3)   
-
-<h6> </h6>
-
-------------------------------------------------------------------------
-
-##### Mimikara-Choukai {.tabset}
-
-聴解N3　![](audio/mimikarachoukai_n3a/02 Track 2.mp3)   
-聴解N3　![](audio/mimikarachoukai_n3a/03 Track 3.mp3)   
-聴解N3　![](audio/mimikarachoukai_n3a/04 Track 4.mp3)   
-聴解N3　![](audio/mimikarachoukai_n3a/05 Track 5.mp3)   
-聴解N3　![](audio/mimikarachoukai_n3a/06 Track 6.mp3)   
-聴解N3　![](audio/mimikarachoukai_n3a/07 Track 7.mp3)   
-聴解N3　![](audio/mimikarachoukai_n3a/08 Track 8.mp3)   
-聴解N3　![](audio/mimikarachoukai_n3a/09 Track 9.mp3)   
-聴解N3　![](audio/mimikarachoukai_n3a/10 Track 10.mp3)   
 
 <h6> </h6>
 
