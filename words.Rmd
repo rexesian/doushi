@@ -55,10 +55,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{css, echo=FALSE}
-@media(prefers-color-scheme: dark) {
+@media(prefers-color-scheme: light) {
   body {
-    background-color: black;
-    filter: invert(1);
+    <!-- background-color: black; -->
+    filter: invert(0);
   }
 }
 ```
@@ -135,7 +135,7 @@ reactable(
     Reading = colDef(minWidth = 25,align = "left"),
     Meaning = colDef(minWidth = 100,align = "left") 
   ),
-  defaultPageSize = 8,
+  defaultPageSize = 100,
   theme = reactableTheme(
     # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
@@ -146,7 +146,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, height = 423,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -158,7 +158,7 @@ reactable(
 ### L5 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -198,7 +198,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -206,7 +206,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -260,7 +260,7 @@ reactable(
 ### L4 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -300,7 +300,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -308,7 +308,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -362,7 +362,7 @@ reactable(
 ### L3 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -402,7 +402,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -410,7 +410,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -464,7 +464,7 @@ reactable(
 ### L2 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -504,7 +504,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -512,7 +512,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -566,7 +566,7 @@ reactable(
 ### L1 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -606,7 +606,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -614,7 +614,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -667,96 +667,10 @@ reactable(
 
 ## <b> Basic </b> {.tabset}
 
-### List {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-core.lst <- corew %>% select(Words, Reading, M1) %>% rename(Meaning = M1)
-cnmw.lst <- cnmw %>% select(Words, Reading, Meaning)
-rdnm.lst <- cmwrdsn %>% select(Words, Reading, Meaning)
-
-core.lst <- core.lst[sample(1:nrow(core.lst)),]
-cnmw.lst <- cnmw.lst[sample(1:nrow(cnmw.lst)),]
-rdnm.lst <- rdnm.lst[sample(1:nrow(rdnm.lst)),]
-
-words.lst <- bind_rows(core.lst, cnmw.lst)
-words.lst <- bind_rows(words.lst, rdnm.lst)
-# words.lst <- words.lst %>% na.omit(words.lst)
-
-reactable(
-  words.lst,
-  columns = list(
-    Words = colDef(minWidth = 22,align = "left", style = list(fontSize = 13.5, fontFamily = 'Rounded Mplus 1c')),
-    Reading = colDef(minWidth = 25,align = "left"),
-    Meaning = colDef(minWidth = 100,align = "left") 
-  ),
-  defaultPageSize = 8,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-### Sentence {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-core.snlst <- corew %>% select(Words, S1, T1) %>% rename(Sentences = S1, Translation = T1)
-cnmw.snlst <- cnmw %>% select(Words, Sentences, Translation)
-rdnm.snlst <- cmwrdsn %>% select(Words, Sentences, Translation)
-
-core.snlst <- core.snlst[sample(1:nrow(core.snlst)),]
-cnmw.snlst <- cnmw.snlst[sample(1:nrow(cnmw.snlst)),]
-rdnm.snlst <- rdnm.snlst[sample(1:nrow(rdnm.snlst)),]
-
-words.snlst <- bind_rows(core.snlst, cnmw.snlst)
-words.snlst <- bind_rows(words.snlst, rdnm.snlst)
-# words.lst <- words.lst %>% na.omit(words.lst)
-
-reactable(
-  words.snlst,
-  columns = list(
-    Words = colDef(minWidth = 25,align = "left", style = list(fontSize = 13.5, fontFamily = 'Rounded Mplus 1c')),
-    Sentences = colDef(minWidth = 70,align = "left", style = list(fontSize = 13.5, fontFamily = 'Rounded Mplus 1c')),
-    Translation = colDef(minWidth = 70,align = "left") 
-  ),
-  defaultPageSize = 8,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
 ### Core {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -807,7 +721,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -816,7 +730,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -889,7 +803,7 @@ reactable(
 ### Common {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -933,7 +847,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -943,7 +857,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1005,7 +919,7 @@ reactable(
 ### Random {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1062,7 +976,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -1071,7 +985,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1130,6 +1044,93 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+### List {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+core.lst <- corew %>% select(Words, Reading, M1) %>% rename(Meaning = M1)
+cnmw.lst <- cnmw %>% select(Words, Reading, Meaning)
+rdnm.lst <- cmwrdsn %>% select(Words, Reading, Meaning)
+
+core.lst <- core.lst[sample(1:nrow(core.lst)),]
+cnmw.lst <- cnmw.lst[sample(1:nrow(cnmw.lst)),]
+rdnm.lst <- rdnm.lst[sample(1:nrow(rdnm.lst)),]
+
+words.lst <- bind_rows(core.lst, cnmw.lst)
+words.lst <- bind_rows(words.lst, rdnm.lst)
+# words.lst <- words.lst %>% na.omit(words.lst)
+
+reactable(
+  words.lst,
+  columns = list(
+    Words = colDef(minWidth = 22,align = "left", style = list(fontSize = 13.5, fontFamily = 'Rounded Mplus 1c')),
+    Reading = colDef(minWidth = 25,align = "left"),
+    Meaning = colDef(minWidth = 100,align = "left") 
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+### Sentences {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+core.snlst <- corew %>% select(Words, S1, T1) %>% rename(Sentences = S1, Translation = T1)
+cnmw.snlst <- cnmw %>% select(Words, Sentences, Translation)
+rdnm.snlst <- cmwrdsn %>% select(Words, Sentences, Translation)
+
+core.snlst <- core.snlst[sample(1:nrow(core.snlst)),]
+cnmw.snlst <- cnmw.snlst[sample(1:nrow(cnmw.snlst)),]
+rdnm.snlst <- rdnm.snlst[sample(1:nrow(rdnm.snlst)),]
+
+words.snlst <- bind_rows(core.snlst, cnmw.snlst)
+words.snlst <- bind_rows(words.snlst, rdnm.snlst)
+# words.lst <- words.lst %>% na.omit(words.lst)
+
+reactable(
+  words.snlst,
+  columns = list(
+    # Words = colDef(minWidth = 25,align = "left", style = list(fontSize = 13.5, fontFamily = 'Rounded Mplus 1c')),
+    Sentences = colDef(minWidth = 70,align = "left", style = list(fontSize = 13.5, fontFamily = 'Rounded Mplus 1c')),
+    Translation = colDef(minWidth = 70,align = "left"),
+    Words = colDef(show = FALSE)
+  ),
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## <b> Daily </b> {.tabset}
 
 ### List {.tabset}
@@ -1183,7 +1184,7 @@ reactable(
 ### Time {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1223,7 +1224,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -1232,7 +1233,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1288,7 +1289,7 @@ reactable(
 ### House {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1328,7 +1329,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -1337,7 +1338,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1393,7 +1394,7 @@ reactable(
 ### Person {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1433,7 +1434,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -1442,7 +1443,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1499,7 +1500,7 @@ reactable(
 ### Family {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1539,7 +1540,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -1548,7 +1549,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1605,7 +1606,7 @@ reactable(
 ### Body {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1645,7 +1646,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -1654,7 +1655,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1711,7 +1712,7 @@ reactable(
 ### Personality {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1751,7 +1752,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -1760,7 +1761,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1817,7 +1818,7 @@ reactable(
 ### Food {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1857,7 +1858,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -1866,7 +1867,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1925,7 +1926,7 @@ reactable(
 ### Na.Adj {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1968,7 +1969,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -1977,7 +1978,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2039,7 +2040,7 @@ reactable(
 ### I.Adj {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2082,7 +2083,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -2091,7 +2092,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2153,7 +2154,7 @@ reactable(
 ### Adverb {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2195,7 +2196,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -2204,7 +2205,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2265,7 +2266,7 @@ reactable(
 ### Noun {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2308,7 +2309,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -2317,7 +2318,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2380,7 +2381,7 @@ reactable(
 ### Onomatope {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2422,7 +2423,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -2431,7 +2432,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2492,7 +2493,7 @@ reactable(
 ### Verb {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2535,7 +2536,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -2544,7 +2545,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2607,7 +2608,7 @@ reactable(
 ### Connectives {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2650,7 +2651,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -2659,7 +2660,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2722,7 +2723,7 @@ reactable(
 ### Grammar {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2766,7 +2767,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -2775,11 +2776,11 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
-gwrds.n2 <- gwrds %>% slice(339:470)
+gwrds.n2 <- gwrds %>% slice(339:572)
 gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
 gwrds.n3 <- gwrds %>% slice(196:338)
 gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
@@ -2787,12 +2788,15 @@ gwrds.n4 <- gwrds %>% slice(43:195)
 gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
 gwrds.n5 <- gwrds %>% slice(1:42)
 gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
-gwrds.ex <- gwrds %>% slice(471:534)
+gwrds.n1 <- gwrds %>% slice(573:592)
+gwrds.n1 <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
+gwrds.ex <- gwrds %>% slice(593:641)
 gwrds.ex <- gwrds.ex[sample(1:nrow(gwrds.ex)),]
 
 gwrds.na <- bind_rows(gwrds.n2, gwrds.n3)
 gwrds.na <- bind_rows(gwrds.na, gwrds.n4)
 gwrds.na <- bind_rows(gwrds.na, gwrds.n5)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n1)
 gwrds.na <- bind_rows(gwrds.na, gwrds.ex)
 
 reactable(
@@ -2848,7 +2852,7 @@ reactable(
 ### Expression {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2887,7 +2891,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -2896,7 +2900,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2953,7 +2957,7 @@ reactable(
 ### Tech {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2993,7 +2997,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -3002,7 +3006,7 @@ reactable(
 
 </div>
 
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3064,7 +3068,7 @@ reactable(
 #### L5 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3104,7 +3108,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3112,7 +3116,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3166,7 +3170,7 @@ reactable(
 #### L4 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3206,7 +3210,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3214,7 +3218,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3268,7 +3272,7 @@ reactable(
 #### L3 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3308,7 +3312,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3316,7 +3320,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3370,7 +3374,7 @@ reactable(
 #### L2 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3410,7 +3414,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3418,7 +3422,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3472,7 +3476,7 @@ reactable(
 #### L1 {.tabset}
 
 <div class = "row">
-<div class = "col-sm-4">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3512,7 +3516,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3520,7 +3524,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-8">
+<div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3667,7 +3671,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3770,7 +3774,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3873,7 +3877,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3976,7 +3980,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -4071,7 +4075,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -4080,101 +4084,101 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-## <b> Related </b> {.tabset}
+<!-- ## <b> Related </b> {.tabset} -->
 
-```{r, echo=FALSE, message=FALSE}
-related.a <- related %>% rename(Related.Words = Related.Words.1A)
-related.a <- related.a[sample(1:nrow(related.a)),]
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+<!-- related.a <- related %>% rename(Related.Words = Related.Words.1A) -->
+<!-- related.a <- related.a[sample(1:nrow(related.a)),] -->
 
-reactable(
-  related.a,
-  columns = list(
-    Words = colDef(
-      cell = function(value, index) {
-        Meaning <- related.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Reading <- related.a$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        tagList(
-          div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 11), Reading),
-          div(style = list(fontSize = 10), Meaning)
-        )
-      },
-      align = "center"
-    ),
-    
-    Related.Words = colDef(
-      minWidth = 180,
-      cell = function(value, index) {
-        Related.Words.1B <- related.a$Related.Words.1B[index]
-        Related.Words.1B <- if (!is.na(Related.Words.1B)) Related.Words.1B else ""
-        Related.Words.2A <- related.a$Related.Words.2A[index]
-        Related.Words.2A <- if (!is.na(Related.Words.2A)) Related.Words.2A else ""
-        Related.Words.2B <- related.a$Related.Words.2B[index]
-        Related.Words.2B <- if (!is.na(Related.Words.2B)) Related.Words.2B else ""
-        Related.Words.3A <- related.a$Related.Words.3A[index]
-        Related.Words.3A <- if (!is.na(Related.Words.3A)) Related.Words.3A else ""
-        Related.Words.3B <- related.a$Related.Words.3B[index]
-        Related.Words.3B <- if (!is.na(Related.Words.3B)) Related.Words.3B else ""
-        Related.Words.4A <- related.a$Related.Words.4A[index]
-        Related.Words.4A <- if (!is.na(Related.Words.4A)) Related.Words.4A else ""
-        Related.Words.4B <- related.a$Related.Words.4B[index]
-        Related.Words.4B <- if (!is.na(Related.Words.4B)) Related.Words.4B else ""
-        Related.Words.5A <- related.a$Related.Words.5A[index]
-        Related.Words.5A <- if (!is.na(Related.Words.5A)) Related.Words.5A else ""
-        Related.Words.5B <- related.a$Related.Words.5B[index]
-        Related.Words.5B <- if (!is.na(Related.Words.5B)) Related.Words.5B else ""
-        tagList(
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), value),
-          div(style = list(fontSize = 10), Related.Words.1B),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.2A),
-          div(style = list(fontSize = 10), Related.Words.2B),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.3A),
-          div(style = list(fontSize = 10), Related.Words.3B),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.4A),
-          div(style = list(fontSize = 10), Related.Words.4B),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.5A),
-          div(style = list(fontSize = 10), Related.Words.5B),
-          div(style = list(fontSize = 2), "."),
-        )
-      },
-      align = "center"
-    ),
-    
-    Related.Words.1B = colDef(show = FALSE),
-    Related.Words.2A = colDef(show = FALSE),
-    Related.Words.2B = colDef(show = FALSE),
-    Related.Words.3A = colDef(show = FALSE),
-    Related.Words.3B = colDef(show = FALSE),
-    Related.Words.4A = colDef(show = FALSE),
-    Related.Words.4B = colDef(show = FALSE),
-    Related.Words.5A = colDef(show = FALSE),
-    Related.Words.5B = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Reading = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   related.a, -->
+<!--   columns = list( -->
+<!--     Words = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- related.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Reading <- related.a$Reading[index] -->
+<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 11), Reading), -->
+<!--           div(style = list(fontSize = 10), Meaning) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--     Related.Words = colDef( -->
+<!--       minWidth = 180, -->
+<!--       cell = function(value, index) { -->
+<!--         Related.Words.1B <- related.a$Related.Words.1B[index] -->
+<!--         Related.Words.1B <- if (!is.na(Related.Words.1B)) Related.Words.1B else "" -->
+<!--         Related.Words.2A <- related.a$Related.Words.2A[index] -->
+<!--         Related.Words.2A <- if (!is.na(Related.Words.2A)) Related.Words.2A else "" -->
+<!--         Related.Words.2B <- related.a$Related.Words.2B[index] -->
+<!--         Related.Words.2B <- if (!is.na(Related.Words.2B)) Related.Words.2B else "" -->
+<!--         Related.Words.3A <- related.a$Related.Words.3A[index] -->
+<!--         Related.Words.3A <- if (!is.na(Related.Words.3A)) Related.Words.3A else "" -->
+<!--         Related.Words.3B <- related.a$Related.Words.3B[index] -->
+<!--         Related.Words.3B <- if (!is.na(Related.Words.3B)) Related.Words.3B else "" -->
+<!--         Related.Words.4A <- related.a$Related.Words.4A[index] -->
+<!--         Related.Words.4A <- if (!is.na(Related.Words.4A)) Related.Words.4A else "" -->
+<!--         Related.Words.4B <- related.a$Related.Words.4B[index] -->
+<!--         Related.Words.4B <- if (!is.na(Related.Words.4B)) Related.Words.4B else "" -->
+<!--         Related.Words.5A <- related.a$Related.Words.5A[index] -->
+<!--         Related.Words.5A <- if (!is.na(Related.Words.5A)) Related.Words.5A else "" -->
+<!--         Related.Words.5B <- related.a$Related.Words.5B[index] -->
+<!--         Related.Words.5B <- if (!is.na(Related.Words.5B)) Related.Words.5B else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), value), -->
+<!--           div(style = list(fontSize = 10), Related.Words.1B), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.2A), -->
+<!--           div(style = list(fontSize = 10), Related.Words.2B), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.3A), -->
+<!--           div(style = list(fontSize = 10), Related.Words.3B), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.4A), -->
+<!--           div(style = list(fontSize = 10), Related.Words.4B), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 18, fontWeight = 600, fontFamily = 'Zen Maru Gothic'), Related.Words.5A), -->
+<!--           div(style = list(fontSize = 10), Related.Words.5B), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
 
-```
+<!--     Related.Words.1B = colDef(show = FALSE), -->
+<!--     Related.Words.2A = colDef(show = FALSE), -->
+<!--     Related.Words.2B = colDef(show = FALSE), -->
+<!--     Related.Words.3A = colDef(show = FALSE), -->
+<!--     Related.Words.3B = colDef(show = FALSE), -->
+<!--     Related.Words.4A = colDef(show = FALSE), -->
+<!--     Related.Words.4B = colDef(show = FALSE), -->
+<!--     Related.Words.5A = colDef(show = FALSE), -->
+<!--     Related.Words.5B = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Reading = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -4358,7 +4362,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -4455,7 +4459,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -4552,7 +4556,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -4649,7 +4653,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -4746,7 +4750,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -4857,7 +4861,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -4970,7 +4974,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -5064,6 +5068,9 @@ reactable(
     Note = colDef(show = FALSE),
     Remarks = colDef(show = FALSE),
     Sentences = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Type = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
     Words = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
@@ -5077,7 +5084,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -5112,6 +5119,9 @@ reactable(
     Rank = colDef(show = FALSE),
     Note = colDef(show = FALSE),
     Remarks = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Type = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Words = colDef(show = FALSE)
   ),
@@ -5180,7 +5190,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -5276,7 +5286,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -5371,7 +5381,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -5477,7 +5487,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -5585,7 +5595,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -5690,7 +5700,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -5750,11 +5760,9 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Random {.tabset}
+## <b> Recognize </b> {.tabset}
 
-#### Recognize {.tabset}
-
-##### 1 {.tabset}
+### 01 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -5848,7 +5856,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -5857,7 +5865,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-##### 2 {.tabset}
+### 02 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -5951,7 +5959,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -5960,7 +5968,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-##### 3 {.tabset}
+### 03 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6054,7 +6062,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -6063,7 +6071,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-##### 4 {.tabset}
+### 04 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6157,7 +6165,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -6166,7 +6174,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-##### 5 {.tabset}
+### 05 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6240,7 +6248,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -6249,9 +6257,9 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### Recall {.tabset}
+## <b> Recall </b> {.tabset}
 
-##### 1 {.tabset}
+### 01 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6345,7 +6353,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -6354,7 +6362,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-##### 2 {.tabset}
+### 02 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6448,7 +6456,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -6457,7 +6465,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-##### 3 {.tabset}
+### 03 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6551,7 +6559,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -6560,7 +6568,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-##### 4 {.tabset}
+### 04 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6654,7 +6662,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -6663,7 +6671,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-##### 5 {.tabset}
+### 05 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6737,7 +6745,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
