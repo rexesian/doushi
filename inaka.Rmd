@@ -161,6 +161,7 @@ scrptexps <- read_csv("jpdb/SCRPTEXPS-EXPTBL.csv")
 scrptrdgn <- read_csv("jpdb/SCRPTRDG-EXPTBL.csv")
 rdngprp <- read_csv("jpdb/RDNGPRP-SCRPT.csv")
 adjirmbr <- read_csv("jpdb/ADJIEXP-ADJI.csv")
+kanawrds <- read_csv("jpdb/KANAPRTB-CHR.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -2337,6 +2338,66 @@ reactable(
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Katakana** is a phonetic script used to represent Foreign loan words.</p>
 
 ![](hk.jpg)
+
+------------------------------------------------------------------------
+
+## Kanawords
+
+```{r, echo=FALSE, message=FALSE}
+
+kanawrds.a <- kanawrds %>% select(Words)
+kanawrds.a <- kanawrds.a[sample(1:nrow(kanawrds.a)),]
+kanawrds.b <- kanawrds %>% select(Words.1)
+kanawrds.b <- kanawrds.b[sample(1:nrow(kanawrds.b)),]
+kanawrds.c <- kanawrds %>% select(Words.2)
+kanawrds.c <- kanawrds.c[sample(1:nrow(kanawrds.c)),]
+kanawrds.d <- kanawrds %>% select(Words.3)
+kanawrds.d <- kanawrds.d[sample(1:nrow(kanawrds.d)),]
+kanawrds.e <- kanawrds %>% select(Words.4)
+kanawrds.e <- kanawrds.e[sample(1:nrow(kanawrds.e)),]
+kanawrds.f <- data.frame(kanawrds.a, kanawrds.b, kanawrds.c, kanawrds.d, kanawrds.e)
+
+reactable(
+  kanawrds.f,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Words.1 <- kanawrds.f$Words.1[index]
+        Words.1 <- if (!is.na(Words.1)) Words.1 else ""
+        Words.2 <- kanawrds.f$Words.2[index]
+        Words.2 <- if (!is.na(Words.2)) Words.2 else ""
+        Words.3 <- kanawrds.f$Words.3[index]
+        Words.3 <- if (!is.na(Words.3)) Words.3 else ""
+        Words.4 <- kanawrds.f$Words.4[index]
+        Words.4 <- if (!is.na(Words.4)) Words.4 else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 400, fontFamily = 'Open Sans', color = '#0F2040'), value, "。",  Words.1, "。",  Words.2, "。",  Words.3, "。",  Words.4, "。")
+        )
+      },
+      align = "left"
+    ),    
+    Words.1 = colDef(show = FALSE),
+    Words.2 = colDef(show = FALSE),
+    Words.3 = colDef(show = FALSE),
+    Words.4 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 50,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, height = 478,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
@@ -21771,6 +21832,9 @@ reactable(
 
 ##### Basic01 {.tabset}
 
+<div class = "row">
+<div class = "col-sm-6">
+
 001　![](audio/basicleveln5n4/1 UNIT 01 数字.mp3)    
 002　![](audio/basicleveln5n4/2 UNIT 02 時間1.mp3)    
 003　![](audio/basicleveln5n4/3 UNIT 02 時間2.mp3)    
@@ -21791,6 +21855,10 @@ reactable(
 018　![](audio/basicleveln5n4/18 UNIT 10 自然.mp3)    
 019　![](audio/basicleveln5n4/19 UNIT 11 教育.mp3)    
 020　![](audio/basicleveln5n4/20 UNIT 12 趣味.mp3)    
+
+</div>
+<div class = "col-sm-6">
+
 021　![](audio/basicleveln5n4/21 UNIT 13 文房具.mp3)    
 022　![](audio/basicleveln5n4/22 UNIT 14 体.mp3)    
 023　![](audio/basicleveln5n4/23 UNIT 15 毎日の生活.mp3)    
@@ -21811,6 +21879,9 @@ reactable(
 038　![](audio/basicleveln5n4/38 UNIT 30 動物.mp3)    
 039　![](audio/basicleveln5n4/39 UNIT 31 日本.mp3)    
 
+</div>
+</div>
+
 <h6> </h6>
 
 ------------------------------------------------------------------------
@@ -21821,6 +21892,12 @@ reactable(
 002　![](audio/basicleveln5n4_2/2 UNIT 33 気持ち.mp3)    
 003　![](audio/basicleveln5n4_2/3 UNIT 34 健康.mp3)    
 004　![](audio/basicleveln5n4_2/4 UNIT 35 見る.mp3)  
+019　![](audio/basicleveln5n4_2/19 UNIT 50 表現.mp3)    
+020　![](audio/basicleveln5n4_2/20 活用練習 動詞.mp3)    
+021　![](audio/basicleveln5n4_2/21 活用練習 形容詞.mp3)    
+022　![](audio/basicleveln5n4_2/22 活用練習 文型1.mp3)    
+023　![](audio/basicleveln5n4_2/23 活用練習 文型2.mp3)    
+024　![](audio/basicleveln5n4_2/24 活用練習 文型3.mp3)    
 
 <h6> </h6>
 
@@ -21844,6 +21921,23 @@ reactable(
 003　![](audio/midleveln3_2/3 Unit 3_ 否定表現.mp3)    
 004　![](audio/midleveln3_2/4 Unit 4_ 前に付く語.mp3)    
 005　![](audio/midleveln3_2/5 Unit 5_ 後ろに付く語.mp3)    
+011　![](audio/midleveln3_2/11 Unit 13-1_ 動詞1.mp3)    
+012　![](audio/midleveln3_2/12 Unit 13-2_ 動詞2.mp3)    
+013　![](audio/midleveln3_2/13 Unit 13-3_ 動詞3.mp3)    
+014　![](audio/midleveln3_2/14 Unit 13-4_ 動詞4.mp3)    
+015　![](audio/midleveln3_2/15 Unit 13-5_ 動詞5.mp3)    
+016　![](audio/midleveln3_2/16 Unit 13-6_ 動詞6.mp3)    
+017　![](audio/midleveln3_2/17 Unit 13-7_ 動詞7.mp3)    
+018　![](audio/midleveln3_2/18 Unit 13-8_ 動詞8.mp3)    
+019　![](audio/midleveln3_2/19 Unit 13-9_ 動詞9.mp3)    
+020　![](audio/midleveln3_2/20 Unit 13-10_ 動詞10.mp3)    
+021　![](audio/midleveln3_2/21 Unit 13-11_ 動詞11.mp3)    
+022　![](audio/midleveln3_2/22 Unit 13-12_ 動詞12.mp3)    
+023　![](audio/midleveln3_2/23 Unit 13-13_ 動詞13.mp3)    
+024　![](audio/midleveln3_2/24 Unit 14-1_ 動詞14.mp3)    
+025　![](audio/midleveln3_2/25 Unit 14-2_ 動詞15.mp3)    
+026　![](audio/midleveln3_2/26 Unit 14-3_ 動詞16.mp3)    
+027　![](audio/midleveln3_2/27 Unit 14-4_ 動詞17.mp3)    
 
 <h6> </h6>
 
@@ -21867,6 +21961,29 @@ reactable(
 014　![](audio/midleveln2/14 PART1 UNIT8 交通.mp3)    
 015　![](audio/midleveln2/15 PART1 UNIT8 交通.mp3)    
 016　![](audio/midleveln2/16 PART1 UNIT8 交通.mp3)    
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
+##### Inter04 {.tabset}
+
+001　![](audio/midleveln2_2/1 Audio Track.mp3)    
+002　![](audio/midleveln2_2/2 Audio Track.mp3)    
+003　![](audio/midleveln2_2/3 Audio Track.mp3)    
+004　![](audio/midleveln2_2/4 Audio Track.mp3)    
+005　![](audio/midleveln2_2/5 Audio Track.mp3)    
+006　![](audio/midleveln2_2/6 Audio Track.mp3)    
+007　![](audio/midleveln2_2/7 Audio Track.mp3)    
+008　![](audio/midleveln2_2/8 Audio Track.mp3)    
+009　![](audio/midleveln2_2/9 Audio Track.mp3)    
+010　![](audio/midleveln2_2/10 Audio Track.mp3)    
+011　![](audio/midleveln2_2/11 Audio Track.mp3)    
+012　![](audio/midleveln2_2/12 Audio Track.mp3)    
+013　![](audio/midleveln2_2/13 Audio Track.mp3)    
+014　![](audio/midleveln2_2/14 Audio Track.mp3)    
+015　![](audio/midleveln2_2/15 Audio Track.mp3)    
+016　![](audio/midleveln2_2/16 Audio Track.mp3)    
 
 <h6> </h6>
 
