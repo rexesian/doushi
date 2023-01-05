@@ -5723,7 +5723,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-## <b> Encode </b> {.tabset}
+## <b> Encoding </b> {.tabset}
 
 ### 01 {.tabset}
 
@@ -6499,7 +6499,93 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-## <b> Decode </b> {.tabset}
+### 10 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+spclkjn.x <- scrptwrdx %>% select(Word, Reading, Meaning) %>% slice(776:825)
+spclkjn.x <- spclkjn.x %>% na.omit(spclkjn.x)
+spclkjn.x <- spclkjn.x[sample(1:nrow(spclkjn.x)),]
+
+reactable(
+  spclkjn.x,
+  columns = list(
+    Word = colDef(
+      cell = function(value, index) {
+        Reading <- spclkjn.x$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- spclkjn.x$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 40, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#008000'), Reading),
+          div(style = list(fontSize = 9, fontWeight = 500, color = '#800000'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 241),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, wrap = FALSE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+spclkjn.x <- spclkjn.x[sample(1:nrow(spclkjn.x)),]
+
+reactable(
+  spclkjn.x,
+  columns = list(
+    Word = colDef(minWidth = 40,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans')),
+    Reading = colDef(minWidth = 40,align = "left", style = list(fontSize = 11, fontFamily = 'Open Sans')),
+    Meaning = colDef(minWidth = 80,align = "left", style = list(fontSize = 11, fontFamily = 'Open Sans'))
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, resizable = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Decoding </b> {.tabset}
 
 ### 01 {.tabset}
 
@@ -7213,6 +7299,94 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 spclkjn.x <- scrptwrdx %>% select(Word, Reading, Meaning) %>% slice(738:775)
+spclkjn.x <- spclkjn.x %>% na.omit(spclkjn.x)
+spclkjn.x <- spclkjn.x[sample(1:nrow(spclkjn.x)),]
+
+reactable(
+  spclkjn.x,
+  columns = list(
+    Word = colDef(
+      cell = function(value, index) {
+        Reading <- spclkjn.x$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- spclkjn.x$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 40, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 10, fontWeight = 500, color = '#008000'), Reading),
+          # div(style = list(fontSize = 9, fontWeight = 500, color = '#800000'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 241),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, wrap = FALSE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+spclkjn.x <- spclkjn.x[sample(1:nrow(spclkjn.x)),]
+
+reactable(
+  spclkjn.x,
+  columns = list(
+    Word = colDef(minWidth = 40,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans')),
+    # Reading = colDef(minWidth = 40,align = "left", style = list(fontSize = 11, fontFamily = 'Open Sans')),
+    # Meaning = colDef(minWidth = 80,align = "left", style = list(fontSize = 11, fontFamily = 'Open Sans')),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, resizable = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+### 10 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+spclkjn.x <- scrptwrdx %>% select(Word, Reading, Meaning) %>% slice(776:825)
 spclkjn.x <- spclkjn.x %>% na.omit(spclkjn.x)
 spclkjn.x <- spclkjn.x[sample(1:nrow(spclkjn.x)),]
 
