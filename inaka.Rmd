@@ -2411,7 +2411,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, height = 530,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, height = 5,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -2721,6 +2721,14 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### L3B {.tabset}
+
+![](knj3b.png)
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
 #### L2A {.tabset}
 
 ![](knj2a.png)
@@ -2754,7 +2762,6 @@ scknj2.a <- scknj2.a[sample(1:nrow(scknj2.a)),]
 scknj1.a <- scknj1.a[sample(1:nrow(scknj1.a)),]
 
 scknja.z <- bind_rows(scknj4.a, scknj3.a)
-# scknja.z <- scknja.z[sample(1:nrow(scknja.z)),]
 
 scknja.y <- bind_rows(scknj5.a, scknj2.a)
 scknja.y <- bind_rows(scknja.y, scknj1.a)
@@ -2762,64 +2769,75 @@ scknja.y <- scknja.y[sample(1:nrow(scknja.y)),]
 
 scknja.x <- bind_rows(scknja.z, scknja.y)
 
+scknja.x1 <- scknja.x %>% select(W1, W2, W3, R1, R2, R3) %>% slice(1:580)
+scknja.x2 <- scknja.x %>% select(W1, W2, W3, R1, R2, R3)  %>% rename(W4 = W1, W5 = W2, W6 = W3, R4 = R1, R5 = R2, R6 = R3) %>% slice(581:1160)
+scknja.xf <- data.frame(scknja.x1, scknja.x2)
+
 reactable(
-  scknja.x,
+  scknja.xf,
   columns = list(
-    # Kanji = colDef(
-    #   cell = function(value, index) {
-    #     Meaning <- scknja.x$Meaning[index]
-    #     Meaning <- if (!is.na(Meaning)) Meaning else ""
-    #     NR <- scknja.x$NR[index]
-    #     NR <- if (!is.na(NR)) NR else ""
-    #     KR <- scknja.x$KR[index]
-    #     KR <- if (!is.na(KR)) KR else ""
-    #     tagList(
-    #       # div(style = list(fontSize = 30, fontWeight = 600, fontFamily = 'Open Sans'), value),
-    #       # div(style = list(fontSize = 9, color = '#008000'), NR),
-    #       # div(style = list(fontSize = 9, color = '#800000'), KR),
-    #       # div(style = list(fontSize = 9, fontWeight = 500), Meaning)
-    #     )
-    #   },
-    #   align = "center"
-    # ),
     W1 = colDef(
       cell = function(value, index) {
-        M1 <- scknja.x$M1[index]
-        M1 <- if (!is.na(M1)) M1 else ""
-        R1 <- scknja.x$R1[index]
+        R1 <- scknja.xf$R1[index]
         R1 <- if (!is.na(R1)) R1 else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
           div(style = list(fontSize = 9, fontWeight = 500, color = '#800000'), R1),
-          # div(style = list(fontSize = 9, fontWeight = 400), M1),
         )
       },
       align = "center"
     ),
     W2 = colDef(
       cell = function(value, index) {
-        M2 <- scknja.x$M2[index]
-        M2 <- if (!is.na(M2)) M2 else ""
-        R2 <- scknja.x$R2[index]
-        R2 <- if (!is.na(M2)) R2 else ""
+        R2 <- scknja.xf$R2[index]
+        R2 <- if (!is.na(R2)) R2 else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
           div(style = list(fontSize = 9, fontWeight = 500, color = '#800000'), R2),
-          # div(style = list(fontSize = 9, fontWeight = 400), M2),
         )
       },
       align = "center"
     ),
     W3 = colDef(
       cell = function(value, index) {
-        M3 <- scknja.x$M3[index]
-        M3 <- if (!is.na(M3)) M3 else ""
-        R3 <- scknja.x$R3[index]
+        R3 <- scknja.xf$R3[index]
         R3 <- if (!is.na(R3)) R3 else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
           div(style = list(fontSize = 9, fontWeight = 500, color = '#800000'), R3),
-          # div(style = list(fontSize = 9, fontWeight = 400), M3),
+        )
+      },
+      align = "center"
+    ),
+    W4 = colDef(
+      cell = function(value, index) {
+        R4 <- scknja.xf$R4[index]
+        R4 <- if (!is.na(R4)) R4 else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 9, fontWeight = 500, color = '#800000'), R4),
+        )
+      },
+      align = "center"
+    ),
+    W5 = colDef(
+      cell = function(value, index) {
+        R5 <- scknja.xf$R5[index]
+        R5 <- if (!is.na(R5)) R5 else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 9, fontWeight = 500, color = '#800000'), R5),
+        )
+      },
+      align = "center"
+    ),
+    W6 = colDef(
+      cell = function(value, index) {
+        R6 <- scknja.xf$R6[index]
+        R6 <- if (!is.na(R6)) R6 else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 9, fontWeight = 500, color = '#800000'), R6),
         )
       },
       align = "center"
@@ -2827,17 +2845,14 @@ reactable(
     R1 = colDef(show = FALSE),
     R2 = colDef(show = FALSE),
     R3 = colDef(show = FALSE),
-    M1 = colDef(show = FALSE),
-    M2 = colDef(show = FALSE),
-    M3 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    NR = colDef(show = FALSE),
-    KR = colDef(show = FALSE),
-    Kanji = colDef(show = FALSE)
+    R4 = colDef(show = FALSE),
+    R5 = colDef(show = FALSE),
+    R6 = colDef(show = FALSE)
+
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 10,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 90),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 60),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -2872,7 +2887,6 @@ scknj2.a <- scknj2.a[sample(1:nrow(scknj2.a)),]
 scknj1.a <- scknj1.a[sample(1:nrow(scknj1.a)),]
 
 scknja.z <- bind_rows(scknj4.a, scknj3.a)
-# scknja.z <- scknja.z[sample(1:nrow(scknja.z)),]
 
 scknja.y <- bind_rows(scknj5.a, scknj2.a)
 scknja.y <- bind_rows(scknja.y, scknj1.a)
@@ -2880,36 +2894,19 @@ scknja.y <- scknja.y[sample(1:nrow(scknja.y)),]
 
 scknja.x <- bind_rows(scknja.z, scknja.y)
 
+scknja.x1 <- scknja.x %>% select(W1, W2, W3, M1, M2, M3) %>% slice(1:580)
+scknja.x2 <- scknja.x %>% select(W1, W2, W3, M1, M2, M3)  %>% rename(W4 = W1, W5 = W2, W6 = W3, M4 = M1, M5 = M2, M6 = M3) %>% slice(581:1160)
+scknja.xf <- data.frame(scknja.x1, scknja.x2)
+
 reactable(
-  scknja.x,
+  scknja.xf,
   columns = list(
-    # Kanji = colDef(
-    #   # Show species under character names
-    #   cell = function(value, index) {
-    #     Meaning <- scknja.x$Meaning[index]
-    #     Meaning <- if (!is.na(Meaning)) Meaning else ""
-    #     NR <- scknja.x$NR[index]
-    #     NR <- if (!is.na(NR)) NR else ""
-    #     KR <- scknja.x$KR[index]
-    #     KR <- if (!is.na(KR)) KR else ""
-    #     tagList(
-    #       div(style = list(fontSize = 30, fontWeight = 600, fontFamily = 'Open Sans'), value),
-    #       # div(style = list(fontSize = 9, color = '#008000'), NR),
-    #       # div(style = list(fontSize = 9, color = '#800000'), KR),
-    #       # div(style = list(fontSize = 9, fontWeight = 500), Meaning)
-    #     )
-    #   },
-    #   align = "center"
-    # ),
     W1 = colDef(
       cell = function(value, index) {
-        M1 <- scknja.x$M1[index]
+        M1 <- scknja.xf$M1[index]
         M1 <- if (!is.na(M1)) M1 else ""
-        R1 <- scknja.x$R1[index]
-        R1 <- if (!is.na(R1)) R1 else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, fontFamily = 'Noto Sans JP'), value),
-          # div(style = list(fontSize = 10, fontWeight = 400, color = '#800000'), R1),
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
           div(style = list(fontSize = 9, fontWeight = 500, color = '#008000'), M1),
         )
       },
@@ -2917,13 +2914,10 @@ reactable(
     ),
     W2 = colDef(
       cell = function(value, index) {
-        M2 <- scknja.x$M2[index]
+        M2 <- scknja.xf$M2[index]
         M2 <- if (!is.na(M2)) M2 else ""
-        R2 <- scknja.x$R2[index]
-        R2 <- if (!is.na(M2)) R2 else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, fontFamily = 'Noto Sans JP'), value),
-          # div(style = list(fontSize = 10, fontWeight = 400, color = '#800000'), R2),
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
           div(style = list(fontSize = 9, fontWeight = 500, color = '#008000'), M2),
         )
       },
@@ -2931,32 +2925,58 @@ reactable(
     ),
     W3 = colDef(
       cell = function(value, index) {
-        M3 <- scknja.x$M3[index]
+        M3 <- scknja.xf$M3[index]
         M3 <- if (!is.na(M3)) M3 else ""
-        R3 <- scknja.x$R3[index]
-        R3 <- if (!is.na(R3)) R3 else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, fontFamily = 'Noto Sans JP'), value),
-          # div(style = list(fontSize = 10, fontWeight = 400, color = '#800000'), R3),
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
           div(style = list(fontSize = 9, fontWeight = 500, color = '#008000'), M3),
         )
       },
       align = "center"
     ),
-    R1 = colDef(show = FALSE),
-    R2 = colDef(show = FALSE),
-    R3 = colDef(show = FALSE),
+    W4 = colDef(
+      cell = function(value, index) {
+        M4 <- scknja.xf$M4[index]
+        M4 <- if (!is.na(M4)) M4 else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 9, fontWeight = 500, color = '#008000'), M4),
+        )
+      },
+      align = "center"
+    ),
+    W5 = colDef(
+      cell = function(value, index) {
+        M5 <- scknja.xf$M5[index]
+        M5 <- if (!is.na(M5)) M5 else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 9, fontWeight = 500, color = '#008000'), M5),
+        )
+      },
+      align = "center"
+    ),
+    W6 = colDef(
+      cell = function(value, index) {
+        M6 <- scknja.xf$M6[index]
+        M6 <- if (!is.na(M6)) M6 else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
+          div(style = list(fontSize = 9, fontWeight = 500, color = '#008000'), M6),
+        )
+      },
+      align = "center"
+    ),
     M1 = colDef(show = FALSE),
     M2 = colDef(show = FALSE),
     M3 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    NR = colDef(show = FALSE),
-    KR = colDef(show = FALSE),
-    Kanji = colDef(show = FALSE)
+    M4 = colDef(show = FALSE),
+    M5 = colDef(show = FALSE),
+    M6 = colDef(show = FALSE)
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 10,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 90),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 60),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -2965,7 +2985,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, wrap = FALSE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -2991,7 +3011,6 @@ scknj2.a <- scknj2.a[sample(1:nrow(scknj2.a)),]
 scknj1.a <- scknj1.a[sample(1:nrow(scknj1.a)),]
 
 scknja.z <- bind_rows(scknj4.a, scknj3.a)
-# scknja.z <- scknja.z[sample(1:nrow(scknja.z)),]
 
 scknja.y <- bind_rows(scknj5.a, scknj2.a)
 scknja.y <- bind_rows(scknja.y, scknj1.a)
@@ -2999,83 +3018,65 @@ scknja.y <- scknja.y[sample(1:nrow(scknja.y)),]
 
 scknja.x <- bind_rows(scknja.z, scknja.y)
 
+scknja.x1 <- scknja.x %>% select(W1, W2, W3) %>% slice(1:580)
+scknja.x2 <- scknja.x %>% select(W1, W2, W3)  %>% rename(W4 = W1, W5 = W2, W6 = W3) %>% slice(581:1160)
+scknja.xf <- data.frame(scknja.x1, scknja.x2)
+
 reactable(
-  scknja.x,
+  scknja.xf,
   columns = list(
-    # Kanji = colDef(
-    #   # Show species under character names
-    #   cell = function(value, index) {
-    #     Meaning <- scknja.x$Meaning[index]
-    #     Meaning <- if (!is.na(Meaning)) Meaning else ""
-    #     NR <- scknja.x$NR[index]
-    #     NR <- if (!is.na(NR)) NR else ""
-    #     KR <- scknja.x$KR[index]
-    #     KR <- if (!is.na(KR)) KR else ""
-    #     tagList(
-    #       div(style = list(fontSize = 30, fontWeight = 600, fontFamily = 'Open Sans'), value),
-    #       # div(style = list(fontSize = 9, color = '#008000'), NR),
-    #       # div(style = list(fontSize = 9, color = '#800000'), KR),
-    #       # div(style = list(fontSize = 9, fontWeight = 500), Meaning)
-    #     )
-    #   },
-    #   align = "center"
-    # ),
     W1 = colDef(
       cell = function(value, index) {
-        M1 <- scknja.x$M1[index]
-        M1 <- if (!is.na(M1)) M1 else ""
-        R1 <- scknja.x$R1[index]
-        R1 <- if (!is.na(R1)) R1 else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, fontFamily = 'Noto Sans JP'), value),
-          # div(style = list(fontSize = 10, fontWeight = 400, color = '#800000'), R1),
-          # div(style = list(fontSize = 9, fontWeight = 500, color = '#008000'), M1),
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
         )
       },
       align = "center"
     ),
     W2 = colDef(
       cell = function(value, index) {
-        M2 <- scknja.x$M2[index]
-        M2 <- if (!is.na(M2)) M2 else ""
-        R2 <- scknja.x$R2[index]
-        R2 <- if (!is.na(M2)) R2 else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, fontFamily = 'Noto Sans JP'), value),
-          # div(style = list(fontSize = 10, fontWeight = 400, color = '#800000'), R2),
-          # div(style = list(fontSize = 9, fontWeight = 500, color = '#008000'), M2),
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
         )
       },
       align = "center"
     ),
     W3 = colDef(
       cell = function(value, index) {
-        M3 <- scknja.x$M3[index]
-        M3 <- if (!is.na(M3)) M3 else ""
-        R3 <- scknja.x$R3[index]
-        R3 <- if (!is.na(R3)) R3 else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, fontFamily = 'Noto Sans JP'), value),
-          # div(style = list(fontSize = 10, fontWeight = 400, color = '#800000'), R3),
-          # div(style = list(fontSize = 9, fontWeight = 500, color = '#008000'), M3),
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
         )
       },
       align = "center"
     ),
-    R1 = colDef(show = FALSE),
-    R2 = colDef(show = FALSE),
-    R3 = colDef(show = FALSE),
-    M1 = colDef(show = FALSE),
-    M2 = colDef(show = FALSE),
-    M3 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    NR = colDef(show = FALSE),
-    KR = colDef(show = FALSE),
-    Kanji = colDef(show = FALSE)
+    W4 = colDef(
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
+        )
+      },
+      align = "center"
+    ),
+    W5 = colDef(
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
+        )
+      },
+      align = "center"
+    ),
+    W6 = colDef(
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
+        )
+      },
+      align = "center"
+    )
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 10,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 90),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 60),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
