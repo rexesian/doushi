@@ -163,6 +163,7 @@ rdngprp <- read_csv("jpim/MRRDNG-SCRPT.csv")
 adjirmbr <- read_csv("jpdb/ADJIEXP-ADJI.csv")
 kanawrds <- read_csv("jpdb/KANAPRTB-CHR.csv")
 rdngchp <- read_csv("jpim/CHP2-SCRPT.csv")
+notesxm <- read_csv("cpdb/LSTNTS-NTS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -19136,7 +19137,7 @@ reactable(
         Translation <- phrsaux$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else "Unknown"
         tagList(
-          div(style = list(fontSize = 36, fontWeight = 800, color = '#2F3F3F', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 36, fontWeight = 800, color = '#0F2040', fontFamily = 'Open Sans'), value),
         )
       },
       align = "center"
@@ -19173,8 +19174,8 @@ phrsaux <- phrsaux[sample(1:nrow(na.omit(phrsaux))),]
 reactable(
   phrsaux,
   columns = list(
-    Expression = colDef(align = "left", style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#555555')),
-    Translation = colDef(minWidth = 100,align = "left")
+    Expression = colDef(align = "left", style = list(fontSize = 17, fontWeight = 400, fontFamily = 'Open Sans', color = '#0F2040')),
+    Translation = colDef(minWidth = 100, align = "left", style = list(color = '#0F2040'))
 
   ),
   defaultPageSize = 9,
@@ -23079,7 +23080,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", height = 320, resizable = TRUE, striped = FALSE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", height = 350, resizable = TRUE, striped = FALSE,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -23107,7 +23108,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", height = 320, resizable = TRUE, striped = FALSE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", height = 350, resizable = TRUE, striped = FALSE,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -23725,6 +23726,52 @@ reactable(
 ------------------------------------------------------------------------
 
 #### Listening {.tabset}
+
+##### N3 {.tabset}
+
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-8"> -->
+
+```{r, echo=FALSE, message=FALSE}
+
+notesxm.a <- notesxm  %>% select(N3.Listening)
+# notesxm <- notesxm[sample(1:nrow(notesxm)),]
+
+reactable(
+  notesxm.a,
+  columns = list(
+    N3.Listening = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 17, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#dee7e7'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- </div> -->
+<!-- <div class = "col-sm-4"> -->
+
+<!-- </div> -->
+<!-- </div> -->
+
+------------------------------------------------------------------------
+
+##### N2 {.tabset}
+
+------------------------------------------------------------------------
+
+##### N1 {.tabset}
 
 ------------------------------------------------------------------------
 
