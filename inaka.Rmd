@@ -2835,9 +2835,9 @@ scknj5w.d <- data.frame(scknj5w.a, scknj5w.b, scknj5w.c)
 reactable(
   scknj5w.d,
   columns = list(
-    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea'))
+    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7'))
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -2941,9 +2941,9 @@ scknj4w.d <- data.frame(scknj4w.a, scknj4w.b, scknj4w.c)
 reactable(
   scknj4w.d,
   columns = list(
-    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea'))
+    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7'))
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -3048,9 +3048,9 @@ scknj3w.d <- data.frame(scknj3w.a, scknj3w.b, scknj3w.c)
 reactable(
   scknj3w.d,
   columns = list(
-    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea'))
+    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7'))
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -3158,9 +3158,9 @@ scknj2w.d <- data.frame(scknj2w.a, scknj2w.b, scknj2w.c)
 reactable(
   scknj2w.d,
   columns = list(
-    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea'))
+    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7'))
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -3264,9 +3264,9 @@ scknj1w.d <- data.frame(scknj1w.a, scknj1w.b, scknj1w.c)
 reactable(
   scknj1w.d,
   columns = list(
-    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea'))
+    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7'))
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -3298,7 +3298,16 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-scrptwrdx.x <- scrptwrdx %>% select(Word, Reading, Meaning)
+scrptwrdx.h <- scrptwrdx %>% select(Word, Reading, Meaning) %>% slice(1:87)
+scrptwrdx.i <- scrptwrdx %>% select(Word, Reading, Meaning) %>% slice(88:943)
+scrptwrdx.j <- scrptwrdx %>% select(Word, Reading, Meaning) %>% slice(944:1056)
+scrptwrdx.h <- scrptwrdx.h[sample(1:nrow(scrptwrdx.h)),]
+scrptwrdx.i <- scrptwrdx.i[sample(1:nrow(scrptwrdx.i)),]
+scrptwrdx.j <- scrptwrdx.j[sample(1:nrow(scrptwrdx.j)),]
+
+scrptwrdx.x <- bind_rows(scrptwrdx.h, scrptwrdx.i)
+scrptwrdx.x <- bind_rows(scrptwrdx.x, scrptwrdx.j)
+
 scrptwrdx.x <- scrptwrdx.x[sample(1:nrow(scrptwrdx.x)),]
 
 reactable(
@@ -3344,24 +3353,33 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-scrptwrdx <- scrptwrdx[sample(1:nrow(scrptwrdx)),]
+scrptwrdx.aa <- scrptwrdx %>% select(Word) %>% rename(W1 = Word) %>% slice(1:29)
+scrptwrdx.ab <- scrptwrdx %>% select(Word) %>% rename(W2 = Word) %>% slice(30:58)
+scrptwrdx.ac <- scrptwrdx %>% select(Word) %>% rename(W3 = Word) %>% slice(59:87)
 
-scrptwrdx.a <- scrptwrdx %>% select(Word) %>% rename(W1 = Word) %>% slice(1:323)
-scrptwrdx.b <- scrptwrdx %>% select(Word) %>% rename(W2 = Word) %>% slice(324:646)
-scrptwrdx.c <- scrptwrdx %>% select(Word) %>% rename(W3 = Word) %>% slice(647:969)
+scrptwrdx.aa <- scrptwrdx.aa[sample(1:nrow(scrptwrdx.aa)),]
+scrptwrdx.ab <- scrptwrdx.ab[sample(1:nrow(scrptwrdx.ab)),]
+scrptwrdx.ac <- scrptwrdx.ac[sample(1:nrow(scrptwrdx.ac)),]
+
+scrptwrdx.a <- scrptwrdx %>% select(Word) %>% rename(W1 = Word) %>% slice(88:410)
+scrptwrdx.b <- scrptwrdx %>% select(Word) %>% rename(W2 = Word) %>% slice(411:733)
+scrptwrdx.c <- scrptwrdx %>% select(Word) %>% rename(W3 = Word) %>% slice(734:1056)
 
 scrptwrdx.a <- scrptwrdx.a[sample(1:nrow(scrptwrdx.a)),]
 scrptwrdx.b <- scrptwrdx.b[sample(1:nrow(scrptwrdx.b)),]
 scrptwrdx.c <- scrptwrdx.c[sample(1:nrow(scrptwrdx.c)),]
 
-scrptwrdx.d <- data.frame(scrptwrdx.a, scrptwrdx.b, scrptwrdx.c)
+scrptwrdx.y <- data.frame(scrptwrdx.a, scrptwrdx.b, scrptwrdx.c)
+scrptwrdx.v <- data.frame(scrptwrdx.aa, scrptwrdx.ab, scrptwrdx.ac)
+
+scrptwrdx.d <- bind_rows(scrptwrdx.v, scrptwrdx.y)
 
 reactable(
   scrptwrdx.d,
   columns = list(
-    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea')),
-    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#fffbea'))
+    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7')),
+    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7'))
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -3420,7 +3438,7 @@ scknja.xf <- data.frame(scknja.x1, scknja.x2)
 reactable(
   scknja.xf,
   columns = list(
-    W1 = colDef(footer = "Total", style= list(background = '#fffbea'),
+    W1 = colDef(footer = "Total", style= list(background = '#dee7e7'),
       cell = function(value, index) {
         R1 <- scknja.xf$R1[index]
         R1 <- if (!is.na(R1)) R1 else ""
@@ -3431,7 +3449,7 @@ reactable(
       },
       align = "center"
     ),
-    W2 = colDef(style= list(background = '#fffbea'),
+    W2 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         R2 <- scknja.xf$R2[index]
         R2 <- if (!is.na(R2)) R2 else ""
@@ -3442,7 +3460,7 @@ reactable(
       },
       align = "center"
     ),
-    W3 = colDef(style= list(background = '#fffbea'),
+    W3 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         R3 <- scknja.xf$R3[index]
         R3 <- if (!is.na(R3)) R3 else ""
@@ -3453,7 +3471,7 @@ reactable(
       },
       align = "center"
     ),
-    W4 = colDef(style= list(background = '#fffbea'),
+    W4 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         R4 <- scknja.xf$R4[index]
         R4 <- if (!is.na(R4)) R4 else ""
@@ -3464,7 +3482,7 @@ reactable(
       },
       align = "center"
     ),
-    W5 = colDef(style= list(background = '#fffbea'),
+    W5 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         R5 <- scknja.xf$R5[index]
         R5 <- if (!is.na(R5)) R5 else ""
@@ -3475,7 +3493,7 @@ reactable(
       },
       align = "center"
     ),
-    W6 = colDef(style= list(background = '#fffbea'),
+    W6 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         R6 <- scknja.xf$R6[index]
         R6 <- if (!is.na(R6)) R6 else ""
@@ -3505,7 +3523,7 @@ reactable(
       fontSize = "11px"
     ),
     headerStyle = list(
-      backgroundColor = "#e2e2e2",
+      backgroundColor = "#dee7e7",
       color = "hsl(0, 0%, 95%)",
       fontSize = 1,
       fontWeight = 100,
@@ -3517,7 +3535,7 @@ reactable(
       "&:hover, &:focus" = list(color = '#ffff00')
     ),
     footerStyle = list(
-      backgroundColor = "#e2e2e2",
+      backgroundColor = "#dee7e7",
       color = "hsl(0, 0%, 95%)",
       fontSize = 1,
       fontWeight = 100,
@@ -3569,7 +3587,7 @@ scknja.xf <- data.frame(scknja.x1, scknja.x2)
 reactable(
   scknja.xf,
   columns = list(
-    W1 = colDef(footer = "Total", style= list(background = '#fffbea'),
+    W1 = colDef(footer = "Total", style= list(background = '#dee7e7'),
       cell = function(value, index) {
         M1 <- scknja.xf$M1[index]
         M1 <- if (!is.na(M1)) M1 else ""
@@ -3580,7 +3598,7 @@ reactable(
       },
       align = "center"
     ),
-    W2 = colDef(style= list(background = '#fffbea'),
+    W2 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         M2 <- scknja.xf$M2[index]
         M2 <- if (!is.na(M2)) M2 else ""
@@ -3591,7 +3609,7 @@ reactable(
       },
       align = "center"
     ),
-    W3 = colDef(style= list(background = '#fffbea'),
+    W3 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         M3 <- scknja.xf$M3[index]
         M3 <- if (!is.na(M3)) M3 else ""
@@ -3602,7 +3620,7 @@ reactable(
       },
       align = "center"
     ),
-    W4 = colDef(style= list(background = '#fffbea'),
+    W4 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         M4 <- scknja.xf$M4[index]
         M4 <- if (!is.na(M4)) M4 else ""
@@ -3613,7 +3631,7 @@ reactable(
       },
       align = "center"
     ),
-    W5 = colDef(style= list(background = '#fffbea'),
+    W5 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         M5 <- scknja.xf$M5[index]
         M5 <- if (!is.na(M5)) M5 else ""
@@ -3624,7 +3642,7 @@ reactable(
       },
       align = "center"
     ),
-    W6 = colDef(style= list(background = '#fffbea'),
+    W6 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         M6 <- scknja.xf$M6[index]
         M6 <- if (!is.na(M6)) M6 else ""
@@ -3653,7 +3671,7 @@ reactable(
       fontSize = "11px"
     ),
     headerStyle = list(
-      backgroundColor = "#e2e2e2",
+      backgroundColor = "#dee7e7",
       color = "hsl(0, 0%, 95%)",
       fontSize = 1,
       fontWeight = 100,
@@ -3665,7 +3683,7 @@ reactable(
       "&:hover, &:focus" = list(color = '#ffff00')
     ),
     footerStyle = list(
-      backgroundColor = "#e2e2e2",
+      backgroundColor = "#dee7e7",
       color = "hsl(0, 0%, 95%)",
       fontSize = 1,
       fontWeight = 100,
@@ -3718,7 +3736,7 @@ scknja.xf <- data.frame(scknja.x1, scknja.x2)
 reactable(
   scknja.xf,
   columns = list(
-    W1 = colDef(footer = "Total", style= list(background = '#fffbea'),
+    W1 = colDef(footer = "Total", style= list(background = '#dee7e7'),
       cell = function(value, index) {
         tagList(
           div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
@@ -3726,7 +3744,7 @@ reactable(
       },
       align = "center"
     ),
-    W2 = colDef(style= list(background = '#fffbea'),
+    W2 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         tagList(
           div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
@@ -3734,7 +3752,7 @@ reactable(
       },
       align = "center"
     ),
-    W3 = colDef(style= list(background = '#fffbea'),
+    W3 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         tagList(
           div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
@@ -3742,7 +3760,7 @@ reactable(
       },
       align = "center"
     ),
-    W4 = colDef(style= list(background = '#fffbea'),
+    W4 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         tagList(
           div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
@@ -3750,7 +3768,7 @@ reactable(
       },
       align = "center"
     ),
-    W5 = colDef(style= list(background = '#fffbea'),
+    W5 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         tagList(
           div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
@@ -3758,7 +3776,7 @@ reactable(
       },
       align = "center"
     ),
-    W6 = colDef(style= list(background = '#fffbea'),
+    W6 = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         tagList(
           div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Noto Sans JP'), value),
@@ -3778,7 +3796,7 @@ reactable(
       fontSize = "11px"
     ),
     headerStyle = list(
-      backgroundColor = "#e2e2e2",
+      backgroundColor = "#dee7e7",
       color = "hsl(0, 0%, 95%)",
       fontSize = 1,
       fontWeight = 100,
@@ -3790,7 +3808,7 @@ reactable(
       "&:hover, &:focus" = list(color = '#ffff00')
     ),
     footerStyle = list(
-      backgroundColor = "#e2e2e2",
+      backgroundColor = "#dee7e7",
       color = "hsl(0, 0%, 95%)",
       fontSize = 1,
       fontWeight = 100,
