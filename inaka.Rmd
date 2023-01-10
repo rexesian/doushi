@@ -24111,13 +24111,10 @@ reactable(
 
 ##### N3 {.tabset}
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-8"> -->
-
 ```{r, echo=FALSE, message=FALSE}
 
 notesxm.a <- notesxm  %>% select(N3.Listening)
-# notesxm <- notesxm[sample(1:nrow(notesxm)),]
+notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
 
 reactable(
   notesxm.a,
@@ -24141,12 +24138,6 @@ reactable(
 
 ```
 
-<!-- </div> -->
-<!-- <div class = "col-sm-4"> -->
-
-<!-- </div> -->
-<!-- </div> -->
-
 ------------------------------------------------------------------------
 
 ##### N2 {.tabset}
@@ -24158,6 +24149,34 @@ reactable(
 ------------------------------------------------------------------------
 
 #### Grammar {.tabset}
+
+##### N3 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+notesxm.a <- notesxm  %>% select(N3.Grammar)
+notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
+
+reactable(
+  notesxm.a,
+  columns = list(
+    N3.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 17, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#dee7e7'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+```
 
 ------------------------------------------------------------------------
 
