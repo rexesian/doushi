@@ -168,6 +168,8 @@ kgordg <- read_csv("jpim/KGORDG-SCRPT.csv")
 dialg <- read_csv("jpim/DIALG-SCRPT.csv")
 notesxm <- read_csv("cpdb/LSTNTS-NTS.csv")
 prtcltst <- read_csv("cpdb/PRTCLTST-TST.csv")
+shdwscrpt <- read_csv("cpdb/SHDWADV-SCRPT.csv")
+shdwvdv <- read_csv("cpdb/SDWNGVD-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -22626,6 +22628,69 @@ reactable(
 
 #### Shadowing {.tabset}
 
+```{r, echo=FALSE, message=FALSE}
+
+shdwvdv.a <- shdwvdv %>% rename(Rnd.Shadowing.Advance = Expression)
+shdwvdv.a <- shdwvdv.a[sample(1:nrow(shdwvdv.a)),]
+
+reactable(
+  shdwvdv.a,
+  columns = list(
+    Scripts = colDef(show = FALSE),
+    Rnd.Shadowing.Advance = colDef(minWidth = 500,align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555",
+      height = 30, fontSize = "11px",
+      align = "center"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+```{r, echo=FALSE, message=FALSE}
+
+shdwscrpt.a <- shdwscrpt  %>% select(Script, Translation)
+shdwscrpt.a <- shdwscrpt.a %>% na.omit(shdwscrpt.a)
+
+reactable(
+  shdwscrpt.a,
+  columns = list(
+    Script = colDef(minWidth = 140, align = "left", html = TRUE, style = list(fontSize = 15, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#dee7e7')),
+     Translation = colDef(minWidth = 90, align = "left", html = TRUE, style = list(fontSize = 12, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#dee7e7'))
+  ),
+  defaultPageSize = 100,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+```
+
 ------------------------------------------------------------------------
 
 ### EV5.0: Listening {.tabset}
@@ -23266,7 +23331,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", height = 450, striped = TRUE, 
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -23296,7 +23361,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", height = 450, striped = TRUE, 
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -23326,7 +23391,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", height = 450, striped = TRUE, 
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -23356,7 +23421,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", height = 450, striped = TRUE, 
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
