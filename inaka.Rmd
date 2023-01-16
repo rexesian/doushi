@@ -1975,7 +1975,7 @@ scknja.wa <- scknja.wa %>% na.omit(scknja.wa)
 reactable(
   scknja.wa,
   columns = list(
-    Words = colDef(align = "center", style = list(fontSize = 60, fontFamily = 'Open Sans', fontWeight = 600, background = '#f7f7f7')),
+    Words = colDef(align = "center", style = list(fontSize = 60, fontFamily = 'Open Sans', fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
     Reading = colDef(show = FALSE),
     Meaning = colDef(show = FALSE) 
   ),
@@ -2045,10 +2045,76 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-spclwrds <- spclwrds[sample(1:nrow(spclwrds)),]
+spclwrds.a <- spclwrds %>% select(Words.1) %>% rename(Words = Words.1)
+spclwrds.a <- spclwrds.a %>% na.omit(spclwrds.a)
+spclwrds.a <- spclwrds.a[sample(1:nrow(spclwrds.a)),]
 
 reactable(
-  spclwrds,
+  spclwrds.a,
+  columns = list(
+    Words = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', background = '#dee7e7', color = '#0F2040'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### LM {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+spclwrds.a <- spclwrds %>% select(Words.2) %>% rename(Words = Words.2)
+spclwrds.a <- spclwrds.a %>% na.omit(spclwrds.a)
+spclwrds.a <- spclwrds.a[sample(1:nrow(spclwrds.a)),]
+
+reactable(
+  spclwrds.a,
+  columns = list(
+    Words = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', background = '#dee7e7', color = '#0F2040'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### LN {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+spclwrds.a <- spclwrds %>% select(Words.3) %>% rename(Words = Words.3)
+spclwrds.a <- spclwrds.a %>% na.omit(spclwrds.a)
+spclwrds.a <- spclwrds.a[sample(1:nrow(spclwrds.a)),]
+
+reactable(
+  spclwrds.a,
   columns = list(
     Words = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', background = '#dee7e7', color = '#0F2040'))
   ),
