@@ -240,7 +240,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Conditioning {.tabset}
+### Attune {.tabset}
 
 #### Reading 
 
@@ -1016,65 +1016,6 @@ reactable(
 
 ## <b> Grammar </b> {.tabset}
 
-### LS
-
-```{r, echo=FALSE, message=FALSE}
-
-gwrds.n5 <- gwrds %>% slice(1:42)
-gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
-gwrds.n4 <- gwrds %>% slice(43:195)
-gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
-gwrds.n3 <- gwrds %>% slice(196:338)
-gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
-gwrds.n2 <- gwrds %>% slice(339:572)
-gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
-gwrds.n1 <- gwrds %>% slice(573:592)
-gwrds.n1 <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
-
-gwrds.lst <- bind_rows(gwrds.n5, gwrds.n4)
-gwrds.lst <- bind_rows(gwrds.lst, gwrds.n3)
-gwrds.lst <- bind_rows(gwrds.lst, gwrds.n2)
-gwrds.lst <- bind_rows(gwrds.lst, gwrds.n1)
-
-reactable(
-  gwrds.lst,
-  columns = list(
-    Words = colDef(minWidth = 32, align = "left" , style = list(fontSize = 13.5, fontFamily = 'Noto Sans JP', background = '#dee7e7'), sticky = "left"),
-    Meaning = colDef(minWidth = 50, align = "left", style = list(fontSize = 10, fontFamily = 'Noto Sans JP', background = '#dee7e7')),
-    Sentence = colDef(minWidth = 70, style= list(background = '#dee7e7'),
-      cell = function(value, index) {
-        Translation <- gwrds.lst$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 13.5, color = '#404040', fontFamily = 'Noto Sans JP'), value),
-          div(style = list(fontSize = 9, color = '#404040'), Translation),
-        )
-      },
-      align = "left"
-    ),
-    Translation = colDef(show = FALSE),
-    Level = colDef(show = FALSE)
-  ),
-  defaultPageSize = 7,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
 ###  L5
 
 ```{r, echo=FALSE, message=FALSE}
@@ -1323,7 +1264,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-gwrds.n1 <- gwrds %>% slice(573:592)
+gwrds.n1 <- gwrds %>% slice(573:612)
 gwrds.na <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
 
 reactable(
@@ -1380,11 +1321,11 @@ reactable(
 
 ------------------------------------------------------------------------
 
-###  ALL
+###  LA
 
 ```{r, echo=FALSE, message=FALSE}
 
-gwrds.n1 <- gwrds %>% slice(573:592)
+gwrds.n1 <- gwrds %>% slice(573:612)
 gwrds.n1 <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
 gwrds.n2 <- gwrds %>% slice(339:572)
 gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
@@ -1394,7 +1335,7 @@ gwrds.n4 <- gwrds %>% slice(43:195)
 gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
 gwrds.n5 <- gwrds %>% slice(1:42)
 gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
-gwrds.ex <- gwrds %>% slice(593:641)
+gwrds.ex <- gwrds %>% slice(593:661)
 gwrds.ex <- gwrds.ex[sample(1:nrow(gwrds.ex)),]
 
 gwrds.na <- bind_rows(gwrds.n1, gwrds.n2)
@@ -1458,11 +1399,68 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+### LS
+
+```{r, echo=FALSE, message=FALSE}
+
+gwrds.n5 <- gwrds %>% slice(1:42)
+gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
+gwrds.n4 <- gwrds %>% slice(43:195)
+gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
+gwrds.n3 <- gwrds %>% slice(196:338)
+gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
+gwrds.n2 <- gwrds %>% slice(339:572)
+gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
+gwrds.n1 <- gwrds %>% slice(573:612)
+gwrds.n1 <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
+
+gwrds.lst <- bind_rows(gwrds.n5, gwrds.n4)
+gwrds.lst <- bind_rows(gwrds.lst, gwrds.n3)
+gwrds.lst <- bind_rows(gwrds.lst, gwrds.n2)
+gwrds.lst <- bind_rows(gwrds.lst, gwrds.n1)
+
+reactable(
+  gwrds.lst,
+  columns = list(
+    Words = colDef(minWidth = 32, align = "left" , style = list(fontSize = 13.5, fontWeight = 500, fontFamily = 'Noto Sans JP', background = '#dee7e7'), sticky = "left"),
+    Meaning = colDef(minWidth = 50, align = "left", style = list(fontSize = 10, fontWeight = 500, fontFamily = 'Noto Sans JP', background = '#dee7e7')),
+    Sentence = colDef(minWidth = 70, style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Translation <- gwrds.lst$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 13.5, color = '#404040', fontFamily = 'Noto Sans JP', fontWeight = 500), value),
+          div(style = list(fontSize = 9, color = '#404040'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE),
+    Level = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## <b> Similars </b> {.tabset}
 
-### Words {.tabset}
-
-#### complex
+### complex
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 複雑・ふくざつ**</p>
 
@@ -1487,7 +1485,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### clear
+### clear
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 明確・めいかく**</p>
 
@@ -1505,7 +1503,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### deceive
+### deceive
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 欺く・あざむく**</p>
 
@@ -1530,7 +1528,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### development
+### development
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 発展・はってん**</p>
 
@@ -1625,7 +1623,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### emergency
+### emergency
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 非常・ひじょう**</p>
 
@@ -1664,7 +1662,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### expectation
+### expectation
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 期待・きたい**</p>
 
@@ -1696,7 +1694,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### disperse
+### disperse
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 拡散・かくさん**</p>
 
@@ -1728,7 +1726,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### price
+### price
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 費用・ひよう**</p>
 
@@ -1809,7 +1807,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### expenses
+### expenses
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 消費・しょうひ**</p>
 
@@ -1946,7 +1944,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### fee
+### fee
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 料金・りょうきん**</p>
 
@@ -2062,7 +2060,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### charge
+### charge
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 代金・だいきん**</p>
 
@@ -2161,7 +2159,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### establish
+### establish
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 設定・せってい**</p>
 
@@ -2263,7 +2261,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### report
+### report
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 報告・ほうこく**</p>
 
@@ -2316,7 +2314,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### cooking
+### cooking
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 料理・りょうり**</p>
 
@@ -2369,7 +2367,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### search
+### search
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 探索・たんさく**</p>
 
@@ -2443,7 +2441,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### suitable
+### suitable
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② 適切・てきせつ**</p>
 
@@ -2510,7 +2508,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### finally
+### finally
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① やっと**</p>
 
@@ -2568,7 +2566,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### situation
+### situation
 
 <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 状態・じょうたい**</p>
 
@@ -2621,150 +2619,134 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Grammar {.tabset}
+<!-- ### Grammar {.tabset} -->
 
-#### 01
+<!-- #### 01 -->
 
-<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 向き**</p>
+<!-- <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① 向き**</p> -->
 
-###### **・suitable for, specially for**
+<!-- ###### **・suitable for, specially for** -->
 
-    ・若い女性向きの小説を書いています
-    ・このレストランは量が多いから男子学生向きですね
-
-<!-- <h> -->
-
-    ・I write novels for young women
-    ・This restaurant is suitable for male students because of the large portions.
-
-<p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② 向け**</p>
-
-###### **・intended for, aimed at**
-
-    ・最近は男性向けの料理教室が人気だ
-    ・ここは女子学生向けの寮ですから男性は入れません
+<!--     ・若い女性向きの小説を書いています -->
+<!--     ・このレストランは量が多いから男子学生向きですね -->
 
 <!-- <h> -->
 
-    ・Cooking classes for men are very popular these days
-    ・This is a dormitory for female students, so men are not allowed
+<!--     ・I write novels for young women -->
+<!--     ・This restaurant is suitable for male students because of the large portions. -->
+
+<!-- <p style="font-size:16px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② 向け**</p> -->
+
+<!-- ###### **・intended for, aimed at** -->
+
+<!--     ・最近は男性向けの料理教室が人気だ -->
+<!--     ・ここは女子学生向けの寮ですから男性は入れません -->
+
+<!-- <h> -->
+
+<!--     ・Cooking classes for men are very popular these days -->
+<!--     ・This is a dormitory for female students, so men are not allowed -->
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 02
+<!-- ### Recognize {.tabset} -->
 
-<!-- ------------------------------------------------------------------------ -->
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
 
-#### 03
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-<!-- ------------------------------------------------------------------------ -->
+<!-- smlrwrds <- smlrwrds[sample(1:nrow(smlrwrds)),] -->
 
-#### 04
+<!-- reactable( -->
+<!--   smlrwrds, -->
+<!--   columns = list( -->
+<!--     Words = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- smlrwrds$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Reading <- smlrwrds$Reading[index] -->
+<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 34, fontWeight = 600, fontFamily = 'Open Sans'), value), -->
+<!--           div(style = list(fontSize = 10), Reading), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 500), Meaning), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
 
-<!-- ------------------------------------------------------------------------ -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Reading = colDef(show = FALSE) -->
 
-#### 05
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, -->
 
-<!-- ------------------------------------------------------------------------ -->
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-### Recognize {.tabset}
+<!-- ``` -->
 
-<div class = "row">
-<div class = "col-sm-6">
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-smlrwrds <- smlrwrds[sample(1:nrow(smlrwrds)),]
+<!-- smlrwrds <- smlrwrds[sample(1:nrow(smlrwrds)),] -->
 
-reactable(
-  smlrwrds,
-  columns = list(
-    Words = colDef(
-      cell = function(value, index) {
-        Meaning <- smlrwrds$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Reading <- smlrwrds$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        tagList(
-          div(style = list(fontSize = 34, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 10), Reading),
-          div(style = list(fontSize = 9, fontWeight = 500), Meaning),
-        )
-      },
-      align = "center"
-    ),
+<!-- reactable( -->
+<!--   smlrwrds, -->
+<!--   columns = list( -->
+<!--     Words = colDef(style= list(background = '#dee7e7'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- smlrwrds$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Reading <- smlrwrds$Reading[index] -->
+<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value), -->
+<!--           # div(style = list(fontSize = 10), Reading), -->
+<!--           # div(style = list(fontSize = 9), Meaning), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
 
-    Meaning = colDef(show = FALSE),
-    Reading = colDef(show = FALSE)
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Reading = colDef(show = FALSE) -->
 
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-</div>
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-smlrwrds <- smlrwrds[sample(1:nrow(smlrwrds)),]
-
-reactable(
-  smlrwrds,
-  columns = list(
-    Words = colDef(style= list(background = '#dee7e7'),
-      cell = function(value, index) {
-        Meaning <- smlrwrds$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Reading <- smlrwrds$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        tagList(
-          div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          # div(style = list(fontSize = 10), Reading),
-          # div(style = list(fontSize = 9), Meaning),
-        )
-      },
-      align = "center"
-    ),
-
-    Meaning = colDef(show = FALSE),
-    Reading = colDef(show = FALSE)
-
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-</div>
-</div>
+<!-- </div> -->
+<!-- </div> -->
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -3010,9 +2992,9 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-## <b> Jlpt </b> {.tabset}
+## <b> Memorize </b> {.tabset}
 
-### Conditioning {.tabset}
+### Attune {.tabset}
 
 #### Reading {.tabset}
 
@@ -3394,6 +3376,7 @@ reactable(
 )
 
 ```
+
 <!-- ------------------------------------------------------------------------ -->
 
 ### Recognize {.tabset}
@@ -4422,6 +4405,10 @@ reactable(
 
 ## <b> Readings </b> {.tabset}
 
+### Articles {.tabset}
+
+<!-- ------------------------------------------------------------------------ -->
+
 ### Sentences {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
@@ -4455,11 +4442,7 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Articles {.tabset}
-
-<!-- ------------------------------------------------------------------------ -->
-
-### Jlpt {.tabset}
+### Exams {.tabset}
 
 #### N5 {.tabset}
 
@@ -4865,6 +4848,8 @@ reactable(
 <!-- ------------------------------------------------------------------------ -->
 
 #### N1 {.tabset}
+
+
 
 <!-- ------------------------------------------------------------------------ -->
 
