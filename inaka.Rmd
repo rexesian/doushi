@@ -1504,7 +1504,8 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-scknj4 <- scknj4[sample(1:nrow(scknj4)),]
+scknj4 <- scknj4
+# scknj4 <- scknj4[sample(1:nrow(scknj4)),]
 
 reactable(
   scknj4,
@@ -1662,9 +1663,9 @@ reactable(
         R3 <- scknj3$R3[index]
         R3 <- if (!is.na(R3)) R3 else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 9, fontWeight = 400), R3),
-          div(style = list(fontSize = 9, fontWeight = 400), M3),
+          div(style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), R3),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), M3),
         )
       },
       align = "center"
@@ -2138,6 +2139,168 @@ reactable(
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
   
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### RVWL4 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# scknj5.w1 <- scknj5 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+# scknj5.w2 <- scknj5 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+# scknj5.w3 <- scknj5 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+scknj4.w1 <- scknj4 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1) %>% slice(1:50)
+scknj4.w2 <- scknj4 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2) %>% slice(1:50)
+scknj4.w3 <- scknj4 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3) %>% slice(1:50)
+# scknj3.w1 <- scknj3 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1) %>% slice(1:50)
+# scknj3.w2 <- scknj3 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2) %>% slice(1:50)
+# scknj3.w3 <- scknj3 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3) %>% slice(1:50)
+# scknj2.w1 <- scknj2 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+# scknj2.w2 <- scknj2 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+# scknj2.w3 <- scknj2 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+# scknj1.w1 <- scknj1 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+# scknj1.w2 <- scknj1 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+# scknj1.w3 <- scknj1 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+
+# scknj5.wa <- bind_rows(scknj5.w1, scknj5.w2)
+# scknj5.wa <- bind_rows(scknj5.wa, scknj5.w3)
+# scknj4.wa <- bind_rows(scknj4.w1, scknj4.w2)
+# scknj4.wa <- bind_rows(scknj4.wa, scknj4.w3)
+# scknj3.wa <- bind_rows(scknj3.w1, scknj3.w2)
+# scknj3.wa <- bind_rows(scknj3.wa, scknj3.w3)
+# scknj2.wa <- bind_rows(scknj2.w1, scknj2.w2)
+# scknj2.wa <- bind_rows(scknj2.wa, scknj2.w3)
+# scknj1.wa <- bind_rows(scknj1.w1, scknj1.w2)
+# scknj1.wa <- bind_rows(scknj1.wa, scknj1.w3)
+
+scknj4.wa <- bind_rows(scknj4.w1, scknj4.w2)
+scknj4.wa <- bind_rows(scknj4.wa, scknj4.w3)
+
+# scknj5.wa <- scknj5.wa[sample(1:nrow(scknj5.wa)),]
+# scknj4.wa <- scknj4.wa[sample(1:nrow(scknj4.wa)),]
+scknj4.wa <- scknj4.wa[sample(1:nrow(scknj4.wa)),]
+# scknj2.wa <- scknj2.wa[sample(1:nrow(scknj2.wa)),]
+# scknj1.wa <- scknj1.wa[sample(1:nrow(scknj1.wa)),]
+
+# scknja.wa <- bind_rows(scknj3.wa, scknj4.wa)
+# scknja.wa <- bind_rows(scknja.wa, scknj2.wa)
+# scknja.wb <- bind_rows(scknj5.wa, scknj1.wa)
+# scknja.wb <- scknja.wb[sample(1:nrow(scknja.wb)),]
+# scknja.wa <- bind_rows(scknja.wa, scknja.wb)
+# 
+# scrptwrdx.r <- scrptwrdx %>% select(Word, Reading, Meaning) %>% rename(Words = Word)
+# scrptwrdx.r <- scrptwrdx.r[sample(1:nrow(scrptwrdx.r)),]
+# scknja.wa <- bind_rows(scknja.wa, scrptwrdx.r)
+
+# scknja.wa <- scknja.wa %>% na.omit(scknja.wa)
+
+scknj4.wa <- scknj4.wa %>% na.omit(scknj4.wa)
+
+reactable(
+  scknj4.wa,
+  columns = list(
+    Words = colDef(align = "center", style = list(fontSize = 60, fontFamily = 'Open Sans', fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE) 
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, 
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### RVWL3 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# scknj5.w1 <- scknj5 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+# scknj5.w2 <- scknj5 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+# scknj5.w3 <- scknj5 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+# scknj4.w1 <- scknj4 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+# scknj4.w2 <- scknj4 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+# scknj4.w3 <- scknj4 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+scknj3.w1 <- scknj3 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1) %>% slice(1:50)
+scknj3.w2 <- scknj3 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2) %>% slice(1:50)
+scknj3.w3 <- scknj3 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3) %>% slice(1:50)
+# scknj2.w1 <- scknj2 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+# scknj2.w2 <- scknj2 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+# scknj2.w3 <- scknj2 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+# scknj1.w1 <- scknj1 %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+# scknj1.w2 <- scknj1 %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+# scknj1.w3 <- scknj1 %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+
+# scknj5.wa <- bind_rows(scknj5.w1, scknj5.w2)
+# scknj5.wa <- bind_rows(scknj5.wa, scknj5.w3)
+# scknj4.wa <- bind_rows(scknj4.w1, scknj4.w2)
+# scknj4.wa <- bind_rows(scknj4.wa, scknj4.w3)
+# scknj3.wa <- bind_rows(scknj3.w1, scknj3.w2)
+# scknj3.wa <- bind_rows(scknj3.wa, scknj3.w3)
+# scknj2.wa <- bind_rows(scknj2.w1, scknj2.w2)
+# scknj2.wa <- bind_rows(scknj2.wa, scknj2.w3)
+# scknj1.wa <- bind_rows(scknj1.w1, scknj1.w2)
+# scknj1.wa <- bind_rows(scknj1.wa, scknj1.w3)
+
+scknj3.wa <- bind_rows(scknj3.w1, scknj3.w2)
+scknj3.wa <- bind_rows(scknj3.wa, scknj3.w3)
+
+# scknj5.wa <- scknj5.wa[sample(1:nrow(scknj5.wa)),]
+# scknj4.wa <- scknj4.wa[sample(1:nrow(scknj4.wa)),]
+scknj3.wa <- scknj3.wa[sample(1:nrow(scknj3.wa)),]
+# scknj2.wa <- scknj2.wa[sample(1:nrow(scknj2.wa)),]
+# scknj1.wa <- scknj1.wa[sample(1:nrow(scknj1.wa)),]
+
+# scknja.wa <- bind_rows(scknj3.wa, scknj4.wa)
+# scknja.wa <- bind_rows(scknja.wa, scknj2.wa)
+# scknja.wb <- bind_rows(scknj5.wa, scknj1.wa)
+# scknja.wb <- scknja.wb[sample(1:nrow(scknja.wb)),]
+# scknja.wa <- bind_rows(scknja.wa, scknja.wb)
+# 
+# scrptwrdx.r <- scrptwrdx %>% select(Word, Reading, Meaning) %>% rename(Words = Word)
+# scrptwrdx.r <- scrptwrdx.r[sample(1:nrow(scrptwrdx.r)),]
+# scknja.wa <- bind_rows(scknja.wa, scrptwrdx.r)
+
+# scknja.wa <- scknja.wa %>% na.omit(scknja.wa)
+
+scknj3.wa <- scknj3.wa %>% na.omit(scknj3.wa)
+
+reactable(
+  scknj3.wa,
+  columns = list(
+    Words = colDef(align = "center", style = list(fontSize = 60, fontFamily = 'Open Sans', fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE) 
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, 
+
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
