@@ -9443,9 +9443,6 @@ reactable(
 
 ##### Sentences {.tabset}
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-6"> -->
-
 ```{r, echo=FALSE, message=FALSE}
 
 verbrsent.freq <- lverbs %>% slice(1:600) %>% select(S1, T1)
@@ -9454,18 +9451,18 @@ verbrsent.freq <- verbrsent.freq  %>% rename(Sentences = S1)
 verbrsent.freq <- verbrsent.freq %>% na.omit(verbrsent.freq)
 verbrsent.freq <- verbrsent.freq[sample(1:nrow(verbrsent.freq)),]
 verbrsent.freqt <- verbrsent.freq  %>% rename(Translation = T1)
+verbrsent.freqt <- verbrsent.freqt[sample(1:nrow(verbrsent.freqt)),]
 
 reactable(
   verbrsent.freqt,
   columns = list(
-    Translation = colDef(style= list(background = '#f7f7f7'),
+    Translation = colDef(style= list(background = '#1b1e1e'),
       cell = function(value, index) {
         Sentences <- verbrsent.freqt$Sentences[index]
         Sentences <- if (!is.na(Sentences)) Sentences else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#303030'), Sentences),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#303030'), value)
-          # div(style = list(fontSize = 9, color = '#787878'), value)
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', color = '#f1f5f5'), Sentences),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#f1f5f5'), value)
         )
       },
       align = "left"
@@ -9485,7 +9482,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE, height = 530,
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE, height = 530,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
