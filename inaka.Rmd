@@ -34,6 +34,10 @@ body{
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Kaisei+Tokumin:wght@400;500;700&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+
 ```{css, echo=FALSE}
 .my-tbl {
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -181,6 +185,7 @@ jlptw2 <- read_csv("jpdb/JLPT2-VRN2.csv")
 jlptw1 <- read_csv("jpdb/JLPT1-VRN1.csv")
 jlptwsnt <- read_csv("jpdb/JLPTWSNT-SNT.csv")
 srsphr <- read_csv("jpim/SRPHR-SCRPT.csv")
+cllect2 <- read_csv("jpdb/CLLCT2-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -3691,7 +3696,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Remember {.tabset}
+#### Sensing {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -4627,9 +4632,6 @@ reactable(
 
 #### Sentences
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-6"> -->
-
 ```{r, echo=FALSE, message=FALSE}
 
 cnntvmre <- cnntvmre[sample(1:nrow(cnntvmre)),]
@@ -4637,13 +4639,13 @@ cnntvmre <- cnntvmre[sample(1:nrow(cnntvmre)),]
 reactable(
   cnntvmre,
   columns = list(
-    Translation = colDef(style= list(background = '#f7f7f7'),
+    Translation = colDef(style= list(background = '#1b1e1e'),
       cell = function(value, index) {
         Sentences <- cnntvmre$Sentences[index]
         Sentences <- if (!is.na(Sentences)) Sentences else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#303030', fontFamily = 'Open Sans'), Sentences),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#303030'), value)
+          div(style = list(fontSize = 20, fontWeight = 500, color = '#f1f5f5', fontFamily = 'Open Sans'), Sentences),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#f1f5f5'), value)
         )
       },
       align = "left"
@@ -4661,55 +4663,16 @@ reactable(
       paddingBottom = "8px",
       width = "100%"
     )
+    # headerStyle = list(
+    #   backgroundColor = '#1b1e1e',
+    #   color = '#f1f5f5'
+    # ),
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, height = 530,
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, height = 530,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 ```
-
-<!-- </div> -->
-<!-- <div class = "col-sm-6"> -->
-
-<!-- ```{r, echo=FALSE, message=FALSE} -->
-
-<!-- # cnntvmre <- cnntvmre[sample(1:nrow(cnntvmre)),] -->
-
-<!-- reactable( -->
-<!--   cnntvmre, -->
-<!--   columns = list( -->
-<!--     Sentences = colDef(style= list(background = '#dee7e7'), -->
-<!--       cell = function(value, index) { -->
-<!--         Translation <- cnntvmre$Translation[index] -->
-<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 11, fontWeight = 400, color = '#0F2040'), Translation), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "left" -->
-<!--     ), -->
-<!--     Translation = colDef(show = FALSE) -->
-
-<!--   ), -->
-<!--   defaultPageSize = 20, -->
-<!--   theme = reactableTheme( -->
-<!--     # Vertically center cells -->
-<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"), -->
-<!--     searchInputStyle = list( -->
-<!--       paddingLeft = "8px", -->
-<!--       paddingTop = "8px", -->
-<!--       paddingBottom = "8px", -->
-<!--       width = "100%" -->
-<!--     ) -->
-<!--   ), -->
-<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE, height = 484, -->
-
-<!--   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px") -->
-<!-- ) -->
-<!-- ``` -->
-
-<!-- </div> -->
-<!-- </div> -->
 
 ------------------------------------------------------------------------
 
@@ -4808,9 +4771,6 @@ reactable(
 
 #### Sentences
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-6"> -->
-
 ```{r, echo=FALSE, message=FALSE}
 
 advlmre <- advlmre[sample(1:nrow(advlmre)),]
@@ -4848,49 +4808,6 @@ reactable(
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 ```
-
-<!-- </div> -->
-<!-- <div class = "col-sm-6"> -->
-
-<!-- ```{r, echo=FALSE, message=FALSE} -->
-
-<!-- advlmre <- advlmre[sample(1:nrow(advlmre)),] -->
-
-<!-- reactable( -->
-<!--   advlmre, -->
-<!--   columns = list( -->
-<!--     Sentences = colDef(style= list(background = '#dee7e7'), -->
-<!--       cell = function(value, index) { -->
-<!--         Translation <- advlmre$Translation[index] -->
-<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 12, fontWeight = 600, color = '#404040'), Translation), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-<!--     Translation = colDef(show = FALSE) -->
-
-<!--   ), -->
-<!--   defaultPageSize = 1, -->
-<!--   theme = reactableTheme( -->
-<!--     # Vertically center cells -->
-<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"), -->
-<!--     searchInputStyle = list( -->
-<!--       paddingLeft = "8px", -->
-<!--       paddingTop = "8px", -->
-<!--       paddingBottom = "8px", -->
-<!--       width = "100%" -->
-<!--     ) -->
-<!--   ), -->
-<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", -->
-
-<!--   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px") -->
-<!-- ) -->
-<!-- ``` -->
-
-<!-- </div> -->
-<!-- </div> -->
 
 ------------------------------------------------------------------------
 
@@ -19940,7 +19857,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Phrases {.tabset}
+#### A.Collection {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -19965,7 +19882,7 @@ reactable(
   defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 310),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -19980,38 +19897,47 @@ reactable(
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
-<!-- #### List {.tabset} -->
+#### B.Collection {.tabset}
 
-<!-- ```{r, echo=FALSE, message=FALSE} -->
+```{r, echo=FALSE, message=FALSE}
 
-<!-- phrsaux <- phrsaux[sample(1:nrow(na.omit(phrsaux))),] -->
+# cllect2 <- cllect2[sample(1:nrow(na.omit(cllect2))),]
 
-<!-- reactable( -->
-<!--   phrsaux, -->
-<!--   columns = list( -->
-<!--     Expression = colDef(align = "left", style = list(fontSize = 17, fontWeight = 400, fontFamily = 'Open Sans', color = '#0F2040')), -->
-<!--     Translation = colDef(minWidth = 100, align = "left", style = list(color = '#0F2040')) -->
+reactable(
+  cllect2,
+  columns = list(
+    Expression = colDef(style= list(background = '#1b1e1e'),
+      cell = function(value, index) {
+        # Translation <- phrsaux$Translation[index]
+        # Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          div(style = list(fontSize = 36, fontWeight = 500, color = '#f1f5f5', fontFamily = 'Open Sans'), value),
+        )
+      },
+      align = "center"
+    )
+    # Translation = colDef(show = FALSE)
 
-<!--   ), -->
-<!--   defaultPageSize = 9, -->
-<!--   theme = reactableTheme( -->
-<!--     # Vertically center cells -->
-<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"), -->
-<!--     searchInputStyle = list( -->
-<!--       paddingLeft = "8px", -->
-<!--       paddingTop = "8px", -->
-<!--       paddingBottom = "8px", -->
-<!--       width = "100%" -->
-<!--     ) -->
-<!--   ), -->
-<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", -->
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 310),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
 
-<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
-<!-- ) -->
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
 
-<!-- ``` -->
+```
 
 ------------------------------------------------------------------------
 
