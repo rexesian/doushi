@@ -2153,6 +2153,38 @@ reactable(
 
 ------------------------------------------------------------------------
 
+### LQ {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+spclwrds.a <- spclwrds %>% select(Words.4) %>% rename(Words = Words.4)
+spclwrds.a <- spclwrds.a %>% na.omit(spclwrds.a)
+spclwrds.a <- spclwrds.a[sample(1:nrow(spclwrds.a)),]
+
+reactable(
+  spclwrds.a,
+  columns = list(
+    Words = colDef(align = "center", style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', background = '#dee7e7', color = '#0F2040'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 ## Hiragana {.tabset}
 
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Hiragana** is a phonetic script used to represent Japanese sound.</p>
