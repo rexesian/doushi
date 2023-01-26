@@ -187,6 +187,7 @@ jlptwsnt <- read_csv("jpdb/JLPTWSNT-SNT.csv")
 srsphr <- read_csv("jpim/SRPHR-SCRPT.csv")
 cllect2 <- read_csv("jpdb/CLLCT2-EXP.csv")
 vrbsphsn <- read_csv("jpdb/VRBSLSP-VRBS.csv")
+wrdsnt <- read_csv("cpdb/WRDNT-SCRPT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -9617,7 +9618,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-###### Recognize {.tabset}
+###### C.Recognize {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -9660,6 +9661,48 @@ reactable(
   defaultPageSize = 1,
   theme = reactableTheme(
     # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, 
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+###### A.Recognize {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+vrbslstnk.b <- verbsls %>% select(Verbs) %>% slice(1:1250)
+vrbslstnk.c <- verbsls %>% select(Verbs) %>% slice(1251:2500)
+vrbslstnk.b <- vrbslstnk.b[sample(1:nrow(vrbslstnk.b)),]
+vrbslstnk.c <- vrbslstnk.c[sample(1:nrow(vrbslstnk.c)),]
+
+vrbslstnk.d <- bind_rows(vrbslstnk.b, vrbslstnk.c)
+
+reactable(
+  vrbslstnk.d,
+  columns = list(
+    Verbs = colDef(style= list(background = '#1b1e1e'),
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 40, fontWeight = 500, fontFamily = 'Open Sans', color = '#f1f5f5'), value),
+        )
+      },
+      align = "center"
+    )
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -24194,6 +24237,35 @@ reactable(
 
 ##### N2 {.tabset}
 
+###### Vocab-PowerDrill
+
+```{r, echo=FALSE, message=FALSE}
+
+notesxm.a <- notesxm  %>% select(Notes.PowerDrill.Vocab.N2)
+notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
+
+reactable(
+  notesxm.a,
+  columns = list(
+    Notes.PowerDrill.Vocab.N2 = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 17, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#dee7e7'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 ------------------------------------------------------------------------
 
 ##### N1 {.tabset}
@@ -25061,6 +25133,38 @@ reactable(
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
 
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Usage
+
+```{r, echo=FALSE, message=FALSE}
+
+wrdsnt.a <- wrdsnt  %>% select(Notes)
+wrdsnt.a <- wrdsnt.a %>% na.omit(wrdsnt.a)
+wrdsnt.a <- wrdsnt.a[sample(1:nrow(wrdsnt.a)),]
+
+reactable(
+  wrdsnt.a,
+  columns = list(
+    Notes = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 17, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#dee7e7'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
