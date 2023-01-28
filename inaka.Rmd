@@ -189,6 +189,7 @@ cllect2 <- read_csv("jpdb/CLLCT2-EXP.csv")
 vrbsphsn <- read_csv("jpdb/VRBSLSP-VRBS.csv")
 wrdsnt <- read_csv("cpdb/WRDNT-SCRPT.csv")
 eswrds <- read_csv("jpdb/SPCLSCR-WRD.csv")
+cmpsnt <- read_csv("jpdb/SPCLSCRN-SNT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -23456,6 +23457,49 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### Sentences {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+cmpsnt.a <- cmpsnt %>% na.omit(cmpsnt)
+cmpsnt.a <- cmpsnt.a[sample(1:nrow(cmpsnt.a)),]
+
+reactable(
+  cmpsnt.a,
+  columns = list(
+    Sentences = colDef(style= list(background = '#1b1e1e'),
+      cell = function(value, index) {
+        Translation <- cmpsnt.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 10, fontWeight = 300, color = '#f1f5f5'), Translation)
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 30,
+  theme = reactableTheme(
+
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, height = 520,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
+
+------------------------------------------------------------------------
+
 #### Reference {.tabset}
 
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Graded-Reader:**   
@@ -26149,12 +26193,11 @@ v1hme1 <- v1hme %>% select(Time) %>%
   separate(Time, into = c('Script','Transcript'), sep = '\\#') %>%
   select(Script,Transcript)
 v1hme1 <- v1hme1[sample(1:nrow(na.omit(v1hme1))),]
-v1hme1
+
 reactable(
   v1hme1,
   columns = list(
     Script = colDef(
-      # Show species under character names
       cell = function(value, index) {
         Transcript <- v1hme1$Transcript[index]
         Transcript <- if (!is.na(Transcript)) Transcript else "Unknown"
