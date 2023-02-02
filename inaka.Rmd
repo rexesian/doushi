@@ -192,6 +192,7 @@ wrdsnt <- read_csv("cpdb/WRDNT-SCRPT.csv")
 eswrds <- read_csv("jpdb/SPCLSCR-WRD.csv")
 cmpsnt <- read_csv("jpdb/SPCLSCRN-SNT.csv")
 blind <- read_csv("jpim/LSBLND-SCRPT.csv")
+grmsplsnt <- read_csv("jpdb/GRMMRSNS-SNT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -19134,32 +19135,38 @@ gwrds.n2 <- gwrds %>% slice(339:572)
 gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
 gwrds.n1 <- gwrds %>% slice(573:612)
 gwrds.n1 <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
+grmsplsnt <- grmsplsnt[sample(1:nrow(grmsplsnt)),]
 
 gwrds.lst <- bind_rows(gwrds.n5, gwrds.n4)
 gwrds.lst <- bind_rows(gwrds.lst, gwrds.n3)
 gwrds.lst <- bind_rows(gwrds.lst, gwrds.n2)
 gwrds.lst <- bind_rows(gwrds.lst, gwrds.n1)
+gwrds.lst <- bind_rows(gwrds.lst, grmsplsnt)
+
+# gwrds.lst <- gwrds.lst[sample(1:nrow(gwrds.lst)),]
 
 reactable(
   gwrds.lst,
   columns = list(
-    Words = colDef(minWidth = 32, align = "left" , style = list(fontSize = 13.5, fontFamily = 'Noto Sans JP', background = '#dee7e7', color = '#0F2040'), sticky = "left"),
-    Meaning = colDef(minWidth = 50, align = "left", style = list(fontSize = 10, fontFamily = 'Noto Sans JP', background = '#dee7e7', color = '#0F2040')),
+    # Words = colDef(minWidth = 32, align = "left" , style = list(fontSize = 13.5, fontFamily = 'Noto Sans JP', background = '#dee7e7', color = '#0F2040'), sticky = "left"),
+    # Meaning = colDef(minWidth = 50, align = "left", style = list(fontSize = 10, fontFamily = 'Noto Sans JP', background = '#dee7e7', color = '#0F2040')),
     Sentence = colDef(minWidth = 70, style= list(background = '#dee7e7', color = '#0F2040'),
       cell = function(value, index) {
         Translation <- gwrds.lst$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 13.5, color = '#0F2040', fontFamily = 'Noto Sans JP'), value),
-          div(style = list(fontSize = 9, color = '#0F2040'), Translation),
+          div(style = list(fontSize = 16, color = '#0F2040', fontFamily = 'Open Sans' ,fontWeight = 400), value),
+          div(style = list(fontSize = 9, color = '#0F2040' ,fontWeight = 400), Translation),
         )
       },
       align = "left"
     ),
+    Words = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Level = colDef(show = FALSE)
   ),
-  defaultPageSize = 5,
+  defaultPageSize = 7,
   theme = reactableTheme(
     # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
