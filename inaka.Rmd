@@ -2137,6 +2137,7 @@ knjind.invv <- knjind.inv %>% select(Kanji.一, Reading) %>%
   select(Kanji.一, Reading, Meaning)
 
 knjind.invv <- knjind.invv %>% rename(Kanji = Kanji.一)
+knjind.invv.a <- knjind.invv %>% select(Kanji)
 
 knjind.invv <- knjind.invv[sample(1:nrow(na.omit(knjind.invv))),]
 knjind.invv <- knjind.invv[sample(1:nrow(knjind.invv)),]
@@ -2218,6 +2219,7 @@ knjind.invv <- knjind.inv %>% select(Kanji.通, Reading) %>%
   select(Kanji.通, Reading, Meaning)
 
 knjind.invv <- knjind.invv %>% rename(Kanji = Kanji.通)
+knjind.invv.b <- knjind.invv %>% select(Kanji)
 
 knjind.invv <- knjind.invv[sample(1:nrow(na.omit(knjind.invv))),]
 knjind.invv <- knjind.invv[sample(1:nrow(knjind.invv)),]
@@ -2241,6 +2243,166 @@ reactable(
     ),
     Reading = colDef(show = FALSE),
     Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    ),
+    footerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, wrap = FALSE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### 提 {.tabset}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+knjind.inv <- knjind %>% select(Kanji.提) %>%
+  separate(Kanji.提, into = c('Kanji.提','Reading'), sep = '#') %>%
+  select(Kanji.提, Reading)
+
+knjind.invv <- knjind.inv %>% select(Kanji.提, Reading) %>%
+  separate(Reading, into = c('Reading','Meaning'), sep = ',') %>%
+  select(Kanji.提, Reading, Meaning)
+
+knjind.invv <- knjind.invv %>% rename(Kanji = Kanji.提)
+knjind.invv.c <- knjind.invv %>% select(Kanji)
+
+knjind.invv <- knjind.invv[sample(1:nrow(na.omit(knjind.invv))),]
+knjind.invv <- knjind.invv[sample(1:nrow(knjind.invv)),]
+
+reactable(
+  knjind.invv,
+  columns = list(
+    Kanji = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Reading <- knjind.invv$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- knjind.invv$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 50, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#266c6c'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    ),
+    footerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, wrap = FALSE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### 言葉 {.tabset}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+knjind.invv.a <- knjind.invv.a %>% select(Kanji)
+knjind.invv.b <- knjind.invv.b %>% select(Kanji)
+knjind.invv.c <- knjind.invv.c %>% select(Kanji)
+
+knjind.invv.1 <- bind_rows(knjind.invv.a, knjind.invv.b)
+knjind.invv.1 <- bind_rows(knjind.invv.1, knjind.invv.c)
+
+knjind.invv.1 <- knjind.invv.1[sample(1:nrow(na.omit(knjind.invv.1))),]
+knjind.invv.1 <- knjind.invv.1[sample(1:nrow(knjind.invv.1)),]
+
+reactable(
+  knjind.invv.1,
+  columns = list(
+    Kanji = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        # Reading <- knjind.invv$Reading[index]
+        # Reading <- if (!is.na(Reading)) Reading else ""
+        # Meaning <- knjind.invv$Meaning[index]
+        # Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 50, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#266c6c'), Reading),
+          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning),
+        )
+      },
+      align = "center"
+    )
+    # Reading = colDef(show = FALSE),
+    # Meaning = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
