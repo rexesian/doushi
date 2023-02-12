@@ -2456,6 +2456,89 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### 的 {.tabset}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+knjind.inv <- knjind %>% select(Kanji.的) %>%
+  separate(Kanji.的, into = c('Kanji.的','Reading'), sep = '#') %>%
+  select(Kanji.的, Reading)
+
+knjind.invv <- knjind.inv %>% select(Kanji.的, Reading) %>%
+  separate(Reading, into = c('Reading','Meaning'), sep = ',') %>%
+  select(Kanji.的, Reading, Meaning)
+
+knjind.invv <- knjind.invv %>% rename(Kanji = Kanji.的)
+knjind.invv.e <- knjind.invv %>% select(Kanji)
+knjind.invv.e <- knjind.invv.e[sample(1:nrow(na.omit(knjind.invv.e))),]
+
+knjind.invv <- knjind.invv[sample(1:nrow(na.omit(knjind.invv))),]
+knjind.invv <- knjind.invv[sample(1:nrow(knjind.invv)),]
+
+reactable(
+  knjind.invv,
+  columns = list(
+    Kanji = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Reading <- knjind.invv$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- knjind.invv$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 50, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#266c6c'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    ),
+    footerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, wrap = FALSE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 #### 言葉 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -2464,10 +2547,12 @@ knjind.invv.a <- knjind.invv.a %>% select(Kanji)
 knjind.invv.b <- knjind.invv.b %>% select(Kanji)
 knjind.invv.c <- knjind.invv.c %>% select(Kanji)
 knjind.invv.d <- knjind.invv.d %>% select(Kanji)
+knjind.invv.e <- knjind.invv.e %>% select(Kanji)
 
 knjind.invv.1 <- bind_rows(knjind.invv.a, knjind.invv.b)
 knjind.invv.1 <- bind_rows(knjind.invv.1, knjind.invv.c)
 knjind.invv.1 <- bind_rows(knjind.invv.1, knjind.invv.d)
+knjind.invv.1 <- bind_rows(knjind.invv.1, knjind.invv.e)
 
 knjind.invv.1 <- knjind.invv.1[sample(1:nrow(na.omit(knjind.invv.1))),]
 knjind.invv.1 <- knjind.invv.1[sample(1:nrow(knjind.invv.1)),]
@@ -26125,7 +26210,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 500, striped = TRUE, 
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -26145,8 +26230,6 @@ reactable(
 #### ExamNotes {.tabset}
 
 ##### N3 {.tabset}
-
-###### Vocab-PowerDrill
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -26168,7 +26251,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 500, striped = TRUE, 
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -26178,8 +26261,6 @@ reactable(
 ------------------------------------------------------------------------
 
 ##### N2 {.tabset}
-
-###### Vocab-PowerDrill
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -26201,7 +26282,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 500, striped = TRUE, 
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
