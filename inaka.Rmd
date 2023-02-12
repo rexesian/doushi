@@ -160,6 +160,7 @@ exmnoter <- read_csv("jpdb/EXMNTSR-NTS.csv")
 rvwadjna <- read_csv("jpdb/WRDCMPSN-CMP.csv")
 rvwadjnatb <- read_csv("jpdb/WRDCMPSNC-CMP.csv")
 verbtbl <- read_csv("jpdb/VRBSLSTBL-VRBS.csv")
+verbtb5 <- read_csv("jpdb/VRBSLSTB5-VRBS.csv")
 verbsls <- read_csv("jpdb/VRBSLS-VRBS.csv")
 spclkjn <- read_csv("jpdb/SCRPTSP-EXT.csv")
 spclkjnsr <- read_csv("jpdb/SCRPTSR-EXT.csv")
@@ -12226,6 +12227,93 @@ reactable(
   ),
   showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, wrap = FALSE,
 
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### E.Table
+
+```{r, echo=FALSE, message=FALSE}
+
+nadj2.a <- nadj2.a[sample(1:nrow(nadj2.a)),]
+
+nadj2.a.1 <- nadj2.a %>% select(Words) %>% rename(W1 = Words) %>% slice(1:50)
+nadj2.a.2 <- nadj2.a %>% select(Words) %>% rename(W2 = Words) %>% slice(51:100)
+nadj2.a.3 <- nadj2.a %>% select(Words) %>% rename(W3 = Words) %>% slice(101:150)
+nadj2.a.4 <- nadj2.a %>% select(Words) %>% rename(W4 = Words) %>% slice(151:200)
+nadj2.a.5 <- nadj2.a %>% select(Words) %>% rename(W5 = Words) %>% slice(201:250)
+
+nadj2.a.1 <- nadj2.a.1[sample(1:nrow(nadj2.a.1)),]
+nadj2.a.2 <- nadj2.a.2[sample(1:nrow(nadj2.a.2)),]
+nadj2.a.3 <- nadj2.a.3[sample(1:nrow(nadj2.a.3)),]
+nadj2.a.4 <- nadj2.a.4[sample(1:nrow(nadj2.a.4)),]
+nadj2.a.5 <- nadj2.a.5[sample(1:nrow(nadj2.a.5)),]
+
+nadj2.a.t <- data.frame(nadj2.a.1, nadj2.a.2, nadj2.a.3, nadj2.a.4, nadj2.a.5)
+
+nadj1.a <- nadj1.a[sample(1:nrow(nadj1.a)),]
+
+nadj1.a.1 <- nadj1.a %>% select(Words) %>% rename(W1 = Words) %>% slice(1:60)
+nadj1.a.2 <- nadj1.a %>% select(Words) %>% rename(W2 = Words) %>% slice(61:120)
+nadj1.a.3 <- nadj1.a %>% select(Words) %>% rename(W3 = Words) %>% slice(121:180)
+nadj1.a.4 <- nadj1.a %>% select(Words) %>% rename(W4 = Words) %>% slice(181:240)
+nadj1.a.5 <- nadj1.a %>% select(Words) %>% rename(W5 = Words) %>% slice(241:300)
+
+nadj1.a.1 <- nadj1.a.1[sample(1:nrow(nadj1.a.1)),]
+nadj1.a.2 <- nadj1.a.2[sample(1:nrow(nadj1.a.2)),]
+nadj1.a.3 <- nadj1.a.3[sample(1:nrow(nadj1.a.3)),]
+nadj1.a.4 <- nadj1.a.4[sample(1:nrow(nadj1.a.4)),]
+nadj1.a.5 <- nadj1.a.5[sample(1:nrow(nadj1.a.5)),]
+
+nadj1.a.t <- data.frame(nadj1.a.1, nadj1.a.2, nadj1.a.3, nadj1.a.4, nadj1.a.5)
+
+adv1.a <- adv1.a[sample(1:nrow(adv1.a)),]
+
+adv1.a.1 <- adv1.a %>% select(Word) %>% rename(W1 = Word) %>% slice(1:42)
+adv1.a.2 <- adv1.a %>% select(Word) %>% rename(W2 = Word) %>% slice(43:84)
+adv1.a.3 <- adv1.a %>% select(Word) %>% rename(W3 = Word) %>% slice(85:126)
+adv1.a.4 <- adv1.a %>% select(Word) %>% rename(W4 = Word) %>% slice(127:168)
+adv1.a.5 <- adv1.a %>% select(Word) %>% rename(W5 = Word) %>% slice(169:210)
+
+adv1.a.1 <- adv1.a.1[sample(1:nrow(adv1.a.1)),]
+adv1.a.2 <- adv1.a.2[sample(1:nrow(adv1.a.2)),]
+adv1.a.3 <- adv1.a.3[sample(1:nrow(adv1.a.3)),]
+adv1.a.4 <- adv1.a.4[sample(1:nrow(adv1.a.4)),]
+adv1.a.5 <- adv1.a.5[sample(1:nrow(adv1.a.5)),]
+
+adv1.a.t <- data.frame(adv1.a.1, adv1.a.2, adv1.a.3, adv1.a.4, adv1.a.5)
+
+verbtb5.a <- verbtb5 %>% select(V1, V2, V3, V4, V5) %>% rename(W1 = V1, W2 = V2, W3 = V3, W4 = V4, W5 = V5)
+
+e.table <- bind_rows(nadj2.a.t, nadj1.a.t)
+e.table <- bind_rows(e.table, adv1.a.t)
+e.table <- bind_rows(e.table, verbtb5.a)
+
+reactable(
+  e.table,
+  columns = list(
+    W1 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5')),
+    W2 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5')),
+    W3 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5')),
+    W4 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5')),
+    W5 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5'))
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 65),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, wrap = FALSE,
+  
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
