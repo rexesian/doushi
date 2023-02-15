@@ -195,6 +195,7 @@ cmpsnt <- read_csv("jpdb/SPCLSCRN-SNT.csv")
 blind <- read_csv("jpim/LSBLND-SCRPT.csv")
 grmsplsnt <- read_csv("jpdb/GRMMRSNS-SNT.csv")
 knjind <- read_csv("jpim/KNJDP-JNKSC.csv")
+tblw5 <- read_csv("jpdb/TBL5-TBWRDS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -4229,7 +4230,54 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 50),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 60),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### LN {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+scknjr.ra <- scknjr %>% select(W1)
+scknjr.rb <- scknjr %>% select(W2)
+scknjr.rc <- scknjr %>% select(W3)
+scknjr.rd <- scknjr %>% select(W4)
+scknjr.re <- scknjr %>% select(W5)
+
+# scknjr.ra <- scknjr.ra[sample(1:nrow(scknjr.ra)),]
+# scknjr.rb <- scknjr.rb[sample(1:nrow(scknjr.rb)),]
+# scknjr.rc <- scknjr.rc[sample(1:nrow(scknjr.rc)),]
+# scknjr.rd <- scknjr.rd[sample(1:nrow(scknjr.rd)),]
+# scknjr.re <- scknjr.re[sample(1:nrow(scknjr.re)),]
+
+scknjr.rf <- data.frame(scknjr.ra, scknjr.rb, scknjr.rc, scknjr.rd, scknjr.re)
+
+reactable(
+  scknjr.rf,
+  columns = list(
+    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
+    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
+    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
+    W4 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
+    W5 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7', color = '#0F2040'))
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 60),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -13906,6 +13954,59 @@ reactable(
     ・Would you let me think about it a little more?
     ・Would you let me say something?
     ・Will you let me leave it here for a moment?
+
+</div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑤ Permission: Seeking with causative + itadaku・morau + koto (ga) dekiru**</p>
+
+<div class = "row">
+<div class = "col-sm-6">
+
+    ・ここで待たせていただくこと、できますか
+    ・ちょっと考えさせてもらうこと、できる？
+
+</div>
+<div class = "col-sm-6">
+
+    ・Can you let me wait here?
+    ・Can you let me think about it a little?
+
+</div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑥ Permission: Seeking with causative + itadaku・morau + wake ni wa ikanai deshou ka**</p>
+
+<div class = "row">
+<div class = "col-sm-6">
+
+    ・試験を一日早く受けさせていただくわけにはいかないでしょうか
+    ・一週間休暇とらせていただくわけにはいかないでしょうか
+    ・車を使わせてもらうわけにはいかないかなあ
+
+</div>
+<div class = "col-sm-6">
+
+    ・Could I be allowed to take the exam a day early?
+    ・Is it at all possible for you to let me take a one-week vacation?
+    ・I wonder if it is at all possible for you to let me use your car?
+
+</div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑦ Permission: Seeking with causative + kudasaru・kureru**</p>
+
+<div class = "row">
+<div class = "col-sm-6">
+
+    ・ちょっと休ませてください
+    ・ちょっと考えさせてくれる？
+
+</div>
+<div class = "col-sm-6">
+
+    ・Please let me rest a little
+    ・Can you let me think about it for a minute?
 
 </div>
 </div>
@@ -27065,6 +27166,101 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### Daily
+
+```{r, echo=FALSE, message=FALSE}
+
+tblw5 <- tblw5[sample(1:nrow(tblw5)),]
+
+reactable(
+  tblw5,
+  columns = list(
+    W1 = colDef(
+      cell = function(value, index) {
+        R1 <- tblw5$R1[index]
+        R1 <- if (!is.na(R1)) R1 else ""
+        T1 <- tblw5$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#026450'), R1),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#800000'), T1),
+        )
+      },
+      align = "center"
+    ),
+    W2 = colDef(
+      cell = function(value, index) {
+        T2 <- tblw5$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        R2 <- tblw5$R2[index]
+        R2 <- if (!is.na(R2)) R2 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#026450'), R2),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#800000'), T2),
+        )
+      },
+      align = "center"
+    ),
+    W3 = colDef(
+      cell = function(value, index) {
+        T3 <- tblw5$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        R3 <- tblw5$R3[index]
+        R3 <- if (!is.na(R3)) R3 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#026450'), R3),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#800000'), T3),
+        )
+      },
+      align = "center"
+    ),
+    W4 = colDef(
+      cell = function(value, index) {
+        T4 <- tblw5$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
+        R4 <- tblw5$R4[index]
+        R4 <- if (!is.na(R4)) R4 else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#026450'), R4),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#800000'), T4),
+        )
+      },
+      align = "center"
+    ),
+
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
+    R1 = colDef(show = FALSE),
+    R2 = colDef(show = FALSE),
+    R3 = colDef(show = FALSE),
+    R4 = colDef(show = FALSE)
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 90),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 #### Level {.tabset}
 
 ##### L5 {.tabset}
@@ -27157,7 +27353,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -27656,6 +27852,41 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 55),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### LN {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+tblw5.a <- tblw5 %>% select(W1, W2, W3, W4)
+
+tblw5.a <- tblw5.a[sample(1:nrow(tblw5.a)),]
+
+reactable(
+  tblw5.a,
+  columns = list(
+    W1 = colDef(align = "center", style = list(fontSize = 19, fontWeight = 600, background = '#dee7e7', color = '#0F2040', fontFamily = 'Open Sans')),
+    W2 = colDef(align = "center", style = list(fontSize = 19, fontWeight = 600, background = '#dee7e7', color = '#0F2040', fontFamily = 'Open Sans')),
+    W3 = colDef(align = "center", style = list(fontSize = 19, fontWeight = 600, background = '#dee7e7', color = '#0F2040', fontFamily = 'Open Sans')),
+    W4 = colDef(align = "center", style = list(fontSize = 19, fontWeight = 600, background = '#dee7e7', color = '#0F2040', fontFamily = 'Open Sans'))
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 55),
     searchInputStyle = list(
       paddingLeft = "8px",
