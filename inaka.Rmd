@@ -2126,6 +2126,89 @@ reactable(
 
 ### LI {.tabset}
 
+#### 最 {.tabset}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+knjind.inv <- knjind %>% select(Kanji.最) %>%
+  separate(Kanji.最, into = c('Kanji.最','Reading'), sep = '#') %>%
+  select(Kanji.最, Reading)
+
+knjind.invv <- knjind.inv %>% select(Kanji.最, Reading) %>%
+  separate(Reading, into = c('Reading','Meaning'), sep = ',') %>%
+  select(Kanji.最, Reading, Meaning)
+
+knjind.invv <- knjind.invv %>% rename(Kanji = Kanji.最)
+knjind.invv.f <- knjind.invv %>% select(Kanji)
+knjind.invv.f <- knjind.invv.f[sample(1:nrow(na.omit(knjind.invv.f))),]
+
+knjind.invv <- knjind.invv[sample(1:nrow(na.omit(knjind.invv))),]
+knjind.invv <- knjind.invv[sample(1:nrow(knjind.invv)),]
+
+reactable(
+  knjind.invv,
+  columns = list(
+    Kanji = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Reading <- knjind.invv$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- knjind.invv$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 50, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#266c6c'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    ),
+    footerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, wrap = FALSE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 #### 一 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -2550,11 +2633,13 @@ knjind.invv.b <- knjind.invv.b %>% select(Kanji)
 knjind.invv.c <- knjind.invv.c %>% select(Kanji)
 knjind.invv.d <- knjind.invv.d %>% select(Kanji)
 knjind.invv.e <- knjind.invv.e %>% select(Kanji)
+knjind.invv.f <- knjind.invv.f %>% select(Kanji)
 
 knjind.invv.1 <- bind_rows(knjind.invv.a, knjind.invv.b)
 knjind.invv.1 <- bind_rows(knjind.invv.1, knjind.invv.c)
 knjind.invv.1 <- bind_rows(knjind.invv.1, knjind.invv.d)
 knjind.invv.1 <- bind_rows(knjind.invv.1, knjind.invv.e)
+knjind.invv.1 <- bind_rows(knjind.invv.1, knjind.invv.f)
 
 knjind.invv.1 <- knjind.invv.1[sample(1:nrow(na.omit(knjind.invv.1))),]
 knjind.invv.1 <- knjind.invv.1[sample(1:nrow(knjind.invv.1)),]
@@ -24626,20 +24711,20 @@ inkrdngs.a <- inkrdngs  %>% slice(16:16)
 reactable(
   inkrdngs.a,
   columns = list(
-    Script = colDef(
+    Script = colDef(style= list(background = '#1b1e1e'),
       minWidth = 280,
       cell = function(value, index) {
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#f1f5f5', fontFamily = 'Helvetica Neue'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -24683,20 +24768,20 @@ inkrdngs.a <- inkrdngs  %>% slice(17:17)
 reactable(
   inkrdngs.a,
   columns = list(
-    Script = colDef(
+    Script = colDef(style= list(background = '#1b1e1e'),
       minWidth = 280,
       cell = function(value, index) {
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#f1f5f5', fontFamily = 'Helvetica Neue'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -24739,20 +24824,20 @@ inkrdngs.a <- inkrdngs  %>% slice(18:18)
 reactable(
   inkrdngs.a,
   columns = list(
-    Script = colDef(
+    Script = colDef(style= list(background = '#1b1e1e'),
       minWidth = 280,
       cell = function(value, index) {
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#f1f5f5', fontFamily = 'Helvetica Neue'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -24795,20 +24880,20 @@ inkrdngs.a <- inkrdngs  %>% slice(19:19)
 reactable(
   inkrdngs.a,
   columns = list(
-    Script = colDef(
+    Script = colDef(style= list(background = '#1b1e1e'),
       minWidth = 280,
       cell = function(value, index) {
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#f1f5f5', fontFamily = 'Helvetica Neue'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -24851,20 +24936,20 @@ inkrdngs.a <- inkrdngs  %>% slice(20:20)
 reactable(
   inkrdngs.a,
   columns = list(
-    Script = colDef(
+    Script = colDef(style= list(background = '#1b1e1e'),
       minWidth = 280,
       cell = function(value, index) {
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#f1f5f5', fontFamily = 'Helvetica Neue'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -24907,20 +24992,20 @@ inkrdngs.a <- inkrdngs  %>% slice(21:21)
 reactable(
   inkrdngs.a,
   columns = list(
-    Script = colDef(
+    Script = colDef(style= list(background = '#1b1e1e'),
       minWidth = 280,
       cell = function(value, index) {
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#f1f5f5', fontFamily = 'Helvetica Neue'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -24963,20 +25048,20 @@ inkrdngs.a <- inkrdngs  %>% slice(22:22)
 reactable(
   inkrdngs.a,
   columns = list(
-    Script = colDef(
+    Script = colDef(style= list(background = '#1b1e1e'),
       minWidth = 280,
       cell = function(value, index) {
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#f1f5f5', fontFamily = 'Helvetica Neue'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -25019,7 +25104,7 @@ inkrdngs.a <- inkrdngs  %>% slice(23:23)
 reactable(
   inkrdngs.a,
   columns = list(
-    Script = colDef(
+    Script = colDef(style= list(background = '#1b1e1e'),
       minWidth = 280,
       cell = function(value, index) {
         Translation <- inkrdngs.a$Translation[index]
@@ -25075,20 +25160,20 @@ inkrdngs.a <- inkrdngs  %>% slice(24:24)
 reactable(
   inkrdngs.a,
   columns = list(
-    Script = colDef(
+    Script = colDef(style= list(background = '#1b1e1e'),
       minWidth = 280,
       cell = function(value, index) {
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#f1f5f5', fontFamily = 'Helvetica Neue'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -25131,20 +25216,20 @@ inkrdngs.a <- inkrdngs  %>% slice(25:25)
 reactable(
   inkrdngs.a,
   columns = list(
-    Script = colDef(
+    Script = colDef(style= list(background = '#1b1e1e'),
       minWidth = 280,
       cell = function(value, index) {
         Translation <- inkrdngs.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 19, fontWeight = 200, color = '#101010', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#f1f5f5', fontFamily = 'Helvetica Neue'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#202020', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
