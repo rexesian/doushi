@@ -196,6 +196,7 @@ blind <- read_csv("jpim/LSBLND-SCRPT.csv")
 grmsplsnt <- read_csv("jpdb/GRMMRSNS-SNT.csv")
 knjind <- read_csv("jpim/KNJDP-JNKSC.csv")
 tblw5 <- read_csv("jpdb/TBL5-TBWRDS.csv")
+advrm <- read_csv("jpdb/ADVRM-ADV.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -7403,12 +7404,12 @@ adjirmbr.a <- adjirmbr.a[sample(1:nrow(adjirmbr.a)),]
 reactable(
   adjirmbr.a,
   columns = list(
-    Expression = colDef(
+    Expression = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         Words <- adjirmbr.a$Words[index]
         Words <- if (!is.na(Words)) Words else ""
         tagList(
-          div(style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
         )
       },
       align = "center"
@@ -7947,26 +7948,27 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-rvwadjna.a <- rvwadjna %>% select(Expression, Meaning, Reading, Words)
+rvwadjna.a <- rvwadjna %>% select(Expression, Meaning, Reading, Words, Translation)
 rvwadjna.a <- rvwadjna.a[sample(1:nrow(rvwadjna.a)),]
 
 reactable(
   rvwadjna.a,
   columns = list(
-    Expression = colDef(
+    Expression = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         Reading <- rvwadjna.a$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- rvwadjna.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
         )
       },
       align = "center"
     ),
     Reading = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
+    Translation = colDef(show = FALSE),
     Words = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
@@ -7980,7 +7982,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -7997,27 +7999,26 @@ rvwadjna.a <- rvwadjna.a[sample(1:nrow(rvwadjna.a)),]
 reactable(
   rvwadjna.a,
   columns = list(
-    Words = colDef(style= list(background = '#dee7e7'),
+    Expression = colDef(
       cell = function(value, index) {
-        Reading <- rvwadjna.a$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- rvwadjna.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Translation <- rvwadjna.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), value),
+          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), Translation,"."))
         )
       },
-      align = "center"
+      align = "left"
     ),
 
     Meaning = colDef(show = FALSE),
     Reading = colDef(show = FALSE),
-    Expression = colDef(show = FALSE)
+    Translation = colDef(show = FALSE),
+    Words = colDef(show = FALSE)
 
   ),
-  defaultPageSize = 1,
+  defaultPageSize = 10,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 42),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -8025,7 +8026,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 365,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -8676,7 +8677,8 @@ reactable(
 
 #### Endings
 
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Affirmative**</p>`まれに・ぜひ**`
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Affirmative**</p>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**・まれに・ぜひ**</p>
 
     ・そういうことも稀にある
     ・コンサートと併せてぜひお越しください
@@ -8737,7 +8739,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-adv1.a <- adv1 %>% slice(1:210) %>% rename(Sentences = S1, Translation = T1)
+adv1.a <- adv1 %>% slice(1:250) %>% rename(Sentences = S1, Translation = T1)
 adv1.a <- adv1.a[sample(1:nrow(adv1.a)),]
 
 reactable(
@@ -9005,11 +9007,11 @@ reactable(
 
 adv1.a <- adv1.a[sample(1:nrow(adv1.a)),]
 
-adv1.a.1 <- adv1.a %>% select(Word) %>% rename(W1 = Word) %>% slice(1:42)
-adv1.a.2 <- adv1.a %>% select(Word) %>% rename(W2 = Word) %>% slice(43:84)
-adv1.a.3 <- adv1.a %>% select(Word) %>% rename(W3 = Word) %>% slice(85:126)
-adv1.a.4 <- adv1.a %>% select(Word) %>% rename(W4 = Word) %>% slice(127:168)
-adv1.a.5 <- adv1.a %>% select(Word) %>% rename(W5 = Word) %>% slice(169:210)
+adv1.a.1 <- adv1.a %>% select(Word) %>% rename(W1 = Word) %>% slice(1:50)
+adv1.a.2 <- adv1.a %>% select(Word) %>% rename(W2 = Word) %>% slice(51:100)
+adv1.a.3 <- adv1.a %>% select(Word) %>% rename(W3 = Word) %>% slice(101:150)
+adv1.a.4 <- adv1.a %>% select(Word) %>% rename(W4 = Word) %>% slice(151:200)
+adv1.a.5 <- adv1.a %>% select(Word) %>% rename(W5 = Word) %>% slice(201:250)
 
 adv1.a.1 <- adv1.a.1[sample(1:nrow(adv1.a.1)),]
 adv1.a.2 <- adv1.a.2[sample(1:nrow(adv1.a.2)),]
@@ -9045,6 +9047,100 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+#### Remember {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+advrm.a <- advrm  %>% slice(1:30)
+advrm.a <- advrm.a[sample(1:nrow(advrm.a)),]
+
+reactable(
+  advrm.a,
+  columns = list(
+    Expression = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Word <- advrm.a$Word[index]
+        Word <- if (!is.na(Word)) Word else ""
+        tagList(
+          div(style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+        )
+      },
+      align = "center"
+    ),
+    Word = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+advrm.a <- advrm.a[sample(1:nrow(advrm.a)),]
+
+reactable(
+  advrm.a,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Translation <- advrm.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), Translation,"."))
+        )
+      },
+      align = "left"
+    ),
+    Word = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 42),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 365,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
@@ -13462,11 +13558,11 @@ nadj1.a.t <- data.frame(nadj1.a.1, nadj1.a.2, nadj1.a.3, nadj1.a.4, nadj1.a.5)
 
 adv1.a <- adv1.a[sample(1:nrow(adv1.a)),]
 
-adv1.a.1 <- adv1.a %>% select(Word) %>% rename(W1 = Word) %>% slice(1:42)
-adv1.a.2 <- adv1.a %>% select(Word) %>% rename(W2 = Word) %>% slice(43:84)
-adv1.a.3 <- adv1.a %>% select(Word) %>% rename(W3 = Word) %>% slice(85:126)
-adv1.a.4 <- adv1.a %>% select(Word) %>% rename(W4 = Word) %>% slice(127:168)
-adv1.a.5 <- adv1.a %>% select(Word) %>% rename(W5 = Word) %>% slice(169:210)
+adv1.a.1 <- adv1.a %>% select(Word) %>% rename(W1 = Word) %>% slice(1:50)
+adv1.a.2 <- adv1.a %>% select(Word) %>% rename(W2 = Word) %>% slice(51:100)
+adv1.a.3 <- adv1.a %>% select(Word) %>% rename(W3 = Word) %>% slice(101:150)
+adv1.a.4 <- adv1.a %>% select(Word) %>% rename(W4 = Word) %>% slice(151:200)
+adv1.a.5 <- adv1.a %>% select(Word) %>% rename(W5 = Word) %>% slice(201:250)
 
 adv1.a.1 <- adv1.a.1[sample(1:nrow(adv1.a.1)),]
 adv1.a.2 <- adv1.a.2[sample(1:nrow(adv1.a.2)),]
