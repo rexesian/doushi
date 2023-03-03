@@ -197,6 +197,7 @@ grmsplsnt <- read_csv("jpdb/GRMMRSNS-SNT.csv")
 knjind <- read_csv("jpim/KNJDP-JNKSC.csv")
 tblw5 <- read_csv("jpdb/TBL5-TBWRDS.csv")
 advrm <- read_csv("jpdb/ADVRM-ADV.csv")
+advusg <- read_csv("cpdb/ADVUSG-SCRPT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -23430,6 +23431,38 @@ reactable(
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
 
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Adverb
+
+```{r, echo=FALSE, message=FALSE}
+
+advusg.a <- advusg  %>% select(Notes)
+advusg.a <- advusg.a %>% na.omit(advusg.a)
+advusg.a <- advusg.a[sample(1:nrow(advusg.a)),]
+
+reactable(
+  advusg.a,
+  columns = list(
+    Notes = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 17, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#dee7e7'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 400, striped = TRUE, 
+  
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
 
