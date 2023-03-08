@@ -12425,7 +12425,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-##### Special {.tabset}
+##### Collection {.tabset}
 
 <div class = "row">
 <div class = "col-sm-4">
@@ -23843,7 +23843,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-# cllect2 <- cllect2[sample(1:nrow(na.omit(cllect2))),]
+cllect2 <- cllect2[sample(1:nrow(na.omit(cllect2))),]
 
 reactable(
   cllect2,
@@ -23857,8 +23857,8 @@ reactable(
         )
       },
       align = "center"
-    )
-    # Translation = colDef(show = FALSE)
+    ),
+    Translation = colDef(show = FALSE)
 
   ),
   defaultPageSize = 1,
@@ -23873,6 +23873,51 @@ reactable(
     )
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### C.Collection {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+phrsaux <- phrsaux[sample(1:nrow(na.omit(phrsaux))),]
+cllect2 <- cllect2[sample(1:nrow(cllect2)),]
+
+phrcllct <- bind_rows(phrsaux, cllect2)
+phrcllct <- phrcllct[sample(1:nrow(phrcllct)),]
+
+reactable(
+  phrcllct,
+  columns = list(
+    Expression = colDef(
+      cell = function(value, index) {
+        Translation <- phrcllct$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), Translation,"."))
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 42),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 365,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
