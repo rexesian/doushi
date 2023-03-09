@@ -199,6 +199,7 @@ tblw5 <- read_csv("jpdb/TBL5-TBWRDS.csv")
 advrm <- read_csv("jpdb/ADVRM-ADV.csv")
 advusg <- read_csv("cpdb/ADVUSG-SCRPT.csv")
 spcvwrds <- read_csv("jpim/SPCVRBS-WRDS.csv")
+spcwwrds <- read_csv("jpim/SPCWRDS-WRDS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -23883,12 +23884,113 @@ reactable(
 
 #### C.Collection {.tabset}
 
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+spcwwrds.a <- spcwwrds %>% select(Verb, Reading, Meaning, Sentence, Translation) %>% rename(Word = Verb)
+spcwwrds.a <- spcwwrds.a[sample(1:nrow(spcwwrds.a)),]
+
+reactable(
+  spcwwrds.a,
+  columns = list(
+    Word = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Reading <- spcvwrds.a$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- spcvwrds.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+spcwwrds.a <- spcwwrds.a[sample(1:nrow(spcwwrds.a)),]
+
+reactable(
+  spcwwrds.a,
+  columns = list(
+    Sentence = colDef(
+      cell = function(value, index) {
+        Translation <- spcvwrds.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), Translation,"."))
+        )
+      },
+      align = "left"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Word = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 42),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 365,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+#### R.Collection {.tabset}
+
 ```{r, echo=FALSE, message=FALSE}
 
 phrsaux <- phrsaux[sample(1:nrow(na.omit(phrsaux))),]
 cllect2 <- cllect2[sample(1:nrow(cllect2)),]
 
+spcwwrc <- spcwwrds %>% select(Sentence, Translation) %>% rename(Expression = Sentence)
+
 phrcllct <- bind_rows(phrsaux, cllect2)
+phrcllct <- bind_rows(phrcllct, spcwwrc)
 phrcllct <- phrcllct[sample(1:nrow(phrcllct)),]
 
 reactable(
