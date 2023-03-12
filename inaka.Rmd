@@ -4629,6 +4629,124 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### N4 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+scknj4r <- scknj4[sample(1:nrow(scknj4)),]
+
+reactable(
+  scknj4r,
+  columns = list(
+    Kanji = colDef(
+      # Show species under character names
+      cell = function(value, index) {
+        Meaning <- scknj4r$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        NR <- scknj4r$NR[index]
+        NR <- if (!is.na(NR)) NR else ""
+        KR <- scknj4r$KR[index]
+        KR <- if (!is.na(KR)) KR else ""
+        tagList(
+          div(style = list(fontSize = 60, fontWeight = 600), value),
+          div(style = list(fontSize = 9, color = '#008000'), NR),
+          div(style = list(fontSize = 9, color = '#800000'), KR),
+          div(style = list(fontSize = 10, fontWeight = 500), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    R1 = colDef(show = FALSE),
+    R2 = colDef(show = FALSE),
+    R3 = colDef(show = FALSE),
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    W1 = colDef(show = FALSE),
+    W2 = colDef(show = FALSE),
+    W3 = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    NR = colDef(show = FALSE),
+    KR = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+scknj4w.a1 <- scknj4 %>% select(W1) %>% slice(1:80)
+scknj4w.b1 <- scknj4 %>% select(W2) %>% slice(1:80)
+scknj4w.c1 <- scknj4 %>% select(W3) %>% slice(1:80)
+
+scknj4w.a1 <- scknj4w.a1[sample(1:nrow(scknj4w.a1)),]
+scknj4w.b1 <- scknj4w.b1[sample(1:nrow(scknj4w.b1)),]
+scknj4w.c1 <- scknj4w.c1[sample(1:nrow(scknj4w.c1)),]
+
+scknj4w.a2 <- scknj3 %>% select(W1) %>% slice(81:170)
+scknj4w.b2 <- scknj3 %>% select(W2) %>% slice(81:170)
+scknj4w.c2 <- scknj3 %>% select(W3) %>% slice(81:170)
+
+scknj4w.a2 <- scknj4w.a2[sample(1:nrow(scknj4w.a2)),]
+scknj4w.b2 <- scknj4w.b2[sample(1:nrow(scknj4w.b2)),]
+scknj4w.c2 <- scknj4w.c2[sample(1:nrow(scknj4w.c2)),]
+
+scknj4w.a <- bind_rows(scknj4w.a2, scknj4w.a1)
+scknj4w.b <- bind_rows(scknj4w.b2, scknj4w.b1)
+scknj4w.c <- bind_rows(scknj4w.c2, scknj4w.c1)
+
+scknj4w.d <- data.frame(scknj4w.a, scknj4w.b, scknj4w.c)
+
+reactable(
+  scknj4w.d,
+  columns = list(
+    W1 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
+    W2 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
+    W3 = colDef(align = "center", style = list(fontSize = 21, fontWeight = 600, background = '#dee7e7', color = '#0F2040'))
+  ),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
 #### N3 {.tabset}
 
 <div class = "row">
@@ -28881,7 +28999,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-jlptw5 <- jlptw5 %>% slice(1:650)
+jlptw5 <- jlptw5 %>% slice(1:700)
 jlptw5 <- jlptw5[sample(1:nrow(jlptw5)),]
 
 reactable(
@@ -28983,7 +29101,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-jlptw4 <- jlptw4 %>% slice(1:650)
+jlptw4 <- jlptw4 %>% slice(1:700)
 jlptw4 <- jlptw4[sample(1:nrow(jlptw4)),]
 
 reactable(
@@ -29085,7 +29203,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-jlptw3 <- jlptw3 %>% slice(1:650)
+jlptw3 <- jlptw3 %>% slice(1:700)
 jlptw3 <- jlptw3[sample(1:nrow(jlptw3)),]
 
 reactable(
@@ -29187,7 +29305,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-jlptw2 <- jlptw2 %>% slice(1:650)
+jlptw2 <- jlptw2 %>% slice(1:700)
 jlptw2 <- jlptw2[sample(1:nrow(jlptw2)),]
 
 reactable(
@@ -29289,7 +29407,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-jlptw1 <- jlptw1 %>% slice(1:650)
+jlptw1 <- jlptw1 %>% slice(1:700)
 jlptw1 <- jlptw1[sample(1:nrow(jlptw1)),]
 
 reactable(
@@ -29437,11 +29555,11 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-jlptw5.a <- jlptw5 %>% slice(1:650) %>% select(Words) %>% rename(W5 = Words)
-jlptw4.a <- jlptw4 %>% slice(1:650) %>% select(Words) %>% rename(W4 = Words)
-jlptw3.a <- jlptw3 %>% slice(1:650) %>% select(Words) %>% rename(W3 = Words)
-jlptw2.a <- jlptw2 %>% slice(1:650) %>% select(Words) %>% rename(W2 = Words)
-jlptw1.a <- jlptw1 %>% slice(1:650) %>% select(Words) %>% rename(W1 = Words)
+jlptw5.a <- jlptw5 %>% slice(1:700) %>% select(Words) %>% rename(W5 = Words)
+jlptw4.a <- jlptw4 %>% slice(1:700) %>% select(Words) %>% rename(W4 = Words)
+jlptw3.a <- jlptw3 %>% slice(1:700) %>% select(Words) %>% rename(W3 = Words)
+jlptw2.a <- jlptw2 %>% slice(1:700) %>% select(Words) %>% rename(W2 = Words)
+jlptw1.a <- jlptw1 %>% slice(1:700) %>% select(Words) %>% rename(W1 = Words)
 
 jlptw5.a <- jlptw5.a[sample(1:nrow(jlptw5.a)),]
 jlptw4.a <- jlptw4.a[sample(1:nrow(jlptw4.a)),]
