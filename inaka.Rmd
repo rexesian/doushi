@@ -2052,6 +2052,153 @@ reactable(
 
 ------------------------------------------------------------------------
 
+### LN {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# scknjr <- scknjr
+# scknjr <- scknjr[sample(1:nrow(scknjr)),]
+
+scknjr.w1 <- scknjr %>% select(W1) %>% slice(1:20)
+scknjr.w2 <- scknjr %>% select(W2) %>% slice(1:20)
+scknjr.w3 <- scknjr %>% select(W3) %>% slice(1:20)
+scknjr.w4 <- scknjr %>% select(W4) %>% slice(1:20)
+scknjr.w5 <- scknjr %>% select(W5) %>% slice(1:20)
+
+scknjr.w1 <- scknjr.w1[sample(1:nrow(scknjr.w1)),]
+scknjr.w2 <- scknjr.w2[sample(1:nrow(scknjr.w2)),]
+scknjr.w3 <- scknjr.w3[sample(1:nrow(scknjr.w3)),]
+scknjr.w4 <- scknjr.w4[sample(1:nrow(scknjr.w4)),]
+scknjr.w5 <- scknjr.w5[sample(1:nrow(scknjr.w5)),]
+
+scknjr.wa <- data.frame(scknjr.w1, scknjr.w2, scknjr.w3, scknjr.w4, scknjr.w5)
+
+reactable(
+  scknjr.wa,
+  columns = list(
+    # Kanji = colDef(style= list(background = '#dee7e7'), sticky = "left",
+    #   cell = function(value, index) {
+    #     Meaning <- scknjr$Meaning[index]
+    #     Meaning <- if (!is.na(Meaning)) Meaning else ""
+    #     NR <- scknjr$NR[index]
+    #     NR <- if (!is.na(NR)) NR else ""
+    #     KR <- scknjr$KR[index]
+    #     KR <- if (!is.na(KR)) KR else ""
+    #     tagList(
+    #       div(style = list(fontSize = 32, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+    #       div(style = list(fontSize = 9, color = '#008000'), NR),
+    #       div(style = list(fontSize = 9, color = '#800000'), KR),
+    #       div(style = list(fontSize = 9, fontWeight = 500, color = '#0F2040'), Meaning)
+    #     )
+    #   },
+    #   align = "center"
+    # ),
+    W1 = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        # M1 <- scknjr$M1[index]
+        # M1 <- if (!is.na(M1)) M1 else ""
+        # R1 <- scknjr$R1[index]
+        # R1 <- if (!is.na(R1)) R1 else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), R1),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), M1),
+        )
+      },
+      align = "center"
+    ),
+    W2 = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        # M2 <- scknjr$M2[index]
+        # M2 <- if (!is.na(M2)) M2 else ""
+        # R2 <- scknjr$R2[index]
+        # R2 <- if (!is.na(M2)) R2 else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), R2),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), M2),
+        )
+      },
+      align = "center"
+    ),
+    W3 = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        # M3 <- scknjr$M3[index]
+        # M3 <- if (!is.na(M3)) M3 else ""
+        # R3 <- scknjr$R3[index]
+        # R3 <- if (!is.na(R3)) R3 else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), R3),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), M3),
+        )
+      },
+      align = "center"
+    ),
+    W4 = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        # M4 <- scknjr$M4[index]
+        # M4 <- if (!is.na(M4)) M4 else ""
+        # R4 <- scknjr$R4[index]
+        # R4 <- if (!is.na(R4)) R4 else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), R4),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), M4),
+        )
+      },
+      align = "center"
+    ),
+    W5 = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        M5 <- scknjr$M5[index]
+        M5 <- if (!is.na(M5)) M5 else ""
+        R5 <- scknjr$R5[index]
+        R5 <- if (!is.na(R5)) R5 else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), R5),
+          # div(style = list(fontSize = 9, fontWeight = 400, color = '#0F2040'), M5),
+        )
+      },
+      align = "center"
+    ),
+    # R1 = colDef(show = FALSE),
+    # R2 = colDef(show = FALSE),
+    # R3 = colDef(show = FALSE),
+    # R4 = colDef(show = FALSE),
+    # R5 = colDef(show = FALSE),
+    # M1 = colDef(show = FALSE),
+    # M2 = colDef(show = FALSE),
+    # M3 = colDef(show = FALSE),
+    # M4 = colDef(show = FALSE),
+    # M5 = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    NR = colDef(show = FALSE),
+    KR = colDef(show = FALSE),
+    Kanji = colDef(show = FALSE)
+  ),
+  defaultColDef = colDef(minWidth = 100),
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 ### LS {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
