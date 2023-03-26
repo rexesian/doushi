@@ -91,6 +91,7 @@ sntcas <- read_csv("jpdb/SNTCASL-SSTNC.csv")
 comdly <- read_csv("jpdb/COMMSTRGY-STRGY.csv")
 sntmre <- read_csv("jpdb/SNTMRE-SNT.csv")
 smplsnt <- read_csv("jpdb/SMPLSNT-SNT.csv")
+splsnt <- read_csv("jpim/SPLSNT-SNT.csv")
 ```
 
 # <b> Sentences </b> {.tabset}
@@ -388,11 +389,6 @@ reactable(
         Structure <- vnsgg$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
         tagList(
-
-          # div(style = list(fontSize = 13, fontWeight = 600), Concept),
-          # div(style = list(fontSize = 9), Meaning),
-          # div(style = list(fontSize = 10), Structure),
-          
           div(style = list(fontSize = 24, fontWeight = 600), Sentences),
           div(style = list(fontSize = 10, color = '#787878'), value),
         )
@@ -702,6 +698,49 @@ reactable(
       align = "center"
     ),
     Sentences = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Special </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+splsnt <- splsnt[sample(1:nrow(splsnt)),]
+
+reactable(
+  splsnt,
+  columns = list(
+    Sentence = colDef(
+      cell = function(value, index) {
+        Translation <- splsnt$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        tagList(
+          # div(style = list(fontSize = 24, fontWeight = 600), Translation),
+          div(style = list(fontSize = 25, fontWeight = 600, fontFamily = 'Open Sans'), value)
+        )
+      },
+      align = "center"
+    ),
+    Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
