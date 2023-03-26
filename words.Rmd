@@ -4063,17 +4063,38 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-# tblw1 <- tblw1[sample(1:nrow(tblw1)),]
+tblw1.a <- tblw1 %>% select(W1, T1) %>% rename(Words = W1, Meaning = T1)
+tblw1.b <- tblw1 %>% select(W2, T2) %>% rename(Words = W2, Meaning = T2)
+tblw1.c <- tblw1 %>% select(W3, T3) %>% rename(Words = W3, Meaning = T3)
+tblw1.d <- tblw1 %>% select(W4, T4) %>% rename(Words = W4, Meaning = T4)
+tblw1.e <- tblw1 %>% select(W5, T5) %>% rename(Words = W5, Meaning = T5)
+tblw1.f <- tblw1 %>% select(W6, T6) %>% rename(Words = W6, Meaning = T6)
+
+tblw1.z <- bind_rows(tblw1.a, tblw1.b)
+tblw1.z <- bind_rows(tblw1.z, tblw1.c)
+tblw1.z <- bind_rows(tblw1.z, tblw1.d)
+tblw1.z <- bind_rows(tblw1.z, tblw1.e)
+tblw1.z <- bind_rows(tblw1.z, tblw1.f)
+
+tblw1.z <- tblw1.z[sample(1:nrow(tblw1.z)),]
+tblw1.z <- tblw1.z[sample(1:nrow(tblw1.z)),]
+
+tblw1.a1 <- tblw1.z %>% rename(W1 = Words, T1 = Meaning) %>% slice(1:328)
+tblw1.a2 <- tblw1.z %>% rename(W2 = Words, T2 = Meaning) %>% slice(329:656)
+tblw1.a3 <- tblw1.z %>% rename(W3 = Words, T3 = Meaning) %>% slice(657:984)
+tblw1.a4 <- tblw1.z %>% rename(W4 = Words, T4 = Meaning) %>% slice(985:1312)
+
+tblw1.za <- data.frame(tblw1.a1, tblw1.a2, tblw1.a3, tblw1.a4)
 
 reactable(
-  tblw1,
+  tblw1.za,
   columns = list(
     W1 = colDef(
       cell = function(value, index) {
-        T1 <- tblw1$T1[index]
+        T1 <- tblw1.za$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T1),
         )
       },
@@ -4081,66 +4102,66 @@ reactable(
     ),
     W2 = colDef(
       cell = function(value, index) {
-        T2 <- tblw1$T2[index]
+        T2 <- tblw1.za$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T2),
         )
       },
       align = "center"
-    ),    
+    ),
     W3 = colDef(
       cell = function(value, index) {
-        T3 <- tblw1$T3[index]
+        T3 <- tblw1.za$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T3),
         )
       },
       align = "center"
-    ),       
+    ),
     W4 = colDef(
       cell = function(value, index) {
-        T4 <- tblw1$T4[index]
+        T4 <- tblw1.za$T4[index]
         T4 <- if (!is.na(T4)) T4 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T4),
         )
       },
       align = "center"
     ),
-    W5 = colDef(
-      cell = function(value, index) {
-        T5 <- tblw1$T5[index]
-        T5 <- if (!is.na(T5)) T5 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8, fontWeight = 400), T5),
-        )
-      },
-      align = "center"
-    ),    
-    W6 = colDef(
-      cell = function(value, index) {
-        T6 <- tblw1$T6[index]
-        T6 <- if (!is.na(T6)) T6 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8, fontWeight = 400), T6),
-        )
-      },
-      align = "center"
-    ),      
-    
+    # W5 = colDef(
+    #   cell = function(value, index) {
+    #     T5 <- tblw1$T5[index]
+    #     T5 <- if (!is.na(T5)) T5 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), value),
+    #       div(style = list(fontSize = 8, fontWeight = 400), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),
+    # W6 = colDef(
+    #   cell = function(value, index) {
+    #     T6 <- tblw1$T6[index]
+    #     T6 <- if (!is.na(T6)) T6 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), value),
+    #       div(style = list(fontSize = 8, fontWeight = 400), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),
+
     T1 = colDef(show = FALSE),
     T2 = colDef(show = FALSE),
     T3 = colDef(show = FALSE),
-    T4 = colDef(show = FALSE),
-    T5 = colDef(show = FALSE),
-    T6 = colDef(show = FALSE)
+    T4 = colDef(show = FALSE)
+    # T5 = colDef(show = FALSE),
+    # T6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -4166,17 +4187,38 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw2 <- tblw2[sample(1:nrow(tblw2)),]
+tblw2.a <- tblw2 %>% select(W1, T1) %>% rename(Words = W1, Meaning = T1)
+tblw2.b <- tblw2 %>% select(W2, T2) %>% rename(Words = W2, Meaning = T2)
+tblw2.c <- tblw2 %>% select(W3, T3) %>% rename(Words = W3, Meaning = T3)
+tblw2.d <- tblw2 %>% select(W4, T4) %>% rename(Words = W4, Meaning = T4)
+tblw2.e <- tblw2 %>% select(W5, T5) %>% rename(Words = W5, Meaning = T5)
+tblw2.f <- tblw2 %>% select(W6, T6) %>% rename(Words = W6, Meaning = T6)
+
+tblw2.z <- bind_rows(tblw2.a, tblw2.b)
+tblw2.z <- bind_rows(tblw2.z, tblw2.c)
+tblw2.z <- bind_rows(tblw2.z, tblw2.d)
+tblw2.z <- bind_rows(tblw2.z, tblw2.e)
+tblw2.z <- bind_rows(tblw2.z, tblw2.f)
+
+tblw2.z <- tblw2.z[sample(1:nrow(tblw2.z)),]
+tblw2.z <- tblw2.z[sample(1:nrow(tblw2.z)),]
+
+tblw2.a1 <- tblw2.z %>% rename(W1 = Words, T1 = Meaning) %>% slice(1:3997)
+tblw2.a2 <- tblw2.z %>% rename(W2 = Words, T2 = Meaning) %>% slice(3998:7994)
+tblw2.a3 <- tblw2.z %>% rename(W3 = Words, T3 = Meaning) %>% slice(7995:11991)
+tblw2.a4 <- tblw2.z %>% rename(W4 = Words, T4 = Meaning) %>% slice(11992:15988)
+
+tblw2.za <- data.frame(tblw2.a1, tblw2.a2, tblw2.a3, tblw2.a4)
 
 reactable(
-  tblw2,
+  tblw2.za,
   columns = list(
     W1 = colDef(
       cell = function(value, index) {
-        T1 <- tblw2$T1[index]
+        T1 <- tblw2.za$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T1),
         )
       },
@@ -4184,10 +4226,10 @@ reactable(
     ),
     W2 = colDef(
       cell = function(value, index) {
-        T2 <- tblw2$T2[index]
+        T2 <- tblw2.za$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T2),
         )
       },
@@ -4195,10 +4237,10 @@ reactable(
     ),    
     W3 = colDef(
       cell = function(value, index) {
-        T3 <- tblw2$T3[index]
+        T3 <- tblw2.za$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T3),
         )
       },
@@ -4206,44 +4248,44 @@ reactable(
     ),       
     W4 = colDef(
       cell = function(value, index) {
-        T4 <- tblw2$T4[index]
+        T4 <- tblw2.za$T4[index]
         T4 <- if (!is.na(T4)) T4 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T4),
         )
       },
       align = "center"
     ),
-    W5 = colDef(
-      cell = function(value, index) {
-        T5 <- tblw2$T5[index]
-        T5 <- if (!is.na(T5)) T5 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8, fontWeight = 400), T5),
-        )
-      },
-      align = "center"
-    ),    
-    W6 = colDef(
-      cell = function(value, index) {
-        T6 <- tblw2$T6[index]
-        T6 <- if (!is.na(T6)) T6 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8, fontWeight = 400), T6),
-        )
-      },
-      align = "center"
-    ),      
+    # W5 = colDef(
+    #   cell = function(value, index) {
+    #     T5 <- tblw2$T5[index]
+    #     T5 <- if (!is.na(T5)) T5 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), value),
+    #       div(style = list(fontSize = 8, fontWeight = 400), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # W6 = colDef(
+    #   cell = function(value, index) {
+    #     T6 <- tblw2$T6[index]
+    #     T6 <- if (!is.na(T6)) T6 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), value),
+    #       div(style = list(fontSize = 8, fontWeight = 400), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),      
     
     T1 = colDef(show = FALSE),
     T2 = colDef(show = FALSE),
     T3 = colDef(show = FALSE),
-    T4 = colDef(show = FALSE),
-    T5 = colDef(show = FALSE),
-    T6 = colDef(show = FALSE)
+    T4 = colDef(show = FALSE)
+    # T5 = colDef(show = FALSE),
+    # T6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -4269,17 +4311,38 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw3 <- tblw3[sample(1:nrow(tblw3)),]
+tblw3.a <- tblw3 %>% select(W1, T1) %>% rename(Words = W1, Meaning = T1)
+tblw3.b <- tblw3 %>% select(W2, T2) %>% rename(Words = W2, Meaning = T2)
+tblw3.c <- tblw3 %>% select(W3, T3) %>% rename(Words = W3, Meaning = T3)
+tblw3.d <- tblw3 %>% select(W4, T4) %>% rename(Words = W4, Meaning = T4)
+tblw3.e <- tblw3 %>% select(W5, T5) %>% rename(Words = W5, Meaning = T5)
+tblw3.f <- tblw3 %>% select(W6, T6) %>% rename(Words = W6, Meaning = T6)
+
+tblw3.z <- bind_rows(tblw3.a, tblw3.b)
+tblw3.z <- bind_rows(tblw3.z, tblw3.c)
+tblw3.z <- bind_rows(tblw3.z, tblw3.d)
+tblw3.z <- bind_rows(tblw3.z, tblw3.e)
+tblw3.z <- bind_rows(tblw3.z, tblw3.f)
+
+tblw3.z <- tblw3.z[sample(1:nrow(tblw3.z)),]
+tblw3.z <- tblw3.z[sample(1:nrow(tblw3.z)),]
+
+tblw3.a1 <- tblw3.z %>% rename(W1 = Words, T1 = Meaning) %>% slice(1:3079)
+tblw3.a2 <- tblw3.z %>% rename(W2 = Words, T2 = Meaning) %>% slice(3080:6158)
+tblw3.a3 <- tblw3.z %>% rename(W3 = Words, T3 = Meaning) %>% slice(6159:9237)
+tblw3.a4 <- tblw3.z %>% rename(W4 = Words, T4 = Meaning) %>% slice(9238:12316)
+
+tblw3.za <- data.frame(tblw3.a1, tblw3.a2, tblw3.a3, tblw3.a4)
 
 reactable(
-  tblw3,
+  tblw3.za,
   columns = list(
     W1 = colDef(
       cell = function(value, index) {
-        T1 <- tblw3$T1[index]
+        T1 <- tblw3.za$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T1),
         )
       },
@@ -4287,10 +4350,10 @@ reactable(
     ),
     W2 = colDef(
       cell = function(value, index) {
-        T2 <- tblw3$T2[index]
+        T2 <- tblw3.za$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T2),
         )
       },
@@ -4298,10 +4361,10 @@ reactable(
     ),    
     W3 = colDef(
       cell = function(value, index) {
-        T3 <- tblw3$T3[index]
+        T3 <- tblw3.za$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T3),
         )
       },
@@ -4309,44 +4372,44 @@ reactable(
     ),       
     W4 = colDef(
       cell = function(value, index) {
-        T4 <- tblw3$T4[index]
+        T4 <- tblw3.za$T4[index]
         T4 <- if (!is.na(T4)) T4 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 500), value),
           div(style = list(fontSize = 8, fontWeight = 400), T4),
         )
       },
       align = "center"
     ),
-    W5 = colDef(
-      cell = function(value, index) {
-        T5 <- tblw3$T5[index]
-        T5 <- if (!is.na(T5)) T5 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8, fontWeight = 400), T5),
-        )
-      },
-      align = "center"
-    ),    
-    W6 = colDef(
-      cell = function(value, index) {
-        T6 <- tblw3$T6[index]
-        T6 <- if (!is.na(T6)) T6 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8, fontWeight = 500), T6),
-        )
-      },
-      align = "center"
-    ),      
+    # W5 = colDef(
+    #   cell = function(value, index) {
+    #     T5 <- tblw3$T5[index]
+    #     T5 <- if (!is.na(T5)) T5 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), value),
+    #       div(style = list(fontSize = 8, fontWeight = 400), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # W6 = colDef(
+    #   cell = function(value, index) {
+    #     T6 <- tblw3$T6[index]
+    #     T6 <- if (!is.na(T6)) T6 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), value),
+    #       div(style = list(fontSize = 8, fontWeight = 500), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),      
     
     T1 = colDef(show = FALSE),
     T2 = colDef(show = FALSE),
     T3 = colDef(show = FALSE),
-    T4 = colDef(show = FALSE),
-    T5 = colDef(show = FALSE),
-    T6 = colDef(show = FALSE)
+    T4 = colDef(show = FALSE)
+    # T5 = colDef(show = FALSE),
+    # T6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -4372,17 +4435,38 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw4 <- tblw4[sample(1:nrow(tblw4)),]
+tblw4.a <- tblw4 %>% select(W1, T1) %>% rename(Words = W1, Meaning = T1)
+tblw4.b <- tblw4 %>% select(W2, T2) %>% rename(Words = W2, Meaning = T2)
+tblw4.c <- tblw4 %>% select(W3, T3) %>% rename(Words = W3, Meaning = T3)
+tblw4.d <- tblw4 %>% select(W4, T4) %>% rename(Words = W4, Meaning = T4)
+tblw4.e <- tblw4 %>% select(W5, T5) %>% rename(Words = W5, Meaning = T5)
+tblw4.f <- tblw4 %>% select(W6, T6) %>% rename(Words = W6, Meaning = T6)
+
+tblw4.z <- bind_rows(tblw4.a, tblw4.b)
+tblw4.z <- bind_rows(tblw4.z, tblw4.c)
+tblw4.z <- bind_rows(tblw4.z, tblw4.d)
+tblw4.z <- bind_rows(tblw4.z, tblw4.e)
+tblw4.z <- bind_rows(tblw4.z, tblw4.f)
+
+tblw4.z <- tblw4.z[sample(1:nrow(tblw4.z)),]
+tblw4.z <- tblw4.z[sample(1:nrow(tblw4.z)),]
+
+tblw4.a1 <- tblw4.z %>% rename(W1 = Words, T1 = Meaning) %>% slice(1:3736)
+tblw4.a2 <- tblw4.z %>% rename(W2 = Words, T2 = Meaning) %>% slice(3737:7472)
+tblw4.a3 <- tblw4.z %>% rename(W3 = Words, T3 = Meaning) %>% slice(7473:11208)
+tblw4.a4 <- tblw4.z %>% rename(W4 = Words, T4 = Meaning) %>% slice(11209:14944)
+
+tblw4.za <- data.frame(tblw4.a1, tblw4.a2, tblw4.a3, tblw4.a4)
 
 reactable(
-  tblw4,
+  tblw4.za,
   columns = list(
     W1 = colDef(
       cell = function(value, index) {
-        T1 <- tblw4$T1[index]
+        T1 <- tblw4.za$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T1),
         )
       },
@@ -4390,10 +4474,10 @@ reactable(
     ),
     W2 = colDef(
       cell = function(value, index) {
-        T2 <- tblw4$T2[index]
+        T2 <- tblw4.za$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T2),
         )
       },
@@ -4401,10 +4485,10 @@ reactable(
     ),    
     W3 = colDef(
       cell = function(value, index) {
-        T3 <- tblw4$T3[index]
+        T3 <- tblw4.za$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T3),
         )
       },
@@ -4412,44 +4496,44 @@ reactable(
     ),       
     W4 = colDef(
       cell = function(value, index) {
-        T4 <- tblw4$T4[index]
+        T4 <- tblw4.za$T4[index]
         T4 <- if (!is.na(T4)) T4 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
           div(style = list(fontSize = 8, fontWeight = 400), T4),
         )
       },
       align = "center"
     ),
-    W5 = colDef(
-      cell = function(value, index) {
-        T5 <- tblw4$T5[index]
-        T5 <- if (!is.na(T5)) T5 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8, fontWeight = 400), T5),
-        )
-      },
-      align = "center"
-    ),    
-    W6 = colDef(
-      cell = function(value, index) {
-        T6 <- tblw4$T6[index]
-        T6 <- if (!is.na(T6)) T6 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8, fontWeight = 400), T6),
-        )
-      },
-      align = "center"
-    ),
+    # W5 = colDef(
+    #   cell = function(value, index) {
+    #     T5 <- tblw4$T5[index]
+    #     T5 <- if (!is.na(T5)) T5 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), value),
+    #       div(style = list(fontSize = 8, fontWeight = 400), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # W6 = colDef(
+    #   cell = function(value, index) {
+    #     T6 <- tblw4$T6[index]
+    #     T6 <- if (!is.na(T6)) T6 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), value),
+    #       div(style = list(fontSize = 8, fontWeight = 400), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),
     
     T1 = colDef(show = FALSE),
     T2 = colDef(show = FALSE),
     T3 = colDef(show = FALSE),
-    T4 = colDef(show = FALSE),
-    T5 = colDef(show = FALSE),
-    T6 = colDef(show = FALSE)
+    T4 = colDef(show = FALSE)
+    # T5 = colDef(show = FALSE),
+    # T6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -4487,8 +4571,8 @@ reactable(
         T1 <- tblw5$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8), R1),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
+          # div(style = list(fontSize = 8), R1),
           div(style = list(fontSize = 8), T1),
         )
       },
@@ -4501,8 +4585,8 @@ reactable(
         R2 <- tblw5$R2[index]
         R2 <- if (!is.na(R2)) R2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8), R2),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
+          # div(style = list(fontSize = 8), R2),
           div(style = list(fontSize = 8), T2),
         )
       },
@@ -4515,8 +4599,8 @@ reactable(
         R3 <- tblw5$R3[index]
         R3 <- if (!is.na(R3)) R3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8), R3),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
+          # div(style = list(fontSize = 8), R3),
           div(style = list(fontSize = 8), T3),
         )
       },
@@ -4529,8 +4613,8 @@ reactable(
         R4 <- tblw5$R4[index]
         R4 <- if (!is.na(R4)) R4 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), value),
-          div(style = list(fontSize = 8), R4),
+          div(style = list(fontSize = 20, fontWeight = 600), value),
+          # div(style = list(fontSize = 8), R4),
           div(style = list(fontSize = 8), T4),
         )
       },
@@ -5360,7 +5444,7 @@ corewz <- corewz[sample(1:nrow(corewz)),]
 reactable(
   corewz,
   columns = list(
-    Sentences = colDef(
+    Sentences = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         Reading <- corewz$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
@@ -5473,7 +5557,7 @@ cnmw <- cnmw[sample(1:nrow(cnmw)),]
 reactable(
   cnmw,
   columns = list(
-    Sentences = colDef(
+    Sentences = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         Meaning <- cnmw$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -5583,7 +5667,7 @@ cmwrdsn <- cmwrdsn[sample(1:nrow(cmwrdsn)),]
 reactable(
   cmwrdsn,
   columns = list(
-    Sentences = colDef(
+    Sentences = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         Note <- cmwrdsn$Note[index]
         Note <- if (!is.na(Note)) Note else ""
@@ -5986,7 +6070,7 @@ nadjb <- nadjb[sample(1:nrow(nadjb)),]
 reactable(
   nadjb,
   columns = list(
-    Sentences = colDef(
+    Sentences = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         Reading <- nadjb$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
@@ -6094,7 +6178,7 @@ nadja <- nadja[sample(1:nrow(nadja)),]
 reactable(
   nadja,
   columns = list(
-    Sentences = colDef(
+    Sentences = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         Reading <- nadja$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
@@ -6199,7 +6283,7 @@ adva <- adva[sample(1:nrow(adva)),]
 reactable(
   adva,
   columns = list(
-    Sentences = colDef(
+    Sentences = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
         Reading <- adva$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
@@ -6248,17 +6332,17 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw1 <- tblw1[sample(1:nrow(tblw1)),]
+tblw1.za <- tblw1.za[sample(1:nrow(tblw1.za)),]
 
 reactable(
-  tblw1,
+  tblw1.za,
   columns = list(
     T1 = colDef(
       cell = function(value, index) {
-        W1 <- tblw1$W1[index]
+        W1 <- tblw1.za$W1[index]
         W1 <- if (!is.na(W1)) W1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W1),
+          div(style = list(fontSize = 20, fontWeight = 600), W1),
           # div(style = list(fontSize = 8, fontWeight = 400), T1),
         )
       },
@@ -6266,10 +6350,10 @@ reactable(
     ),
     T2 = colDef(
       cell = function(value, index) {
-        W2 <- tblw1$W2[index]
+        W2 <- tblw1.za$W2[index]
         W2 <- if (!is.na(W2)) W2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W2),
+          div(style = list(fontSize = 20, fontWeight = 600), W2),
           # div(style = list(fontSize = 8, fontWeight = 400), T2),
         )
       },
@@ -6277,10 +6361,10 @@ reactable(
     ),    
     T3 = colDef(
       cell = function(value, index) {
-        W3 <- tblw1$W3[index]
+        W3 <- tblw1.za$W3[index]
         W3 <- if (!is.na(W3)) W3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W3),
+          div(style = list(fontSize = 20, fontWeight = 600), W3),
           # div(style = list(fontSize = 8, fontWeight = 400), T3),
         )
       },
@@ -6288,44 +6372,44 @@ reactable(
     ),       
     T4 = colDef(
       cell = function(value, index) {
-        W4 <- tblw1$W4[index]
+        W4 <- tblw1.za$W4[index]
         W4 <- if (!is.na(W4)) W4 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W4),
+          div(style = list(fontSize = 20, fontWeight = 600), W4),
           # div(style = list(fontSize = 8, fontWeight = 400), T4),
         )
       },
       align = "center"
     ),
-    T5 = colDef(
-      cell = function(value, index) {
-        W5 <- tblw1$W5[index]
-        W5 <- if (!is.na(W5)) W5 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W5),
-          # div(style = list(fontSize = 8, fontWeight = 400), T5),
-        )
-      },
-      align = "center"
-    ),    
-    T6 = colDef(
-      cell = function(value, index) {
-        W6 <- tblw1$W6[index]
-        W6 <- if (!is.na(W6)) W6 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W6),
-          # div(style = list(fontSize = 8, fontWeight = 400), T6),
-        )
-      },
-      align = "center"
-    ),      
+    # T5 = colDef(
+    #   cell = function(value, index) {
+    #     W5 <- tblw1$W5[index]
+    #     W5 <- if (!is.na(W5)) W5 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), W5),
+    #       # div(style = list(fontSize = 8, fontWeight = 400), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # T6 = colDef(
+    #   cell = function(value, index) {
+    #     W6 <- tblw1$W6[index]
+    #     W6 <- if (!is.na(W6)) W6 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), W6),
+    #       # div(style = list(fontSize = 8, fontWeight = 400), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),      
     
     W1 = colDef(show = FALSE),
     W2 = colDef(show = FALSE),
     W3 = colDef(show = FALSE),
-    W4 = colDef(show = FALSE),
-    W5 = colDef(show = FALSE),
-    W6 = colDef(show = FALSE)
+    W4 = colDef(show = FALSE)
+    # W5 = colDef(show = FALSE),
+    # W6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -6351,17 +6435,17 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw2 <- tblw2[sample(1:nrow(tblw2)),]
+tblw2.za <- tblw2.za[sample(1:nrow(tblw2.za)),]
 
 reactable(
-  tblw2,
+  tblw2.za,
   columns = list(
     T1 = colDef(
       cell = function(value, index) {
-        W1 <- tblw2$W1[index]
+        W1 <- tblw2.za$W1[index]
         W1 <- if (!is.na(W1)) W1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W1),
+          div(style = list(fontSize = 20, fontWeight = 600), W1),
           # div(style = list(fontSize = 8, fontWeight = 400), T1),
         )
       },
@@ -6369,10 +6453,10 @@ reactable(
     ),
     T2 = colDef(
       cell = function(value, index) {
-        W2 <- tblw2$W2[index]
+        W2 <- tblw2.za$W2[index]
         W2 <- if (!is.na(W2)) W2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W2),
+          div(style = list(fontSize = 20, fontWeight = 600), W2),
           # div(style = list(fontSize = 8, fontWeight = 400), T2),
         )
       },
@@ -6380,10 +6464,10 @@ reactable(
     ),    
     T3 = colDef(
       cell = function(value, index) {
-        W3 <- tblw2$W3[index]
+        W3 <- tblw2.za$W3[index]
         W3 <- if (!is.na(W3)) W3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W3),
+          div(style = list(fontSize = 20, fontWeight = 600), W3),
           # div(style = list(fontSize = 8, fontWeight = 400), T3),
         )
       },
@@ -6391,44 +6475,44 @@ reactable(
     ),       
     T4 = colDef(
       cell = function(value, index) {
-        W4 <- tblw2$W4[index]
+        W4 <- tblw2.za$W4[index]
         W4 <- if (!is.na(W4)) W4 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W4),
+          div(style = list(fontSize = 20, fontWeight = 600), W4),
           # div(style = list(fontSize = 8, fontWeight = 400), T4),
         )
       },
       align = "center"
     ),
-    T5 = colDef(
-      cell = function(value, index) {
-        W5 <- tblw2$W5[index]
-        W5 <- if (!is.na(W5)) W5 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W5),
-          # div(style = list(fontSize = 8, fontWeight = 400), T5),
-        )
-      },
-      align = "center"
-    ),    
-    T6 = colDef(
-      cell = function(value, index) {
-        W6 <- tblw2$W6[index]
-        W6 <- if (!is.na(W6)) W6 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W6),
-          # div(style = list(fontSize = 8, fontWeight = 400), T6),
-        )
-      },
-      align = "center"
-    ),      
+    # T5 = colDef(
+    #   cell = function(value, index) {
+    #     W5 <- tblw2$W5[index]
+    #     W5 <- if (!is.na(W5)) W5 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), W5),
+    #       # div(style = list(fontSize = 8, fontWeight = 400), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # T6 = colDef(
+    #   cell = function(value, index) {
+    #     W6 <- tblw2$W6[index]
+    #     W6 <- if (!is.na(W6)) W6 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), W6),
+    #       # div(style = list(fontSize = 8, fontWeight = 400), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),      
     
     W1 = colDef(show = FALSE),
     W2 = colDef(show = FALSE),
     W3 = colDef(show = FALSE),
-    W4 = colDef(show = FALSE),
-    W5 = colDef(show = FALSE),
-    W6 = colDef(show = FALSE)
+    W4 = colDef(show = FALSE)
+    # W5 = colDef(show = FALSE),
+    # W6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -6454,17 +6538,17 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw3 <- tblw3[sample(1:nrow(tblw3)),]
+tblw3.za <- tblw3.za[sample(1:nrow(tblw3.za)),]
 
 reactable(
-  tblw3,
+  tblw3.za,
   columns = list(
     T1 = colDef(
       cell = function(value, index) {
-        W1 <- tblw3$W1[index]
+        W1 <- tblw3.za$W1[index]
         W1 <- if (!is.na(W1)) W1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W1),
+          div(style = list(fontSize = 20, fontWeight = 600), W1),
           # div(style = list(fontSize = 8, fontWeight = 400), T1),
         )
       },
@@ -6472,10 +6556,10 @@ reactable(
     ),
     T2 = colDef(
       cell = function(value, index) {
-        W2 <- tblw3$W2[index]
+        W2 <- tblw3.za$W2[index]
         W2 <- if (!is.na(W2)) W2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W2),
+          div(style = list(fontSize = 20, fontWeight = 600), W2),
           # div(style = list(fontSize = 8, fontWeight = 400), T2),
         )
       },
@@ -6483,10 +6567,10 @@ reactable(
     ),    
     T3 = colDef(
       cell = function(value, index) {
-        W3 <- tblw3$W3[index]
+        W3 <- tblw3.za$W3[index]
         W3 <- if (!is.na(W3)) W3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W3),
+          div(style = list(fontSize = 20, fontWeight = 600), W3),
           # div(style = list(fontSize = 8, fontWeight = 400), T3),
         )
       },
@@ -6494,44 +6578,44 @@ reactable(
     ),       
     T4 = colDef(
       cell = function(value, index) {
-        W4 <- tblw3$W4[index]
+        W4 <- tblw3.za$W4[index]
         W4 <- if (!is.na(W4)) W4 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W4),
+          div(style = list(fontSize = 20, fontWeight = 600), W4),
           # div(style = list(fontSize = 8, fontWeight = 400), T4),
         )
       },
       align = "center"
     ),
-    T5 = colDef(
-      cell = function(value, index) {
-        W5 <- tblw3$W5[index]
-        W5 <- if (!is.na(W5)) W5 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W5),
-          # div(style = list(fontSize = 8, fontWeight = 400), T5),
-        )
-      },
-      align = "center"
-    ),    
-    T6 = colDef(
-      cell = function(value, index) {
-        W6 <- tblw3$W6[index]
-        W6 <- if (!is.na(W6)) W6 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W6),
-          # div(style = list(fontSize = 8, fontWeight = 400), T6),
-        )
-      },
-      align = "center"
-    ),      
+    # T5 = colDef(
+    #   cell = function(value, index) {
+    #     W5 <- tblw3$W5[index]
+    #     W5 <- if (!is.na(W5)) W5 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), W5),
+    #       # div(style = list(fontSize = 8, fontWeight = 400), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # T6 = colDef(
+    #   cell = function(value, index) {
+    #     W6 <- tblw3$W6[index]
+    #     W6 <- if (!is.na(W6)) W6 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), W6),
+    #       # div(style = list(fontSize = 8, fontWeight = 400), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),      
     
     W1 = colDef(show = FALSE),
     W2 = colDef(show = FALSE),
     W3 = colDef(show = FALSE),
-    W4 = colDef(show = FALSE),
-    W5 = colDef(show = FALSE),
-    W6 = colDef(show = FALSE)
+    W4 = colDef(show = FALSE)
+    # W5 = colDef(show = FALSE),
+    # W6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -6557,17 +6641,17 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw4 <- tblw4[sample(1:nrow(tblw4)),]
+tblw4.za <- tblw4.za[sample(1:nrow(tblw4.za)),]
 
 reactable(
-  tblw4,
+  tblw4.za,
   columns = list(
     T1 = colDef(
       cell = function(value, index) {
-        W1 <- tblw4$W1[index]
+        W1 <- tblw4.za$W1[index]
         W1 <- if (!is.na(W1)) W1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W1),
+          div(style = list(fontSize = 20, fontWeight = 600), W1),
           # div(style = list(fontSize = 8, fontWeight = 400), T1),
         )
       },
@@ -6575,10 +6659,10 @@ reactable(
     ),
     T2 = colDef(
       cell = function(value, index) {
-        W2 <- tblw4$W2[index]
+        W2 <- tblw4.za$W2[index]
         W2 <- if (!is.na(W2)) W2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W2),
+          div(style = list(fontSize = 20, fontWeight = 600), W2),
           # div(style = list(fontSize = 8, fontWeight = 400), T2),
         )
       },
@@ -6586,10 +6670,10 @@ reactable(
     ),    
     T3 = colDef(
       cell = function(value, index) {
-        W3 <- tblw4$W3[index]
+        W3 <- tblw4.za$W3[index]
         W3 <- if (!is.na(W3)) W3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W3),
+          div(style = list(fontSize = 20, fontWeight = 600), W3),
           # div(style = list(fontSize = 8, fontWeight = 400), T3),
         )
       },
@@ -6597,44 +6681,44 @@ reactable(
     ),       
     T4 = colDef(
       cell = function(value, index) {
-        W4 <- tblw4$W4[index]
+        W4 <- tblw4.za$W4[index]
         W4 <- if (!is.na(W4)) W4 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W4),
+          div(style = list(fontSize = 20, fontWeight = 600), W4),
           # div(style = list(fontSize = 8, fontWeight = 400), T4),
         )
       },
       align = "center"
     ),
-    T5 = colDef(
-      cell = function(value, index) {
-        W5 <- tblw4$W5[index]
-        W5 <- if (!is.na(W5)) W5 else ""
-        tagList(
-          div(style = list(fontSize = 18, fontWeight = 500), W5),
-          # div(style = list(fontSize = 8, fontWeight = 400), T5),
-        )
-      },
-      align = "center"
-    ),    
-    T6 = colDef(
-      cell = function(value, index) {
-        W6 <- tblw4$W6[index]
-        W6 <- if (!is.na(W6)) W6 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W6),
-          # div(style = list(fontSize = 8, fontWeight = 400), T6),
-        )
-      },
-      align = "center"
-    ),      
+    # T5 = colDef(
+    #   cell = function(value, index) {
+    #     W5 <- tblw4$W5[index]
+    #     W5 <- if (!is.na(W5)) W5 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 18, fontWeight = 500), W5),
+    #       # div(style = list(fontSize = 8, fontWeight = 400), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # T6 = colDef(
+    #   cell = function(value, index) {
+    #     W6 <- tblw4$W6[index]
+    #     W6 <- if (!is.na(W6)) W6 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 16, fontWeight = 500), W6),
+    #       # div(style = list(fontSize = 8, fontWeight = 400), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),      
     
     W1 = colDef(show = FALSE),
     W2 = colDef(show = FALSE),
     W3 = colDef(show = FALSE),
-    W4 = colDef(show = FALSE),
-    W5 = colDef(show = FALSE),
-    W6 = colDef(show = FALSE)
+    W4 = colDef(show = FALSE)
+    # W5 = colDef(show = FALSE),
+    # W6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -6670,7 +6754,7 @@ reactable(
         W1 <- tblw5$W1[index]
         W1 <- if (!is.na(W1)) W1 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W1),
+          div(style = list(fontSize = 20, fontWeight = 600), W1),
           # div(style = list(fontSize = 8, fontWeight = 400), T1),
         )
       },
@@ -6681,7 +6765,7 @@ reactable(
         W2 <- tblw5$W2[index]
         W2 <- if (!is.na(W2)) W2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W2),
+          div(style = list(fontSize = 20, fontWeight = 600), W2),
           # div(style = list(fontSize = 8, fontWeight = 400), T2),
         )
       },
@@ -6692,7 +6776,7 @@ reactable(
         W3 <- tblw5$W3[index]
         W3 <- if (!is.na(W3)) W3 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W3),
+          div(style = list(fontSize = 20, fontWeight = 600), W3),
           # div(style = list(fontSize = 8, fontWeight = 400), T3),
         )
       },
@@ -6703,7 +6787,7 @@ reactable(
         W4 <- tblw5$W4[index]
         W4 <- if (!is.na(W4)) W4 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500), W4),
+          div(style = list(fontSize = 20, fontWeight = 600), W4),
           # div(style = list(fontSize = 8, fontWeight = 400), T4),
         )
       },
@@ -6745,14 +6829,14 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw1 <- tblw1[sample(1:nrow(tblw1)),]
+tblw1.za <- tblw1.za[sample(1:nrow(tblw1.za)),]
 
 reactable(
-  tblw1,
+  tblw1.za,
   columns = list(
     W1 = colDef(
       cell = function(value, index) {
-        T1 <- tblw1$T1[index]
+        T1 <- tblw1.za$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W1),
@@ -6763,7 +6847,7 @@ reactable(
     ),
     W2 = colDef(
       cell = function(value, index) {
-        T2 <- tblw1$T2[index]
+        T2 <- tblw1.za$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W2),
@@ -6774,7 +6858,7 @@ reactable(
     ),    
     W3 = colDef(
       cell = function(value, index) {
-        T3 <- tblw1$T3[index]
+        T3 <- tblw1.za$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W3),
@@ -6785,7 +6869,7 @@ reactable(
     ),       
     W4 = colDef(
       cell = function(value, index) {
-        T4 <- tblw1$T4[index]
+        T4 <- tblw1.za$T4[index]
         T4 <- if (!is.na(T4)) T4 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W4),
@@ -6794,35 +6878,35 @@ reactable(
       },
       align = "center"
     ),
-    W5 = colDef(
-      cell = function(value, index) {
-        T5 <- tblw1$T5[index]
-        T5 <- if (!is.na(T5)) T5 else ""
-        tagList(
-          # div(style = list(fontSize = 18, fontWeight = 500), W5),
-          div(style = list(fontSize = 11, fontWeight = 600), T5),
-        )
-      },
-      align = "center"
-    ),    
-    W6 = colDef(
-      cell = function(value, index) {
-        T6 <- tblw1$T6[index]
-        T6 <- if (!is.na(T6)) T6 else ""
-        tagList(
-          # div(style = list(fontSize = 18, fontWeight = 500), W6),
-          div(style = list(fontSize = 11, fontWeight = 600), T6),
-        )
-      },
-      align = "center"
-    ),      
+    # W5 = colDef(
+    #   cell = function(value, index) {
+    #     T5 <- tblw1$T5[index]
+    #     T5 <- if (!is.na(T5)) T5 else ""
+    #     tagList(
+    #       # div(style = list(fontSize = 18, fontWeight = 500), W5),
+    #       div(style = list(fontSize = 11, fontWeight = 600), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # W6 = colDef(
+    #   cell = function(value, index) {
+    #     T6 <- tblw1$T6[index]
+    #     T6 <- if (!is.na(T6)) T6 else ""
+    #     tagList(
+    #       # div(style = list(fontSize = 18, fontWeight = 500), W6),
+    #       div(style = list(fontSize = 11, fontWeight = 600), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),      
     
     T1 = colDef(show = FALSE),
     T2 = colDef(show = FALSE),
     T3 = colDef(show = FALSE),
-    T4 = colDef(show = FALSE),
-    T5 = colDef(show = FALSE),
-    T6 = colDef(show = FALSE)
+    T4 = colDef(show = FALSE)
+    # T5 = colDef(show = FALSE),
+    # T6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -6848,14 +6932,14 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw2 <- tblw2[sample(1:nrow(tblw2)),]
+tblw2.za <- tblw2.za[sample(1:nrow(tblw2.za)),]
 
 reactable(
-  tblw2,
+  tblw2.za,
   columns = list(
     W1 = colDef(
       cell = function(value, index) {
-        T1 <- tblw2$T1[index]
+        T1 <- tblw2.za$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W1),
@@ -6866,7 +6950,7 @@ reactable(
     ),
     W2 = colDef(
       cell = function(value, index) {
-        T2 <- tblw2$T2[index]
+        T2 <- tblw2.za$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W2),
@@ -6877,7 +6961,7 @@ reactable(
     ),    
     W3 = colDef(
       cell = function(value, index) {
-        T3 <- tblw2$T3[index]
+        T3 <- tblw2.za$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W3),
@@ -6888,7 +6972,7 @@ reactable(
     ),       
     W4 = colDef(
       cell = function(value, index) {
-        T4 <- tblw2$T4[index]
+        T4 <- tblw2.za$T4[index]
         T4 <- if (!is.na(T4)) T4 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W4),
@@ -6897,35 +6981,35 @@ reactable(
       },
       align = "center"
     ),
-    W5 = colDef(
-      cell = function(value, index) {
-        T5 <- tblw2$T5[index]
-        T5 <- if (!is.na(T5)) T5 else ""
-        tagList(
-          # div(style = list(fontSize = 18, fontWeight = 500), W5),
-          div(style = list(fontSize = 11, fontWeight = 600), T5),
-        )
-      },
-      align = "center"
-    ),    
-    W6 = colDef(
-      cell = function(value, index) {
-        T6 <- tblw2$T6[index]
-        T6 <- if (!is.na(T6)) T6 else ""
-        tagList(
-          # div(style = list(fontSize = 18, fontWeight = 500), W6),
-          div(style = list(fontSize = 11, fontWeight = 600), T6),
-        )
-      },
-      align = "center"
-    ),      
+    # W5 = colDef(
+    #   cell = function(value, index) {
+    #     T5 <- tblw2$T5[index]
+    #     T5 <- if (!is.na(T5)) T5 else ""
+    #     tagList(
+    #       # div(style = list(fontSize = 18, fontWeight = 500), W5),
+    #       div(style = list(fontSize = 11, fontWeight = 600), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # W6 = colDef(
+    #   cell = function(value, index) {
+    #     T6 <- tblw2$T6[index]
+    #     T6 <- if (!is.na(T6)) T6 else ""
+    #     tagList(
+    #       # div(style = list(fontSize = 18, fontWeight = 500), W6),
+    #       div(style = list(fontSize = 11, fontWeight = 600), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),      
     
     T1 = colDef(show = FALSE),
     T2 = colDef(show = FALSE),
     T3 = colDef(show = FALSE),
-    T4 = colDef(show = FALSE),
-    T5 = colDef(show = FALSE),
-    T6 = colDef(show = FALSE)
+    T4 = colDef(show = FALSE)
+    # T5 = colDef(show = FALSE),
+    # T6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -6951,14 +7035,14 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw3 <- tblw3[sample(1:nrow(tblw3)),]
+tblw3.za <- tblw3.za[sample(1:nrow(tblw3.za)),]
 
 reactable(
-  tblw3,
+  tblw3.za,
   columns = list(
     W1 = colDef(
       cell = function(value, index) {
-        T1 <- tblw3$T1[index]
+        T1 <- tblw3.za$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W1),
@@ -6969,7 +7053,7 @@ reactable(
     ),
     W2 = colDef(
       cell = function(value, index) {
-        T2 <- tblw3$T2[index]
+        T2 <- tblw3.za$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W2),
@@ -6980,7 +7064,7 @@ reactable(
     ),    
     W3 = colDef(
       cell = function(value, index) {
-        T3 <- tblw3$T3[index]
+        T3 <- tblw3.za$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W3),
@@ -6991,7 +7075,7 @@ reactable(
     ),       
     W4 = colDef(
       cell = function(value, index) {
-        T4 <- tblw3$T4[index]
+        T4 <- tblw3.za$T4[index]
         T4 <- if (!is.na(T4)) T4 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W4),
@@ -7000,35 +7084,35 @@ reactable(
       },
       align = "center"
     ),
-    W5 = colDef(
-      cell = function(value, index) {
-        T5 <- tblw3$T5[index]
-        T5 <- if (!is.na(T5)) T5 else ""
-        tagList(
-          # div(style = list(fontSize = 18, fontWeight = 500), W5),
-          div(style = list(fontSize = 11, fontWeight = 600), T5),
-        )
-      },
-      align = "center"
-    ),    
-    W6 = colDef(
-      cell = function(value, index) {
-        T6 <- tblw3$T6[index]
-        T6 <- if (!is.na(T6)) T6 else ""
-        tagList(
-          # div(style = list(fontSize = 18, fontWeight = 500), W6),
-          div(style = list(fontSize = 11, fontWeight = 600), T6),
-        )
-      },
-      align = "center"
-    ),      
+    # W5 = colDef(
+    #   cell = function(value, index) {
+    #     T5 <- tblw3$T5[index]
+    #     T5 <- if (!is.na(T5)) T5 else ""
+    #     tagList(
+    #       # div(style = list(fontSize = 18, fontWeight = 500), W5),
+    #       div(style = list(fontSize = 11, fontWeight = 600), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # W6 = colDef(
+    #   cell = function(value, index) {
+    #     T6 <- tblw3$T6[index]
+    #     T6 <- if (!is.na(T6)) T6 else ""
+    #     tagList(
+    #       # div(style = list(fontSize = 18, fontWeight = 500), W6),
+    #       div(style = list(fontSize = 11, fontWeight = 600), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),      
     
     T1 = colDef(show = FALSE),
     T2 = colDef(show = FALSE),
     T3 = colDef(show = FALSE),
-    T4 = colDef(show = FALSE),
-    T5 = colDef(show = FALSE),
-    T6 = colDef(show = FALSE)
+    T4 = colDef(show = FALSE)
+    # T5 = colDef(show = FALSE),
+    # T6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(
@@ -7054,14 +7138,14 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-tblw4 <- tblw4[sample(1:nrow(tblw4)),]
+tblw4.za <- tblw4.za[sample(1:nrow(tblw4.za)),]
 
 reactable(
-  tblw4,
+  tblw4.za,
   columns = list(
     W1 = colDef(
       cell = function(value, index) {
-        T1 <- tblw4$T1[index]
+        T1 <- tblw4.za$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W1),
@@ -7072,7 +7156,7 @@ reactable(
     ),
     W2 = colDef(
       cell = function(value, index) {
-        T2 <- tblw4$T2[index]
+        T2 <- tblw4.za$T2[index]
         T2 <- if (!is.na(T2)) T2 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W2),
@@ -7083,7 +7167,7 @@ reactable(
     ),    
     W3 = colDef(
       cell = function(value, index) {
-        T3 <- tblw4$T3[index]
+        T3 <- tblw4.za$T3[index]
         T3 <- if (!is.na(T3)) T3 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W3),
@@ -7094,7 +7178,7 @@ reactable(
     ),       
     W4 = colDef(
       cell = function(value, index) {
-        T4 <- tblw4$T4[index]
+        T4 <- tblw4.za$T4[index]
         T4 <- if (!is.na(T4)) T4 else ""
         tagList(
           # div(style = list(fontSize = 18, fontWeight = 500), W4),
@@ -7103,35 +7187,35 @@ reactable(
       },
       align = "center"
     ),
-    W5 = colDef(
-      cell = function(value, index) {
-        T5 <- tblw4$T5[index]
-        T5 <- if (!is.na(T5)) T5 else ""
-        tagList(
-          # div(style = list(fontSize = 18, fontWeight = 500), W5),
-          div(style = list(fontSize = 11, fontWeight = 600), T5),
-        )
-      },
-      align = "center"
-    ),    
-    W6 = colDef(
-      cell = function(value, index) {
-        T6 <- tblw4$T6[index]
-        T6 <- if (!is.na(T6)) T6 else ""
-        tagList(
-          # div(style = list(fontSize = 18, fontWeight = 500), W6),
-          div(style = list(fontSize = 11, fontWeight = 600), T6),
-        )
-      },
-      align = "center"
-    ),      
+    # W5 = colDef(
+    #   cell = function(value, index) {
+    #     T5 <- tblw4$T5[index]
+    #     T5 <- if (!is.na(T5)) T5 else ""
+    #     tagList(
+    #       # div(style = list(fontSize = 18, fontWeight = 500), W5),
+    #       div(style = list(fontSize = 11, fontWeight = 600), T5),
+    #     )
+    #   },
+    #   align = "center"
+    # ),    
+    # W6 = colDef(
+    #   cell = function(value, index) {
+    #     T6 <- tblw4$T6[index]
+    #     T6 <- if (!is.na(T6)) T6 else ""
+    #     tagList(
+    #       # div(style = list(fontSize = 18, fontWeight = 500), W6),
+    #       div(style = list(fontSize = 11, fontWeight = 600), T6),
+    #     )
+    #   },
+    #   align = "center"
+    # ),      
     
     T1 = colDef(show = FALSE),
     T2 = colDef(show = FALSE),
     T3 = colDef(show = FALSE),
-    T4 = colDef(show = FALSE),
-    T5 = colDef(show = FALSE),
-    T6 = colDef(show = FALSE)
+    T4 = colDef(show = FALSE)
+    # T5 = colDef(show = FALSE),
+    # T6 = colDef(show = FALSE)
   ),
   defaultPageSize = 5,
   theme = reactableTheme(

@@ -103,36 +103,68 @@ smplsnt <- read_csv("jpdb/SMPLSNT-SNT.csv")
 
 vnstc <- vnstc[sample(1:nrow(vnstc)),]
 
+# reactable(
+#   vnstc,
+#   columns = list(
+#     Sentence = colDef(
+#       cell = function(value, index) {
+#         Translation <- vnstc$Translation[index]
+#         Translation <- if (!is.na(Translation)) Translation else "Unknown"
+#         tagList(
+#           div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
+#           div(style = list(fontSize = 10, color = '#787878'), Translation)
+#         )
+#       },
+#       align = "center"
+#     ),
+#     Translation = colDef(show = FALSE)
+#   ),
+#   defaultPageSize = 1,
+#   theme = reactableTheme(
+#     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+#     searchInputStyle = list(
+#       paddingLeft = "8px",
+#       paddingTop = "8px",
+#       paddingBottom = "8px",
+#       width = "100%",
+#       fontSize = "11px"
+#     )
+#   ),
+#   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+# 
+#   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+# )
+
 reactable(
   vnstc,
   columns = list(
-    Sentence = colDef(
+    Sentence = colDef(style= list(background = '#1b1e1e'),
       cell = function(value, index) {
         Translation <- vnstc$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 10, color = '#787878'), Translation)
+          div(style = list(fontSize = 16, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Open Sans'), value),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    Translation = colDef(show = FALSE)
+    Translation = colDef(align = "left", style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5'))
+
   ),
-  defaultPageSize = 1,
+  defaultPageSize = 25,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
       paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
+      width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, height = 525,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 
 ```
@@ -145,36 +177,68 @@ reactable(
 
 vnstd <- vnstd[sample(1:nrow(vnstd)),]
 
+# reactable(
+#   vnstd,
+#   columns = list(
+#     Sentence = colDef(
+#       cell = function(value, index) {
+#         Translation <- vnstd$Translation[index]
+#         Translation <- if (!is.na(Translation)) Translation else "Unknown"
+#         tagList(
+#           div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
+#           div(style = list(fontSize = 10, color = '#787878'), Translation)
+#         )
+#       },
+#       align = "center"
+#     ),
+#     Translation = colDef(show = FALSE)
+#   ),
+#   defaultPageSize = 1,
+#   theme = reactableTheme(
+#     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+#     searchInputStyle = list(
+#       paddingLeft = "8px",
+#       paddingTop = "8px",
+#       paddingBottom = "8px",
+#       width = "100%",
+#       fontSize = "11px"
+#     )
+#   ),
+#   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+# 
+#   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+# )
+
 reactable(
   vnstd,
   columns = list(
-    Sentence = colDef(
+    Sentence = colDef(style= list(background = '#1b1e1e'),
       cell = function(value, index) {
         Translation <- vnstd$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 10, color = '#787878'), Translation)
+          div(style = list(fontSize = 16, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Open Sans'), value),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    Translation = colDef(show = FALSE)
+    Translation = colDef(align = "left", style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5'))
+
   ),
-  defaultPageSize = 1,
+  defaultPageSize = 25,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
       paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
+      width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, height = 525,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 
 ```
@@ -187,36 +251,68 @@ reactable(
 
 vnste <- vnste[sample(1:nrow(vnste)),]
 
+# reactable(
+#   vnste,
+#   columns = list(
+#     Sentence = colDef(
+#       cell = function(value, index) {
+#         Translation <- vnste$Translation[index]
+#         Translation <- if (!is.na(Translation)) Translation else "Unknown"
+#         tagList(
+#           div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
+#           div(style = list(fontSize = 10, color = '#787878'), Translation)
+#         )
+#       },
+#       align = "center"
+#     ),
+#     Translation = colDef(show = FALSE)
+#   ),
+#   defaultPageSize = 1,
+#   theme = reactableTheme(
+#     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+#     searchInputStyle = list(
+#       paddingLeft = "8px",
+#       paddingTop = "8px",
+#       paddingBottom = "8px",
+#       width = "100%",
+#       fontSize = "11px"
+#     )
+#   ),
+#   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+# 
+#   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+# )
+
 reactable(
   vnste,
   columns = list(
-    Sentence = colDef(
+    Sentence = colDef(style= list(background = '#1b1e1e'),
       cell = function(value, index) {
         Translation <- vnste$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 10, color = '#787878'), Translation)
+          div(style = list(fontSize = 16, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Open Sans'), value),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    Translation = colDef(show = FALSE)
+    Translation = colDef(align = "left", style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5'))
+
   ),
-  defaultPageSize = 1,
+  defaultPageSize = 25,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
       paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
+      width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, height = 525,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 
 ```
@@ -232,36 +328,68 @@ reactable(
 # sntdly <- sntdly[sample(1:nrow(sntdly)),]
 comdly <- comdly[sample(1:nrow(comdly)),]
 
+# reactable(
+#   comdly,
+#   columns = list(
+#     Sentence = colDef(
+#       cell = function(value, index) {
+#         Meaning <- comdly$Meaning[index]
+#         Meaning <- if (!is.na(Meaning)) Meaning else "Unknown"
+#         tagList(
+#           div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
+#           div(style = list(fontSize = 10, color = '#787878'), Meaning)
+#         )
+#       },
+#       align = "center"
+#     ),
+#     Meaning = colDef(show = FALSE)
+#   ),
+#   defaultPageSize = 1,
+#   theme = reactableTheme(
+#     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+#     searchInputStyle = list(
+#       paddingLeft = "8px",
+#       paddingTop = "8px",
+#       paddingBottom = "8px",
+#       width = "100%",
+#       fontSize = "11px"
+#     )
+#   ),
+#   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+# 
+#   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+# )
+
 reactable(
   comdly,
   columns = list(
-    Sentence = colDef(
+    Sentence = colDef(style= list(background = '#1b1e1e'),
       cell = function(value, index) {
         Meaning <- comdly$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else "Unknown"
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 10, color = '#787878'), Meaning)
+          div(style = list(fontSize = 16, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Open Sans'), value),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    Meaning = colDef(show = FALSE)
+    Meaning = colDef(align = "left", style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5'))
+
   ),
-  defaultPageSize = 1,
+  defaultPageSize = 25,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
       paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
+      width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, height = 525,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 
 ```
@@ -270,135 +398,178 @@ reactable(
 
 ## <b> Casual </b> {.tabset}
 
-### Sayachi
+<!-- ### Sayachi -->
 
 ```{r, echo=FALSE, message=FALSE}
 
-sntcas.sayachi <- sntcas %>% select(Sayachi.Sentences, Sayachi.Translation) %>% rename(Sentences = Sayachi.Sentences)
+sntcas.sayachi <- sntcas %>% select(Sayachi.Sentences, Sayachi.Translation) %>% rename(Sentences = Sayachi.Sentences, Translation = Sayachi.Translation)
 sntcas.sayachi <- sntcas.sayachi %>% na.omit(sntcas.sayachi)
 sntcas.sayachi <- sntcas.sayachi[sample(1:nrow(sntcas.sayachi)),]
 
-reactable(
-  sntcas.sayachi,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Sayachi.Translation <- sntcas.sayachi$Sayachi.Translation[index]
-        Sayachi.Translation <- if (!is.na(Sayachi.Translation)) Sayachi.Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 10, color = '#787878'), Sayachi.Translation)
-        )
-      },
-      align = "center"
-    ),
-    Sayachi.Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-### Kakochin
-
-```{r, echo=FALSE, message=FALSE}
-
-sntcas.kakochin <- sntcas %>% select(Kakochin.Sentences, Kakochin.Translation) %>% rename(Sentences = Kakochin.Sentences)
+sntcas.kakochin <- sntcas %>% select(Kakochin.Sentences, Kakochin.Translation) %>% rename(Sentences = Kakochin.Sentences, Translation = Kakochin.Translation)
 sntcas.kakochin <- sntcas.kakochin %>% na.omit(sntcas.kakochin)
 sntcas.kakochin <- sntcas.kakochin[sample(1:nrow(sntcas.kakochin)),]
 
+sntcas.ikechan <- sntcas %>% select(Ikechan.Sentences, Ikechan.Translation) %>% rename(Sentences = Ikechan.Sentences, Translation = Ikechan.Translation)
+sntcas.ikechan <- sntcas.ikechan %>% na.omit(sntcas.ikechan)
+sntcas.ikechan <- sntcas.ikechan[sample(1:nrow(sntcas.ikechan)),]
+
+sntcas.all <- bind_rows(sntcas.sayachi, sntcas.kakochin)
+sntcas.all <- bind_rows(sntcas.all, sntcas.ikechan)
+
+# reactable(
+#   sntcas.sayachi,
+#   columns = list(
+#     Sentences = colDef(
+#       cell = function(value, index) {
+#         Sayachi.Translation <- sntcas.sayachi$Sayachi.Translation[index]
+#         Sayachi.Translation <- if (!is.na(Sayachi.Translation)) Sayachi.Translation else "Unknown"
+#         tagList(
+#           div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
+#           div(style = list(fontSize = 10, color = '#787878'), Sayachi.Translation)
+#         )
+#       },
+#       align = "center"
+#     ),
+#     Sayachi.Translation = colDef(show = FALSE)
+#   ),
+#   defaultPageSize = 1,
+#   theme = reactableTheme(
+#     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+#     searchInputStyle = list(
+#       paddingLeft = "8px",
+#       paddingTop = "8px",
+#       paddingBottom = "8px",
+#       width = "100%",
+#       fontSize = "11px"
+#     )
+#   ),
+#   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+# 
+#   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+# )
+
 reactable(
-  sntcas.kakochin,
+  sntcas.all,
   columns = list(
-    Sentences = colDef(
+    Sentences = colDef(style= list(background = '#1b1e1e'),
       cell = function(value, index) {
-        Kakochin.Translation <- sntcas.kakochin$Kakochin.Translation[index]
-        Kakochin.Translation <- if (!is.na(Kakochin.Translation)) Kakochin.Translation else "Unknown"
+        Translation <- sntcas.all$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 10, color = '#787878'), Kakochin.Translation)
+          div(style = list(fontSize = 16, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Open Sans'), value),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    Kakochin.Translation = colDef(show = FALSE)
+    Translation = colDef(align = "left", style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5'))
+
   ),
-  defaultPageSize = 1,
+  defaultPageSize = 25,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
       paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
+      width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, height = 525,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 
 ```
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Ikechan
+<!-- ### Kakochin -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-sntcas.ikechan <- sntcas %>% select(Ikechan.Sentences, Ikechan.Translation) %>% rename(Sentences = Ikechan.Sentences)
-sntcas.ikechan <- sntcas.ikechan %>% na.omit(sntcas.ikechan)
-sntcas.ikechan <- sntcas.ikechan[sample(1:nrow(sntcas.ikechan)),]
+<!-- sntcas.kakochin <- sntcas %>% select(Kakochin.Sentences, Kakochin.Translation) %>% rename(Sentences = Kakochin.Sentences) -->
+<!-- sntcas.kakochin <- sntcas.kakochin %>% na.omit(sntcas.kakochin) -->
+<!-- sntcas.kakochin <- sntcas.kakochin[sample(1:nrow(sntcas.kakochin)),] -->
 
-reactable(
-  sntcas.ikechan,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Ikechan.Translation <- sntcas.ikechan$Ikechan.Translation[index]
-        Ikechan.Translation <- if (!is.na(Ikechan.Translation)) Ikechan.Translation else "Unknown"
-        tagList(
-          div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 10, color = '#787878'), Ikechan.Translation)
-        )
-      },
-      align = "center"
-    ),
-    Ikechan.Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   sntcas.kakochin, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Kakochin.Translation <- sntcas.kakochin$Kakochin.Translation[index] -->
+<!--         Kakochin.Translation <- if (!is.na(Kakochin.Translation)) Kakochin.Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value), -->
+<!--           div(style = list(fontSize = 10, color = '#787878'), Kakochin.Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Kakochin.Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ### Ikechan -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- sntcas.ikechan <- sntcas %>% select(Ikechan.Sentences, Ikechan.Translation) %>% rename(Sentences = Ikechan.Sentences) -->
+<!-- sntcas.ikechan <- sntcas.ikechan %>% na.omit(sntcas.ikechan) -->
+<!-- sntcas.ikechan <- sntcas.ikechan[sample(1:nrow(sntcas.ikechan)),] -->
+
+<!-- reactable( -->
+<!--   sntcas.ikechan, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Ikechan.Translation <- sntcas.ikechan$Ikechan.Translation[index] -->
+<!--         Ikechan.Translation <- if (!is.na(Ikechan.Translation)) Ikechan.Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value), -->
+<!--           div(style = list(fontSize = 10, color = '#787878'), Ikechan.Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Ikechan.Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -896,992 +1067,992 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-## <b> Remember </b> {.tabset}
+<!-- ## <b> Remember </b> {.tabset} -->
 
-### Level {.tabset}
+<!-- ### Level {.tabset} -->
 
-#### Beginner
+<!-- #### Beginner -->
 
-<div class = "row">
-<div class = "col-sm-6">
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-vnstc <- vnstc[sample(1:nrow(vnstc)),]
+<!-- vnstc <- vnstc[sample(1:nrow(vnstc)),] -->
 
-reactable(
-  vnstc,
-  columns = list(
-    Translation = colDef(
-      cell = function(value, index) {
-        Sentence <- vnstc$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentence)
-        )
-      },
-      align = "center"
-    ),
-    Sentence = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+<!-- reactable( -->
+<!--   vnstc, -->
+<!--   columns = list( -->
+<!--     Translation = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Sentence <- vnstc$Sentence[index] -->
+<!--         Sentence <- if (!is.na(Sentence)) Sentence else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentence) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Sentence = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-</div>
-<div class = "col-sm-6">
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-vnstc <- vnstc[sample(1:nrow(vnstc)),]
+<!-- vnstc <- vnstc[sample(1:nrow(vnstc)),] -->
 
-reactable(
-  vnstc,
-  columns = list(
-    Sentence = colDef(
-      cell = function(value, index) {
-        Translation <- vnstc$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   vnstc, -->
+<!--   columns = list( -->
+<!--     Sentence = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- vnstc$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-</div>
-</div>
-
-<!-- ------------------------------------------------------------------------ -->
-
-#### Intermediate
-
-<div class = "row">
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-vnstd <- vnstd[sample(1:nrow(vnstd)),]
-
-reactable(
-  vnstd,
-  columns = list(
-    Translation = colDef(
-      cell = function(value, index) {
-        Sentence <- vnstd$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentence)
-        )
-      },
-      align = "center"
-    ),
-    Sentence = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-</div>
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-vnstd <- vnstd[sample(1:nrow(vnstd)),]
-
-reactable(
-  vnstd,
-  columns = list(
-    Sentence = colDef(
-      cell = function(value, index) {
-        Translation <- vnstd$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-</div>
-</div>
+<!-- </div> -->
+<!-- </div> -->
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### Advance
+<!-- #### Intermediate -->
 
-<div class = "row">
-<div class = "col-sm-6">
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-vnste <- vnste[sample(1:nrow(vnste)),]
+<!-- vnstd <- vnstd[sample(1:nrow(vnstd)),] -->
 
-reactable(
-  vnste,
-  columns = list(
-    Translation = colDef(
-      cell = function(value, index) {
-        Sentence <- vnste$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentence)
-        )
-      },
-      align = "center"
-    ),
-    Sentence = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+<!-- reactable( -->
+<!--   vnstd, -->
+<!--   columns = list( -->
+<!--     Translation = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Sentence <- vnstd$Sentence[index] -->
+<!--         Sentence <- if (!is.na(Sentence)) Sentence else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentence) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Sentence = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-</div>
-<div class = "col-sm-6">
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-vnste <- vnste[sample(1:nrow(vnste)),]
+<!-- vnstd <- vnstd[sample(1:nrow(vnstd)),] -->
 
-reactable(
-  vnste,
-  columns = list(
-    Sentence = colDef(
-      cell = function(value, index) {
-        Translation <- vnste$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   vnstd, -->
+<!--   columns = list( -->
+<!--     Sentence = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- vnstd$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-</div>
-</div>
-
-<!-- ------------------------------------------------------------------------ -->
-
-### Daily {.tabset}
-
-<div class = "row">
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-comdly <- comdly[sample(1:nrow(comdly)),]
-
-reactable(
-  comdly,
-  columns = list(
-    Meaning = colDef(
-      cell = function(value, index) {
-        Sentence <- comdly$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentence)
-        )
-      },
-      align = "center"
-    ),
-    Sentence = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-</div>
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-comdly <- comdly[sample(1:nrow(comdly)),]
-
-reactable(
-  comdly,
-  columns = list(
-    Sentence = colDef(
-      cell = function(value, index) {
-        Meaning <- comdly$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Meaning)
-        )
-      },
-      align = "center"
-    ),
-    Meaning = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-</div>
-</div>
+<!-- </div> -->
+<!-- </div> -->
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Casual {.tabset}
+<!-- #### Advance -->
 
-#### Sayachi
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
 
-<div class = "row">
-<div class = "col-sm-6">
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- vnste <- vnste[sample(1:nrow(vnste)),] -->
 
-sntcas.sayachi <- sntcas.sayachi %>% rename(Translation = Sayachi.Translation)
-sntcas.sayachi <- sntcas.sayachi[sample(1:nrow(sntcas.sayachi)),]
+<!-- reactable( -->
+<!--   vnste, -->
+<!--   columns = list( -->
+<!--     Translation = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Sentence <- vnste$Sentence[index] -->
+<!--         Sentence <- if (!is.na(Sentence)) Sentence else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentence) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Sentence = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
 
-reactable(
-  sntcas.sayachi,
-  columns = list(
-    Translation = colDef(
-      cell = function(value, index) {
-        Sentences <- sntcas.sayachi$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentences)
-        )
-      },
-      align = "center"
-    ),
-    Sentences = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!-- ``` -->
 
-```
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
 
-</div>
-<div class = "col-sm-6">
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- vnste <- vnste[sample(1:nrow(vnste)),] -->
 
-sntcas.sayachi <- sntcas.sayachi[sample(1:nrow(sntcas.sayachi)),]
+<!-- reactable( -->
+<!--   vnste, -->
+<!--   columns = list( -->
+<!--     Sentence = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- vnste$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-reactable(
-  sntcas.sayachi,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- sntcas.sayachi$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!-- ``` -->
 
-```
-
-</div>
-</div>
+<!-- </div> -->
+<!-- </div> -->
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### Kakochin
+<!-- ### Daily {.tabset} -->
 
-<div class = "row">
-<div class = "col-sm-6">
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-sntcas.kakochin <- sntcas.kakochin %>% rename(Translation = Kakochin.Translation)
-sntcas.kakochin <- sntcas.kakochin[sample(1:nrow(sntcas.kakochin)),]
+<!-- comdly <- comdly[sample(1:nrow(comdly)),] -->
 
-reactable(
-  sntcas.kakochin,
-  columns = list(
-    Translation = colDef(
-      cell = function(value, index) {
-        Sentences <- sntcas.kakochin$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentences)
-        )
-      },
-      align = "center"
-    ),
-    Sentences = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+<!-- reactable( -->
+<!--   comdly, -->
+<!--   columns = list( -->
+<!--     Meaning = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Sentence <- comdly$Sentence[index] -->
+<!--         Sentence <- if (!is.na(Sentence)) Sentence else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentence) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Sentence = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-</div>
-<div class = "col-sm-6">
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-sntcas.kakochin <- sntcas.kakochin[sample(1:nrow(sntcas.kakochin)),]
+<!-- comdly <- comdly[sample(1:nrow(comdly)),] -->
 
-reactable(
-  sntcas.kakochin,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- sntcas.kakochin$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   comdly, -->
+<!--   columns = list( -->
+<!--     Sentence = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- comdly$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Meaning) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Meaning = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-</div>
-</div>
-
-<!-- ------------------------------------------------------------------------ -->
-
-#### Ikechan
-
-<div class = "row">
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-sntcas.ikechan <- sntcas.ikechan %>% rename(Translation = Ikechan.Translation)
-sntcas.ikechan <- sntcas.ikechan[sample(1:nrow(sntcas.ikechan)),]
-
-reactable(
-  sntcas.ikechan,
-  columns = list(
-    Translation = colDef(
-      cell = function(value, index) {
-        Sentences <- sntcas.ikechan$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentences)
-        )
-      },
-      align = "center"
-    ),
-    Sentences = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-</div>
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE}
-
-sntcas.ikechan <- sntcas.ikechan[sample(1:nrow(sntcas.ikechan)),]
-
-reactable(
-  sntcas.ikechan,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- sntcas.ikechan$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-</div>
-</div>
+<!-- </div> -->
+<!-- </div> -->
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Random {.tabset}
+<!-- ### Casual {.tabset} -->
 
-#### 1
+<!-- #### Sayachi -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
 
-vnsgg <- vnsgg[sample(1:nrow(vnsgg)),]
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-reactable(
-  vnsgg,
-  columns = list(
-    Concept = colDef(
-      cell = function(value, index) {
-        Sentences <- vnsgg$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- vnsgg$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        Meaning <- vnsgg$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Structure <- vnsgg$Structure[index]
-        Structure <- if (!is.na(Structure)) Structure else ""
-        tagList(
+<!-- sntcas.sayachi <- sntcas.sayachi %>% rename(Translation = Sayachi.Translation) -->
+<!-- sntcas.sayachi <- sntcas.sayachi[sample(1:nrow(sntcas.sayachi)),] -->
 
-          # div(style = list(fontSize = 13, fontWeight = 600), value),
-          # div(style = list(fontSize = 9), Meaning),
-          # div(style = list(fontSize = 10), Structure),
-          
-          # div(style = list(fontSize = 24, fontWeight = 600), Sentences),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation),
-        )
-      },
-      align = "center"
-    ),
-    Sentences = colDef(show = FALSE),
-    Translation = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE),
-    Remarks = colDef(show = FALSE),
-    S1 = colDef(show = FALSE),
-    T1 = colDef(show = FALSE),
-    S2 = colDef(show = FALSE),
-    T2 = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   sntcas.sayachi, -->
+<!--   columns = list( -->
+<!--     Translation = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Sentences <- sntcas.sayachi$Sentences[index] -->
+<!--         Sentences <- if (!is.na(Sentences)) Sentences else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentences) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Sentences = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- sntcas.sayachi <- sntcas.sayachi[sample(1:nrow(sntcas.sayachi)),] -->
+
+<!-- reactable( -->
+<!--   sntcas.sayachi, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- sntcas.sayachi$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- #### Kakochin -->
+
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- sntcas.kakochin <- sntcas.kakochin %>% rename(Translation = Kakochin.Translation) -->
+<!-- sntcas.kakochin <- sntcas.kakochin[sample(1:nrow(sntcas.kakochin)),] -->
+
+<!-- reactable( -->
+<!--   sntcas.kakochin, -->
+<!--   columns = list( -->
+<!--     Translation = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Sentences <- sntcas.kakochin$Sentences[index] -->
+<!--         Sentences <- if (!is.na(Sentences)) Sentences else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value), -->
+<!--           div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentences) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Sentences = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- sntcas.kakochin <- sntcas.kakochin[sample(1:nrow(sntcas.kakochin)),] -->
+
+<!-- reactable( -->
+<!--   sntcas.kakochin, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- sntcas.kakochin$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- #### Ikechan -->
+
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- sntcas.ikechan <- sntcas.ikechan %>% rename(Translation = Ikechan.Translation) -->
+<!-- sntcas.ikechan <- sntcas.ikechan[sample(1:nrow(sntcas.ikechan)),] -->
+
+<!-- reactable( -->
+<!--   sntcas.ikechan, -->
+<!--   columns = list( -->
+<!--     Translation = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Sentences <- sntcas.ikechan$Sentences[index] -->
+<!--         Sentences <- if (!is.na(Sentences)) Sentences else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value), -->
+<!--           div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans'), Sentences) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Sentences = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- sntcas.ikechan <- sntcas.ikechan[sample(1:nrow(sntcas.ikechan)),] -->
+
+<!-- reactable( -->
+<!--   sntcas.ikechan, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- sntcas.ikechan$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans'), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ### Random {.tabset} -->
+
+<!-- #### 1 -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- vnsgg <- vnsgg[sample(1:nrow(vnsgg)),] -->
+
+<!-- reactable( -->
+<!--   vnsgg, -->
+<!--   columns = list( -->
+<!--     Concept = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Sentences <- vnsgg$Sentences[index] -->
+<!--         Sentences <- if (!is.na(Sentences)) Sentences else "" -->
+<!--         Translation <- vnsgg$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         Meaning <- vnsgg$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Structure <- vnsgg$Structure[index] -->
+<!--         Structure <- if (!is.na(Structure)) Structure else "" -->
+<!--         tagList( -->
+
+<!--           # div(style = list(fontSize = 13, fontWeight = 600), value), -->
+<!--           # div(style = list(fontSize = 9), Meaning), -->
+<!--           # div(style = list(fontSize = 10), Structure), -->
+
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), Sentences), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Sentences = colDef(show = FALSE), -->
+<!--     Translation = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Structure = colDef(show = FALSE), -->
+<!--     Remarks = colDef(show = FALSE), -->
+<!--     S1 = colDef(show = FALSE), -->
+<!--     T1 = colDef(show = FALSE), -->
+<!--     S2 = colDef(show = FALSE), -->
+<!--     T2 = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 2
+<!-- #### 2 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-icwrds <- icwrds[sample(1:nrow(icwrds)),]
+<!-- icwrds <- icwrds[sample(1:nrow(icwrds)),] -->
 
-reactable(
-  icwrds,
-  columns = list(
-    Script = colDef(
-      cell = function(value, index) {
-        Translation <- icwrds$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation),
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   icwrds, -->
+<!--   columns = list( -->
+<!--     Script = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- icwrds$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-#### 3
-
-```{r, echo=FALSE, message=FALSE}
-
-expw <- expw[sample(1:nrow(expw)),]
-
-reactable(
-  expw,
-  columns = list(
-    Expression = colDef(
-      cell = function(value, index) {
-        Translation <- expw$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation),
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
+<!-- ``` -->
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 4
+<!-- #### 3 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-vnstg <- vnstg[sample(1:nrow(vnstg)),]
+<!-- expw <- expw[sample(1:nrow(expw)),] -->
 
-reactable(
-  vnstg,
-  columns = list(
-    Phrases = colDef(
-      cell = function(value, index) {
-        Translation <- vnstg$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   expw, -->
+<!--   columns = list( -->
+<!--     Expression = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- expw$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-#### 5
-
-```{r, echo=FALSE, message=FALSE}
-
-vnstb <- vnstb[sample(1:nrow(vnstb)),]
-
-reactable(
-  vnstb,
-  columns = list(
-    Phrase = colDef(
-      cell = function(value, index) {
-        Translation <- vnstb$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
+<!-- ``` -->
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 6
+<!-- #### 4 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-sntv <- sntv[sample(1:nrow(sntv)),]
+<!-- vnstg <- vnstg[sample(1:nrow(vnstg)),] -->
 
-reactable(
-  sntv,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- sntv$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   vnstg, -->
+<!--   columns = list( -->
+<!--     Phrases = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- vnstg$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-#### 7
-
-```{r, echo=FALSE, message=FALSE}
-
-cmwpg <- cmwpg[sample(1:nrow(cmwpg)),]
-
-reactable(
-  cmwpg,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- cmwpg$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
+<!-- ``` -->
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### 8
+<!-- #### 5 -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-cmwpc <- cmwpc[sample(1:nrow(cmwpc)),]
+<!-- vnstb <- vnstb[sample(1:nrow(vnstb)),] -->
 
-reactable(
-  cmwpc,
-  columns = list(
-    Sentences = colDef(
-      cell = function(value, index) {
-        Translation <- cmwpc$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else "Unknown"
-        tagList(
-          # div(style = list(fontSize = 24, fontWeight = 600), value),
-          div(style = list(fontSize = 12, fontWeight = 600), Translation)
-        )
-      },
-      align = "center"
-    ),
-    Translation = colDef(show = FALSE)
-  ),
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+<!-- reactable( -->
+<!--   vnstb, -->
+<!--   columns = list( -->
+<!--     Phrase = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- vnstb$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- #### 6 -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- sntv <- sntv[sample(1:nrow(sntv)),] -->
+
+<!-- reactable( -->
+<!--   sntv, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- sntv$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- #### 7 -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- cmwpg <- cmwpg[sample(1:nrow(cmwpg)),] -->
+
+<!-- reactable( -->
+<!--   cmwpg, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- cmwpg$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- #### 8 -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- cmwpc <- cmwpc[sample(1:nrow(cmwpc)),] -->
+
+<!-- reactable( -->
+<!--   cmwpc, -->
+<!--   columns = list( -->
+<!--     Sentences = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- cmwpc$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "Unknown" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 24, fontWeight = 600), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600), Translation) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 
