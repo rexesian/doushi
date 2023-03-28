@@ -200,6 +200,7 @@ advrm <- read_csv("jpdb/ADVRM-ADV.csv")
 advusg <- read_csv("cpdb/ADVUSG-SCRPT.csv")
 spcvwrds <- read_csv("jpim/SPCVRBS-WRDS.csv")
 spcwwrds <- read_csv("jpim/SPCWRDS-WRDS.csv")
+knlvls <- read_csv("jpim/KNLVL-KLV.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -2369,6 +2370,103 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+### LE {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+knlvls.a <- knlvls %>% select(Kanji, Meaning)
+knlvls.a <- knlvls.a %>% na.omit(knlvls.a) 
+knlvls.a <- knlvls.a[sample(1:nrow(knlvls.a)),]
+
+reactable(
+  knlvls.a,
+  columns = list(
+    Kanji = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Meaning <- knlvls.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 12, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+knlvls.b <- knlvls %>% select(S1) %>% rename(Words = S1)
+knlvls.c <- knlvls %>% select(S2) %>% rename(Words = S2)
+knlvls.d <- knlvls %>% select(S3) %>% rename(Words = S3)
+knlvls.e <- knlvls %>% select(S4) %>% rename(Words = S4)
+knlvls.f <- knlvls %>% select(S5) %>% rename(Words = S5)
+knlvls.g <- knlvls %>% select(S6) %>% rename(Words = S6)
+knlvls.h <- knlvls %>% select(S7) %>% rename(Words = S7)
+knlvls.i <- knlvls %>% select(S8) %>% rename(Words = S8)
+
+knlvls.z <- bind_rows(knlvls.b, knlvls.c)
+knlvls.z <- bind_rows(knlvls.z, knlvls.d)
+knlvls.z <- bind_rows(knlvls.z, knlvls.e)
+knlvls.z <- bind_rows(knlvls.z, knlvls.f)
+knlvls.z <- bind_rows(knlvls.z, knlvls.g)
+knlvls.z <- bind_rows(knlvls.z, knlvls.h)
+knlvls.z <- bind_rows(knlvls.z, knlvls.i)
+
+knlvls.z <- knlvls.z %>% na.omit(knlvls.z) 
+knlvls.z <- knlvls.z[sample(1:nrow(knlvls.z)),]
+
+reactable(
+  knlvls.z,
+  columns = list(
+    Words = colDef(align = "center", style = list(fontSize = 32, fontFamily = 'Open Sans', fontWeight = 600, background = '#dee7e7', color = '#0F2040'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
