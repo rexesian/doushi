@@ -2389,8 +2389,10 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
+# knlvls.a <- knlvls %>% select(Kanji, Meaning, S1, S2, S3, S4, S5, S6, S7, S8)
 knlvls.a <- knlvls %>% select(Kanji, Meaning)
-knlvls.a <- knlvls.a %>% na.omit(knlvls.a) 
+knlvls.a <- knlvls.a %>% na.omit(knlvls.a)
+knlvls.a <- knlvls.a[sample(1:nrow(knlvls.a)),]
 knlvls.a <- knlvls.a[sample(1:nrow(knlvls.a)),]
 
 reactable(
@@ -2400,13 +2402,42 @@ reactable(
       cell = function(value, index) {
         Meaning <- knlvls.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
+        # S1 <- knlvls.a$S1[index]
+        # S1 <- if (!is.na(S1)) S1 else ""
+        # S2 <- knlvls.a$S2[index]
+        # S2 <- if (!is.na(S2)) S2 else ""
+        # S3 <- knlvls.a$S3[index]
+        # S3 <- if (!is.na(S3)) S3 else ""
+        # S4 <- knlvls.a$S4[index]
+        # S4 <- if (!is.na(S4)) S4 else ""
+        # S5 <- knlvls.a$S5[index]
+        # S5 <- if (!is.na(S5)) S5 else ""
+        # S6 <- knlvls.a$S6[index]
+        # S6 <- if (!is.na(S6)) S6 else ""
+        # S7 <- knlvls.a$S7[index]
+        # S7 <- if (!is.na(S7)) S7 else ""
+        # S8 <- knlvls.a$S8[index]
+        # S8 <- if (!is.na(S8)) S8 else ""
         tagList(
           div(style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
-          div(style = list(fontSize = 12, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Meaning)
+          div(style = list(fontSize = 12, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Meaning),
+          # div(style = list(fontSize = 2, color = '#dee7e7'), "."),
+          # div(style = list(fontSize = 2, color = '#dee7e7'), "."),
+          # div(style = list(fontSize = 2, color = '#dee7e7'), "."),
+          # div(style = list(fontSize = 12, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), S1,"。", S2,"。", S3,"。", S4),
+          # div(style = list(fontSize = 12, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), S5,"。", S6,"。", S7,"。", S8),
         )
       },
       align = "center"
     ),
+    # S1 = colDef(show = FALSE),
+    # S2 = colDef(show = FALSE),
+    # S3 = colDef(show = FALSE),
+    # S4 = colDef(show = FALSE),
+    # S5 = colDef(show = FALSE),
+    # S6 = colDef(show = FALSE),
+    # S7 = colDef(show = FALSE),
+    # S8 = colDef(show = FALSE),
     Meaning = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
@@ -30027,9 +30058,21 @@ reactable(
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.1rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  showPageInfo = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, borderless = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -30062,9 +30105,21 @@ reactable(
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.1rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  showPageInfo = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, borderless = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
