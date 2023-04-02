@@ -95,6 +95,7 @@ comdly <- read_csv("jpdb/COMMSTRGY-STRGY.csv")
 sntmre <- read_csv("jpdb/SNTMRE-SNT.csv")
 smplsnt <- read_csv("jpdb/SMPLSNT-SNT.csv")
 splsnt <- read_csv("jpim/SPLSNT-SNT.csv")
+rrdng <- read_csv("jpim/SNTRDG-RDG.csv")
 ```
 
 # <b> Sentences </b> {.tabset}
@@ -722,7 +723,6 @@ reactable(
 )
 
 ```
-
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -1847,5 +1847,58 @@ reactable(
 <!-- ) -->
 
 <!-- ``` -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Reading </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+rrdng <- rrdng[sample(1:nrow(rrdng)),]
+# rrdng.a <- rrdng  %>% slice(1:1)
+
+reactable(
+  rrdng,
+  columns = list(
+    Article = colDef(style= list(background = '#1b1e1e'),
+      minWidth = 280,
+      cell = function(value, index) {
+        Translation <- rrdng$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 200, color = '#f1f5f5', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 300, color = '#f1f5f5', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 
