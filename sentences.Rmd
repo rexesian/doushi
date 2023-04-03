@@ -96,6 +96,8 @@ sntmre <- read_csv("jpdb/SNTMRE-SNT.csv")
 smplsnt <- read_csv("jpdb/SMPLSNT-SNT.csv")
 splsnt <- read_csv("jpim/SPLSNT-SNT.csv")
 rrdng <- read_csv("jpim/SNTRDG-RDG.csv")
+gwrds <- read_csv("jpdb/WGRMR-LST.csv")
+grmsplsnt <- read_csv("jpdb/GRMMRSNS-SNT.csv")
 ```
 
 # <b> Sentences </b> {.tabset}
@@ -1847,6 +1849,73 @@ reactable(
 <!-- ) -->
 
 <!-- ``` -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Grammar </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+gwrds.lst <- gwrds
+gwrds.lst <- gwrds.lst[sample(1:nrow(gwrds.lst)),]
+gwrds.lst <- gwrds.lst[sample(1:nrow(gwrds.lst)),]
+
+# gwrds.n5 <- gwrds %>% slice(1:42)
+# gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
+# gwrds.n4 <- gwrds %>% slice(43:195)
+# gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
+# gwrds.n3 <- gwrds %>% slice(196:338)
+# gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
+# gwrds.n2 <- gwrds %>% slice(339:572)
+# gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
+# gwrds.n1 <- gwrds %>% slice(573:640)
+# gwrds.n1 <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
+# grmsplsnt <- grmsplsnt[sample(1:nrow(grmsplsnt)),]
+# 
+# gwrds.lst <- bind_rows(gwrds.n5, gwrds.n4)
+# gwrds.lst <- bind_rows(gwrds.lst, gwrds.n3)
+# gwrds.lst <- bind_rows(gwrds.lst, gwrds.n2)
+# gwrds.lst <- bind_rows(gwrds.lst, gwrds.n1)
+# gwrds.lst <- bind_rows(gwrds.lst, grmsplsnt)
+
+reactable(
+  gwrds.lst,
+  columns = list(
+    # Words = colDef(minWidth = 32, align = "left" , style = list(fontSize = 13.5, fontFamily = 'Noto Sans JP', background = '#dee7e7', color = '#0F2040'), sticky = "left"),
+    # Meaning = colDef(minWidth = 50, align = "left", style = list(fontSize = 10, fontFamily = 'Noto Sans JP', background = '#dee7e7', color = '#0F2040')),
+    Sentence = colDef(minWidth = 70, style= list(background = '#dee7e7', color = '#0F2040'),
+      cell = function(value, index) {
+        Translation <- gwrds.lst$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 17, color = '#0F2040', fontFamily = 'Open Sans' ,fontWeight = 400), value),
+          div(style = list(fontSize = 9, color = '#0F2040' ,fontWeight = 400), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Words = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Translation = colDef(show = FALSE),
+    Level = colDef(show = FALSE)
+  ),
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 <!-- ------------------------------------------------------------------------ -->
 
