@@ -201,6 +201,7 @@ advusg <- read_csv("cpdb/ADVUSG-SCRPT.csv")
 spcvwrds <- read_csv("jpim/SPCVRBS-WRDS.csv")
 spcwwrds <- read_csv("jpim/SPCWRDS-WRDS.csv")
 knlvls <- read_csv("jpim/KNLVL-KLV.csv")
+knjwrdrd <- read_csv("jpim/WRDRD-KNJ.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1446,8 +1447,97 @@ reactable(
 
 ## Chart {.tabset}
 
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+knjwrdrd <- knjwrdrd[sample(1:nrow(knjwrdrd)),]
+
+reactable(
+  knjwrdrd,
+  columns = list(
+    Kanji = colDef(
+      cell = function(value, index) {
+        K.Meaning <- knjwrdrd$K.Meaning[index]
+        K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
+        Words.A <- knjwrdrd$Words.A[index]
+        Words.A <- if (!is.na(Words.A)) Words.A else ""
+        Words.B <- knjwrdrd$Words.B[index]
+        Words.B <- if (!is.na(Words.B)) Words.B else ""
+        Words.C <- knjwrdrd$Words.C[index]
+        Words.C <- if (!is.na(Words.C)) Words.C else ""
+        Words.D <- knjwrdrd$Words.D[index]
+        Words.D <- if (!is.na(Words.D)) Words.D else ""
+        W.Meaning.A <- knjwrdrd$W.Meaning.A[index]
+        W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else ""
+        W.Meaning.B <- knjwrdrd$W.Meaning.B[index]
+        W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else ""
+        W.Meaning.C <- knjwrdrd$W.Meaning.C[index]
+        W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else ""
+        tagList(
+          div(style = list(fontSize = 60, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), K.Meaning),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), Words.A),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), Words.B),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), Words.C),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), W.Meaning.A),
+          div(style = list(fontSize = 12, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), W.Meaning.B),
+          div(style = list(fontSize = 12, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), W.Meaning.C),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), Words.D),
+        )
+      },
+      align = "center"
+    ),
+    K.Meaning = colDef(show = FALSE),
+    Words.A = colDef(show = FALSE),
+    Words.B = colDef(show = FALSE),
+    Words.C = colDef(show = FALSE),
+    Words.D = colDef(show = FALSE),
+    W.Meaning.A = colDef(show = FALSE),
+    W.Meaning.B = colDef(show = FALSE),
+    W.Meaning.C = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 320),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+    # headerStyle = list(
+    #   backgroundColor = "#F4F5DE",
+    #   color = "hsl(0, 0%, 95%)",
+    #   fontSize = 0.1,
+    #   fontWeight = 100,
+    #   fontFamily = 'Open Sans',
+    #   fontSize = "0.1rem",
+    #   letterSpacing = "1px",
+    #   textTransform = "lowercase",
+    #   padding = "0px",
+    #   "&:hover, &:focus" = list(color = '#ffff00')
+    # ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
 ![](chart.png){width=400px}
 
+</div>
+</div>
 
 ------------------------------------------------------------------------
 
@@ -15199,24 +15289,7 @@ reactable(
 
 #### Meeting {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Meeting a person for the first time**</p>
-
-<div class = "row">
-<div class = "col-sm-6">
-
-    🅼 はじめまして。ジョンです。よろしくお願いします
-    🅵 はじめまして。りなと申します。こちらこそ。よろしくお願いします
-
-</div>
-<div class = "col-sm-6">
-
-    🅼 How do you do. I am John. Nice to meet you　
-    🅵 How do you do. I am Rina. Nice to meet you too..
-    
-</div>
-</div>
-
-<h6> </h6>
+c
 
 ------------------------------------------------------------------------
 
