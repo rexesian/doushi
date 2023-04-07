@@ -203,6 +203,7 @@ spcwwrds <- read_csv("jpim/SPCWRDS-WRDS.csv")
 knlvls <- read_csv("jpim/KNLVL-KLV.csv")
 knjwrdrd <- read_csv("jpim/WRDRD-KNJ.csv")
 dliwrd <- read_csv("jpim/CMWRD-CMNW.csv")
+dliphr <- read_csv("jpim/CMPHR-CMNW.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1610,6 +1611,44 @@ reactable(
 
 <div class = "row">
 <div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+dliphr.a <- dliphr
+dliphr.a <- dliphr.a[sample(1:nrow(dliphr.a)),]
+
+reactable(
+  dliphr.a,
+  columns = list(
+    Sentences = colDef(
+      cell = function(value, index) {
+        Translation <- dliphr.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#800000', fontFamily = 'Open Sans'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 65),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 400,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 </div>
 <div class = "col-sm-6">
