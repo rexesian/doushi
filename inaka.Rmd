@@ -1620,22 +1620,29 @@ dliphr.a <- dliphr.a[sample(1:nrow(dliphr.a)),]
 reactable(
   dliphr.a,
   columns = list(
-    Sentences = colDef(
+    Phrases = colDef(
       cell = function(value, index) {
+        Meaning <- dliphr.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Sentences <- dliphr.a$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
         Translation <- dliphr.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 10, fontWeight = 300, color = '#800000', fontFamily = 'Open Sans'), Translation),
+          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)),
+          div(style = list(fontSize = 14, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), Sentences),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation),
         )
       },
       align = "left"
     ),
+    Meaning = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 10,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 65),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -1643,7 +1650,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 400,
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 390,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
 )
