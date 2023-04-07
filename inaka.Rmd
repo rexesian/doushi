@@ -202,6 +202,7 @@ spcvwrds <- read_csv("jpim/SPCVRBS-WRDS.csv")
 spcwwrds <- read_csv("jpim/SPCWRDS-WRDS.csv")
 knlvls <- read_csv("jpim/KNLVL-KLV.csv")
 knjwrdrd <- read_csv("jpim/WRDRD-KNJ.csv")
+dliwrd <- read_csv("jpim/CMWRD-CMNW.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1447,10 +1448,10 @@ reactable(
 
 ## Diagram {.tabset}
 
+### Kanji {.tabset}
+
 <div class = "row">
 <div class = "col-sm-6">
-
-<!-- ### Words {.tabset} -->
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1533,13 +1534,87 @@ reactable(
 
 ```
 
-<!-- ### Expression {.tabset} -->
+</div>
+<div class = "col-sm-6">
+
+![](chart.png){width=400px}
+<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+### Words {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+dliwrd.a <- dliwrd %>% slice(1:900)
+dliwrd.a <- dliwrd.a[sample(1:nrow(dliwrd.a)),]
+
+reactable(
+  dliwrd.a,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- dliwrd.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Sentences <- dliwrd.a$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
+        Translation <- dliwrd.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)),
+          div(style = list(fontSize = 14, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), Sentences),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 35,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 390,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 </div>
 <div class = "col-sm-6">
 
 ![](chart.png){width=400px}
+<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
 
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+### Phrases {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+</div>
+<div class = "col-sm-6">
+
+![](chart.png){width=400px}
 <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
 
 </div>
