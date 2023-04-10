@@ -204,6 +204,7 @@ knlvls <- read_csv("jpim/KNLVL-KLV.csv")
 knjwrdrd <- read_csv("jpim/WRDRD-KNJ.csv")
 dliwrd <- read_csv("jpim/CMWRD-CMNW.csv")
 dliphr <- read_csv("jpim/CMPHR-CMNW.csv")
+cmmvrb <- read_csv("jpim/CMVRB-VRBS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1627,6 +1628,69 @@ reactable(
         Sentences <- dliphr.a$Sentences[index]
         Sentences <- if (!is.na(Sentences)) Sentences else ""
         Translation <- dliphr.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)),
+          div(style = list(fontSize = 14, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), Sentences),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 390,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+![](chart.png){width=400px}
+<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+
+</div>
+</div>
+
+
+------------------------------------------------------------------------
+
+### Verbs {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+cmmvrb.a <- cmmvrb
+cmmvrb.a <- cmmvrb.a %>% na.omit(cmmvrb.a)
+cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),]
+
+reactable(
+  cmmvrb.a,
+  columns = list(
+    Verbs = colDef(
+      cell = function(value, index) {
+        Meaning <- cmmvrb.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Sentences <- cmmvrb.a$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
+        Translation <- cmmvrb.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(span(style = list(fontSize = 22, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)),
