@@ -78,6 +78,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(reactable)
 library(htmltools)
+library(crosstalk)
 library(bslib)
 library(dplyr)
 library(purrr)
@@ -1681,8 +1682,10 @@ cmmvrb.a <- cmmvrb
 cmmvrb.a <- cmmvrb.a %>% na.omit(cmmvrb.a)
 cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),]
 
-reactable(
-  cmmvrb.a,
+shared_data <- SharedData$new(cmmvrb.a)
+
+tbl <- reactable(
+  shared_data,
   columns = list(
     Verbs = colDef(
       cell = function(value, index) {
@@ -1700,6 +1703,7 @@ reactable(
       },
       align = "left"
     ),
+    Level = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
@@ -1717,6 +1721,16 @@ reactable(
   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 390,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+)
+
+div(
+  class = "chart",
+  div(
+    # class = "filters",
+    filter_select("filter_level", "Level:", shared_data, ~Level, allLevels = TRUE, multiple = FALSE),
+  ),
+  # tags$hr(),
+  tbl
 )
 
 ```
@@ -1743,8 +1757,10 @@ cmmptrn.a <- cmmptrn
 cmmptrn.a <- cmmptrn.a %>% na.omit(cmmptrn.a)
 cmmptrn.a <- cmmptrn.a[sample(1:nrow(cmmptrn.a)),]
 
-reactable(
-  cmmptrn.a,
+shared_data <- SharedData$new(cmmptrn.a)
+
+tbl <- reactable(
+  shared_data, filterable = FALSE,
   columns = list(
     Words = colDef(
       cell = function(value, index) {
@@ -1770,6 +1786,7 @@ reactable(
     Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 10,
+  # elementId = "Level",
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
     searchInputStyle = list(
@@ -1782,6 +1799,16 @@ reactable(
   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 390,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+)
+
+div(
+  class = "chart",
+  div(
+    # class = "filters",
+    filter_select("filter_level", "Level:", shared_data, ~Level, allLevels = TRUE, multiple = FALSE),
+  ),
+  # tags$hr(),
+  tbl
 )
 
 ```
