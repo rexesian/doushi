@@ -207,6 +207,7 @@ dliwrd <- read_csv("jpim/CMWRD-CMNW.csv")
 dliphr <- read_csv("jpim/CMPHR-CMNW.csv")
 cmmvrb <- read_csv("jpim/CMVRB-VRBS.csv")
 cmmptrn <- read_csv("jpim/CMPTRN-LST.csv")
+cmmpassc <- read_csv("jpim/CMPASSC-ASSC.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1832,6 +1833,165 @@ reactable(
 
 ![](chart.png){width=400px}
 <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+## Review {.tabset}
+
+<!-- ### Association {.tabset} -->
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+cmmpassc.a <- cmmpassc
+cmmpassc.a <- cmmpassc.a %>% na.omit(cmmpassc.a)
+cmmpassc.a <- cmmpassc.a[sample(1:nrow(cmmpassc.a)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chart", tags$label("Level:", `for` = "assoc-level-filter"),
+      # div(
+        tags$select(
+          id = "assoc-level-filter",
+          onchange = "Reactable.setFilter('assoc-filter-table', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(cmmptrn.a$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  cmmpassc.a, filterable = FALSE,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- cmmpassc.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- cmmpassc.a$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        # Sentence <- cmmpassc.a$Sentence[index]
+        # Sentence <- if (!is.na(Sentence)) Sentence else ""
+        # Translation <- cmmpassc.a$Translation[index]
+        # Translation <- if (!is.na(Translation)) Translation else ""
+        Level <- cmmpassc.a$Level[index]
+        Level <- if (!is.na(Level)) Level else ""
+        tagList(
+          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 8, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
+          # div(style = list(fontSize = 11, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Reading),
+          # div(style = list(fontSize = 14, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation),
+        )
+      },
+      align = "left", minWidth = 550
+    ),
+    Level = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+    # Sentence = colDef(show = FALSE),
+    # Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 10,
+  elementId = "assoc-filter-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 398,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- cmmpassc.a <- cmmpassc -->
+<!-- cmmpassc.a <- cmmpassc.a %>% na.omit(cmmpassc.a) -->
+<!-- cmmpassc.a <- cmmpassc.a[sample(1:nrow(cmmpassc.a)),] -->
+
+<!-- htmltools::browsable( -->
+<!--   tagList( -->
+<!--     div( -->
+<!--       div(class = "chart", tags$label("Level:", `for` = "assoca-level-filter"), -->
+<!--       # div( -->
+<!--         tags$select( -->
+<!--           id = "assoca-level-filter", -->
+<!--           onchange = "Reactable.setFilter('assoca-filter-table', 'Level', this.value)", -->
+<!--           tags$option("All", value = ""), -->
+<!--           lapply(unique(cmmptrn.a$Level), tags$option) -->
+<!--         # ) -->
+<!--       )) -->
+<!--     ), -->
+<!--     # tags$hr("aria-hidden" = "true"), -->
+
+<!-- reactable( -->
+<!--   cmmpassc.a, filterable = FALSE, -->
+<!--   columns = list( -->
+<!--     Words = colDef( -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- cmmpassc.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Reading <- cmmpassc.a$Reading[index] -->
+<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         # Sentence <- cmmpassc.a$Sentence[index] -->
+<!--         # Sentence <- if (!is.na(Sentence)) Sentence else "" -->
+<!--         # Translation <- cmmpassc.a$Translation[index] -->
+<!--         # Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         Level <- cmmpassc.a$Level[index] -->
+<!--         Level <- if (!is.na(Level)) Level else "" -->
+<!--         tagList( -->
+<!--           div(span(style = list(fontSize = 22, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 8, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Reading), -->
+<!--           # div(style = list(fontSize = 14, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), Sentence), -->
+<!--           # div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left", minWidth = 550 -->
+<!--     ), -->
+<!--     Level = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Reading = colDef(show = FALSE) -->
+<!--     # Sentence = colDef(show = FALSE), -->
+<!--     # Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   defaultPageSize = 1, -->
+<!--   elementId = "assoca-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 390), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE,  -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!--   ) -->
+<!-- ) -->
+
+<!-- ``` -->
+
 
 </div>
 </div>
