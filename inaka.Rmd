@@ -208,6 +208,7 @@ dliphr <- read_csv("jpim/CMPHR-CMNW.csv")
 cmmvrb <- read_csv("jpim/CMVRB-VRBS.csv")
 cmmptrn <- read_csv("jpim/CMPTRN-LST.csv")
 cmmpassc <- read_csv("jpim/CMPASSC-ASSC.csv")
+cmmpnflct <- read_csv("jpim/CMPNFLCT-NFLCT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1756,6 +1757,93 @@ reactable(
 
 ------------------------------------------------------------------------
 
+### Inflects {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+cmmpnflct.a <- cmmpnflct
+cmmpnflct.a <- cmmpnflct.a %>% na.omit(cmmpnflct.a)
+cmmpnflct.a <- cmmpnflct.a[sample(1:nrow(cmmpnflct.a)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chart", tags$label("Level:", `for` = "inflect-level-filter"),
+      # div(
+        tags$select(
+          id = "inflect-level-filter",
+          onchange = "Reactable.setFilter('inflect-filter-table', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(cmmpnflct.a$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  cmmpnflct.a, filterable = FALSE,
+  columns = list(
+    Words = colDef(
+      cell = function(value, index) {
+        Meaning <- cmmpnflct.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Remarks <- cmmpnflct.a$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        Sentence <- cmmpnflct.a$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Translation <- cmmpnflct.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        Level <- cmmpnflct.a$Level[index]
+        Level <- if (!is.na(Level)) Level else ""
+        tagList(
+          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 5, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#009A77', fontFamily = 'Open Sans'), Remarks),
+          div(style = list(fontSize = 14, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), Sentence),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation),
+        )
+      },
+      align = "left", 
+    ),
+    Level = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 10,
+  elementId = "inflect-filter-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 365,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+)
+  )
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+![](chart.png){width=400px}
+<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
 ### Patterns {.tabset}
 
 <div class = "row">
@@ -1861,7 +1949,7 @@ htmltools::browsable(
           id = "assoc-level-filter",
           onchange = "Reactable.setFilter('assoc-filter-table', 'Level', this.value)",
           tags$option("All", value = ""),
-          lapply(unique(cmmptrn.a$Level), tags$option)
+          lapply(unique(cmmpassc.a$Level), tags$option)
         # )
       ))
     ),
@@ -1889,7 +1977,7 @@ reactable(
           # div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation),
         )
       },
-      align = "left", minWidth = 550
+      align = "left"
     ),
     Level = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
