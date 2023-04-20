@@ -1452,16 +1452,45 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Diagram {.tabset}
+## Focus {.tabset}
 
-### Kanji {.tabset}
+### Diagram {.tabset}
 
 <div class = "row">
 <div class = "col-sm-6">
 
+![](chart.png){width=400px}
+
+<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+### Kanji {.tabset}
+
+<div class = "row">
+<div class = "col-sm-8">
+
 ```{r, echo=FALSE, message=FALSE}
 
 knjwrdrd <- knjwrdrd[sample(1:nrow(knjwrdrd)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chart", tags$label("Level:", `for` = "kanji-level-filter"),
+      # div(
+        tags$select(
+          id = "kanji-level-filter",
+          onchange = "Reactable.setFilter('kanji-filter-table', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(knjwrdrd$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
 
 reactable(
   knjwrdrd,
@@ -1502,6 +1531,7 @@ reactable(
       },
       align = "center"
     ),
+    Level = colDef(show = FALSE),
     K.Meaning = colDef(show = FALSE),
     Words.A = colDef(show = FALSE),
     Words.B = colDef(show = FALSE),
@@ -1512,6 +1542,7 @@ reactable(
     W.Meaning.C = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
+  elementId = "kanji-filter-table",
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 350),
     searchInputStyle = list(
@@ -1536,15 +1567,17 @@ reactable(
   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
 )
 
 ```
 
 </div>
-<div class = "col-sm-6">
+<div class = "col-sm-4">
 
-![](chart.png){width=400px}
-<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+<!-- ![](chart.png){width=400px} -->
+<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
 
 </div>
 </div>
@@ -1554,12 +1587,27 @@ reactable(
 ### Words {.tabset}
 
 <div class = "row">
-<div class = "col-sm-6">
+<div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
 
-dliwrd.a <- dliwrd %>% slice(1:1030)
+dliwrd.a <- dliwrd %>% slice(1:1060)
 dliwrd.a <- dliwrd.a[sample(1:nrow(dliwrd.a)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chart", tags$label("Level:", `for` = "words-level-filter"),
+      # div(
+        tags$select(
+          id = "words-level-filter",
+          onchange = "Reactable.setFilter('words-filter-table', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(dliwrd.a$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
 
 reactable(
   dliwrd.a,
@@ -1580,11 +1628,13 @@ reactable(
       },
       align = "left"
     ),
+    Level = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 35,
+  elementId = "words-filter-table",
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
     searchInputStyle = list(
@@ -1597,15 +1647,17 @@ reactable(
   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 390,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
 )
 
 ```
 
 </div>
-<div class = "col-sm-6">
+<div class = "col-sm-4">
 
-![](chart.png){width=400px}
-<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+<!-- ![](chart.png){width=400px} -->
+<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
 
 </div>
 </div>
@@ -1615,12 +1667,27 @@ reactable(
 ### Phrases {.tabset}
 
 <div class = "row">
-<div class = "col-sm-6">
+<div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
 
 dliphr.a <- dliphr
 dliphr.a <- dliphr.a[sample(1:nrow(dliphr.a)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chart", tags$label("Level:", `for` = "phrases-level-filter"),
+      # div(
+        tags$select(
+          id = "phrases-level-filter",
+          onchange = "Reactable.setFilter('phrases-filter-table', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(dliphr.a$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
 
 reactable(
   dliphr.a,
@@ -1641,11 +1708,13 @@ reactable(
       },
       align = "left"
     ),
+    Level = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
     Sentences = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 10,
+  elementId = "phrases-filter-table",
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
     searchInputStyle = list(
@@ -1658,15 +1727,17 @@ reactable(
   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 390,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
 )
 
 ```
 
 </div>
-<div class = "col-sm-6">
+<div class = "col-sm-4">
 
-![](chart.png){width=400px}
-<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+<!-- ![](chart.png){width=400px} -->
+<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
 
 </div>
 </div>
@@ -1676,7 +1747,7 @@ reactable(
 ### Verbs {.tabset}
 
 <div class = "row">
-<div class = "col-sm-6">
+<div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1743,14 +1814,13 @@ reactable(
   )
 )
 
-
 ```
 
 </div>
-<div class = "col-sm-6">
+<div class = "col-sm-4">
 
-![](chart.png){width=400px}
-<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+<!-- ![](chart.png){width=400px} -->
+<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
 
 </div>
 </div>
@@ -1760,7 +1830,7 @@ reactable(
 ### Inflects {.tabset}
 
 <div class = "row">
-<div class = "col-sm-6">
+<div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1834,10 +1904,10 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-6">
+<div class = "col-sm-4">
 
-![](chart.png){width=400px}
-<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+<!-- ![](chart.png){width=400px} -->
+<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
 
 </div>
 </div>
@@ -1847,7 +1917,7 @@ reactable(
 ### Patterns {.tabset}
 
 <div class = "row">
-<div class = "col-sm-6">
+<div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1917,10 +1987,10 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-6">
+<div class = "col-sm-4">
 
-![](chart.png){width=400px}
-<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+<!-- ![](chart.png){width=400px} -->
+<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
 
 </div>
 </div>
@@ -1932,7 +2002,7 @@ reactable(
 <!-- ### Association {.tabset} -->
 
 <div class = "row">
-<div class = "col-sm-6">
+<div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -1988,7 +2058,7 @@ reactable(
   defaultPageSize = 50,
   elementId = "assoc-filter-table",
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 60),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -1996,7 +2066,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 397,
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 430,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
   )
@@ -2006,7 +2076,7 @@ reactable(
 ```
 
 </div>
-<div class = "col-sm-6">
+<div class = "col-sm-4">
 
 
 <!-- ```{r, echo=FALSE, message=FALSE} -->
@@ -2080,8 +2150,8 @@ reactable(
 
 <!-- ``` -->
 
-![](chart.png){width=400px}
-<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+<!-- ![](chart.png){width=400px} -->
+<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
 
 </div>
 </div>
