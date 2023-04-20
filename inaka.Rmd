@@ -1819,6 +1819,72 @@ reactable(
 </div>
 <div class = "col-sm-4">
 
+```{r, echo=FALSE, message=FALSE}
+
+# cmmvrb.a <- cmmvrb
+# cmmvrb.a <- cmmvrb.a %>% na.omit(cmmvrb.a)
+cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chart", tags$label("Level:", `for` = "verbb-level-filter"),
+      # div(
+        tags$select(
+          id = "verbb-level-filter",
+          onchange = "Reactable.setFilter('verbb-filter-table', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(cmmvrb.a$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  cmmvrb.a,
+  columns = list(
+    Verbs = colDef(style= list(background = '#f9f6ed'),
+      cell = function(value, index) {
+        Meaning <- cmmvrb.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        # Sentences <- cmmvrb.a$Sentences[index]
+        # Sentences <- if (!is.na(Sentences)) Sentences else ""
+        # Translation <- cmmvrb.a$Translation[index]
+        # Translation <- if (!is.na(Translation)) Translation else ""
+        # Level <- cmmvrb.a$Level[index]
+        # Level <- if (!is.na(Level)) Level else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Level = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  defaultPageSize = 1,
+  elementId = "verbb-filter-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 317),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
+)
+
+```
+
 <!-- ![](chart.png){width=400px} -->
 <!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
 
