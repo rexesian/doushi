@@ -268,6 +268,8 @@ cmmpnflct <- read_csv("jpim/CMPNFLCT-NFLCT.csv")
 wrdmng <- read_csv("jpim/WRDMNG-WRDL.csv")
 dfexmple <- read.csv("jpdb/TBL3-TBWRDS.csv")
 tblw2 <- read_csv("jpdb/TBL2-TBWRDS.csv")
+vnstx <- read_csv("jpdb/VERBSYL-VERBS.csv")
+vnstr <- read_csv("jpdb/VERBRNDM-VERBS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -10335,14 +10337,14 @@ nounw.a <- nounw.a[sample(1:nrow(nounw.a)),]
 reactable(
   nounw.a,
   columns = list(
-    Words = colDef(style= list(background = '#dee7e7'),
+    Words = colDef(style= list(background = '#edede9'),
       cell = function(value, index) {
         Reading <- nounw.a$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- nounw.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 28, fontWeight = 600, color = '#404040'), value),
+          div(style = list(fontSize = 28, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040'), Reading),
           # div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
@@ -10412,7 +10414,6 @@ reactable(
   rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
-    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -10437,16 +10438,16 @@ nounw.a <- nounw.a[sample(1:nrow(nounw.a)),]
 reactable(
   nounw.a,
   columns = list(
-    Words = colDef(style= list(background = '#dee7e7'),
+    Words = colDef(style= list(background = '#edede9'),
       cell = function(value, index) {
         Reading <- nounw.a$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- nounw.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), value),
-          # div(style = list(fontSize = 11, color = '#404040'), Reading),
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#404040'), Meaning)
+          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 11, color = '#0F2040'), Reading),
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
@@ -10585,81 +10586,115 @@ reactable(
 
 ###### **Adjective Stem ⇢ Adverb**
 
-    ・うまい　　⇢　うまく　　◦ skillfully, well
-    ・やすい　　⇢　やすく　　◦ inexpensively, cheaply
-    ・ふかい　　⇢　ふかく　　◦ deeply, intimately
-    ・はやい　　⇢　はやく　　◦ early, soon, quickly
-    ・すごい　　⇢　すごく　　◦ awfully, very, immensely
-    ・みじかい　⇢　みじかく　◦ shortly, briefly
-    ・くわしい　⇢　くわしく　◦ in detail, fully
+<div class = "expressjp">
+・うまい　　⇢　うまく　　◦ skillfully, well   
+・やすい　　⇢　やすく　　◦ inexpensively, cheaply  
+・ふかい　　⇢　ふかく　　◦ deeply, intimately   
+・はやい　　⇢　はやく　　◦ early, soon, quickly   
+・すごい　　⇢　すごく　　◦ awfully, very, immensely  
+・みじかい　⇢　みじかく　◦ shortly, briefly   
+・くわしい　⇢　くわしく　◦ in detail, fully   
+</div>
+
+<h6> </h6>
 
 ###### **Na Adjective ⇢ Adverb**
 
-    ・きれい　　⇢　きれいに　　◦ neatly, carefully
-    ・とくべつ　⇢　とくべつに　◦ speacilly, particularlly
-    ・たいせつ　⇢　たいせつに　◦ carefully, with great care
+<div class = "expressjp">
+・きれい　　⇢　きれいに　　◦ neatly, carefully    
+・とくべつ　⇢　とくべつに　◦ specially, particularly      
+・たいせつ　⇢　たいせつに　◦ carefully, with great care    
+</div>
+
+<h6> </h6>
 
 ###### **No Adjective ⇢ Adverb**
 
-    ・はだか　⇢　はだかで　◦ nakedly
+<div class = "expressjp">
+・はだか　⇢　はだかで　◦ nakedly    
+</div>
+
+<h6> </h6>
 
 ###### **Onomatope ⇢ Adverb**
 
-    ・ちゃんと　⇢　ちゃんと　◦ properly, deligently, exactly
-    ・ヨボヨボ　⇢　ヨボヨボ　◦ shaky, unsteadily
-    ・すっかり　⇢　すっかり　◦ completely, entirely
+<div class = "expressjp">
+・ちゃんと　⇢　ちゃんと　◦ properly, diligently, exactly    
+・ヨボヨボ　⇢　ヨボヨボ　◦ shaky, unsteadily    
+・すっかり　⇢　すっかり　◦ completely, entirely    
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・ゆっくり　⇢　ゆっくり(と)　◦ slowly, leisurely
-    ・ピカピカ　⇢　ピカピカ(と)　◦ sparkly
-    ・ふらふら　⇢　ふらふら(と)　◦ shaky, unsteadily
+<div class = "expressjp">
+・ゆっくり　⇢　ゆっくり(と)　◦ slowly, leisurely    
+・ピカピカ　⇢　ピカピカ(と)　◦ sparkly    
+・ふらふら　⇢　ふらふら(と)　◦ shaky, unsteadily   
+</div>
+
+<h6> </h6>
 
 ###### **Verbs ⇢ Adverb**
 
-    ・はじめる　⇢　はじめて　◦ first time
-    ・きわめる　⇢　きわめて　◦ extremely, exceedingly
-    ・すぐれる　⇢　すぐれて　◦ exceedingly
-    ・いそぐ　　⇢　いそいで　◦ quickly
-    ・追う　　　⇢　おって　　◦ later on, shortly, in due course
-    ・かくれる　⇢　かくれて　◦ secretly
+<div class = "expressjp">
+・はじめる　⇢　はじめて　◦ first time     
+・きわめる　⇢　きわめて　◦ extremely, exceedingly    
+・すぐれる　⇢　すぐれて　◦ exceedingly    
+・いそぐ　　⇢　いそいで　◦ quickly   
+・追う　　　⇢　おって　　◦ later on, shortly, in due course   
+・かくれる　⇢　かくれて　◦ secretly   
+</div>
+
+<h6> </h6>
 
 ###### **Verbs (Duplication) ⇢ Adverb**
 
-    ・おそれる　⇢　おそる-おそる　◦ timidly 
-    ・かわる　　⇢　かわる-がわる　◦ in-turn
-    ・ます　　　⇢　ます-ます　　　◦ increasingly
-    ・なく　　　⇢　なく-なく　　　◦ in tears
-    ・みる　　　⇢　みる-みる　　　◦ as you look on, very fast, in a twinkle
+<div class = "expressjp">
+・おそれる　⇢　おそる-おそる　◦ timidly     
+・かわる　　⇢　かわる-がわる　◦ in-turn    
+・ます　　　⇢　ます-ます　　　◦ increasingly   
+・なく　　　⇢　なく-なく　　　◦ in tears    
+・みる　　　⇢　みる-みる　　　◦ as you look on, very fast, in a twinkle  
+</div>
+
+<h6> </h6>
 
 ###### **Nouns (Adverbial Nouns) ⇢ Adverb**
 
 ###### These are used as an adeverb to express time
 
-    ・いま　　⇢　いま　　◦ now 
-    ・きょう　⇢　きょう　◦ today
-    ・きのう　⇢　きのう　◦ yesterday
-    ・あした　⇢　あした　◦ tomorrow
-    ・あさ　　⇢　あさ　　◦ morning
-    ・ひる　　⇢　ひる　　◦ noon
-    ・よる　　⇢　よる　　◦ night
-    ・はる　　⇢　はる　　◦ spring
-    ・なつ　　⇢　なつ　　◦ summer
-    ・あき　　⇢　あき　　◦ autumn
-    ・ふゆ　　⇢　ふゆ　　◦ winter
-    ・むかし　⇢　むかし　◦ old times
+<div class = "expressjp">
+・いま　　⇢　いま　　◦ now     
+・きょう　⇢　きょう　◦ today    
+・きのう　⇢　きのう　◦ yesterday   
+・あした　⇢　あした　◦ tomorrow    
+・あさ　　⇢　あさ　　◦ morning    
+・ひる　　⇢　ひる　　◦ noon    
+・よる　　⇢　よる　　◦ night    
+・はる　　⇢　はる　　◦ spring    
+・なつ　　⇢　なつ　　◦ summer   
+・あき　　⇢　あき　　◦ autumn    
+・ふゆ　　⇢　ふゆ　　◦ winter   
+・むかし　⇢　むかし　◦ old times    
+</div>
+
+<h6> </h6>
 
 ###### **Nouns・Verbs + Compound Particle (Pre-Verbal Form) ⇢ Adverbials**
 
 ###### Modifies, describes or gives more information about the verb it's closely connected
 
-    ・日本の文化について話す
-    ・年を取るにつれて記憶力が衰える
+<div class = "expressjp">
+・日本の文化について話す    
+・年を取るにつれて記憶力が衰える    
+</div>
 
-<!-- <h>   -->
+<h6> </h6>
 
-    ・To talk about Japanese culture
-    ・As one grows old one's memory fails
+<div class = "expressjp">
+ ・To talk about Japanese culture     
+ ・As one grows old one's memory fails     
+</div>
 
 <h6> </h6>
 
@@ -10671,80 +10706,90 @@ reactable(
 
 ###### **Indicates the way some action is being performed**
 
-    ・きれい　　⇢　きれいに　◦ neatly
-    ・すっかり　⇢　すっかり　◦ completely
-    ・ゆっくり　⇢　ゆっくり　◦ well
-    ・まっすぐ　⇢　まっすぐ　◦ straightly
-    ・ちょうど　⇢　ちょうど　◦ exactly
-    ・はっきり　⇢　はっきり　◦ clearly
-    ・まったく　⇢　まったく　◦ really
-    ・ちゃんと　⇢　ちゃんと　◦ properly
-    ・きちんと　⇢　きちんと　◦ accurately
-    ・ぶじ　　　⇢　ぶじに　　◦ safely
-    ・さっそく　⇢　さっそく　◦ immediately      
+<div class = "expressjp">
+・きれい　　⇢　きれいに　◦ neatly    
+・すっかり　⇢　すっかり　◦ completely  
+・ゆっくり　⇢　ゆっくり　◦ well   
+・まっすぐ　⇢　まっすぐ　◦ straightly  
+・ちょうど　⇢　ちょうど　◦ exactly    
+・はっきり　⇢　はっきり　◦ clearly   
+・まったく　⇢　まったく　◦ really   
+・ちゃんと　⇢　ちゃんと　◦ properly    
+・きちんと　⇢　きちんと　◦ accurately   
+・ぶじ　　　⇢　ぶじに　　◦ safely    
+・さっそく　⇢　さっそく　◦ immediately        
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Adverbs of Degree and Quantity**</p>
 
 ###### **Indicates the degree to which the word it modifies**
 
-    ・もっと　　⇢　もっと　　　◦ more, even more, further
-    ・もっとも　⇢　もっとも　　◦ extremely, most
-    ・いちばん　⇢　いちばん　　◦ most, number one
-    ・だいぶ　　⇢　だいぶ　　　◦ pretty, considerably
-    ・ひじょう　⇢　ひじょうに　◦ very, extremely
-    ・ほとんど　⇢　ほとんど　　◦ almost, mostly
-    ・いっさい　⇢　いっさい　　◦ entirety, (not) at all, never
-    ・じつ　　　⇢　じつに　　　◦ really, very clever
-    ・かなり　　⇢　かなり　　　◦ considerably, fairly
-    ・けっこう　⇢　けっこう　　◦ quite, fairly, considerably
-    ・きわめて　⇢　きわめて　　◦ extremely, exceedingly
-    ・すっかり　⇢　すっかり　　◦ completely, entirely
-    ・たいへん　⇢　たいへん　　◦ very, greatly, terribly
-    ・とても　　⇢　とても　　　◦ very, exceedingly
-    ・すごく　　⇢　すごく　　　◦ very, immensely
-    ・たくさん　⇢　たくさん　　◦ a lot, sufficiently
-    ・おおい　　⇢　おおいに　　◦ a lot, much, greatly
-    ・わずか　　⇢　わずかに　　◦ a little, slightly
-    ・ずいぶん　⇢　ずいぶん　　◦ very, etremely, terribly
-    ・すこし　　⇢　すこし　　　◦ a little, a few
-    ・あまり　　⇢　あまり　　　◦ (not) very much
-    ・ぜんぜん　⇢　ぜんぜん　　◦ (not) at all
-    ・なかなか　⇢　なかなか　　◦ pretty, fairly
-    ・たっぷり　⇢　たっぷり　　◦ full, plenty, ample
-    ・まあまあ　⇢　まあまあ　　◦ so-so
+<div class = "expressjp">
+・もっと　　⇢　もっと　　　◦ more, even more, further           
+・もっとも　⇢　もっとも　　◦ extremely, most    
+・いちばん　⇢　いちばん　　◦ most, number one   
+・だいぶ　　⇢　だいぶ　　　◦ pretty, considerably   
+・ひじょう　⇢　ひじょうに　◦ very, extremely    
+・ほとんど　⇢　ほとんど　　◦ almost, mostly.   
+・いっさい　⇢　いっさい　　◦ entirety, (not) at all, never   
+・じつ　　　⇢　じつに　　　◦ really, very clever    
+・かなり　　⇢　かなり　　　◦ considerably, fairly    
+・けっこう　⇢　けっこう　　◦ quite, fairly, considerably    
+・きわめて　⇢　きわめて　　◦ extremely, exceedingly   
+・すっかり　⇢　すっかり　　◦ completely, entirely    
+・たいへん　⇢　たいへん　　◦ very, greatly, terribly    
+・とても　　⇢　とても　　　◦ very, exceedingly   
+・すごく　　⇢　すごく　　　◦ very, immensely   
+・たくさん　⇢　たくさん　　◦ a lot, sufficiently    
+・おおい　　⇢　おおいに　　◦ a lot, much, greatly    
+・わずか　　⇢　わずかに　　◦ a little, slightly    
+・ずいぶん　⇢　ずいぶん　　◦ very, extremely, terribly   
+・すこし　　⇢　すこし　　　◦ a little, a few    
+・あまり　　⇢　あまり　　　◦ (not) very much   
+・ぜんぜん　⇢　ぜんぜん　　◦ (not) at all     
+・なかなか　⇢　なかなか　　◦ pretty, fairly    
+・たっぷり　⇢　たっぷり　　◦ full, plenty, ample   
+・まあまあ　⇢　まあまあ　　◦ so-so     
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Adverbial Nouns of Time and Frequency**</p>
 
 ###### **Indicates the time and frequency to which the word it modifies**
 
-    ・あらかじめ　　⇢ あらかじめ　　◦ beforehand, previously
-    ・はじめ　　　　⇢ はじめに　　　◦ firstly, first of all
-    ・いま　　　　　⇢ いま　　　　　◦ now
-    ・いまにも　　　⇢ いまにも　　　◦ any moment
-    ・このあいだ　　⇢ このあいだ　　◦ the other day, lately
-    ・このところ　　⇢ このところ　　◦ lately, recently
-    ・まだ　　　　　⇢ まだ　　　　　◦ still, as yet, only
-    ・まもなく　　　⇢ まもなく　　　◦ soon, shortly, in a moment
-    ・まれ　　　　　⇢ まれに　　　　◦ rarely
-    ・また　　　　　⇢ また　　　　　◦ again
-    ・もう　　　　　⇢ もう　　　　　◦ already
-    ・むかし　　　　⇢ むかし　　　　◦ in the past
-    ・さいご　　　　⇢ さいごに　　　◦ finally
-    ・さいきん　　　⇢ さいきん　　　◦ recently
-    ・さいしょ　　　⇢ さいしょに　　◦ first, onset
-    ・さき　　　　　⇢ さきに　　　　◦ ahead (of), first
-    ・さきほど　　　⇢ さきほど　　　◦ a while ago
-    ・さっき　　　　⇢ さっき　　　　◦ a moment ago
-    ・すぐ　　　　　⇢ すぐに　　　　◦ immediately
-    ・すこし　　　　⇢ すこし　　　　◦ a little, a bit
-    ・たびたび　　　⇢ たびたび  　　◦ often
-    ・しばしば　　　⇢ しばしば　　　◦ frequently
-    ・しょっちゅう　⇢ しょっちゅう　◦ always, frequently
-    ・すで　　　　　⇢ すでに　　　　◦ already, too late
-    ・つぎ　　　　　⇢ つぎに　　　　◦ next to
-    ・よく　　　　　⇢ よく　　　　　◦ often
-    ・やがて　　　　⇢ やがて　　　　◦ shortly
-    ・ずっと　　　　⇢ ずっと　　　　◦ all along, throughout
+<div class = "expressjp">
+・あらかじめ　　⇢ あらかじめ　　◦ beforehand, previously    
+・はじめ　　　　⇢ はじめに　　　◦ firstly, first of all    
+・いま　　　　　⇢ いま　　　　　◦ now    
+・いまにも　　　⇢ いまにも　　　◦ any moment   
+・このあいだ　　⇢ このあいだ　　◦ the other day, lately   
+・このところ　　⇢ このところ　　◦ lately, recently   
+・まだ　　　　　⇢ まだ　　　　　◦ still, as yet, only   
+・まもなく　　　⇢ まもなく　　　◦ soon, shortly, in a moment   
+・まれ　　　　　⇢ まれに　　　　◦ rarely   
+・また　　　　　⇢ また　　　　　◦ again    
+・もう　　　　　⇢ もう　　　　　◦ already    
+・むかし　　　　⇢ むかし　　　　◦ in the past   
+・さいご　　　　⇢ さいごに　　　◦ finally   
+・さいきん　　　⇢ さいきん　　　◦ recently   
+・さいしょ　　　⇢ さいしょに　　◦ first, onset    
+・さき　　　　　⇢ さきに　　　　◦ ahead (of), first      
+・さきほど　　　⇢ さきほど　　　◦ a while ago  
+・さっき　　　　⇢ さっき　　　　◦ a moment ago    
+・すぐ　　　　　⇢ すぐに　　　　◦ immediately    
+・すこし　　　　⇢ すこし　　　　◦ a little, a bit    
+・たびたび　　　⇢ たびたび  　　◦ often   
+・しばしば　　　⇢ しばしば　　　◦ frequently    
+・しょっちゅう　⇢ しょっちゅう　◦ always, frequently   
+・すで　　　　　⇢ すでに　　　　◦ already, too late   
+・つぎ　　　　　⇢ つぎに　　　　◦ next to     
+・よく　　　　　⇢ よく　　　　　◦ often  
+・やがて　　　　⇢ やがて　　　　◦ shortly    
+・ずっと　　　　⇢ ずっと　　　　◦ all along, throughout   
+</div>
 
 <h6> </h6>
 
@@ -10755,56 +10800,78 @@ reactable(
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Affirmative**</p>
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**・まれに・ぜひ**</p>
 
-    ・そういうことも稀にある
-    ・コンサートと併せてぜひお越しください
- 
-<!-- <h> -->
-     
-    ・Rarely does that happen
-    ・Please come along with the concert
+<div class = "expressjp">
+・そういうことも稀にある.   
+・コンサートと併せてぜひお越しください.   
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">   
+・Rarely does that happen.   
+・Please come along with the concert.   
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Negative**</p>
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**・あまり・けっして・たいして・めったに**</p>
-   
-    ・あまり幸せそうに見えなかったな
-    ・この矛盾はけっして解かれなかった
-    ・彼女はめったに間違えない
-    ・今の状況もその当時とたいして変わっていません
- 
-<!-- <h> -->
-     
-    ・He didn't seem very happy
-    ・This contradiction was never resolved
-    ・She rarely makes mistakes
-    ・The situation today is much the same as it was then
+
+<div class = "expressjp">
+・あまり幸せそうに見えなかったな.    
+・この矛盾はけっして解かれなかった.   
+・彼女はめったに間違えない.    
+・今の状況もその当時とたいして変わっていません.   
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">    
+・He didn't seem very happy.   
+・This contradiction was never resolved.   
+・She rarely makes mistakes.   
+・The situation today is much the same as it was then.   
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Conjecture**</p>
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**・おそらく・たぶん・ひょっとすると・もしすると**</p>
 
-    ・娘はおそらくもう到着しただろう
-    ・もしかすると来月休みがとれるかもしれない
-    ・たぶんこんな景色が見られるでしょう
-    ・ひょっとすると、正しいモジュールがロードできていないかもしれません
- 
-<!-- <h> -->
-     
-    ・She's probably already there
-    ・Maybe we can take a vacation next month
-    ・Maybe we'll see a view like this
-    ・Maybe the correct module is not loaded
+<div class = "expressjp">
+・娘はおそらくもう到着しただろう.   
+・もしかすると来月休みがとれるかもしれない.   
+・たぶんこんな景色が見られるでしょう.        
+・ひょっとすると、正しいモジュールがロードできていないかもしれません.     
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">     
+・She's probably already there.   
+・Maybe we can take a vacation next month.   
+・Maybe we'll see a view like this.   
+・Maybe the correct module is not loaded.   
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ Conditional**</p>
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**・もし・まんがいち・たとえ**</p>
 
-    ・もし何か良い物を見つけたら、お知らせしますね
-    ・たとえ優勝するのは無理でも、やってみます
-    ・万が一できれば、手を貸してくれないか
- 
-<!-- <h> -->
+<div class = "expressjp">
+・もし何か良い物を見つけたら、お知らせしますね.    
+・たとえ優勝するのは無理でも、やってみます.    
+・万が一できれば、手を貸してくれないか.  
+</div>
 
-    ・If I find something good, I'll let you know
-    ・Even if I can't win, I'll try
-    ・If you can, please lend me a hand
+<h6> </h6>
+
+<div class = "expressjp">
+・If I find something good, I'll let you know.   
+・Even if I can't win, I'll try.   
+・If you can, please lend me a hand.   
+</div>
 
 <h6> </h6>
 
@@ -10820,29 +10887,29 @@ adv1.a <- adv1.a[sample(1:nrow(adv1.a)),]
 reactable(
   adv1.a,
   columns = list(
-    Word = colDef(style= list(background = '#dee7e7'),
+    Word = colDef(style= list(background = '#e0e1dd'),
       cell = function(value, index) {
         Reading <- adv1.a$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- adv1.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, color = '#404040', fontFamily = 'Noto Sans JP'), value),
-          div(style = list(fontSize = 10, color = '#404040'), Reading),
-          div(style = list(fontSize = 10, color = '#404040'), Meaning)
+          div(style = list(fontSize = 22, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, color = '#266c6c', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
     ),
     
-    Sentences = colDef(style= list(background = '#dee7e7'),
+    Sentences = colDef(style= list(background = '#edede9'),
       minWidth = 200,
       cell = function(value, index) {
         Translation <- adv1.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 18, fontWeight = 600, color = '#404040', fontFamily = 'Noto Sans JP'), value),
-          div(style = list(fontSize = 9, color = '#404040'), Translation)
+          div(style = list(fontSize = 18, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, color = '#0F2040', fontFamily = 'Open Sans'), Translation)
         )
       },
       align = "left"
@@ -10853,9 +10920,9 @@ reactable(
     Reading = colDef(show = FALSE)
 
   ),
+  rowClass = "my-row",
   defaultPageSize = 5,
   theme = reactableTheme(
-    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -10864,7 +10931,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -10885,16 +10952,16 @@ adv1.a <- adv1.a[sample(1:nrow(adv1.a)),]
 reactable(
   adv1.a,
   columns = list(
-    Word = colDef(
+    Word = colDef(style= list(background = '#e0e1dd'),
       cell = function(value, index) {
         Reading <- adv1.a$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- adv1.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 11, color = '#404040'), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#404040'), Meaning)
+          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, color = '#0F2040', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
@@ -10906,9 +10973,9 @@ reactable(
     Sentences = colDef(show = FALSE)
     
   ),
+  rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
-    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -10917,7 +10984,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE, highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -10933,14 +11000,14 @@ adv1.a <- adv1.a[sample(1:nrow(adv1.a)),]
 reactable(
   adv1.a,
   columns = list(
-    Word = colDef(style= list(background = '#dee7e7'),
+    Word = colDef(style= list(background = '#edede9'),
       cell = function(value, index) {
         Reading <- adv1.a$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- adv1.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040'), Reading),
           # div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
@@ -10953,9 +11020,9 @@ reactable(
     Reading = colDef(show = FALSE),
     Sentences = colDef(show = FALSE)
   ),
+  rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
-    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -10964,7 +11031,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -10987,16 +11054,16 @@ adv1.a <- adv1.a[sample(1:nrow(adv1.a)),]
 reactable(
   adv1.a,
   columns = list(
-    Meaning = colDef(
+    Meaning = colDef(style= list(background = '#e0e1dd'),
       cell = function(value, index) {
         Reading <- adv1.a$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         Word <- adv1.a$Word[index]
         Word <- if (!is.na(Word)) Word else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), Word),
-          div(style = list(fontSize = 11, color = '#404040'), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#404040'), value)
+          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Word),
+          div(style = list(fontSize = 11, color = '#0F2040', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), value)
         )
       },
       align = "center"
@@ -11007,9 +11074,9 @@ reactable(
     Reading = colDef(show = FALSE),
     Sentences = colDef(show = FALSE)
   ),
+  rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
-    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -11018,7 +11085,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE, highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -11034,16 +11101,16 @@ adv1.a <- adv1.a[sample(1:nrow(adv1.a)),]
 reactable(
   adv1.a,
   columns = list(
-    Word = colDef(style= list(background = '#dee7e7'),
+    Word = colDef(style= list(background = '#edede9'),
       cell = function(value, index) {
         Reading <- adv1.a$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- adv1.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#404040', fontFamily = 'Open Sans'), value),
-          # div(style = list(fontSize = 11, color = '#404040'), Reading),
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#404040'), Meaning)
+          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 11, color = '#0F2040'), Reading),
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
@@ -11054,9 +11121,9 @@ reactable(
     Reading = colDef(show = FALSE),
     Sentences = colDef(show = FALSE)
   ),
+  rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
-    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -11065,7 +11132,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers",
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -11099,15 +11166,15 @@ adv1.a.t <- data.frame(adv1.a.1, adv1.a.2, adv1.a.3, adv1.a.4, adv1.a.5)
 reactable(
   adv1.a.t,
   columns = list(
-    W1 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
-    W2 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
-    W3 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
-    W4 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 600, background = '#dee7e7', color = '#0F2040')),
-    W5 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 600, background = '#dee7e7', color = '#0F2040'))
+    W1 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 600, background = '#e0e1dd', color = '#0F2040', fontFamily = 'Open Sans')),
+    W2 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 600, background = '#e0e1dd', color = '#0F2040', fontFamily = 'Open Sans')),
+    W3 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 600, background = '#e0e1dd', color = '#0F2040', fontFamily = 'Open Sans')),
+    W4 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 600, background = '#e0e1dd', color = '#0F2040', fontFamily = 'Open Sans')),
+    W5 = colDef(align = "center", style = list(fontSize = 20, fontWeight = 600, background = '#e0e1dd', color = '#0F2040', fontFamily = 'Open Sans'))
   ),
+  rowClass = "my-row",
   defaultPageSize = 5,
   theme = reactableTheme(
-    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -11116,7 +11183,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", 
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -11138,7 +11205,7 @@ advrm.a <- advrm.a[sample(1:nrow(advrm.a)),]
 reactable(
   advrm.a,
   columns = list(
-    Expression = colDef(style= list(background = '#dee7e7'),
+    Expression = colDef(style= list(background = '#e0e1dd'),
       cell = function(value, index) {
         Word <- advrm.a$Word[index]
         Word <- if (!is.na(Word)) Word else ""
@@ -11153,6 +11220,7 @@ reactable(
     Meaning = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
+  rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
@@ -11164,7 +11232,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -11181,12 +11249,12 @@ advrm.a <- advrm.a[sample(1:nrow(advrm.a)),]
 reactable(
   advrm.a,
   columns = list(
-    Expression = colDef(
+    Expression = colDef(style= list(background = '#edede9'),
       cell = function(value, index) {
         Translation <- advrm.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), Translation,"."))
+          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), Translation,"."))
         )
       },
       align = "left"
@@ -11196,6 +11264,7 @@ reactable(
     Meaning = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
+  rowClass = "my-row",
   defaultPageSize = 10,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 42),
@@ -11207,7 +11276,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 365,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -11232,13 +11301,13 @@ adv1.a <- adv1.a %>% na.omit(adv1.a)
 reactable(
   adv1.a,
   columns = list(
-    Translation = colDef(style= list(background = '#f7f7f7'),
+    Translation = colDef(style= list(background = '#e0e1dd'),
       cell = function(value, index) {
         Sentences <- adv1.a$Sentences[index]
         Sentences <- if (!is.na(Sentences)) Sentences else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#303030', fontFamily = 'Open Sans'), Sentences),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#303030'), value)
+          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentences),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040'), value)
         )
       },
       align = "left"
@@ -11249,9 +11318,9 @@ reactable(
     Sentences = colDef(show = FALSE)
 
   ),
+  rowClass = "my-row",
   defaultPageSize = 20,
   theme = reactableTheme(
-    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -11260,7 +11329,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, height = 530,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, highlight = TRUE, height = 530,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -11334,27 +11403,39 @@ reactable(
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Usage: Adverb**</p>
 
-    ・成績表はちゃんと提出していただきます
-    ・頭の中がぴかぴかと光った
-    ・ぶらりと歩〱と時がゆっ〱り流れてい〱ようだ
-    ・ゴルフをしないとよぼよぼになる
+<div class = "expressjp">
+・成績表はちゃんと提出していただきます.   
+・頭の中がぴかぴかと光った.   
+・ぶらりと歩〱と時がゆっ〱り流れてい〱ようだ.   
+・ゴルフをしないとよぼよぼになる.   
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・You'll be required to submit your grades
-    ・My head was shining brightly
-    ・Time seems to flow more slowly as I stroll along
-    ・I'd be a wreck if I didn't play golf
+<div class = "expressjp">
+・You'll be required to submit your grades.   
+・My head was shining brightly.   
+・Time seems to flow more slowly as I stroll along.  
+・I'd be a wreck if I didn't play golf.  
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Usage: Noun-Modifier**</p>
 
-    ・いらいらが高じて虐待に走るケースすら出ている
-    ・In some cases, frustration has even led to abuse
+<div class = "expressjp">
+・いらいらが高じて虐待に走るケースすら出ている.    
+・In some cases, frustration has even led to abuse.   
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Usage: Verb-Modifier**</p>
 
-    ・電話の声の調子もしっかりしていた
-    ・The tone of his voice on the phone was solid
+<div class = "expressjp">
+・電話の声の調子もしっかりしていた.   
+・The tone of his voice on the phone was solid.   
+</div>
 
 <h6> </h6>
 
@@ -11370,29 +11451,29 @@ ontmpe <- ontmpe[sample(1:nrow(ontmpe)),]
 reactable(
   ontmpe,
   columns = list(
-    Word = colDef(style= list(background = '#dee7e7'),
+    Word = colDef(style= list(background = '#e0e1dd'),
       cell = function(value, index) {
         Reading <- ontmpe$Reading[index]
         Reading <- if (!is.na(Reading)) Reading else ""
         Meaning <- ontmpe$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 600, color = '#404040', fontFamily = 'Noto Sans JP'), value),
-          # div(style = list(fontSize = 11, color = '#404040'), Reading),
-          div(style = list(fontSize = 10, color = '#404040'), Meaning)
+          div(style = list(fontSize = 22, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, color = '#266c6c', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
     ),
 
-    Sentences = colDef(style= list(background = '#dee7e7'),
+    Sentences = colDef(style= list(background = '#edede9'),
       minWidth = 180,
       cell = function(value, index) {
         T1 <- ontmpe$T1[index]
         T1 <- if (!is.na(T1)) T1 else ""
         tagList(
-          div(style = list(fontSize = 18, fontWeight = 600, color = '#404040', fontFamily = 'Noto Sans JP'), value),
-          div(style = list(fontSize = 9, color = '#404040'), T1)
+          div(style = list(fontSize = 18, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, color = '#0F2040', fontFamily = 'Open Sans'), T1)
         )
       },
       align = "left"
@@ -11403,9 +11484,9 @@ reactable(
     Reading = colDef(show = FALSE)
 
   ),
+  rowClass = "my-row",
   defaultPageSize = 5,
   theme = reactableTheme(
-    # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
     searchInputStyle = list(
       paddingLeft = "8px",
@@ -11414,7 +11495,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -11439,47 +11520,51 @@ reactable(
 ###### **konoyouni** `in this manner・in this way・like this`
 ###### **kou** `in this way・thus・such`
 
-    ・これは本です
-    ・これを見てくれ
-    ・このペンは誰のです
-    ・この雨の中を歩いてきたのですか
-    ・ここから消えてくれ
-    ・ここが私の通った学校だ
-    ・ここまでは追ってこないだろう
-    ・こちらへどうぞ
-    ・こちらを向いてください
-    ・こういうこと
-    ・こういうふうにやるとうまくいくよ
-    ・こんな大雪は珍しい
-    ・こんな気持ちになったのは初めてだ
-    ・このような話をどこかで聞いたことがある
-    ・昔の夏はこんなに暑くなかった
-    ・山手線がこんなに遅れることは珍しい
-    ・このようにやってごらんなさい
-    ・ラケットはこう持ってください
-    ・いいかい, 説明書にこう書いてある
+<div class = "expressjp">
+・これは本です.   
+・これを見てくれ.   
+・このペンは誰のです.   
+・この雨の中を歩いてきたのですか.   
+・ここから消えてくれ.   
+・ここが私の通った学校だ.   
+・ここまでは追ってこないだろう.   
+・こちらへどうぞ.  
+・こちらを向いてください.   
+・こういうこと.   
+・こういうふうにやるとうまくいくよ.   
+・こんな大雪は珍しい.   
+・こんな気持ちになったのは初めてだ.  
+・このような話をどこかで聞いたことがある.  
+・昔の夏はこんなに暑くなかった.  
+・山手線がこんなに遅れることは珍しい.  
+・このようにやってごらんなさい.  
+・ラケットはこう持ってください.   
+・いいかい, 説明書にこう書いてある.  
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・This is a book
-    ・Look at this
-    ・Whose pen is this?
-    ・Have you walked in this rain?
-    ・Get out of here
-    ・This is the school I went to
-    ・They won't follow us this far
-    ・This way, please
-    ・Please turn around
-    ・Things like this
-    ・If you do it like this, it works
-    ・Such heavy snow is rare
-    ・I've never felt like this before
-    ・I've heard stories like this somewhere before
-    ・It wasn't always this hot in the summer
-    ・It's rare for the Yamanote Line to be this late
-    ・Try it this way
-    ・Hold your racquet like this
-    ・Listen! This is what it says in the explanation
+<div class = "expressjp">
+・This is a book.   
+・Look at this.   
+・Whose pen is this?    
+・Have you walked in this rain?    
+・Get out of here.   
+・This is the school I went to.  
+・They won't follow us this far.  
+・This way, please.  
+・Please turn around.   
+・Things like this.  
+・If you do it like this, it works.  
+・Such heavy snow is rare.   
+・I've never felt like this before.  
+・I've heard stories like this somewhere before.   
+・It wasn't always this hot in the summer.   
+・It's rare for the Yamanote Line to be this late.  
+・Try it this way.  
+・Hold your racket like this.   
+・Listen! This is what it says in the explanation.  
+</div>
 
 <h6> </h6>
 
@@ -11499,55 +11584,59 @@ reactable(
 ###### **sonoyouni** `in that manner・in that way・like that`
 ###### **sou** `in that way・thus・such`
 
-    ・それ以前
-    ・それ以後
-    ・それについては後で述べる
-    ・その意気だ
-    ・それは僕がなくしたその時計だった
-    ・そこが困ったところなんだよ
-    ・そこから先は言わなくてもいい
-    ・そこまでは考えなかった
-    ・そちらのを見せてください
-    ・今からそちらへ伺います
-    ・そちらの様子はいかがですか
-    ・そういう場合には
-    ・若者には時々そういうことがあるんだけど
-    ・そういうわけさ
-    ・そんなことを言ったら誤解されるよ
-    ・そんな自分がつくづくいやになる
-    ・そんなつもりじゃなかったんだ
-    ・そんなに使ったのか
-    ・そんなに寒くない
-    ・ほんとにそうなんですか
-    ・そう考えると
-    ・わかりました.そうします
-    ・そう言われればそんな気がしてきた
+<div class = "expressjp">
+・それ以前.    
+・それ以後.   
+・それについては後で述べる.  
+・その意気だ.   
+・それは僕がなくしたその時計だった.   
+・そこが困ったところなんだよ.   
+・そこから先は言わなくてもいい.   
+・そこまでは考えなかった.   
+・そちらのを見せてください.   
+・今からそちらへ伺います.   
+・そちらの様子はいかがですか.   
+・そういう場合には.  
+・若者には時々そういうことがあるんだけど.   
+・そういうわけさ.   
+・そんなことを言ったら誤解されるよ.   
+・そんな自分がつくづくいやになる.   
+・そんなつもりじゃなかったんだ.       
+・そんなに使ったのか.  
+・そんなに寒くない.   
+・ほんとにそうなんですか.   
+・そう考えると.   
+・わかりました.そうします.  
+・そう言われればそんな気がしてきた.   
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・Before that
-    ・After that
-    ・We'll talk about that later
-    ・That's the spirit!
-    ・It was that watch I lost
-    ・That's where the trouble lies
-    ・You don't have to tell me where to go from there
-    ・I didn't think that far ahead
-    ・Please show me that
-    ・I'm on my way there now
-    ・How are things going over there?
-    ・In that case
-    ・I mean, that's what happens sometimes with young people
-    ・That's how it is
-    ・You'll be misunderstood if you say that
-    ・I hate myself for that.
-    ・I didn't mean it like that
-    ・You've spent that much?
-    ・It's not that cold
-    ・Is it really so?
-    ・When you think about it
-    ・I understand. I will do that
-    ・That's what I thought when you said that
+<div class = "expressjp">
+・Before that.   
+・After that.  
+・We'll talk about that later.  
+・That's the spirit!    
+・It was that watch I lost.   
+・That's where the trouble lies.  
+・You don't have to tell me where to go from there.  
+・I didn't think that far ahead.   
+・Please show me that.  
+・I'm on my way there now.  
+・How are things going over there?    
+・In that case.   
+・I mean, that's what happens sometimes with young people.   
+・That's how it is.   
+・You'll be misunderstood if you say that.      
+・I hate myself for that.  
+・I didn't mean it like that.   
+・You've spent that much?    
+・It's not that cold.         
+・Is it really so?    
+・When you think about it.  
+・I understand. I will do that.   
+・That's what I thought when you said that.   
+</div>
 
 <h6> </h6>
 
@@ -11567,39 +11656,43 @@ reactable(
 ###### **anoyouni** `in that manner・in that way・like that`
 ###### **aa** `in that way・thus・such`
 
-    ・あれが今度の市長です
-    ・あれは何の音だろう
-    ・あれは何ですか
-    ・あの山は何という山ですか
-    ・あの後ずっと
-    ・あの話はどうなってる?
-    ・あそこまで競走しよう
-    ・あそこのラーメン屋に入ろう
-    ・普通あそこまで言わないよ
-    ・あちらに見える山
-    ・あちらが新製品でございます
-    ・あちらの気候は日本より厳しい
-    ・あんな正直な人
-    ・あんな美しい絵
-    ・私はあんなに偉い人は見たことがない
+<div class = "expressjp">
+・あれが今度の市長です.   
+・あれは何の音だろう.   
+・あれは何ですか.   
+・あの山は何という山ですか.   
+・あの後ずっと.       
+・あの話はどうなってる?     
+・あそこまで競走しよう.   
+・あそこのラーメン屋に入ろう.   
+・普通あそこまで言わないよ.   
+・あちらに見える山.   
+・あちらが新製品でございます.   
+・あちらの気候は日本より厳しい.   
+・あんな正直な人.   
+・あんな美しい絵.   
+・私はあんなに偉い人は見たことがない.  
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・That's the new mayor
-    ・What was that sound?
-    ・What is that?
-    ・What is that mountain called?
-    ・After all that time
-    ・What's that story?
-    ・Let's race up there!
-    ・Let's go to that noodle shop
-    ・They don't usually say that much.
-    ・The mountain you can see over there
-    ・That's the new product!
-    ・The climate there is harsher than in Japan
-    ・Such an honest man
-    ・Such a beautiful picture
-    ・I've never seen anyone that so great in my life
+<div class = "expressjp">
+・That's the new mayor.   
+・What was that sound?    
+・What is that?    
+・What is that mountain called?    
+・After all that time.   
+・What's that story?    
+・Let's race up there!    
+・Let's go to that noodle shop.   
+・They don't usually say that much.   
+・The mountain you can see over there.   
+・That's the new product!    
+・The climate there is harsher than in Japan.  
+・Such an honest man.  
+・Such a beautiful picture.  
+・I've never seen anyone that so great in my life.  
+</div>
 
 <h6> </h6>
 
@@ -11619,57 +11712,61 @@ reactable(
 ###### **donoyouni** `how・in what manner・in what way・like what`
 ###### **dou** `in what way・ how about・how・no matter how`
 
-    ・ジョッキは、大、中、小のどれがいいですか
-    ・ビールは、ジョッキとボトルとどっちがいいですか
-    ・どの車がいいですか
-    ・どの部屋がいいですかか
-    ・どこから来たの
-    ・今日はどこからですか
-    ・対戦相手はどこですか
-    ・どちらへお出でですか
-    ・光と音とどちらが速いか
-    ・お国はどちらですか?
-    ・どういう風に
-    ・どういう訳で
-    ・それはどういう訳ですか
-    ・いったいこれはどういうこと?
-    ・その人はどういう性格の人ですか
-    ・どんな人ですか
-    ・今日はどんな具合ですか
-    ・子供にどんな本を読ませたらいいでしょうか
-    ・どんなに金があっても
-    ・どんなに勉強しても
-    ・どうなさいましたか
-    ・どうしたの
-    ・どう考えてみても
-    ・どう考えてみてもそれはおかしいよ
+<div class = "expressjp">
+・ジョッキは、大、中、小のどれがいいですか.   
+・ビールは、ジョッキとボトルとどっちがいいですか.   
+・どの車がいいですか.   
+・どの部屋がいいですかか.   
+・どこから来たの.   
+・今日はどこからですか.   
+・対戦相手はどこですか.   
+・どちらへお出でですか.   
+・光と音とどちらが速いか.   
+・お国はどちらですか.      
+・どういう風に.  
+・どういう訳で.   
+・それはどういう訳ですか.  
+・いったいこれはどういうこと.   
+・その人はどういう性格の人ですか.   
+・どんな人ですか.   
+・今日はどんな具合ですか.   
+・子供にどんな本を読ませたらいいでしょうか.   
+・どんなに金があっても.   
+・どんなに勉強しても.   
+・どうなさいましたか.   
+・どうしたの.   
+・どう考えてみても.   
+・どう考えてみてもそれはおかしいよ.   
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・Which one do you like a large, medium or small mug?
-    ・Which one do you prefer a mug of beer or a bottle?
-    ・Which car would you like to buy?
-    ・Which room would you like?
-    ・Where do you come from?
-    ・Where do you come from today?
-    ・Where are the opponents?
-    ・Where are you going?
-    ・Which is faster, light or sound?
-    ・Where is your country?
-    ・In what way?
-    ・For what reason?
-    ・What is the reason?
-    ・What is this all about?
-    ・What kind of person is he?
-    ・What kind of person are you?
-    ・How are you feeling today?
-    ・What books should I read to my child?
-    ・No matter how much money you have
-    ・No matter how much you study
-    ・How can I help you?
-    ・What's the matter?
-    ・No matter how you look at it
-    ・No matter how you look at it, that's not right
+<div class = "expressjp">
+・Which one do you like a large, medium or small mug?    
+・Which one do you prefer a mug of beer or a bottle?    
+・Which car would you like to buy?    
+・Which room would you like?   
+・Where do you come from?    
+・Where do you come from today?   
+・Where are the opponents?   
+・Where are you going?   
+・Which is faster, light or sound?   
+・Where is your country?   
+・In what way?   
+・For what reason?   
+・What is the reason?   
+・What is this all about?    
+・What kind of person is he?   
+・What kind of person are you?   
+・How are you feeling today?   
+・What books should I read to my child?    
+・No matter how much money you have.   
+・No matter how much you study.   
+・How can I help you?    
+・What's the matter?    
+・No matter how you look at it.   
+・No matter how you look at it, that's not right.  
+</div>
 
 <h6> </h6>
 
@@ -14695,6 +14792,7 @@ reactable(
     Sentence = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
+  rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
@@ -14706,7 +14804,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -14723,12 +14821,12 @@ spcvwrds.a <- spcvwrds.a[sample(1:nrow(spcvwrds.a)),]
 reactable(
   spcvwrds.a,
   columns = list(
-    Sentence = colDef(
+    Sentence = colDef(style= list(background = '#edede9'),
       cell = function(value, index) {
         Translation <- spcvwrds.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#303030'), Translation,"."))
+          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), Translation,"."))
         )
       },
       align = "left"
@@ -14738,6 +14836,7 @@ reactable(
     Verb = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
+  rowClass = "my-row",
   defaultPageSize = 10,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 42),
@@ -14749,7 +14848,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, height = 365,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -14759,6 +14858,47 @@ reactable(
 </div>
 </div>
 
+
+------------------------------------------------------------------------
+
+##### Chart {.tabset}
+
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+
+verbs.lst1 <- lverbs  %>%  select(Verbs)
+verbs.lst4 <- cmmvrb  %>%  select(Verbs)
+verbs.lst2 <- vnstx  %>%  select(Words) %>%  rename(Verbs = Words)
+verbs.lst3 <- vnstr  %>%  select(Words) %>%  select(Verbs = Words)
+
+verbs.lsta <- bind_rows(verbs.lst1, verbs.lst4)
+verbs.lsta <- bind_rows(verbs.lst1, verbs.lst2)
+verbs.lsta <- bind_rows(verbs.lst1, verbs.lst3)
+
+corpus.v = Corpus(VectorSource(verbs.lsta$Verbs))
+
+DTMV <- TermDocumentMatrix(corpus.v)
+matv <- as.matrix(DTMV)
+fv <- sort(rowSums(matv),decreasing=TRUE)
+dat.v <- data.frame(word = names(fv),freq=fv)
+
+dat.v.w <- dat.v %>%
+  select(word, freq) %>%
+  mutate(
+    rnum2 = round(runif(nrow(.), min=0, max=1), digits = 4),
+    freq = freq + rnum2,
+    spread = round(runif(nrow(.), min=0, max=1), digits = 4),
+  )
+
+p.v <- ggplot(dat.v.w, dynamicTicks = TRUE, aes(x=spread, y=freq, colour=freq, text = paste(word))) + geom_point(aes(size = freq))  + scale_colour_gradient(low="#060047", high="#EB455F")
+p.v <- p.v + aes(ymin=0.9)
+p.v <- p.v + theme(plot.background = element_rect(fill = "#e0e1dd"))
+
+ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,family="RocknRoll One")))
+
+```
+
+<h6> </h6>
+
 ------------------------------------------------------------------------
 
 ### EC.2.0: Connective-Forms {.tabset}
@@ -14766,52 +14906,74 @@ reactable(
 
 ###### **⚭　Noun・Na-Adj + de**
 
-    ・どうぶつ　⇢　どうぶつで 
-    ・きれい　　⇢　きれいで
+<div class = "expressjp">
+・どうぶつ　⇢　どうぶつで    
+・きれい　　⇢　きれいで    
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・ウンさんは中国人でキムさんは韓国人です 
-    ・りなさんはきれいでやさしいです
+<div class = "expressjp">
+・ウンさんは中国人でキムさんは韓国人です.     
+・りなさんはきれいでやさしいです.   
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・Wong-san is Chinese and Mr. Kim is Korean
-    ・Rina-san is beautiful and kind
+<div class = "expressjp">
+・Wong-san is Chinese and Mr. Kim is Korean.   
+・Rina-san is beautiful and kind.   
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② I-Adjective: i ⇢ kute**</p>
 
 ###### **⚭　I-Adj + kute**
 
-    ・やすい　　⇢　やすくて
-    ・おおきい　⇢　おおきくて
+<div class = "expressjp">
+・やすい　　⇢　やすくて       
+・おおきい　⇢　おおきくて         
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・この辞書は安くて便利だ
-    ・あの家は大きくて美しい
+<div class = "expressjp">
+・この辞書は安くて便利だ.    
+・あの家は大きくて美しい.   
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・This dictionary is cheap and convenient
-    ・That house is big and beautiful
+<div class = "expressjp">
+・This dictionary is cheap and convenient.   
+・That house is big and beautiful.    
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Verb: Verb ⇢ Noun-base form, Verb ⇢ Te-form**</p>
 
 ###### **⚭　Vnoun・Vte**
 
-    ・おきる　⇢　おき
-    ・たべる　⇢　たべて
+<div class = "expressjp">
+・おきる　⇢　おき     
+・たべる　⇢　たべて   
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・私は朝六時に起き、夜十時ごろ寝る
-    ・山田さんはラメンを食べてビールを飲む
+<div class = "expressjp">
+・私は朝六時に起き、夜十時ごろ寝る.    
+・山田さんはラメンを食べてビールを飲む.  
+</div>
 
-<!-- <h> -->
+<h6> </h6>
 
-    ・I get up at six in the morning and go to bed around ten at night
-    ・Yamada-san eats ramen and drinks beer
+<div class = "expressjp">
+・I get up at six in the morning and go to bed around ten at night.   
+・Yamada-san eats ramen and drinks beer.   
+</div>
 
 <h6> </h6>
 
