@@ -99,6 +99,7 @@ splsnt <- read_csv("jpim/SPLSNT-SNT.csv")
 rrdng <- read_csv("jpim/SNTRDG-RDG.csv")
 gwrds <- read_csv("jpdb/WGRMR-LST.csv")
 grmsplsnt <- read_csv("jpdb/GRMMRSNS-SNT.csv")
+dlyexps <- read_csv("jpim/DLYSNTC-DLY.csv")
 ```
 
 # <b> Sentences </b> {.tabset}
@@ -247,6 +248,48 @@ reactable(
     )
   ),
   showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, height = 510,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Express </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+dlyexps.a <- dlyexps[sample(1:nrow(dlyexps)),]
+
+reactable(
+  dlyexps.a,
+  columns = list(
+    Expression = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        Translation <- dlyexps.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#0F2040', fontFamily = 'Open Sans'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    # Translation = colDef(align = "left", style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5'))
+    Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 25,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, height = 470,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )

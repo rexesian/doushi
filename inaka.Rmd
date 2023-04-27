@@ -139,6 +139,7 @@ library(ggplot2)
 library(plotly)
 library(shiny)
 library(hrbrthemes)
+library(ggthemes)
 library(webshot)
 options(readr.show_col_types = FALSE, max.print=10000, always_allow_html = TRUE)
 ```
@@ -1955,6 +1956,79 @@ reactable(
 
 <!-- ![](chart.png){width=400px} -->
 <!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
+```{r, echo=FALSE, message=FALSE}
+
+cmmpassc.a <- cmmpassc
+cmmpassc.a <- cmmpassc.a %>% na.omit(cmmpassc.a)
+cmmpassc.a <- cmmpassc.a[sample(1:nrow(cmmpassc.a)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chart", tags$label("Level:", `for` = "assoc-level-filter"),
+      # div(
+        tags$select(
+          id = "assoc-level-filter",
+          onchange = "Reactable.setFilter('assoc-filter-table', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(cmmpassc.a$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  cmmpassc.a, filterable = FALSE,
+  columns = list(
+    Words = colDef(style= list(background = '#f9f6ed'),
+      cell = function(value, index) {
+        Meaning <- cmmpassc.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Reading <- cmmpassc.a$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        # Sentence <- cmmpassc.a$Sentence[index]
+        # Sentence <- if (!is.na(Sentence)) Sentence else ""
+        # Translation <- cmmpassc.a$Translation[index]
+        # Translation <- if (!is.na(Translation)) Translation else ""
+        Level <- cmmpassc.a$Level[index]
+        Level <- if (!is.na(Level)) Level else ""
+        tagList(
+          # div(span(style = list(fontSize = 22, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 8, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
+          # div(style = list(fontSize = 11, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Reading),
+          # div(style = list(fontSize = 14, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation),
+          div(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value,"。"),
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, "."),
+        )
+      },
+      align = "left"
+    ),
+    Level = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE)
+    # Sentence = colDef(show = FALSE),
+    # Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 50,
+  elementId = "assoc-filter-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 64),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 388,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
+)
+
+```
 
 </div>
 </div>
@@ -2191,6 +2265,40 @@ reactable(
 </div>
 </div>
 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+cmmvrb.rc <- cmmvrb
+cmmvrb.rc <- cmmvrb.rc %>% na.omit(cmmvrb.rc)
+cmmvrb.rc <- cmmvrb.rc[sample(1:nrow(cmmvrb.rc)),]
+
+cmmvrb.rc <- cmmvrb.rc %>% filter(Level==5)
+# cmmvrb.rc
+num.rows.rc = nrow(cmmvrb.rc)
+
+datan.rc.1 <- cmmvrb.rc %>%
+  select(Verbs, Meaning, Sentences, Translation, Level) %>%
+  mutate(
+      x = rnorm(num.rows.rc, 1, 2), 
+      y = rnorm(num.rows.rc, 1, 4),
+      # x = sort(x, decreasing = FALSE),
+      # y = sort(y, decreasing = FALSE),
+  )
+datan.rc.1
+
+num.char.rc = nchar(datan.rc.1$Verbs)
+datan.rc.1 <- data.frame(datan.rc.1, num.char.rc)
+# datan.rc.1
+
+p.rc <- ggplot(datan.rc.1, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Verbs, "<br>","<sup>", Sentences, "<br>","<sup>", Translation))) + geom_point(aes(size = num.char.rc, colour=num.char.rc, aplha=0.6))  + scale_colour_gradient(low="#EB455F", high="#060047")
+# p.rc <- p.rc + geom_point(alpha = 0.5)
+p.rc <- p.rc + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())
+
+
+ggplotly(p.rc, tooltip = c("text"), width=800, height=500)  %>% layout(hoverlabel = list(font=list(size=29,family="Zen Kaku Gothic New")))
+
+
+```
+
 ------------------------------------------------------------------------
 
 ### Inflects {.tabset}
@@ -2363,91 +2471,91 @@ reactable(
 </div>
 </div>
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### Review {.tabset}
+<!-- ### Review {.tabset} -->
 
 <!-- ### Association {.tabset} -->
 
-<div class = "row">
-<div class = "col-sm-8">
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-8"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-cmmpassc.a <- cmmpassc
-cmmpassc.a <- cmmpassc.a %>% na.omit(cmmpassc.a)
-cmmpassc.a <- cmmpassc.a[sample(1:nrow(cmmpassc.a)),]
+<!-- cmmpassc.a <- cmmpassc -->
+<!-- cmmpassc.a <- cmmpassc.a %>% na.omit(cmmpassc.a) -->
+<!-- cmmpassc.a <- cmmpassc.a[sample(1:nrow(cmmpassc.a)),] -->
 
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chart", tags$label("Level:", `for` = "assoc-level-filter"),
-      # div(
-        tags$select(
-          id = "assoc-level-filter",
-          onchange = "Reactable.setFilter('assoc-filter-table', 'Level', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(cmmpassc.a$Level), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
+<!-- htmltools::browsable( -->
+<!--   tagList( -->
+<!--     div( -->
+<!--       div(class = "chart", tags$label("Level:", `for` = "assoc-level-filter"), -->
+<!--       # div( -->
+<!--         tags$select( -->
+<!--           id = "assoc-level-filter", -->
+<!--           onchange = "Reactable.setFilter('assoc-filter-table', 'Level', this.value)", -->
+<!--           tags$option("All", value = ""), -->
+<!--           lapply(unique(cmmpassc.a$Level), tags$option) -->
+<!--         # ) -->
+<!--       )) -->
+<!--     ), -->
+<!--     # tags$hr("aria-hidden" = "true"), -->
 
-reactable(
-  cmmpassc.a, filterable = FALSE,
-  columns = list(
-    Words = colDef(style= list(background = '#f9f6ed'),
-      cell = function(value, index) {
-        Meaning <- cmmpassc.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Reading <- cmmpassc.a$Reading[index]
-        Reading <- if (!is.na(Reading)) Reading else ""
-        # Sentence <- cmmpassc.a$Sentence[index]
-        # Sentence <- if (!is.na(Sentence)) Sentence else ""
-        # Translation <- cmmpassc.a$Translation[index]
-        # Translation <- if (!is.na(Translation)) Translation else ""
-        Level <- cmmpassc.a$Level[index]
-        Level <- if (!is.na(Level)) Level else ""
-        tagList(
-          # div(span(style = list(fontSize = 22, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 8, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
-          # div(style = list(fontSize = 11, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Reading),
-          # div(style = list(fontSize = 14, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), Sentence),
-          # div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation),
-          div(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value,"。"),
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, "."),
-        )
-      },
-      align = "left"
-    ),
-    Level = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Reading = colDef(show = FALSE)
-    # Sentence = colDef(show = FALSE),
-    # Translation = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 50,
-  elementId = "assoc-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 60),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 373,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
-  )
-  )
-)
+<!-- reactable( -->
+<!--   cmmpassc.a, filterable = FALSE, -->
+<!--   columns = list( -->
+<!--     Words = colDef(style= list(background = '#f9f6ed'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- cmmpassc.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Reading <- cmmpassc.a$Reading[index] -->
+<!--         Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         # Sentence <- cmmpassc.a$Sentence[index] -->
+<!--         # Sentence <- if (!is.na(Sentence)) Sentence else "" -->
+<!--         # Translation <- cmmpassc.a$Translation[index] -->
+<!--         # Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         Level <- cmmpassc.a$Level[index] -->
+<!--         Level <- if (!is.na(Level)) Level else "" -->
+<!--         tagList( -->
+<!--           # div(span(style = list(fontSize = 22, fontWeight = 600, color = '#202020', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 8, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))), -->
+<!--           # div(style = list(fontSize = 11, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Reading), -->
+<!--           # div(style = list(fontSize = 14, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), Sentence), -->
+<!--           # div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation), -->
+<!--           div(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value,"。"), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, "."), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ), -->
+<!--     Level = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Reading = colDef(show = FALSE) -->
+<!--     # Sentence = colDef(show = FALSE), -->
+<!--     # Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 50, -->
+<!--   elementId = "assoc-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 60), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 373, -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!--   ) -->
+<!-- ) -->
 
-</div>
-<div class = "col-sm-4">
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- <div class = "col-sm-4"> -->
 
 
 <!-- ```{r, echo=FALSE, message=FALSE} -->
@@ -2524,8 +2632,49 @@ reactable(
 <!-- ![](chart.png){width=400px} -->
 <!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
 
-</div>
-</div>
+<!-- </div> -->
+<!-- </div> -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ### Current {.tabset} -->
+
+<!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE} -->
+
+<!-- cmmvrb.rc <- cmmvrb -->
+<!-- cmmvrb.rc <- cmmvrb.rc %>% na.omit(cmmvrb.rc) -->
+<!-- cmmvrb.rc <- cmmvrb.rc[sample(1:nrow(cmmvrb.rc)),] -->
+
+<!-- cmmvrb.rc <- cmmvrb.rc %>% filter(Level==5) -->
+<!-- # cmmvrb.rc -->
+<!-- num.rows.rc = nrow(cmmvrb.rc) -->
+
+<!-- datan.rc.1 <- cmmvrb.rc %>% -->
+<!--   select(Verbs, Meaning, Sentences, Translation, Level) %>% -->
+<!--   mutate( -->
+<!--       x = rnorm(num.rows.rc, 1, 2),  -->
+<!--       y = rnorm(num.rows.rc, 1, 4), -->
+<!--       # x = sort(x, decreasing = FALSE), -->
+<!--       # y = sort(y, decreasing = FALSE), -->
+<!--   ) -->
+<!-- # datan.rc.1 -->
+
+<!-- num.char.rc = nchar(datan.rc.1$Verbs) -->
+<!-- datan.rc.1 <- data.frame(datan.rc.1, num.char.rc) -->
+<!-- # datan.rc.1 -->
+
+<!-- p.rc <- ggplot(datan.rc.1, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Verbs, "<br>","<sup>", Sentences, "<br>","<sup>", Translation))) + geom_point(aes(size = num.char.rc, colour=num.char.rc, aplha=0.2))  + scale_colour_gradient(low="#EB455F", high="#060047") -->
+<!-- p.rc <- p.rc + labs(title = "Scatter Expressions",  -->
+<!--             x = "Random X",  -->
+<!--             y = "Random Y") -->
+
+<!-- p.rc <- p.rc + theme(plot.background = element_rect(fill = "#e0e1dd")) -->
+
+<!-- ggplotly(p.rc, tooltip = c("text"), width=800, height=500)  %>% layout(hoverlabel = list(font=list(size=29,family="Zen Kaku Gothic New"))) -->
+
+
+<!-- ``` -->
+
 
 ------------------------------------------------------------------------
 
@@ -16961,21 +17110,27 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🅼 はじめまして
-    🅼 はジョンと申します
-    🅼 アメリカから来ました
-    🅼 旅行会社です
-    🅼 よろしくお願いします
+<div class = "expressjp">
+🅼 はじめまして.    
+🅼 はジョンと申します.    
+🅼 アメリカから来ました.   
+🅼 旅行会社です.   
+🅼 よろしくお願いします.  
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🅼 Nice to meet you　
-    🅼 My name is John　
-    🅼 I came from America
-    🅼 I am a travel agent
-    🅼 Glad to meet you all
-    
+<div class = "expressjp">
+🅼 Nice to meet you.      
+🅼 My name is John.       
+🅼 I came from America.       
+🅼 I am a travel agent.      
+🅼 Glad to meet you all.     
+</div>
+
 </div>
 </div>
 
@@ -16990,17 +17145,25 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🅼 はじめまして。私はジョンです。よろしくお願いします
-    🅵 はじめまして。りなと申します。よろしくお願いします
+<div class = "expressjp">
+🅼 はじめまして。私はジョンです。よろしくお願いします.   
+🅵 はじめまして。りなと申します。よろしくお願いします.   
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🅼 How do you do. I am John. Nice to meet you　
-    🅵 How do you do. I am Rina. Nice to meet you
-    
+<div class = "expressjp">
+🅼 How do you do. I am John. Nice to meet you.   　  
+🅵 How do you do. I am Rina. Nice to meet you.   
+</div>
+
 </div>
 </div>
+
+<h6> </h6>
 
 ------------------------------------------------------------------------
 
@@ -17011,21 +17174,27 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🅼 りなさん、ご出身はどこですか　
-    🅵 ロンドンです。ジョンさんは？
-    🅼 シカゴです。学生ですか、もう働いていますか　
-    🅵 学生です。ジョンさんは？
-    🅼 働いています。旅行会社に勤めています
+<div class = "expressjp">
+🅼 りなさん、ご出身はどこですか.    
+🅵 ロンドンです。ジョンさんは？               
+🅼 シカゴです。学生ですか、もう働いていますか.       
+🅵 学生です。ジョンさんは？        
+🅼 働いています。旅行会社に勤めています.       
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🅼 Rina-san, Where are you from?　
-    🅵 I am from London. How about John-san?
-    🅼 I am from Chicago. Are a student or working already?　
-    🅵 I am a student. How about John-san?
-    🅼 I am working. I work at a travel agency
-    
+<div class = "expressjp">
+🅼 Rina-san, Where are you from?      
+🅵 I am from London. How about John-san?       
+🅼 I am from Chicago. Are a student or working already?      
+🅵 I am a student. How about John-san?        
+🅼 I am working. I work at a travel agency.     
+</div>
+
 </div>
 </div>
 
@@ -17040,19 +17209,25 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🆃 はい、レストランみやこでございます　
-    🅲 あのう、予約お願いしたいんですが..
-    🆃 かしこまりました。いつの予約ですか
-    🅲 20日の7時に2名でお願いします
+<div class = "expressjp">
+🆃 はい、レストランみやこでございます.       
+🅲 あのう、予約お願いしたいんですが.       
+🆃 かしこまりました。いつの予約ですか.   
+🅲 20日の7時に2名でお願いします.   
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🆃 Hello, this is Miyako restaurant　
-    🅲 Uhmm, I would like to make a reservation
-    🆃 Most certainly, When would you like to make a reservation?
-    🅲 On the 20th, at 7 o'clock for 2 people please
-    
+<div class = "expressjp">
+🆃 Hello, this is Miyako restaurant.     
+🅲 Uhmm, I would like to make a reservation.      
+🆃 Most certainly, When would you like to make a reservation?     
+🅲 On the 20th, at 7 o'clock for 2 people please.    
+</div>
+  
 </div>
 </div>
 
@@ -17067,19 +17242,25 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🆃 このレストランのおすすめ料理はなんですか　
-    🅲 豚骨ラーメンでございます
-    🆃 いいですね。ではそれをお願いします
-    🅲 かしこまりました
+<div class = "expressjp">
+🆃 このレストランのおすすめ料理はなんですか.     
+🅲 豚骨ラーメンでございます.         
+🆃 いいですね。ではそれをお願いします.   
+🅲 かしこまりました.   
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🆃 What is the best dish in this restaurant?　
-    🅲 Pork bone ramen, sir.
-    🆃 That sounds good. I'll have some of that, please.
-    🅲 Most certainly
-    
+<div class = "expressjp">
+🆃 What is the best dish in this restaurant?       
+🅲 Pork bone ramen, sir.      
+🆃 That sounds good. I'll have some of that, please.     
+🅲 Most certainly.      
+</div>
+
 </div>
 </div>
 
@@ -17094,19 +17275,25 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🆃 すみません。メニューお願いします
-    🅲 はい、かしこまりました
-    🆃 あ、英語のメニューはありますか
-    🅲 はい、ございます。今、お持ちします
+<div class = "expressjp">
+🆃 すみません。メニューお願いします.   
+🅲 はい、かしこまりました.   
+🆃 あ、英語のメニューはありますか.   
+🅲 はい、ございます。今、お持ちします.   
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🆃 Excuse me. Menu, please
-    🅲 Yes, most certainly
-    🆃 Oh, do you have a menu in English?
-    🅲 Yes, we do. I'll bring one immediately
-    
+<div class = "expressjp">
+🆃 Excuse me. Menu, please.   
+🅲 Yes, most certainly.   
+🆃 Oh, do you have a menu in English?    
+🅲 Yes, we do. I'll bring one immediately.    
+</div>
+
 </div>
 </div>
 
@@ -17121,17 +17308,23 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🅲 この料理に豚肉入っていますか
-    🆃 いいえ、入っていません。それは鶏肉です
-    🅲 そうですか。では、これをお願いします
+<div class = "expressjp">
+🅲 この料理に豚肉入っていますか.   
+🆃 いいえ、入っていません。それは鶏肉です.   
+🅲 そうですか。では、これをお願いします.   
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🅲 Is there any pork in this dish?
-    🆃 No, there is no pork in this dish. It's chicken
-    🅲 I see. I'll have this one, please
-    
+<div class = "expressjp">
+🅲 Is there any pork in this dish?    
+🆃 No, there is no pork in this dish. It's chicken.   
+🅲 I see. I'll have this one, please.   
+</div>
+
 </div>
 </div>
 
@@ -17146,19 +17339,25 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🆃 すみません。ビール4つとウーロン茶2つ、お願いします
-    🅲 ビールを4つとウーロン茶を2つですね
-    🆃 それから、焼き鳥の盛り合わせとサラダ、お願いします
-    🅲 焼き鳥の盛り合わせとサラダですね。かしこまりました
+<div class = "expressjp">
+🆃 すみません。ビール4つとウーロン茶2つ、お願いします.   
+🅲 ビールを4つとウーロン茶を2つですね.   
+🆃 それから、焼き鳥の盛り合わせとサラダ、お願いします.   
+🅲 焼き鳥の盛り合わせとサラダですね。かしこまりました.   
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🆃 Excuse me. Four beers and two oolong teas, please.
-    🅲 Four beers and two oolong teas, please.
-    🆃 And some assorted grilled chicken and salad, please.
-    🅲 Assorted yakitori and salad. Most certainly
-    
+<div class = "expressjp">
+🆃 Excuse me. Four beers and two oolong teas, please.   
+🅲 Four beers and two oolong teas, please.  
+🆃 And some assorted grilled chicken and salad, please.   
+🅲 Assorted yakitori and salad. Most certainly.   
+</div>
+
 </div>
 </div>
 
@@ -17173,19 +17372,25 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🅲 すみません。お会計、お願いします
-    🆃 はい、9,000円になります
-    🅲 みんな、割り勘でいいかな
-    🅲 えーっと、1人1,500円ずつ
+<div class = "expressjp">
+🅲 すみません。お会計、お願いします.   
+🆃 はい、9,000円になります.   
+🅲 みんな、割り勘でいいかな.  
+🅲 えーっと、1人1,500円ずつ.   
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🅲 Excuse me. Can I have the bill, please?
-    🆃 Yes, that'll be 9,000 yen
-    🅲 Let's split the bill, shall we?
-    🅲 Let's see, 1,500 yen each
-    
+<div class = "expressjp">
+🅲 Excuse me. Can I have the bill, please?    
+🆃 Yes, that'll be 9,000 yen.   
+🅲 Let's split the bill, shall we?    
+🅲 Let's see, 1,500 yen each.  
+</div>
+
 </div>
 </div>
 
@@ -17200,21 +17405,27 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🅰 新大阪まで往復でお願いします
-    🆀 今日のご出発ですか？
-    🅰 はい、十時頃の「望み」をお願いします
-    🅰 帰りは明後日の夕方五時頃です
-    🆀 かしこまりました。少々お待ちください
+<div class = "expressjp">
+🅰 新大阪まで往復でお願いします.   
+🆀 今日のご出発ですか？   
+🅰 はい、十時頃の「望み」をお願いします.  
+🅰 帰りは明後日の夕方五時頃です.  
+🆀 かしこまりました。少々お待ちください.   
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🅰 A round trip ticket to Shin-Osaka please.
-    🆀 Are you leaving today?
-    🅰 Yes, around ten o'clock "Nozomi" please.
-    🅰 Return will be the day after tomorrow around 5pm.
-    🆀 Most certainly. Please wait a moment.
-    
+<div class = "expressjp">
+🅰 A round trip ticket to Shin-Osaka please.   
+🆀 Are you leaving today?   
+🅰 Yes, around ten o'clock "Nozomi" please.  
+🅰 Return will be the day after tomorrow around 5pm.  
+🆀 Most certainly. Please wait a moment.  
+</div>
+
 </div>
 </div>
 
@@ -17229,17 +17440,23 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🆀 すみません。この電車中目黒へ行きますか？
-    🅰 いいえ、行きません。3番線の電車に乗ってください
-    🅰 3番線ですね。どうも。
+<div class = "expressjp">
+🆀 すみません。この電車中目黒へ行きますか？     
+🅰 いいえ、行きません。3番線の電車に乗ってください.   
+🅰 3番線ですね。どうも.   
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🆀 Excuse me. Does this train go to Nakameguro?
-    🅰 No, It is not going. Please take the train on line 3.
-    🅰 Track 3, right. Thank you.
-    
+<div class = "expressjp">
+🆀 Excuse me. Does this train go to Nakameguro?   
+🅰 No, It is not going. Please take the train on line 3.  
+🅰 Track 3, right. Thank you.  
+</div>
+
 </div>
 </div>
 
@@ -17254,19 +17471,25 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 <div class = "row">
 <div class = "col-sm-6">
 
-    🆀 すみません。お台場どう行ったらいいですか？
-    🅰 おぢあばですか。山手線で新橋まで行って
-    🅰 新橋でゆりかもめに乗り換えてください
-    🆀 新橋でゆりかもめですね。ありがとうございます
+<div class = "expressjp">
+🆀 すみません。お台場どう行ったらいいですか？   
+🅰 おぢあばですか。山手線で新橋まで行って.   
+🅰 新橋でゆりかもめに乗り換えてください.   
+🆀 新橋でゆりかもめですね。ありがとうございます.  
+</div>
+
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    🆀 Excuse me. How do I get to Odaiba?
-    🅰 Is it Ojiba? Take the Yamanote line to Shinbashi.
-    🅰 Please change to Yurikamome at Shinbashi
-    🆀 Yurikamome at Shinbashi, right? Thank you.
-    
+<div class = "expressjp">
+🆀 Excuse me. How do I get to Odaiba?   
+🅰 Is it Ojiba? Take the Yamanote line to Shinbashi.  
+🅰 Please change to Yurikamome at Shinbashi.   
+🆀 Yurikamome at Shinbashi, right? Thank you.   
+</div>
+
 </div>
 </div>
 
@@ -17497,48 +17720,60 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・ビールをのむ？
-    ・ビールを飲みますか
-    ・あの人は日本人ですか
-    ・パーティーに行くんですか
-    ・パーティーに行くの？
-    ・熱があるんですか
+<div class = "expressjp">
+・ビールをのむ？     
+・ビールを飲みますか.     
+・あの人は日本人ですか.   
+・パーティーに行くんですか.    
+・パーティーに行くの？       
+・熱があるんですか.    
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・Do you drink beer?
-    ・Do you drink beer?
-    ・Is that person is Japanes?
-    ・Are you are going to the party?
-    ・Are you are going to the party?
-    ・Is it that you have a fever?
-
+<div class = "expressjp">
+・Do you drink beer?       
+・Do you drink beer?     
+・Is that person is Japanese?      
+・Are you are going to the party?      
+・Are you are going to the party?      
+・Is it that you have a fever?    
+</div>
+ 
 </div>
 </div>
+ 
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Asking for a specific information**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・だれが来たんですか
-    ・何を読んでいるんですか
-    ・お昼は何にしますか
-    ・だれが来たの？
-    ・何読んでるの？
-    ・お昼は何にする？
-
+<div class = "expressjp">
+・だれが来たんですか.     
+・何を読んでいるんですか.    
+・お昼は何にしますか.    
+・だれが来たの？     
+・何読んでるの？      
+・お昼は何にする？     
+</div>
+ 
 </div>
 <div class = "col-sm-6">
 
-    ・Who came?
-    ・What are you reading?
-    ・What shall we have for lunch?
-    ・Who came?
-    ・What are you reading?
-    ・What shall we have for lunch?
-
+<div class = "expressjp">
+・Who came?     
+・What are you reading?     
+・What shall we have for lunch?     
+・Who came?     
+・What are you reading?     
+・What shall we have for lunch?      
+</div>
+ 
 </div>
 </div>
  
@@ -31089,21 +31324,23 @@ num.rows.n = nrow(ntvspk.a)
 ntvspk.a.m <- ntvspk.a %>%
   select(Expression, Translation) %>%
   mutate(
-      x = rnorm(num.rows.n), 
-      y = rnorm(num.rows.n),
+      x = rnorm(num.rows.n, 1, 0.2), 
+      y = rnorm(num.rows.n, 1, 0.3),
+      # x = sort(x, decreasing = FALSE),
+      # y = sort(y, decreasing = FALSE),
   )
-
+# ntvspk.a.m
 num.char = nchar(ntvspk.a.m$Expression)
 ntvspk.a.m.v <- data.frame(ntvspk.a.m, num.char)
 
-p.n <- ggplot(ntvspk.a.m.v, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Expression, "<br>", Translation))) + geom_point(aes(size = num.char, colour=num.char, aplha=0.5))  + scale_colour_gradient(low="#EB455F", high="#060047")
+p.n <- ggplot(ntvspk.a.m.v, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Expression, "<br>","<sup>","<sup>", Translation))) + geom_point(aes(size = num.char, colour=num.char, aplha=0.5))  + scale_colour_gradient(low="#EB455F", high="#060047")
 p.n <- p.n + labs(title = "Scatter Expressions", 
             x = "Random X", 
             y = "Random Y")
 # p.n <- p.n + theme(legend.position="left")
 p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"))
 
-ggplotly(p.n, tooltip = c("text"), width=800, height=500)  %>% layout(hoverlabel = list(font=list(size=18,family="RocknRoll One")))
+ggplotly(p.n, tooltip = c("text"), width=800, height=500)  %>% layout(hoverlabel = list(font=list(size=27,family="Zen Kaku Gothic New")))
 
 # ggplot(ntvspk.a.m, aes(x = x, y = y, text = paste(Expression))) + geom_hex(bins = 50)
 
