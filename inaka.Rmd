@@ -270,6 +270,7 @@ dfexmple <- read.csv("jpdb/TBL3-TBWRDS.csv")
 tblw2 <- read_csv("jpdb/TBL2-TBWRDS.csv")
 vnstx <- read_csv("jpdb/VERBSYL-VERBS.csv")
 vnstr <- read_csv("jpdb/VERBRNDM-VERBS.csv")
+ntvspk <- read_csv("jpim/NTVSPK-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -1581,6 +1582,7 @@ datanw <- dat.a %>%
   )
 
 datanw.a <- datanw %>% select(word, freq, spread) %>% slice(1:2000)
+datanw.c <- datanw %>% select(word, freq, spread) %>% slice(1:20)
 
 td <- reactable(
   datanw.a, defaultColDef = colDef(show = FALSE),
@@ -31076,15 +31078,36 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Tasks {.tabset}
+#### Native {.tabset}
 
-<h6> </h6>
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
 
-------------------------------------------------------------------------
+ntvspk.a <- ntvspk  %>%  select(Expression, Translation)
 
-#### Topics {.tabset}
+num.rows.n = nrow(ntvspk.a)
 
-<h6> </h6>
+ntvspk.a.m <- ntvspk.a %>%
+  select(Expression, Translation) %>%
+  mutate(
+      x = rnorm(num.rows.n), 
+      y = rnorm(num.rows.n),
+  )
+
+num.char = nchar(ntvspk.a.m$Expression)
+ntvspk.a.m.v <- data.frame(ntvspk.a.m, num.char)
+
+p.n <- ggplot(ntvspk.a.m.v, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Expression, "<br>", Translation))) + geom_point(aes(size = num.char, colour=num.char, aplha=0.5))  + scale_colour_gradient(low="#EB455F", high="#060047")
+p.n <- p.n + labs(title = "Scatter Expressions", 
+            x = "Random X", 
+            y = "Random Y")
+# p.n <- p.n + theme(legend.position="left")
+p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"))
+
+ggplotly(p.n, tooltip = c("text"), width=800, height=500)  %>% layout(hoverlabel = list(font=list(size=18,family="RocknRoll One")))
+
+# ggplot(ntvspk.a.m, aes(x = x, y = y, text = paste(Expression))) + geom_hex(bins = 50)
+
+```
 
 ------------------------------------------------------------------------
 
