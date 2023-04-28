@@ -101,6 +101,7 @@ gwrds <- read_csv("jpdb/WGRMR-LST.csv")
 grmsplsnt <- read_csv("jpdb/GRMMRSNS-SNT.csv")
 dlyexps <- read_csv("jpim/DLYSNTC-DLY.csv")
 spcvwrds <- read_csv("jpim/SPCVRBS-WRDS.csv")
+splwrds <- read_csv("jpim/SPLWRDS-WRDS.csv")
 ```
 
 # <b> Sentences </b> {.tabset}
@@ -670,12 +671,18 @@ reactable(
 spcvwrds.a <- spcvwrds %>% select(Sentence, Translation)
 spcvwrds.a <- spcvwrds.a[sample(1:nrow(spcvwrds.a)),]
 
+splwrds.a <- splwrds %>% select(Sentence, Translation)
+splwrds.a <- splwrds.a[sample(1:nrow(splwrds.a)),]
+
+spcvwords.a <- bind_rows(spcvwrds.a, splwrds.a)
+spcvwords.a <- spcvwords.a[sample(1:nrow(spcvwords.a)),]
+
 reactable(
-  spcvwrds.a,
+  spcvwords.a,
   columns = list(
     Sentence = colDef(style= list(background = '#e0e1dd'), 
       cell = function(value, index) {
-        Translation <- spcvwrds.a$Translation[index]
+        Translation <- spcvwords.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(style = list(fontSize = 18, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), value, "。"),
