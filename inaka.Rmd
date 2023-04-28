@@ -272,6 +272,7 @@ tblw2 <- read_csv("jpdb/TBL2-TBWRDS.csv")
 vnstx <- read_csv("jpdb/VERBSYL-VERBS.csv")
 vnstr <- read_csv("jpdb/VERBRNDM-VERBS.csv")
 ntvspk <- read_csv("jpim/NTVSPK-EXP.csv")
+wrdxps <- read_csv("jpim/WRDXPS-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -2265,38 +2266,38 @@ reactable(
 </div>
 </div>
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE} -->
 
-cmmvrb.rc <- cmmvrb
-cmmvrb.rc <- cmmvrb.rc %>% na.omit(cmmvrb.rc)
-cmmvrb.rc <- cmmvrb.rc[sample(1:nrow(cmmvrb.rc)),]
+<!-- cmmvrb.rc <- cmmvrb -->
+<!-- cmmvrb.rc <- cmmvrb.rc %>% na.omit(cmmvrb.rc) -->
+<!-- cmmvrb.rc <- cmmvrb.rc[sample(1:nrow(cmmvrb.rc)),] -->
 
-cmmvrb.rc <- cmmvrb.rc %>% filter(Level==5)
-# cmmvrb.rc
-num.rows.rc = nrow(cmmvrb.rc)
+<!-- cmmvrb.rc <- cmmvrb.rc %>% filter(Level==5) -->
+<!-- # cmmvrb.rc -->
+<!-- num.rows.rc = nrow(cmmvrb.rc) -->
 
-datan.rc.1 <- cmmvrb.rc %>%
-  select(Verbs, Meaning, Sentences, Translation, Level) %>%
-  mutate(
-      x = rnorm(num.rows.rc, 1, 2), 
-      y = rnorm(num.rows.rc, 1, 4),
-      # x = sort(x, decreasing = FALSE),
-      # y = sort(y, decreasing = FALSE),
-  )
-# datan.rc.1
+<!-- datan.rc.1 <- cmmvrb.rc %>% -->
+<!--   select(Verbs, Meaning, Sentences, Translation, Level) %>% -->
+<!--   mutate( -->
+<!--       x = rnorm(num.rows.rc, 1, 2),  -->
+<!--       y = rnorm(num.rows.rc, 1, 4), -->
+<!--       # x = sort(x, decreasing = FALSE), -->
+<!--       # y = sort(y, decreasing = FALSE), -->
+<!--   ) -->
+<!-- # datan.rc.1 -->
 
-num.char.rc = nchar(datan.rc.1$Verbs)
-datan.rc.1 <- data.frame(datan.rc.1, num.char.rc)
-# datan.rc.1
+<!-- num.char.rc = nchar(datan.rc.1$Verbs) -->
+<!-- datan.rc.1 <- data.frame(datan.rc.1, num.char.rc) -->
+<!-- # datan.rc.1 -->
 
-p.rc <- ggplot(datan.rc.1, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Verbs, "<br>","<sup>", Sentences, "<br>","<sup>", Translation))) + geom_point(aes(size = num.char.rc, colour=num.char.rc, aplha=0.6))  + scale_colour_gradient(low="#EB455F", high="#060047")
-# p.rc <- p.rc + geom_point(alpha = 0.5)
-# p.rc <- p.rc + theme_wsj()
-p.rc <- p.rc + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())
+<!-- p.rc <- ggplot(datan.rc.1, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Verbs, "<br>","<sup>", Sentences, "<br>","<sup>", Translation))) + geom_point(aes(size = num.char.rc, colour=num.char.rc, aplha=0.6))  + scale_colour_gradient(low="#EB455F", high="#060047") -->
+<!-- # p.rc <- p.rc + geom_point(alpha = 0.5) -->
+<!-- # p.rc <- p.rc + theme_wsj() -->
+<!-- p.rc <- p.rc + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank()) -->
 
-ggplotly(p.rc, tooltip = c("text"), width=800, height=500)  %>% layout(hoverlabel = list(font=list(size=29,family="Zen Kaku Gothic New")))
+<!-- ggplotly(p.rc, tooltip = c("text"), width=800, height=500)  %>% layout(hoverlabel = list(font=list(size=29,family="Zen Kaku Gothic New"))) -->
 
-```
+<!-- ``` -->
 
 ------------------------------------------------------------------------
 ### Inflects {.tabset}
@@ -2468,6 +2469,124 @@ reactable(
 
 </div>
 </div>
+
+------------------------------------------------------------------------
+
+### Temp {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+wrdxps.a <- wrdxps %>% select(Verbs)
+wrdxps.a <- wrdxps.a %>% na.omit(wrdxps.a) 
+wrdxps.a <- wrdxps.a[sample(1:nrow(wrdxps.a)),]
+
+reactable(
+  wrdxps.a,
+  columns = list(
+    Verbs = colDef(align = "center", style = list(fontSize = 33, fontFamily = 'Open Sans', fontWeight = 600, background = '#edede9', color = '#0F2040'))
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 280),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+cmmvrb.rc <- cmmvrb
+cmmvrb.rc <- cmmvrb.rc %>% na.omit(cmmvrb.rc)
+cmmvrb.rc <- cmmvrb.rc[sample(1:nrow(cmmvrb.rc)),]
+
+cmmvrb.rc <- cmmvrb.rc %>% filter(Level==5)
+# cmmvrb.rc
+num.rows.rc = nrow(cmmvrb.rc)
+
+datan.rc.1 <- cmmvrb.rc %>%
+  select(Verbs, Meaning, Sentences, Translation, Level) %>%
+  mutate(
+      x = rnorm(num.rows.rc, 1, 2), 
+      y = rnorm(num.rows.rc, 1, 4),
+      # x = sort(x, decreasing = FALSE),
+      # y = sort(y, decreasing = FALSE),
+  )
+# datan.rc.1
+
+num.char.rc = nchar(datan.rc.1$Verbs)
+datan.rc.1 <- data.frame(datan.rc.1, num.char.rc)
+# datan.rc.1
+
+p.rc <- ggplot(datan.rc.1, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Verbs, "<br>","<sup>", Sentences, "<br>","<sup>", Translation))) + geom_point(aes(size = num.char.rc, colour=num.char.rc, aplha=0.6))  + scale_colour_gradient(low="#EB455F", high="#060047")
+# p.rc <- p.rc + geom_point(alpha = 0.5)
+# p.rc <- p.rc + theme_wsj()
+p.rc <- p.rc + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())
+
+ggplotly(p.rc, tooltip = c("text"), width=420)  %>% layout(hoverlabel = list(font=list(size=24,family="Zen Kaku Gothic New")))
+
+```
+
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+wrdxps.b <- wrdxps %>% select(Pattern, Translation)
+wrdxps.b <- wrdxps.b %>% na.omit(wrdxps.b) 
+wrdxps.b <- wrdxps.b[sample(1:nrow(wrdxps.b)),]
+
+reactable(
+  wrdxps.b,
+  columns = list(
+    Pattern = colDef(style= list(background = '#e0e1dd'), 
+      cell = function(value, index) {
+        Translation <- wrdxps.b$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#0F2040', fontFamily = 'Open Sans'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 25,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, height = 350,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -3649,265 +3768,265 @@ reactable(
 
 <!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### LD {.tabset}
+<!-- ### LD {.tabset} -->
 
-<div class = "row">
-<div class = "col-sm-6">
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-# knlvls.a <- knlvls %>% select(Kanji, Meaning, S1, S2, S3, S4, S5, S6, S7, S8)
-knlvls.a <- knlvls %>% select(Kanji, Meaning) %>% slice(1:1400)
-knlvls.a <- knlvls.a %>% na.omit(knlvls.a)
-knlvls.a <- knlvls.a[sample(1:nrow(knlvls.a)),]
-knlvls.a <- knlvls.a[sample(1:nrow(knlvls.a)),]
+<!-- # knlvls.a <- knlvls %>% select(Kanji, Meaning, S1, S2, S3, S4, S5, S6, S7, S8) -->
+<!-- knlvls.a <- knlvls %>% select(Kanji, Meaning) %>% slice(1:1400) -->
+<!-- knlvls.a <- knlvls.a %>% na.omit(knlvls.a) -->
+<!-- knlvls.a <- knlvls.a[sample(1:nrow(knlvls.a)),] -->
+<!-- knlvls.a <- knlvls.a[sample(1:nrow(knlvls.a)),] -->
 
-reactable(
-  knlvls.a,
-  columns = list(
-    Kanji = colDef(style= list(background = '#e0e1dd'),
-      cell = function(value, index) {
-        Meaning <- knlvls.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        # S1 <- knlvls.a$S1[index]
-        # S1 <- if (!is.na(S1)) S1 else ""
-        # S2 <- knlvls.a$S2[index]
-        # S2 <- if (!is.na(S2)) S2 else ""
-        # S3 <- knlvls.a$S3[index]
-        # S3 <- if (!is.na(S3)) S3 else ""
-        # S4 <- knlvls.a$S4[index]
-        # S4 <- if (!is.na(S4)) S4 else ""
-        # S5 <- knlvls.a$S5[index]
-        # S5 <- if (!is.na(S5)) S5 else ""
-        # S6 <- knlvls.a$S6[index]
-        # S6 <- if (!is.na(S6)) S6 else ""
-        # S7 <- knlvls.a$S7[index]
-        # S7 <- if (!is.na(S7)) S7 else ""
-        # S8 <- knlvls.a$S8[index]
-        # S8 <- if (!is.na(S8)) S8 else ""
-        tagList(
-          div(style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
-          div(style = list(fontSize = 12, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Meaning),
-          # div(style = list(fontSize = 2, color = '#dee7e7'), "."),
-          # div(style = list(fontSize = 2, color = '#dee7e7'), "."),
-          # div(style = list(fontSize = 2, color = '#dee7e7'), "."),
-          # div(style = list(fontSize = 12, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), S1,"。", S2,"。", S3,"。", S4),
-          # div(style = list(fontSize = 12, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), S5,"。", S6,"。", S7,"。", S8),
-        )
-      },
-      align = "center"
-    ),
-    # S1 = colDef(show = FALSE),
-    # S2 = colDef(show = FALSE),
-    # S3 = colDef(show = FALSE),
-    # S4 = colDef(show = FALSE),
-    # S5 = colDef(show = FALSE),
-    # S6 = colDef(show = FALSE),
-    # S7 = colDef(show = FALSE),
-    # S8 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+<!-- reactable( -->
+<!--   knlvls.a, -->
+<!--   columns = list( -->
+<!--     Kanji = colDef(style= list(background = '#e0e1dd'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- knlvls.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         # S1 <- knlvls.a$S1[index] -->
+<!--         # S1 <- if (!is.na(S1)) S1 else "" -->
+<!--         # S2 <- knlvls.a$S2[index] -->
+<!--         # S2 <- if (!is.na(S2)) S2 else "" -->
+<!--         # S3 <- knlvls.a$S3[index] -->
+<!--         # S3 <- if (!is.na(S3)) S3 else "" -->
+<!--         # S4 <- knlvls.a$S4[index] -->
+<!--         # S4 <- if (!is.na(S4)) S4 else "" -->
+<!--         # S5 <- knlvls.a$S5[index] -->
+<!--         # S5 <- if (!is.na(S5)) S5 else "" -->
+<!--         # S6 <- knlvls.a$S6[index] -->
+<!--         # S6 <- if (!is.na(S6)) S6 else "" -->
+<!--         # S7 <- knlvls.a$S7[index] -->
+<!--         # S7 <- if (!is.na(S7)) S7 else "" -->
+<!--         # S8 <- knlvls.a$S8[index] -->
+<!--         # S8 <- if (!is.na(S8)) S8 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Meaning), -->
+<!--           # div(style = list(fontSize = 2, color = '#dee7e7'), "."), -->
+<!--           # div(style = list(fontSize = 2, color = '#dee7e7'), "."), -->
+<!--           # div(style = list(fontSize = 2, color = '#dee7e7'), "."), -->
+<!--           # div(style = list(fontSize = 12, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), S1,"。", S2,"。", S3,"。", S4), -->
+<!--           # div(style = list(fontSize = 12, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), S5,"。", S6,"。", S7,"。", S8), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     # S1 = colDef(show = FALSE), -->
+<!--     # S2 = colDef(show = FALSE), -->
+<!--     # S3 = colDef(show = FALSE), -->
+<!--     # S4 = colDef(show = FALSE), -->
+<!--     # S5 = colDef(show = FALSE), -->
+<!--     # S6 = colDef(show = FALSE), -->
+<!--     # S7 = colDef(show = FALSE), -->
+<!--     # S8 = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-</div>
-<div class = "col-sm-6">
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-knlvls.b <- knlvls %>% select(S1) %>% rename(Words = S1) %>% slice(1:1400)
-knlvls.c <- knlvls %>% select(S2) %>% rename(Words = S2) %>% slice(1:1400)
-knlvls.d <- knlvls %>% select(S3) %>% rename(Words = S3) %>% slice(1:1400)
-knlvls.e <- knlvls %>% select(S4) %>% rename(Words = S4) %>% slice(1:1400)
-knlvls.f <- knlvls %>% select(S5) %>% rename(Words = S5) %>% slice(1:1400)
-knlvls.g <- knlvls %>% select(S6) %>% rename(Words = S6) %>% slice(1:1400)
-knlvls.h <- knlvls %>% select(S7) %>% rename(Words = S7) %>% slice(1:1400)
-knlvls.i <- knlvls %>% select(S8) %>% rename(Words = S8) %>% slice(1:1400)
+<!-- knlvls.b <- knlvls %>% select(S1) %>% rename(Words = S1) %>% slice(1:1400) -->
+<!-- knlvls.c <- knlvls %>% select(S2) %>% rename(Words = S2) %>% slice(1:1400) -->
+<!-- knlvls.d <- knlvls %>% select(S3) %>% rename(Words = S3) %>% slice(1:1400) -->
+<!-- knlvls.e <- knlvls %>% select(S4) %>% rename(Words = S4) %>% slice(1:1400) -->
+<!-- knlvls.f <- knlvls %>% select(S5) %>% rename(Words = S5) %>% slice(1:1400) -->
+<!-- knlvls.g <- knlvls %>% select(S6) %>% rename(Words = S6) %>% slice(1:1400) -->
+<!-- knlvls.h <- knlvls %>% select(S7) %>% rename(Words = S7) %>% slice(1:1400) -->
+<!-- knlvls.i <- knlvls %>% select(S8) %>% rename(Words = S8) %>% slice(1:1400) -->
 
-knlvls.z <- bind_rows(knlvls.b, knlvls.c)
-knlvls.z <- bind_rows(knlvls.z, knlvls.d)
-knlvls.z <- bind_rows(knlvls.z, knlvls.e)
-knlvls.z <- bind_rows(knlvls.z, knlvls.f)
-knlvls.z <- bind_rows(knlvls.z, knlvls.g)
-knlvls.z <- bind_rows(knlvls.z, knlvls.h)
-knlvls.z <- bind_rows(knlvls.z, knlvls.i)
+<!-- knlvls.z <- bind_rows(knlvls.b, knlvls.c) -->
+<!-- knlvls.z <- bind_rows(knlvls.z, knlvls.d) -->
+<!-- knlvls.z <- bind_rows(knlvls.z, knlvls.e) -->
+<!-- knlvls.z <- bind_rows(knlvls.z, knlvls.f) -->
+<!-- knlvls.z <- bind_rows(knlvls.z, knlvls.g) -->
+<!-- knlvls.z <- bind_rows(knlvls.z, knlvls.h) -->
+<!-- knlvls.z <- bind_rows(knlvls.z, knlvls.i) -->
 
-knlvls.z <- knlvls.z %>% na.omit(knlvls.z) 
-knlvls.z <- knlvls.z[sample(1:nrow(knlvls.z)),]
+<!-- knlvls.z <- knlvls.z %>% na.omit(knlvls.z)  -->
+<!-- knlvls.z <- knlvls.z[sample(1:nrow(knlvls.z)),] -->
 
-reactable(
-  knlvls.z,
-  columns = list(
-    Words = colDef(align = "center", style = list(fontSize = 33, fontFamily = 'Open Sans', fontWeight = 600, background = '#edede9', color = '#0F2040'))
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "simple", highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!-- reactable( -->
+<!--   knlvls.z, -->
+<!--   columns = list( -->
+<!--     Words = colDef(align = "center", style = list(fontSize = 33, fontFamily = 'Open Sans', fontWeight = 600, background = '#edede9', color = '#0F2040')) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "simple", highlight = TRUE, -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-</div>
-</div>
+<!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- </div> -->
+<!-- </div> -->
 
-### LE {.tabset}
+<!-- ------------------------------------------------------------------------ -->
 
-<div class = "row">
-<div class = "col-sm-6">
+<!-- ### LE {.tabset} -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
 
-# knlvls.b <- knlvls %>% select(Kanji, Meaning, S1, S2, S3, S4, S5, S6, S7, S8)
-knlvls.b <- knlvls %>% select(Kanji, Meaning) %>% slice(1400:3000)
-knlvls.b <- knlvls.b %>% na.omit(knlvls.b)
-knlvls.b <- knlvls.b[sample(1:nrow(knlvls.b)),]
-knlvls.b <- knlvls.b[sample(1:nrow(knlvls.b)),]
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-reactable(
-  knlvls.b,
-  columns = list(
-    Kanji = colDef(style= list(background = '#e0e1dd'),
-      cell = function(value, index) {
-        Meaning <- knlvls.b$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        # S1 <- knlvls.b$S1[index]
-        # S1 <- if (!is.na(S1)) S1 else ""
-        # S2 <- knlvls.b$S2[index]
-        # S2 <- if (!is.na(S2)) S2 else ""
-        # S3 <- knlvls.b$S3[index]
-        # S3 <- if (!is.na(S3)) S3 else ""
-        # S4 <- knlvls.b$S4[index]
-        # S4 <- if (!is.na(S4)) S4 else ""
-        # S5 <- knlvls.b$S5[index]
-        # S5 <- if (!is.na(S5)) S5 else ""
-        # S6 <- knlvls.b$S6[index]
-        # S6 <- if (!is.na(S6)) S6 else ""
-        # S7 <- knlvls.b$S7[index]
-        # S7 <- if (!is.na(S7)) S7 else ""
-        # S8 <- knlvls.b$S8[index]
-        # S8 <- if (!is.na(S8)) S8 else ""
-        tagList(
-          div(style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
-          div(style = list(fontSize = 12, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Meaning),
-          # div(style = list(fontSize = 2, color = '#dee7e7'), "."),
-          # div(style = list(fontSize = 2, color = '#dee7e7'), "."),
-          # div(style = list(fontSize = 2, color = '#dee7e7'), "."),
-          # div(style = list(fontSize = 12, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), S1,"。", S2,"。", S3,"。", S4),
-          # div(style = list(fontSize = 12, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), S5,"。", S6,"。", S7,"。", S8),
-        )
-      },
-      align = "center"
-    ),
-    # S1 = colDef(show = FALSE),
-    # S2 = colDef(show = FALSE),
-    # S3 = colDef(show = FALSE),
-    # S4 = colDef(show = FALSE),
-    # S5 = colDef(show = FALSE),
-    # S6 = colDef(show = FALSE),
-    # S7 = colDef(show = FALSE),
-    # S8 = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+<!-- # knlvls.b <- knlvls %>% select(Kanji, Meaning, S1, S2, S3, S4, S5, S6, S7, S8) -->
+<!-- knlvls.b <- knlvls %>% select(Kanji, Meaning) %>% slice(1400:3000) -->
+<!-- knlvls.b <- knlvls.b %>% na.omit(knlvls.b) -->
+<!-- knlvls.b <- knlvls.b[sample(1:nrow(knlvls.b)),] -->
+<!-- knlvls.b <- knlvls.b[sample(1:nrow(knlvls.b)),] -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!-- reactable( -->
+<!--   knlvls.b, -->
+<!--   columns = list( -->
+<!--     Kanji = colDef(style= list(background = '#e0e1dd'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- knlvls.b$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         # S1 <- knlvls.b$S1[index] -->
+<!--         # S1 <- if (!is.na(S1)) S1 else "" -->
+<!--         # S2 <- knlvls.b$S2[index] -->
+<!--         # S2 <- if (!is.na(S2)) S2 else "" -->
+<!--         # S3 <- knlvls.b$S3[index] -->
+<!--         # S3 <- if (!is.na(S3)) S3 else "" -->
+<!--         # S4 <- knlvls.b$S4[index] -->
+<!--         # S4 <- if (!is.na(S4)) S4 else "" -->
+<!--         # S5 <- knlvls.b$S5[index] -->
+<!--         # S5 <- if (!is.na(S5)) S5 else "" -->
+<!--         # S6 <- knlvls.b$S6[index] -->
+<!--         # S6 <- if (!is.na(S6)) S6 else "" -->
+<!--         # S7 <- knlvls.b$S7[index] -->
+<!--         # S7 <- if (!is.na(S7)) S7 else "" -->
+<!--         # S8 <- knlvls.b$S8[index] -->
+<!--         # S8 <- if (!is.na(S8)) S8 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Meaning), -->
+<!--           # div(style = list(fontSize = 2, color = '#dee7e7'), "."), -->
+<!--           # div(style = list(fontSize = 2, color = '#dee7e7'), "."), -->
+<!--           # div(style = list(fontSize = 2, color = '#dee7e7'), "."), -->
+<!--           # div(style = list(fontSize = 12, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), S1,"。", S2,"。", S3,"。", S4), -->
+<!--           # div(style = list(fontSize = 12, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), S5,"。", S6,"。", S7,"。", S8), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     # S1 = colDef(show = FALSE), -->
+<!--     # S2 = colDef(show = FALSE), -->
+<!--     # S3 = colDef(show = FALSE), -->
+<!--     # S4 = colDef(show = FALSE), -->
+<!--     # S5 = colDef(show = FALSE), -->
+<!--     # S6 = colDef(show = FALSE), -->
+<!--     # S7 = colDef(show = FALSE), -->
+<!--     # S8 = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-</div>
-<div class = "col-sm-6">
+<!-- ``` -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
 
-knlvls.b <- knlvls %>% select(S1) %>% rename(Words = S1) %>% slice(1400:3000)
-knlvls.c <- knlvls %>% select(S2) %>% rename(Words = S2) %>% slice(1400:3000)
-knlvls.d <- knlvls %>% select(S3) %>% rename(Words = S3) %>% slice(1400:3000)
-knlvls.e <- knlvls %>% select(S4) %>% rename(Words = S4) %>% slice(1400:3000)
-knlvls.f <- knlvls %>% select(S5) %>% rename(Words = S5) %>% slice(1400:3000)
-knlvls.g <- knlvls %>% select(S6) %>% rename(Words = S6) %>% slice(1400:3000)
-knlvls.h <- knlvls %>% select(S7) %>% rename(Words = S7) %>% slice(1400:3000)
-knlvls.i <- knlvls %>% select(S8) %>% rename(Words = S8) %>% slice(1400:3000)
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-knlvls.x <- bind_rows(knlvls.b, knlvls.c)
-knlvls.x <- bind_rows(knlvls.x, knlvls.d)
-knlvls.x <- bind_rows(knlvls.x, knlvls.e)
-knlvls.x <- bind_rows(knlvls.x, knlvls.f)
-knlvls.x <- bind_rows(knlvls.x, knlvls.g)
-knlvls.x <- bind_rows(knlvls.x, knlvls.h)
-knlvls.x <- bind_rows(knlvls.x, knlvls.i)
+<!-- knlvls.b <- knlvls %>% select(S1) %>% rename(Words = S1) %>% slice(1400:3000) -->
+<!-- knlvls.c <- knlvls %>% select(S2) %>% rename(Words = S2) %>% slice(1400:3000) -->
+<!-- knlvls.d <- knlvls %>% select(S3) %>% rename(Words = S3) %>% slice(1400:3000) -->
+<!-- knlvls.e <- knlvls %>% select(S4) %>% rename(Words = S4) %>% slice(1400:3000) -->
+<!-- knlvls.f <- knlvls %>% select(S5) %>% rename(Words = S5) %>% slice(1400:3000) -->
+<!-- knlvls.g <- knlvls %>% select(S6) %>% rename(Words = S6) %>% slice(1400:3000) -->
+<!-- knlvls.h <- knlvls %>% select(S7) %>% rename(Words = S7) %>% slice(1400:3000) -->
+<!-- knlvls.i <- knlvls %>% select(S8) %>% rename(Words = S8) %>% slice(1400:3000) -->
 
-knlvls.x <- knlvls.x %>% na.omit(knlvls.x) 
-knlvls.x <- knlvls.x[sample(1:nrow(knlvls.x)),]
+<!-- knlvls.x <- bind_rows(knlvls.b, knlvls.c) -->
+<!-- knlvls.x <- bind_rows(knlvls.x, knlvls.d) -->
+<!-- knlvls.x <- bind_rows(knlvls.x, knlvls.e) -->
+<!-- knlvls.x <- bind_rows(knlvls.x, knlvls.f) -->
+<!-- knlvls.x <- bind_rows(knlvls.x, knlvls.g) -->
+<!-- knlvls.x <- bind_rows(knlvls.x, knlvls.h) -->
+<!-- knlvls.x <- bind_rows(knlvls.x, knlvls.i) -->
 
-reactable(
-  knlvls.x,
-  columns = list(
-    Words = colDef(align = "center", style = list(fontSize = 33, fontFamily = 'Open Sans', fontWeight = 600, background = '#edede9', color = '#0F2040'))
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!-- knlvls.x <- knlvls.x %>% na.omit(knlvls.x)  -->
+<!-- knlvls.x <- knlvls.x[sample(1:nrow(knlvls.x)),] -->
 
-```
+<!-- reactable( -->
+<!--   knlvls.x, -->
+<!--   columns = list( -->
+<!--     Words = colDef(align = "center", style = list(fontSize = 33, fontFamily = 'Open Sans', fontWeight = 600, background = '#edede9', color = '#0F2040')) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", highlight = TRUE, -->
 
-</div>
-</div>
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- </div> -->
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -17786,20 +17905,28 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・スミスさんは「初めまして」と日本語で言いました
-    ・田中さんは「月曜日に持ってきます」と言いました
-    ・田中さんが「フランスのお菓子はおいしいよ」と言いました
-    ・田中さんは「私がやります」と言いました
-    ・田中さんは「あした宿題を出します」と言いました
+<div class = "expressjp">
+・スミスさんは「初めまして」と日本語で言いました.    
+・田中さんは「月曜日に持ってきます」と言いました.   
+・田中さんが「フランスのお菓子はおいしいよ」と言いました.   
+・田中さんは「私がやります」と言いました.   
+・田中さんは「あした宿題を出します」と言いました.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・Ms Smith said, ‘How do you do,’ in Japanese
-    ・Ms Tanaka said, ‘I will bring it on Monday’
-    ・Ms Tanaka said, ‘French confectionery is good, I tell you’
-    ・Ms Tanaka said, ‘I will do it’
-    ・Ms Tanaka said, ‘I will hand in homework tomorrow’
+<div class = "expressjp">
+・Ms Smith said, ‘How do you do,’ in Japanese.   
+・Ms Tanaka said, ‘I will bring it on Monday’.   
+・Ms Tanaka said, ‘French confectionery is good, I tell you’.   
+・Ms Tanaka said, ‘I will do it’.  
+・Ms Tanaka said, ‘I will hand in homework tomorrow’.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -17809,18 +17936,26 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・田中さんは月曜日に持ってくると言いました
-    ・田中さんがフランスのお菓子はおいしいと言いました
-    ・田中さんは自分がやると言いました
-    ・田中さんは次の日に宿題を出すと言いました
+<div class = "expressjp">
+・田中さんは月曜日に持ってくると言いました.    
+・田中さんがフランスのお菓子はおいしいと言いました.    
+・田中さんは自分がやると言いました.   
+・田中さんは次の日に宿題を出すと言いました.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・Ms Tanaka said that she would bring it on Monday
-    ・Ms Tanaka said that French confectionery is good
-    ・Ms Tanaka said that she would do it
-    ・Ms Tanaka said that she will hand in homework the next day
+<div class = "expressjp">
+・Ms Tanaka said that she would bring it on Monday.   
+・Ms Tanaka said that French confectionery is good.   
+・Ms Tanaka said that she would do it.   
+・Ms Tanaka said that she will hand in homework the next day.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -17830,30 +17965,38 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・友達が手伝ってくれると言いました
-    ・友達が手伝ってくれるって言いました
-    ・台風で停電になったと新聞に書いてありました
-    ・田中さんはアメリカに行くとか言っていました
-    ・助詞の間違いが多いなんて言われました
-    ・スミスさんは日本に留学すると言っていました
-    ・スミスさんは日本に􏰵学すると言いました
-    ・天気予報によるとあしたは雨だそうです
-    ・新聞によると働く女性が増えているそうだ
-    ・ある調査によると国際結婚が増えているとのこと
+<div class = "expressjp">
+・友達が手伝ってくれると言いました.    
+・友達が手伝ってくれるって言いました.    
+・台風で停電になったと新聞に書いてありました.    
+・田中さんはアメリカに行くとか言っていました.    
+・助詞の間違いが多いなんて言われました.      
+・スミスさんは日本に留学すると言っていました.    
+・スミスさんは日本に􏰵学すると言いました.    
+・天気予報によるとあしたは雨だそうです.   
+・新聞によると働く女性が増えているそうだ.   
+・ある調査によると国際結婚が増えているとのこと.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・My friend said he would help me
-    ・My friend said he would help me
-    ・Written in the newspaper that the typhoon caused a power outage
-    ・Mr. Tanaka said something like he was going to America
-    ・I was told like I made too many mistakes with particles
-    ・Mr. Smith was saying the he was going to study in Japan
-    ・Mr. Smith said he was going to study in Japan
-    ・According to the weather forecast, it's supposed to rain tomorrow
-    ・According to the newspaper, working women is increasing
-    ・According to one survey, international marriages are on the rise
+<div class = "expressjp">
+・My friend said he would help me.   
+・My friend said he would help me.   
+・Written in the newspaper that the typhoon caused a power outage.   
+・Mr. Tanaka said something like he was going to America.   
+・I was told like I made too many mistakes with particles.   
+・Mr. Smith was saying the he was going to study in Japan.   
+・Mr. Smith said he was going to study in Japan.    
+・According to the weather forecast, it's supposed to rain tomorrow.   
+・According to the newspaper, working women is increasing.   
+・According to one survey, international marriages are on the rise.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -17863,22 +18006,30 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・友達に宿題があるかどうかと聞いたが、友達も知らなかった
-    ・どんな日本食が好きかと聞かれて、答えに困った
-    ・おすしを食べたことがあるかどうかと聞かれた
-    ・試験はいつか先生に伺いましょう
-    ・日本人にも敬語が難しいかという質問をよくされる
-    ・友達から出席できないという返事をもらった
+<div class = "expressjp">
+・友達に宿題があるかどうかと聞いたが、友達も知らなかった.    
+・どんな日本食が好きかと聞かれて、答えに困った.   
+・おすしを食べたことがあるかどうかと聞かれた.  
+・試験はいつか先生に伺いましょう.   
+・日本人にも敬語が難しいかという質問をよくされる.   
+・友達から出席できないという返事をもらった.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・I asked my friends if we had homework, but they didn't know also
-    ・When asked what kind of Japanese food I like, An answer is at loss
-    ・I was asked if I had ever eaten sushi
-    ・Let’s ask our teacher when the exam is
-    ・I'm often asked if honorifics are difficult even for Japanese
-    ・I received a reply from a friend that he could not attend
+<div class = "expressjp">
+・I asked my friends if we had homework, but they didn't know also.    
+・When asked what kind of Japanese food I like, An answer is at loss.   
+・I was asked if I had ever eaten sushi.   
+・Let’s ask our teacher when the exam is.   
+・I'm often asked if honorifics are difficult even for Japanese.  
+・I received a reply from a friend that he could not attend.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -17896,28 +18047,34 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・必要に応じて作ります
-    ・健康に注意する必要がある
-    ・何か必要なものがあったら、言ってください
-    ・毎日練習することが必要だ
-    ・お金はいくらぐらいいりますか
-    ・新しいことを始めるには勇気がいる
-    ・お金がないから仕事をしなければならない
-    ・あした朝早いから、早く寝なければいけない
-    ・もっと勉強しなくてはいけません
+<div class = "expressjp">
+・必要に応じて作ります.    
+・健康に注意する必要がある.   
+・何か必要なものがあったら、言ってください.   
+・毎日練習することが必要だ.   
+・お金はいくらぐらいいりますか.   
+・新しいことを始めるには勇気がいる.   
+・お金がないから仕事をしなければならない.    
+・あした朝早いから、早く寝なければいけない.  
+・もっと勉強しなくてはいけません.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・I will make depending on needs
-    ・There is a need to be careful about one’s health
-    ・If there is anything you need, please tell me
-    ・It is necessary to practice every day
-    ・How much money do you need?
-    ・You need courage to begin a new thing
-    ・Since I don’t have money, I need to work
-    ・How much money do you need?
-    ・I need to study more
+<div class = "expressjp">
+ ・I will make depending on needs.   
+ ・There is a need to be careful about one’s health.   
+ ・If there is anything you need, please tell me.   
+ ・It is necessary to practice every day.  
+ ・How much money do you need?    
+ ・You need courage to begin a new thing.   
+ ・Since I don’t have money, I need to work.  
+ ・How much money do you need?    
+ ・I need to study more.   
+</div>
 
 </div>
 </div>
@@ -17933,22 +18090,30 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・私は山本です
-    ・私は山本と言います
-    ・私は山本と申します
-    ・こちらは山本さんです
-    ・そちらは山本さんです
-    ・あちらは山本社長でいらっしゃいます
+<div class = "expressjp">
+・私は山本です.    
+・私は山本と言います.   
+・私は山本と申します.   
+・こちらは山本さんです.   
+・そちらは山本さんです.   
+・あちらは山本社長でいらっしゃいます.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・I am Yamamoto
-    ・I am Yamamoto
-    ・I am Yamamoto
-    ・This is Mr. Yamamoto
-    ・That is Mr. Yamamoto
-    ・That is President Yamamoto over there
+<div class = "expressjp">
+・I am Yamamoto.    
+・I am Yamamoto.   
+・I am Yamamoto.   
+・This is Mr. Yamamoto.   
+・That is Mr. Yamamoto.  
+・That is President Yamamoto over there.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -17958,18 +18123,26 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・領事館はあれです
-    ・図書館はあれです
-    ・これが私の家です
-    ・ここが私の別荘です
+<div class = "expressjp">
+・領事館はあれです.    
+・図書館はあれです.    
+・これが私の家です.   
+・ここが私の別荘です.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・The consulate is that one
-    ・The library is that one
-    ・This is my home
-    ・This place is my vacation home
+<div class = "expressjp">
+・The consulate is that one.    
+・The library is that one.    
+・This is my home.   
+・This place is my vacation home.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -17979,17 +18152,23 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・これは田中さんの傘です
-    ・それは中国語の辞書です
-    ・あれは山田さんの車です
+<div class = "expressjp">
+・これは田中さんの傘です.    
+・それは中国語の辞書です.    
+・あれは山田さんの車です.    
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・This is Mr. Tanaka's umbrella
-    ・That is a Chinese dictionary
-    ・That is Mr. Yamada's car
-
+<div class = "expressjp">
+・This is Mr. Tanaka's umbrella.    
+・That is a Chinese dictionary.   
+・That is Mr. Yamada's car.   
+</div>
+ 
 </div>
 </div>
 
