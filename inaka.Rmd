@@ -273,6 +273,7 @@ vnstx <- read_csv("jpdb/VERBSYL-VERBS.csv")
 vnstr <- read_csv("jpdb/VERBRNDM-VERBS.csv")
 ntvspk <- read_csv("jpim/NTVSPK-EXP.csv")
 wrdxps <- read_csv("jpim/WRDXPS-EXP.csv")
+explcexp <- read_csv("jpim/EXPLCTMS-TRN.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -2582,9 +2583,40 @@ reactable(
 
 ```
 
-</div>
-</div>
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
 
+ntvspk.a <- ntvspk  %>%  select(Expression, Translation)
+
+num.rows.n = nrow(ntvspk.a)
+
+ntvspk.a.m <- ntvspk.a %>%
+  select(Expression, Translation) %>%
+  mutate(
+      x = rnorm(num.rows.n, 1, 0.2), 
+      y = rnorm(num.rows.n, 1, 0.3),
+      # x = sort(x, decreasing = FALSE),
+      # y = sort(y, decreasing = FALSE),
+  )
+# ntvspk.a.m
+num.char = nchar(ntvspk.a.m$Expression)
+ntvspk.a.m.v <- data.frame(ntvspk.a.m, num.char)
+
+p.n <- ggplot(ntvspk.a.m.v, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Expression, "<br>","<sup>","<sup>", Translation))) + geom_point(aes(size = num.char, colour=num.char, aplha=0.5))  + scale_colour_gradient(low="#EB455F", high="#060047")
+# p.n <- p.n + labs(title = "Scatter Expressions", 
+#             x = "Random X", 
+#             y = "Random Y")
+# p.n <- p.n + theme(legend.position="left")
+# p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"))
+p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())
+
+ggplotly(p.n, tooltip = c("text"), width=420)  %>% layout(hoverlabel = list(font=list(size=19,family="Zen Kaku Gothic New")))
+
+# ggplot(ntvspk.a.m, aes(x = x, y = y, text = paste(Expression))) + geom_hex(bins = 50)
+
+```
+
+</div>
+</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -31648,9 +31680,9 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Elements {.tabset}
+#### Comprehesion {.tabset}
 
-<!-- ##### Particles {.tabset} -->
+##### Particles {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -31660,7 +31692,7 @@ prtcltst.a <- prtcltst.a %>% na.omit(prtcltst.a)
 reactable(
   prtcltst.a,
   columns = list(
-    Particles = colDef(minWidth = 150, align = "center", html = TRUE, style = list(fontSize = 28, fontWeight = 600, color = '#0F2040', fontFamily = 'Hina Mincho', background = '#e0e1dd'))
+    Particles = colDef(minWidth = 150, align = "center", html = TRUE, style = list(fontSize = 28, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#e0e1dd'))
   ),
   defaultPageSize = 1,
   theme = reactableTheme(
@@ -31694,37 +31726,132 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Native {.tabset}
+#### Cognitive {.tabset}
 
-```{r, echo=FALSE, message=FALSE, warning = FALSE}
+##### Implicit {.tabset}
 
-ntvspk.a <- ntvspk  %>%  select(Expression, Translation)
+```{r, echo=FALSE, message=FALSE}
 
-num.rows.n = nrow(ntvspk.a)
+ntvspk.b <- ntvspk  %>%  select(Expression, Translation)
+ntvspk.b <- ntvspk.b[sample(1:nrow(ntvspk.b)),]
+ntvspk.b <- ntvspk.b[sample(1:nrow(ntvspk.b)),]
 
-ntvspk.a.m <- ntvspk.a %>%
-  select(Expression, Translation) %>%
-  mutate(
-      x = rnorm(num.rows.n, 1, 0.2), 
-      y = rnorm(num.rows.n, 1, 0.3),
-      # x = sort(x, decreasing = FALSE),
-      # y = sort(y, decreasing = FALSE),
-  )
-# ntvspk.a.m
-num.char = nchar(ntvspk.a.m$Expression)
-ntvspk.a.m.v <- data.frame(ntvspk.a.m, num.char)
+reactable(
+  ntvspk.b,
+  onClick = "expand",
+  columns = list(
+    # Expression = colDef(minWidth = 50, align = "left", style = list(fontSize = 17, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#e0e1dd')),
+    Expression = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 17, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040', background = '#e0e1dd'), value, "。"),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
 
-p.n <- ggplot(ntvspk.a.m.v, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Expression, "<br>","<sup>","<sup>", Translation))) + geom_point(aes(size = num.char, colour=num.char, aplha=0.5))  + scale_colour_gradient(low="#EB455F", high="#060047")
-# p.n <- p.n + labs(title = "Scatter Expressions", 
-#             x = "Random X", 
-#             y = "Random Y")
-# p.n <- p.n + theme(legend.position="left")
-# p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"))
-p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())
+  details = function(index){
+    Translation <- ntvspk.b$Translation[index]
+    Translation <- if (!is.na(Translation)) Translation else ""
 
-ggplotly(p.n, tooltip = c("text"), width=800, height=500)  %>% layout(hoverlabel = list(font=list(size=24,family="Zen Kaku Gothic New")))
+    tagList(
+      div(class = "package-detail",
+        htmltools::div(style = list(padding = 10, fontSize = 15, fontWeight = 400, color = '#f0dfbf', fontFamily = 'Zen Kaku Gothic New', background = '#1f1e22'), "・ ", Translation)
+      )
+    )
+  },
+  # rowClass = "my-row",
+  defaultPageSize = 7,
+  # defaultSorted = "Category",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#e0e1dd",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0.1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "lowercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#e0e1dd')
+    ),
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "numbers",
 
-# ggplot(ntvspk.a.m, aes(x = x, y = y, text = paste(Expression))) + geom_hex(bins = 50)
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### Explicit {.tabset}
+
+<!-- ####  Reference {.tabset} -->
+
+```{r, echo=FALSE, message=FALSE}
+
+explcexp.a <- explcexp
+explcexp.a <- explcexp.a[sample(1:nrow(explcexp.a)),]
+
+reactable(
+  explcexp.a,
+  onClick = "expand",
+  columns = list(
+    Expression = colDef(minWidth = 50, align = "left", style = list(fontSize = 15, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#dee7e7')),
+    Translation = colDef(show = FALSE)
+  ),
+
+  details = function(index){
+    Translation <- explcexp.a$Translation[index]
+    Translation <- if (!is.na(Translation)) Translation else ""
+
+    tagList(
+      div(
+        htmltools::div(style = list(padding = 10, fontSize = 19, fontWeight = 400, color = '#f0dfbf', fontFamily = 'Zen Kaku Gothic New', background = '#1f1e22'), "・ ", Translation)
+      )
+    )
+  },
+  # rowClass = "my-row",
+  defaultPageSize = 7,
+  # defaultSorted = "Category",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0.1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "lowercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#dee7e7')
+    ),
+  ),
+  showPageInfo = FALSE, outlined = TRUE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
 
 ```
 
