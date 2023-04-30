@@ -144,6 +144,7 @@ vnste <- read_csv("jpdb/SNTSA-SSTNC.csv")
 vnstg <- read_csv("jpdb/SNTSR4-SSTNC.csv")
 vnstb <- read_csv("jpdb/SNTSR5-SSTNC.csv")
 sntv <- read_csv("jpdb/SNTSR6-SSTNC.csv")
+vdsrs <- read_csv("cpdb/VDSRS-EXP.csv")
 ```
 
 # <b> Immersion </b> {.tabset}
@@ -4501,6 +4502,46 @@ reactable(
 <!-- ------------------------------------------------------------------------ -->
 
 ## <b> Video </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+vdsrs.a <- vdsrs %>% select(Expression)
+vdsrs.a <- vdsrs.a[sample(1:nrow(vdsrs.a)),]
+
+reactable(
+  vdsrs.a,
+  columns = list(
+    # Scripts = colDef(show = FALSE),
+    Expression = colDef(minWidth = 500, align = "left", html = TRUE)
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#DEE0DC",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0.1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.1rem",
+      letterSpacing = "0px",
+      textTransform = "lowercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#DEE0DC')
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple",
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 <!-- ------------------------------------------------------------------------ -->
 
