@@ -274,6 +274,7 @@ vnstr <- read_csv("jpdb/VERBRNDM-VERBS.csv")
 ntvspk <- read_csv("jpim/NTVSPK-EXP.csv")
 wrdxps <- read_csv("jpim/WRDXPS-EXP.csv")
 explcexp <- read_csv("jpim/EXPLCTMS-TRN.csv")
+mstrypatrn <- read_csv("jpim/PTTRND-EXP.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -16391,132 +16392,6 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 <!-- ------------------------------------------------------------------------ -->
 
-<!-- ### ES.1.0: Words {.tabset} -->
-
-<!-- #### W.Table -->
-
-<!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE} -->
-
-<!-- reactable( -->
-<!--   eswrds, -->
-<!--   columns = list( -->
-<!--     W1 = colDef(footer = "Total", style= list(background = '#1b1e1e'), -->
-<!--       cell = function(value, index) { -->
-<!--         M1 <- eswrds$M1[index] -->
-<!--         M1 <- if (!is.na(M1)) M1 else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 21, fontWeight = 500, fontFamily = 'Open Sans', color = '#f1f5f5'), value), -->
-<!--           div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#f1f5f5'), M1), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-<!--     W2 = colDef(style= list(background = '#1b1e1e'), -->
-<!--       cell = function(value, index) { -->
-<!--         M2 <- eswrds$M2[index] -->
-<!--         M2 <- if (!is.na(M2)) M2 else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 21, fontWeight = 500, fontFamily = 'Open Sans', color = '#f1f5f5'), value), -->
-<!--           div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#f1f5f5'), M2), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-<!--     W3 = colDef(style= list(background = '#1b1e1e'), -->
-<!--       cell = function(value, index) { -->
-<!--         M3 <- eswrds$M3[index] -->
-<!--         M3 <- if (!is.na(M3)) M3 else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 21, fontWeight = 500, fontFamily = 'Open Sans', color = '#f1f5f5'), value), -->
-<!--           div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#f1f5f5'), M3), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-<!--     W4 = colDef(style= list(background = '#1b1e1e'), -->
-<!--       cell = function(value, index) { -->
-<!--         M4 <- eswrds$M4[index] -->
-<!--         M4 <- if (!is.na(M4)) M4 else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 21, fontWeight = 500, fontFamily = 'Open Sans', color = '#f1f5f5'), value), -->
-<!--           div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#f1f5f5'), M4), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-<!--     W5 = colDef(style= list(background = '#1b1e1e'), -->
-<!--       cell = function(value, index) { -->
-<!--         M5 <- eswrds$M5[index] -->
-<!--         M5 <- if (!is.na(M5)) M5 else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 21, fontWeight = 500, fontFamily = 'Open Sans', color = '#f1f5f5'), value), -->
-<!--           div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#f1f5f5'), M5), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-<!--     W6 = colDef(style= list(background = '#1b1e1e'), -->
-<!--       cell = function(value, index) { -->
-<!--         M6 <- eswrds$M6[index] -->
-<!--         M6 <- if (!is.na(M6)) M6 else "" -->
-<!--         tagList( -->
-<!--           div(style = list(fontSize = 21, fontWeight = 500, fontFamily = 'Open Sans', color = '#f1f5f5'), value), -->
-<!--           div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#f1f5f5'), M6), -->
-<!--         ) -->
-<!--       }, -->
-<!--       align = "center" -->
-<!--     ), -->
-<!--     M1 = colDef(show = FALSE), -->
-<!--     M2 = colDef(show = FALSE), -->
-<!--     M3 = colDef(show = FALSE), -->
-<!--     M4 = colDef(show = FALSE), -->
-<!--     M5 = colDef(show = FALSE), -->
-<!--     M6 = colDef(show = FALSE) -->
-<!--   ), -->
-<!--   defaultPageSize = 7, -->
-<!--   theme = reactableTheme( -->
-<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 65), -->
-<!--     searchInputStyle = list( -->
-<!--       paddingLeft = "8px", -->
-<!--       paddingTop = "8px", -->
-<!--       paddingBottom = "8px", -->
-<!--       width = "100%", -->
-<!--       fontSize = "11px" -->
-<!--     ), -->
-<!--     headerStyle = list( -->
-<!--       backgroundColor = "#1b1e1e", -->
-<!--       color = "hsl(0, 0%, 95%)", -->
-<!--       fontSize = 0, -->
-<!--       fontWeight = 100, -->
-<!--       fontFamily = 'Open Sans', -->
-<!--       fontSize = "0.1rem", -->
-<!--       letterSpacing = "1px", -->
-<!--       textTransform = "uppercase", -->
-<!--       padding = "0px", -->
-<!--       "&:hover, &:focus" = list(color = '#ffff00') -->
-<!--     ), -->
-<!--     footerStyle = list( -->
-<!--       backgroundColor = "#1b1e1e", -->
-<!--       color = "hsl(0, 0%, 95%)", -->
-<!--       fontSize = 0, -->
-<!--       fontWeight = 100, -->
-<!--       fontFamily = 'Open Sans', -->
-<!--       fontSize = "0.1rem", -->
-<!--       letterSpacing = "1px", -->
-<!--       textTransform = "uppercase", -->
-<!--       padding = "0px", -->
-<!--       "&:hover, &:focus" = list(color = '#ffff00') -->
-<!--     ) -->
-<!--   ), -->
-<!--   showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, wrap = FALSE, -->
-
-<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
-<!-- ) -->
-
-<!-- ``` -->
-
-<!-- ------------------------------------------------------------------------ -->
-
 <!-- #### R.Table -->
 
 <!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE} -->
@@ -18892,16 +18767,24 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・どこに行きますか。
-    ・先週の土曜日は京都に来ましたか。
-    ・猫が食卓にいります。
+<div class = "expressjp">
+・どこに行きますか.    
+・先週の土曜日は京都に来ましたか.    
+・猫が食卓にいります.    
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・Where are you going?
-    ・Did you come to Kyoto last Saturday?
-    ・The cat is at the table.
+<div class = "expressjp">
+・Where are you going?    
+・Did you come to Kyoto last Saturday?   
+・The cat is at the table.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -18911,14 +18794,22 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・長野は有名な場所であることは知っていますか。
-    ・今日その疑問に対する答えを私たちは知っています。
+<div class = "expressjp">
+・長野は有名な場所であることは知っていますか.   
+・今日その疑問に対する答えを私たちは知っています.    
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・Do you know that Nagano is a famous place?
-    ・Today we know the answer to that question.
+<div class = "expressjp">
+・Do you know that Nagano is a famous place?     
+・Today we know the answer to that question.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -18928,14 +18819,22 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・高層バルコニーから夕日を見ますか。
-    ・すぐに崩壊しているのを見ますか。
+<div class = "expressjp">
+・高層バルコニーから夕日を見ますか.    
+・すぐに崩壊しているのを見ますか.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・Do you want to watch the sunset from a high-rise balcony?
-    ・Do you see it disintegrating quickly?
+<div class = "expressjp">
+・Do you want to watch the sunset from a high-rise balcony?    
+・Do you see it disintegrating quickly?     
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -18945,14 +18844,22 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・朝ご飯を食べましたか。
-    ・このプログラムでは一緒にランチを食べます。
+<div class = "expressjp">
+・朝ご飯を食べましたか.    
+・このプログラムでは一緒にランチを食べます.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・Have you eaten breakfast?
-    ・HIn this program we will have lunch together.
+<div class = "expressjp">
+・Have you eaten breakfast?     
+・HIn this program we will have lunch together.    
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -18962,14 +18869,22 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・この動物は日本語で何と言いますか。
-    ・あの山脈の名前は何と言いますか。
+<div class = "expressjp">
+・この動物は日本語で何と言いますか.    
+・あの山脈の名前は何と言いますか.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・What is this animal called in Japanese?
-    ・What is the name of that mountain range?
+<div class = "expressjp">
+・What is this animal called in Japanese?     
+・What is the name of that mountain range?    
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -18979,14 +18894,22 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・そう伝えてくれますか。
-    ・終わりまで読み飛ばしてくれますか。
+<div class = "expressjp">
+・そう伝えてくれますか.    
+・終わりまで読み飛ばしてくれますか.    
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・Would you tell them that?
-    ・Can you skip to the end?
+<div class = "expressjp">
+・Would you tell them that?     
+・Can you skip to the end?    
+</div>
+ 
+<h6> </h6>
 
 </div>
 </div>
@@ -18996,14 +18919,20 @@ reactable(
 <div class = "row">
 <div class = "col-sm-6">
 
-    ・市場特性について説明しますか。
-    ・計算テーブルの見積価格を更新しますか。
+<div class = "expressjp">
+・市場特性について説明しますか.   
+・計算テーブルの見積価格を更新しますか.   
+</div>
+ 
+<h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
-    ・Would you describe the market characteristics?
-    ・Do you want to update the quoted prices in the calculation table?
+<div class = "expressjp">
+・Would you describe the market characteristics?     
+・Do you want to update the quoted prices in the calculation table?    
+</div>
 
 </div>
 </div>
@@ -31540,6 +31469,7 @@ reactable(
 ------------------------------------------------------------------------
 
 ##### Inter01 {.tabset}
+
 <div class = "row">
 <div class = "col-sm-6">
 
@@ -31575,28 +31505,144 @@ reactable(
 
 ##### Inter02 {.tabset}
 
+<div class = "row">
+<div class = "col-sm-6">
+
+<div class = "expressjp">
 001　![](audio/midleveln3_2/1 Unit 1_ こそあ.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 002　![](audio/midleveln3_2/2 Unit 2_ 含む表現.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 003　![](audio/midleveln3_2/3 Unit 3_ 否定表現.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 004　![](audio/midleveln3_2/4 Unit 4_ 前に付く語.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 005　![](audio/midleveln3_2/5 Unit 5_ 後ろに付く語.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 011　![](audio/midleveln3_2/11 Unit 13-1_ 動詞1.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 012　![](audio/midleveln3_2/12 Unit 13-2_ 動詞2.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 013　![](audio/midleveln3_2/13 Unit 13-3_ 動詞3.mp3)    
+</div>
+
+<h6> </h6>
+
+</div>
+<div class = "col-sm-6">
+
+<div class = "expressjp">
 014　![](audio/midleveln3_2/14 Unit 13-4_ 動詞4.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 015　![](audio/midleveln3_2/15 Unit 13-5_ 動詞5.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 016　![](audio/midleveln3_2/16 Unit 13-6_ 動詞6.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 017　![](audio/midleveln3_2/17 Unit 13-7_ 動詞7.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 018　![](audio/midleveln3_2/18 Unit 13-8_ 動詞8.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 019　![](audio/midleveln3_2/19 Unit 13-9_ 動詞9.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 020　![](audio/midleveln3_2/20 Unit 13-10_ 動詞10.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 021　![](audio/midleveln3_2/21 Unit 13-11_ 動詞11.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 022　![](audio/midleveln3_2/22 Unit 13-12_ 動詞12.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 023　![](audio/midleveln3_2/23 Unit 13-13_ 動詞13.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 024　![](audio/midleveln3_2/24 Unit 14-1_ 動詞14.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 025　![](audio/midleveln3_2/25 Unit 14-2_ 動詞15.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 026　![](audio/midleveln3_2/26 Unit 14-3_ 動詞16.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 027　![](audio/midleveln3_2/27 Unit 14-4_ 動詞17.mp3)    
+</div>
+
+</div>
+</div>
 
 <h6> </h6>
 
@@ -31604,22 +31650,99 @@ reactable(
 
 ##### Inter03 {.tabset}
 
+<div class = "expressjp">
 001　![](audio/midleveln2/1 PART1 UNIT1 時間.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 002　![](audio/midleveln2/2 PART1 UNIT1 時間.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 003　![](audio/midleveln2/3 PART1 UNIT1 時間.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 004　![](audio/midleveln2/4 PART1 UNIT1 時間.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 005　![](audio/midleveln2/5 PART1 UNIT2 家族.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 006　![](audio/midleveln2/6 PART1 UNIT3 人と人.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 007　![](audio/midleveln2/7 PART1 UNIT4 人と人.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 008　![](audio/midleveln2/8 PART1 UNIT4 人と人.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 009　![](audio/midleveln2/9 PART1 UNIT4 人と人.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 010　![](audio/midleveln2/10 PART1 UNIT5 料理.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 011　![](audio/midleveln2/11 PART1 UNIT6 家具.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 012　![](audio/midleveln2/12 PART1 UNIT7 毎日の生活.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 013　![](audio/midleveln2/13 PART1 UNIT8 交通.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 014　![](audio/midleveln2/14 PART1 UNIT8 交通.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 015　![](audio/midleveln2/15 PART1 UNIT8 交通.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 016　![](audio/midleveln2/16 PART1 UNIT8 交通.mp3)    
+</div>
 
 <h6> </h6>
 
@@ -31627,22 +31750,99 @@ reactable(
 
 ##### Inter04 {.tabset}
 
+<div class = "expressjp">
 001　![](audio/midleveln2_2/1 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 002　![](audio/midleveln2_2/2 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 003　![](audio/midleveln2_2/3 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 004　![](audio/midleveln2_2/4 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 005　![](audio/midleveln2_2/5 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 006　![](audio/midleveln2_2/6 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 007　![](audio/midleveln2_2/7 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 008　![](audio/midleveln2_2/8 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 009　![](audio/midleveln2_2/9 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 010　![](audio/midleveln2_2/10 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 011　![](audio/midleveln2_2/11 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 012　![](audio/midleveln2_2/12 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 013　![](audio/midleveln2_2/13 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 014　![](audio/midleveln2_2/14 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 015　![](audio/midleveln2_2/15 Audio Track.mp3)    
+</div>
+
+<h6> </h6>
+
+<div class = "expressjp">
 016　![](audio/midleveln2_2/16 Audio Track.mp3)    
+</div>
 
 <h6> </h6>
 
@@ -31741,10 +31941,10 @@ reactable(
   onClick = "expand",
   columns = list(
     # Expression = colDef(minWidth = 50, align = "left", style = list(fontSize = 17, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#e0e1dd')),
-    Expression = colDef(style= list(background = '#e0e1dd'),
+    Expression = colDef(style= list(background = '#DEE0DC'),
       cell = function(value, index) {
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040', background = '#e0e1dd'), value, "。"),
+          div(style = list(fontSize = 17, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040', background = '#DEE0DC'), value, "。"),
         )
       },
       align = "left"
@@ -31758,7 +31958,7 @@ reactable(
 
     tagList(
       div(class = "package-detail",
-        htmltools::div(style = list(padding = 10, fontSize = 15, fontWeight = 400, color = '#f0dfbf', fontFamily = 'Zen Kaku Gothic New', background = '#1f1e22'), "・ ", Translation)
+        htmltools::div(style = list(padding = 6, fontSize = 15, fontWeight = 400, color = '#f0dfbf', fontFamily = 'Zen Kaku Gothic New', background = '#1f1e22'), "・ ", Translation)
       )
     )
   },
@@ -31766,7 +31966,7 @@ reactable(
   defaultPageSize = 7,
   # defaultSorted = "Category",
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 50),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 45),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -31775,7 +31975,7 @@ reactable(
       fontSize = "11px"
     ),
     headerStyle = list(
-      backgroundColor = "#e0e1dd",
+      backgroundColor = "#DEE0DC",
       color = "hsl(0, 0%, 95%)",
       fontSize = 0.1,
       fontWeight = 100,
@@ -31784,7 +31984,7 @@ reactable(
       letterSpacing = "1px",
       textTransform = "lowercase",
       padding = "0px",
-      "&:hover, &:focus" = list(color = '#e0e1dd')
+      "&:hover, &:focus" = list(color = '#DEE0DC')
     ),
   ),
   showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "numbers",
@@ -31809,7 +32009,7 @@ reactable(
   explcexp.a,
   onClick = "expand",
   columns = list(
-    Expression = colDef(minWidth = 50, align = "left", style = list(fontSize = 15, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#dee7e7')),
+    Expression = colDef(minWidth = 50, align = "left", style = list(fontSize = 15, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#DEE0DC')),
     Translation = colDef(show = FALSE)
   ),
 
@@ -31819,7 +32019,7 @@ reactable(
 
     tagList(
       div(
-        htmltools::div(style = list(padding = 10, fontSize = 19, fontWeight = 400, color = '#f0dfbf', fontFamily = 'Zen Kaku Gothic New', background = '#1f1e22'), "・ ", Translation)
+        htmltools::div(style = list(padding = 6, fontSize = 19, fontWeight = 400, color = '#f0dfbf', fontFamily = 'Zen Kaku Gothic New', background = '#1f1e22'), "・ ", Translation)
       )
     )
   },
@@ -31827,7 +32027,7 @@ reactable(
   defaultPageSize = 7,
   # defaultSorted = "Category",
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 50),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 45),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -31836,7 +32036,7 @@ reactable(
       fontSize = "11px"
     ),
     headerStyle = list(
-      backgroundColor = "#dee7e7",
+      backgroundColor = "#DEE0DC",
       color = "hsl(0, 0%, 95%)",
       fontSize = 0.1,
       fontWeight = 100,
@@ -31845,10 +32045,221 @@ reactable(
       letterSpacing = "1px",
       textTransform = "lowercase",
       padding = "0px",
-      "&:hover, &:focus" = list(color = '#dee7e7')
+      "&:hover, &:focus" = list(color = '#DEE0DC')
     ),
   ),
   showPageInfo = FALSE, outlined = TRUE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### Pattern {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+mstrypatrn.b <- mstrypatrn  %>%  select(Expression, Translation)
+mstrypatrn.b <- mstrypatrn.b[sample(1:nrow(mstrypatrn.b)),]
+mstrypatrn.b <- mstrypatrn.b[sample(1:nrow(mstrypatrn.b)),]
+
+reactable(
+  mstrypatrn.b,
+  onClick = "expand",
+  columns = list(
+    # Expression = colDef(minWidth = 50, align = "left", style = list(fontSize = 17, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#e0e1dd')),
+    Expression = colDef(style= list(background = '#DEE0DC'),
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 17, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040', background = '#DEE0DC'), value),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+
+  details = function(index){
+    Translation <- mstrypatrn.b$Translation[index]
+    Translation <- if (!is.na(Translation)) Translation else ""
+
+    tagList(
+      div(class = "package-detail",
+        htmltools::div(style = list(padding = 6, fontSize = 15, fontWeight = 400, color = '#f0dfbf', fontFamily = 'Zen Kaku Gothic New', background = '#1f1e22'), "・ ", Translation)
+      )
+    )
+  },
+  # rowClass = "my-row",
+  defaultPageSize = 7,
+  # defaultSorted = "Category",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 45),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#DEE0DC",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0.1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "lowercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#DEE0DC')
+    ),
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### Words {.tabset}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+eswrds.a <- eswrds
+
+# eswrds.1 <- eswrds %>% select(W1, M1)
+# eswrds.2 <- eswrds %>% select(W2, M2)
+# eswrds.3 <- eswrds %>% select(W3, M3)
+# eswrds.4 <- eswrds %>% select(W4, M4)
+# eswrds.5 <- eswrds %>% select(W5, M5)
+# eswrds.6 <- eswrds %>% select(W6, M6)
+# 
+# eswrds.1 <- eswrds.1[sample(1:nrow(eswrds.1)),]
+# eswrds.2 <- eswrds.2[sample(1:nrow(eswrds.2)),]
+# eswrds.3 <- eswrds.3[sample(1:nrow(eswrds.3)),] 
+# eswrds.4 <- eswrds.4[sample(1:nrow(eswrds.4)),]
+# eswrds.5 <- eswrds.5[sample(1:nrow(eswrds.5)),] 
+# eswrds.6 <- eswrds.6[sample(1:nrow(eswrds.6)),]
+# 
+# eswrds.a <- data.frame(eswrds.1, eswrds.2, eswrds.3, eswrds.4, eswrds.5, eswrds.6)
+
+reactable(
+  eswrds.a,
+  columns = list(
+    W1 = colDef(footer = "Total", style= list(background = '#DEE0DC'),
+      cell = function(value, index) {
+        M1 <- eswrds.a$M1[index]
+        M1 <- if (!is.na(M1)) M1 else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
+          div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#800000'), M1),
+        )
+      },
+      align = "center"
+    ),
+    W2 = colDef(style= list(background = '#DEE0DC'),
+      cell = function(value, index) {
+        M2 <- eswrds.a$M2[index]
+        M2 <- if (!is.na(M2)) M2 else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
+          div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#800000'), M2),
+        )
+      },
+      align = "center"
+    ),
+    W3 = colDef(style= list(background = '#DEE0DC'),
+      cell = function(value, index) {
+        M3 <- eswrds.a$M3[index]
+        M3 <- if (!is.na(M3)) M3 else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
+          div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#800000'), M3),
+        )
+      },
+      align = "center"
+    ),
+    W4 = colDef(style= list(background = '#DEE0DC'),
+      cell = function(value, index) {
+        M4 <- eswrds.a$M4[index]
+        M4 <- if (!is.na(M4)) M4 else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
+          div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#800000'), M4),
+        )
+      },
+      align = "center"
+    ),
+    W5 = colDef(style= list(background = '#DEE0DC'),
+      cell = function(value, index) {
+        M5 <- eswrds.a$M5[index]
+        M5 <- if (!is.na(M5)) M5 else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
+          div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#800000'), M5),
+        )
+      },
+      align = "center"
+    ),
+    W6 = colDef(style= list(background = '#DEE0DC'),
+      cell = function(value, index) {
+        M6 <- eswrds.a$M6[index]
+        M6 <- if (!is.na(M6)) M6 else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 500, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
+          div(style = list(fontSize = 9, fontWeight = 300, fontFamily = 'Open Sans', color = '#800000'), M6),
+        )
+      },
+      align = "center"
+    ),
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    M4 = colDef(show = FALSE),
+    M5 = colDef(show = FALSE),
+    M6 = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 65),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#DEE0DC",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.1rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#DEE0DC')
+    ),
+    footerStyle = list(
+      backgroundColor = "#DEE0DC",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.1rem",
+      letterSpacing = "1px",
+      textTransform = "uppercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#DEE0DC')
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, wrap = FALSE, highlight = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
