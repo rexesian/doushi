@@ -107,6 +107,7 @@ tblw5 <- read_csv("jpdb/TBL5-TBWRDS.csv")
 techw <- read_csv("jpdb/WRDSTCH-WRD.csv")
 related <- read_csv("jpdb/RLWRDS-WRDS.csv")
 splwrds <- read_csv("jpim/SPLWRDS-WRDS.csv")
+freqwrds <- read_csv("jpim/ULTWRD-TBWRD.csv")
 ```
 
 # <b> Words </b> {.tabset}
@@ -4808,6 +4809,166 @@ reactable(
 
 <!-- </div> -->
 <!-- </div> -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+## <b> Frequency </b> {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+freqwrds.a <- freqwrds %>% select(Word, Meaning, Freq, Type)
+freqwrds.a <- freqwrds.a[sample(1:nrow(freqwrds.a)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "charts", tags$label("【Type】", `for` = "word-type-filter"),
+      # div(
+        tags$select(
+          id = "word-type-filter",
+          onchange = "Reactable.setFilter('word-filter-table', 'Type', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(freqwrds.a$Type), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  freqwrds.a,
+  columns = list(
+    Word = colDef(style= list(background = '#DEE0DC'),
+      cell = function(value, index) {
+        Meaning <- freqwrds.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Freq <- freqwrds.a$Freq[index]
+        Freq <- if (!is.na(Freq)) Freq else ""
+        Type <- freqwrds.a$Type[index]
+        Type <- if (!is.na(Type)) Type else ""
+        tagList(
+          div(style = list(fontSize = 22, fontWeight = 600, color = '#0D1D3A', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#1C5454', fontFamily = 'Open Sans'), Meaning),
+          # div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Freq),
+          # div(style = list(fontSize = 10, fontWeight = 300, color = '#101010', fontFamily = 'Open Sans'), Type),
+        )
+      },
+      align = "left"
+    ),
+    Type = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Freq = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 30,
+  defaultSorted = "Freq",
+  elementId = "word-filter-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#000015",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0.1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "lowercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 360,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+freqwrds.a <- freqwrds.a[sample(1:nrow(freqwrds.a)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "charts", tags$label("【Type】", `for` = "words-level-filter"),
+      # div(
+        tags$select(
+          id = "words-level-filter",
+          onchange = "Reactable.setFilter('words-filter-table', 'Type', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(freqwrds.a$Type), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  freqwrds.a,
+  columns = list(
+    Word = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Meaning <- freqwrds.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+        )
+      },
+      align = "center"
+    ),
+    Type = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Freq = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  elementId = "words-filter-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 317),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#000015",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0.1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "lowercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
+)
+
+```
+
+</div>
+</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
