@@ -103,6 +103,42 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
   font-family: 'Rounded Mplus 1c', 'M PLUS Rounded 1c', sans-serif;
 }
 
+.detail-label {
+  margin: 1.25rem 0 0.25rem;
+  font-size: 1.2rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.package-detail {
+  padding: 10px;
+  background: hsl(213, 20%, 99%);
+}
+
+.detail-descriptiona {
+  color: 	#0F2040;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: 'Zen Kaku Gothic New';
+  background: hsl(213, 20%, 99%);
+  padding-left: 10px;
+}
+
+.detail-descriptionb {
+  color: 	#0F2040;
+  font-size: 12px;
+  font-family: 'Zen Kaku Gothic New';
+  background: hsl(213, 20%, 99%);
+  padding-left: 15px;
+}
+
+.packages-table {
+  margin-top: 0.2rem;
+  font-size: 0.9375rem;
+  border: 1px solid hsl(213, 33%, 93%);
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
 ```
 
 ```{r setup, include=FALSE}
@@ -276,6 +312,7 @@ wrdxps <- read_csv("jpim/WRDXPS-EXP.csv")
 explcexp <- read_csv("jpim/EXPLCTMS-TRN.csv")
 mstrypatrn <- read_csv("jpim/PTTRND-EXP.csv")
 freqwrds <- read_csv("jpim/ULTWRD-TBWRD.csv")
+comstrgyfnc <- read_csv("jpim/COMFNC-CMSTR.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -18898,6 +18935,105 @@ reactable(
 </div>
 
 <h6> </h6>
+
+------------------------------------------------------------------------
+
+#### Expression {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+comstrgyfnc.b <- comstrgyfnc
+comstrgyfnc.b <- comstrgyfnc.b[sample(1:nrow(comstrgyfnc.b)),]
+comstrgyfnc.b <- comstrgyfnc.b[sample(1:nrow(comstrgyfnc.b)),]
+
+row_details <- function(index) {
+  pkg <- comstrgyfnc.b[index, ]
+
+  pkg_field <- function(name, class_name, ...) {
+    if (any(is.na(...))) NULL
+    else div(class = class_name, ...)
+  }
+
+  detail <- div(
+    # class = "package-detail",
+    pkg_field("S1", "detail-descriptiona" , pkg$S1),
+    pkg_field("T1", "detail-descriptionb" , pkg$T1),
+    pkg_field("S2", "detail-descriptiona" , pkg$S2),
+    pkg_field("T2", "detail-descriptionb" , pkg$T2),
+    pkg_field("S3", "detail-descriptiona" , pkg$S3),
+    pkg_field("T3", "detail-descriptionb" , pkg$T3),
+    pkg_field("S4", "detail-descriptiona" , pkg$S4),
+    pkg_field("T4", "detail-descriptionb" , pkg$T4),
+    pkg_field("S5", "detail-descriptiona" , pkg$S5),
+    pkg_field("T5", "detail-descriptionb" , pkg$T5)
+  )
+  detail
+}
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "charts", tags$label("【Category】", `for` = "cat-type-filter"),
+      # div(
+        tags$select(
+          id = "cattype-filter",
+          onchange = "Reactable.setFilter('cat-filter-table', 'Category', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(comstrgyfnc.b$Category), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  comstrgyfnc.b,
+  onClick = "expand",
+  columns = list(
+    Function = colDef(minWidth = 300, align = "left", html = TRUE, style = list(fontSize = 16, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#dee7e7')),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
+    T5 = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    S4 = colDef(show = FALSE),
+    S5 = colDef(show = FALSE),
+    Category = colDef(show = FALSE)
+  ),
+  details = row_details,
+  rowClass = "my-row",
+  class = "packages-table",
+  defaultPageSize = 5,
+  defaultSorted = "Category",
+  elementId = "cat-filter-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, highlight = TRUE, paginationType = "numbers",
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
+)
+
+```
 
 ------------------------------------------------------------------------
 
