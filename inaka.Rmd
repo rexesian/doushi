@@ -118,7 +118,7 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
   color: 	#0F2040;
   font-size: 17px;
   font-weight: 500;
-  font-family: 'Zen Kaku Gothic New';
+  font-family: 'RocknRoll One';
   background: hsl(213, 20%, 99%);
   padding-left: 10px;
 }
@@ -128,7 +128,7 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
   font-size: 12px;
   font-family: 'Zen Kaku Gothic New';
   background: hsl(213, 20%, 99%);
-  padding-left: 15px;
+  padding-left: 20px;
 }
 
 .packages-table {
@@ -1935,7 +1935,7 @@ dliwrd.a <- dliwrd.a[sample(1:nrow(dliwrd.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "words-level-filter"),
+      div(class = "charts", tags$label("Level:", `for` = "words-level-filter"),
       # div(
         tags$select(
           id = "words-level-filter",
@@ -2006,7 +2006,7 @@ cmmpassc.a <- cmmpassc.a[sample(1:nrow(cmmpassc.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "assoc-level-filter"),
+      div(class = "charts", tags$label("Level:", `for` = "assoc-level-filter"),
       # div(
         tags$select(
           id = "assoc-level-filter",
@@ -2089,7 +2089,7 @@ dliphr.a <- dliphr.a[sample(1:nrow(dliphr.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "phrases-level-filter"),
+      div(class = "charts", tags$label("Level:", `for` = "phrases-level-filter"),
       # div(
         tags$select(
           id = "phrases-level-filter",
@@ -2171,7 +2171,7 @@ cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "verb-level-filter"),
+      div(class = "charts", tags$label("Level:", `for` = "verb-level-filter"),
       # div(
         tags$select(
           id = "verb-level-filter",
@@ -2242,7 +2242,7 @@ cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "verbb-level-filter"),
+      div(class = "charts", tags$label("Level:", `for` = "verbb-level-filter"),
       # div(
         tags$select(
           id = "verbb-level-filter",
@@ -2355,7 +2355,7 @@ cmmpnflct.a <- cmmpnflct.a[sample(1:nrow(cmmpnflct.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "inflect-level-filter"),
+      div(class = "charts", tags$label("Level:", `for` = "inflect-level-filter"),
       # div(
         tags$select(
           id = "inflect-level-filter",
@@ -2440,7 +2440,7 @@ cmmptrn.a <- cmmptrn.a[sample(1:nrow(cmmptrn.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "pattern-level-filter"),
+      div(class = "charts", tags$label("Level:", `for` = "pattern-level-filter"),
       # div(
         tags$select(
           id = "pattern-level-filter",
@@ -18965,7 +18965,9 @@ row_details <- function(index) {
     pkg_field("S4", "detail-descriptiona" , pkg$S4),
     pkg_field("T4", "detail-descriptionb" , pkg$T4),
     pkg_field("S5", "detail-descriptiona" , pkg$S5),
-    pkg_field("T5", "detail-descriptionb" , pkg$T5)
+    pkg_field("T5", "detail-descriptionb" , pkg$T5),
+    pkg_field("S6", "detail-descriptiona" , pkg$S6),
+    pkg_field("T6", "detail-descriptionb" , pkg$T6)
   )
   detail
 }
@@ -18995,17 +18997,19 @@ reactable(
     T3 = colDef(show = FALSE),
     T4 = colDef(show = FALSE),
     T5 = colDef(show = FALSE),
+    T6 = colDef(show = FALSE),
     S1 = colDef(show = FALSE),
     S2 = colDef(show = FALSE),
     S3 = colDef(show = FALSE),
     S4 = colDef(show = FALSE),
     S5 = colDef(show = FALSE),
+    S6 = colDef(show = FALSE),
     Category = colDef(show = FALSE)
   ),
   details = row_details,
   rowClass = "my-row",
   class = "packages-table",
-  defaultPageSize = 5,
+  defaultPageSize = 100,
   defaultSorted = "Category",
   elementId = "cat-filter-table",
   theme = reactableTheme(
@@ -19026,7 +19030,7 @@ reactable(
       padding = "0px"
     ),
   ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, highlight = TRUE, paginationType = "numbers",
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, highlight = TRUE, paginationType = "numbers", heigh = 345,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
   )
@@ -32227,10 +32231,10 @@ reactable(
   onClick = "expand",
   columns = list(
     # Expression = colDef(minWidth = 50, align = "left", style = list(fontSize = 17, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#e0e1dd')),
-    Expression = colDef(style= list(background = '#DEE0DC'),
+    Expression = colDef(style= list(background = '#e3dede'),
       cell = function(value, index) {
         tagList(
-          div(style = list(fontSize = 17, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040', background = '#DEE0DC'), value, "。"),
+          div(style = list(fontSize = 17, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#05445e', background = '#e3dede'), value, "。"),
         )
       },
       align = "left",
@@ -32250,6 +32254,7 @@ reactable(
   # rowClass = "my-row",
   defaultPageSize = 7,
   # defaultSorted = "Category",
+  class = "packages-table",
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 45),
     searchInputStyle = list(
@@ -32260,7 +32265,7 @@ reactable(
       fontSize = "11px"
     ),
     headerStyle = list(
-      backgroundColor = "#DEE0DC",
+      backgroundColor = "#dee7e7",
       color = "hsl(0, 0%, 95%)",
       fontSize = 0.1,
       fontWeight = 100,
@@ -32269,10 +32274,10 @@ reactable(
       letterSpacing = "1px",
       textTransform = "lowercase",
       padding = "0px",
-      "&:hover, &:focus" = list(color = '#DEE0DC')
+      "&:hover, &:focus" = list(color = '#dee7e7')
     ),
   ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "numbers",
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", height = 350,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -32311,6 +32316,7 @@ reactable(
   # rowClass = "my-row",
   defaultPageSize = 7,
   # defaultSorted = "Category",
+  # class = "packages-table",
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 45),
     searchInputStyle = list(
@@ -32371,7 +32377,7 @@ reactable(
     Translation <- if (!is.na(Translation)) Translation else ""
 
     tagList(
-      div(class = "package-detail",
+      div(
         htmltools::div(style = list(padding = 6, fontSize = 15, fontWeight = 400, color = '#f0dfbf', fontFamily = 'Zen Kaku Gothic New', background = '#1f1e22'), "・ ", Translation)
       )
     )
@@ -32379,6 +32385,7 @@ reactable(
   # rowClass = "my-row",
   defaultPageSize = 7,
   # defaultSorted = "Category",
+  # class = "packages-table",
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 45),
     searchInputStyle = list(
@@ -32510,6 +32517,7 @@ reactable(
   ),
   rowClass = "my-row",
   defaultPageSize = 7,
+  class = "packages-table",
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 65),
     searchInputStyle = list(
