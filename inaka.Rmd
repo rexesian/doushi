@@ -1562,14 +1562,21 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Focus {.tabset}
-
-### Diagram {.tabset}
+## Diagram {.tabset}
 
 <div class = "row">
 <div class = "col-sm-6">
 
+![](chart.png){width=400px}
+
+<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
+
+</div>
+<div class = "col-sm-6">
+
 ```{r, echo=FALSE, message=FALSE, warning = FALSE}
+library(htmlwidgets)
+webshot::install_phantomjs()
 
 dfexmple.a <- dfexmple %>% select(W1) %>% rename(Words = W1)
 dfexmple.b <- dfexmple %>% select(W2) %>% rename(Words = W2)
@@ -1626,87 +1633,24 @@ datanw <- dat.a %>%
 datanw.a <- datanw %>% select(word, freq, spread) %>% slice(1:2000)
 datanw.c <- datanw %>% select(word, freq, spread) %>% slice(1:20)
 
-td <- reactable(
-  datanw.a, defaultColDef = colDef(show = FALSE),
-  columns = list(
-    word = colDef(show = TRUE, style= list(background = '#e0e1dd'),
-      cell = function(value, index) {
-        tagList(
-          div(style = list(fontSize = 52, fontWeight = 500, fontFamily = 'RocknRoll One', color = '#0F2040'), value),
-        )
-      },
-      align = "center"
-    ),
-    freq = colDef(show = FALSE),
-    spread = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    ),
-    headerStyle = list(
-      backgroundColor = "#1b1e1e",
-      color = "hsl(0, 0%, 95%)",
-      fontSize = 0.1,
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0.75rem",
-      letterSpacing = "1px",
-      textTransform = "lowercase",
-      padding = "0px",
-      "&:hover, &:focus" = list(color = '#1b1e1e')
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "jump", striped = TRUE, highlight = TRUE,
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-td
-
 p <- ggplot(datanw, dynamicTicks = TRUE, aes(x=spread, y=freq, colour=freq, text = paste(word))) + geom_point(aes(size = freq)) + scale_colour_gradient(low="#060047", high="#EB455F")
 p <- p + scale_y_reverse() + aes(ymin=-0.1)
-p <- p + theme(plot.background = element_rect(fill = "#e0e1dd"))
+p <- p + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(r = 25))
 
-ggplotly(p, tooltip = "text", width=420, height=450)  %>% layout(hoverlabel = list(font=list(size=35,family="RocknRoll One")))
-
-```
-
-</div>
-<div class = "col-sm-6">
-
-```{r, echo=FALSE, message=FALSE, warning = FALSE}
-library(htmlwidgets)
-webshot::install_phantomjs()
-
-wd <- wordcloud2(dat, size=0.3, color=rep_len( c("#ab5852","#009FBD","#210062","#77037B","#00202e","#41644A","#263A29","#E86A33","#642915","#c7522a","#db836b","#e0a278","#e5c185","#233341","#74a892","#008585", "#5d659d","#c5b8cd","#211137","#8fb7cd","#143c7f","#143c7f","#967ba2","#7792d7"), nrow(demoFreq) ), backgroundColor="#f5f7f9", fontFamily = "RocknRoll One", hoverFunction = NULL, rotateRatio = 0.5)
-
-saveWidget(wd,"tmp.html",selfcontained = F)
-webshot("tmp.html","fig_1.png", delay =5)
+ggplotly(p, tooltip = "text", width=410, height=450)  %>% layout(hoverlabel = list(font=list(size=35,family="RocknRoll One")))
 
 ```
 
-![](chart.png){width=400px}
-
-<center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center>
-
 </div>
 </div>
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### Cloud {.tabset}
+<!-- ### Cloud {.tabset} -->
 
-![](fig_1.png)
+<!-- ![](fig_1.png) -->
 
-<h6> </h6>
+<!-- <h6> </h6> -->
 
 <!-- #### 01 {.tabset} -->
 
@@ -1805,12 +1749,16 @@ webshot("tmp.html","fig_1.png", delay =5)
 
 ------------------------------------------------------------------------
 
+## Focus {.tabset}
+
 ### Kanji {.tabset}
 
 <div class = "row">
 <div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
+library(htmlwidgets)
+webshot::install_phantomjs()
 
 knjwrdrd <- knjwrdrd[sample(1:nrow(knjwrdrd)),]
 
@@ -1935,7 +1883,7 @@ dliwrd.a <- dliwrd.a[sample(1:nrow(dliwrd.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "charts", tags$label("Level:", `for` = "words-level-filter"),
+      div(class = "chart", tags$label("Level:", `for` = "words-level-filter"),
       # div(
         tags$select(
           id = "words-level-filter",
@@ -2006,7 +1954,7 @@ cmmpassc.a <- cmmpassc.a[sample(1:nrow(cmmpassc.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "charts", tags$label("Level:", `for` = "assoc-level-filter"),
+      div(class = "chart", tags$label("Level:", `for` = "assoc-level-filter"),
       # div(
         tags$select(
           id = "assoc-level-filter",
@@ -2021,7 +1969,7 @@ htmltools::browsable(
 reactable(
   cmmpassc.a, filterable = FALSE,
   columns = list(
-    Words = colDef(style= list(background = '#f9f6ed'),
+    Words = colDef(style= list(background = '#e0e1dd'),
       cell = function(value, index) {
         Meaning <- cmmpassc.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -2038,7 +1986,7 @@ reactable(
           # div(style = list(fontSize = 11, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Reading),
           # div(style = list(fontSize = 14, fontWeight = 400, color = '#202020', fontFamily = 'Open Sans'), Sentence),
           # div(style = list(fontSize = 10, fontWeight = 300, color = '#202020', fontFamily = 'Open Sans'), Translation),
-          div(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value,"。"),
+          div(style = list(fontSize = 22, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value,"。"),
           div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, "."),
         )
       },
@@ -2089,7 +2037,7 @@ dliphr.a <- dliphr.a[sample(1:nrow(dliphr.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "charts", tags$label("Level:", `for` = "phrases-level-filter"),
+      div(class = "chart", tags$label("Level:", `for` = "phrases-level-filter"),
       # div(
         tags$select(
           id = "phrases-level-filter",
@@ -2171,7 +2119,7 @@ cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "charts", tags$label("Level:", `for` = "verb-level-filter"),
+      div(class = "chart", tags$label("Level:", `for` = "verb-level-filter"),
       # div(
         tags$select(
           id = "verb-level-filter",
@@ -2242,7 +2190,7 @@ cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "charts", tags$label("Level:", `for` = "verbb-level-filter"),
+      div(class = "chart", tags$label("Level:", `for` = "verbb-level-filter"),
       # div(
         tags$select(
           id = "verbb-level-filter",
@@ -2341,7 +2289,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### Inflects {.tabset}
+### Inflection {.tabset}
 
 <div class = "row">
 <div class = "col-sm-8">
@@ -2355,7 +2303,7 @@ cmmpnflct.a <- cmmpnflct.a[sample(1:nrow(cmmpnflct.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "charts", tags$label("Level:", `for` = "inflect-level-filter"),
+      div(class = "chart", tags$label("Level:", `for` = "inflect-level-filter"),
       # div(
         tags$select(
           id = "inflect-level-filter",
@@ -2440,7 +2388,7 @@ cmmptrn.a <- cmmptrn.a[sample(1:nrow(cmmptrn.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "charts", tags$label("Level:", `for` = "pattern-level-filter"),
+      div(class = "chart", tags$label("Level:", `for` = "pattern-level-filter"),
       # div(
         tags$select(
           id = "pattern-level-filter",
@@ -2510,76 +2458,189 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### Temp {.tabset}
-
-<div class = "row">
-<div class = "col-sm-6">
+### Comms {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
-wrdxps.a <- wrdxps %>% select(Verbs)
-wrdxps.a <- wrdxps.a %>% na.omit(wrdxps.a) 
-wrdxps.a <- wrdxps.a[sample(1:nrow(wrdxps.a)),]
+comstrgyfnc.b <- comstrgyfnc
+comstrgyfnc.b <- comstrgyfnc.b[sample(1:nrow(comstrgyfnc.b)),]
+comstrgyfnc.b <- comstrgyfnc.b[sample(1:nrow(comstrgyfnc.b)),]
+
+row_details <- function(index) {
+  pkg <- comstrgyfnc.b[index, ]
+
+  pkg_field <- function(name, class_name, ...) {
+    if (any(is.na(...))) NULL
+    else div(class = class_name, ...)
+  }
+
+  detail <- div(
+    # class = "package-detail",
+    pkg_field("S1", "detail-descriptiona" , pkg$S1),
+    pkg_field("T1", "detail-descriptionb" , pkg$T1),
+    pkg_field("S2", "detail-descriptiona" , pkg$S2),
+    pkg_field("T2", "detail-descriptionb" , pkg$T2),
+    pkg_field("S3", "detail-descriptiona" , pkg$S3),
+    pkg_field("T3", "detail-descriptionb" , pkg$T3),
+    pkg_field("S4", "detail-descriptiona" , pkg$S4),
+    pkg_field("T4", "detail-descriptionb" , pkg$T4),
+    pkg_field("S5", "detail-descriptiona" , pkg$S5),
+    pkg_field("T5", "detail-descriptionb" , pkg$T5),
+    pkg_field("S6", "detail-descriptiona" , pkg$S6),
+    pkg_field("T6", "detail-descriptionb" , pkg$T6)
+  )
+  detail
+}
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "charts", tags$label("【Category】", `for` = "cat-types-filter"),
+      # div(
+        tags$select(
+          id = "cat-types-filter",
+          onchange = "Reactable.setFilter('cats-filter-table', 'Category', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(comstrgyfnc.b$Category), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
 
 reactable(
-  wrdxps.a,
+  comstrgyfnc.b,
+  onClick = "expand",
   columns = list(
-    Verbs = colDef(align = "center", style = list(fontSize = 33, fontFamily = 'Open Sans', fontWeight = 600, background = '#edede9', color = '#0F2040'))
+    Function = colDef(minWidth = 300, align = "left", html = TRUE, style = list(fontSize = 16, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#dee7e7')),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
+    T5 = colDef(show = FALSE),
+    T6 = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    S4 = colDef(show = FALSE),
+    S5 = colDef(show = FALSE),
+    S6 = colDef(show = FALSE),
+    Category = colDef(show = FALSE)
   ),
+  details = row_details,
   rowClass = "my-row",
-  defaultPageSize = 1,
+  class = "packages-table",
+  defaultPageSize = 100,
+  defaultSorted = "Category",
+  elementId = "cats-filter-table",
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 280),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
       paddingBottom = "8px",
-      width = "100%"
-    )
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
   ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", highlight = TRUE,
-  
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, highlight = TRUE, paginationType = "numbers", heigh = 345,
+
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
 )
 
 ```
 
+------------------------------------------------------------------------
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+### More {.tabset}
 
-cmmvrb.rc <- cmmvrb
-cmmvrb.rc <- cmmvrb.rc %>% na.omit(cmmvrb.rc)
-cmmvrb.rc <- cmmvrb.rc[sample(1:nrow(cmmvrb.rc)),]
+#### Freq-Rvw {.tabset}
 
-cmmvrb.rc <- cmmvrb.rc %>% filter(Level==5)
-# cmmvrb.rc
-num.rows.rc = nrow(cmmvrb.rc)
+<div class = "row">
+<div class = "col-sm-6">
 
-datan.rc.1 <- cmmvrb.rc %>%
-  select(Verbs, Meaning, Sentences, Translation, Level) %>%
-  mutate(
-      x = rnorm(num.rows.rc, 1, 2), 
-      y = rnorm(num.rows.rc, 1, 4),
-      # x = sort(x, decreasing = FALSE),
-      # y = sort(y, decreasing = FALSE),
-  )
-# datan.rc.1
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+library(htmlwidgets)
+webshot::install_phantomjs()
 
-num.char.rc = nchar(datan.rc.1$Verbs)
-datan.rc.1 <- data.frame(datan.rc.1, num.char.rc)
-# datan.rc.1
+td <- reactable(
+  datanw.a, defaultColDef = colDef(show = FALSE),
+  columns = list(
+    word = colDef(show = TRUE, style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 52, fontWeight = 500, fontFamily = 'RocknRoll One', color = '#0F2040'), value),
+        )
+      },
+      align = "center"
+    ),
+    freq = colDef(show = FALSE),
+    spread = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 320),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#1b1e1e",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0.1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "lowercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#1b1e1e')
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "jump", striped = TRUE, highlight = TRUE,
 
-p.rc <- ggplot(datan.rc.1, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Verbs, "<br>","<sup>", Sentences, "<br>","<sup>", Translation))) + geom_point(aes(size = num.char.rc, colour=num.char.rc, aplha=0.6))  + scale_colour_gradient(low="#EB455F", high="#060047")
-# p.rc <- p.rc + geom_point(alpha = 0.5)
-# p.rc <- p.rc + theme_wsj()
-p.rc <- p.rc + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
 
-ggplotly(p.rc, tooltip = c("text"), width=420)  %>% layout(hoverlabel = list(font=list(size=24,family="Zen Kaku Gothic New")))
+td
 
 ```
 
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+library(htmlwidgets)
+webshot::install_phantomjs()
+
+wd <- wordcloud2(dat, size=0.3, color=rep_len( c("#ab5852","#009FBD","#210062","#77037B","#00202e","#41644A","#263A29","#E86A33","#642915","#c7522a","#db836b","#e0a278","#e5c185","#233341","#74a892","#008585", "#5d659d","#c5b8cd","#211137","#8fb7cd","#143c7f","#143c7f","#967ba2","#7792d7"), nrow(demoFreq) ), backgroundColor="#f5f7f9", fontFamily = "RocknRoll One", hoverFunction = NULL, rotateRatio = 0.5)
+
+saveWidget(wd,"tmp.html",selfcontained = F)
+webshot("tmp.html","fig_1.png", delay =5)
+
+```
 
 </div>
+</div>
+
+------------------------------------------------------------------------
+
+#### Verb-Rvw {.tabset}
+
+<div class = "row">
 <div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE}
@@ -2620,7 +2681,154 @@ reactable(
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 
+
 ```
+
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+wrdxps.a <- wrdxps %>% select(Verbs)
+wrdxps.a <- wrdxps.a %>% na.omit(wrdxps.a) 
+wrdxps.a <- wrdxps.a[sample(1:nrow(wrdxps.a)),]
+
+reactable(
+  wrdxps.a,
+  columns = list(
+    Verbs = colDef(align = "center", style = list(fontSize = 33, fontFamily = 'Open Sans', fontWeight = 600, background = '#edede9', color = '#0F2040'))
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 280),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+
+```
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+#### Verb-Snt {.tabset}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+cmmvrb.rc <- cmmvrb
+cmmvrb.rc <- cmmvrb.rc %>% na.omit(cmmvrb.rc)
+cmmvrb.rc <- cmmvrb.rc[sample(1:nrow(cmmvrb.rc)),]
+
+cmmvrb.rc <- cmmvrb.rc %>% filter(Level==5)
+# cmmvrb.rc
+num.rows.rc = nrow(cmmvrb.rc)
+
+datan.rc.1 <- cmmvrb.rc %>%
+  select(Verbs, Meaning, Sentences, Translation, Level) %>%
+  mutate(
+      x = rnorm(num.rows.rc, 1, 2), 
+      y = rnorm(num.rows.rc, 1, 4),
+      # x = sort(x, decreasing = FALSE),
+      # y = sort(y, decreasing = FALSE),
+  )
+# datan.rc.1
+
+num.char.rc = nchar(datan.rc.1$Verbs)
+datan.rc.1 <- data.frame(datan.rc.1, num.char.rc)
+# datan.rc.1
+
+p.rc <- ggplot(datan.rc.1, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Verbs, "<br>","<sup>", Sentences, "<br>","<sup>", Translation))) + geom_point(aes(size = num.char.rc, colour=num.char.rc, aplha=0.6))  + scale_colour_gradient(low="#EB455F", high="#060047")
+# p.rc <- p.rc + geom_point(alpha = 0.5)
+# p.rc <- p.rc + theme_wsj()
+p.rc <- p.rc + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())
+
+ggplotly(p.rc, tooltip = c("text"), width=700)  %>% layout(hoverlabel = list(font=list(size=24,family="Zen Kaku Gothic New")))
+
+```
+
+------------------------------------------------------------------------
+
+#### Comm-Snt {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+mstrypatrn.b <- mstrypatrn  %>%  select(Expression, Translation)
+mstrypatrn.b <- mstrypatrn.b[sample(1:nrow(mstrypatrn.b)),]
+mstrypatrn.b <- mstrypatrn.b[sample(1:nrow(mstrypatrn.b)),]
+
+reactable(
+  mstrypatrn.b,
+  onClick = "expand",
+  columns = list(
+    # Expression = colDef(minWidth = 50, align = "left", style = list(fontSize = 17, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#e0e1dd')),
+    # Expression = colDef(style= list(background = '#e8e7e2'),
+    Translation = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        tagList(
+          # div(style = list(fontSize = 19, fontWeight = 400, fontFamily = 'RocknRoll One', color = '#2b3441', background = '#e8e7e2'), value),
+          div(style = list(fontSize = 15, fontWeight = 500, fontFamily = 'Zen Kaku Gothic New', color = '#2b3441', background = '#dee7e7'), value),
+        )
+      },
+      align = "left"
+    ),
+    Expression = colDef(show = FALSE)
+  ),
+
+  details = function(index){
+    Expression <- mstrypatrn.b$Expression[index]
+    Expression <- if (!is.na(Expression)) Expression else ""
+
+    tagList(
+      div(
+        # htmltools::div(style = list(padding = 6, fontSize = 15, fontWeight = 400, color = '#1f1e22', fontFamily = 'Zen Kaku Gothic New', background = '#f5f5f5'), "・ ", Translation)
+        htmltools::div(style = list(padding = 6, fontSize = 19, fontWeight = 400, color = '#1f1e22', fontFamily = 'RocknRoll One', background = '#f5f5f5'), "・ ", Expression)
+      )
+    )
+  },
+  # rowClass = "my-row",
+  defaultPageSize = 7,
+  # defaultSorted = "Category",
+  # class = "packages-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 45),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", height = 360,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Native-Phr {.tabset}
 
 ```{r, echo=FALSE, message=FALSE, warning = FALSE}
 
@@ -2648,14 +2856,12 @@ p.n <- ggplot(ntvspk.a.m.v, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Expr
 # p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"))
 p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())
 
-ggplotly(p.n, tooltip = c("text"), width=420)  %>% layout(hoverlabel = list(font=list(size=19,family="Zen Kaku Gothic New")))
+ggplotly(p.n, tooltip = c("text"), width=700)  %>% layout(hoverlabel = list(font=list(size=19,family="Zen Kaku Gothic New")))
 
 # ggplot(ntvspk.a.m, aes(x = x, y = y, text = paste(Expression))) + geom_hex(bins = 50)
 
 ```
 
-</div>
-</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -8253,6 +8459,14 @@ webshot("tmp2.html","fig_2.png", delay =20, vwidth = 1000)
 #### 05 {.tabset}
 
 ![](fig_2.png)
+
+<h6> </h6>
+
+------------------------------------------------------------------------
+
+#### 05 {.tabset}
+
+![](fig_1.png)
 
 <h6> </h6>
 
@@ -18978,7 +19192,7 @@ htmltools::browsable(
       div(class = "charts", tags$label("【Category】", `for` = "cat-type-filter"),
       # div(
         tags$select(
-          id = "cattype-filter",
+          id = "cat-type-filter",
           onchange = "Reactable.setFilter('cat-filter-table', 'Category', this.value)",
           tags$option("All", value = ""),
           lapply(unique(comstrgyfnc.b$Category), tags$option)
@@ -32417,7 +32631,6 @@ reactable(
 )
 
 ```
-
 
 ------------------------------------------------------------------------
 
