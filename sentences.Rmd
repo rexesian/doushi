@@ -304,6 +304,58 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+## <b> Collect </b> {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+spcvwrds.a <- spcvwrds %>% select(Sentence, Translation)
+spcvwrds.a <- spcvwrds.a[sample(1:nrow(spcvwrds.a)),]
+
+splwrds.a <- splwrds %>% select(Sentence, Translation)
+splwrds.a <- splwrds.a[sample(1:nrow(splwrds.a)),]
+
+spcvwords.a <- bind_rows(spcvwrds.a, splwrds.a)
+spcvwords.a <- spcvwords.a[sample(1:nrow(spcvwords.a)),]
+
+reactable(
+  spcvwords.a,
+  columns = list(
+    Sentence = colDef(style= list(background = '#e0e1dd'), 
+      cell = function(value, index) {
+        Translation <- spcvwords.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), value, "。"),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#0F2040', fontFamily = 'Open Sans'), Translation,"."),
+        )
+      },
+      align = "left"
+    ),
+    # Reading = colDef(show = FALSE),
+    # Meaning = colDef(show = FALSE),
+    # Verb = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 25,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, height = 510,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
 ## <b> Random </b> {.tabset}
 
 ### R1
@@ -646,58 +698,6 @@ reactable(
       align = "left"
     ),
     # Translation = colDef(align = "left", style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', background = '#1b1e1e', color = '#f1f5f5'), minWidth = 500)
-    Translation = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 25,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, height = 510,
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-<!-- ------------------------------------------------------------------------ -->
-
-## <b> Collect </b> {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-spcvwrds.a <- spcvwrds %>% select(Sentence, Translation)
-spcvwrds.a <- spcvwrds.a[sample(1:nrow(spcvwrds.a)),]
-
-splwrds.a <- splwrds %>% select(Sentence, Translation)
-splwrds.a <- splwrds.a[sample(1:nrow(splwrds.a)),]
-
-spcvwords.a <- bind_rows(spcvwrds.a, splwrds.a)
-spcvwords.a <- spcvwords.a[sample(1:nrow(spcvwords.a)),]
-
-reactable(
-  spcvwords.a,
-  columns = list(
-    Sentence = colDef(style= list(background = '#e0e1dd'), 
-      cell = function(value, index) {
-        Translation <- spcvwords.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 18, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), value, "。"),
-          div(style = list(fontSize = 10, fontWeight = 300, color = '#0F2040', fontFamily = 'Open Sans'), Translation,"."),
-        )
-      },
-      align = "left"
-    ),
-    # Reading = colDef(show = FALSE),
-    # Meaning = colDef(show = FALSE),
-    # Verb = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   rowClass = "my-row",

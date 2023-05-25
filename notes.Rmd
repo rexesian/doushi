@@ -57,8 +57,10 @@ library(purrr)
 ```
 
 ```{r, echo=FALSE, message=FALSE, error=FALSE}
-snds <- read_csv("itln/APHB-SND.csv")
+# snds <- read_csv("itln/APHB-SND.csv")
+snds <- read_csv("notedb/APHB-SND.csv")
 krnexprsn <- read_csv("notedb/KRNEXP-EXP.csv")
+krndlg <- read_csv("notedb/KRNDLG-DLG.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -211,8 +213,7 @@ krnexprsn <- read_csv("notedb/KRNEXP-EXP.csv")
 
 ### Reading Practice {.tabset}
 
-#### 1 {.tabset}
-
+#### Expressions {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -263,38 +264,83 @@ reactable(
 
 ---
 
-#### 2 {.tabset}
+#### Exerpts {.tabset}
 
-<p style="font-size:20px;">
-소피아: 안녕하세요. 제 이름은 소피아입니다. 저는 미국 사람입니다.  
-민수: 반갑습니다. 제 이름은 민수입니다. 저는 한국 사람입니다.  
-소피아: 민수 씨, 안녕히 가세요.  
-민수: 안녕히 가세요.  
-</p>
+```{r, echo=FALSE, message=FALSE}
 
----
+krndlg <- krndlg[sample(1:nrow(krndlg)),]
 
-#### 3 {.tabset}
+reactable(
+  krndlg,
+  # columns = list(
+  #   Korean = colDef(html = TRUE,
+  #     cell = function(value, index) {
+  #       Japanese <- krndlg$Japanese[index]
+  #       Japanese <- if (!is.na(Japanese)) Japanese else ""
+  #       English <- krndlg$English[index]
+  #       English <- if (!is.na(English)) English else ""
+  #       tagList(
+  #         div(style = list(fontSize = 24, fontWeight = 500), value),
+  #         tags$hr("aria-hidden" = "true"),
+  #         div(style = list(fontSize = 19, fontWeight = 500), Japanese),
+  #         tags$hr("aria-hidden" = "true"),
+  #         div(style = list(fontSize = 12, fontWeight = 500), English)
+  #       )
+  #     },
+  #     align = "left"
+  #   ),
+  #   English = colDef(show = FALSE),
+  #   Japanese = colDef(show = FALSE)
+  # ),
+    columns = list(
+      Korean = colDef(sticky = "left", align = "left", html=TRUE, minWidth = 500, style = list(fontSize = 21)),
+      # Japanese = colDef(align = "left", html=TRUE, minWidth = 500, style = list(fontSize = 14, background = '#dee7e7')),
+      # English = colDef(align = "left", html=TRUE, minWidth = 400, style = list(fontSize = 11, background = '#dee7e7'))
+    English = colDef(show = FALSE),
+    Japanese = colDef(show = FALSE)
+    ),
+  # defaultColDef = colDef(minWidth = 600),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 200),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
 
-<p style="font-size:20px;">
-   민수는 학생입니다. 민수는 아침에 일찍 일어납니다. 민수는 아침밥을 먹고 학교에 갑니다. 민수는 소피아를 만났습니다. “안녕하세요?” 소피아가 인사합니다. “안녕하세요.” 민수도 인사합니다. 민수와 소피아는 학교에 가서 공부를 합니다.
-</p>
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
 
----
+```
 
-#### 4 {.tabset}
+<!-- --- -->
 
-<p style="font-size:20px;">
-   한 아기 곰이 숲속에 살았습니다. 그가 늦잠을 잤고 학교에 늦게 갔습니다. 그의 반 친구들은 그를 놀렸습니다. 그가 그의 얼굴을 씻지 않았기 때문이었습니다. 그가 연못으로 갔고 그의 얼굴을 씻었습니다. 그의 얼굴이 깨끗해졌습니다. 그가 연못을 보고 웃었습니다. 연못도 그에게 웃어주었습니다.
-</p>
+<!-- #### 3 {.tabset} -->
 
----
+<!-- <p style="font-size:20px;"> -->
+<!--    민수는 학생입니다. 민수는 아침에 일찍 일어납니다. 민수는 아침밥을 먹고 학교에 갑니다. 민수는 소피아를 만났습니다. “안녕하세요?” 소피아가 인사합니다. “안녕하세요.” 민수도 인사합니다. 민수와 소피아는 학교에 가서 공부를 합니다. -->
+<!-- </p> -->
 
-#### 5 {.tabset}
+<!-- --- -->
 
-<p style="font-size:20px;">
-   메뚜기가 나무 위에서 노래를 부르고 있었습니다. 당나귀는 메뚜기처럼 노래를 잘 하고 싶었습니다. 당나귀가 메뚜기에게 물어봤습니다. “노래를 잘 하기 위해서 무엇을 먹니? 메뚜기가 대답했습니다. “나는 이슬만 먹어.” 당나귀는 이슬만 먹기 시작했습니다. 며칠 뒤, 그가 아팠고 죽었습니다.
-</p>
+<!-- #### 4 {.tabset} -->
+
+<!-- <p style="font-size:20px;"> -->
+<!--    한 아기 곰이 숲속에 살았습니다. 그가 늦잠을 잤고 학교에 늦게 갔습니다. 그의 반 친구들은 그를 놀렸습니다. 그가 그의 얼굴을 씻지 않았기 때문이었습니다. 그가 연못으로 갔고 그의 얼굴을 씻었습니다. 그의 얼굴이 깨끗해졌습니다. 그가 연못을 보고 웃었습니다. 연못도 그에게 웃어주었습니다. -->
+<!-- </p> -->
+
+<!-- --- -->
+
+<!-- #### 5 {.tabset} -->
+
+<!-- <p style="font-size:20px;"> -->
+<!--    메뚜기가 나무 위에서 노래를 부르고 있었습니다. 당나귀는 메뚜기처럼 노래를 잘 하고 싶었습니다. 당나귀가 메뚜기에게 물어봤습니다. “노래를 잘 하기 위해서 무엇을 먹니? 메뚜기가 대답했습니다. “나는 이슬만 먹어.” 당나귀는 이슬만 먹기 시작했습니다. 며칠 뒤, 그가 아팠고 죽었습니다. -->
+<!-- </p> -->
 
 -----------------------------------------------------------------------
 
