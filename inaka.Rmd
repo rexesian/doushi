@@ -337,7 +337,7 @@ vrbinflctn <- read_csv("jpdb/VRBEXT-WRDS.csv")
 syntxm <- read_csv("jpim/SYNTX-SYNX.csv")
 kana <- read_csv("jpdb/SCRPT6-KANA.csv")
 hangeul <- read_csv("notedb/HNGL-HNGL.csv")
-
+dailysets <- read_csv("jpim/MNTWRD-MLTNGL.csv")
 webshot::install_phantomjs()
 ```
 
@@ -2080,87 +2080,6 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### Phrases {.tabset}
-
-<div class = "row">
-<div class = "col-sm-8">
-
-```{r, echo=FALSE, message=FALSE}
-
-dliphr.a <- dliphr
-dliphr.a <- dliphr.a[sample(1:nrow(dliphr.a)),]
-
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chart", tags$label("Level:", `for` = "phrases-level-filter"),
-      # div(
-        tags$select(
-          id = "phrases-level-filter",
-          onchange = "Reactable.setFilter('phrases-filter-table', 'Level', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(dliphr.a$Level), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
-
-reactable(
-  dliphr.a,
-  columns = list(
-    Phrases = colDef(style= list(background = '#f9f6ed'),
-      cell = function(value, index) {
-        Meaning <- dliphr.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentences <- dliphr.a$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- dliphr.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)),
-          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentences),
-          div(style = list(fontSize = 10, fontWeight = 300, color = '#101010', fontFamily = 'Open Sans'), Translation),
-        )
-      },
-      align = "left"
-    ),
-    Level = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Sentences = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 10,
-  elementId = "phrases-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 390,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
-  )
-  )
-)
-
-```
-
-</div>
-<div class = "col-sm-4">
-
-<!-- ![](chart.png){width=400px} -->
-<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
-
-</div>
-</div>
-
-------------------------------------------------------------------------
-
 ### Verbs {.tabset}
 
 <div class = "row">
@@ -2345,7 +2264,88 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### Verbs-Inf {.tabset}
+### Set-Phrases {.tabset}
+
+<div class = "row">
+<div class = "col-sm-8">
+
+```{r, echo=FALSE, message=FALSE}
+
+dliphr.a <- dliphr
+dliphr.a <- dliphr.a[sample(1:nrow(dliphr.a)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chart", tags$label("Level:", `for` = "phrases-level-filter"),
+      # div(
+        tags$select(
+          id = "phrases-level-filter",
+          onchange = "Reactable.setFilter('phrases-filter-table', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(dliphr.a$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  dliphr.a,
+  columns = list(
+    Phrases = colDef(style= list(background = '#f9f6ed'),
+      cell = function(value, index) {
+        Meaning <- dliphr.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Sentences <- dliphr.a$Sentences[index]
+        Sentences <- if (!is.na(Sentences)) Sentences else ""
+        Translation <- dliphr.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)),
+          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentences),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#101010', fontFamily = 'Open Sans'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Level = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 10,
+  elementId = "phrases-filter-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 390,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
+)
+
+```
+
+</div>
+<div class = "col-sm-4">
+
+<!-- ![](chart.png){width=400px} -->
+<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+### Set-Functions {.tabset}
 
 <div class = "row">
 <div class = "col-sm-8">
@@ -37928,7 +37928,9 @@ reactable(
 
 # <b> Expressions </b> {.tabset}
 
-## Daily
+### XP1.0: Various-Expressions {.tabset}
+
+#### Set-Usual
 
 <div class = "row">
 <div class = "col-sm-9">
@@ -38324,7 +38326,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Phrases
+#### Set-Phrase
 
 <div class = "row">
 <div class = "col-sm-9">
@@ -38366,7 +38368,6 @@ reactable(
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
-
 
 ```
 
@@ -38434,6 +38435,58 @@ reactable(
 
 </div>
 </div>
+
+------------------------------------------------------------------------
+
+#### Set-Daily
+
+```{r, echo=FALSE, message=FALSE}
+
+dailysets.a <- dailysets
+dailysets.a <- dailysets.a %>% na.omit(dailysets.a) 
+dailysets.a <- dailysets.a[sample(1:nrow(dailysets.a)),]
+
+reactable(
+  dailysets.a,
+  columns = list(
+    Japanese = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Korean <- dailysets.a$Korean[index]
+        Korean <- if (!is.na(Korean)) Korean else ""
+        English <- dailysets.a$English[index]
+        English <- if (!is.na(English)) English else ""
+        Spanish <- dailysets.a$Spanish[index]
+        Spanish <- if (!is.na(Spanish)) Spanish else ""
+        tagList(
+          div(style = list(fontSize = 26, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040'), Korean),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#800000'), English),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish)
+        )
+      },
+      align = "center"
+    ),
+    English = colDef(show = FALSE),
+    Korean = colDef(show = FALSE),
+    Spanish = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 280),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
