@@ -23922,32 +23922,49 @@ reactable(
       cell = function(value, index) {
         Meaning <- grmrusl$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Sentence <- grmrusl$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Translation <- grmrusl$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        Remark <- grmrusl$Remark[index]
+        Remark <- if (!is.na(Remark)) Remark else ""
         tagList(
           div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
+          div(style = list(fontSize = 15, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Remark),
           div(style = list(fontSize = 12, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), Sentence),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
         )
       },
       align = "center"
     ),
-    Sentence = colDef(style= list(background = '#e0e1dd'),
-      minWidth = 150,
-      cell = function(value, index) {
-        Translation <- grmrusl$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
-          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
-        )
-      },
-      align = "left"
-    ),
+    # Sentence = colDef(style= list(background = '#e0e1dd'),
+    #   minWidth = 150,
+    #   cell = function(value, index) {
+    #     Translation <- grmrusl$Translation[index]
+    #     Translation <- if (!is.na(Translation)) Translation else ""
+    #     tagList(
+    #       div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
+    #       div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
+    #     )
+    #   },
+    #   align = "left"
+    # ),
+    Remark = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   rowClass = "my-row",
-  defaultPageSize = 3,
+  defaultPageSize = 1,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
