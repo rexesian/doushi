@@ -96,6 +96,18 @@ div.highlight-ur { background-color: #f2f2ef; padding-left: 0px; padding-top: 7p
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
+.detail-descrip_a {
+  color: 	#0F2040;
+  font-size: 16px;
+  font-weight: 300;
+  font-family: 'Open Sans';
+  background-color: #edede9;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 ```
 
 ```{r setup, include=FALSE}
@@ -186,6 +198,7 @@ kanawrds <- read_csv("jpdb/KANAPRTB-CHR.csv")
 grmmrrvwn <- read_csv("jpim/GRMRVPT-RVW.csv")
 kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
 syntxm <- read_csv("jpim/SYNTX-SYNX.csv")
+webshot::install_phantomjs()
 ```
 
 # <b> Exams </b> {.tabset}
@@ -7292,13 +7305,26 @@ reactable(
 reactable(
   kgordg,
   columns = list(
-    Script = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 16, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    # Script = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 16, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    
+    Script = colDef(show = TRUE, html = TRUE,
+      cell = function(value, index) {
+        tag_list <- tagList(
+          div(class = "detail-descrip_a", HTML(kgordg$Script[index]))
+        )
+        as.character(tag_list)
+      },
+      align = "left"
+    ),
     Translation = colDef(show = FALSE)
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    selectStyle = list(backgroundColor = "#061126"),
+    paginationStyle = list(borderColor = "#061126"),
+    pageButtonActiveStyle = list(background = "#dee7e7"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -7306,7 +7332,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 500, resizable = TRUE, striped = TRUE, highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", height = 500, resizable = TRUE, striped = TRUE, highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
