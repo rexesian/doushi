@@ -155,6 +155,66 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
+.detail-des_func_a {
+  color: 	#800000;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Righteous';
+  background-color: #e0e1dd;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.detail-des_func_b {
+  color: 	#0F2040;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Open Sans';
+  background-color: #edede9;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.detail-des_func_c {
+  color: 	#0F2040;
+  font-size: 11px;
+  font-weight: 400;
+  font-family: 'Zen Kaku Gothic New';
+  background-color: #edede9;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.detail-des_func_d {
+  color: 	#264653;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: 'Open Sans';
+  background-color: #e0e1dd;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.detail-des_func_e {
+  color: 	#259999;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: 'Zen Kaku Gothic New';
+  background-color: #e0e1dd;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 ```
 
 ```{r setup, include=FALSE}
@@ -338,6 +398,7 @@ syntxm <- read_csv("jpim/SYNTX-SYNX.csv")
 kana <- read_csv("jpdb/SCRPT6-KANA.csv")
 hangeul <- read_csv("notedb/HNGL-HNGL.csv")
 dailysets <- read_csv("jpim/MNTWRD-MLTNGL.csv")
+mstryfunc<- read_csv("jpim/COMMFNCZ-CMFNC.csv")
 webshot::install_phantomjs()
 ```
 
@@ -2264,7 +2325,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### Set-Phrases {.tabset}
+### Set-Phr {.tabset}
 
 <div class = "row">
 <div class = "col-sm-8">
@@ -2345,7 +2406,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### Set-Functions {.tabset}
+### Set-Pat {.tabset}
 
 <div class = "row">
 <div class = "col-sm-8">
@@ -2430,7 +2491,68 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### Comm-Functions {.tabset}
+### Set-Fnc {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+mstryfunc.a <- mstryfunc
+mstryfunc.a <- mstryfunc.a[sample(1:nrow(mstryfunc.a)),]
+
+reactable(
+  mstryfunc.a,
+  columns = list(
+    Function = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
+      cell = function(value, index) {
+        Pattern <- mstryfunc.a$Pattern[index]
+        Pattern <- if (!is.na(Pattern)) Pattern else ""
+        Details <- mstryfunc.a$Details[index]
+        Details <- if (!is.na(Details)) Details else ""
+        tag_list <- tagList(
+          div(class = "detail-des_func_a", HTML(mstryfunc.a$Function[index])),
+          div(class = "detail-des_func_d", HTML(mstryfunc.a$Pattern[index])),
+          div(class = "detail-des_func_e", HTML(mstryfunc.a$Details[index])),
+        )
+        as.character(tag_list)
+      },
+      align = "center"
+    ),
+    Sample = colDef(style= list(background = '#edede9'), html = TRUE, minWidth = 250,
+      cell = function(value, index) {
+        Translate <- mstryfunc.a$Translate[index]
+        Translate <- if (!is.na(Translate)) Translate else ""
+        tag_list <- tagList(
+          div(class = "detail-des_func_b", HTML(mstryfunc.a$Sample[index])),
+          div(class = "detail-des_func_c", HTML(mstryfunc.a$Translate[index]))
+        )
+        as.character(tag_list)
+      },
+      align = "left"
+    ), 
+    Pattern = colDef(show = FALSE),
+    Details = colDef(show = FALSE),
+    Translate = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", height = 600, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### Comm-Fnc {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2538,7 +2660,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### Comm-Elements {.tabset}
+### Comm-Ele {.tabset}
 
 <!-- <div class = "row"> -->
 <!-- <div class = "col-sm-8"> -->
@@ -2630,7 +2752,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### Comm-Patterns {.tabset}
+### Comm-Pat {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -34278,6 +34400,67 @@ reactable(
     )
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### Functions {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+mstryfunc.a <- mstryfunc
+mstryfunc.a <- mstryfunc.a[sample(1:nrow(mstryfunc.a)),]
+
+reactable(
+  mstryfunc.a,
+  columns = list(
+    Function = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
+      cell = function(value, index) {
+        Pattern <- mstryfunc.a$Pattern[index]
+        Pattern <- if (!is.na(Pattern)) Pattern else ""
+        Details <- mstryfunc.a$Details[index]
+        Details <- if (!is.na(Details)) Details else ""
+        tag_list <- tagList(
+          div(class = "detail-des_func_a", HTML(mstryfunc.a$Function[index])),
+          div(class = "detail-des_func_d", HTML(mstryfunc.a$Pattern[index])),
+          div(class = "detail-des_func_e", HTML(mstryfunc.a$Details[index])),
+        )
+        as.character(tag_list)
+      },
+      align = "center"
+    ),
+    Sample = colDef(style= list(background = '#edede9'), html = TRUE, minWidth = 250,
+      cell = function(value, index) {
+        Translate <- mstryfunc.a$Translate[index]
+        Translate <- if (!is.na(Translate)) Translate else ""
+        tag_list <- tagList(
+          div(class = "detail-des_func_b", HTML(mstryfunc.a$Sample[index])),
+          div(class = "detail-des_func_c", HTML(mstryfunc.a$Translate[index]))
+        )
+        as.character(tag_list)
+      },
+      align = "left"
+    ), 
+    Pattern = colDef(show = FALSE),
+    Details = colDef(show = FALSE),
+    Translate = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", height = 600, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, paginationType = "simple", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
