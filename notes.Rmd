@@ -86,6 +86,8 @@ library(purrr)
 snds <- read_csv("notedb/APHB-SND.csv")
 krnexprsn <- read_csv("notedb/KRNEXP-EXP.csv")
 krndlg <- read_csv("notedb/KRNDLG-DLG.csv")
+hangeul <- read_csv("notedb/HNGL-HNGL.csv")
+krnsnt <- read_csv("notedb/KRNSNT-SNT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -236,7 +238,57 @@ krndlg <- read_csv("notedb/KRNDLG-DLG.csv")
 
 ![](hngl.png)
 
-### Expressions {.tabset}
+------------------------------------------------------------------------
+
+### Scripts
+
+```{r, echo=FALSE, message=FALSE}
+
+hangeul <- hangeul %>% select(Script, Sound, Meaning)
+hangeul <- hangeul[sample(1:nrow(hangeul)),]
+
+reactable(
+  hangeul,
+  # columns = list(
+  #   Script = colDef(align = "center", style = list(fontSize = 60, fontWeight = 700, color = '#0F2040', background = '#edede9'))
+  # ),
+  columns = list(
+      Script = colDef(style= list(background = '#edede9'),
+      cell = function(value, index) {
+        Sound <- hangeul$Sound[index]
+        Sound <- if (!is.na(Sound)) Sound else ""
+        Meaning <- hangeul$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 62, fontWeight = 700, color = '#0F2040'), value),
+          div(style = list(fontSize = 13, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Sound),
+          div(style = list(fontSize = 13, fontWeight = 500, color = '#450814', fontFamily = 'Zen Kaku Gothic New'), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    Sound = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 220),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", fullWidth = FALSE, width = 300, highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+### Phrase {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -285,44 +337,38 @@ reactable(
 
 ```
 
------------------------------------------------------------------------
-
-### Exerpts {.tabset}
+### Verb {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
-krndlg <- krndlg[sample(1:nrow(krndlg)),]
+krnsnt <- krnsnt[sample(1:nrow(krnsnt)),]
 
 reactable(
-  krndlg,
-  # columns = list(
-  #   Korean = colDef(html = TRUE,
-  #     cell = function(value, index) {
-  #       Japanese <- krndlg$Japanese[index]
-  #       Japanese <- if (!is.na(Japanese)) Japanese else ""
-  #       English <- krndlg$English[index]
-  #       English <- if (!is.na(English)) English else ""
-  #       tagList(
-  #         div(style = list(fontSize = 24, fontWeight = 500), value),
-  #         tags$hr("aria-hidden" = "true"),
-  #         div(style = list(fontSize = 19, fontWeight = 500), Japanese),
-  #         tags$hr("aria-hidden" = "true"),
-  #         div(style = list(fontSize = 12, fontWeight = 500), English)
-  #       )
-  #     },
-  #     align = "left"
-  #   ),
-  #   English = colDef(show = FALSE),
-  #   Japanese = colDef(show = FALSE)
-  # ),
-    columns = list(
-      Korean = colDef(sticky = "left", align = "left", html=TRUE, minWidth = 500, style = list(fontSize = 21, background = '#edede9')),
-      # Japanese = colDef(align = "left", html=TRUE, minWidth = 500, style = list(fontSize = 14, background = '#dee7e7')),
-      # English = colDef(align = "left", html=TRUE, minWidth = 400, style = list(fontSize = 11, background = '#dee7e7'))
-    English = colDef(show = FALSE),
-    Japanese = colDef(show = FALSE)
+  krnsnt,
+  columns = list(
+    Sentence = colDef(style= list(background = '#edede9'),
+      cell = function(value, index) {
+        Translation <- krnsnt$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        Spanish <- krnsnt$Spanish[index]
+        Spanish <- if (!is.na(Spanish)) Spanish else ""
+        Japanese <- krnsnt$Japanese[index]
+        Japanese <- if (!is.na(Japanese)) Japanese else ""
+        tagList(
+          div(style = list(fontSize = 28, fontWeight = 800, color = '#0F2040'), value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 15, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Japanese),
+          div(style = list(fontSize = 13, fontWeight = 600, color = '#800000', fontFamily = 'Righteous'), Translation),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Spanish)
+
+        )
+      },
+      align = "center"
     ),
-  # defaultColDef = colDef(minWidth = 600),
+    Translation = colDef(show = FALSE),
+    Spanish = colDef(show = FALSE),
+    Japanese = colDef(show = FALSE)
+  ),
   defaultPageSize = 1,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
@@ -340,6 +386,126 @@ reactable(
 )
 
 ```
+
+<p style="font-size:14px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**Korean Present Tense Conjugation Rules**</p>
+
+When conjugating a verb into the present tense (or any tense) in Korean the first thing you must do is to drop the 다 ending. This will give you the basic verb stem. So, the basic verb stem of 먹다 is 먹. The basic verb stem of 사다 is 사.  
+
+After removing 다 you must add the correct present tense ending to conjugate the verb in the present tense. You must add one of the following endings to the verb stem:  
+
+- 아요 [a-yo]
+- 어요 [eo-yo]
+- 여요 [yeo-yo]
+
+*Please note that in the above 3 present tense endings, ‘요‘ makes it the polite form. You can form the present tense without this 요 and it is still correct, but it is not polite language. So, it is best to learn the present tense in the polite form. In future lessons, you will learn the different politeness levels and how to replace 요 with more honorific endings. For now, just remember that 아요 / 어요 / 여요 are the present tense endings in polite language.  
+
+<p style="font-size:14px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**Conjugation Rule 1:**</p>
+
+**If the last vowel in a verb stem is ㅏ or ㅗ, then you add 아요.**
+
+Let’s look at some examples:  
+
+살다 (to live) in the present tense is 살아요. After removing ‘다‘ you are left with the verb stem ‘살‘. As you can see the last vowel in 살 is ㅏ. So, we add 아요. 살다 becomes 살아요 when conjugated in the present tense.
+만나다 (to meet) in the present tense is 만나요. After removing ‘다‘ you are left with the verb stem ‘만나‘. The last vowel in 만나 is ㅏ. So, we add 아요. 만나다 becomes 만나요 in the present tense. Notice it is not 만나아요. This is because 만나 already ends in the 아 vowel sound.
+보다 (to see) in the present tense is 봐요. After removing ‘다‘ you are left with the verb stem ‘보‘. The last vowel in 보 is 오. So, we add 아요. 보다 becomes 봐요 in the present tense.  
+
+<p style="font-size:14px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**Conjugation Rule 2:**</p>
+
+**If the last vowel in a verb stem is NOT ㅏ or ㅗ, then you add 어요.**. 
+
+Let’s look at some examples:  
+
+먹다 (to eat) in the present tense is 먹어요. After removing ‘다‘ you are left with the verb stem ‘먹‘ As you can see, the last vowel is not ㅏ or ㅗ. The last vowel in 먹 is ㅓ. So, we add 어요. 먹다 becomes 먹어요 in the present tense.
+읽다 (to read) in the present tense is 읽어요. After removing ‘다‘ you are left with the verb stem ‘읽‘. The last vowel is not 아 or 오. The last vowel in 읽 is ㅣ. So, you must add 어요. 읽다 becomes 읽어요 when conjugated in the present tense.
+서다 (to stand) in the present tense is 서요. After removing ‘다‘ you are left with the verb stem ‘서‘. As you can see, the last vowel is not 아 or 어. The last vowel in 서 is ㅓ. 서다 becomes 서요 when conjugated in the present tense. Notice it is not 서어요. This is because 서 already ends in the 어 vowel sound.  
+
+<p style="font-size:14px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**Conjugation Rule 3:**</p>
+
+**If a verb ends in 하다 add 여요.**. 
+
+This rule may appear a little strange when you find out that 하+ 여요 becomes 해요. Originally 하+여요 became 하여요 but over time this became 해요. All you need to remember is that 하다 verbs in the present tense are 해요. Let’s look at some examples:  
+
+하다 (to do) becomes 해요 in the present tense.
+공부하다 (to study) becomes 공부해요 in the present tense.
+청소하다 (to clean) becomes 청소해요 in the present tense.
+준비하다 (to prepare) becomes 준비해요 in the present tense.
+In Korean, many verbs end in 하다 (to do). 하다 can change many nouns into a verb, For example, the noun for cleaning is 청소. To make the verb ‘to clean’ you simply add ‘하다‘ to make 청소하다. Learning how to conjugate 하다 verbs into the present tense will enable you to easily conjugate all the many 하다 verbs. All you need to remember is that 하다 changes into 해요 in the present tense.  
+
+<p style="font-size:14px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**Tricky Conjugations**</p>
+
+With some verbs that end in a vowel sound, when adding 아요 / 어요 to make the Korean present tense, the correct conjugation may not appear obvious. This is because the final vowel in the verb stem must combine with the initial vowel in 아요 / 어요.  
+
+To explain what we mean, let’s take the verb 가다 (to go). As you learned above, the first thing you do is drop the 다 to make the basic verb stem (가). As you can see, the final vowel in the verb stem 가 is ㅏ, so we must add 아요 to make the present tense (see rule 1 above).  
+
+However, in this example, 가 + 아요 does not make 가아요. Instead, the correct conjugation is 가요. This is because if you say 가 followed by ㅏ quickly, it combines to make the sound 가.  
+
+Here are some other tricky vowel combinations which you may, at first, find a little difficult to conjugate.  
+
+- ㅗ + ㅏ = ㅘ (e.g. 보다 conjugated in the present tense becomes 봐요)
+- ㅣ + ㅓ = ㅕ (e.g. 마시다 conjugated in the present tense becomes 마셔요)
+- ㅜ + ㅓ = ㅝ (e.g. 배우다 conjugated in the present tense becomes 배워요)
+- ㅏ + ㅏ = ㅏ (e.g. 가다 conjugated in the present tense becomes 가요)
+- ㅓ + ㅓ = ㅓ (e.g. 서다 conjugated in the present tense becomes 서요)
+- ㅕ + ㅓ = ㅕ (e.g. 켜다 conjugated in the present tense becomes 켜요)
+- ㅐ + ㅓ = ㅐ (e.g. 보내다 conjugated in the present tense becomes 보내요)
+- ㅔ + ㅓ = ㅔ ( e.g. 세다 conjugated in the present tense becomes 세요)
+
+
+<!-- ----------------------------------------------------------------------- -->
+
+<!-- ### Exerpts {.tabset} -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- krndlg <- krndlg[sample(1:nrow(krndlg)),] -->
+
+<!-- reactable( -->
+<!--   krndlg, -->
+<!--   # columns = list( -->
+<!--   #   Korean = colDef(html = TRUE, -->
+<!--   #     cell = function(value, index) { -->
+<!--   #       Japanese <- krndlg$Japanese[index] -->
+<!--   #       Japanese <- if (!is.na(Japanese)) Japanese else "" -->
+<!--   #       English <- krndlg$English[index] -->
+<!--   #       English <- if (!is.na(English)) English else "" -->
+<!--   #       tagList( -->
+<!--   #         div(style = list(fontSize = 24, fontWeight = 500), value), -->
+<!--   #         tags$hr("aria-hidden" = "true"), -->
+<!--   #         div(style = list(fontSize = 19, fontWeight = 500), Japanese), -->
+<!--   #         tags$hr("aria-hidden" = "true"), -->
+<!--   #         div(style = list(fontSize = 12, fontWeight = 500), English) -->
+<!--   #       ) -->
+<!--   #     }, -->
+<!--   #     align = "left" -->
+<!--   #   ), -->
+<!--   #   English = colDef(show = FALSE), -->
+<!--   #   Japanese = colDef(show = FALSE) -->
+<!--   # ), -->
+<!--     columns = list( -->
+<!--       Korean = colDef(sticky = "left", align = "left", html=TRUE, minWidth = 500, style = list(fontSize = 21, background = '#edede9')), -->
+<!--       # Japanese = colDef(align = "left", html=TRUE, minWidth = 500, style = list(fontSize = 14, background = '#dee7e7')), -->
+<!--       # English = colDef(align = "left", html=TRUE, minWidth = 400, style = list(fontSize = 11, background = '#dee7e7')) -->
+<!--     English = colDef(show = FALSE), -->
+<!--     Japanese = colDef(show = FALSE) -->
+<!--     ), -->
+<!--   # defaultColDef = colDef(minWidth = 600), -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 <!-- --- -->
 
