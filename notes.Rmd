@@ -350,12 +350,15 @@ reactable(
       cell = function(value, index) {
         Translation <- krnsnt$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
+        Reading <- krnsnt$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
         Spanish <- krnsnt$Spanish[index]
         Spanish <- if (!is.na(Spanish)) Spanish else ""
         Japanese <- krnsnt$Japanese[index]
         Japanese <- if (!is.na(Japanese)) Japanese else ""
         tagList(
           div(style = list(fontSize = 28, fontWeight = 800, color = '#0F2040'), value),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Reading),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 15, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Japanese),
           div(style = list(fontSize = 13, fontWeight = 600, color = '#800000', fontFamily = 'Righteous'), Translation),
@@ -365,6 +368,7 @@ reactable(
       },
       align = "center"
     ),
+    Reading = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
     Spanish = colDef(show = FALSE),
     Japanese = colDef(show = FALSE)
