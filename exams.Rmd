@@ -174,6 +174,42 @@ div.expresstr { outline-style: solid; outline-color: #0F2040; outline-width: 1px
   padding-bottom: 8px;
 }
 
+.detail-des_func_d {
+  color: 	#264653;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: 'Open Sans';
+  background-color: #e0e1dd;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.detail-des_func_g {
+  color: 	#0F2040;
+  font-size: 11px;
+  font-weight: 400;
+  font-family: 'Zen Kaku Gothic New';
+  background-color: #e0e1dd;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.detail-des_func_h {
+  color: 	#264653;
+  font-size: 15px;
+  font-weight: 300;
+  font-family: 'Open Sans';
+  background-color: #e0e1dd;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 ```
 
 ```{r setup, include=FALSE}
@@ -265,7 +301,7 @@ grmmrrvwn <- read_csv("jpim/GRMRVPT-RVW.csv")
 kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
 syntxm <- read_csv("jpim/SYNTX-SYNX.csv")
 mstryfunc<- read_csv("jpim/COMMFNCZ-CMFNC.csv")
-webshot::install_phantomjs()
+lstenscrpt<- read_csv("cpdb/EXMSCPT-SCRPT.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -3884,7 +3920,19 @@ reactable(
 reactable(
   dlyrdg,
   columns = list(
-    Script = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 17, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#edede9')),
+    Script = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
+      cell = function(value, index) {
+        Translation <- dlyrdg$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tag_list <- tagList(
+          div(class = "detail-des_func_h", HTML(dlyrdg$Script[index])),
+          tags$hr("aria-hidden" = "true"),
+          div(class = "detail-des_func_g", HTML(dlyrdg$Translation[index])),
+        )
+        as.character(tag_list)
+      },
+      align = "left"
+    ),
     Translation = colDef(show = FALSE)
   ),
   defaultPageSize = 1,
@@ -3922,7 +3970,7 @@ reactable(
   rowClass = "my-row",
   defaultPageSize = 8,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 400),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -3940,6 +3988,51 @@ reactable(
 ------------------------------------------------------------------------
 
 # <b> Listening </b> {.tabset}
+
+## Script {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+lstenscrpt.n3 <- lstenscrpt %>% select(N3.Script, N3.Trans)
+lstenscrpt.n3 <- lstenscrpt.n3[sample(1:nrow(lstenscrpt.n3)),]
+
+reactable(
+  lstenscrpt.n3,
+  columns = list(
+    N3.Script = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
+      cell = function(value, index) {
+        N3.Trans <- lstenscrpt.n3$N3.Trans[index]
+        N3.Trans <- if (!is.na(N3.Trans)) N3.Trans else ""
+        tag_list <- tagList(
+          div(class = "detail-des_func_d", HTML(lstenscrpt.n3$N3.Script[index])),
+          tags$hr("aria-hidden" = "true"),
+          div(class = "detail-des_func_g", HTML(lstenscrpt.n3$N3.Trans[index])),
+        )
+        as.character(tag_list)
+      },
+      align = "left"
+    ),
+    N3.Trans = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", height = 400, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
 
 ## Audio {.tabset}
 
