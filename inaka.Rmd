@@ -215,6 +215,30 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
   padding-bottom: 8px;
 }
 
+.detail-des_func_f {
+  color: 	#0F2040;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Open Sans';
+  background-color: #edede9;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.detail-des_func_g {
+  color: 	#259999;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: 'Zen Kaku Gothic New';
+  background-color: #e0e1dd;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 ```
 
 ```{r setup, include=FALSE}
@@ -399,6 +423,7 @@ kana <- read_csv("jpdb/SCRPT6-KANA.csv")
 hangeul <- read_csv("notedb/HNGL-HNGL.csv")
 dailysets <- read_csv("jpim/MNTWRD-MLTNGL.csv")
 mstryfunc<- read_csv("jpim/COMMFNCZ-CMFNC.csv")
+setmodes<- read_csv("jpim/CMMDENT-MDENT.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -4493,6 +4518,58 @@ reactable(
         tagList(
           div(style = list(fontSize = 50, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           div(style = list(fontSize = 12, fontWeight = 500, color = '#0F2040'), Meaning)
+        )
+      },
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### N3 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+scknj3.n <- scknj3  %>% slice(1:30)
+
+scknj3.n.w1 <- scknj3.n %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+scknj3.n.w2 <- scknj3.n %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+scknj3.n.w3 <- scknj3.n %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+
+scknj3.nt <- bind_rows(scknj3.n.w1, scknj3.n.w2)
+scknj3.nt <- bind_rows(scknj3.nt, scknj3.n.w3)
+
+scknj3.nt <- scknj3.nt[sample(1:nrow(scknj3.nt)),]
+
+reactable(
+  scknj3.nt,
+  columns = list(
+    Words = colDef(align = "center", style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        Meaning <- scknj3.nt$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 50, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 12, fontWeight = 500, color = '#0F2040'), Meaning)
         )
       },
     ),
@@ -19998,6 +20075,62 @@ reactable(
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
   )
   )
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### SetModes {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+setmodes.a <- setmodes
+setmodes.a <- setmodes.a[sample(1:nrow(setmodes.a)),]
+
+reactable(
+  setmodes.a,
+  columns = list(
+    Phrase = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
+      cell = function(value, index) {
+        Translate <- setmodes.a$Translate[index]
+        Translate <- if (!is.na(Translate)) Translate else ""
+        Details <- setmodes.a$Details[index]
+        Details <- if (!is.na(Details)) Details else ""
+        tag_list <- tagList(
+          div(class = "detail-des_func_f", HTML(setmodes.a$Phrase[index])),
+          div(class = "detail-des_func_d", HTML(setmodes.a$Translate[index])),
+          div(class = "detail-des_func_g", HTML(setmodes.a$Details[index])),
+        )
+        as.character(tag_list)
+      },
+      align = "left"
+    ),
+    Details = colDef(show = FALSE),
+    Translate = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#e0e1dd",
+      color = "#e0e1dd",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = FALSE, searchable = TRUE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 
 ```
