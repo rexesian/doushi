@@ -424,6 +424,7 @@ hangeul <- read_csv("notedb/HNGL-HNGL.csv")
 dailysets <- read_csv("jpim/MNTWRD-MLTNGL.csv")
 mstryfunc<- read_csv("jpim/COMMFNCZ-CMFNC.csv")
 setmodes<- read_csv("jpim/CMMDENT-MDENT.csv")
+sntmodes<- read_csv("jpim/SNTMDE-MDE.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -24179,8 +24180,8 @@ reactable(
         Translation <- spphr.x$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 700, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value, "。"),
-          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation, "."),
+          div(style = list(fontSize = 19, fontWeight = 700, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value, "。"),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation, "."),
         )
       },
       align = "left"
@@ -24227,8 +24228,8 @@ reactable(
         Translation <- smpsnt.x$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 700, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value, "。"),
-          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation, "."),
+          div(style = list(fontSize = 19, fontWeight = 700, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value, "。"),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation, "."),
         )
       },
       align = "left"
@@ -24275,8 +24276,8 @@ reactable(
         Translation <- cmnknjp.x$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 700, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value, "。"),
-          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation, "."),
+          div(style = list(fontSize = 19, fontWeight = 700, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value, "。"),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation, "."),
         )
       },
       align = "left"
@@ -24318,13 +24319,55 @@ reactable(
         Meaning <- dailycom$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 700, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value),
-          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Meaning),
+          div(style = list(fontSize = 19, fontWeight = 700, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Meaning),
         )
       },
       align = "left"
     ),
     Meaning = colDef(show = FALSE)
+  ), 
+  rowClass = "my-row",
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### Modes {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+sntmodes <- sntmodes[sample(1:nrow(sntmodes)),]
+
+reactable(
+  sntmodes,
+  columns = list(
+    Phrase = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        Translation <- sntmodes$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 700, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
   ), 
   rowClass = "my-row",
   defaultPageSize = 7,
