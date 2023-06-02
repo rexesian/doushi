@@ -135,7 +135,7 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
   font-size: 17px;
   font-weight: 500;
   font-family: 'RocknRoll One';
-  background: hsl(213, 20%, 99%);
+  background: #eef3f3
   padding-left: 10px;
 }
 
@@ -143,7 +143,7 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
   color: 	#0F2040;
   font-size: 12px;
   font-family: 'Zen Kaku Gothic New';
-  background: hsl(213, 20%, 99%);
+  background: #eef3f3
   padding-left: 20px;
 }
 
@@ -425,6 +425,7 @@ dailysets <- read_csv("jpim/MNTWRD-MLTNGL.csv")
 mstryfunc<- read_csv("jpim/COMMFNCZ-CMFNC.csv")
 setmodes<- read_csv("jpim/CMMDENT-MDENT.csv")
 sntmodes<- read_csv("jpim/SNTMDE-MDE.csv")
+setwrdss<- read_csv("jpim/SETWRDS-MDE.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -16877,7 +16878,7 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 ------------------------------------------------------------------------
 
 ### EC.3.0: Auxiliaries {.tabset}
-<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Auxiliaries** are attached at the end of a word or a sentence to give nuance.</p>
+<p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Auxiliaries** are attached at the end of a word or a sentence to give a nuance in the meaning as a whole or set the mode.</p>
 
 #### Aux-Adj {.tabset}
 
@@ -38906,8 +38907,8 @@ reactable(
   showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, highlight = TRUE, paginationType = "numbers",
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
     theme = reactableTheme(
-    backgroundColor = "hsl(213, 20%, 99%)",
-    borderColor = "hsl(213, 20%, 99%)",
+    backgroundColor = "#e7eeee",
+    borderColor = "#e7eeee",
     selectStyle = list(backgroundColor = "#061126"),
     paginationStyle = list(borderColor = "#061126"),
     pageButtonActiveStyle = list(background = "#dee7e7"),
@@ -39328,6 +39329,9 @@ reactable(
 
 #### Set-Daily
 
+<div class = "row">
+<div class = "col-sm-9">
+
 ```{r, echo=FALSE, message=FALSE}
 
 dailysets.a <- dailysets
@@ -39360,6 +39364,104 @@ reactable(
     English = colDef(show = FALSE),
     Korean = colDef(show = FALSE),
     Spanish = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 280),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-3">
+
+```{r, echo=FALSE, message=FALSE}
+
+setwrdss <- setwrdss[sample(1:nrow(setwrdss)),]
+
+reactable(
+  setwrdss,
+  columns = list(
+    Words = colDef(style= list(background = '#d9d9d7'),
+      cell = function(value, index) {
+        # Reading <- jlptw.all.b$Reading[index]
+        # Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- setwrdss$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 19, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#026450'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 93       ),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+------------------------------------------------------------------------
+
+#### Set-Modes
+
+```{r, echo=FALSE, message=FALSE}
+
+sntmodes <- sntmodes[sample(1:nrow(sntmodes)),]
+
+reactable(
+  sntmodes,
+  columns = list(
+    Phrase = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        # Korean <- sntmodes$Korean[index]
+        # Korean <- if (!is.na(Korean)) Korean else ""
+        # English <- sntmodes$English[index]
+        # English <- if (!is.na(English)) English else ""
+        Translation <- sntmodes$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 26, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040'), Korean),
+          # div(style = list(fontSize = 11, fontWeight = 500, color = '#800000'), English),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Translation)
+        )
+      },
+      align = "center"
+    ),
+    # English = colDef(show = FALSE),
+    # Korean = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
