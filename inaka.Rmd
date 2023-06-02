@@ -39762,23 +39762,25 @@ reactable(
   columns = list(
     Words = colDef(style= list(background = '#dee7e7'),
       cell = function(value, index) {
-        # Korean <- setwrdcmb$Korean[index]
-        # Korean <- if (!is.na(Korean)) Korean else ""
-        # English <- setwrdcmb$English[index]
-        # English <- if (!is.na(English)) English else ""
+        Sentence <- setwrdcmb$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Translation <- setwrdcmb$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
         Meaning <- setwrdcmb$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
           div(style = list(fontSize = 26, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          # div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040'), Korean),
-          # div(style = list(fontSize = 11, fontWeight = 500, color = '#259999'), English),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#800000', fontFamily = 'Zen Kaku Gothic New'), Meaning)
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#800000', fontFamily = 'Zen Kaku Gothic New'), Meaning),
+          div(style = list(fontSize = 1, color = '#dee7e7'), "."),
+          div(style = list(fontSize = 1, color = '#dee7e7'), "."),
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Translation)
         )
       },
       align = "center"
     ),
-    # English = colDef(show = FALSE),
-    # Korean = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE),
     Meaning = colDef(show = FALSE)
   ),
   rowClass = "my-row",
