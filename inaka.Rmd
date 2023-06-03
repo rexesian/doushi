@@ -427,6 +427,7 @@ setmodes<- read_csv("jpim/CMMDENT-MDENT.csv")
 sntmodes<- read_csv("jpim/SNTMDE-MDE.csv")
 setwrdss<- read_csv("jpim/SETWRDS-MDE.csv")
 setwrdcmb<- read_csv("jpim/SETWRE-MDE.csv")
+grmqstnrv<- read_csv("jpim/GMQTNS-QNS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -13828,39 +13829,61 @@ reactable(
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Time**</p>
 
-    ・秒　　びょう　　　　　　◦ seconds
-    ・分　　ふん・ぷん・ぶん　◦ minutes
-    ・月　　かげつ　　　　　　◦ number of months
-    ・月　　つき　　　　　　　◦ number of months
-    ・年　　ねん　　　　　　　◦ number of years
-    ・時間　じかん　　　　　　◦ number of hours
-    ・週間　しゅうかん　　　　◦ number of weeks
+<div class = "expresstr">
+・秒　　びょう　　　　　　◦ seconds   
+・分　　ふん・ぷん・ぶん　◦ minutes     
+・月　　かげつ　　　　　　◦ number of months   
+・月　　つき　　　　　　　◦ number of months  
+・年　　ねん　　　　　　　◦ number of years   
+・時間　じかん　　　　　　◦ number of hours   
+・週間　しゅうかん　　　　◦ number of weeks    
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Numerical Value**</p>
 
-    ・十　　じゅう　　　　　　◦ tens
-    ・百　　ひゃく　　　　　　◦ hundreds
-    ・千　　せん　　　　　　　◦ thousand
-    ・万　　まん　　　　　　　◦ ten thousand
+<div class = "expresstr">
+・十　　じゅう　　　　　　◦ tens     
+・百　　ひゃく　　　　　　◦ hundreds   
+・千　　せん　　　　　　　◦ thousand   
+・万　　まん　　　　　　　◦ ten thousand    
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Percentage**</p>
 
-    ・割　　わり　　　　　　　◦ percent
+<div class = "expresstr">
+・割　　わり　　　　　　　◦ percent     
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ Weight**</p>
 
-    ・キロ　　　　キロ　　　　◦ kilo
-    ・グラム　　　グラム　　　◦ gram
-    ・ミリグラム　ミリグラム　◦ milligram
+<div class = "expresstr">
+・キロ　　　　キロ　　　　◦ kilo    
+・グラム　　　グラム　　　◦ gram    
+・ミリグラム　ミリグラム　◦ milligram   
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑤ Distance**</p>
 
-    ・メートル　　メートル　　◦ meter
-    ・センチ　　　センチ　　　◦ centimeter
+<div class = "expresstr">
+・メートル　　メートル　　◦ meter   
+・センチ　　　センチ　　　◦ centimeter   
+</div>
+
+<h6> </h6>
 
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑥ Volume**</p>
 
-    ・リットル　　リットル　　◦ liter
+<div class = "expresstr">
+・リットル　　リットル　　◦ liter    
+</div>
 
 <h6> </h6>
 
@@ -21884,7 +21907,7 @@ reactable(
 
 <h6> </h6>
 
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ Destination・Terminating Point: Go to・Come to・Return to**</p>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ Destination・Terminating Point・Place to Enter: Go to・Come to・Return to**</p>
 
 ###### **⚭　Place + ni**
 
@@ -30428,6 +30451,49 @@ You can replace **nanka** with **nante** The meaning and nuances are pretty exac
 <!-- </div> -->
 <!-- </div> -->
 <h6> </h6>
+
+------------------------------------------------------------------------
+
+#### Question {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+grmqstnrv <- grmqstnrv[sample(1:nrow(na.omit(grmqstnrv))),]
+grmqstnrv <- grmqstnrv[sample(1:nrow(grmqstnrv)),]
+
+reactable(
+  na.omit(grmqstnrv),
+  columns = list(
+    Questions = colDef(style= list(background = '#e3e4e0'),
+      cell = function(value, index) {
+        Number <- grmqstnrv$Number[index]
+        Number <- if (!is.na(Number)) Number else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Helvetica Neue', color = '#01161e'), value),
+        )
+      },
+      align = "left"
+    ),
+    Number = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
