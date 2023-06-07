@@ -1,5 +1,5 @@
 ---
-title: "<b> 超曖昧几帳面日本語 </b>"
+title: "<b> 構造化几帳面認知思想日本語 </b>"
 output:
   html_document:
     theme: sandstone
@@ -39861,6 +39861,53 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+#### Set-Sense
+
+```{r, echo=FALSE, message=FALSE}
+
+setwrdss <- setwrdss[sample(1:nrow(setwrdss)),]
+
+reactable(
+  setwrdss,
+  columns = list(
+    Words = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        # Reading <- jlptw.all.b$Reading[index]
+        # Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- setwrdss$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 50, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#026450'), Reading),
+          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 280),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 
 ------------------------------------------------------------------------
 
