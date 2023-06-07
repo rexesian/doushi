@@ -1,5 +1,5 @@
 ---
-title: "<b> 自室学習部屋で塾の教室 </b>"
+title: "<b> 超曖昧几帳面日本語 </b>"
 output:
   html_document:
     theme: sandstone
@@ -213,8 +213,8 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
 .detail-des_func_g {
   color: 	#259999;
   font-size: 12px;
-  font-weight: 400;
-  font-family: 'Zen Kaku Gothic New';
+  font-weight: 300;
+  font-family: 'Open Sans';
   background-color: #e0e1dd;
   padding-left: 8px;
   padding-right: 8px;
@@ -8553,10 +8553,9 @@ scknja.y <- scknja.y[sample(1:nrow(scknja.y)),]
 
 scknja.x <- bind_rows(scknja.z, scknja.y)
 
-scknja.x1 <- scknja.x %>% select(W1, W2, W3, R1, R2, R3) %>% slice(1:580)
-scknja.x2 <- scknja.x %>% select(W1, W2, W3, R1, R2, R3)  %>% rename(W4 = W1, W5 = W2, W6 = W3, R4 = R1, R5 = R2, R6 = R3) %>% slice(581:1160)
+scknja.x1 <- scknja.x %>% select(W1, W2, W3, R1, R2, R3) %>% slice(1:670)
+scknja.x2 <- scknja.x %>% select(W1, W2, W3, R1, R2, R3) %>% rename(W4 = W1, W5 = W2, W6 = W3, R4 = R1, R5 = R2, R6 = R3) %>% slice(671:1340)
 scknja.xf <- data.frame(scknja.x1, scknja.x2)
-
 reactable(
   scknja.xf,
   columns = list(
@@ -8702,8 +8701,8 @@ scknja.y <- scknja.y[sample(1:nrow(scknja.y)),]
 
 scknja.x <- bind_rows(scknja.z, scknja.y)
 
-scknja.x1 <- scknja.x %>% select(W1, W2, W3, M1, M2, M3) %>% slice(1:580)
-scknja.x2 <- scknja.x %>% select(W1, W2, W3, M1, M2, M3)  %>% rename(W4 = W1, W5 = W2, W6 = W3, M4 = M1, M5 = M2, M6 = M3) %>% slice(581:1160)
+scknja.x1 <- scknja.x %>% select(W1, W2, W3, M1, M2, M3) %>% slice(1:670)
+scknja.x2 <- scknja.x %>% select(W1, W2, W3, M1, M2, M3)  %>% rename(W4 = W1, W5 = W2, W6 = W3, M4 = M1, M5 = M2, M6 = M3) %>% slice(671:1340)
 scknja.xf <- data.frame(scknja.x1, scknja.x2)
 
 scknja.xfc <- scknja.xf %>% select(W1, W2, W3, W4, W5, W6, M1, M2, M3, M4, M5, M6) %>%
@@ -8862,8 +8861,8 @@ scknja.y <- scknja.y[sample(1:nrow(scknja.y)),]
 
 scknja.x <- bind_rows(scknja.z, scknja.y)
 
-scknja.x1 <- scknja.x %>% select(W1, W2, W3) %>% slice(1:580)
-scknja.x2 <- scknja.x %>% select(W1, W2, W3)  %>% rename(W4 = W1, W5 = W2, W6 = W3) %>% slice(581:1160)
+scknja.x1 <- scknja.x %>% select(W1, W2, W3) %>% slice(1:670)
+scknja.x2 <- scknja.x %>% select(W1, W2, W3)  %>% rename(W4 = W1, W5 = W2, W6 = W3) %>% slice(671:1340)
 scknja.xf <- data.frame(scknja.x1, scknja.x2)
 
 reactable(
@@ -9765,63 +9764,63 @@ reactable(
 </div>
 <div class = "col-sm-4">
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-hangeul <- hangeul %>% select(Script, Sound, Meaning)
-hangeul <- hangeul[sample(1:nrow(hangeul)),]
+<!-- hangeul <- hangeul %>% select(Script, Sound, Meaning) -->
+<!-- hangeul <- hangeul[sample(1:nrow(hangeul)),] -->
 
-reactable(
-  hangeul,
-  # columns = list(
-  #   Script = colDef(align = "center", style = list(fontSize = 60, fontWeight = 700, color = '#0F2040', background = '#edede9'))
-  # ),
-  columns = list(
-      Script = colDef(style= list(background = '#edede9'),
-      cell = function(value, index) {
-        Sound <- hangeul$Sound[index]
-        Sound <- if (!is.na(Sound)) Sound else ""
-        Meaning <- hangeul$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        tagList(
-          div(style = list(fontSize = 62, fontWeight = 700, color = '#0F2040'), value),
-          div(style = list(fontSize = 13, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Sound),
-          div(style = list(fontSize = 13, fontWeight = 500, color = '#450814', fontFamily = 'Zen Kaku Gothic New'), Meaning)
-        )
-      },
-      align = "center"
-    ),
-    Sound = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 220),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#1b1e1e",
-      color = "hsl(0, 0%, 95%)",
-      fontSize = 0.1,
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0.75rem",
-      letterSpacing = "1px",
-      textTransform = "lowercase",
-      padding = "0px",
-      "&:hover, &:focus" = list(color = '#1b1e1e')
-    ),    
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", fullWidth = FALSE, width = 300, highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!-- reactable( -->
+<!--   hangeul, -->
+<!--   # columns = list( -->
+<!--   #   Script = colDef(align = "center", style = list(fontSize = 60, fontWeight = 700, color = '#0F2040', background = '#edede9')) -->
+<!--   # ), -->
+<!--   columns = list( -->
+<!--       Script = colDef(style= list(background = '#edede9'), -->
+<!--       cell = function(value, index) { -->
+<!--         Sound <- hangeul$Sound[index] -->
+<!--         Sound <- if (!is.na(Sound)) Sound else "" -->
+<!--         Meaning <- hangeul$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 62, fontWeight = 700, color = '#0F2040'), value), -->
+<!--           div(style = list(fontSize = 13, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Sound), -->
+<!--           div(style = list(fontSize = 13, fontWeight = 500, color = '#450814', fontFamily = 'Zen Kaku Gothic New'), Meaning) -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Sound = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 220), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#1b1e1e", -->
+<!--       color = "hsl(0, 0%, 95%)", -->
+<!--       fontSize = 0.1, -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0.75rem", -->
+<!--       letterSpacing = "1px", -->
+<!--       textTransform = "lowercase", -->
+<!--       padding = "0px", -->
+<!--       "&:hover, &:focus" = list(color = '#1b1e1e') -->
+<!--     ),     -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", fullWidth = FALSE, width = 300, highlight = TRUE, -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 </div>
 </div>
@@ -20673,7 +20672,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### SetModes {.tabset}
+#### ModeSetting {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
