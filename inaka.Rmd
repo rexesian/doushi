@@ -411,6 +411,7 @@ sntmodes<- read_csv("jpim/SNTMDE-MDE.csv")
 setwrdss<- read_csv("jpim/SETWRDS-MDE.csv")
 setwrdcmb<- read_csv("jpim/SETWRE-MDE.csv")
 grmqstnrv<- read_csv("jpim/GMQTNS-QNS.csv")
+connectors <- read_csv("jpdb/CONNECT-CONNECTORS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -9843,6 +9844,7 @@ reactable(
 ・そのうえ　◦ In addition                        
 ・それに　　◦ Besides, In addition, Moreover      
 ・また　　　◦ In addition, Too, Also, Likewise   
+・なお　　　◦ In addition, Moreover, Furthermore   
 ・それから　◦ And then, After                      
 ・そして　　◦ And, And then                         
 </div>
@@ -9854,9 +9856,11 @@ reactable(
 <div class = "expresstr">
 ・でも　　　◦ But             
 ・しかし　　◦ But             
-・ところが　◦ However     
+・ただ　　　◦ But, However             
+・ところが　◦ But, However     
 ・けれども　◦ But, However     
 ・それでも　◦ But still, Nevertheless        
+・もっとも　◦ But then, However, Though        
 </div>
 
 <h6> </h6>
@@ -9874,13 +9878,16 @@ reactable(
 <p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ Cause & Reason, Effect & Result and Situation & Result**</p>
 
 <div class = "expresstr">
-・それで　　　◦ Thereupon, Because of that, That's why   
-・すると　　　◦ Thereupon, Hereupon        
-・だから　　　◦ So, Therefore              
-・そこで　　　◦ So, Therefore               
-・したがって　◦ Therefore, Consequently       
-・そのけっか　◦ As a result of that           
-・そのために　◦ Hence, For that reason            
+・それで　　　　◦ Thereupon, Because of that, That's why   
+・すると　　　　◦ Thereupon, Hereupon        
+・だから　　　　◦ So, Therefore              
+・そこで　　　　◦ So, Therefore               
+・したがって　　◦ Therefore, Consequently       
+・そのけっか　　◦ As a result of that           
+・そのために　　◦ Hence, For that reason            
+・それゆえに　　◦ So, Therefore, Hence, For that reason            
+・そうしたら　　◦ Then, In that case, If so                
+・ということで　◦ So, Therefore, Thus, That being so           
 </div>
 
 <h6> </h6>
@@ -9889,6 +9896,7 @@ reactable(
 
 <div class = "expresstr">
 ・ところで　◦ By the way     
+・さて　　　◦ Well, Now, Then     
 </div>
 
 <h6> </h6>
@@ -10063,6 +10071,111 @@ reactable(
 </div>
 
 <h6> </h6>
+
+------------------------------------------------------------------------
+
+#### Recognize
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+connectors.a <- connectors %>% select(Words, Reading, Meaning, S1, T1) %>% rename(Sentences = S1, Translation = T1)
+connectors.a <- connectors.a[sample(1:nrow(connectors.a)),]
+
+reactable(
+  connectors.a,
+  columns = list(
+    Words = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        Reading <- connectors.a$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- connectors.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#266c6c', fontFamily = 'Open Sans'), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    
+    Translation = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE)
+
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
+
+</div>
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+connectors.a <- connectors.a[sample(1:nrow(connectors.a)),]
+
+reactable(
+  connectors.a,
+  columns = list(
+    Words = colDef(style= list(background = '#edede9'),
+      cell = function(value, index) {
+        Reading <- connectors.a$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- connectors.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 11, color = '#404040'), Reading),
+          # div(style = list(fontSize = 10, color = '#404040'), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    
+    Translation = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Reading = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE)
+
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+```
+
+</div>
+</div>
 
 <!-- ------------------------------------------------------------------------ -->
 
@@ -10479,9 +10592,9 @@ reactable(
         Meaning <- nadj2.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 11, color = '#0F2040', fontFamily = 'Open Sans'), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#266c6c', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
@@ -10528,7 +10641,7 @@ reactable(
         Meaning <- nadj2.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 28, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040'), Reading),
           # div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
@@ -10584,9 +10697,9 @@ reactable(
         Words <- nadj2.a$Words[index]
         Words <- if (!is.na(Words)) Words else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words),
-          div(style = list(fontSize = 11, color = '#0F2040', fontFamily = 'Open Sans'), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), value)
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words),
+          div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#266c6c', fontFamily = 'Open Sans'), value)
         )
       },
       align = "center"
@@ -10633,7 +10746,7 @@ reactable(
         Meaning <- nadj2.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040', fontFamily = 'Open Sans'), Reading),
           div(style = list(fontSize = 12, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
         )
@@ -11057,9 +11170,9 @@ reactable(
         Meaning <- nadj1.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 11, color = '#0F2040', fontFamily = 'Open Sans'), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#266c6c', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
@@ -11106,7 +11219,7 @@ reactable(
         Meaning <- nadj1.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 28, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040'), Reading),
           # div(style = list(fontSize = 10, fontWeight = 500, color = '#404040'), Meaning)
         )
@@ -11161,9 +11274,9 @@ reactable(
         Words <- nadj1.a$Words[index]
         Words <- if (!is.na(Words)) Words else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words),
-          div(style = list(fontSize = 11, color = '#0F2040', fontFamily = 'Open Sans'), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), value)
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words),
+          div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#266c6c', fontFamily = 'Open Sans'), value)
         )
       },
       align = "center"
@@ -11211,7 +11324,7 @@ reactable(
         Meaning <- nadj1.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040'), Reading),
           div(style = list(fontSize = 12, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
         )
@@ -11666,9 +11779,9 @@ reactable(
         Meaning <- nounw.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 11, color = '#0F2040', fontFamily = 'Open Sans'), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#266c6c', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
@@ -11713,7 +11826,7 @@ reactable(
         Meaning <- nounw.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 28, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040'), Reading),
           # div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
@@ -11767,9 +11880,9 @@ reactable(
         Words <- nounw.a$Words[index]
         Words <- if (!is.na(Words)) Words else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words),
-          div(style = list(fontSize = 11, color = '#0F2040', fontFamily = 'Open Sans'), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), value)
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words),
+          div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#266c6c', fontFamily = 'Open Sans'), value)
         )
       },
       align = "center"
@@ -11814,9 +11927,9 @@ reactable(
         Meaning <- nounw.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#0F2040'), Reading),
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#266c6c', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
@@ -11962,7 +12075,7 @@ reactable(
         Meaning <- nounw.n$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 28, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040'), Reading),
           # div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
@@ -12376,9 +12489,9 @@ reactable(
         Meaning <- adv1.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 11, color = '#0F2040', fontFamily = 'Open Sans'), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#266c6c', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
@@ -12424,7 +12537,7 @@ reactable(
         Meaning <- adv1.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040'), Reading),
           # div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
@@ -12478,9 +12591,9 @@ reactable(
         Word <- adv1.a$Word[index]
         Word <- if (!is.na(Word)) Word else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Word),
-          div(style = list(fontSize = 11, color = '#0F2040', fontFamily = 'Open Sans'), Reading),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), value)
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Word),
+          div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#266c6c', fontFamily = 'Open Sans'), value)
         )
       },
       align = "center"
@@ -12525,9 +12638,9 @@ reactable(
         Meaning <- adv1.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#0F2040'), Reading),
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Meaning)
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#266c6c', fontFamily = 'Open Sans'), Meaning)
         )
       },
       align = "center"
@@ -12818,7 +12931,7 @@ reactable(
         Meaning <- adv1.n$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040'), Reading),
           # div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
@@ -25391,10 +25504,14 @@ reactable(
 
 ###### Expectation of realizing objective
 
-    ・風邪が早く治るように注射を打ってもらいました
-    ・黒板の字がよく見えるように前の席に座りましょう
-    ・だれにもわからないようにそっと家を出たのだが母に見つかってしまった
-    ・たくさんの人がバザーに参加するように広い会場を用意した
+<div class = "expresstr">
+・風邪が早く治るように注射を打ってもらいました.   
+・黒板の字がよく見えるように前の席に座りましょう.    
+・だれにもわからないようにそっと家を出たのだが母に見つかってしまった.   
+・たくさんの人がバザーに参加するように広い会場を用意した.  
+</div>
+
+<h6> </h6>
 
 **②　上で ◦ For・In order to**
 
@@ -25402,11 +25519,15 @@ reactable(
 
 ###### Indicates purpose and then explain on how to achieve it
 
-    ・今度の企画を成功させる上でぜひみんなの協力が必要なのだ
-    ・数学を学習する上で大切なことは基礎的な事項をしっかり身につけることだ
-    ・有意義な留学生活を送る上での注意点は下記のとおりです
-    ・テレビは外国語の勉強の上でかなり役に立ちます
-    ・食料品の保存の上で次のことに注意してください
+<div class = "expresstr">
+・今度の企画を成功させる上でぜひみんなの協力が必要なのだ.   
+・数学を学習する上で大切なことは基礎的な事項をしっかり身につけることだ.    
+・有意義な留学生活を送る上での注意点は下記のとおりです.   
+・テレビは外国語の勉強の上でかなり役に立ちます.   
+・食料品の保存の上で次のことに注意してください.   
+</div>
+
+<h6> </h6>
 
 **③　べく ◦ For the purpose of・In order to・Thinking to**
 
@@ -25418,10 +25539,14 @@ reactable(
 
 ###### Clauses of requests, commands, or appeals do not follow
 
-    ・ひとこと鈴木さんに別れの言葉を言うべく彼のマンションを訪れたのですが彼はすでに出発した後でした
-    ・彼女は新しい気持ちで再出発するべく長野県の山村に引っ越して行った
-    ・田中氏は記者会見場に向かうべく上着を着て部屋を出た
-    ・ラムさんを迎えるべく空港まで行ったが会えなかった
+<div class = "expresstr">
+・ひとこと鈴木さんに別れの言葉を言うべく彼のマンションを訪れたのですが彼はすでに出発した後でした.   
+・彼女は新しい気持ちで再出発するべく長野県の山村に引っ越して行った.   
+・田中氏は記者会見場に向かうべく上着を着て部屋を出た.   
+・ラムさんを迎えるべく空港まで行ったが会えなかった.   
+</div>
+
+<h6> </h6>
 
 **④　んがため(に) ◦ In order to**
 
@@ -25435,10 +25560,14 @@ reactable(
 
 ###### Clauses containing requests, commands, or urgings do not follow
 
-    ・研究を完成させんがため彼は昼夜寝ずにがんばった
-    ・1日も早く自分の店を持たんがために必死で働いているのだ
-    ・これも勝たんがための練習だからがんばるしかない
-    ・災害から1週間たった。避難先のこの地で生きんがための方法をあれこれ考えて昨夜はよく眠れなかった
+<div class = "expresstr">
+・研究を完成させんがため彼は昼夜寝ずにがんばった.   
+・1日も早く自分の店を持たんがために必死で働いているのだ.   
+・これも勝たんがための練習だからがんばるしかない.   
+・災害から1週間たった。避難先のこの地で生きんがための方法をあれこれ考えて昨夜はよく眠れなかった.  
+</div>
+
+<h6> </h6>
 
 **⑤　ため(に) ◦ In order to**
 
@@ -25448,10 +25577,12 @@ reactable(
 
 ###### ために appends to verbs that include volition
 
-    ・西洋美術を勉強するためにイタリア語を習っています
-    ・田中さんはサッカーの試合に勝つために毎日10キロ走っています
-    ・国際会議に出席のため、ドイツのフランクフルトへ行きました
-    ・人は何のために生きているのだろう
+<div class = "expresstr">
+・西洋美術を勉強するためにイタリア語を習っています.    
+・田中さんはサッカーの試合に勝つために毎日10キロ走っています.   
+・国際会議に出席のため、ドイツのフランクフルトへ行きました.   
+・人は何のために生きているのだろう.  
+</div>
 
 <h6> </h6>
 
@@ -26073,13 +26204,17 @@ reactable(
 
 ###### Similar in meaning and usage to にしては , but わりに(は)is unique in that it poses problem of inappropriateness
 
-    ・わたしの母は、年を取っているわりには新しいことに意欲的です
-    ・きのうの講演会は、思ったわりには人が集まらなかった
-    ・このくつは値段が高いわりによく売れる
-    ・彼女は年齢のわりには若く見えます
-    ・今日は休日のわりに人が少ないね
-    ・この寿司は高い割にまずい
-    ・テストの勉強をしなかった割にはよく出来た
+<div class = "expresstr">
+・わたしの母は、年を取っているわりには新しいことに意欲的です.    
+・きのうの講演会は、思ったわりには人が集まらなかった.   
+・このくつは値段が高いわりによく売れる.   
+・彼女は年齢のわりには若く見えます.   
+・今日は休日のわりに人が少ないね.   
+・この寿司は高い割にまずい.   
+・テストの勉強をしなかった割にはよく出来た.    
+</div>
+
+<h6> </h6>
 
 **②　にしては◦ For・considering**
 
@@ -26089,12 +26224,14 @@ reactable(
 
 ###### For criticizing or evaluating outsiders; not often used about speaker
 
-    ・あの人は新入社員にしては、客の応対がうまい
-    ・彼は力士にしては体が小さい
-    ・この作品は文学賞を取った彼が書いたにしては、おもしろくない
-    ・このレポートは時間をかけて調査したにしては、詳しいデータが集まっていない
-    ・あの人は５０歳にしては、ずいぶん若く見える
-    ・彼は勉強しなかったにしては、いい点が取れた
+<div class = "expresstr">
+・あの人は新入社員にしては、客の応対がうまい.   
+・彼は力士にしては体が小さい.   
+・この作品は文学賞を取った彼が書いたにしては、おもしろくない.   
+・このレポートは時間をかけて調査したにしては、詳しいデータが集まっていない.   
+・あの人は５０歳にしては、ずいぶん若く見える.   
+・彼は勉強しなかったにしては、いい点が取れた.  
+</div>
 
 <h6> </h6>
 
