@@ -1702,9 +1702,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE, warning = FALSE}
 
-webshot::install_phantomjs(  version = "2.1.1",
-  baseURL = "https://github.com/wch/webshot/releases/download/v0.3.1/",
-  force = FALSE)
+webshot::install_phantomjs(  version = "2.1.1", baseURL = "https://github.com/wch/webshot/releases/download/v0.3.1/", force = FALSE)
 
 dfexmple.a <- dfexmple %>% select(W1) %>% rename(Words = W1)
 dfexmple.b <- dfexmple %>% select(W2) %>% rename(Words = W2)
@@ -1761,8 +1759,8 @@ datanw <- dat.a %>%
 datanw.a <- datanw %>% select(word, freq, spread) %>% slice(1:2000)
 datanw.c <- datanw %>% select(word, freq, spread) %>% slice(1:20)
 
-library(htmlwidgets)
-webshot::install_phantomjs()
+# library(htmlwidgets)
+# webshot::install_phantomjs()
 
 wd <- wordcloud2(dat, size=0.3, color=rep_len( c("#ab5852","#009FBD","#210062","#77037B","#00202e","#41644A","#263A29","#E86A33","#642915","#c7522a","#db836b","#e0a278","#e5c185","#233341","#74a892","#008585", "#5d659d","#c5b8cd","#211137","#8fb7cd","#143c7f","#143c7f","#967ba2","#7792d7"), nrow(demoFreq) ), backgroundColor="#f5f7f9", fontFamily = "RocknRoll One", hoverFunction = NULL, rotateRatio = 0.5)
 
@@ -1887,8 +1885,8 @@ webshot("tmp.html","fig_1.png", delay =5)
 <div class = "col-sm-8">
 
 ```{r, echo=FALSE, message=FALSE}
-library(htmlwidgets)
-webshot::install_phantomjs()
+# library(htmlwidgets)
+# webshot::install_phantomjs()
 
 knjwrdrd <- knjwrdrd[sample(1:nrow(knjwrdrd)),]
 
@@ -2879,8 +2877,8 @@ reactable(
 <div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE, warning = FALSE}
-library(htmlwidgets)
-webshot::install_phantomjs()
+# library(htmlwidgets)
+# webshot::install_phantomjs()
 
 td <- reactable(
   datanw.a, defaultColDef = colDef(show = FALSE),
@@ -2933,7 +2931,7 @@ td
 <div class = "col-sm-6">
 
 ```{r, echo=FALSE, message=FALSE, warning = FALSE}
-webshot::install_phantomjs()
+# webshot::install_phantomjs()
 
 p <- ggplot(datanw, dynamicTicks = TRUE, aes(x=spread, y=freq, colour=freq, text = paste(word))) + geom_point(aes(size = freq)) + scale_colour_gradient(low="#060047", high="#EB455F")
 p <- p + scale_y_reverse() + aes(ymin=-0.1)
@@ -4508,58 +4506,6 @@ reactable(
         tagList(
           div(style = list(fontSize = 50, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           div(style = list(fontSize = 12, fontWeight = 500, color = '#0F2040'), Meaning)
-        )
-      },
-    ),
-    Reading = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-### N3 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-scknj3.n <- scknj3  %>% slice(1:30)
-
-scknj3.n.w1 <- scknj3.n %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
-scknj3.n.w2 <- scknj3.n %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
-scknj3.n.w3 <- scknj3.n %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
-
-scknj3.nt <- bind_rows(scknj3.n.w1, scknj3.n.w2)
-scknj3.nt <- bind_rows(scknj3.nt, scknj3.n.w3)
-
-scknj3.nt <- scknj3.nt[sample(1:nrow(scknj3.nt)),]
-
-reactable(
-  scknj3.nt,
-  columns = list(
-    Words = colDef(align = "center", style= list(background = '#e0e1dd'),
-      cell = function(value, index) {
-        Meaning <- scknj3.nt$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        tagList(
-          div(style = list(fontSize = 50, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          # div(style = list(fontSize = 12, fontWeight = 500, color = '#0F2040'), Meaning)
         )
       },
     ),
@@ -8973,7 +8919,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE, warning = FALSE}
 # library(htmlwidgets)
-webshot::install_phantomjs()
+# webshot::install_phantomjs()
 
 dat.ax <- dat.a %>% slice(2000:8000)
 wd5 <- wordcloud2(dat.ax, size=0.15, color=rep_len( c("#ab5852","#009FBD","#210062","#77037B","#00202e","#41644A","#263A29","#E86A33","#642915","#c7522a","#db836b","#e0a278","#e5c185","#233341","#74a892","#008585", "#5d659d","#c5b8cd","#211137","#8fb7cd","#143c7f","#143c7f","#967ba2","#7792d7"), nrow(demoFreq) ), backgroundColor="#f5f7f9", fontFamily = "RocknRoll One", hoverFunction = NULL, rotateRatio = 0)
@@ -8994,7 +8940,7 @@ webshot("tmp4.html","fig_4.png", delay =20, vwidth = 1000)
 
 ```{r, echo=FALSE, message=FALSE, warning = FALSE}
 # library(htmlwidgets)
-webshot::install_phantomjs()
+# webshot::install_phantomjs()
 
 dat.ax <- dat.a %>% slice(8000:1200)
 wd3 <- wordcloud2(dat.ax, size=0.5, color=rep_len( c("#ab5852","#009FBD","#210062","#77037B","#00202e","#41644A","#263A29","#E86A33","#642915","#c7522a","#db836b","#e0a278","#e5c185","#233341","#74a892","#008585", "#5d659d","#c5b8cd","#211137","#8fb7cd","#143c7f","#143c7f","#967ba2","#7792d7"), nrow(demoFreq) ), backgroundColor="#f5f7f9", fontFamily = "RocknRoll One", hoverFunction = NULL, rotateRatio = 0.5)
@@ -40554,52 +40500,51 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-#### Set-Sense
+<!-- #### Set-Sense -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-setwrdss <- setwrdss[sample(1:nrow(setwrdss)),]
+<!-- setwrdss <- setwrdss[sample(1:nrow(setwrdss)),] -->
 
-reactable(
-  setwrdss,
-  columns = list(
-    Words = colDef(style= list(background = '#dee7e7'),
-      cell = function(value, index) {
-        # Reading <- jlptw.all.b$Reading[index]
-        # Reading <- if (!is.na(Reading)) Reading else ""
-        Meaning <- setwrdss$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        tagList(
-          div(style = list(fontSize = 50, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
-          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#026450'), Reading),
-          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning),
-        )
-      },
-      align = "center"
-    ),
-    Reading = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 280),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+<!-- reactable( -->
+<!--   setwrdss, -->
+<!--   columns = list( -->
+<!--     Words = colDef(style= list(background = '#dee7e7'), -->
+<!--       cell = function(value, index) { -->
+<!--         # Reading <- jlptw.all.b$Reading[index] -->
+<!--         # Reading <- if (!is.na(Reading)) Reading else "" -->
+<!--         Meaning <- setwrdss$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 50, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value), -->
+<!--           # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#026450'), Reading), -->
+<!--           # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Reading = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 280), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
-
+<!-- ``` -->
 
 ------------------------------------------------------------------------
 
