@@ -3930,7 +3930,7 @@ reactable(
 reactable(
   dlyrdg,
   columns = list(
-    Script = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
+    Script = colDef(style= list(background = '#f9f9f7'), html = TRUE, minWidth = 200,
       cell = function(value, index) {
         Translation <- dlyrdg$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
@@ -4009,7 +4009,7 @@ lstenscrpt.n3 <- lstenscrpt.n3[sample(1:nrow(lstenscrpt.n3)),]
 reactable(
   lstenscrpt.n3,
   columns = list(
-    N3.Script = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
+    N3.Script = colDef(style= list(background = '#f9f9f7'), html = TRUE, minWidth = 200,
       cell = function(value, index) {
         N3.Trans <- lstenscrpt.n3$N3.Trans[index]
         N3.Trans <- if (!is.na(N3.Trans)) N3.Trans else ""
@@ -4459,103 +4459,6 @@ reactable(
   defaultPageSize = 1,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 200),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-# <b> Realize </b> {.tabset}
-
-## Kanji {.tabset}
-
-### N3 {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-scknj3.n <- scknj3  %>% slice(1:30)
-
-scknj3.n.w1 <- scknj3.n %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
-scknj3.n.w2 <- scknj3.n %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
-scknj3.n.w3 <- scknj3.n %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
-
-scknj3.nt <- bind_rows(scknj3.n.w1, scknj3.n.w2)
-scknj3.nt <- bind_rows(scknj3.nt, scknj3.n.w3)
-
-scknj3.nt <- scknj3.nt[sample(1:nrow(scknj3.nt)),]
-
-reactable(
-  scknj3.nt,
-  columns = list(
-    Words = colDef(align = "center", style= list(background = '#e0e1dd'),
-      cell = function(value, index) {
-        Meaning <- scknj3.nt$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        tagList(
-          div(style = list(fontSize = 50, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          # div(style = list(fontSize = 12, fontWeight = 500, color = '#0F2040'), Meaning)
-        )
-      },
-    ),
-    Reading = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-### N2 {.tabset}
-
-------------------------------------------------------------------------
-
-### N1 {.tabset}
-
-------------------------------------------------------------------------
-
-## Words {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-imrtwrds <- imrtwrds %>% select(Questions)
-imrtwrds <- imrtwrds[sample(1:nrow(na.omit(imrtwrds))),] 
-imrtwrds <- imrtwrds[sample(1:nrow(imrtwrds)),]
-
-reactable(
-  na.omit(imrtwrds),
-  columns = list(
-    Questions = colDef(style= list(background = '#f9f9f7', fontSize = 16, fontWeight = 300, fontFamily = 'Helvetica Neue', color = '#01161e'), html = TRUE, align = "left")),
-  rowClass = "my-row",
-  defaultPageSize = 7,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 50),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -8026,5 +7929,104 @@ reactable(
 <!-- ``` -->
 
 <!-- <h6> </h6> -->
+
+------------------------------------------------------------------------
+
+# <b> Memorialize </b> {.tabset}
+
+### MZ.01: Decode-Explicit {.tabset}
+
+#### Kanji {.tabset}
+
+##### N3 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+scknj3.n <- scknj3  %>% slice(1:30)
+
+scknj3.n.w1 <- scknj3.n %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+scknj3.n.w2 <- scknj3.n %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+scknj3.n.w3 <- scknj3.n %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+
+scknj3.nt <- bind_rows(scknj3.n.w1, scknj3.n.w2)
+scknj3.nt <- bind_rows(scknj3.nt, scknj3.n.w3)
+
+scknj3.nt <- scknj3.nt[sample(1:nrow(scknj3.nt)),]
+
+reactable(
+  scknj3.nt,
+  columns = list(
+    Words = colDef(align = "center", style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        Meaning <- scknj3.nt$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 50, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 12, fontWeight = 500, color = '#0F2040'), Meaning)
+        )
+      },
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### N2 {.tabset}
+
+------------------------------------------------------------------------
+
+##### N1 {.tabset}
+
+------------------------------------------------------------------------
+
+#### Words {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+imrtwrds <- imrtwrds %>% select(Questions)
+imrtwrds <- imrtwrds[sample(1:nrow(na.omit(imrtwrds))),] 
+imrtwrds <- imrtwrds[sample(1:nrow(imrtwrds)),]
+
+reactable(
+  na.omit(imrtwrds),
+  columns = list(
+    Questions = colDef(style= list(background = '#f9f9f7', fontSize = 16, fontWeight = 300, fontFamily = 'Helvetica Neue', color = '#01161e'), html = TRUE, align = "left")),
+  rowClass = "my-row",
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 
