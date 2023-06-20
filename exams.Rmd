@@ -347,7 +347,7 @@ knjiqns<- read_csv("jpim/KNQTNS-QNS.csv")
 psggqns<- read_csv("jpim/PSGQTNS-QNS.csv")
 imrtwrds<- read_csv("jpim/IMMRT-QNS.csv")
 cooccurnx<- read_csv("cpdb/CRRXN-CRNS.csv")
-
+qsnn <- read_csv("jpim/EXMQTNN-QSNTN.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -4478,6 +4478,75 @@ reactable(
 )
 ```
 
+------------------------------------------------------------------------
+
+#### N0
+
+```{r, echo=FALSE, message=FALSE}
+
+# set.seed(3841)
+qsnn <- qsnn[sample(1:nrow(qsnn)),]
+
+reactable(
+  qsnn,
+  columns = list(
+       Question = colDef(
+         style= list(background = '#f0f0ed'),
+         #style = list(fontSize = "50px", fontWeight = 700), align = "center"
+         
+      #   style = JS("function(rowInfo, colInfo, state) {
+      #   var firstSorted = state.sorted[0]
+      #   if (!firstSorted || firstSorted.id === 'Question') {
+      #     var prevRow = state.pageRows[rowInfo.viewIndex - 1]
+      #     if (prevRow && rowInfo.row['Question'] === prevRow['Question']) {
+      #       return { visibility: 'Question' }
+      #     }
+      #   }
+      # }"),
+      cell = function(value, index) {
+        A <- qsnn$A[index]
+        A  <- if (!is.na(A )) A  else "Unknown"
+        B <- qsnn$B[index]
+        B  <- if (!is.na(B )) B  else "Unknown"
+        C <- qsnn$C[index]
+        C  <- if (!is.na(C )) C  else "Unknown"
+        D <- qsnn$D[index]
+        D  <- if (!is.na(D )) D  else "Unknown"
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 500, color = '#0F2040', fontFamily = 'Helvetica Neue'), "🆀 ", value),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(span(style = list(color = '#f9f9f7'), "."), span(style = list(fontSize = 14, fontWeight = 300, color = '#0F2040', fontFamily = 'Helvetica Neue'), A, " ", B, " ", C, " ", D)),
+        )
+      },
+      align = "left", minWidth = 400
+      ),
+      A = colDef(show = FALSE),
+      B = colDef(show = FALSE),
+      C = colDef(show = FALSE),
+      D = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+    outlined = TRUE, defaultPageSize = 3, compact = FALSE, highlight = TRUE, fullWidth = TRUE,
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers",
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px"),
+    theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      # "&:hover[aria-sort]" = list(background = "hsl(0, 0%, 96%)"),
+      # "&[aria-sort='ascending'], &[aria-sort='descending']" = list(background = "hsl(0, 0%, 96%)"),
+      # borderColor = "#555", 
+      height = 30, fontSize = "11px"
+    )
+  )
+)
+```
 
 ------------------------------------------------------------------------
 
