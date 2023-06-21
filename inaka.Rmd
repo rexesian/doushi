@@ -2802,7 +2802,7 @@ reactable(
 syntxm.a <- syntxm
 # syntxm.a <- syntxm.a %>% slice(196:200)
 syntxm.a <- syntxm.a %>% na.omit(syntxm.a)
-# syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),]
+syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),]
 
 htmltools::browsable(
   tagList(
@@ -2841,7 +2841,7 @@ reactable(
         Spanish <- syntxm.a$Spanish[index]
         Spanish <- if (!is.na(Spanish)) Spanish else ""
         tagList(
-          div(style = list(fontSize = 22, fontWeight = 900, color = '#0F2040', fontFamily = 'Righteous'), value),
+          div(style = list(fontSize = 18, fontWeight = 900, color = '#0F2040', fontFamily = 'Righteous'), value),
           div(style = list(fontSize = 13, fontWeight = 500, color = '#941b0c'), Expression),
           div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure),
           div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks),
@@ -25037,53 +25037,67 @@ reactable(
   grmrusl,
   columns = list(
     Expression = colDef(style= list(background = '#edede9'),
-      minWidth = 80,
+      minWidth = 150,
       cell = function(value, index) {
         Meaning <- grmrusl$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentence <- grmrusl$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else ""
-        Translation <- grmrusl$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
+        Meaning.1 <- grmrusl$Meaning.1[index]
+        Meaning.1 <- if (!is.na(Meaning.1)) Meaning.1 else ""
+        Meaning.2 <- grmrusl$Meaning.2[index]
+        Meaning.2 <- if (!is.na(Meaning.2)) Meaning.2 else ""
+        # Sentence <- grmrusl$Sentence[index]
+        # Sentence <- if (!is.na(Sentence)) Sentence else ""
+        # Translation <- grmrusl$Translation[index]
+        # Translation <- if (!is.na(Translation)) Translation else ""
+        Structure <- grmrusl$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
         Remark <- grmrusl$Remark[index]
         Remark <- if (!is.na(Remark)) Remark else ""
         tagList(
           div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
           div(style = list(fontSize = 15, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Remark),
-          div(style = list(fontSize = 12, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.1),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.2),
           div(style = list(fontSize = 1, color = '#edede9'), "."),
           div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), Sentence),
-          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Structure),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), Sentence),
+          # div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
         )
       },
       align = "center"
     ),
-    # Sentence = colDef(style= list(background = '#e0e1dd'),
-    #   minWidth = 150,
-    #   cell = function(value, index) {
-    #     Translation <- grmrusl$Translation[index]
-    #     Translation <- if (!is.na(Translation)) Translation else ""
-    #     tagList(
-    #       div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
-    #       div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
-    #     )
-    #   },
-    #   align = "left"
-    # ),
+    Sentence = colDef(style= list(background = '#e0e1dd'),
+      minWidth = 250,
+      cell = function(value, index) {
+        Translation <- grmrusl$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
+        )
+      },
+      align = "left"
+    ),
     Remark = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
+    Meaning.1 = colDef(show = FALSE),
+    Meaning.2 = colDef(show = FALSE),
+    Structure = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 260),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -25095,6 +25109,82 @@ reactable(
   showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Class {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+syntxm.a <- syntxm
+# syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),]
+
+reactable(
+  syntxm.a,
+  columns = list(
+    Meaning = colDef(style= list(background = '#edede9'),
+      cell = function(value, index) {
+        Expression <- syntxm.a$Expression[index]
+        Expression <- if (!is.na(Expression)) Expression else ""
+        Structure <- syntxm.a$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        Sentence <- syntxm.a$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Korean <- syntxm.a$Korean[index]
+        Korean <- if (!is.na(Korean)) Korean else ""
+        English <- syntxm.a$English[index]
+        English <- if (!is.na(English)) English else ""
+        Remarks <- syntxm.a$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        Spanish <- syntxm.a$Spanish[index]
+        Spanish <- if (!is.na(Spanish)) Spanish else ""
+        tagList(
+          div(style = list(fontSize = 18, fontWeight = 900, color = '#0F2040', fontFamily = 'Righteous'), value),
+          div(style = list(fontSize = 13, fontWeight = 500, color = '#941b0c'), Expression),
+          div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          div(style = list(fontSize = 16, fontWeight = 400, color = '#0F2040'), Korean),
+          div(style = list(fontSize = 11, fontWeight = 400, color = '#0F2040'), English),
+          div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
+        )
+      },
+      align = "center"
+    ),
+    
+    Expression = colDef(show = FALSE),
+    Structure = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    Korean = colDef(show = FALSE),
+    English = colDef(show = FALSE),
+    Spanish = colDef(show = FALSE),
+    Level = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    # Vertically center cells
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 260, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 
 ```
@@ -25561,7 +25651,7 @@ reactable(
 
 ##### Sequential.Events
 
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① てはじめて◦ It is・was not until.. that・Not until・Only after**</p>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① てはじめて ◦ It is・was not until.. that・Not until・Only after**</p>
 
 <div class = "add_info">
 **⚭　Vte + hajimete**      
@@ -25581,7 +25671,7 @@ reactable(
 
 <h6> </h6>
 
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② 上で◦ After having・Upon・After**</p>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② 上で ◦ After having・Upon・After**</p>
 
 <div class = "add_info">
 **⚭ Vplain・Vta・N+no + uede**      
@@ -25603,11 +25693,113 @@ reactable(
 
 <h6> </h6>
 
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**③ ていらい ◦ Since・Ever since**</p>
+
+<div class = "add_info">
+**⚭ Vte・N + irai**      
+・Certain state continues after action is completed.      
+・Cannot be used for the near past.        
+・It cannot be used for the future.         
+・Not used when later action occurs only once.    
+・Gives a nuance that it has been continuously going on since it was in the past.         
+</div>
+
+<div class = "expresstrz">
+・一人暮らしを始めて以来ずっと外食が続いているす.    
+・あの画家の絵を見て以来あの画家にすっかり夢中になっています.    
+・来日以来父の友人のお宅にホームステイしています.   
+・結婚して以来一度も合コンしていない.   
+・この映画を見て以来ずっと彼のファンです.    
+・東京へ引っ越して以来実家の両親に連絡していない.    
+・日本に来て以来私はこの街にずっと住んでいるす.   
+・入院を経験して以来健康には気をつけるようにしています.   
+・当社は設立以来毎年業績が右肩上がりだ.  
+・妊娠以来私はお酒を飲んでいない.     
+・これは独立以来初めての上方成長であった.    
+・京都大学設立以来のキャンパスである.     
+</div>
+
+<h6> </h6>
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**④ てからは ◦ Since・Ever since**</p>
+
+<div class = "add_info">
+**⚭ Vte + kara wa**      
+・A condition has continued since advent of certain action.      
+・Nearly same meaning as ていらい.        
+・It cannot be used for independent events unlike てから.         
+</div>
+
+<div class = "expresstrz">
+・先月禁煙してからは１度もたばこを吸っていません.    
+・毎日飲んでいた薬を止めてからはかえって食欲も出て元気に過ごしています.    
+・就職してからは旅行に行くチャンスがありません.   
+・２年前に社会人になってからは、ひまな時間はほとんどありませんい.   
+</div>
+
+<h6> </h6>
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**⑤ てからでないと ◦ Until・Unless・Not until after・If not after**</p>
+
+<div class = "add_info">
+**⚭ Vte + kara de naito**      
+・Something must be done first before something else can be done.      
+・Phrases showing difficulty or impossibility follow.        
+・An expression used when you want to say that it is difficult to do a subsequent matter only after you have done a previous matter.       
+</div>
+
+<div class = "expresstrz">
+・野菜を生で食べるならよく洗ってからでないと農薬が心配だ.    
+・現物を見てからでないと買うかどうか決めることはできません.    
+・部長に承認をもらってからでないと見積書を提示することはできません.   
+・きちんと証拠を掴んでからでないとあの男を逮捕することはできない.   
+・グループは空にしてからでないと削除できせん.    
+・このモデルはある程度読者と翻訳者が増えてからでないとうまく回りません.    
+・地域か地区は先にサイトを選択してからでないと選択できません.   
+</div>
+
+<h6> </h6>
+
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**⑥ てからでなければ ◦ Until・Unless・Not until after・If not after**</p>
+
+<div class = "add_info">
+**⚭ Vte + kara de nakereba**      
+・Something must be done first before something else can be done.      
+・Phrases showing difficulty or impossibility follow.        
+・An expression used when you want to say that it is difficult to do a subsequent matter only after you have done a previous matter.       
+</div>
+
+<div class = "expresstrz">
+・そのことについてはよく調査してからでなければ責任ある説明はできない.    
+・契約書の内容をきちんと確認してからでなければサインすることはできません.    
+・追加のステップを実行してからでなければデータベースをリカバリできなくなる可能性があります.   
+</div>
+
+<h6> </h6>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**⑦ てからというものは ◦ Since・From the time**</p>
+
+<div class = "add_info">
+**⚭ Vte + kara toiu mono (wa)**      
+・Something creates a chance for a situation after some action or event.       
+・Express an emotion about a dramatic change that occurs later.        
+・Meaning and usage of てからは is nearly the same but with the addition of というもの makes it exclamatory.       
+</div>
+
+<div class = "expresstrz">
+・たばこを止めてからというもの食欲が出て体の調子がとてもいい.    
+・新学期が始まってからというものとっても忙しいのです.    
+・僕がここに来てからというもの彼はとても良い形で迎えてくれた.    
+・ビールをやめてからというものすこぶる体調が良いのでいい気になっています.      
+・あの本を読んでからというものはどう生きるべきかについて考えない日はない.    
+</div>
+
+<h6> </h6>
+
 ------------------------------------------------------------------------
 
 ##### Progressive.Events
 
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① 一方だ◦ Will just continue・More and more・Continue to**</p>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① 一方だ ◦ Will just continue・More and more・Continue to**</p>
 
 <div class = "add_info">
 **⚭　Vru + ippouda**      
@@ -25629,7 +25821,7 @@ reactable(
 
 <h6> </h6>
 
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② ばかりだ◦ Just continues to**</p>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② ばかりだ ◦ Just continues to**</p>
 
 <div class = "add_info">
 **⚭ Vru + bakari da**      
@@ -25645,7 +25837,7 @@ reactable(
 
 <h6> </h6>
 
-<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**③ つつある◦ Be doing・To be in the process of doing**</p>
+<p style="font-size:13px; line-height: 0.5; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**③ つつある ◦ Be doing・To be in the process of doing**</p>
 
 <div class = "add_info">
 **⚭ Vnoun-stem + tsutsu aru**      
@@ -31287,11 +31479,11 @@ You can replace **nanka** with **nante** The meaning and nuances are pretty exac
 ##### Tendency
 
 <div class = "highlight">
-◦ がち　　　　　　　・Liable to, Prone to, Tend to
-◦ っぽい　　　　　　・Somewhat, -ish
-◦ ぎみ　　　　　　　・Be a little, Have a touch of, -looking
-◦ きらいがある　　　・Be liable to, Be inclined to, Have a tendency to
-◦ めく　　　　　　　・Take on the air of, Seems, Show signs of
+◦ がち　　　　　　　・Liable to, Prone to, Tend to      
+◦ っぽい　　　　　　・Somewhat, -ish      
+◦ ぎみ　　　　　　　・Be a little, Have a touch of, -looking     
+◦ きらいがある　　　・Be liable to, Be inclined to, Have a tendency to      
+◦ めく　　　　　　　・Take on the air of, Seems, Show signs of    
 </div>
 
 <h6> </h6>
@@ -31342,16 +31534,16 @@ You can replace **nanka** with **nante** The meaning and nuances are pretty exac
 ##### Wishes
 
 <div class = "highlight">
-◦ がほしい　　　　　・I want a
-◦ たい　　　　　　　・I want to
-◦ がる　　　　　　　・Eager to, Tends to
-◦ たらいい　　　　　・It would be nice if
-◦ といい　　　　　　・Hope that, Would be good if
-◦ ばいい　　　　　　・Hope that, Would be good if
-◦ てほしい　　　　　・Want to happen or be done
-◦ てほしいものだ　　・Really wish
-◦ たいものだ　　　　・I really want to
-◦ ないものか　　　　・Isn’t there some way?
+◦ がほしい　　　　　・I want a     
+◦ たい　　　　　　　・I want to    
+◦ がる　　　　　　　・Eager to, Tends to    
+◦ たらいい　　　　　・It would be nice if   
+◦ といい　　　　　　・Hope that, Would be good if   
+◦ ばいい　　　　　　・Hope that, Would be good if   
+◦ てほしい　　　　　・Want to happen or be done   
+◦ てほしいものだ　　・Really wish   
+◦ たいものだ　　　　・I really want to   
+◦ ないものか　　　　・Isn’t there some way?    
 </div>
 
 <h6> </h6>
@@ -31397,15 +31589,15 @@ You can replace **nanka** with **nante** The meaning and nuances are pretty exac
 ##### Volition
 
 <div class = "highlight">
-◦ つもりだ　　　　　・Intends to
-◦ よう　　　　　　　・I think I will, I'll do, Let’s do
-◦ ようとおもう　　　・I think I will
-◦ ようとする　　　　・Just when about to, Try to, Attempt to
-◦ ようにする　　　　・Make a point of, Try to
-◦ ようとしない　　　・Doesn’t even think about, Not make an effort to
-◦ つもりだ　　　　　・Supposed to be, But
-◦ まい　　　　　　　・I will never, Will not, Will probably not
-◦ ようか〜まいか　　・Whether to..or not
+◦ つもりだ　　　　　・Intends to     
+◦ よう　　　　　　　・I think I will, I'll do, Let’s do    
+◦ ようとおもう　　　・I think I will    
+◦ ようとする　　　　・Just when about to, Try to, Attempt to   
+◦ ようにする　　　　・Make a point of, Try to   
+◦ ようとしない　　　・Doesn’t even think about, Not make an effort to   
+◦ つもりだ　　　　　・Supposed to be, But   
+◦ まい　　　　　　　・I will never, Will not, Will probably not   
+◦ ようか〜まいか　　・Whether to..or not   
 </div>
 
 <h6> </h6>
@@ -31449,10 +31641,10 @@ You can replace **nanka** with **nante** The meaning and nuances are pretty exac
 ##### Stative
 
 <div class = "highlight">
-◦ になる　　　　　　・Become
-◦ ようになる　　　　・Become such that, Start to do
-◦ てくる　　　　　　・Has become, It's getting
-◦ ことがある　　　　・There are times
+◦ になる　　　　　　・Become       
+◦ ようになる　　　　・Become such that, Start to do    
+◦ てくる　　　　　　・Has become, It's getting    
+◦ ことがある　　　　・There are times   
 </div>
 
 <h6> </h6>
@@ -31486,10 +31678,10 @@ You can replace **nanka** with **nante** The meaning and nuances are pretty exac
 ##### Determine
 
 <div class = "highlight">
-◦ にする　　　　　　・Will have, Decide on
-◦ ことにする　　　　・Make up one’s mind to, I decide to
-◦ ことになる　　　　・Has been decide that
-◦ ことになっている　・The case that, The custom that
+◦ にする　　　　　　・Will have, Decide on    
+◦ ことにする　　　　・Make up one’s mind to, I decide to    
+◦ ことになる　　　　・Has been decide that    
+◦ ことになっている　・The case that, The custom that    
 </div>
 
 <h6> </h6>
@@ -36436,81 +36628,81 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-##### Patterns {.tabset}
+<!-- ##### Patterns {.tabset} -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-syntxm.a <- syntxm
-syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),]
+<!-- syntxm.a <- syntxm -->
+<!-- syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),] -->
 
-reactable(
-  syntxm.a,
-  columns = list(
-    Meaning = colDef(style= list(background = '#edede9'),
-      cell = function(value, index) {
-        Expression <- syntxm.a$Expression[index]
-        Expression <- if (!is.na(Expression)) Expression else ""
-        Structure <- syntxm.a$Structure[index]
-        Structure <- if (!is.na(Structure)) Structure else ""
-        Sentence <- syntxm.a$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else ""
-        Korean <- syntxm.a$Korean[index]
-        Korean <- if (!is.na(Korean)) Korean else ""
-        English <- syntxm.a$English[index]
-        English <- if (!is.na(English)) English else ""
-        Remarks <- syntxm.a$Remarks[index]
-        Remarks <- if (!is.na(Remarks)) Remarks else ""
-        Spanish <- syntxm.a$Spanish[index]
-        Spanish <- if (!is.na(Spanish)) Spanish else ""
-        tagList(
-          div(style = list(fontSize = 22, fontWeight = 900, color = '#0F2040', fontFamily = 'Righteous'), value),
-          div(style = list(fontSize = 13, fontWeight = 500, color = '#941b0c'), Expression),
-          div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 16, fontWeight = 400, color = '#0F2040'), Korean),
-          div(style = list(fontSize = 11, fontWeight = 400, color = '#0F2040'), English),
-          div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
-        )
-      },
-      align = "center"
-    ),
-    
-    Expression = colDef(show = FALSE),
-    Structure = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE),
-    Remarks = colDef(show = FALSE),
-    Korean = colDef(show = FALSE),
-    English = colDef(show = FALSE),
-    Spanish = colDef(show = FALSE),
-    Level = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
+<!-- reactable( -->
+<!--   syntxm.a, -->
+<!--   columns = list( -->
+<!--     Meaning = colDef(style= list(background = '#edede9'), -->
+<!--       cell = function(value, index) { -->
+<!--         Expression <- syntxm.a$Expression[index] -->
+<!--         Expression <- if (!is.na(Expression)) Expression else "" -->
+<!--         Structure <- syntxm.a$Structure[index] -->
+<!--         Structure <- if (!is.na(Structure)) Structure else "" -->
+<!--         Sentence <- syntxm.a$Sentence[index] -->
+<!--         Sentence <- if (!is.na(Sentence)) Sentence else "" -->
+<!--         Korean <- syntxm.a$Korean[index] -->
+<!--         Korean <- if (!is.na(Korean)) Korean else "" -->
+<!--         English <- syntxm.a$English[index] -->
+<!--         English <- if (!is.na(English)) English else "" -->
+<!--         Remarks <- syntxm.a$Remarks[index] -->
+<!--         Remarks <- if (!is.na(Remarks)) Remarks else "" -->
+<!--         Spanish <- syntxm.a$Spanish[index] -->
+<!--         Spanish <- if (!is.na(Spanish)) Spanish else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 22, fontWeight = 900, color = '#0F2040', fontFamily = 'Righteous'), value), -->
+<!--           div(style = list(fontSize = 13, fontWeight = 500, color = '#941b0c'), Expression), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence), -->
+<!--           div(style = list(fontSize = 16, fontWeight = 400, color = '#0F2040'), Korean), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 400, color = '#0F2040'), English), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
 
-```
+<!--     Expression = colDef(show = FALSE), -->
+<!--     Structure = colDef(show = FALSE), -->
+<!--     Sentence = colDef(show = FALSE), -->
+<!--     Remarks = colDef(show = FALSE), -->
+<!--     Korean = colDef(show = FALSE), -->
+<!--     English = colDef(show = FALSE), -->
+<!--     Spanish = colDef(show = FALSE), -->
+<!--     Level = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     # Vertically center cells -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", highlight = TRUE, -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 ------------------------------------------------------------------------
 
