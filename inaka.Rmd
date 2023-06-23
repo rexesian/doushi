@@ -24971,218 +24971,6 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Basics {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-# cvnptn <- cvnptn[sample(1:nrow(cvnptn)),]
-
-reactable(
-  cvnptn,
-  columns = list(
-    Concept = colDef(style= list(background = '#edede9'), minWidth = 250,
-      cell = function(value, index) {
-        Meaning <- cvnptn$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Structure <- cvnptn$Structure[index]
-        Structure <- if (!is.na(Structure)) Structure else ""
-        Remarks <- cvnptn$Remarks[index]
-        Remarks <- if (!is.na(Remarks)) Remarks else ""
-        S.Remarks <- cvnptn$S.Remarks[index]
-        S.Remarks <- if (!is.na(S.Remarks)) S.Remarks else ""
-        R.Remarks <- cvnptn$R.Remarks[index]
-        R.Remarks <- if (!is.na(R.Remarks)) R.Remarks else ""
-        Info <- cvnptn$Info[index]
-        Info <- if (!is.na(Info)) Info else ""
-        tagList(
-          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 12, fontWeight = 500, color = '#800000', fontFamily = 'Righteous'), Meaning),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Remarks),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), S.Remarks),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), R.Remarks),
-          div(style = list(fontSize = 9, color = '#8C8C8C'), Info),
-          div(style = list(fontSize = 10, fontWeight = 500, color = '#008000'), Structure),
-        )
-      },
-      align = "center"
-    ),
-    Sentences = colDef(style= list(background = '#e0e1dd'),
-      minWidth = 400,
-      cell = function(value, index) {
-        T1 <- cvnptn$T1[index]
-        T1 <- if (!is.na(T1)) T1 else ""
-        S2 <- cvnptn$S2[index]
-        S2 <- if (!is.na(S2)) S2 else ""
-        T2 <- cvnptn$T2[index]
-        T2 <- if (!is.na(T2)) T2 else ""
-        S3 <- cvnptn$S3[index]
-        S3 <- if (!is.na(S3)) S3 else ""
-        T3 <- cvnptn$T3[index]
-        T3 <- if (!is.na(T3)) T3 else ""
-        S4 <- cvnptn$S4[index]
-        S4 <- if (!is.na(S4)) S4 else ""
-        T4 <- cvnptn$T4[index]
-        T4 <- if (!is.na(T4)) T4 else ""
-        S5 <- cvnptn$S5[index]
-        S5 <- if (!is.na(S5)) S5 else ""
-        T5 <- cvnptn$T5[index]
-        T5 <- if (!is.na(T5)) T5 else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
-          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040'), T1),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S2),
-          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040'), T2),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S3),
-          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040'), T3),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S4),
-          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040'), T4),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 1), "."),
-          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S5),
-          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040'), T5),
-        )
-      },
-      align = "left"
-    ),
-    Meaning = colDef(show = FALSE),
-    Structure = colDef(show = FALSE),
-    Remarks = colDef(show = FALSE),
-    S.Remarks = colDef(show = FALSE),
-    R.Remarks = colDef(show = FALSE),
-    Info = colDef(show = FALSE),
-    Sentences = colDef(show = FALSE),
-    T1 = colDef(show = FALSE),
-    S2 = colDef(show = FALSE),
-    T2 = colDef(show = FALSE),
-    S3 = colDef(show = FALSE),
-    T3 = colDef(show = FALSE),
-    S4 = colDef(show = FALSE),
-    T4 = colDef(show = FALSE),
-    S5 = colDef(show = FALSE),
-    T5 = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 260),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", resizable = TRUE, wrap = FALSE, striped = TRUE, highlight = TRUE,
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-#### Usual {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-# grmrusl <- grmrusl[sample(1:nrow(grmrusl)),]
-
-reactable(
-  grmrusl,
-  columns = list(
-    Expression = colDef(style= list(background = '#edede9'),
-      minWidth = 250,
-      cell = function(value, index) {
-        Meaning <- grmrusl$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Meaning.1 <- grmrusl$Meaning.1[index]
-        Meaning.1 <- if (!is.na(Meaning.1)) Meaning.1 else ""
-        Meaning.2 <- grmrusl$Meaning.2[index]
-        Meaning.2 <- if (!is.na(Meaning.2)) Meaning.2 else ""
-        # Sentence <- grmrusl$Sentence[index]
-        # Sentence <- if (!is.na(Sentence)) Sentence else ""
-        # Translation <- grmrusl$Translation[index]
-        # Translation <- if (!is.na(Translation)) Translation else ""
-        Structure <- grmrusl$Structure[index]
-        Structure <- if (!is.na(Structure)) Structure else ""
-        Remark <- grmrusl$Remark[index]
-        Remark <- if (!is.na(Remark)) Remark else ""
-        tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
-          div(style = list(fontSize = 15, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Remark),
-          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning),
-          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.1),
-          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.2),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Structure),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), Sentence),
-          # div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
-        )
-      },
-      align = "center"
-    ),
-    Sentence = colDef(style= list(background = '#e0e1dd'),
-      minWidth = 400,
-      cell = function(value, index) {
-        Translation <- grmrusl$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
-          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
-        )
-      },
-      align = "left"
-    ),
-    Remark = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Meaning.1 = colDef(show = FALSE),
-    Meaning.2 = colDef(show = FALSE),
-    Structure = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 260),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
 #### Usage {.tabset}
 
 ##### Time.Relation
@@ -27523,6 +27311,218 @@ reactable(
 </div>
 
 <h6> </h6>
+
+------------------------------------------------------------------------
+
+#### Basic {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# cvnptn <- cvnptn[sample(1:nrow(cvnptn)),]
+
+reactable(
+  cvnptn,
+  columns = list(
+    Concept = colDef(style= list(background = '#edede9'), minWidth = 250,
+      cell = function(value, index) {
+        Meaning <- cvnptn$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Structure <- cvnptn$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- cvnptn$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        S.Remarks <- cvnptn$S.Remarks[index]
+        S.Remarks <- if (!is.na(S.Remarks)) S.Remarks else ""
+        R.Remarks <- cvnptn$R.Remarks[index]
+        R.Remarks <- if (!is.na(R.Remarks)) R.Remarks else ""
+        Info <- cvnptn$Info[index]
+        Info <- if (!is.na(Info)) Info else ""
+        tagList(
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 500, color = '#800000', fontFamily = 'Righteous'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Remarks),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), S.Remarks),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), R.Remarks),
+          div(style = list(fontSize = 9, color = '#8C8C8C'), Info),
+          div(style = list(fontSize = 10, fontWeight = 500, color = '#008000'), Structure),
+        )
+      },
+      align = "center"
+    ),
+    Sentences = colDef(style= list(background = '#e0e1dd'),
+      minWidth = 400,
+      cell = function(value, index) {
+        T1 <- cvnptn$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- cvnptn$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- cvnptn$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        S3 <- cvnptn$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        T3 <- cvnptn$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        S4 <- cvnptn$S4[index]
+        S4 <- if (!is.na(S4)) S4 else ""
+        T4 <- cvnptn$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
+        S5 <- cvnptn$S5[index]
+        S5 <- if (!is.na(S5)) S5 else ""
+        T5 <- cvnptn$T5[index]
+        T5 <- if (!is.na(T5)) T5 else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040'), T1),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S2),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040'), T2),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S3),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040'), T3),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S4),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040'), T4),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S5),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040'), T5),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE),
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S.Remarks = colDef(show = FALSE),
+    R.Remarks = colDef(show = FALSE),
+    Info = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    S4 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
+    S5 = colDef(show = FALSE),
+    T5 = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 260),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", resizable = TRUE, wrap = FALSE, striped = TRUE, highlight = TRUE,
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Usual {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# grmrusl <- grmrusl[sample(1:nrow(grmrusl)),]
+
+reactable(
+  grmrusl,
+  columns = list(
+    Expression = colDef(style= list(background = '#edede9'),
+      minWidth = 250,
+      cell = function(value, index) {
+        Meaning <- grmrusl$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Meaning.1 <- grmrusl$Meaning.1[index]
+        Meaning.1 <- if (!is.na(Meaning.1)) Meaning.1 else ""
+        Meaning.2 <- grmrusl$Meaning.2[index]
+        Meaning.2 <- if (!is.na(Meaning.2)) Meaning.2 else ""
+        # Sentence <- grmrusl$Sentence[index]
+        # Sentence <- if (!is.na(Sentence)) Sentence else ""
+        # Translation <- grmrusl$Translation[index]
+        # Translation <- if (!is.na(Translation)) Translation else ""
+        Structure <- grmrusl$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        Remark <- grmrusl$Remark[index]
+        Remark <- if (!is.na(Remark)) Remark else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
+          div(style = list(fontSize = 15, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Remark),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.1),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.2),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Structure),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), Sentence),
+          # div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
+        )
+      },
+      align = "center"
+    ),
+    Sentence = colDef(style= list(background = '#e0e1dd'),
+      minWidth = 400,
+      cell = function(value, index) {
+        Translation <- grmrusl$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Remark = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Meaning.1 = colDef(show = FALSE),
+    Meaning.2 = colDef(show = FALSE),
+    Structure = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 260),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
