@@ -4554,18 +4554,20 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-psggqns <- psggqns %>% select(Questions)
+psggqns <- psggqns %>% select(Questions, Translation)
 psggqns <- psggqns[sample(1:nrow(na.omit(psggqns))),] 
 psggqns <- psggqns[sample(1:nrow(psggqns)),]
 
 reactable(
   na.omit(psggqns),
   columns = list(
-    Questions = colDef(style= list(background = '#f0f0ed', fontSize = 16, fontWeight = 300, fontFamily = 'Helvetica Neue', color = '#01161e'), html = TRUE, align = "left")),
+    Questions = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd', lineHeight = 2)),
+    Translation = colDef(minWidth = 80, align = "left", html = TRUE, style = list(fontSize = 11, fontWeight = 200, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#edede9', lineHeight = 2))
+  ),
   rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 200),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
