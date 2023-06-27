@@ -186,7 +186,7 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
   font-size: 12px;
   font-weight: 400;
   font-family: 'Open Sans';
-  background-color: #e0e1dd;
+  background-color: #e6e7e3;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 8px;
@@ -210,7 +210,7 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
   font-size: 16px;
   font-weight: 600;
   font-family: 'Open Sans';
-  background-color: #edede9;
+  background-color: #e0e1dd;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 8px;
@@ -222,12 +222,25 @@ div.expresstrxc { outline-style: solid; outline-color: #0F2040; outline-width: 1
   font-size: 12px;
   font-weight: 300;
   font-family: 'Open Sans';
-  background-color: #e0e1dd;
+  background-color: #edede9;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 8px;
   padding-bottom: 8px;
 }
+
+.detail-des_func_h {
+  color: 	#253f41;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: 'Open Sans';
+  background-color: #edede9;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
 div.add_info {
   padding-top: 0px; 
   padding-bottom: 0px;
@@ -502,7 +515,7 @@ connectors <- read_csv("jpdb/CONNECT-CONNECTORS.csv")
 ## Version
 
 <div class = "highlight-ur">
-・Version 🆅.3.7
+・Version 🆅.3.8
 </div>
 
 ------------------------------------------------------------------------
@@ -1931,7 +1944,7 @@ knjwrdrd <- knjwrdrd[sample(1:nrow(knjwrdrd)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "kanji-level-filter"),
+      div(class = "chartz", tags$label("【Level】", `for` = "kanji-level-filter"),
       # div(
         tags$select(
           id = "kanji-level-filter",
@@ -2002,19 +2015,15 @@ reactable(
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%"
-    )
-    # headerStyle = list(
-    #   backgroundColor = "#F4F5DE",
-    #   color = "hsl(0, 0%, 95%)",
-    #   fontSize = 0.1,
-    #   fontWeight = 100,
-    #   fontFamily = 'Open Sans',
-    #   fontSize = "0.1rem",
-    #   letterSpacing = "1px",
-    #   textTransform = "lowercase",
-    #   padding = "0px",
-    #   "&:hover, &:focus" = list(color = '#ffff00')
-    # ),
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
   
@@ -2049,7 +2058,7 @@ dliwrd.a <- dliwrd.a[sample(1:nrow(dliwrd.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "words-level-filter"),
+      div(class = "chartz", tags$label("【Level】", `for` = "words-level-filter"),
       # div(
         tags$select(
           id = "words-level-filter",
@@ -2074,8 +2083,8 @@ reactable(
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
           div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)),
-          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentences),
-          div(style = list(fontSize = 10, fontWeight = 300, color = '#101010', fontFamily = 'Open Sans'), Translation),
+          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Zen Kaku Gothic New'), Sentences),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#101010', fontFamily = 'Zen Kaku Gothic New'), Translation),
         )
       },
       align = "left"
@@ -2095,9 +2104,17 @@ reactable(
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%"
-    )
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 390,
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 372,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
   )
@@ -2121,7 +2138,7 @@ cmmpassc.a <- cmmpassc.a[sample(1:nrow(cmmpassc.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "assoc-level-filter"),
+      div(class = "chartz", tags$label("【Level】", `for` = "assoc-level-filter"),
       # div(
         tags$select(
           id = "assoc-level-filter",
@@ -2169,15 +2186,23 @@ reactable(
   defaultPageSize = 50,
   elementId = "assoc-filter-table",
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 64),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 66),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%"
-    )
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 390,
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 372,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
   )
@@ -2205,7 +2230,7 @@ cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "verb-level-filter"),
+      div(class = "chartz", tags$label("【Level】", `for` = "verb-level-filter"),
       # div(
         tags$select(
           id = "verb-level-filter",
@@ -2253,9 +2278,17 @@ reactable(
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%"
-    )
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 390,
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
   )
@@ -2276,7 +2309,7 @@ cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "verbb-level-filter"),
+      div(class = "chartz", tags$label("【Level】", `for` = "verbb-level-filter"),
       # div(
         tags$select(
           id = "verbb-level-filter",
@@ -2317,13 +2350,21 @@ reactable(
   defaultPageSize = 1,
   elementId = "verbb-filter-table",
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 317),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 320),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%"
-    )
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
   
@@ -2388,7 +2429,7 @@ dliphr.a <- dliphr.a[sample(1:nrow(dliphr.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "phrases-level-filter"),
+      div(class = "chartz", tags$label("【Level】", `for` = "phrases-level-filter"),
       # div(
         tags$select(
           id = "phrases-level-filter",
@@ -2434,9 +2475,17 @@ reactable(
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%"
-    )
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 390,
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
   )
@@ -2470,7 +2519,7 @@ cmmpnflct.a <- cmmpnflct.a[sample(1:nrow(cmmpnflct.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "chart", tags$label("Level:", `for` = "inflect-level-filter"),
+      div(class = "chartz", tags$label("【Level】", `for` = "inflect-level-filter"),
       # div(
         tags$select(
           id = "inflect-level-filter",
@@ -2522,9 +2571,17 @@ reactable(
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%"
-    )
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 340,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3267,7 +3324,7 @@ reactable(
     tagList(
       div(
         # htmltools::div(style = list(padding = 6, fontSize = 15, fontWeight = 400, color = '#1f1e22', fontFamily = 'Zen Kaku Gothic New', background = '#f5f5f5'), "・ ", Translation)
-        htmltools::div(style = list(padding = 6, fontSize = 19, fontWeight = 400, color = '#0F2040', fontFamily = 'RocknRoll One', background = '#f5f5f5'), "・ ", Expression)
+        htmltools::div(style = list(padding = 6, fontSize = 17, fontWeight = 400, color = '#0F2040', fontFamily = 'RocknRoll One', background = '#f5f5f5'), "・ ", Expression)
       )
     )
   },
@@ -4527,7 +4584,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, height = 420,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, height = 420,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -18567,30 +18624,30 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Attention
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Different ways to attract someone’s attention**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Different ways to attract someone’s attention**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
+・Hey.  
+・Uhmm.  
+・Just a minute.  
+・Excuse me.  
+・Uh, excuse me but.   
+・Uh, I am sorry to be rude but.  
+</div>
+
+</div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
 ・ねえ.   
 ・あのう.   
 ・ちょっと.  
 ・すみませんが.  
 ・あのう、すみませんが.  
 ・あのう、失礼ですが.  
-</div>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
-・hey.  
-・umm.  
-・just a minute.  
-・excuse me.  
-・uh, excuse me but.   
-・uh, I am sorry to be rude but.  
 </div>
 
 </div>
@@ -18602,22 +18659,22 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Response
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to respond if some is calling your attention**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to respond if some is calling your attention**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・え、何？   
-・はい、何でしょうか？   
+<div class = "expresstrz">
+・What is it?   
+・Yes, what is it?   
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・what is it?   
-・yes, what is it?   
+<div class = "expresstrz">
+・え、何？   
+・はい、何でしょうか？   
 </div>
 
 </div>
@@ -18629,28 +18686,12 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Start a Conversation
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to initiate a conversation**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to initiate a conversation**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・ちょっとお話したいことがあるんですが.   
-・ちょっと話があるんだけど.  
-・今二、三分よろしいでしょうか.  
-・今ちょっといい？   
-・今忙しい？   
-・今お忙しいでしょうか.   
-・お仕事中すみませんが.   
-・仕事中いんだけど.   
-・ちょっと聞きたいんだけど.   
-・ちょっとお聞きしたいことがあるんですが.   
-</div>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・I have something I would like to talk to you about.  
 ・I have something I want to tell you.   
 ・Do you have two or three minutes now?   
@@ -18664,6 +18705,22 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 
 </div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・ちょっとお話したいことがあるんですが.   
+・ちょっと話があるんだけど.  
+・今二、三分よろしいでしょうか.  
+・今ちょっといい？   
+・今忙しい？   
+・今お忙しいでしょうか.   
+・お仕事中すみませんが.   
+・仕事中いんだけど.   
+・ちょっと聞きたいんだけど.   
+・ちょっとお聞きしたいことがあるんですが.   
+</div>
+
+</div>
 </div>
 
 <h6> </h6>
@@ -18672,26 +18729,26 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### End a Conversation
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to end a conversation**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to end a conversation**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・じゃあね.  
-・では・じゃ、今日はこんなところで.   
-・では・じゃ、そろそろ.   
-・では・じゃ、そろそろこのんで.   
+<div class = "expresstrz">
+・Ok, then.   
+・Ok, then, this is it for today.   
+・Well.., I should be going soon.   
+・Well.., I should be going soon.   
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・Ok, then.   
-・Ok, then, this is it for today.   
-・Well.., I should be going soon.   
-・Well.., I should be going soon.   
+<div class = "expresstrz">
+・じゃあね.  
+・では・じゃ、今日はこんなところで.   
+・では・じゃ、そろそろ.   
+・では・じゃ、そろそろこのんで.   
 </div>
 
 </div>
@@ -18703,22 +18760,22 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Topic Introduction
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to introduce a topic**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to introduce a topic**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・実は今度の試験のことなんですけど.   
- ・実は今度の試験のことなんですが.   
+<div class = "expresstrz">
+・Well, it’s about the upcoming exam.  
+・Well, it’s about the upcoming exam.  
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・Well, it’s about the upcoming exam.  
-・Well, it’s about the upcoming exam.  
+<div class = "expresstrz">
+・実は今度の試験のことなんですけど.   
+・実は今度の試験のことなんですが.   
 </div>
 
 </div>
@@ -18730,28 +18787,28 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Topic Change
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to change a topic**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to change a topic**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・ところで.  
- ・ちなみに.  
- ・それはそうと.  
- ・話は違うけど.  
- ・話は変わりますが.  
+<div class = "expresstrz">
+・By the way.   
+・By the way.   
+・Be that as it may.    
+・Not to change the topic.    
+・Not to change the subject.  
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・By the way.   
- ・By the way.   
- ・Be that as it may.    
- ・Not to change the topic.    
- ・Not to change the subject.  
+<div class = "expresstrz">
+・ところで.  
+・ちなみに.  
+・それはそうと.  
+・話は違うけど.  
+・話は変わりますが.  
 </div>
 
 </div>
@@ -18763,26 +18820,26 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Opening
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Make an opening remarks**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Make an opening remarks**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・今日は〜についてお話したいと思います.  
- ・〜について述べたいと思います.  
- ・〜に関して考察をしたいと思います.  
- ・本日は。。につきましてお話をさせて戴きます.  
+<div class = "expresstrz">
+・Today, I would like to talk about.    
+・I would like to talk about.    
+・I would like to look at.   
+・I should like to talk about..today.  
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・Today, I would like to talk about.    
- ・I would like to talk about.    
- ・I would like to look at.   
- ・I should like to talk about..today.  
+<div class = "expresstrz">
+・今日は〜についてお話したいと思います.  
+・〜について述べたいと思います.  
+・〜に関して考察をしたいと思います.  
+・本日は.. につきましてお話をさせて戴きます.  
 </div>
 
 </div>
@@ -18794,30 +18851,30 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Sequence
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to establishing a sequence**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to establishing a sequence**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・まず始めに.  
- ・まず最初に.  
- ・次に.  
- ・第一に.  
- ・第二点として.  
- ・最後に.   
+<div class = "expresstrz">
+・First of all.  
+・First of all.  
+・Next.  
+・Firstly.  
+・Secondly, as my second point    
+・Lastly.  
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・First of all.  
- ・First of all.  
- ・Next.  
- ・Firstly.  
- ・Secondly, as my second point    
- ・Lastly.  
+<div class = "expresstrz">
+・まず始めに.  
+・まず最初に.  
+・次に.  
+・第一に.  
+・第二点として.  
+・最後に.   
 </div>
 
 </div>
@@ -18829,22 +18886,22 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Examples
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to cite examples**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to cite examples**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・例えば.  
- ・いくつか例をあげたいと思います.  
+<div class = "expresstrz">
+・For example.  
+・I would like to give a few examples.  
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・For example.  
- ・I would like to give a few examples.  
+<div class = "expresstrz">
+・例えば.  
+・いくつか例をあげたいと思います.  
 </div>
 
 </div>
@@ -18856,28 +18913,28 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Summarize
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to summarize and conclude a statement**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to summarize and conclude a statement**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・結論を述べますと.  
-・結論として次のことが言えると思います.  
-・以上のことから〜ということが明らかになると思います.   
-・以上のことをまとめますと.  
-・つまり〜ということだと思います.  
-</div>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・To conclude.  
 ・As a conclusion, I can say the following.  
 ・From what I’ve said so far, I believe it is clear that.  
 ・To summarize from what I have said so far.  
 ・In other words, it means.   
+</div>
+
+</div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・結論を述べますと.  
+・結論として次のことが言えると思います.  
+・以上のことから〜ということが明らかになると思います.   
+・以上のことをまとめますと.  
+・つまり〜ということだと思います.  
 </div>
 
 </div>
@@ -18889,22 +18946,22 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### End a presentation
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to end a presentation**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to end a presentation**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・以上です。ご清聴ありがとうございました.  
-・これで終わらせていただきたいと思います.  
+<div class = "expresstrz">
+・That is all. Thank you very much for your attention.  
+・I would like to end with this.  
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・That is all. Thank you very much for your attention.  
- ・I would like to end with this.  
+<div class = "expresstrz">
+・以上です. ご清聴ありがとうございました.  
+・これで終わらせていただきたいと思います.  
 </div>
 
 </div>
@@ -18916,25 +18973,16 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Vague-Indirect
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Being vague or indirect**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Being vague or indirect**</p>
 
-###### **nanka** `something`
+<div class = "add_info">
+**nanka** `something`
+</div>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・ラッシュアワーの時なんかもういっぱいで.  
-・スーパーでおすしなんかも売っています.  
-・もう言い訳なんか聞きたくないね.  
-・この間オープンしたイタリアンなんかどう.  
-・なんか楽しいことないかなあ.  
-</div>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・It’s so crowded during the rush hour, for example.  
 ・At the supermarket they sell things like sushi.  
 ・I don't want to hear any more excuses or something.  
@@ -18943,72 +18991,89 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 
 </div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・ラッシュアワーの時なんかもういっぱいで.  
+・スーパーでおすしなんかも売っています.  
+・もう言い訳なんか聞きたくないね.  
+・この間オープンしたイタリアンなんかどう.  
+・なんか楽しいことないかなあ.  
+</div>
+
+</div>
 </div>
 
 <h6> </h6>
 
-###### **demo** `or something`
+<div class = "add_info">
+**demo** `or something`
+</div>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・お茶でもいかがですか.  
- ・散歩でもしようかなと思っています.  
-</div>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・How about tea or something?   
 ・I am thinking of taking a walk or something.  
 </div>
 
 </div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・お茶でもいかがですか.  
+・散歩でもしようかなと思っています.  
+</div>
+
+</div>
 </div>
 
 <h6> </h6>
 
-###### **toka** `something like`
+<div class = "add_info">
+**toka** `something like`
+</div>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・勉強とかしてるのかな？   
-・好きな人とかいないの？   
-</div>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・Are you studying or something?   
 ・Don't you have a crush on someone?   
 </div>
 
 </div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・勉強とかしてるのかな？   
+・好きな人とかいないの？   
+</div>
+
+</div>
 </div>
 
 <h6> </h6>
 
-###### **n ja nai deshou ka・ka na to omoimasu** `stating one's opinion indirectly`
+<div class = "add_info">
+**n ja nai deshou ka・ka na to omoimasu** `stating one's opinion indirectly`
+</div>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・日本に行くなら小さい町の方がいいんじゃないでしょうか.  
- ・大学は大きい大学の方がいいかなと思います.  
+<div class = "expresstrz">
+・If you are going to Japan, it's better to go to a small town.   
+・I think a bigger university might be better.  
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・If you are going to Japan, it's better to go to a small town.   
- ・I think a bigger university might be better.  
+<div class = "expresstrz">
+・日本に行くなら小さい町の方がいいんじゃないでしょうか.  
+・大学は大きい大学の方がいいかなと思います.  
 </div>
 
 </div>
@@ -19020,24 +19085,24 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Ask a Repeat
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**①  Asking for Repetition**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**①  Asking for Repetition**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・今何て言った?   
- ・すみません、今ちょっとよく聞こえなかったんですが.  
- ・すみません。もう一度言っていただけませんか.  
+<div class = "expresstrz">
+・What did you say just now?    
+・I’m sorry, I couldn’t hear well, but.  
+・I am sorry, but could I ask you to say that one more time?   
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・What did you say just now?    
-・I’m sorry, I couldn’t hear well, but.  
-・I am sorry, but could I ask you to say that one more time?   
+<div class = "expresstrz">
+・今何て言った?   
+・すみません、今ちょっとよく聞こえなかったんですが.  
+・すみません. もう一度言っていただけませんか.  
 </div>
 
 </div>
@@ -19049,26 +19114,26 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Afterthoughts
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**①  Express Afterthoughts**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**①  Express Afterthoughts**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・本当に疲れたよ、今回の出張(は).   
- ・来ましたよ、バス(が).  
- ・あ、忘れちゃった、傘(を).   
- ・辞書も使いますよ、時々.  
+<div class = "expresstrz">
+・It was really tiring, my business trip this time.  
+・It’s here, the bus.   
+・Oh, I forgot, the umbrella.  
+・I use the dictionary too, sometimes. 
 </div>
 
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
- ・It was really tiring, my business trip this time.  
- ・It’s here, the bus.   
- ・Oh, I forgot, the umbrella.  
- ・I use the dictionary too, sometimes. 
+<div class = "expresstrz">
+・本当に疲れたよ、今回の出張(は).   
+・来ましたよ、バス(が).  
+・あ、忘れちゃった、傘(を).   
+・辞書も使いますよ、時々.  
 </div>
 
 </div>
@@ -19084,17 +19149,17 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Introduction {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to do a self introduction**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to do a self introduction**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅼 はじめまして.    
-🅼 はジョンと申します.    
-🅼 アメリカから来ました.   
-🅼 旅行会社です.   
-🅼 よろしくお願いします.  
+<div class = "expresstrz">
+🅼 Nice to meet you.      
+🅼 My name is John.       
+🅼 I came from America.       
+🅼 I am a travel agent.      
+🅼 Glad to meet you all.     
 </div>
 
 <h6> </h6>
@@ -19102,12 +19167,12 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅼 Nice to meet you.      
-🅼 My name is John.       
-🅼 I came from America.       
-🅼 I am a travel agent.      
-🅼 Glad to meet you all.     
+<div class = "expresstrz">
+🅼 はじめまして.    
+🅼 はジョンと申します.    
+🅼 アメリカから来ました.   
+🅼 旅行会社です.   
+🅼 よろしくお願いします.  
 </div>
 
 </div>
@@ -19119,14 +19184,14 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Meeting {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Meeting for the first time**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Meeting for the first time**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅼 はじめまして。私はジョンです。よろしくお願いします.   
-🅵 はじめまして。りなと申します。よろしくお願いします.   
+<div class = "expresstrz">
+🅼 How do you do. I am John. Nice to meet you.   　  
+🅵 How do you do. I am Rina. Nice to meet you.   
 </div>
 
 <h6> </h6>
@@ -19134,9 +19199,9 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅼 How do you do. I am John. Nice to meet you.   　  
-🅵 How do you do. I am Rina. Nice to meet you.   
+<div class = "expresstrz">
+🅼 はじめまして. 私はジョンです. よろしくお願いします.   
+🅵 はじめまして. りなと申します. よろしくお願いします.   
 </div>
 
 </div>
@@ -19148,17 +19213,17 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### SmallTalk {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Small talk during the first meeting**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Small talk during the first meeting**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅼 りなさん、ご出身はどこですか.    
-🅵 ロンドンです。ジョンさんは？               
-🅼 シカゴです。学生ですか、もう働いていますか.       
-🅵 学生です。ジョンさんは？        
-🅼 働いています。旅行会社に勤めています.       
+<div class = "expresstrz">
+🅼 Rina-san, Where are you from?      
+🅵 I am from London. How about John-san?       
+🅼 I am from Chicago. Are a student or working already?      
+🅵 I am a student. How about John-san?        
+🅼 I am working. I work at a travel agency.     
 </div>
 
 <h6> </h6>
@@ -19166,12 +19231,12 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅼 Rina-san, Where are you from?      
-🅵 I am from London. How about John-san?       
-🅼 I am from Chicago. Are a student or working already?      
-🅵 I am a student. How about John-san?        
-🅼 I am working. I work at a travel agency.     
+<div class = "expresstrz">
+🅼 りなさん、ご出身はどこですか.    
+🅵 ロンドンです. ジョンさんは？               
+🅼 シカゴです. 学生ですか、もう働いていますか.       
+🅵 学生です. ジョンさんは？        
+🅼 働いています. 旅行会社に勤めています.       
 </div>
 
 </div>
@@ -19183,16 +19248,16 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Reservation
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to make a reservation**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to make a reservation**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆃 はい、レストランみやこでございます.       
-🅲 あのう、予約お願いしたいんですが.       
-🆃 かしこまりました。いつの予約ですか.   
-🅲 20日の7時に2名でお願いします.   
+<div class = "expresstrz">
+🆃 Hello, this is Miyako restaurant.     
+🅲 Uhmm, I would like to make a reservation.      
+🆃 Most certainly, When would you like to make a reservation?     
+🅲 On the 20th, at 7 o'clock for 2 people please.    
 </div>
 
 <h6> </h6>
@@ -19200,11 +19265,11 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆃 Hello, this is Miyako restaurant.     
-🅲 Uhmm, I would like to make a reservation.      
-🆃 Most certainly, When would you like to make a reservation?     
-🅲 On the 20th, at 7 o'clock for 2 people please.    
+<div class = "expresstrz">
+🆃 はい、レストランみやこでございます.       
+🅲 あのう、予約お願いしたいんですが.       
+🆃 かしこまりました。いつの予約ですか.   
+🅲 20日の7時に2名でお願いします.   
 </div>
   
 </div>
@@ -19216,16 +19281,16 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Recommendation
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Asking for a recommendation**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Asking for a recommendation**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆃 このレストランのおすすめ料理はなんですか.     
-🅲 豚骨ラーメンでございます.         
-🆃 いいですね。ではそれをお願いします.   
-🅲 かしこまりました.   
+<div class = "expresstrz">
+🆃 What is the best dish in this restaurant?       
+🅲 Pork bone ramen, sir.      
+🆃 That sounds good. I'll have some of that, please.     
+🅲 Most certainly.      
 </div>
 
 <h6> </h6>
@@ -19233,11 +19298,11 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆃 What is the best dish in this restaurant?       
-🅲 Pork bone ramen, sir.      
-🆃 That sounds good. I'll have some of that, please.     
-🅲 Most certainly.      
+<div class = "expresstrz">
+🆃 このレストランのおすすめ料理はなんですか.     
+🅲 豚骨ラーメンでございます.         
+🆃 いいですね. ではそれをお願いします.   
+🅲 かしこまりました.   
 </div>
 
 </div>
@@ -19249,16 +19314,16 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Menu
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Asking for a menu**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Asking for a menu**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆃 すみません。メニューお願いします.   
-🅲 はい、かしこまりました.   
-🆃 あ、英語のメニューはありますか.   
-🅲 はい、ございます。今、お持ちします.   
+<div class = "expresstrz">
+🆃 Excuse me. Menu, please.   
+🅲 Yes, most certainly.   
+🆃 Oh, do you have a menu in English?    
+🅲 Yes, we do. I'll bring one immediately.    
 </div>
 
 <h6> </h6>
@@ -19266,11 +19331,11 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆃 Excuse me. Menu, please.   
-🅲 Yes, most certainly.   
-🆃 Oh, do you have a menu in English?    
-🅲 Yes, we do. I'll bring one immediately.    
+<div class = "expresstrz">
+🆃 すみません. メニューお願いします.   
+🅲 はい、かしこまりました.   
+🆃 あ、英語のメニューはありますか.   
+🅲 はい、ございます. 今、お持ちします.   
 </div>
 
 </div>
@@ -19282,15 +19347,15 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Food
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Asking food if contains something**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Asking food if contains something**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅲 この料理に豚肉入っていますか.   
-🆃 いいえ、入っていません。それは鶏肉です.   
-🅲 そうですか。では、これをお願いします.   
+<div class = "expresstrz">
+🅲 Is there any pork in this dish?    
+🆃 No, there is no pork in this dish. It's chicken.   
+🅲 I see. I'll have this one, please.   
 </div>
 
 <h6> </h6>
@@ -19298,10 +19363,10 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅲 Is there any pork in this dish?    
-🆃 No, there is no pork in this dish. It's chicken.   
-🅲 I see. I'll have this one, please.   
+<div class = "expresstrz">
+🅲 この料理に豚肉入っていますか.   
+🆃 いいえ、入っていません. それは鶏肉です.   
+🅲 そうですか. では、これをお願いします.   
 </div>
 
 </div>
@@ -19313,16 +19378,16 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Ordering
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to make an order**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to make an order**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆃 すみません。ビール4つとウーロン茶2つ、お願いします.   
-🅲 ビールを4つとウーロン茶を2つですね.   
-🆃 それから、焼き鳥の盛り合わせとサラダ、お願いします.   
-🅲 焼き鳥の盛り合わせとサラダですね。かしこまりました.   
+<div class = "expresstrz">
+🆃 Excuse me. Four beers and two oolong teas, please.   
+🅲 Four beers and two oolong teas, please.  
+🆃 And some assorted grilled chicken and salad, please.   
+🅲 Assorted yakitori and salad. Most certainly.   
 </div>
 
 <h6> </h6>
@@ -19330,11 +19395,11 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆃 Excuse me. Four beers and two oolong teas, please.   
-🅲 Four beers and two oolong teas, please.  
-🆃 And some assorted grilled chicken and salad, please.   
-🅲 Assorted yakitori and salad. Most certainly.   
+<div class = "expresstrz">
+🆃 すみません. ビール4つとウーロン茶2つ、お願いします.   
+🅲 ビールを4つとウーロン茶を2つですね.   
+🆃 それから、焼き鳥の盛り合わせとサラダ、お願いします.   
+🅲 焼き鳥の盛り合わせとサラダですね. かしこまりました.   
 </div>
 
 </div>
@@ -19346,16 +19411,16 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Paying
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Paying the bill**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Paying the bill**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅲 すみません。お会計、お願いします.   
-🆃 はい、9,000円になります.   
-🅲 みんな、割り勘でいいかな.  
-🅲 えーっと、1人1,500円ずつ.   
+<div class = "expresstrz">
+🅲 Excuse me. Can I have the bill, please?    
+🆃 Yes, that would be 9,000 yen.   
+🅲 Let's split the bill, shall we?    
+🅲 Let's see, 1,500 yen each.  
 </div>
 
 <h6> </h6>
@@ -19363,11 +19428,11 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅲 Excuse me. Can I have the bill, please?    
-🆃 Yes, that'll be 9,000 yen.   
-🅲 Let's split the bill, shall we?    
-🅲 Let's see, 1,500 yen each.  
+<div class = "expresstrz">
+🅲 すみません. お会計、お願いします.   
+🆃 はい、9,000円になります.   
+🅲 みんな、割り勘でいいかな.  
+🅲 えーっと、1人1,500円ずつ.   
 </div>
 
 </div>
@@ -19379,17 +19444,17 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Ticket
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① How to buy a ticket**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① How to buy a ticket**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅰 新大阪まで往復でお願いします.   
-🆀 今日のご出発ですか？   
-🅰 はい、十時頃の「望み」をお願いします.  
-🅰 帰りは明後日の夕方五時頃です.  
-🆀 かしこまりました。少々お待ちください.   
+<div class = "expresstrz">
+🅰 A round trip ticket to Shin-Osaka please.   
+🆀 Are you leaving today?   
+🅰 Yes, around ten o'clock "Nozomi" please.  
+🅰 Return will be the day after tomorrow around 5pm.  
+🆀 Most certainly. Please wait a moment.  
 </div>
 
 <h6> </h6>
@@ -19397,12 +19462,12 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🅰 A round trip ticket to Shin-Osaka please.   
-🆀 Are you leaving today?   
-🅰 Yes, around ten o'clock "Nozomi" please.  
-🅰 Return will be the day after tomorrow around 5pm.  
-🆀 Most certainly. Please wait a moment.  
+<div class = "expresstrz">
+🅰 新大阪まで往復でお願いします.   
+🆀 今日のご出発ですか？   
+🅰 はい、十時頃の「望み」をお願いします.  
+🅰 帰りは明後日の夕方五時頃です.  
+🆀 かしこまりました. 少々お待ちください.   
 </div>
 
 </div>
@@ -19414,15 +19479,15 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Destination
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Asking for the destination**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Asking for the destination**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆀 すみません。この電車中目黒へ行きますか？     
-🅰 いいえ、行きません。3番線の電車に乗ってください.   
-🅰 3番線ですね。どうも.   
+<div class = "expresstrz">
+🆀 Excuse me. Does this train go to Nakameguro?   
+🅰 No, It is not going. Please take the train on line 3.  
+🅰 Track 3, right. Thank you.  
 </div>
 
 <h6> </h6>
@@ -19430,10 +19495,10 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆀 Excuse me. Does this train go to Nakameguro?   
-🅰 No, It is not going. Please take the train on line 3.  
-🅰 Track 3, right. Thank you.  
+<div class = "expresstrz">
+🆀 すみません. この電車中目黒へ行きますか？     
+🅰 いいえ、行きません。3番線の電車に乗ってください.   
+🅰 3番線ですね. どうも.   
 </div>
 
 </div>
@@ -19445,16 +19510,16 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 #### Directions
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Asking for directions**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Asking for directions**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆀 すみません。お台場どう行ったらいいですか？   
-🅰 おぢあばですか。山手線で新橋まで行って.   
-🅰 新橋でゆりかもめに乗り換えてください.   
-🆀 新橋でゆりかもめですね。ありがとうございます.  
+<div class = "expresstrz">
+🆀 Excuse me. How do I get to Odaiba?   
+🅰 Is it Ojiba? Take the Yamanote line to Shinbashi.  
+🅰 Please change to Yurikamome at Shinbashi.   
+🆀 Yurikamome at Shinbashi, right? Thank you.   
 </div>
 
 <h6> </h6>
@@ -19462,11 +19527,11 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-🆀 Excuse me. How do I get to Odaiba?   
-🅰 Is it Ojiba? Take the Yamanote line to Shinbashi.  
-🅰 Please change to Yurikamome at Shinbashi.   
-🆀 Yurikamome at Shinbashi, right? Thank you.   
+<div class = "expresstrz">
+🆀 すみません. お台場どう行ったらいいですか？   
+🅰 おぢあばですか. 山手線で新橋まで行って.   
+🅰 新橋でゆりかもめに乗り換えてください.   
+🆀 新橋でゆりかもめですね. ありがとうございます.  
 </div>
 
 </div>
@@ -19482,7 +19547,7 @@ ggplotly(p.v, tooltip = "text")  %>% layout(hoverlabel = list(font=list(size=35,
 
 ```{r, echo=FALSE, message=FALSE}
 
-commsynrgy.a <- commsynrgy %>% select(Health.Sentences, Health.Translation) %>% rename(Sentences = Health.Sentences, Translation = Health.Translation)
+commsynrgy.a <- commsynrgy %>% select(Health.Translation, Health.Sentences) %>% rename(Translation = Health.Translation, Sentences = Health.Sentences)
 commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
 commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
 
@@ -19493,12 +19558,12 @@ reactable(
       minWidth = 130,
       cell = function(value, index) {
         tagList(
-          div(style = list(fontSize = 13.5, color = '#0F2040'), value),
+          div(style = list(fontSize = 14, color = '#264653', fontWeight = 400, fontFamily = 'Zen Kaku Gothic New'), value),
         )
       },
       align = "left"
     ),
-    Translation = colDef(minWidth = 115, align = "left", style = list(color = '#0F2040'))
+    Translation = colDef(minWidth = 115, align = "left", style = list(fontSize = 12.2, color = '#264653', fontFamily = 'Zen Kaku Gothic New'))
   ),
   rowClass = "my-row",
   defaultPageSize = 8,
@@ -19524,7 +19589,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-commsynrgy.a <- commsynrgy %>% select(Sight.Sentences, Sight.Translation) %>% rename(Sentences = Sight.Sentences, Translation = Sight.Translation)
+commsynrgy.a <- commsynrgy %>% select(Sight.Translation, Sight.Sentences) %>% rename(Translation = Sight.Translation, Sentences = Sight.Sentences)
 commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
 commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
 
@@ -19535,12 +19600,12 @@ reactable(
       minWidth = 130,
       cell = function(value, index) {
         tagList(
-          div(style = list(fontSize = 13.5, color = '#0F2040'), value),
+          div(style = list(fontSize = 14, color = '#264653', fontWeight = 400, fontFamily = 'Zen Kaku Gothic New'), value),
         )
       },
       align = "left"
     ),
-    Translation = colDef(minWidth = 115, align = "left", style = list(color = '#0F2040'))
+    Translation = colDef(minWidth = 115, align = "left", style = list(fontSize = 12.2, color = '#264653', fontFamily = 'Zen Kaku Gothic New'))
   ),
   rowClass = "my-row",
   defaultPageSize = 8,
@@ -19566,7 +19631,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-commsynrgy.a <- commsynrgy %>% select(Travel.Sentences, Travel.Translation) %>% rename(Sentences = Travel.Sentences, Translation = Travel.Translation)
+commsynrgy.a <- commsynrgy %>% select(Travel.Translation, Travel.Sentences) %>% rename(Translation = Travel.Translation, Sentences = Travel.Sentences)
 commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
 commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
 
@@ -19577,12 +19642,12 @@ reactable(
       minWidth = 130,
       cell = function(value, index) {
         tagList(
-          div(style = list(fontSize = 13.5, color = '#0F2040'), value),
+          div(style = list(fontSize = 14, color = '#264653', fontWeight = 400, fontFamily = 'Zen Kaku Gothic New'), value),
         )
       },
       align = "left"
     ),
-    Translation = colDef(minWidth = 115, align = "left", style = list(color = '#0F2040'))
+    Translation = colDef(minWidth = 115, align = "left", style = list(fontSize = 12.2, color = '#264653', fontFamily = 'Zen Kaku Gothic New'))
   ),
   rowClass = "my-row",
   defaultPageSize = 8,
@@ -19608,7 +19673,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-commsynrgy.a <- commsynrgy %>% select(Dining.Sentences, Dining.Translation) %>% rename(Sentences = Dining.Sentences, Translation = Dining.Translation)
+commsynrgy.a <- commsynrgy %>% select(Dining.Translation, Dining.Sentences) %>% rename(Translation = Dining.Translation, Sentences = Dining.Sentences)
 commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
 commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
 
@@ -19619,12 +19684,12 @@ reactable(
       minWidth = 130,
       cell = function(value, index) {
         tagList(
-          div(style = list(fontSize = 13.5, color = '#0F2040'), value),
+          div(style = list(fontSize = 14, color = '#264653', fontWeight = 400, fontFamily = 'Zen Kaku Gothic New'), value),
         )
       },
       align = "left"
     ),
-    Translation = colDef(minWidth = 115, align = "left", style = list(color = '#0F2040'))
+    Translation = colDef(minWidth = 115, align = "left", style = list(fontSize = 12.2, color = '#264653', fontFamily = 'Zen Kaku Gothic New'))
   ),
   rowClass = "my-row",
   defaultPageSize = 8,
@@ -19650,7 +19715,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-commsynrgy.a <- commsynrgy %>% select(Shopping.Sentences, Shopping.Translation) %>% rename(Sentences = Shopping.Sentences, Translation = Shopping.Translation)
+commsynrgy.a <- commsynrgy %>% select(Shopping.Translation, Shopping.Sentences) %>% rename(Translation = Shopping.Translation, Sentences = Shopping.Sentences)
 commsynrgy.a <- commsynrgy.a %>% na.omit(commsynrgy.a)
 commsynrgy.a <- commsynrgy.a[sample(1:nrow(commsynrgy.a)),]
 
@@ -19661,12 +19726,12 @@ reactable(
       minWidth = 130,
       cell = function(value, index) {
         tagList(
-          div(style = list(fontSize = 13.5, color = '#0F2040'), value),
+          div(style = list(fontSize = 14, color = '#264653', fontWeight = 400, fontFamily = 'Zen Kaku Gothic New'), value),
         )
       },
       align = "left"
     ),
-    Translation = colDef(minWidth = 115, align = "left", style = list(color = '#0F2040'))
+    Translation = colDef(minWidth = 115, align = "left", style = list(fontSize = 12.2, color = '#264653', fontFamily = 'Zen Kaku Gothic New'))
   ),
   rowClass = "my-row",
   defaultPageSize = 8,
@@ -19700,23 +19765,6 @@ reactable(
 <div class = "col-sm-6">
 
 <div class = "expresstrz">
-・誰が来たと思いますか.    
-・誰を探しているのですか.   
-・誰にそそのかされてやったのか.   
-・あの人は誰ですか.    
-・これが誰だか分かるか.    
-・誰がそんな危ない橋を渡るものか.    
-・誰と時間を過ごしているか.    
-・誰がそんなとこ行くか.    
-・そんなこと誰が言ったんですか.    
-</div>
- 
-<h6> </h6>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstrz">
 ・Who do you think came?     
 ・Who are you looking for?     
 ・Who put you up to this?     
@@ -19731,26 +19779,28 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② How: どう**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
 <div class = "expresstrz">
-・今朝の気分はどうですか.    
-・お茶を１杯どうですか.    
-・これらにどうよく対処するか.    
-・彼らとどう向き合うか.    
-・逃亡している気持ちはどう？    
-・科学はどう成り立っているか.    
-・そのやり取りをどう診断するか.    
+・誰が来たと思いますか.    
+・誰を探しているのですか.   
+・誰にそそのかされてやったのか.   
+・あの人は誰ですか.    
+・これが誰だか分かるか.    
+・誰がそんな危ない橋を渡るものか.    
+・誰と時間を過ごしているか.    
+・誰がそんなとこ行くか.    
+・そんなこと誰が言ったんですか.    
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② How: どう**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
 <div class = "expresstrz">
@@ -19766,6 +19816,21 @@ reactable(
 <h6> </h6>
 
 </div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・今朝の気分はどうですか.    
+・お茶を１杯どうですか.    
+・これらにどうよく対処するか.    
+・彼らとどう向き合うか.    
+・逃亡している気持ちはどう？    
+・科学はどう成り立っているか.    
+・そのやり取りをどう診断するか.    
+</div>
+ 
+<h6> </h6>
+
+</div>
 </div>
 
 <p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**③ How to do・In what way: どうやって**</p>
@@ -19774,22 +19839,22 @@ reactable(
 <div class = "col-sm-6">
 
 <div class = "expresstrz">
-・どうやってやるのか教えてください.    
-・どうやって上手く過ごすのか.    
-・どうやって侵入したのか.    
-・どうやって消費パターンを変えるか.    
+・Please tell me how you do it?     
+・How do we spend our time successfully?     
+・How did they get in?     
+・How do we change consumption patterns?    
 </div>
- 
+
 <h6> </h6>
 
 </div>
 <div class = "col-sm-6">
 
 <div class = "expresstrz">
-・Please tell me how you do it?     
-・How do we spend our time successfully?     
-・How did they get in?     
-・How do we change consumption patterns?    
+・どうやってやるのか教えてください.    
+・どうやって上手く過ごすのか.    
+・どうやって侵入したのか.    
+・どうやって消費パターンを変えるか.    
 </div>
  
 <h6> </h6>
@@ -19803,12 +19868,26 @@ reactable(
 
 #### Seeking {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Asking a yes or no question**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Asking a yes or no question**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
+・Do you drink beer?       
+・Do you drink beer?     
+・Is that person is Japanese?      
+・Are you are going to the party?      
+・Are you are going to the party?      
+・Is it that you have a fever?    
+</div>
+ 
+<h6> </h6>
+
+</div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
 ・ビールをのむ？     
 ・ビールを飲みますか.     
 ・あの人は日本人ですか.   
@@ -19818,48 +19897,34 @@ reactable(
 </div>
  
 <h6> </h6>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
-・Do you drink beer?       
-・Do you drink beer?     
-・Is that person is Japanese?      
-・Are you are going to the party?      
-・Are you are going to the party?      
-・Is it that you have a fever?    
-</div>
- 
- <h6> </h6>
  
 </div>
 </div>
  
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Asking for a specific information**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② Asking for a specific information**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・だれが来たんですか.     
-・何を読んでいるんですか.    
-・お昼は何にしますか.    
-・だれが来たの？     
-・何読んでるの？      
-・お昼は何にする？     
-</div>
- 
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・Who came?     
 ・What are you reading?     
 ・What shall we have for lunch?     
 ・Who came?     
 ・What are you reading?     
 ・What shall we have for lunch?      
+</div>
+ 
+</div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・だれが来たんですか.     
+・何を読んでいるんですか.    
+・お昼は何にしますか.    
+・だれが来たの？     
+・何読んでるの？      
+・お昼は何にする？     
 </div>
  
 </div>
@@ -19871,25 +19936,12 @@ reactable(
 
 #### Reporting {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Direct quotation**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Direct quotation**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・スミスさんは「初めまして」と日本語で言いました.    
-・田中さんは「月曜日に持ってきます」と言いました.   
-・田中さんが「フランスのお菓子はおいしいよ」と言いました.   
-・田中さんは「私がやります」と言いました.   
-・田中さんは「あした宿題を出します」と言いました.   
-</div>
- 
-<h6> </h6>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・Ms Smith said, ‘How do you do,’ in Japanese.   
 ・Ms Tanaka said, ‘I will bring it on Monday’.   
 ・Ms Tanaka said, ‘French confectionery is good, I tell you’.   
@@ -19900,26 +19952,27 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Indirect quotation**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・田中さんは月曜日に持ってくると言いました.    
-・田中さんがフランスのお菓子はおいしいと言いました.    
-・田中さんは自分がやると言いました.   
-・田中さんは次の日に宿題を出すと言いました.   
+<div class = "expresstrz">
+・スミスさんは「初めまして」と日本語で言いました.    
+・田中さんは「月曜日に持ってきます」と言いました.   
+・田中さんが「フランスのお菓子はおいしいよ」と言いました.   
+・田中さんは「私がやります」と言いました.   
+・田中さんは「あした宿題を出します」と言いました.   
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② Indirect quotation**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・Ms Tanaka said that she would bring it on Monday.   
 ・Ms Tanaka said that French confectionery is good.   
 ・Ms Tanaka said that she would do it.   
@@ -19929,32 +19982,26 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Reporting a statement**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・友達が手伝ってくれると言いました.    
-・友達が手伝ってくれるって言いました.    
-・台風で停電になったと新聞に書いてありました.    
-・田中さんはアメリカに行くとか言っていました.    
-・助詞の間違いが多いなんて言われました.      
-・スミスさんは日本に留学すると言っていました.    
-・スミスさんは日本に􏰵学すると言いました.    
-・天気予報によるとあしたは雨だそうです.   
-・新聞によると働く女性が増えているそうだ.   
-・ある調査によると国際結婚が増えているとのこと.   
+<div class = "expresstrz">
+・田中さんは月曜日に持ってくると言いました.    
+・田中さんがフランスのお菓子はおいしいと言いました.    
+・田中さんは自分がやると言いました.   
+・田中さんは次の日に宿題を出すと言いました.   
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**③ Reporting a statement**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・My friend said he would help me.   
 ・My friend said he would help me.   
 ・Written in newspaper that power outage due to a typhoon.     
@@ -19970,28 +20017,32 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ Reporting questions and answers**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・友達に宿題があるかどうかと聞いたが、友達も知らなかった.    
-・どんな日本食が好きかと聞かれて、答えに困った.   
-・おすしを食べたことがあるかどうかと聞かれた.  
-・試験はいつか先生に伺いましょう.   
-・日本人にも敬語が難しいかという質問をよくされる.   
-・友達から出席できないという返事をもらった.   
+<div class = "expresstrz">
+・友達が手伝ってくれると言いました.    
+・友達が手伝ってくれるって言いました.    
+・台風で停電になったと新聞に書いてありました.    
+・田中さんはアメリカに行くとか言っていました.    
+・助詞の間違いが多いなんて言われました.      
+・スミスさんは日本に留学すると言っていました.    
+・スミスさんは日本に􏰵学すると言いました.    
+・天気予報によるとあしたは雨だそうです.   
+・新聞によると働く女性が増えているそうだ.   
+・ある調査によると国際結婚が増えているとのこと.   
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**④ Reporting questions and answers**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・I asked my friends if they we homework but they didn't either.     
 ・Asked what kind of Japanese food I like, The answer is at loss.   
 ・I was asked if I had ever eaten sushi.   
@@ -20003,9 +20054,23 @@ reactable(
 <h6> </h6>
 
 </div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・友達に宿題があるかどうかと聞いたが、友達も知らなかった.    
+・どんな日本食が好きかと聞かれて、答えに困った.   
+・おすしを食べたことがあるかどうかと聞かれた.  
+・試験はいつか先生に伺いましょう.   
+・日本人にも敬語が難しいかという質問をよくされる.   
+・友達から出席できないという返事をもらった.   
+</div>
+ 
+<h6> </h6>
+
+</div>
 </div>
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑤ Reporting commands and requests**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**⑤ Reporting commands and requests**</p>
  
 <h6> </h6>
 
@@ -20013,26 +20078,12 @@ reactable(
 
 #### Identifying {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Identifying: Oneself or Others**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Identifying: Oneself or Others**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・私は山本です.    
-・私は山本と言います.   
-・私は山本と申します.   
-・こちらは山本さんです.   
-・そちらは山本さんです.   
-・あちらは山本社長でいらっしゃいます.   
-</div>
- 
-<h6> </h6>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・I am Yamamoto.    
 ・I am Yamamoto.   
 ・I am Yamamoto.   
@@ -20044,26 +20095,28 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Identifying: Places**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・領事館はあれです.    
-・図書館はあれです.    
-・これが私の家です.   
-・ここが私の別荘です.   
+<div class = "expresstrz">
+・私は山本です.    
+・私は山本と言います.   
+・私は山本と申します.   
+・こちらは山本さんです.   
+・そちらは山本さんです.   
+・あちらは山本社長でいらっしゃいます.   
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② Identifying: Places**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・The consulate is that one.    
 ・The library is that one.    
 ・This is my home.   
@@ -20073,17 +20126,29 @@ reactable(
 <h6> </h6>
 
 </div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・領事館はあれです.    
+・図書館はあれです.    
+・これが私の家です.   
+・ここが私の別荘です.   
+</div>
+ 
+<h6> </h6>
+
+</div>
 </div>
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Identifying: Things**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**③ Identifying: Things**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・これは田中さんの傘です.    
-・それは中国語の辞書です.    
-・あれは山田さんの車です.    
+<div class = "expresstrz">
+・This is Mr. Tanaka's umbrella.    
+・That is a Chinese dictionary.   
+・That is Mr. Yamada's car.   
 </div>
  
 <h6> </h6>
@@ -20091,10 +20156,10 @@ reactable(
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・This is Mr. Tanaka's umbrella.    
-・That is a Chinese dictionary.   
-・That is Mr. Yamada's car.   
+<div class = "expresstrz">
+・これは田中さんの傘です.    
+・それは中国語の辞書です.    
+・あれは山田さんの車です.    
 </div>
  
 </div>
@@ -20106,25 +20171,12 @@ reactable(
 
 #### Describing {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Describing: People**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Describing: People**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・出口さんは目が大きいです.    
-・姉は足が長いです.   
-・除きさんは性格がとてもいいですね.   
-・川口さんは赤いセーターを着ています.   
-・井上さんはサングラスをかけている人です.   
-</div>
- 
-<h6> </h6>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・Speaking of Mr. Deguchi, He has big eyes.   
 ・Speaking of my big sister, She has long legs.   
 ・Speaking of Mr.Nozoki, He has a good personality.   
@@ -20135,27 +20187,27 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Describing: Places**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・オーストラリアはどんな所ですか.    
-・オーストラリアは海がきれいです.   
-・この公園はバラで有名です.    
-・東京は人口が多いです.    
-・あのレストランはパスタがおいしいですよ.    
+<div class = "expresstrz">
+・出口さんは目が大きいです.    
+・姉は足が長いです.   
+・除きさんは性格がとてもいいですね.   
+・川口さんは赤いセーターを着ています.   
+・井上さんはサングラスをかけている人です.   
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② Describing: Places**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・What is Australia like?     
 ・Australia has beautiful beaches.   
 ・This park is famous for roses.   
@@ -20166,31 +20218,27 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Describing: Weather**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・東京は今雨が降っています.    
-・北海道は雪が降っています.   
-・今ちょっと雲っています.   
-・ニューヨークは今晴れています.   
-・今風が吹いています.   
-・今日はちょっと寒いです.   
-・今日は春らしく暖かいですね.   
-・今日は随分暑いですね.   
-・夏でも涼しいですね.    
+<div class = "expresstrz">
+・オーストラリアはどんな所ですか.    
+・オーストラリアは海がきれいです.   
+・この公園はバラで有名です.    
+・東京は人口が多いです.    
+・あのレストランはパスタがおいしいですよ.    
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**③ Describing: Weather**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・It's raining in Tokyo right now.    
 ・It's snowing in Hokkaido.   
 ・It's a little bit cloudy.   
@@ -20200,6 +20248,23 @@ reactable(
 ・It's warm like spring today.   
 ・It's very hot today.   
 ・It's cool even in summer.   
+</div>
+ 
+<h6> </h6>
+
+</div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・東京は今雨が降っています.    
+・北海道は雪が降っています.   
+・今ちょっと雲っています.   
+・ニューヨークは今晴れています.   
+・今風が吹いています.   
+・今日はちょっと寒いです.   
+・今日は春らしく暖かいですね.   
+・今日は随分暑いですね.   
+・夏でも涼しいですね.    
 </div>
 
 </div>
@@ -20211,18 +20276,18 @@ reactable(
 
 #### Comparison {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Comparison: Inequality**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Comparison: Inequality**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・地下鉄の方がバスより便利ですよ.    
-・でもあのレストランはもっとおいしいですよ.   
-・あのレストランはこのレストランほど高くありませんよ.   
-・この電車の方があの電車より速いです.   
-・コーヒーの方がお茶より好きです.   
-・浅間山は富士山ほど高くない.  
+<div class = "expresstrz">
+・Subways are more convenient than buses.    
+・But that restaurant is even better.   
+・That restaurant isn't as expensive as this one.  
+・This train is faster than that train.   
+・I like coffee better than tea.  
+・Mt. Asama is not as high as Mt. Fuji.   
 </div>
  
 <h6> </h6>
@@ -20230,13 +20295,13 @@ reactable(
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・Subways are more convenient than buses.    
-・But that restaurant is even better.   
-・That restaurant isn't as expensive as this one.  
-・This train is faster than that train.   
-・I like coffee better than tea.  
-・Mt. Asama is not as high as Mt. Fuji.   
+<div class = "expresstrz">
+・地下鉄の方がバスより便利ですよ.    
+・でもあのレストランはもっとおいしいですよ.   
+・あのレストランはこのレストランほど高くありませんよ.   
+・この電車の方があの電車より速いです.   
+・コーヒーの方がお茶より好きです.   
+・浅間山は富士山ほど高くない.  
 </div>
 
 </div>
@@ -20248,26 +20313,12 @@ reactable(
 
 #### Contrast {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Contrast: Conjunctive**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Contrast: Conjunctive**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・疲れていたけれども宿題をしました.   
-・皆さんに聞いてみましたけれどもよく分かりませんでした.   
-・つまらなかったけれども文句は言わなかった.   
-・私は日本人ですが、日本語が話せません.  
-・父は日本人だが、母はアメリカ人だ.  
-・この観点は必要ですが、これでは不十分です.  
-</div>
- 
-<h6> </h6>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・Although I was tired, I did my homework.  
 ・Although I asked everyone, I still couldn’t figure it out.  
 ・Although it was boring, I didn’t complain about it.  
@@ -20279,19 +20330,33 @@ reactable(
 <h6> </h6>
 
 </div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・疲れていたけれども宿題をしました.   
+・皆さんに聞いてみましたけれどもよく分かりませんでした.   
+・つまらなかったけれども文句は言わなかった.   
+・私は日本人ですが、日本語が話せません.  
+・父は日本人だが、母はアメリカ人だ.  
+・この観点は必要ですが、これでは不十分です.  
+</div>
+ 
+<h6> </h6>
+
+</div>
 </div>
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Contrast: Connectives**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② Contrast: Connectives**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・田中さんは背が高い。でも佐藤さんは背が低い.   
-・遊びに行こうよ。でも、まだ宿題が終わってない.   
-・可能性はある。しかし、かなり厳しい.   
-・みんな疲れていた。だが、あきらめなかった.  
-・誰も期待していなかった。ところが、その商品はよく売れた.  
+<div class = "expresstrz">
+・Ms Tanaka is tall. But Ms Sato is short.   
+・Let’s go to play. But, I haven’t finished my homework.   
+・It is possible. However, it is quite demanding.  
+・Everyone was tired. However, they did not give up.  
+・Nobody expected it. Nonetheless, that product sold well.  
 </div>
  
 <h6> </h6>
@@ -20299,12 +20364,12 @@ reactable(
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・Ms Tanaka is tall. But Ms Sato is short.   
-・Let’s go to play. But, I haven’t finished my homework.   
-・It is possible. However, it is quite demanding.  
-・Everyone was tired. However, they did not give up.  
-・Nobody expected it. Nonetheless, that product sold well.  
+<div class = "expresstrz">
+・田中さんは背が高い。でも佐藤さんは背が低い.   
+・遊びに行こうよ。でも、まだ宿題が終わってない.   
+・可能性はある。しかし、かなり厳しい.   
+・みんな疲れていた。だが、あきらめなかった.  
+・誰も期待していなかった。ところが、その商品はよく売れた.  
 </div>
 
 </div>
@@ -20316,29 +20381,12 @@ reactable(
 
 #### Needs {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Expressing needs**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Expressing needs**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・必要に応じて作ります.    
-・健康に注意する必要がある.   
-・何か必要なものがあったら、言ってください.   
-・毎日練習することが必要だ.   
-・お金はいくらぐらいいりますか.   
-・新しいことを始めるには勇気がいる.   
-・お金がないから仕事をしなければならない.    
-・あした朝早いから、早く寝なければいけない.  
-・もっと勉強しなくてはいけません.   
-</div>
- 
-<h6> </h6>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
  ・I will make depending on needs.   
  ・There is a need to be careful about one’s health.   
  ・If there is anything you need, please tell me.   
@@ -20348,6 +20396,23 @@ reactable(
  ・Since I don’t have money, I need to work.  
  ・How much money do you need?    
  ・I need to study more.   
+</div>
+ 
+<h6> </h6>
+
+</div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・必要に応じて作ります.    
+・健康に注意する必要がある.   
+・何か必要なものがあったら、言ってください.   
+・毎日練習することが必要だ.   
+・お金はいくらぐらいいりますか.   
+・新しいことを始めるには勇気がいる.   
+・お金がないから仕事をしなければならない.    
+・あした朝早いから、早く寝なければいけない.  
+・もっと勉強しなくてはいけません.   
 </div>
 
 </div>
@@ -20359,17 +20424,17 @@ reactable(
 
 #### Suggestion {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Advice・Suggestion: Seeking**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Advice・Suggestion: Seeking**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・どうすればいいでしょうか.   
-・どうしたらいいと思う.   
-・何かいい方法はないかな.   
-・ちょっと相談にのってもらえませんか.   
-・アドバイスをお願いします.   
+<div class = "expresstrz">
+・What should I do?     
+・what do you think I should do?   
+・Any suggestions on what to do about it?    
+・Could I consult you about something?   
+・Please advise me.   
 </div>
  
 <h6> </h6>
@@ -20377,12 +20442,12 @@ reactable(
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・What should I do?     
-・what do you think I should do?   
-・Any suggestions on what to do about it?    
-・Could I consult you about something?   
-・Please advise me.   
+<div class = "expresstrz">
+・どうすればいいでしょうか.   
+・どうしたらいいと思う.   
+・何かいい方法はないかな.   
+・ちょっと相談にのってもらえませんか.   
+・アドバイスをお願いします.   
 </div>
 
 </div>
@@ -20394,26 +20459,12 @@ reactable(
 
 #### Prohibition {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Prohibition: Forbid to do**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Prohibition: Forbid to do**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・何も言わないで休んではいけません.   
-・寝坊しては困ります.    
-・予習しないで授業に来てはだめです.   
-・何も言わないで休んじゃいけない.   
-・寝坊しちゃ困る.   
-・予習しないで授業に来てはだめ.   
-</div>
- 
-<h6> </h6>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・Don't take a day off without saying something.   
 ・No oversleeping.    
 ・Don't come to class unprepared.   
@@ -20425,25 +20476,28 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Prohibition: Prohibit by a rule**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・建物の中ではたばこをすってはいけないことになっています.   
-・雑誌は貸出できないことになっています.   
-・休むときは学校に連絡しなければならないことになっています.   
+<div class = "expresstrz">
+・何も言わないで休んではいけません.   
+・寝坊しては困ります.    
+・予習しないで授業に来てはだめです.   
+・何も言わないで休んじゃいけない.   
+・寝坊しちゃ困る.   
+・予習しないで授業に来てはだめ.   
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② Prohibition: Prohibit by a rule**</p>
+1a313a
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・It is a rule that you must not smoke inside the buildings.    
 ・As a rule, you cannot check the magazines out.   
 ・You must notify the school when you are absent.
@@ -20452,16 +20506,27 @@ reactable(
 <h6> </h6>
 
 </div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・建物の中ではたばこをすってはいけないことになっています.   
+・雑誌は貸出できないことになっています.   
+・休むときは学校に連絡しなければならないことになっています.   
+</div>
+ 
+<h6> </h6>
+
+</div>
 </div>
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Prohibition: Not Permitted by law or regulation**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**③ Prohibition: Not Permitted by law or regulation**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・衣服や靴を脱ぐことは禁止されています.    
-・関係者以外の出入りは許されていない.    
+<div class = "expresstrz">
+・Removing clothing and shoes is prohibited.    
+・Unauthorized persons are prohibited from entering.   
 </div>
  
 <h6> </h6>
@@ -20469,9 +20534,9 @@ reactable(
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・Removing clothing and shoes is prohibited.    
-・Unauthorized persons are prohibited from entering.   
+<div class = "expresstrz">
+・衣服や靴を脱ぐことは禁止されています.    
+・関係者以外の出入りは許されていない.    
 </div>
 
 </div>
@@ -20483,26 +20548,12 @@ reactable(
 
 #### Permission {.tabset}
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**① Permission: Seeking with te mo ii**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**① Permission: Seeking with te mo ii**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・この部屋を使ってもいいですか.   
-・この部屋を使ってもよろしいでしょうか.   
-・ペン借りてもいい？    
-・こうなったのか聞いてもいいですか.   
-・お金はあとで払ってもかまいませんか.   
-・たばこすってもかまわない？    
-</div>
- 
-<h6> </h6>
-
-</div>
-<div class = "col-sm-6">
-
-<div class = "expresstr">
+<div class = "expresstrz">
 ・May I use this room?    
 ・May I use this room?    
 ・May I borrow a pen?    
@@ -20514,26 +20565,28 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**② Permission: Seeking with causative + itadaku・morau**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・コンピューターを使わせていただけませんか.    
-・その本ちょっとコピーさせてもらえませんか.   
-・ちょっと待たせてもらえないかな.   
-・荷物おかせてもらえる？    
+<div class = "expresstrz">
+・この部屋を使ってもいいですか.   
+・この部屋を使ってもよろしいでしょうか.   
+・ペン借りてもいい？    
+・こうなったのか聞いてもいいですか.   
+・お金はあとで払ってもかまいませんか.   
+・たばこすってもかまわない？    
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**② Permission: Seeking with causative + itadaku・morau**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・May I use your computer?    
 ・Can I have a copy of that book?   
 ・Could you give us a moment please?   
@@ -20543,25 +20596,26 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**③ Permission: Seeking with causative + itadakitai・moraitai + ndesu ga**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・お名前を書かせていただきたいんですが、よろしいでしょうか.   
-・写真をとらせてもらいたいんですが、いいですか.   
-・そのペン使わせてもらいたいんだけど、いい？   
+<div class = "expresstrz">
+・コンピューターを使わせていただけませんか.    
+・その本ちょっとコピーさせてもらえませんか.   
+・ちょっと待たせてもらえないかな.   
+・荷物おかせてもらえる？    
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**③ Permission: Seeking with causative + itadakitai・moraitai + ndesu ga**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・I would like to ask you to let me put your name. Is it alright?    
 ・I would like you to let me take pictures. Is it ok?    
 ・I want to ask you to let me use the pen. ok?    
@@ -20570,25 +20624,25 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**④ Permission: Seeking with causative + itadaite・moratte + mo ii desu ka**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・もう少し考えさせていただいてもよろしいでしょうか.   
-・ちょっと言わせてもらってもいいですか.    
-・ちょっとここにおかせてもらってもいい？    
+<div class = "expresstrz">
+・お名前を書かせていただきたいんですが、よろしいでしょうか.   
+・写真をとらせてもらいたいんですが、いいですか.   
+・そのペン使わせてもらいたいんだけど、いい？   
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**④ Permission: Seeking with causative + itadaite・moratte + mo ii desu ka**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・Would you let me think about it a little more?    
 ・Would you let me say something?    
 ・Will you let me leave it here for a moment?    
@@ -20597,24 +20651,25 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑤ Permission: Seeking with causative + itadaku・morau + koto (ga) dekiru**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・ここで待たせていただくこと、できますか.    
-・ちょっと考えさせてもらうこと、できる？    
+<div class = "expresstrz">
+・もう少し考えさせていただいてもよろしいでしょうか.   
+・ちょっと言わせてもらってもいいですか.    
+・ちょっとここにおかせてもらってもいい？    
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**⑤ Permission: Seeking with causative + itadaku・morau + koto (ga) dekiru**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・Can you let me wait here?    
 ・Can you let me think about it a little?     
 </div>
@@ -20622,25 +20677,24 @@ reactable(
 <h6> </h6>
 
 </div>
-</div>
-
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑥ Permission: Seeking with causative + itadaku・morau + wake ni wa ikanai deshou ka**</p>
-
-<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・試験を受けさせていただくわけにはいかないでしょうか.   
-・一週間休暇とらせていただくわけにはいかないでしょうか.   
-・車を使わせてもらうわけにはいかないかなあ.   
+<div class = "expresstrz">
+・ここで待たせていただくこと、できますか.    
+・ちょっと考えさせてもらうこと、できる？    
 </div>
  
 <h6> </h6>
 
 </div>
+</div>
+
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**⑥ Permission: Seeking with causative + itadaku・morau + wake ni wa ikanai deshou ka**</p>
+
+<div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
+<div class = "expresstrz">
 ・Could I be allowed to take the exam?     
 ・Is it at all possible for you to let me take a week vacation?    
 ・I wonder if it is at all possible for you to let me use your car?    
@@ -20649,16 +20703,27 @@ reactable(
 <h6> </h6>
 
 </div>
+<div class = "col-sm-6">
+
+<div class = "expresstrz">
+・試験を受けさせていただくわけにはいかないでしょうか.   
+・一週間休暇とらせていただくわけにはいかないでしょうか.   
+・車を使わせてもらうわけにはいかないかなあ.   
+</div>
+ 
+<h6> </h6>
+
+</div>
 </div>
 
-<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #202020; font-weight: bold">**⑦ Permission: Seeking with causative + kudasaru・kureru**</p>
+<p style="font-size:13px; line-height: 1; font-family: Noto Sans JP;  color: #1a313a; font-weight: bold">**⑦ Permission: Seeking with causative + kudasaru・kureru**</p>
 
 <div class = "row">
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・ちょっと休ませてください.    
-・ちょっと考えさせてくれる？    
+<div class = "expresstrz">
+・Please let me rest a little.    
+・Can you let me think about it for a minute?    
 </div>
  
 <h6> </h6>
@@ -20666,9 +20731,9 @@ reactable(
 </div>
 <div class = "col-sm-6">
 
-<div class = "expresstr">
-・Please let me rest a little.    
-・Can you let me think about it for a minute?    
+<div class = "expresstrz">
+・ちょっと休ませてください.    
+・ちょっと考えさせてくれる？    
 </div>
 
 </div>
@@ -20696,18 +20761,18 @@ row_details <- function(index) {
 
   detail <- div(
     # class = "package-detail",
-    pkg_field("S1", "detail-descriptiona" , pkg$S1),
-    pkg_field("T1", "detail-descriptionb" , pkg$T1),
-    pkg_field("S2", "detail-descriptiona" , pkg$S2),
-    pkg_field("T2", "detail-descriptionb" , pkg$T2),
-    pkg_field("S3", "detail-descriptiona" , pkg$S3),
-    pkg_field("T3", "detail-descriptionb" , pkg$T3),
-    pkg_field("S4", "detail-descriptiona" , pkg$S4),
-    pkg_field("T4", "detail-descriptionb" , pkg$T4),
-    pkg_field("S5", "detail-descriptiona" , pkg$S5),
-    pkg_field("T5", "detail-descriptionb" , pkg$T5),
-    pkg_field("S6", "detail-descriptiona" , pkg$S6),
-    pkg_field("T6", "detail-descriptionb" , pkg$T6)
+    pkg_field("T1", "detail-descriptiond" , pkg$T1),
+    pkg_field("S1", "detail-descriptionc" , pkg$S1),
+    pkg_field("T2", "detail-descriptiond" , pkg$T2),
+    pkg_field("S2", "detail-descriptionc" , pkg$S2),
+    pkg_field("T3", "detail-descriptiond" , pkg$T3),
+    pkg_field("S3", "detail-descriptionc" , pkg$S3),
+    pkg_field("T4", "detail-descriptiond" , pkg$T4),
+    pkg_field("S4", "detail-descriptionc" , pkg$S4),
+    pkg_field("T5", "detail-descriptiond" , pkg$T5),
+    pkg_field("S5", "detail-descriptionc" , pkg$S5),
+    pkg_field("T6", "detail-descriptiond" , pkg$T6),
+    pkg_field("S6", "detail-descriptionc" , pkg$S6)
   )
   detail
 }
@@ -20715,7 +20780,7 @@ row_details <- function(index) {
 htmltools::browsable(
   tagList(
     div(
-      div(class = "charts", tags$label("【Category】", `for` = "cat-type-filter"),
+      div(class = "chartz", tags$label("【Category】", `for` = "cat-type-filter"),
       # div(
         tags$select(
           id = "cat-type-filter",
@@ -20799,7 +20864,7 @@ reactable(
         Details <- if (!is.na(Details)) Details else ""
         tag_list <- tagList(
           div(class = "detail-des_func_f", HTML(setmodes.a$Phrase[index])),
-          div(class = "detail-des_func_d", HTML(setmodes.a$Translate[index])),
+          div(class = "detail-des_func_h", HTML(setmodes.a$Translate[index])),
           div(class = "detail-des_func_g", HTML(setmodes.a$Details[index])),
         )
         as.character(tag_list)
@@ -20812,7 +20877,7 @@ reactable(
   rowClass = "my-row",
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", fontSize = "11px", height = 130),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", fontSize = "11px", height = 150),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -35696,7 +35761,7 @@ exvdvg.a <- exvdvg.a[sample(1:nrow(exvdvg.a)),]
 htmltools::browsable(
   tagList(
     div(
-      div(class = "charts", tags$label("【Channel】", `for` = "script-types-filter"),
+      div(class = "chartz", tags$label("【Channel】", `for` = "script-types-filter"),
         tags$select(
           id = "script-types-filter",
           onchange = "Reactable.setFilter('script-filter-table', 'Scripts', this.value)",
@@ -41377,11 +41442,11 @@ reactable(
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
           div(style = list(fontSize = 26, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#800000', fontFamily = 'Zen Kaku Gothic New'), Meaning),
+          div(style = list(fontSize = 11, fontWeight = 400, color = '#800000', fontFamily = 'Zen Kaku Gothic New'), Meaning),
           div(style = list(fontSize = 1, color = '#dee7e7'), "."),
           div(style = list(fontSize = 1, color = '#dee7e7'), "."),
           div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 10, fontWeight = 300, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Translation)
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Translation)
         )
       },
       align = "center"
