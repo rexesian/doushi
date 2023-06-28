@@ -2397,6 +2397,135 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
+### Medical {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.medical <- wordsw %>% select(Medical, Medical.Read, Medical.Trans)
+
+reactable(
+  na.omit(wordsw.medical),
+  columns = list(
+    Medical = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        Medical.Read <- wordsw.medical$Medical.Read[index]
+        Medical.Read <- if (!is.na(Medical.Read)) Medical.Read else ""
+        Medical.Trans <- wordsw.medical$Medical.Trans[index]
+        Medical.Trans <- if (!is.na(Medical.Trans)) Medical.Trans else ""
+        tagList(
+          div(style = list(fontSize = 34, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#026450'), Medical.Read ),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Medical.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Medical.Read  = colDef(show = FALSE),
+    Medical.Trans = colDef(show = FALSE)
+
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#000015",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0.1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "lowercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+
+<div class = "col-sm-6">
+
+```{r, echo=FALSE, message=FALSE}
+
+wordsw.medical <- wordsw.medical %>% na.omit(wordsw.medical)
+wordsw.medical <- wordsw.medical[sample(1:nrow(wordsw.medical)),]
+
+reactable(
+  wordsw.medical,
+  columns = list(
+    Medical = colDef(style= list(background = '#dee7e7'),
+      # Show species under character names
+      cell = function(value, index) {
+        Medical.Read <- wordsw.medical$Medical.Read[index]
+        Medical.Read <- if (!is.na(Medical.Read)) Medical.Read else ""
+        Medical.Trans <- wordsw.medical$Medical.Trans[index]
+        Medical.Trans <- if (!is.na(Medical.Trans)) Medical.Trans else ""
+        tagList(
+          div(style = list(fontSize = 34, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          # div(style = list(fontSize = 11), Feels.Read ),
+          # div(style = list(fontSize = 10), Feels.Trans)
+        )
+      },
+      align = "center"
+    ),
+
+    Medical.Read  = colDef(show = FALSE),
+    Medical.Trans = colDef(show = FALSE)
+
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#000015",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0.1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "lowercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#ffff00')
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+
+```
+
+</div>
+</div>
+
+<!-- ------------------------------------------------------------------------ -->
+
 ### List {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
@@ -2409,6 +2538,7 @@ wordsw.bd <- wordsw %>% select(Body, Body.Read, Body.Trans )%>% rename(Expressio
 wordsw.ps <- wordsw %>% select(Personality, Personality.Read, Personality.Trans )%>% rename(Expression = Personality, Reading = Personality.Read, Meaning = Personality.Trans)
 wordsw.fd <- wordsw %>% select(Food, Food.Read, Food.Trans )%>% rename(Expression = Food, Reading = Food.Read, Meaning = Food.Trans)
 wordsw.fl <- wordsw %>% select(Feels, Feels.Read, Feels.Trans )%>% rename(Expression = Feels, Reading = Feels.Read, Meaning = Feels.Trans)
+wordsw.md <- wordsw %>% select(Medical, Medical.Read, Medical.Trans )%>% rename(Expression = Medical, Reading = Medical.Read, Meaning = Medical.Trans)
 
 wordsw.all <- bind_rows(wordsw.tm, wordsw.th)
 wordsw.all <- bind_rows(wordsw.all, wordsw.pr)
@@ -2417,6 +2547,7 @@ wordsw.all <- bind_rows(wordsw.all, wordsw.bd)
 wordsw.all <- bind_rows(wordsw.all, wordsw.ps)
 wordsw.all <- bind_rows(wordsw.all, wordsw.fd)
 wordsw.all <- bind_rows(wordsw.all, wordsw.fl)
+wordsw.all <- bind_rows(wordsw.all, wordsw.md)
 wordsw.all <- wordsw.all %>% na.omit(wordsw.all)
 wordsw.all <- wordsw.all[sample(1:nrow(wordsw.all)),]
 
