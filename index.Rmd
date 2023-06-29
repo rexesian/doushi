@@ -52,6 +52,15 @@ body{
 <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Righteous&display=swap" rel="stylesheet">
 
 ```{css, echo=FALSE}
+div.expresstrz { background-color: #fceff0; outline-style: solid; outline-color: #fd5c65; outline-width: 0.5px; border-radius: 2px; padding: 1px; padding-top: 10px; 
+  color: 	#264653;
+  font-size: 12.4px;
+  font-weight: 400;
+  font-family: 'Zen Kaku Gothic New', 'M PLUS Rounded 1c', sans-serif;
+}
+```
+
+```{css, echo=FALSE}
 @media(prefers-color-scheme: light) {
   body {
     <!-- background-color: black; -->
@@ -78,6 +87,59 @@ noteswrds <- read_csv("notedb/FRNT-WRD.csv")
 
 <p style="font-size:19px; line-height: 1; font-family: Righteous;  color: #0F2040;">**Cognitive Structured Language Learning**</p>
 
+<h6> </h6>
+<h6> </h6>
+
+<div class = "row">
+<div class = "col-sm-4">
+<div class = "expresstrz">
+・休日はいつもより遅く**起きる**.   
+・昨夜小さな地震が**起こった**.     
+・毎朝、母に**起こして**もらっている.    
+・**寝室**に新しいベッドを置いた.    
+・**寝台車**を利用して旅する.    
+・ジョギング後にシャワーを**浴びる**.    
+・ベランダで**日光浴**をする.    
+・**浴室**のリフォーム百万円かかった.    
+・**お湯**を沸かしてコーヒーを入れる.    
+・**熱湯**を入れて3分持ってください.    
+</div>
+</div>
+<div class = "col-sm-4">
+<div class = "expresstrz">
+・**早起き**するのは気持ちがいい.    
+・パソコンを**再起動**する.   
+・子供が**昼寝**をする.   
+・子供を**寝かす**のは私の役目だ.    
+・川で**水浴び**をする.    
+・クリスマス気分に冷水を**浴びせる**.   
+・家族で**海水浴**に行く.   
+・ゆっくりと**湯船**に浸かる.   
+・海岸で貝を**拾う**.    
+・**拾得物**を交番に届けた.   
+</div>
+</div>
+<div class = "col-sm-4">
+<div class = "expresstrz">
+・毎日うがいと**手洗い**をしている.    
+・**洗面所**で歯を磨く.    
+・**洗濯物**を畳む.   
+・シャツのしわをのばして**干す**.  
+・**食生活**に気をつける.   
+・**活気**のある職場.  
+・通学の時間を**活用**して単語を覚える.   
+・ボランティア**活動**に参加する.   
+・結婚祝いのつつみに**拾万円**と書く.    
+・いらなくなった書類を**捨てる**.   
+</div>
+</div>
+</div>
+
+<br>
+
+<div class = "row">
+<div class = "col-sm-4">
+
 ```{r, echo=FALSE, message=FALSE}
 
 noteswrds <- noteswrds[sample(1:nrow(noteswrds)),]
@@ -92,7 +154,7 @@ reactable(
         Meaning <- noteswrds$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 60, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 40, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
           # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#026450'), Reading),
           # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning),
         )
@@ -108,7 +170,7 @@ reactable(
     selectStyle = list(backgroundColor = "#dee7e7"),
     paginationStyle = list(borderColor = "#061126"),
     pageButtonActiveStyle = list(background = "#dee7e7"),
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 350),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 240),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -130,6 +192,121 @@ reactable(
 )
 
 ```
+
+</div>
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+noteswrds <- noteswrds[sample(1:nrow(noteswrds)),]
+
+reactable(
+  noteswrds,
+  columns = list(
+    Words = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Reading <- noteswrds$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- noteswrds$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 40, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#026450'), Reading),
+          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    selectStyle = list(backgroundColor = "#dee7e7"),
+    paginationStyle = list(borderColor = "#061126"),
+    pageButtonActiveStyle = list(background = "#dee7e7"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 240),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-4">
+
+```{r, echo=FALSE, message=FALSE}
+
+noteswrds <- noteswrds[sample(1:nrow(noteswrds)),]
+
+reactable(
+  noteswrds,
+  columns = list(
+    Words = colDef(style= list(background = '#dee7e7'),
+      cell = function(value, index) {
+        Reading <- noteswrds$Reading[index]
+        Reading <- if (!is.na(Reading)) Reading else ""
+        Meaning <- noteswrds$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 40, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#026450'), Reading),
+          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#800000'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Reading = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    selectStyle = list(backgroundColor = "#dee7e7"),
+    paginationStyle = list(borderColor = "#061126"),
+    pageButtonActiveStyle = list(background = "#dee7e7"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 240),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 <h6> </h6>
 
