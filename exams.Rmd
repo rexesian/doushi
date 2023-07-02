@@ -355,6 +355,7 @@ psggqns<- read_csv("jpim/PSGQTNS-QNS.csv")
 imrtwrds<- read_csv("jpim/IMMRT-QNS.csv")
 cooccurnx<- read_csv("cpdb/CRRXN-CRNS.csv")
 qsnn <- read_csv("jpim/EXMQTNN-QSNTN.csv")
+grmrusl <- read_csv("jpdb/SPKPTNI-GRM.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -2474,6 +2475,123 @@ reactable(
 )
 #   )
 # )
+
+```
+
+------------------------------------------------------------------------
+
+### GD.04: Quick-Note {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# grmrusl <- grmrusl[sample(1:nrow(grmrusl)),]
+
+reactable(
+  grmrusl,
+  columns = list(
+    Expression = colDef(style= list(background = '#edede9'),
+      minWidth = 120, sticky = "left",
+      cell = function(value, index) {
+        Meaning <- grmrusl$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Meaning.1 <- grmrusl$Meaning.1[index]
+        Meaning.1 <- if (!is.na(Meaning.1)) Meaning.1 else ""
+        Meaning.2 <- grmrusl$Meaning.2[index]
+        Meaning.2 <- if (!is.na(Meaning.2)) Meaning.2 else ""
+        # Sentence <- grmrusl$Sentence[index]
+        # Sentence <- if (!is.na(Sentence)) Sentence else ""
+        # Translation <- grmrusl$Translation[index]
+        # Translation <- if (!is.na(Translation)) Translation else ""
+        Structure <- grmrusl$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        Remark <- grmrusl$Remark[index]
+        Remark <- if (!is.na(Remark)) Remark else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Remark),
+          # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning),
+          # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.1),
+          # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.2),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Structure),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), Sentence),
+          # div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(style= list(background = '#e6e7e3'),
+      minWidth = 190,
+      cell = function(value, index) {
+        Meaning.1 <- grmrusl$Meaning.1[index]
+        Meaning.1 <- if (!is.na(Meaning.1)) Meaning.1 else ""
+        Meaning.2 <- grmrusl$Meaning.2[index]
+        Meaning.2 <- if (!is.na(Meaning.2)) Meaning.2 else ""
+        Structure <- grmrusl$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        tagList(
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), value),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.1),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.2),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Structure),
+        )
+      },
+      align = "center"
+    ),
+    # Structure = colDef(style= list(background = '#edede9'),
+    #   minWidth = 80,
+    #   cell = function(value, index) {
+    #     tagList(
+    #       div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+    #     )
+    #   },
+    #   align = "center"
+    # ),
+    Sentence = colDef(style= list(background = '#e0e1dd'),
+      minWidth = 500,
+      cell = function(value, index) {
+        Translation <- grmrusl$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
+          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Remark = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Meaning.1 = colDef(show = FALSE),
+    Meaning.2 = colDef(show = FALSE),
+    Structure = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 4,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 80),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
 
 ```
 
