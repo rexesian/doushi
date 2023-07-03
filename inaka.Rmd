@@ -2882,8 +2882,8 @@ reactable(
 
 syntxm.a <- syntxm
 # syntxm.a <- syntxm.a %>% slice(196:200)
-syntxm.a <- syntxm.a %>% na.omit(syntxm.a)
-# syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),]
+# syntxm.a <- syntxm.a %>% na.omit(syntxm.a)
+syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),]
 
 htmltools::browsable(
   tagList(
@@ -2909,6 +2909,8 @@ reactable(
         Expression <- if (!is.na(Expression)) Expression else ""
         Structure <- syntxm.a$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Structure.1 <- syntxm.a$Structure.1[index]
+        Structure.1 <- if (!is.na(Structure.1)) Structure.1 else ""
         Sentence <- syntxm.a$Sentence[index]
         Sentence <- if (!is.na(Sentence)) Sentence else ""
         Korean <- syntxm.a$Korean[index]
@@ -2917,15 +2919,19 @@ reactable(
         English <- if (!is.na(English)) English else ""
         Remarks <- syntxm.a$Remarks[index]
         Remarks <- if (!is.na(Remarks)) Remarks else ""
+        Remarks.1 <- syntxm.a$Remarks.1[index]
+        Remarks.1 <- if (!is.na(Remarks.1)) Remarks.1 else ""
         Level <- syntxm.a$Level[index]
         Level <- if (!is.na(Level)) Level else ""
         Spanish <- syntxm.a$Spanish[index]
         Spanish <- if (!is.na(Spanish)) Spanish else ""
         tagList(
-          div(style = list(fontSize = 18, fontWeight = 900, color = '#0F2040', fontFamily = 'Righteous'), value),
-          div(style = list(fontSize = 13, fontWeight = 500, color = '#941b0c'), Expression),
+          div(style = list(fontSize = 17, fontWeight = 900, color = '#0F2040', fontFamily = 'Righteous'), value),
+          div(style = list(fontSize = 12, fontWeight = 500, color = '#941b0c'), Expression),
           div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure),
+          div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure.1),
           div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks.1),
           div(style = list(fontSize = 1, color = '#edede9'), "."),
           div(style = list(fontSize = 1, color = '#edede9'), "."),
           div(style = list(fontSize = 1, color = '#edede9'), "."),
@@ -2943,8 +2949,10 @@ reactable(
     
     Expression = colDef(show = FALSE),
     Structure = colDef(show = FALSE),
+    Structure.1 = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
     Remarks = colDef(show = FALSE),
+    Remarks.1 = colDef(show = FALSE),
     Korean = colDef(show = FALSE),
     English = colDef(show = FALSE),
     Spanish = colDef(show = FALSE),
@@ -2954,7 +2962,7 @@ reactable(
   defaultPageSize = 1,
   elementId = "pattern-filter-table",
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 310, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -21725,11 +21733,12 @@ Polite words that are applied by the use of prefixes and verb endings.
 <p style="font-size:13px; line-height: 1; font-family: Roboto Condensed;  color: #1a313a; font-weight: bold">**尊敬語: Honorific Keigo**</p>
 
 <div class = "add_info">
-**⚭　o + V~~masu~~ + ni naru・narimasu**    
-**⚭　go + V~~suru~~ + ni naru・narimasu**    
-**⚭　go + V~~suru~~ + desu**   
-**⚭　o + V~~masu~~ + kudasai**   
-**⚭　go + V~~suru~~ + kudasai**   
+**⚭　o + Vnoun-stem + ni naru・narimasu**    
+**⚭　go + Vsuru-stem + ni naru・narimasu**    
+**⚭　o + Vnoun-stem + desu**   
+**⚭　go + Vsuru-stem + desu**   
+**⚭　o + Vnoun-stem+ kudasai**   
+**⚭　go + Vsuru-stem + kudasai**   
 **⚭　Vspecial**   
 Used when you are talking to or talking about a person of higher authority.    
 </div>
@@ -25863,7 +25872,7 @@ reactable(
 
 #### Usage {.tabset}
 
-##### Time.Relation
+##### Time.Event
 
 <p style="font-size:13px; line-height: 0.5; font-family: Roboto Condensed;  color: #1a313a; font-weight: bold">**① 時 ◦ When**</p>
 
@@ -26263,6 +26272,47 @@ reactable(
 ・サービスレベル目標を達成しつつデータ損失を回避します.    
 ・ネットワーク管理への投資を保護しつつ、優れた付加価値を提供する.      
   
+</div>
+
+<h6> </h6>
+
+<p style="font-size:13px; line-height: 0.5; font-family: Roboto Condensed;  color: #1a313a; font-weight: bold">**⑲ て ◦ Then・And・While・When**</p>
+
+<div class = "add_info">
+**⚭ Vte**     
+・Loosely connects what precedes and follows it.   
+・Describes method and means and then follows the action.   
+・Describes what happens or what action occurs in what state.      
+</div>
+
+<div class = "expresstrz">
+・そのニュースを聞いて泣きたくなった.    
+・彼女はそこに座って本を読んでいることがよくある.        
+・会議の形式や内容に合わせて考えてみてください.    
+・魚を追いかけて下流に下りていってもまた逃げられる.    
+・振り向いて車から離れて下さい.     
+・休暇に訪れて自ら変化を感じ取ってください.   
+・今日は手伝ってくれて感謝してる.     
+</div>
+
+<h6> </h6>
+
+<p style="font-size:13px; line-height: 0.5; font-family: Roboto Condensed;  color: #1a313a; font-weight: bold">**⑳ たら ◦ When**</p>
+
+<div class = "add_info">
+**⚭ Vta + ra**     
+・After the completion of an action or operation another action or event could take place.   
+・Often verb conveys the speaker's volition, thoughts, opinions or advice.   
+</div>
+
+<div class = "expresstrz">
+・制限時間に達したらセッションを中止する.    
+・夏休みになったら国へ帰ります.        
+・京都駅に着いたらわたしに電話をください.    
+・メンテナンスが完了しましたら別途アナウンスいたします.        
+・終わったらロッカーを閉めてね.     
+・お前が戻ったら良い知らせを待ってる.   
+・ブースターの準備ができたら報告します.     
 </div>
 
 <h6> </h6>
@@ -27531,11 +27581,12 @@ Emphasizes something happens only in certain occasions or in particular cases.
 
 ##### Viewpoint.Evaluation
 
-<p style="font-size:13px; line-height: 0.5; font-family: Roboto Condensed;  color: #1a313a; font-weight: bold">**① わりには ◦ Considering**</p>
+<p style="font-size:13px; line-height: 0.5; font-family: Roboto Condensed;  color: #1a313a; font-weight: bold">**① わりには ◦ For・Considering・Despite*</p>
 
 <div class = "add_info">
 **⚭ Vplain・Na-Adj+(na・dearu)・N+(no・dearu) + wari ni (wa)**     
 ・Something is inappropriate considering what would be natural degree.     
+・Unlike the expected or anticipated result from the fact.    
 ・Similar in meaning and usage to にしては but わりには is unique in that it poses problem of inappropriateness.    
 </div>
 
@@ -28421,14 +28472,49 @@ syntxm.a <- syntxm
 reactable(
   syntxm.a,
   columns = list(
-    Expression = colDef(style= list(background = '#edede9'),
+    Expression = colDef(style= list(background = '#edede9'), minWidth = 230, sticky = "left",
       cell = function(value, index) {
         Meaning <- syntxm.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         Structure <- syntxm.a$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Structure.1 <- syntxm.a$Structure.1[index]
+        Structure.1 <- if (!is.na(Structure.1)) Structure.1 else ""
         Sentence <- syntxm.a$Sentence[index]
         Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Korean <- syntxm.a$Korean[index]
+        Korean <- if (!is.na(Korean)) Korean else ""
+        English <- syntxm.a$English[index]
+        English <- if (!is.na(English)) English else ""
+        Remarks <- syntxm.a$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        Remarks.1 <- syntxm.a$Remarks.1[index]
+        Remarks.1 <- if (!is.na(Remarks.1)) Remarks.1 else ""
+        Spanish <- syntxm.a$Spanish[index]
+        Spanish <- if (!is.na(Spanish)) Spanish else ""
+        tagList(
+          div(style = list(fontSize = 12, fontWeight = 900, color = '#1a313a', fontFamily = 'Righteous'), Meaning),
+          div(style = list(fontSize = 13, fontWeight = 500, color = '#941b0c'), value),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure.1),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Remarks),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Remarks.1),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#0F2040'), Korean),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#0F2040'), English),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
+        )
+      },
+      align = "center"
+    ),
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 400,
+      cell = function(value, index) {
         Korean <- syntxm.a$Korean[index]
         Korean <- if (!is.na(Korean)) Korean else ""
         English <- syntxm.a$English[index]
@@ -28438,39 +28524,30 @@ reactable(
         Spanish <- syntxm.a$Spanish[index]
         Spanish <- if (!is.na(Spanish)) Spanish else ""
         tagList(
-          div(style = list(fontSize = 18, fontWeight = 900, color = '#1a313a', fontFamily = 'Righteous'), Meaning),
-          div(style = list(fontSize = 13, fontWeight = 500, color = '#941b0c'), value),
-          div(style = list(fontSize = 11, fontWeight = 500, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure),
-          div(style = list(fontSize = 10, fontWeight = 300, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Remarks),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 16, fontWeight = 400, color = '#0F2040'), Korean),
-          div(style = list(fontSize = 11, fontWeight = 400, color = '#0F2040'), English),
-          div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
+          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 13, fontWeight = 400, color = '#0F2040'), Korean),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450'), English),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
         )
       },
-      align = "center"
-    ),
-    
+      align = "left"
+    ),   
     Meaning = colDef(show = FALSE),
     Structure = colDef(show = FALSE),
+    Structure.1 = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
     Remarks = colDef(show = FALSE),
+    Remarks.1 = colDef(show = FALSE),
     Korean = colDef(show = FALSE),
     English = colDef(show = FALSE),
     Spanish = colDef(show = FALSE),
     Level = colDef(show = FALSE)
   ),
   rowClass = "my-row",
-  defaultPageSize = 1,
+  defaultPageSize = 3,
   theme = reactableTheme(
     # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 260, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 130, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -28478,7 +28555,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -29063,7 +29140,7 @@ reactable(
     Level = colDef(show = FALSE)
   ),
   rowClass = "my-row",
-  defaultPageSize = 7,
+  defaultPageSize = 6,
   theme = reactableTheme(
     # Vertically center cells
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
@@ -38055,66 +38132,66 @@ reactable(
 
 <!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-##### Functions {.tabset}
+<!-- ##### Functions {.tabset} -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-mstryfunc.a <- mstryfunc
-mstryfunc.a <- mstryfunc.a[sample(1:nrow(mstryfunc.a)),]
+<!-- mstryfunc.a <- mstryfunc -->
+<!-- mstryfunc.a <- mstryfunc.a[sample(1:nrow(mstryfunc.a)),] -->
 
-reactable(
-  mstryfunc.a,
-  columns = list(
-    Function = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
-      cell = function(value, index) {
-        Pattern <- mstryfunc.a$Pattern[index]
-        Pattern <- if (!is.na(Pattern)) Pattern else ""
-        Details <- mstryfunc.a$Details[index]
-        Details <- if (!is.na(Details)) Details else ""
-        tag_list <- tagList(
-          div(class = "detail-des_func_a", HTML(mstryfunc.a$Function[index])),
-          div(class = "detail-des_func_d", HTML(mstryfunc.a$Pattern[index])),
-          div(class = "detail-des_func_e", HTML(mstryfunc.a$Details[index])),
-        )
-        as.character(tag_list)
-      },
-      align = "center"
-    ),
-    Sample = colDef(style= list(background = '#edede9'), html = TRUE, minWidth = 250,
-      cell = function(value, index) {
-        Translate <- mstryfunc.a$Translate[index]
-        Translate <- if (!is.na(Translate)) Translate else ""
-        tag_list <- tagList(
-          div(class = "detail-des_func_b", HTML(mstryfunc.a$Sample[index])),
-          div(class = "detail-des_func_c", HTML(mstryfunc.a$Translate[index]))
-        )
-        as.character(tag_list)
-      },
-      align = "left"
-    ), 
-    Pattern = colDef(show = FALSE),
-    Details = colDef(show = FALSE),
-    Translate = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", height = 600, fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, paginationType = "simple", highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
+<!-- reactable( -->
+<!--   mstryfunc.a, -->
+<!--   columns = list( -->
+<!--     Function = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200, -->
+<!--       cell = function(value, index) { -->
+<!--         Pattern <- mstryfunc.a$Pattern[index] -->
+<!--         Pattern <- if (!is.na(Pattern)) Pattern else "" -->
+<!--         Details <- mstryfunc.a$Details[index] -->
+<!--         Details <- if (!is.na(Details)) Details else "" -->
+<!--         tag_list <- tagList( -->
+<!--           div(class = "detail-des_func_a", HTML(mstryfunc.a$Function[index])), -->
+<!--           div(class = "detail-des_func_d", HTML(mstryfunc.a$Pattern[index])), -->
+<!--           div(class = "detail-des_func_e", HTML(mstryfunc.a$Details[index])), -->
+<!--         ) -->
+<!--         as.character(tag_list) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Sample = colDef(style= list(background = '#edede9'), html = TRUE, minWidth = 250, -->
+<!--       cell = function(value, index) { -->
+<!--         Translate <- mstryfunc.a$Translate[index] -->
+<!--         Translate <- if (!is.na(Translate)) Translate else "" -->
+<!--         tag_list <- tagList( -->
+<!--           div(class = "detail-des_func_b", HTML(mstryfunc.a$Sample[index])), -->
+<!--           div(class = "detail-des_func_c", HTML(mstryfunc.a$Translate[index])) -->
+<!--         ) -->
+<!--         as.character(tag_list) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ),  -->
+<!--     Pattern = colDef(show = FALSE), -->
+<!--     Details = colDef(show = FALSE), -->
+<!--     Translate = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", height = 600, fontSize = "11px"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, paginationType = "simple", highlight = TRUE, -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 ------------------------------------------------------------------------
 

@@ -219,6 +219,30 @@ div.expresstr { outline-style: solid; outline-color: #0F2040; outline-width: 1px
   padding-bottom: 8px;
 }
 
+.detail-tags_a {
+  color: 	#0F2040;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: 'Open Sans';
+  background-color: #e0e1dd;
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.detail-tags_b {
+  color: 	#01161e;
+  font-size: 10px;
+  font-weight: 300;
+  font-family: 'Zen Kaku Gothic New';
+  background-color: #e0e1dd;
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 .detail-bar_sep {
   color: 	#e0e1dd;
 }
@@ -356,6 +380,7 @@ imrtwrds<- read_csv("jpim/IMMRT-QNS.csv")
 cooccurnx<- read_csv("cpdb/CRRXN-CRNS.csv")
 qsnn <- read_csv("jpim/EXMQTNN-QSNTN.csv")
 grmrusl <- read_csv("jpdb/SPKPTNI-GRM.csv")
+gclass <- read_csv("jpim/GRMMEANN-GMN.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -2340,8 +2365,9 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-syntxm.a <- syntxm %>% select(Expression, Structure, Meaning, Remarks, Sentence, Korean, English)
-syntxm.a <- syntxm.a %>% na.omit(syntxm.a)
+syntxm.a <- syntxm
+# syntxm.a <- syntxm.a %>% na.omit(syntxm.a)
+syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),]
 syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),]
 
 reactable(
@@ -2353,6 +2379,8 @@ reactable(
         Expression <- if (!is.na(Expression)) Expression else ""
         Structure <- syntxm.a$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Structure.1 <- syntxm.a$Structure.1[index]
+        Structure.1 <- if (!is.na(Structure.1)) Structure.1 else ""
         Sentence <- syntxm.a$Sentence[index]
         Sentence <- if (!is.na(Sentence)) Sentence else ""
         Korean <- syntxm.a$Korean[index]
@@ -2361,11 +2389,15 @@ reactable(
         English <- if (!is.na(English)) English else ""
         Remarks <- syntxm.a$Remarks[index]
         Remarks <- if (!is.na(Remarks)) Remarks else ""
+        Remarks.1 <- syntxm.a$Remarks.1[index]
+        Remarks.1 <- if (!is.na(Remarks.1)) Remarks.1 else ""
         tagList(
           div(style = list(fontSize = 22, fontWeight = 900, color = '#0F2040', fontFamily = 'Righteous'), value),
           div(style = list(fontSize = 13, fontWeight = 500, color = '#941b0c'), Expression),
           div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure),
+          div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure.1),
           div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks.1),
           div(style = list(fontSize = 1, color = '#edede9'), "."),
           div(style = list(fontSize = 1, color = '#edede9'), "."),
           div(style = list(fontSize = 1, color = '#edede9'), "."),
@@ -2382,16 +2414,19 @@ reactable(
     
     Expression = colDef(show = FALSE),
     Structure = colDef(show = FALSE),
+    Structure.1 = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
     Remarks = colDef(show = FALSE),
+    Remarks.1 = colDef(show = FALSE),
+    Level = colDef(show = FALSE),
     Korean = colDef(show = FALSE),
+    Spanish = colDef(show = FALSE),
     English = colDef(show = FALSE)
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
   theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 260, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -2480,106 +2515,78 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### GD.04: Quick-Note {.tabset}
+### GD.04: Class-Type {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
-# grmrusl <- grmrusl[sample(1:nrow(grmrusl)),]
+gclass.a <- gclass %>% drop_na(Structure)
+
+gclass.a <- gclass.a[sample(1:nrow(gclass.a)),]
+# gclass.a <- gclass.a %>% na.omit(gclass.a)
 
 reactable(
-  grmrusl,
+  gclass.a,
   columns = list(
-    Expression = colDef(style= list(background = '#edede9'),
-      minWidth = 120, sticky = "left",
+    Pattern = colDef(style= list(background = '#edede9'),
+      minWidth = 200, sticky = "left",
       cell = function(value, index) {
-        Meaning <- grmrusl$Meaning[index]
+        Meaning <- gclass.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Meaning.1 <- grmrusl$Meaning.1[index]
-        Meaning.1 <- if (!is.na(Meaning.1)) Meaning.1 else ""
-        Meaning.2 <- grmrusl$Meaning.2[index]
-        Meaning.2 <- if (!is.na(Meaning.2)) Meaning.2 else ""
-        # Sentence <- grmrusl$Sentence[index]
-        # Sentence <- if (!is.na(Sentence)) Sentence else ""
-        # Translation <- grmrusl$Translation[index]
-        # Translation <- if (!is.na(Translation)) Translation else ""
-        Structure <- grmrusl$Structure[index]
-        Structure <- if (!is.na(Structure)) Structure else ""
-        Remark <- grmrusl$Remark[index]
-        Remark <- if (!is.na(Remark)) Remark else ""
         tagList(
-          div(style = list(fontSize = 15, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
-          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Remark),
-          # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning),
-          # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.1),
-          # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.2),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Structure),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 1, color = '#edede9'), "."),
-          # div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), Sentence),
-          # div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
+          div(style = list(fontSize = 14, fontWeight = 600, fontFamily = 'Roboto Condensed', color = '#01161e'), value),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Meaning),
         )
       },
       align = "center"
     ),
-    Meaning = colDef(style= list(background = '#e6e7e3'),
-      minWidth = 190,
+    Remarks = colDef(style= list(background = '#e6e7e3'),
+      minWidth = 250,
       cell = function(value, index) {
-        Meaning.1 <- grmrusl$Meaning.1[index]
-        Meaning.1 <- if (!is.na(Meaning.1)) Meaning.1 else ""
-        Meaning.2 <- grmrusl$Meaning.2[index]
-        Meaning.2 <- if (!is.na(Meaning.2)) Meaning.2 else ""
-        Structure <- grmrusl$Structure[index]
+        Structure <- gclass.a$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks.1 <- gclass.a$Remarks.1[index]
+        Remarks.1 <- if (!is.na(Remarks.1)) Remarks.1 else ""
+        Remarks.2 <- gclass.a$Remarks.2[index]
+        Remarks.2 <- if (!is.na(Remarks.2)) Remarks.2 else ""
         tagList(
           div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), value),
-          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.1),
-          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.2),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Structure),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Remarks.1),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Remarks.2),
+          div(style = list(fontSize = 1, color = '#e6e7e3'), "."),
+          div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Roboto Condensed', color = '#0F2040'), Structure),
         )
       },
       align = "center"
     ),
-    # Structure = colDef(style= list(background = '#edede9'),
-    #   minWidth = 80,
-    #   cell = function(value, index) {
-    #     tagList(
-    #       div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
-    #     )
-    #   },
-    #   align = "center"
-    # ),
     Sentence = colDef(style= list(background = '#e0e1dd'),
-      minWidth = 500,
+      minWidth = 500, html = TRUE,
       cell = function(value, index) {
-        Translation <- grmrusl$Translation[index]
+        Translation <- gclass.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
-          div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
+        # tagList(
+        #   div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
+        #   div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
+        # )
+        tag_list <- tagList(
+          div(class = "detail-tags_a", HTML(gclass.a$Sentence[index])),
+          div(class = "detail-tags_b", HTML(gclass.a$Translation[index])),
         )
+        as.character(tag_list)
       },
       align = "left"
     ),
-    Remark = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    Remarks.1 = colDef(show = FALSE),
+    Remarks.2 = colDef(show = FALSE),
     Meaning = colDef(show = FALSE),
-    Meaning.1 = colDef(show = FALSE),
-    Meaning.2 = colDef(show = FALSE),
     Structure = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
     Translation = colDef(show = FALSE)
   ),
   rowClass = "my-row",
-  defaultPageSize = 4,
+  defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 80),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -2594,6 +2601,123 @@ reactable(
 )
 
 ```
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ### GD.05: Quick-Note {.tabset} -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- # grmrusl <- grmrusl[sample(1:nrow(grmrusl)),] -->
+
+<!-- reactable( -->
+<!--   grmrusl, -->
+<!--   columns = list( -->
+<!--     Expression = colDef(style= list(background = '#edede9'), -->
+<!--       minWidth = 190, sticky = "left", -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- grmrusl$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Meaning.1 <- grmrusl$Meaning.1[index] -->
+<!--         Meaning.1 <- if (!is.na(Meaning.1)) Meaning.1 else "" -->
+<!--         Meaning.2 <- grmrusl$Meaning.2[index] -->
+<!--         Meaning.2 <- if (!is.na(Meaning.2)) Meaning.2 else "" -->
+<!--         # Sentence <- grmrusl$Sentence[index] -->
+<!--         # Sentence <- if (!is.na(Sentence)) Sentence else "" -->
+<!--         # Translation <- grmrusl$Translation[index] -->
+<!--         # Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         Structure <- grmrusl$Structure[index] -->
+<!--         Structure <- if (!is.na(Structure)) Structure else "" -->
+<!--         Remark <- grmrusl$Remark[index] -->
+<!--         Remark <- if (!is.na(Remark)) Remark else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 15, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Remark), -->
+<!--           # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning), -->
+<!--           # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.1), -->
+<!--           # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.2), -->
+<!--           # div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           # div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           # div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), Structure), -->
+<!--           # div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           # div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           # div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           # div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           # div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           # div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           # div(style = list(fontSize = 17, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), Sentence), -->
+<!--           # div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Meaning = colDef(style= list(background = '#e6e7e3'), -->
+<!--       minWidth = 230, -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning.1 <- grmrusl$Meaning.1[index] -->
+<!--         Meaning.1 <- if (!is.na(Meaning.1)) Meaning.1 else "" -->
+<!--         Meaning.2 <- grmrusl$Meaning.2[index] -->
+<!--         Meaning.2 <- if (!is.na(Meaning.2)) Meaning.2 else "" -->
+<!--         Structure <- grmrusl$Structure[index] -->
+<!--         Structure <- if (!is.na(Structure)) Structure else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), value), -->
+<!--           div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.1), -->
+<!--           div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Meaning.2), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Roboto Condensed', color = '#0F2040'), Structure), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     # Structure = colDef(style= list(background = '#edede9'), -->
+<!--     #   minWidth = 80, -->
+<!--     #   cell = function(value, index) { -->
+<!--     #     tagList( -->
+<!--     #       div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value), -->
+<!--     #     ) -->
+<!--     #   }, -->
+<!--     #   align = "center" -->
+<!--     # ), -->
+<!--     Sentence = colDef(style= list(background = '#e0e1dd'), -->
+<!--       minWidth = 450, -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- grmrusl$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ), -->
+<!--     Remark = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Meaning.1 = colDef(show = FALSE), -->
+<!--     Meaning.2 = colDef(show = FALSE), -->
+<!--     Structure = colDef(show = FALSE), -->
+<!--     Sentence = colDef(show = FALSE), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 4, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 85), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE, -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 ------------------------------------------------------------------------
 
