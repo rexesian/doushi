@@ -1470,18 +1470,21 @@ reactable(
 
 ### SC.03: Kanji-Recollect {.tabset}
 
-#### LV3 {.tabset}
+#### L3 {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
-
-knjrv3 <- knjrv3[sample(1:nrow(knjrv3)),]
+knjrv3.a <- knjrv3 %>% slice(1:44)
+knjrv3.a <- knjrv3.a[sample(1:nrow(knjrv3.a)),]
+knjrv3.b <- knjrv3 %>% slice(45:74)
+knjrv3.b <- knjrv3.b[sample(1:nrow(knjrv3.b)),]
+knjrv3.c <- bind_rows(knjrv3.a, knjrv3.b)
 
 reactable(
-  knjrv3,
+  knjrv3.c,
   columns = list(
     Kanji.A = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
       cell = function(value, index) {
-        Read.A <- knjrv3$Read.A[index]
+        Read.A <- knjrv3.c$Read.A[index]
         Read.A <- if (!is.na(Read.A)) Read.A else ""
         tagList(
           div(style = list(fontSize = 19, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
@@ -1493,7 +1496,7 @@ reactable(
     Mean.A = colDef(align = "center", minWidth = 120, style = list(fontSize = 12, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
     Kanji.B = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
       cell = function(value, index) {
-        Read.B <- knjrv3$Read.B[index]
+        Read.B <- knjrv3.c$Read.B[index]
         Read.B <- if (!is.na(Read.B)) Read.B else ""
         tagList(
           div(style = list(fontSize = 19, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
@@ -1505,7 +1508,7 @@ reactable(
     Mean.B = colDef(align = "center", minWidth = 120, style = list(fontSize = 12, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
     Kanji.C = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
       cell = function(value, index) {
-        Read.C <- knjrv3$Read.C[index]
+        Read.C <- knjrv3.c$Read.C[index]
         Read.C <- if (!is.na(Read.C)) Read.C else ""
         tagList(
           div(style = list(fontSize = 19, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
@@ -1548,11 +1551,11 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### LV2 {.tabset}
+#### L2 {.tabset}
 
 ------------------------------------------------------------------------
 
-#### LV1 {.tabset}
+#### L1 {.tabset}
 
 ------------------------------------------------------------------------
 
