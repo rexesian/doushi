@@ -1606,7 +1606,7 @@ reactable(
 ##### Nouns {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
-knjrv3.b <- knjrv3 %>% slice(45:265)
+knjrv3.b <- knjrv3 %>% slice(45:281)
 knjrv3.b <- knjrv3.b[sample(1:nrow(knjrv3.b)),]
 # knjrv3.c <- bind_rows(knjrv3.a, knjrv3.b)
 knjrv3.c <- knjrv3.b
@@ -5551,9 +5551,21 @@ reactable(
 ・**Declarative**：Describe and provides meaning.    
 ・**Imperative**: Gives some command or instructions.    
 ・**Conditional**：Set up conditions either hypothetical or factual.       
+・**Interrogative**：For asking questions.     
 </div>
 <h6> </h6>
 
+<div class = "highlightpz">
+・**③ Function** ・Construction          
+・Usual pattern or style of a sentence depending on the function intended to carry out or perform.     
+</div>
+<div class = "expresstrl">
+・**Prohibition**：Usual pattern or style to prohibit someone to do.    
+・**Suggestion**: Usual pattern or style to form a suggestion.    
+・**Permission**：Usual pattern or style to give or ask a permission.       
+・**Request**：Usual pattern or style for requesting something.           
+</div>
+<h6> </h6>
 ------------------------------------------------------------------------
 
 #### Pattern
@@ -9437,12 +9449,26 @@ scknj3.nt <- bind_rows(scknj3.nt, scknj3.n.w3)
 
 scknj3.nt <- scknj3.nt[sample(1:nrow(scknj3.nt)),]
 
+scknj3.nn <- scknj3  %>% slice(356:370)
+# scknj3.nn
+ 
+scknj3.nn.w1 <- scknj3.nn %>% select(W1, R1, M1) %>% rename(Words = W1, Reading = R1, Meaning = M1)
+scknj3.nn.w2 <- scknj3.nn %>% select(W2, R2, M2) %>% rename(Words = W2, Reading = R2, Meaning = M2)
+scknj3.nn.w3 <- scknj3.nn %>% select(W3, R3, M3) %>% rename(Words = W3, Reading = R3, Meaning = M3)
+
+scknj3.nnt <- bind_rows(scknj3.nn.w1, scknj3.nn.w2)
+scknj3.nnt <- bind_rows(scknj3.nnt, scknj3.nn.w3)
+ 
+scknj3.nnt <- scknj3.nnt[sample(1:nrow(scknj3.nnt)),]
+
+scknj3.nnta <- bind_rows(scknj3.nnt, scknj3.nt)
+
 reactable(
-  scknj3.nt,
+  scknj3.nnta,
   columns = list(
     Words = colDef(align = "center", style= list(background = '#e0e1dd'),
       cell = function(value, index) {
-        Meaning <- scknj3.nt$Meaning[index]
+        Meaning <- scknj3.nnta$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
           div(style = list(fontSize = 40, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
