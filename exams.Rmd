@@ -432,6 +432,7 @@ grmrusl <- read_csv("jpdb/SPKPTNI-GRM.csv")
 gclass <- read_csv("jpim/GRMMEANN-GMN.csv")
 knjrv3 <- read_csv("cpdb/KNRJ3-LVL3.csv")
 charkw <- read_csv("cpdb/CHRW-WCK.csv")
+scrptrvw <- read_csv("jpdb/SCRPTRVW-KNJD5.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -1947,7 +1948,7 @@ charkw.a <- charkw.a[sample(1:nrow(charkw.a)),]
 reactable(
   charkw.a,
   columns = list(
-    Char.T = colDef(style= list(background = '#e0e1dd'), minWidth = 80,
+    Char.T = colDef(style= list(background = '#e0e1dd'), minWidth = 90,
       cell = function(value, index) {
         Reading.T <- charkw.a$Reading.T[index]
         Reading.T <- if (!is.na(Reading.T)) Reading.T else ""
@@ -1999,7 +2000,7 @@ charkw.a <- charkw.a[sample(1:nrow(charkw.a)),]
 reactable(
   charkw.a,
   columns = list(
-    Char.F = colDef(style= list(background = '#e0e1dd'), minWidth = 80,
+    Char.F = colDef(style= list(background = '#e0e1dd'), minWidth = 90,
       cell = function(value, index) {
         Reading.F <- charkw.a$Reading.F[index]
         Reading.F <- if (!is.na(Reading.F)) Reading.F else ""
@@ -9703,6 +9704,45 @@ reactable(
     )
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Script {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+scrptrvw.a <- scrptrvw %>% select(W1, W2, W3)
+scrptrvw.a <- scrptrvw.a %>% pivot_longer(everything())
+scrptrvw.a <- scrptrvw.a %>% rename(Word = value)
+scrptrvw.a <- na.omit(scrptrvw.a) %>% select(Word)
+scrptrvw.a <- scrptrvw.a[sample(1:nrow(scrptrvw.a)),]
+
+# scrptwrdx.a <- scrptwrdx %>% select(Word)
+# scrptwrdx.a <- scrptwrdx.a[sample(1:nrow(scrptwrdx.a)),]
+# scrptrvw.b <- bind_rows(scrptrvw.a, scrptwrdx.a)
+# scrptrvw.b <- scrptrvw.b[sample(1:nrow(scrptrvw.b)),]
+
+reactable(
+  scrptrvw.a,
+  columns = list(
+    Word = colDef(align = "center", style = list(fontSize = 40, fontWeight = 600, fontFamily = 'Open Sans', background = '#dee7e7', color = '#0F2040'))
+  ),
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
