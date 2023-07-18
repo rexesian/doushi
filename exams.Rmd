@@ -431,6 +431,7 @@ qsnn <- read_csv("jpim/EXMQTNN-QSNTN.csv")
 grmrusl <- read_csv("jpdb/SPKPTNI-GRM.csv")
 gclass <- read_csv("jpim/GRMMEANN-GMN.csv")
 knjrv3 <- read_csv("cpdb/KNRJ3-LVL3.csv")
+charkw <- read_csv("cpdb/CHRW-WCK.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -1686,7 +1687,7 @@ reactable(
 ##### Verbs {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
-knjrv3.b <- knjrv3 %>% slice(401:420)
+knjrv3.b <- knjrv3 %>% slice(401:430)
 knjrv3.b <- knjrv3.b[sample(1:nrow(knjrv3.b)),]
 # knjrv3.c <- bind_rows(knjrv3.a, knjrv3.b)
 knjrv3.c <- knjrv3.b
@@ -1932,6 +1933,112 @@ reactable(
 ------------------------------------------------------------------------
 
 #### L1 {.tabset}
+
+------------------------------------------------------------------------
+
+### SC.04: Kanji-Expanded {.tabset}
+
+#### C3 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+charkw.a <- charkw %>% select(Char.T, Reading.T,Meaning.T)
+charkw.a <- charkw.a[sample(1:nrow(charkw.a)),]
+
+reactable(
+  charkw.a,
+  columns = list(
+    Char.T = colDef(style= list(background = '#e0e1dd'), minWidth = 80,
+      cell = function(value, index) {
+        Reading.T <- charkw.a$Reading.T[index]
+        Reading.T <- if (!is.na(Reading.T)) Reading.T else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Reading.T),
+        )
+      },
+      align = "center"
+    ),
+    Meaning.T = colDef(align = "left", minWidth = 250, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#edede9')),
+    Reading.T = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#f5f5f5",
+      color = "#f5f5f5",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### C4 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+charkw.a <- charkw %>% select(Char.F, Reading.F, Meaning.F)
+charkw.a <- charkw.a[sample(1:nrow(charkw.a)),]
+
+reactable(
+  charkw.a,
+  columns = list(
+    Char.F = colDef(style= list(background = '#e0e1dd'), minWidth = 80,
+      cell = function(value, index) {
+        Reading.F <- charkw.a$Reading.F[index]
+        Reading.F <- if (!is.na(Reading.F)) Reading.F else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Reading.F),
+        )
+      },
+      align = "center"
+    ),
+    Meaning.F = colDef(align = "left", minWidth = 250, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#edede9')),
+    Reading.F = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#f5f5f5",
+      color = "#f5f5f5",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
@@ -3393,7 +3500,7 @@ reactable(
   rowClass = "my-row",
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70, borderColor = "#f5f5f5"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -3426,7 +3533,7 @@ reactable(
       "&:hover, &:focus" = list(color = '#dee7e7')
     )
   ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, highlight = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3527,7 +3634,7 @@ reactable(
   rowClass = "my-row",
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70, borderColor = "#f5f5f5"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -3560,7 +3667,7 @@ reactable(
       "&:hover, &:focus" = list(color = '#edede9')
     )
   ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, highlight = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -3648,7 +3755,7 @@ reactable(
   rowClass = "my-row",
   defaultPageSize = 5,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70, borderColor = "#f5f5f5"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -3681,7 +3788,7 @@ reactable(
       "&:hover, &:focus" = list(color = '#e7e5d9')
     )
   ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, highlight = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
