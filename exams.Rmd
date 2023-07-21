@@ -433,6 +433,7 @@ gclass <- read_csv("jpim/GRMMEANN-GMN.csv")
 knjrv3 <- read_csv("cpdb/KNRJ3-LVL3.csv")
 charkw <- read_csv("cpdb/CHRW-WCK.csv")
 scrptrvw <- read_csv("jpdb/SCRPTRVW-KNJD5.csv")
+jtst <- read_csv("cpdb/JTST-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -5433,7 +5434,43 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### QN.03: Hooked-Clips {.tabset}
+### QN.03: Quiz-Quest {.tabset}
+
+
+```{r, echo=FALSE, message=FALSE}
+
+jtst.a <- jtst %>% select(Question, Options)
+jtst.a <- jtst.a[sample(1:nrow(na.omit(jtst.a))),] 
+jtst.a <- jtst.a[sample(1:nrow(jtst.a)),]
+
+reactable(
+  na.omit(jtst.a),
+  columns = list(
+    Question = colDef(minWidth = 120, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd', lineHeight = 2)),
+    Options = colDef(minWidth = 80, align = "left", html = TRUE, style = list(fontSize = 12, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#edede9', lineHeight = 2))
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 7,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### QN.04: Hook-Clips {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
