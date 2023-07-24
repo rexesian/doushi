@@ -441,6 +441,7 @@ scrptrvw <- read_csv("jpdb/SCRPTRVW-KNJD5.csv")
 jtst <- read_csv("cpdb/JTST-QNS.csv")
 pwrd <- read_csv("cpdb/PWR-QNS.csv")
 frst <- read_csv("cpdb/MRI-QNS.csv")
+cuse <- read_csv("cpdb/CHE-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -5018,7 +5019,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### QN.02: Level-Insight {.tabset}
+### QN.02: Level-Sight {.tabset}
 
 #### N5
 
@@ -5581,6 +5582,62 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+### QN.07: Select-Use {.tabset}
+
+
+```{r, echo=FALSE, message=FALSE}
+
+cuse.a <- cuse %>% select(Question, Options.1, Options.2, Options.3, Options.4 ) %>% rename(Options = Options.1)
+cuse.a <- cuse.a[sample(1:nrow(na.omit(cuse.a))),] 
+cuse.a <- cuse.a[sample(1:nrow(cuse.a)),]
+
+reactable(
+  na.omit(cuse.a),
+  columns = list(
+    Question = colDef(minWidth = 30, align = "center", html = TRUE, style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd', lineHeight = 2)),
+    Options = colDef(style= list(minWidth = 200, background = '#edede9'),
+      cell = function(value, index) {
+        Options.2 <- cuse.a$Options.2[index]
+        Options.2 <- if (!is.na(Options.2)) Options.2 else ""
+        Options.3 <- cuse.a$Options.3[index]
+        Options.3 <- if (!is.na(Options.3)) Options.3 else ""
+        Options.4 <- cuse.a$Options.4[index]
+        Options.4 <- if (!is.na(Options.4)) Options.4 else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 300, color = '#0F2040', lineHeight = 1.9, fontFamily = 'Open Sans'), "① ", value),
+          div(style = list(fontSize = 13, fontWeight = 300, color = '#0F2040', lineHeight = 1.9, fontFamily = 'Open Sans'), "② ", Options.2),
+          div(style = list(fontSize = 13, fontWeight = 300, color = '#0F2040', lineHeight = 1.9, fontFamily = 'Open Sans'), "③ ", Options.3),
+          div(style = list(fontSize = 13, fontWeight = 300, color = '#0F2040', lineHeight = 1.9, fontFamily = 'Open Sans'), "④ ", Options.4),
+        )
+      },
+      align = "left"
+    ),
+    Options.2 = colDef(show = FALSE),
+    Options.3 = colDef(show = FALSE),
+    Options.4 = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 130),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE, resizable = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 
 <!-- ------------------------------------------------------------------------ -->
 
