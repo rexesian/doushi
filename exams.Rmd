@@ -369,7 +369,8 @@ library(shiny)
 library(hrbrthemes)
 library(ggthemes)
 library(htmlwidgets)
-# library(webshot)
+library(webshot)
+webshot::install_phantomjs(version = "2.1.1", baseURL = "https://github.com/wch/webshot/releases/download/v0.3.1/", force = FALSE)
 options(readr.show_col_types = FALSE, max.print=10000, always_allow_html = TRUE)
 ```
 
@@ -439,6 +440,7 @@ charkw <- read_csv("cpdb/CHRW-WCK.csv")
 scrptrvw <- read_csv("jpdb/SCRPTRVW-KNJD5.csv")
 jtst <- read_csv("cpdb/JTST-QNS.csv")
 pwrd <- read_csv("cpdb/PWR-QNS.csv")
+frst <- read_csv("cpdb/MRI-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -5511,7 +5513,43 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### QN.05: Hook-Clips {.tabset}
+### QN.05: Find-Forest {.tabset}
+
+
+```{r, echo=FALSE, message=FALSE}
+
+frst.a <- frst %>% select(Question, Options)
+frst.a <- frst.a[sample(1:nrow(na.omit(frst.a))),] 
+frst.a <- frst.a[sample(1:nrow(frst.a)),]
+
+reactable(
+  na.omit(frst.a),
+  columns = list(
+    Question = colDef(minWidth = 200, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd', lineHeight = 2)),
+    Options = colDef(minWidth = 140, align = "left", html = TRUE, style = list(fontSize = 12, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#edede9', lineHeight = 2))
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE, resizable = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### QN.06: Hook-Clips {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -5522,8 +5560,8 @@ psggqns <- psggqns[sample(1:nrow(psggqns)),]
 reactable(
   na.omit(psggqns),
   columns = list(
-    Questions = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd', lineHeight = 2)),
-    Translation = colDef(minWidth = 80, align = "left", html = TRUE, style = list(fontSize = 11, fontWeight = 200, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#edede9', lineHeight = 2))
+    Questions = colDef(minWidth = 200, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd', lineHeight = 2)),
+    Translation = colDef(minWidth = 140, align = "left", html = TRUE, style = list(fontSize = 11, fontWeight = 200, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#edede9', lineHeight = 2))
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
@@ -5537,7 +5575,7 @@ reactable(
       fontSize = "11px"
     )
   ),
-  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, resizable = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
