@@ -1698,17 +1698,18 @@ reactable(
 ##### Verbs {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
-knjrv3.b <- knjrv3 %>% slice(401:470)
+knjrv3.b <- knjrv3 %>% slice(401:493)
 knjrv3.b <- knjrv3.b[sample(1:nrow(knjrv3.b)),]
-# knjrv3.c <- bind_rows(knjrv3.a, knjrv3.b)
-knjrv3.c <- knjrv3.b
+knjrv3.c <- knjrv3 %>% slice(494:500)
+knjrv3.c <- knjrv3.c[sample(1:nrow(knjrv3.c)),]
+knjrv3.z <- bind_rows(knjrv3.b, knjrv3.c)
 
 reactable(
-  knjrv3.c,
+  knjrv3.z,
   columns = list(
     Kanji.A = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
       cell = function(value, index) {
-        Read.A <- knjrv3.c$Read.A[index]
+        Read.A <- knjrv3.z$Read.A[index]
         Read.A <- if (!is.na(Read.A)) Read.A else ""
         tagList(
           div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
@@ -1720,7 +1721,7 @@ reactable(
     Mean.A = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
     Kanji.B = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
       cell = function(value, index) {
-        Read.B <- knjrv3.c$Read.B[index]
+        Read.B <- knjrv3.z$Read.B[index]
         Read.B <- if (!is.na(Read.B)) Read.B else ""
         tagList(
           div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
@@ -1732,7 +1733,7 @@ reactable(
     Mean.B = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
     Kanji.C = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
       cell = function(value, index) {
-        Read.C <- knjrv3.c$Read.C[index]
+        Read.C <- knjrv3.z$Read.C[index]
         Read.C <- if (!is.na(Read.C)) Read.C else ""
         tagList(
           div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
