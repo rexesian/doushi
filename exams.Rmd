@@ -442,7 +442,7 @@ jtst <- read_csv("cpdb/JTST-QNS.csv")
 pwrd <- read_csv("cpdb/PWR-QNS.csv")
 frst <- read_csv("cpdb/MRI-QNS.csv")
 cuse <- read_csv("cpdb/CHE-QNS.csv")
-kanjinmq <- read_csv("jpdb/SCRPTNMQ-NMQ.csv")
+qmnq <- read_csv("cpdb/MNKNJ-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -1698,7 +1698,7 @@ reactable(
 ##### Verbs {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
-knjrv3.b <- knjrv3 %>% slice(401:450)
+knjrv3.b <- knjrv3 %>% slice(401:470)
 knjrv3.b <- knjrv3.b[sample(1:nrow(knjrv3.b)),]
 # knjrv3.c <- bind_rows(knjrv3.a, knjrv3.b)
 knjrv3.c <- knjrv3.b
@@ -2050,6 +2050,143 @@ reactable(
 )
 
 ```
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ### SC.05: Kanji-Mnemonics {.tabset} -->
+
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-8"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- kanjinmq <- kanjinmq[sample(1:nrow(kanjinmq)),] -->
+
+<!-- reactable( -->
+<!--   kanjinmq, -->
+<!--   columns = list( -->
+<!--     Kanji = colDef(style= list(background = '#e0e1dd'), -->
+<!--       cell = function(value, index) { -->
+<!--         Expression <- kanjinmq$Expression[index] -->
+<!--         Expression <- if (!is.na(Expression)) Expression else "" -->
+<!--         Author <- kanjinmq$Author[index] -->
+<!--         Author <- if (!is.na(Author)) Author else "" -->
+<!--         Name <- kanjinmq$Name[index] -->
+<!--         Name <- if (!is.na(Name)) Name else "" -->
+<!--         Words <- kanjinmq$Words[index] -->
+<!--         Words <- if (!is.na(Words)) Words else ""  -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 60, fontWeight = 600, color = '#0F2040', fontFamily = 'Noto Sans JP'), value), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 13, fontWeight = 600, color = '#800000', fontFamily = 'Klee One'), Expression), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 13, fontWeight = 500, color = '#008000', fontFamily = 'Klee One'), "by: ", Author, "。", Name), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 19, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), Words), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Expression = colDef(show = FALSE), -->
+<!--     Author = colDef(show = FALSE), -->
+<!--     Name = colDef(show = FALSE), -->
+<!--     Words = colDef(show = FALSE) -->
+
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- <div class = "col-sm-4"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- qmnq <- qmnq[sample(1:nrow(qmnq)),] -->
+
+<!-- reactable( -->
+<!--   qmnq, -->
+<!--   columns = list( -->
+<!--     Kanji = colDef(style= list(background = '#e0e1dd'), -->
+<!--       cell = function(value, index) { -->
+<!--         # Expression <- kanjinmq$Expression[index] -->
+<!--         # Expression <- if (!is.na(Expression)) Expression else "" -->
+<!--         # Author <- kanjinmq$Author[index] -->
+<!--         # Author <- if (!is.na(Author)) Author else "" -->
+<!--         # Name <- kanjinmq$Name[index] -->
+<!--         # Name <- if (!is.na(Name)) Name else "" -->
+<!--         # Words <- kanjinmq$Words[index] -->
+<!--         # Words <- if (!is.na(Words)) Words else ""  -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 38, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 13, fontWeight = 600, color = '#800000', fontFamily = 'Klee One'), Expression), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 13, fontWeight = 500, color = '#008000', fontFamily = 'Klee One'), "by: ", Author, "。", Name), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 19, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), Words), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ) -->
+<!--     # Expression = colDef(show = FALSE), -->
+<!--     # Author = colDef(show = FALSE), -->
+<!--     # Name = colDef(show = FALSE), -->
+<!--     # Words = colDef(show = FALSE) -->
+
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- </div> -->
 
 ------------------------------------------------------------------------
 
@@ -3351,6 +3488,8 @@ reactable(
 
 ### MZ.01: Mnemonic {.tabset}
 
+#### Study {.tabset}
+
 ```{r, echo=FALSE, message=FALSE}
 
 kanjinmq <- kanjinmq[sample(1:nrow(kanjinmq)),]
@@ -3359,7 +3498,7 @@ kanjinmq <- kanjinmq[sample(1:nrow(kanjinmq)),]
 reactable(
   kanjinmq,
   columns = list(
-    Kanji = colDef(style= list(background = '#edede9'),
+    Kanji = colDef(style= list(background = '#e0e1dd'),
       cell = function(value, index) {
         Expression <- kanjinmq$Expression[index]
         Expression <- if (!is.na(Expression)) Expression else ""
@@ -3409,6 +3548,138 @@ reactable(
     )
   ),
   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Sense {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+qmnq <- qmnq[sample(1:nrow(qmnq)),]
+
+reactable(
+  qmnq,
+  columns = list(
+    Kanji = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        Meaning <- qmnq$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        # Author <- kanjinmq$Author[index]
+        # Author <- if (!is.na(Author)) Author else ""
+        # Name <- kanjinmq$Name[index]
+        # Name <- if (!is.na(Name)) Name else ""
+        # Words <- kanjinmq$Words[index]
+        # Words <- if (!is.na(Words)) Words else "" 
+        tagList(
+          div(style = list(fontSize = 38, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 13, fontWeight = 500, color = '#008000', fontFamily = 'Klee One'), "by: ", Author, "。", Name),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 19, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), Words),
+        )
+      },
+      align = "center"
+    ),
+    # Expression = colDef(show = FALSE),
+    # Author = colDef(show = FALSE),
+    # Name = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Recall {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+qmnq <- qmnq[sample(1:nrow(qmnq)),]
+
+reactable(
+  qmnq,
+  columns = list(
+    Kanji = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        # Expression <- kanjinmq$Expression[index]
+        # Expression <- if (!is.na(Expression)) Expression else ""
+        # Author <- kanjinmq$Author[index]
+        # Author <- if (!is.na(Author)) Author else ""
+        # Name <- kanjinmq$Name[index]
+        # Name <- if (!is.na(Name)) Name else ""
+        # Words <- kanjinmq$Words[index]
+        # Words <- if (!is.na(Words)) Words else "" 
+        tagList(
+          div(style = list(fontSize = 38, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 13, fontWeight = 600, color = '#800000', fontFamily = 'Klee One'), Expression),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 13, fontWeight = 500, color = '#008000', fontFamily = 'Klee One'), "by: ", Author, "。", Name),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 19, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), Words),
+        )
+      },
+      align = "center"
+    ),
+    # Expression = colDef(show = FALSE),
+    # Author = colDef(show = FALSE),
+    # Name = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 300),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
