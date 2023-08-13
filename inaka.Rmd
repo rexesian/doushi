@@ -29734,8 +29734,8 @@ reactable(
         Spanish <- syntxm.a$Spanish[index]
         Spanish <- if (!is.na(Spanish)) Spanish else ""
         tagList(
-          div(style = list(fontSize = 15, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 13, fontWeight = 400, color = '#01161e'), Korean),
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 400, color = '#01161e'), Korean),
           div(style = list(fontSize = 10, fontWeight = 400, color = '#026450'), English),
           div(style = list(fontSize = 10, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
         )
@@ -29786,7 +29786,7 @@ gwrds.na <- gwrds.na[sample(1:nrow(gwrds.na)),]
 reactable(
   gwrds.na,
   columns = list(
-    Words = colDef(style= list(background = '#edede9'),
+    Words = colDef(style= list(background = '#edede9'), minWidth = 300, sticky = "left",
       cell = function(value, index) {
         Meaning <- gwrds.na$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -29797,22 +29797,32 @@ reactable(
         Level <- gwrds.na$Level[index]
         Level <- if (!is.na(Level)) Level else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 15, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
+          div(style = list(fontSize = 14, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+      cell = function(value, index) {
+        Translation <- gwrds.na$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Translation),
+        )
+      },
+      align = "left"
+    ),    
     Meaning = colDef(show = FALSE),
     Level = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
@@ -29820,10 +29830,9 @@ reactable(
 
   ),
   rowClass = "my-row",
-  defaultPageSize = 1,
+  defaultPageSize = 5,
   theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -29831,7 +29840,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -29851,7 +29860,7 @@ gwrds.na <- gwrds.na[sample(1:nrow(gwrds.na)),]
 reactable(
   gwrds.na,
   columns = list(
-    Words = colDef(style= list(background = '#edede9'),
+    Words = colDef(style= list(background = '#edede9'), minWidth = 300, sticky = "left",
       cell = function(value, index) {
         Meaning <- gwrds.na$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -29862,22 +29871,32 @@ reactable(
         Level <- gwrds.na$Level[index]
         Level <- if (!is.na(Level)) Level else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 15, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
+          div(style = list(fontSize = 14, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+      cell = function(value, index) {
+        Translation <- gwrds.na$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Translation),
+        )
+      },
+      align = "left"
+    ),    
     Meaning = colDef(show = FALSE),
     Level = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
@@ -29885,10 +29904,9 @@ reactable(
 
   ),
   rowClass = "my-row",
-  defaultPageSize = 1,
+  defaultPageSize = 5,
   theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -29896,7 +29914,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -29916,7 +29934,7 @@ gwrds.na <- gwrds.na[sample(1:nrow(gwrds.na)),]
 reactable(
   gwrds.na,
   columns = list(
-    Words = colDef(style= list(background = '#edede9'),
+    Words = colDef(style= list(background = '#edede9'), minWidth = 300, sticky = "left",
       cell = function(value, index) {
         Meaning <- gwrds.na$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -29927,22 +29945,32 @@ reactable(
         Level <- gwrds.na$Level[index]
         Level <- if (!is.na(Level)) Level else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 15, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
+          div(style = list(fontSize = 14, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+      cell = function(value, index) {
+        Translation <- gwrds.na$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Translation),
+        )
+      },
+      align = "left"
+    ),    
     Meaning = colDef(show = FALSE),
     Level = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
@@ -29950,10 +29978,9 @@ reactable(
 
   ),
   rowClass = "my-row",
-  defaultPageSize = 1,
+  defaultPageSize = 5,
   theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -29961,7 +29988,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -29981,7 +30008,7 @@ gwrds.na <- gwrds.na[sample(1:nrow(gwrds.na)),]
 reactable(
   gwrds.na,
   columns = list(
-    Words = colDef(style= list(background = '#edede9'),
+    Words = colDef(style= list(background = '#edede9'), minWidth = 300, sticky = "left",
       cell = function(value, index) {
         Meaning <- gwrds.na$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -29992,22 +30019,32 @@ reactable(
         Level <- gwrds.na$Level[index]
         Level <- if (!is.na(Level)) Level else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 15, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
+          div(style = list(fontSize = 14, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+      cell = function(value, index) {
+        Translation <- gwrds.na$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Translation),
+        )
+      },
+      align = "left"
+    ),    
     Meaning = colDef(show = FALSE),
     Level = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
@@ -30015,10 +30052,9 @@ reactable(
 
   ),
   rowClass = "my-row",
-  defaultPageSize = 1,
+  defaultPageSize = 5,
   theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -30026,7 +30062,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -30046,7 +30082,7 @@ gwrds.na <- gwrds.na[sample(1:nrow(gwrds.na)),]
 reactable(
   gwrds.na,
   columns = list(
-    Words = colDef(style= list(background = '#edede9'),
+    Words = colDef(style= list(background = '#edede9'), minWidth = 300, sticky = "left",
       cell = function(value, index) {
         Meaning <- gwrds.na$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -30057,22 +30093,32 @@ reactable(
         Level <- gwrds.na$Level[index]
         Level <- if (!is.na(Level)) Level else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 15, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
+          div(style = list(fontSize = 14, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+      cell = function(value, index) {
+        Translation <- gwrds.na$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Translation),
+        )
+      },
+      align = "left"
+    ),    
     Meaning = colDef(show = FALSE),
     Level = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
@@ -30080,10 +30126,9 @@ reactable(
 
   ),
   rowClass = "my-row",
-  defaultPageSize = 1,
+  defaultPageSize = 5,
   theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -30091,7 +30136,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -30127,7 +30172,7 @@ gwrds.na <- gwrds.na[sample(1:nrow(gwrds.na)),]
 reactable(
   gwrds.na,
   columns = list(
-    Words = colDef(style= list(background = '#edede9'),
+    Words = colDef(style= list(background = '#edede9'), minWidth = 300, sticky = "left",
       cell = function(value, index) {
         Meaning <- gwrds.na$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -30138,22 +30183,32 @@ reactable(
         Level <- gwrds.na$Level[index]
         Level <- if (!is.na(Level)) Level else ""
         tagList(
-          div(style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 15, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
+          div(style = list(fontSize = 14, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "Level: ", Level),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
         )
       },
-      align = "center"
+      align = "left"
     ),
-    
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+      cell = function(value, index) {
+        Translation <- gwrds.na$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Translation),
+        )
+      },
+      align = "left"
+    ),    
     Meaning = colDef(show = FALSE),
     Level = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
@@ -30161,10 +30216,9 @@ reactable(
 
   ),
   rowClass = "my-row",
-  defaultPageSize = 1,
+  defaultPageSize = 5,
   theme = reactableTheme(
-    # Vertically center cells
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 250, fontSize = "11px"),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70, fontSize = "11px"),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -30172,7 +30226,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
@@ -30332,7 +30386,7 @@ reactable(
   columns = list(
     # Words = colDef(minWidth = 32, align = "left" , style = list(fontSize = 13.5, fontFamily = 'Noto Sans JP', background = '#dee7e7', color = '#0F2040'), sticky = "left"),
     # Meaning = colDef(minWidth = 50, align = "left", style = list(fontSize = 10, fontFamily = 'Noto Sans JP', background = '#dee7e7', color = '#0F2040')),
-    Sentence = colDef(minWidth = 70, style= list(background = '#edede9', color = '#0F2040'),
+    Sentence = colDef(minWidth = 70, style= list(background = '#e0e1dd', color = '#0F2040'),
       cell = function(value, index) {
         Translation <- gwrds.lst$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
@@ -36550,7 +36604,7 @@ reactable(
         tagList(
           div(style = list(fontSize = 26, color = '#0F2040', fontWeight = 600, fontFamily = 'Open Sans'), Words),
           # div(style = list(fontSize = 10, color = '#0F2040', fontWeight = 400, fontFamily = 'Open Sans'), Reading),
-          div(style = list(fontSize = 10, color = '#0F2040', fontWeight = 600, fontFamily = 'Open Sans'), value)
+          div(style = list(fontSize = 10, color = '#026450', fontWeight = 600, fontFamily = 'Open Sans'), value)
         )
       },
       align = "center"
@@ -36823,7 +36877,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -36879,7 +36933,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -36935,7 +36989,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -36991,7 +37045,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37047,7 +37101,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37103,7 +37157,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37159,7 +37213,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37215,7 +37269,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37271,7 +37325,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37327,7 +37381,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37384,7 +37438,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37441,7 +37495,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37498,7 +37552,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37555,7 +37609,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37611,7 +37665,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37667,7 +37721,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37724,7 +37778,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37780,7 +37834,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37836,7 +37890,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37892,7 +37946,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -37948,7 +38002,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38004,7 +38058,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38060,7 +38114,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38116,7 +38170,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38172,7 +38226,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38228,7 +38282,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38284,7 +38338,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38340,7 +38394,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38396,7 +38450,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38452,7 +38506,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38508,7 +38562,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38564,7 +38618,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38620,7 +38674,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38676,7 +38730,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38732,7 +38786,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38788,7 +38842,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38844,7 +38898,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -38900,7 +38954,7 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Klee One'), Translation),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
