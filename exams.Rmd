@@ -221,7 +221,7 @@ div.expresstr { outline-style: solid; outline-color: #0F2040; outline-width: 1px
 
 .detail-tags_a {
   color: 	#0F2040;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 300;
   font-family: 'Open Sans';
   background-color: #e0e1dd;
@@ -3291,42 +3291,61 @@ gclass.a <- gclass %>% drop_na(Structure)
 reactable(
   gclass.a,
   columns = list(
-    Pattern = colDef(style= list(background = '#edede9'),
-      minWidth = 200, sticky = "left",
+    Pattern = colDef(style= list(background = '#e6e7e3'),
+      minWidth = 325, sticky = "left",
       cell = function(value, index) {
         Meaning <- gclass.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
-        tagList(
-          div(style = list(fontSize = 12, fontWeight = 600, fontFamily = 'Roboto Condensed', color = '#01161e'), value),
-          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Meaning),
-        )
-      },
-      align = "center"
-    ),
-    Remarks = colDef(style= list(background = '#e6e7e3'),
-      minWidth = 270,
-      cell = function(value, index) {
         Structure <- gclass.a$Structure[index]
         Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- gclass.a$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
         Remarks.1 <- gclass.a$Remarks.1[index]
         Remarks.1 <- if (!is.na(Remarks.1)) Remarks.1 else ""
         Remarks.2 <- gclass.a$Remarks.2[index]
         Remarks.2 <- if (!is.na(Remarks.2)) Remarks.2 else ""
         tagList(
-          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), value),
+          div(span(style = list(fontSize = 12, fontWeight = 600, fontFamily = 'Roboto Condensed', color = '#01161e'), value), " ", span(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Meaning)),
+          # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Righteous', color = '#800000'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Remarks),
           div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Remarks.1),
           div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Remarks.2),
           div(style = list(fontSize = 1, color = '#e6e7e3'), "."),
           div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Roboto Condensed', color = '#0F2040'), Structure),
+          div(style = list(fontSize = 1, color = '#e6e7e3'), "."),
+          div(style = list(fontSize = 1, color = '#e6e7e3'), "."),
         )
       },
-      align = "center"
+      align = "left"
     ),
+    # Remarks = colDef(style= list(background = '#e6e7e3'),
+    #   minWidth = 270,
+    #   cell = function(value, index) {
+    #     Structure <- gclass.a$Structure[index]
+    #     Structure <- if (!is.na(Structure)) Structure else ""
+    #     Remarks.1 <- gclass.a$Remarks.1[index]
+    #     Remarks.1 <- if (!is.na(Remarks.1)) Remarks.1 else ""
+    #     Remarks.2 <- gclass.a$Remarks.2[index]
+    #     Remarks.2 <- if (!is.na(Remarks.2)) Remarks.2 else ""
+    #     tagList(
+    #       div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), value),
+    #       div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Remarks.1),
+    #       div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), Remarks.2),
+    #       div(style = list(fontSize = 1, color = '#e6e7e3'), "."),
+    #       div(style = list(fontSize = 10, fontWeight = 600, fontFamily = 'Roboto Condensed', color = '#0F2040'), Structure),
+    #     )
+    #   },
+    #   align = "center"
+    # ),
     Sentence = colDef(style= list(background = '#e0e1dd'),
       minWidth = 500, html = TRUE,
       cell = function(value, index) {
         Translation <- gclass.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
+        Sentence.1 <- gclass.a$Sentence.1[index]
+        Sentence.1 <- if (!is.na(Sentence.1)) Sentence.1 else ""
+        Translation.1 <- gclass.a$Translation.1[index]
+        Translation.1 <- if (!is.na(Translation.1)) Translation.1 else ""
         # tagList(
         #   div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161e'), value),
         #   div(style = list(fontSize = 11, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#01161e'), Translation),
@@ -3334,6 +3353,8 @@ reactable(
         tag_list <- tagList(
           div(class = "detail-tags_a", HTML(gclass.a$Sentence[index])),
           div(class = "detail-tags_b", HTML(gclass.a$Translation[index])),
+          div(class = "detail-tags_a", HTML(gclass.a$Sentence.1[index])),
+          div(class = "detail-tags_b", HTML(gclass.a$Translation.1[index])),
         )
         as.character(tag_list)
       },
@@ -3345,12 +3366,14 @@ reactable(
     Meaning = colDef(show = FALSE),
     Structure = colDef(show = FALSE),
     Sentence = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
+    Translation = colDef(show = FALSE),
+    Sentence.1 = colDef(show = FALSE),
+    Translation.1 = colDef(show = FALSE)
   ),
   rowClass = "my-row",
   defaultPageSize = 4,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 80),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 90),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -6380,7 +6403,7 @@ notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
 reactable(
   notesxm.a,
   columns = list(
-    N3.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
+    N3.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 13, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
@@ -6411,7 +6434,7 @@ notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
 reactable(
   notesxm.a,
   columns = list(
-    N2.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
+    N2.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 13, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
@@ -6442,7 +6465,7 @@ notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
 reactable(
   notesxm.a,
   columns = list(
-    N1.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
+    N1.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 13, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
@@ -6473,7 +6496,7 @@ notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
 reactable(
   notesxm.a,
   columns = list(
-    L2.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
+    L2.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 13, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
@@ -6504,7 +6527,7 @@ notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
 reactable(
   notesxm.a,
   columns = list(
-    L3.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
+    L3.Grammar = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 13, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
@@ -6535,7 +6558,7 @@ notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
 reactable(
   notesxm.a,
   columns = list(
-    General.Concept = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
+    General.Concept = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 13, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
@@ -6566,7 +6589,7 @@ notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
 reactable(
   notesxm.a,
   columns = list(
-    GRM.Notes = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
+    GRM.Notes = colDef(minWidth = 150, align = "left", html = TRUE, style = list(fontSize = 13, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd'))
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
