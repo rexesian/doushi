@@ -445,6 +445,7 @@ cuse <- read_csv("cpdb/CHE-QNS.csv")
 qmnq <- read_csv("cpdb/MNKNJ-QNS.csv")
 advwrds <- read_csv("cpdb/MWRDSS-QNS.csv")
 rvwwrds <- read_csv("cpdb/RVWMS-QNS.csv")
+formula <- read_csv("cpdb/GFRML-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -6720,6 +6721,40 @@ reactable(
 
 ------------------------------------------------------------------------
 
+### AN.03: Grammar-Formulae {.tabset}
+
+#### L3 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+formula <- formula[sample(1:nrow(na.omit(formula))),]
+formula <- formula[sample(1:nrow(formula)),]
+
+reactable(
+  na.omit(formula),
+  columns = list(
+    Syntax = colDef(style= list(minWidth = 2000, background = '#e0e1dd', fontSize = 11.2, fontWeight = 300, fontFamily = 'Open Sans', color = '#01161f'), html = TRUE, align = "left")),
+  rowClass = "my-row",
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 45),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE, 
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 # <b> Peripherals </b>
 
 ### CS.01: Relations {.tabset}
@@ -10942,3 +10977,5 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
