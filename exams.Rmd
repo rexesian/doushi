@@ -450,6 +450,7 @@ rvwwrdr <- read_csv("cpdb/RVWMR-QNS.csv")
 formula <- read_csv("cpdb/GFRML-QNS.csv")
 rgmrlpt <- read_csv("cpdb/GRMLPT-QNS.csv")
 rvwwrdx <- read_csv("cpdb/RVWMX-QNS.csv")
+rvwwknj <- read_csv("cpdb/RVWMKN-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -11199,6 +11200,38 @@ reactable(
   defaultPageSize = 3,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 135),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE, 
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Scripts {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+rvwwknj <- rvwwknj[sample(1:nrow(na.omit(rvwwknj))),]
+rvwwknj <- rvwwknj[sample(1:nrow(rvwwknj)),]
+
+reactable(
+  na.omit(rvwwknj),
+  columns = list(
+    Words = colDef(style= list(minWidth = 1900, background = '#e0e1dd', fontSize = 11.2, fontWeight = 300, fontFamily = 'Open Sans', color = '#01161f'), html = TRUE, align = "left")),
+  rowClass = "my-row",
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 200),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
