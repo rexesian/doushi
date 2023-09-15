@@ -451,6 +451,7 @@ formula <- read_csv("cpdb/GFRML-QNS.csv")
 rgmrlpt <- read_csv("cpdb/GRMLPT-QNS.csv")
 rvwwrdx <- read_csv("cpdb/RVWMX-QNS.csv")
 rvwwknj <- read_csv("cpdb/RVWMKN-QNS.csv")
+knjdxw <- read_csv("cpdb/KNWDJX-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -2398,6 +2399,59 @@ reactable(
   defaultPageSize = 5,
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#f5f5f5",
+      color = "#f5f5f5",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### K1 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+knjdxw <- knjdxw[sample(1:nrow(knjdxw)),]
+
+reactable(
+  knjdxw,
+  columns = list(
+    Kanji = colDef(style= list(background = '#e0e1dd'), minWidth = 90,
+      cell = function(value, index) {
+        Hint <- knjdxw$Hint[index]
+        Hint <- if (!is.na(Hint)) Hint else ""
+        tagList(
+          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans'), Hint),
+        )
+      },
+      align = "center"
+    ),
+    Details = colDef(html = TRUE, align = "left", minWidth = 250, style = list(fontSize = 11, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans', background = '#edede9')),
+    Details = colDef(show = FALSE),
+    Hint = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 80),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
@@ -11318,18 +11372,40 @@ rvwwknj <- rvwwknj[sample(1:nrow(rvwwknj)),]
 reactable(
   na.omit(rvwwknj),
   columns = list(
-    Words = colDef(style= list(minWidth = 1900, background = '#e0e1dd', fontSize = 11.2, fontWeight = 300, fontFamily = 'Open Sans', color = '#01161f'), html = TRUE, align = "left")),
+    # Kanji = colDef(style= list(minWidth = 20, background = '#e0e1dd', fontSize = 25, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161f'), align = "center")
+    Kanji = colDef(style= list(background = '#e0e1dd', minWidth = 35),
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans', color = '#01161f'), value),
+        )
+      },
+      align = "center"
+    ),
+    Words = colDef(style= list(minWidth = 1200, background = '#e0e1dd', fontSize = 11.2, fontWeight = 300, fontFamily = 'Open Sans', color = '#01161f'), html = TRUE, align = "left")
+    ),
   rowClass = "my-row",
   defaultPageSize = 3,
   theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 200),
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 220),
     searchInputStyle = list(
       paddingLeft = "8px",
       paddingTop = "8px",
       paddingBottom = "8px",
       width = "100%",
       fontSize = "11px"
-    )
+    ),
+    headerStyle = list(
+      backgroundColor = "#DEE0DC",
+      color = "hsl(0, 0%, 95%)",
+      fontSize = 0.1,
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0.75rem",
+      letterSpacing = "1px",
+      textTransform = "lowercase",
+      padding = "0px",
+      "&:hover, &:focus" = list(color = '#DEE0DC')
+    ),
   ),
   showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE, 
 
