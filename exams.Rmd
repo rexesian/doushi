@@ -370,7 +370,7 @@ library(hrbrthemes)
 library(ggthemes)
 library(htmlwidgets)
 library(webshot)
-webshot::install_phantomjs(version = "2.1.1", baseURL = "https://github.com/wch/webshot/releases/download/v0.3.1/", force = FALSE)
+# webshot::install_phantomjs(version = "2.1.1", baseURL = "https://github.com/wch/webshot/releases/download/v0.3.1/", force = FALSE)
 options(readr.show_col_types = FALSE, max.print=10000, always_allow_html = TRUE)
 ```
 
@@ -436,6 +436,8 @@ qsnn <- read_csv("jpim/EXMQTNN-QSNTN.csv")
 grmrusl <- read_csv("jpdb/SPKPTNI-GRM.csv")
 gclass <- read_csv("jpim/GRMMEANN-GMN.csv")
 knjrv3 <- read_csv("cpdb/KNRJ3-LVL3.csv")
+knjrv2 <- read_csv("cpdb/KNRJ2-LVL2.csv")
+knjrv1 <- read_csv("cpdb/KNRJ1-LVL1.csv")
 charkw <- read_csv("cpdb/CHRW-WCK.csv")
 scrptrvw <- read_csv("jpdb/SCRPTRVW-KNJD5.csv")
 jtst <- read_csv("cpdb/JTST-QNS.csv")
@@ -2314,9 +2316,330 @@ reactable(
 
 #### L2 {.tabset}
 
+##### Kanji {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+knjrv2.a <- knjrv2 %>% slice(1:5)
+knjrv2.a <- knjrv2.a[sample(1:nrow(knjrv2.a)),]
+# knjrv2.b <- knjrv2 %>% slice(45:99)
+# knjrv2.b <- knjrv2.b[sample(1:nrow(knjrv2.b)),]
+# knjrv2.c <- bind_rows(knjrv2.a, knjrv2.b)
+knjrv2.c <- knjrv2.a
+
+reactable(
+  knjrv2.c,
+  columns = list(
+    Kanji.A = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.A <- knjrv2.c$Read.A[index]
+        Read.A <- if (!is.na(Read.A)) Read.A else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.A),
+        )
+      },
+      align = "center"
+    ),
+    Mean.A = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Kanji.B = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.B <- knjrv2.c$Read.B[index]
+        Read.B <- if (!is.na(Read.B)) Read.B else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.B),
+        )
+      },
+      align = "center"
+    ),
+    Mean.B = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Kanji.C = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.C <- knjrv2.c$Read.C[index]
+        Read.C <- if (!is.na(Read.C)) Read.C else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.C),
+        )
+      },
+      align = "center"
+    ),
+    Mean.C = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Read.A = colDef(show = FALSE),
+    Read.B = colDef(show = FALSE),
+    Read.C = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#f5f5f5",
+      color = "#f5f5f5",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### I-Adj {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+knjrv2.b <- knjrv2 %>% slice(1251:1260)
+knjrv2.b <- knjrv2.b[sample(1:nrow(knjrv2.b)),]
+# knjrv2.c <- bind_rows(knjrv2.a, knjrv2.b)
+knjrv2.c <- knjrv2.b
+
+reactable(
+  knjrv2.c,
+  columns = list(
+    Kanji.A = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.A <- knjrv2.c$Read.A[index]
+        Read.A <- if (!is.na(Read.A)) Read.A else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.A),
+        )
+      },
+      align = "center"
+    ),
+    Mean.A = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Kanji.B = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.B <- knjrv2.c$Read.B[index]
+        Read.B <- if (!is.na(Read.B)) Read.B else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.B),
+        )
+      },
+      align = "center"
+    ),
+    Mean.B = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Kanji.C = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.C <- knjrv2.c$Read.C[index]
+        Read.C <- if (!is.na(Read.C)) Read.C else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.C),
+        )
+      },
+      align = "center"
+    ),
+    Mean.C = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Read.A = colDef(show = FALSE),
+    Read.B = colDef(show = FALSE),
+    Read.C = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#f5f5f5",
+      color = "#f5f5f5",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+
+------------------------------------------------------------------------
+
+##### Verbs {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+knjrv2.b <- knjrv2 %>% slice(1001:1005)
+knjrv2.b <- knjrv2.b[sample(1:nrow(knjrv2.b)),]
+knjrv2.c <- knjrv2 %>% slice(1006:1010)
+knjrv2.c <- knjrv2.c[sample(1:nrow(knjrv2.c)),]
+knjrv2.z <- bind_rows(knjrv2.b, knjrv2.c)
+
+reactable(
+  knjrv2.z,
+  columns = list(
+    Kanji.A = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.A <- knjrv2.z$Read.A[index]
+        Read.A <- if (!is.na(Read.A)) Read.A else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.A),
+        )
+      },
+      align = "center"
+    ),
+    Mean.A = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Kanji.B = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.B <- knjrv2.z$Read.B[index]
+        Read.B <- if (!is.na(Read.B)) Read.B else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.B),
+        )
+      },
+      align = "center"
+    ),
+    Mean.B = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Kanji.C = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.C <- knjrv2.z$Read.C[index]
+        Read.C <- if (!is.na(Read.C)) Read.C else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.C),
+        )
+      },
+      align = "center"
+    ),
+    Mean.C = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Read.A = colDef(show = FALSE),
+    Read.B = colDef(show = FALSE),
+    Read.C = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#f5f5f5",
+      color = "#f5f5f5",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 ------------------------------------------------------------------------
 
 #### L1 {.tabset}
+
+##### Verbs {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+knjrv1.b <- knjrv1 %>% slice(301:305)
+knjrv1.b <- knjrv1.b[sample(1:nrow(knjrv1.b)),]
+knjrv1.c <- knjrv1 %>% slice(306:310)
+knjrv1.c <- knjrv1.c[sample(1:nrow(knjrv1.c)),]
+knjrv1.z <- bind_rows(knjrv1.b, knjrv1.c)
+
+reactable(
+  knjrv1.z,
+  columns = list(
+    Kanji.A = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.A <- knjrv1.z$Read.A[index]
+        Read.A <- if (!is.na(Read.A)) Read.A else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.A),
+        )
+      },
+      align = "center"
+    ),
+    Mean.A = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Kanji.B = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.B <- knjrv1.z$Read.B[index]
+        Read.B <- if (!is.na(Read.B)) Read.B else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.B),
+        )
+      },
+      align = "center"
+    ),
+    Mean.B = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Kanji.C = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Read.C <- knjrv1.z$Read.C[index]
+        Read.C <- if (!is.na(Read.C)) Read.C else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.C),
+        )
+      },
+      align = "center"
+    ),
+    Mean.C = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Read.A = colDef(show = FALSE),
+    Read.B = colDef(show = FALSE),
+    Read.C = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#f5f5f5",
+      color = "#f5f5f5",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
