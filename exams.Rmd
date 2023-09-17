@@ -370,7 +370,7 @@ library(hrbrthemes)
 library(ggthemes)
 library(htmlwidgets)
 library(webshot)
-# webshot::install_phantomjs(version = "2.1.1", baseURL = "https://github.com/wch/webshot/releases/download/v0.3.1/", force = FALSE)
+webshot::install_phantomjs(version = "2.1.1", baseURL = "https://github.com/wch/webshot/releases/download/v0.3.1/", force = FALSE)
 options(readr.show_col_types = FALSE, max.print=10000, always_allow_html = TRUE)
 ```
 
@@ -453,6 +453,7 @@ rvwwrdx <- read_csv("cpdb/RVWMX-QNS.csv")
 rvwwknj <- read_csv("cpdb/RVWMKN-QNS.csv")
 knjdxw <- read_csv("cpdb/KNWDJX-QNS.csv")
 knjdms <- read_csv("cpdb/MSWRDS-QNS.csv")
+knjdmn <- read_csv("cpdb/MNWRDS-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -2478,7 +2479,6 @@ reactable(
 
 ```
 
-
 ------------------------------------------------------------------------
 
 #### K2 {.tabset}
@@ -2541,7 +2541,7 @@ reactable(
         Meaning <- knjdms$Words[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 24, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
         )
       },
       align = "center"
@@ -2569,6 +2569,99 @@ reactable(
 
 </div>
 </div>
+
+------------------------------------------------------------------------
+
+#### K3 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+
+```{r, echo=FALSE, message=FALSE}
+
+knjdmn <- knjdmn[sample(1:nrow(knjdmn)),]
+
+reactable(
+  knjdmn,
+  columns = list(
+    Words = colDef(style= list(background = '#edede9'), minWidth = 500,
+      cell = function(value, index) {
+        Meaning <- knjdmn$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), Meaning,"."))
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 42),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+
+```{r, echo=FALSE, message=FALSE}
+
+knjdmn <- knjdmn[sample(1:nrow(knjdmn)),]
+
+reactable(
+  knjdmn,
+  columns = list(
+    Words = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        Meaning <- knjdmn$Words[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
+
+
 
 
 <!-- ------------------------------------------------------------------------ -->
