@@ -456,6 +456,7 @@ rvwwknj <- read_csv("cpdb/RVWMKN-QNS.csv")
 knjdxw <- read_csv("cpdb/KNWDJX-QNS.csv")
 knjdms <- read_csv("cpdb/MSWRDS-QNS.csv")
 knjdmn <- read_csv("cpdb/MNWRDS-QNS.csv")
+dlgwrd <- read_csv("cpdb/DLGMW-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -6211,9 +6212,46 @@ reactable(
 
 ------------------------------------------------------------------------
 
-# <b> Reading </b> {.tabset}
+# <b> Context </b> {.tabset}
 
-## Excerpts {.tabset}
+### CN.01: Visual-Reading {.tabset}
+
+#### Dialogue {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+dlgwrd <- dlgwrd %>% select(Script, Translation)
+dlgwrd <- dlgwrd[sample(1:nrow(na.omit(psggqns))),] 
+dlgwrd <- dlgwrd[sample(1:nrow(dlgwrd)),]
+
+reactable(
+  na.omit(dlgwrd),
+  columns = list(
+    Script = colDef(minWidth = 400, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd', lineHeight = 2)),
+    Translation = colDef(minWidth =300, align = "left", html = TRUE, style = list(fontSize = 11, fontWeight = 200, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#edede9', lineHeight = 2))
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, resizable = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Excerpts {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6264,7 +6302,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Sentences {.tabset}
+#### Sentences {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6297,9 +6335,9 @@ reactable(
 
 ------------------------------------------------------------------------
 
-# <b> Listening </b> {.tabset}
+### CN.02: Audio-Listening {.tabset}
 
-## Script {.tabset}
+#### Script {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -6354,11 +6392,11 @@ reactable(
 
 ------------------------------------------------------------------------
 
-## Audio {.tabset}
+#### Audio {.tabset}
 
 ------------------------------------------------------------------------
 
-## Video {.tabset}
+#### Video {.tabset}
 
 ------------------------------------------------------------------------
 
