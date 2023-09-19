@@ -457,6 +457,7 @@ knjdxw <- read_csv("cpdb/KNWDJX-QNS.csv")
 knjdms <- read_csv("cpdb/MSWRDS-QNS.csv")
 knjdmn <- read_csv("cpdb/MNWRDS-QNS.csv")
 dlgwrd <- read_csv("cpdb/DLGMW-QNS.csv")
+knjdmv <- read_csv("cpdb/MNWRDV-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -2985,6 +2986,96 @@ reactable(
 </div>
 </div>
 
+------------------------------------------------------------------------
+
+#### K4 {.tabset}
+
+<div class = "row">
+<div class = "col-sm-6">
+
+
+```{r, echo=FALSE, message=FALSE}
+
+knjdmv <- knjdmv[sample(1:nrow(knjdmv)),]
+
+reactable(
+  knjdmv,
+  columns = list(
+    Words = colDef(style= list(background = '#edede9'), minWidth = 500,
+      cell = function(value, index) {
+        Meaning <- knjdmv$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), Meaning,"."))
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 42),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+<div class = "col-sm-6">
+
+
+```{r, echo=FALSE, message=FALSE}
+
+knjdmv <- knjdmv[sample(1:nrow(knjdmv)),]
+
+reactable(
+  knjdmv,
+  columns = list(
+    Words = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        Meaning <- knjdmv$Words[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+        )
+      },
+      align = "center"
+    ),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+</div>
+</div>
 
 
 

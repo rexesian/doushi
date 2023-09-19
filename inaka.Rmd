@@ -12022,8 +12022,14 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-rvwadjna.a <- rvwadjna %>% select(Expression, Meaning, Reading, Words, Translation) %>% slice(1:100)
+rvwadjna.b <- rvwadjna %>% select(Expression, Meaning, Reading, Words, Translation) %>% slice(1:120)
+rvwadjna.c <- rvwadjna %>% select(Expression, Meaning, Reading, Words, Translation) %>% slice(359:380)
+rvwadjna.b <- rvwadjna.b[sample(1:nrow(rvwadjna.b)),]
+rvwadjna.c <- rvwadjna.c[sample(1:nrow(rvwadjna.c)),]
+
+rvwadjna.a <- bind_rows(rvwadjna.b, rvwadjna.c)
 rvwadjna.a <- rvwadjna.a[sample(1:nrow(rvwadjna.a)),]
+
 
 reactable(
   rvwadjna.a,
