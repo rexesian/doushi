@@ -606,6 +606,7 @@ elmtbl <- read_csv("cpdb/ELEMNTS-TBL.csv")
 wordfndr <- read_csv("jpdb/WRDFNR-MNN.csv")
 grmrfndr <- read_csv("jpdb/WRDFNRST-MNN.csv")
 msrtywg <- read_csv("cpdb/MSTRYW-QNS.csv")
+ontmrmm <- read_csv("cpdb/ONMTPE-QNS.csv")
 ```
 
 ------------------------------------------------------------------------
@@ -13263,7 +13264,7 @@ reactable(
         Word <- advrm.a$Word[index]
         Word <- if (!is.na(Word)) Word else ""
         tagList(
-          div(style = list(fontSize = 28, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
         )
       },
       align = "center"
@@ -13479,10 +13480,10 @@ reactable(
 ・Also imply the attitude or intention of the sound or feeling.    
 </div>
 <div class = "expresstrz">
-・彼はにこりと口元を上げた.     
-・彼女はうなずきながら話を聞いていた.    
-・He lifted his mouth in a grin.     
-・She was listening to the story while nodding.   
+・彼はひっかりとした目で私を見た.     
+・彼女はぼんやりとした表情で窓の外を見ていた.    
+・He looked at me with sharp eyes.     
+・She was looking out of the window with a blank expression.   
 </div>
 
 <h6> </h6>
@@ -13649,6 +13650,98 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### Remember {.tabset}
+
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
+
+<!-- ```{r, echo=FALSE, message=FALSE} -->
+
+<!-- ontmrmm.a <- ontmrmm  %>% slice(1:70) -->
+<!-- ontmrmm.a <- ontmrmm.a[sample(1:nrow(ontmrmm.a)),] -->
+
+<!-- reactable( -->
+<!--   ontmrmm.a, -->
+<!--   columns = list( -->
+<!--     Sentence = colDef(style= list(background = '#e0e1dd'), -->
+<!--       cell = function(value, index) { -->
+<!--         Translation <- ontmrmm.a$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 21, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 250), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
+
+```{r, echo=FALSE, message=FALSE}
+
+ontmrmm.a <- ontmrmm
+ontmrmm.a <- ontmrmm.a[sample(1:nrow(ontmrmm.a)),]
+ontmrmm.a <- ontmrmm.a[sample(1:nrow(ontmrmm.a)),]
+
+reactable(
+  ontmrmm.a,
+  columns = list(
+    Sentence = colDef(style= list(background = '#edede9'),
+      cell = function(value, index) {
+        Translation <- ontmrmm.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(span(style = list(fontSize = 16, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), value, "。"), span(style = list(fontSize = 10, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), Translation,"."))
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 10,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 42),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+<!-- </div> -->
+<!-- </div> -->
+
+------------------------------------------------------------------------
+
 #### Recognize
 
 <div class = "row">
@@ -13668,7 +13761,7 @@ reactable(
         Meaning <- ontmpe.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           div(style = list(fontSize = 11, color = '#800000', fontFamily = 'Open Sans'), Reading),
           div(style = list(fontSize = 10, fontWeight = 500, color = '#266c6c', fontFamily = 'Open Sans'), Meaning)
         )
@@ -13716,7 +13809,7 @@ reactable(
         Meaning <- ontmpe.a$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 24, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 11, color = '#404040'), Reading),
           # div(style = list(fontSize = 10, color = '#404040'), Meaning)
         )
@@ -13767,7 +13860,7 @@ reactable(
         Sentence <- ontpesnt.a$Sentence[index]
         Sentence <- if (!is.na(Sentence)) Sentence else ""
         tagList(
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          div(style = list(fontSize = 18, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
           div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value)
         )
       },
@@ -13787,7 +13880,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, highlight = TRUE, height = 480,
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = TRUE, paginationType = "numbers", striped = TRUE, highlight = TRUE, height = 460,
   
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
