@@ -458,6 +458,7 @@ knjdms <- read_csv("cpdb/MSWRDS-QNS.csv")
 knjdmn <- read_csv("cpdb/MNWRDS-QNS.csv")
 dlgwrd <- read_csv("cpdb/DLGMW-QNS.csv")
 knjdmv <- read_csv("cpdb/MNWRDV-QNS.csv")
+psgn3 <- read_csv("cpdb/PSSGN3-QNS.csv")
 ```
 
 # <b> Exams </b> {.tabset}
@@ -3218,6 +3219,43 @@ reactable(
 
 ------------------------------------------------------------------------
 
+### SC.05: Kanji-Passages {.tabset}
+
+<!-- #### N3 {.tabset} -->
+
+```{r, echo=FALSE, message=FALSE}
+
+psgn3 <- psgn3 %>% select(Script, Translation)
+psgn3 <- psgn3[sample(1:nrow(na.omit(psgn3))),] 
+psgn3 <- psgn3[sample(1:nrow(psgn3)),]
+
+reactable(
+  na.omit(psgn3),
+  columns = list(
+    Script = colDef(minWidth = 400, align = "left", html = TRUE, style = list(fontSize = 14, fontWeight = 200, color = '#0F2040', fontFamily = 'Open Sans', background = '#e0e1dd', lineHeight = 2)),
+    Translation = colDef(minWidth =300, align = "left", html = TRUE, style = list(fontSize = 11, fontWeight = 200, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#edede9', lineHeight = 2))
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, resizable = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 # <b> Words </b> {.tabset}
 
 ### WD.01: Level-Grade {.tabset}
@@ -4317,8 +4355,8 @@ reactable(
           div(style = list(fontSize = 11, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Remarks.1),
           div(style = list(fontSize = 1, color = '#edede9'), "."),
           div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 11, fontWeight = 600, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Structure),
-          div(style = list(fontSize = 11, fontWeight = 600, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Structure.1),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#01161e', fontFamily = 'Roboto Condensed'), Structure),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#01161e', fontFamily = 'Roboto Condensed'), Structure.1),
           # div(style = list(fontSize = 1, color = '#edede9'), "."),
           # div(style = list(fontSize = 1, color = '#edede9'), "."),
           # div(style = list(fontSize = 1, color = '#edede9'), "."),
@@ -6313,7 +6351,7 @@ reactable(
 ```{r, echo=FALSE, message=FALSE}
 
 dlgwrd <- dlgwrd %>% select(Script, Translation)
-dlgwrd <- dlgwrd[sample(1:nrow(na.omit(psggqns))),] 
+dlgwrd <- dlgwrd[sample(1:nrow(na.omit(dlgwrd))),] 
 dlgwrd <- dlgwrd[sample(1:nrow(dlgwrd)),]
 
 reactable(
