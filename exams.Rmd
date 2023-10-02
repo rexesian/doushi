@@ -110,19 +110,6 @@ div.expresstr { outline-style: solid; outline-color: #0F2040; outline-width: 1px
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
-.detail-descrip_a {
-  color: 	#0F2040;
-  font-size: 14px;
-  font-weight: 300;
-  font-family: 'Open Sans';
-  background-color: #edede9;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  line-height: 1.5;
-}
-
 .detail-des_func_a {
   color: 	#800000;
   font-size: 20px;
@@ -131,7 +118,7 @@ div.expresstr { outline-style: solid; outline-color: #0F2040; outline-width: 1px
   background-color: #e0e1dd;
   padding-left: 8px;
   padding-right: 8px;
-  padding-top: 8px;
+  padding-top: 20px;
   padding-bottom: 8px;
 }
 
@@ -143,26 +130,26 @@ div.expresstr { outline-style: solid; outline-color: #0F2040; outline-width: 1px
   background-color: #edede9;
   padding-left: 8px;
   padding-right: 8px;
-  padding-top: 8px;
+  padding-top: 20px;
   padding-bottom: 8px;
 }
 
 .detail-des_func_c {
   color: 	#0F2040;
-  font-size: 11px;
-  font-weight: 400;
+  font-size: 11.5px;
+  font-weight: 300;
   font-family: 'Zen Kaku Gothic New';
   background-color: #edede9;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 8px;
-  padding-bottom: 8px;
+  padding-bottom: 20px;
 }
 
 .detail-des_func_d {
-  color: 	#264653;
-  font-size: 13px;
-  font-weight: 600;
+  color: 	#253f41;
+  font-size: 11.5px;
+  font-weight: 400;
   font-family: 'Open Sans';
   background-color: #e0e1dd;
   padding-left: 8px;
@@ -172,20 +159,20 @@ div.expresstr { outline-style: solid; outline-color: #0F2040; outline-width: 1px
 }
 
 .detail-des_func_e {
-  color: 	#259999;
-  font-size: 12px;
-  font-weight: 500;
+  color: 	#0b8282;
+  font-size: 11.5px;
+  font-weight: 400;
   font-family: 'Zen Kaku Gothic New';
   background-color: #e0e1dd;
   padding-left: 8px;
   padding-right: 8px;
   padding-top: 8px;
-  padding-bottom: 8px;
+  padding-bottom: 20px;
 }
 
-.detail-des_func_d {
-  color: 	#264653;
-  font-size: 13px;
+.detail-des_func_f {
+  color: 	#0F2040;
+  font-size: 16px;
   font-weight: 600;
   font-family: 'Open Sans';
   background-color: #e0e1dd;
@@ -4798,7 +4785,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-qmnq <- qmnq %>% slice(1:43)
+# qmnq <- qmnq %>% slice(1:43)
 qmnq <- qmnq[sample(1:nrow(qmnq)),]
 
 reactable(
@@ -11235,6 +11222,72 @@ reactable(
 <!-- ------------------------------------------------------------------------ -->
 
 #### Functions {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+mstryfunc.a <- mstryfunc
+mstryfunc.a <- mstryfunc.a[sample(1:nrow(mstryfunc.a)),]
+
+reactable(
+  mstryfunc.a,
+  columns = list(
+    Function = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
+      cell = function(value, index) {
+        Pattern <- mstryfunc.a$Pattern[index]
+        Pattern <- if (!is.na(Pattern)) Pattern else ""
+        Details <- mstryfunc.a$Details[index]
+        Details <- if (!is.na(Details)) Details else ""
+        tag_list <- tagList(
+          div(class = "detail-des_func_a", HTML(mstryfunc.a$Function[index])),
+          div(class = "detail-des_func_d", HTML(mstryfunc.a$Pattern[index])),
+          div(class = "detail-des_func_e", HTML(mstryfunc.a$Details[index])),
+        )
+        as.character(tag_list)
+      },
+      align = "left"
+    ),
+    Sample = colDef(style= list(background = '#edede9'), html = TRUE, minWidth = 250,
+      cell = function(value, index) {
+        Translate <- mstryfunc.a$Translate[index]
+        Translate <- if (!is.na(Translate)) Translate else ""
+        tag_list <- tagList(
+          div(class = "detail-des_func_b", HTML(mstryfunc.a$Sample[index])),
+          div(class = "detail-des_func_c", HTML(mstryfunc.a$Translate[index]))
+        )
+        as.character(tag_list)
+      },
+      align = "left"
+    ), 
+    Pattern = colDef(show = FALSE),
+    Details = colDef(show = FALSE),
+    Translate = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#edede9",
+      color = "#edede9",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, outlined = TRUE, bordered = FALSE, searchable = FALSE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 
 ```{r, echo=FALSE, message=FALSE}
 
