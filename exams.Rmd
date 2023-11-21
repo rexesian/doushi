@@ -2126,7 +2126,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-##### Recall {.tabset}
+##### Recognize {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -2178,6 +2178,97 @@ reactable(
         # Read.C <- if (!is.na(Read.C)) Read.C else ""
         tagList(
           div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.C),
+        )
+      },
+      align = "center"
+    )
+    # Mean.C = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    # Read.A = colDef(show = FALSE),
+    # Read.B = colDef(show = FALSE),
+    # Read.C = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5", height = 50),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    ),
+    headerStyle = list(
+      backgroundColor = "#f5f5f5",
+      color = "#f5f5f5",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+##### Recollect {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+knjrv3.k <- knjrv3 %>% slice(1:44) %>% select(Mean.A, Mean.B, Mean.C)
+knjrv3.i <- knjrv3 %>% slice(551:579) %>% select(Mean.A, Mean.B, Mean.C)
+knjrv3.n <- knjrv3 %>% slice(601:620) %>% select(Mean.A, Mean.B, Mean.C)
+knjrv3.v <- knjrv3 %>% slice(641:651) %>% select(Mean.A, Mean.B, Mean.C)
+
+
+knjrv3.k <- knjrv3.k[sample(1:nrow(knjrv3.k)),]
+knjrv3.i <- knjrv3.i[sample(1:nrow(knjrv3.i)),]
+knjrv3.n <- knjrv3.n[sample(1:nrow(knjrv3.n)),]
+knjrv3.v <- knjrv3.v[sample(1:nrow(knjrv3.v)),]
+
+knjrv3.x <- bind_rows(knjrv3.k, knjrv3.i)
+knjrv3.x <- bind_rows(knjrv3.x, knjrv3.n)
+knjrv3.x <- bind_rows(knjrv3.x, knjrv3.v)
+
+reactable(
+  knjrv3.x,
+  columns = list(
+    Mean.A = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        # Read.A <- knjrv3.c$Read.A[index]
+        # Read.A <- if (!is.na(Read.A)) Read.A else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 700, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.A),
+        )
+      },
+      align = "center"
+    ),
+    # Mean.A = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Mean.B = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        # Read.B <- knjrv3.c$Read.B[index]
+        # Read.B <- if (!is.na(Read.B)) Read.B else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 700, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.B),
+        )
+      },
+      align = "center"
+    ),
+    # Mean.B = colDef(align = "center", minWidth = 120, style = list(fontSize = 11, fontWeight = 600, color = '#0d7266', fontFamily = 'Open Sans', background = '#e0e1dd')),
+    Mean.C = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        # Read.C <- knjrv3.c$Read.C[index]
+        # Read.C <- if (!is.na(Read.C)) Read.C else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 700, color = '#0F2040', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 9, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Read.C),
         )
       },
