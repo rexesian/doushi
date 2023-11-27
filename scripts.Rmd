@@ -143,6 +143,7 @@ scrptwrdx <- read_csv("jpdb/SCRPTWRD-EXT.csv")
 knjind <- read_csv("jpim/KNJDP-JNKSC.csv")
 kanawrds <- read_csv("jpdb/KANAPRTB-CHR.csv")
 scrptrvw <- read_csv("jpdb/SCRPTRVW-KNJD5.csv")
+knjwrdrd <- read_csv("jpim/WRDRD-KNJ.csv")
 ```
 
 # <b> Scripts </b> {.tabset}
@@ -5083,6 +5084,492 @@ reactable(
 
 </div>
 </div>
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### LS {.tabset}
+
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-10"> -->
+
+```{r, echo=FALSE, message=FALSE}
+# library(htmlwidgets)
+# webshot::install_phantomjs()
+
+knjwrdrd <- knjwrdrd[sample(1:nrow(knjwrdrd)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chartz", tags$label("【Level】", `for` = "kanji-level-filter"),
+      # div(
+        tags$select(
+          id = "kanji-level-filter",
+          onchange = "Reactable.setFilter('kanji-filter-table', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(knjwrdrd$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  knjwrdrd,
+  columns = list(
+    Kanji = colDef(style= list(background = '#060912'), minWidth = 57,
+      cell = function(value, index) {
+        K.Meaning <- knjwrdrd$K.Meaning[index]
+        K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
+        # Words.A <- knjwrdrd$Words.A[index]
+        # Words.A <- if (!is.na(Words.A)) Words.A else ""
+        # Words.B <- knjwrdrd$Words.B[index]
+        # Words.B <- if (!is.na(Words.B)) Words.B else ""
+        # Words.C <- knjwrdrd$Words.C[index]
+        # Words.C <- if (!is.na(Words.C)) Words.C else ""
+        # Words.D <- knjwrdrd$Words.D[index]
+        # Words.D <- if (!is.na(Words.D)) Words.D else ""
+        # W.Meaning.A <- knjwrdrd$W.Meaning.A[index]
+        # W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else ""
+        # W.Meaning.B <- knjwrdrd$W.Meaning.B[index]
+        # W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else ""
+        # W.Meaning.C <- knjwrdrd$W.Meaning.C[index]
+        # W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else ""
+        tagList(
+          div(style = list(fontSize = 60, fontWeight = 600, color = '#f9f2e5', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#7fffff', fontFamily = 'Open Sans'), K.Meaning),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.A),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.B),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.C),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.A),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.B),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.C),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.D),
+        )
+      },
+      align = "center"
+    ),
+    Words.A = colDef(style= list(background = '#f9f6ed'),
+      cell = function(value, index) {
+        # K.Meaning <- knjwrdrd$K.Meaning[index]
+        # K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
+        Words.A <- knjwrdrd$Words.A[index]
+        Words.A <- if (!is.na(Words.A)) Words.A else ""
+        Words.B <- knjwrdrd$Words.B[index]
+        Words.B <- if (!is.na(Words.B)) Words.B else ""
+        Words.C <- knjwrdrd$Words.C[index]
+        Words.C <- if (!is.na(Words.C)) Words.C else ""
+        Words.D <- knjwrdrd$Words.D[index]
+        Words.D <- if (!is.na(Words.D)) Words.D else ""
+        W.Meaning.A <- knjwrdrd$W.Meaning.A[index]
+        W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else ""
+        W.Meaning.B <- knjwrdrd$W.Meaning.B[index]
+        W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else ""
+        W.Meaning.C <- knjwrdrd$W.Meaning.C[index]
+        W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else ""
+        S1 <- knjwrdrd$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- knjwrdrd$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T1 <- knjwrdrd$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- knjwrdrd$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          # div(style = list(fontSize = 60, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), K.Meaning),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.B),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.C),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.A),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.B),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.C),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.D),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), S1),
+          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), S2),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), T1),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), T2),
+        )
+      },
+      align = "left"
+    ),
+    Level = colDef(show = FALSE),
+    K.Meaning = colDef(show = FALSE),
+    Words.A = colDef(show = FALSE),
+    Words.B = colDef(show = FALSE),
+    Words.C = colDef(show = FALSE),
+    Words.D = colDef(show = FALSE),
+    W.Meaning.A = colDef(show = FALSE),
+    W.Meaning.B = colDef(show = FALSE),
+    W.Meaning.C = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  elementId = "kanji-filter-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 350),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### LC {.tabset}
+
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-10"> -->
+
+```{r, echo=FALSE, message=FALSE}
+# library(htmlwidgets)
+# webshot::install_phantomjs()
+
+knjwrdrd <- knjwrdrd[sample(1:nrow(knjwrdrd)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chartz", tags$label("【Level】", `for` = "kanji-level-filter-1"),
+      # div(
+        tags$select(
+          id = "kanji-level-filter-1",
+          onchange = "Reactable.setFilter('kanji-filter-table-1', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(knjwrdrd$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  knjwrdrd,
+  columns = list(
+    Kanji = colDef(style= list(background = '#060912'), minWidth = 57,
+      cell = function(value, index) {
+        K.Meaning <- knjwrdrd$K.Meaning[index]
+        K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
+        # Words.A <- knjwrdrd$Words.A[index]
+        # Words.A <- if (!is.na(Words.A)) Words.A else ""
+        # Words.B <- knjwrdrd$Words.B[index]
+        # Words.B <- if (!is.na(Words.B)) Words.B else ""
+        # Words.C <- knjwrdrd$Words.C[index]
+        # Words.C <- if (!is.na(Words.C)) Words.C else ""
+        # Words.D <- knjwrdrd$Words.D[index]
+        # Words.D <- if (!is.na(Words.D)) Words.D else ""
+        # W.Meaning.A <- knjwrdrd$W.Meaning.A[index]
+        # W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else ""
+        # W.Meaning.B <- knjwrdrd$W.Meaning.B[index]
+        # W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else ""
+        # W.Meaning.C <- knjwrdrd$W.Meaning.C[index]
+        # W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else ""
+        tagList(
+          div(style = list(fontSize = 60, fontWeight = 600, color = '#f9f2e5', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 12, fontWeight = 600, color = '#7fffff', fontFamily = 'Open Sans'), K.Meaning),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.A),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.B),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.C),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.A),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.B),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.C),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.D),
+        )
+      },
+      align = "center"
+    ),
+    Words.A = colDef(style= list(background = '#f9f6ed'),
+      cell = function(value, index) {
+        # K.Meaning <- knjwrdrd$K.Meaning[index]
+        # K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
+        Words.A <- knjwrdrd$Words.A[index]
+        Words.A <- if (!is.na(Words.A)) Words.A else ""
+        Words.B <- knjwrdrd$Words.B[index]
+        Words.B <- if (!is.na(Words.B)) Words.B else ""
+        Words.C <- knjwrdrd$Words.C[index]
+        Words.C <- if (!is.na(Words.C)) Words.C else ""
+        Words.D <- knjwrdrd$Words.D[index]
+        Words.D <- if (!is.na(Words.D)) Words.D else ""
+        W.Meaning.A <- knjwrdrd$W.Meaning.A[index]
+        W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else ""
+        W.Meaning.B <- knjwrdrd$W.Meaning.B[index]
+        W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else ""
+        W.Meaning.C <- knjwrdrd$W.Meaning.C[index]
+        W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else ""
+        S1 <- knjwrdrd$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- knjwrdrd$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T1 <- knjwrdrd$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- knjwrdrd$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          # div(style = list(fontSize = 60, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), K.Meaning),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.B),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.C),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.A),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.B),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.C),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.D),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), S1),
+          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), S2),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), T1),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), T2),
+        )
+      },
+      align = "left"
+    ),
+    Level = colDef(show = FALSE),
+    K.Meaning = colDef(show = FALSE),
+    Words.A = colDef(show = FALSE),
+    Words.B = colDef(show = FALSE),
+    Words.C = colDef(show = FALSE),
+    Words.D = colDef(show = FALSE),
+    W.Meaning.A = colDef(show = FALSE),
+    W.Meaning.B = colDef(show = FALSE),
+    W.Meaning.C = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  elementId = "kanji-filter-table-1",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 350),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
+)
+
+```
+
+<!-- ------------------------------------------------------------------------ -->
+
+#### LR {.tabset}
+
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-10"> -->
+
+```{r, echo=FALSE, message=FALSE}
+# library(htmlwidgets)
+# webshot::install_phantomjs()
+
+knjwrdrd <- knjwrdrd[sample(1:nrow(knjwrdrd)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chartz", tags$label("【Level】", `for` = "kanji-level-filter-2"),
+      # div(
+        tags$select(
+          id = "kanji-level-filter-2",
+          onchange = "Reactable.setFilter('kanji-filter-table-2', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(knjwrdrd$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  knjwrdrd,
+  columns = list(
+    Kanji = colDef(style= list(background = '#060912'), minWidth = 57,
+      cell = function(value, index) {
+        K.Meaning <- knjwrdrd$K.Meaning[index]
+        K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
+        # Words.A <- knjwrdrd$Words.A[index]
+        # Words.A <- if (!is.na(Words.A)) Words.A else ""
+        # Words.B <- knjwrdrd$Words.B[index]
+        # Words.B <- if (!is.na(Words.B)) Words.B else ""
+        # Words.C <- knjwrdrd$Words.C[index]
+        # Words.C <- if (!is.na(Words.C)) Words.C else ""
+        # Words.D <- knjwrdrd$Words.D[index]
+        # Words.D <- if (!is.na(Words.D)) Words.D else ""
+        # W.Meaning.A <- knjwrdrd$W.Meaning.A[index]
+        # W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else ""
+        # W.Meaning.B <- knjwrdrd$W.Meaning.B[index]
+        # W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else ""
+        # W.Meaning.C <- knjwrdrd$W.Meaning.C[index]
+        # W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else ""
+        tagList(
+          # div(style = list(fontSize = 60, fontWeight = 600, color = '#f9f2e5', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#7fffff', fontFamily = 'Open Sans'), K.Meaning),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.A),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.B),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.C),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.A),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.B),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.C),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.D),
+        )
+      },
+      align = "center"
+    ),
+    Words.A = colDef(style= list(background = '#f9f6ed'),
+      cell = function(value, index) {
+        # K.Meaning <- knjwrdrd$K.Meaning[index]
+        # K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
+        Words.A <- knjwrdrd$Words.A[index]
+        Words.A <- if (!is.na(Words.A)) Words.A else ""
+        Words.B <- knjwrdrd$Words.B[index]
+        Words.B <- if (!is.na(Words.B)) Words.B else ""
+        Words.C <- knjwrdrd$Words.C[index]
+        Words.C <- if (!is.na(Words.C)) Words.C else ""
+        Words.D <- knjwrdrd$Words.D[index]
+        Words.D <- if (!is.na(Words.D)) Words.D else ""
+        W.Meaning.A <- knjwrdrd$W.Meaning.A[index]
+        W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else ""
+        W.Meaning.B <- knjwrdrd$W.Meaning.B[index]
+        W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else ""
+        W.Meaning.C <- knjwrdrd$W.Meaning.C[index]
+        W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else ""
+        S1 <- knjwrdrd$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- knjwrdrd$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T1 <- knjwrdrd$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- knjwrdrd$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        tagList(
+          # div(style = list(fontSize = 60, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), K.Meaning),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.B),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.C),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.A),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.B),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.C),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.D),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), S1),
+          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), S2),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 2), "."),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), T1),
+          div(style = list(fontSize = 9, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), T2),
+        )
+      },
+      align = "left"
+    ),
+    Level = colDef(show = FALSE),
+    K.Meaning = colDef(show = FALSE),
+    Words.A = colDef(show = FALSE),
+    Words.B = colDef(show = FALSE),
+    Words.C = colDef(show = FALSE),
+    Words.D = colDef(show = FALSE),
+    W.Meaning.A = colDef(show = FALSE),
+    W.Meaning.B = colDef(show = FALSE),
+    W.Meaning.C = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  elementId = "kanji-filter-table-2",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 350),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+  )
+  )
+)
+
+```
 
 <!-- ------------------------------------------------------------------------ -->
 
