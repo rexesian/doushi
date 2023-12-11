@@ -11893,6 +11893,8 @@ reactable(
 
 ### LLE:04 Frequency {.tabset}
 
+#### Study {.tabset}
+
 ```{r, echo=FALSE, message=FALSE}
 
 frezknjz <- frezknjz[sample(1:nrow(frezknjz)),]
@@ -11926,6 +11928,73 @@ reactable(
         tagList(
           div(style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value,"。", S2,"。", S3),
           div(style = list(fontSize = 10, fontWeight = 500, color = '#800000'), T1,"。", T2,"。", T3),
+        )
+      },
+      align = "center"
+    ),
+    S2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Recall {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+frezknjz <- frezknjz[sample(1:nrow(frezknjz)),]
+
+reactable(
+  frezknjz,
+  columns = list(
+    Kanji = colDef(style= list(background = '#e0e1dd'), minWidth = 100,
+      cell = function(value, index) {
+        Meaning <- frezknjz$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 10, fontWeight = 600, color = '#026450'), Meaning)
+        )
+      },
+      align = "center"
+    ),
+    S1 = colDef(style= list(background = '#edede9'), minWidth = 200,
+      cell = function(value, index) {
+        S2 <- frezknjz$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- frezknjz$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        T1 <- frezknjz$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        T2 <- frezknjz$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        T3 <- frezknjz$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        tagList(
+          div(style = list(fontSize = 21, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value,"。", S2,"。", S3),
+          # div(style = list(fontSize = 10, fontWeight = 500, color = '#800000'), T1,"。", T2,"。", T3),
         )
       },
       align = "center"
