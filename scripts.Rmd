@@ -147,6 +147,7 @@ scrptrvw <- read_csv("jpdb/SCRPTRVW-KNJD5.csv")
 knjwrdrd <- read_csv("jpim/WRDRD-KNJ.csv")
 knjrcgnz <- read_csv("cpdb/WRDRDLV-KNJ.csv")
 frezknjz <- read_csv("cpdb/KNLE-KNRQZ.csv")
+frezwrds <- read_csv("cpdb/KNLT-KNRSNT.csv")
 ```
 
 # <b> Scripts: Study </b> {.tabset}
@@ -757,7 +758,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-scknj3.sl <- scknj3 %>% slice(1:20)
+scknj3.sl <- scknj3 %>% slice(1:40)
 scknj3.sl <- scknj3.sl[sample(1:nrow(scknj3.sl)),]
 
 reactable(
@@ -12126,6 +12127,54 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+#### Collab {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+frezwrds <- frezwrds[sample(1:nrow(frezwrds)),]
+
+reactable(
+  frezwrds,
+  columns = list(
+    Sentences = colDef(style= list(background = '#e0e1dd'), minWidth = 200,
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 300, color = '#0F2040', fontFamily = 'Open Sans'), value),
+        )
+      },
+      align = "left"
+    ),
+    Translation = colDef(style= list(background = '#edede9'), minWidth = 200,
+      cell = function(value, index) {
+        tagList(
+          div(style = list(fontSize = 11, fontWeight = 100, color = '#0F2040', fontFamily = 'Open Sans'), value),
+        )
+      },
+      align = "left"
+    )
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 
 ------------------------------------------------------------------------
 
