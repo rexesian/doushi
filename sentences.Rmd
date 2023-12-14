@@ -3155,7 +3155,107 @@ reactable(
 
 # <b> Essence </b> {.tabset}
 
-### ES:01 Set-Words
+### ES:01 Essence.Grammar
+
+```{r, echo=FALSE, message=FALSE}
+
+gwrds.n1 <- gwrds %>% slice(573:642)
+gwrds.n1 <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
+gwrds.n2 <- gwrds %>% slice(339:572)
+gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
+gwrds.n3 <- gwrds %>% slice(196:338)
+gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
+gwrds.n4 <- gwrds %>% slice(43:195)
+gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
+gwrds.n5 <- gwrds %>% slice(1:42)
+gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
+gwrds.ex <- gwrds %>% slice(643:691)
+gwrds.ex <- gwrds.ex[sample(1:nrow(gwrds.ex)),]
+
+gwrds.na <- bind_rows(gwrds.n1, gwrds.n2)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n3)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n4)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n5)
+gwrds.na <- bind_rows(gwrds.na, gwrds.ex)
+gwrds.na <- gwrds.na[sample(1:nrow(gwrds.na)),]
+
+reactable(
+  gwrds.na,
+  columns = list(
+    # Words = colDef(style= list(background = '#edede9'), minWidth = 310, sticky = "left",
+    #   cell = function(value, index) {
+    #     Meaning <- gwrds.na$Meaning[index]
+    #     Meaning <- if (!is.na(Meaning)) Meaning else ""
+    #     Sentence <- gwrds.na$Sentence[index]
+    #     Sentence <- if (!is.na(Sentence)) Sentence else ""
+    #     Translation <- gwrds.na$Translation[index]
+    #     Translation <- if (!is.na(Translation)) Translation else ""
+    #     Level <- gwrds.na$Level[index]
+    #     Level <- if (!is.na(Level)) Level else ""
+    #     tagList(
+    #       div(style = list(fontSize = 14, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value),
+    #       div(style = list(fontSize = 11, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), "▪ ", Meaning),
+    #       div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "▸ Level: ", Level),
+    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
+    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
+    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
+    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
+    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
+    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
+    #       # div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+    #       # div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
+    #     )
+    #   },
+    #   align = "left"
+    # ),
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+      cell = function(value, index) {
+        Words <- gwrds.na$Words[index]
+        Words <- if (!is.na(Words)) Words else ""
+        Meaning <- gwrds.na$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Level <- gwrds.na$Level[index]
+        Level <- if (!is.na(Level)) Level else ""
+        Translation <- gwrds.na$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 15, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New' ,fontWeight = 400), value),
+          div(style = list(fontSize = 12, color = '#00202e', fontFamily = 'Zen Kaku Gothic New' ,fontWeight = 300), Translation),
+          div(style = list(fontSize = 11, fontWeight = 600, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Words, "▪ ", Meaning, "▸ Level: ", Level),
+          # div(style = list(fontSize = 11, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), "▪ ", Meaning),
+          # div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "▸ Level: ", Level),
+        )
+      },
+      align = "left"
+    ),    
+    Words = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Level = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 77, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### ES:02 Essence.Word.Sets
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3173,7 +3273,7 @@ reactable(
         Meaning <- setwrdcmb$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), value,"。"),
+          div(style = list(fontSize = 15, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value,"。"),
           # div(style = list(fontSize = 11, fontWeight = 500, color = '#800000', fontFamily = 'Zen Kaku Gothic New'), Meaning),
           # div(style = list(fontSize = 1, color = '#dee7e7'), "."),
           # div(style = list(fontSize = 1, color = '#dee7e7'), "."),
