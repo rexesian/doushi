@@ -3375,161 +3375,161 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-#### Word-Rcl {.tabset}
+<!-- #### Word-Rcl {.tabset} -->
 
-<div class = "row">
-<div class = "col-sm-6">
+<!-- <div class = "row"> -->
+<!-- <div class = "col-sm-6"> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-freqwrds.a <- freqwrds %>% select(Word, Meaning, Freq, Type)
-freqwrds.a <- freqwrds.a[sample(1:nrow(freqwrds.a)),]
+<!-- freqwrds.a <- freqwrds %>% select(Word, Meaning, Freq, Type) -->
+<!-- freqwrds.a <- freqwrds.a[sample(1:nrow(freqwrds.a)),] -->
 
-# htmltools::browsable(
-#   tagList(
-#     div(
-#       div(class = "charts", tags$label("【Type】", `for` = "word-type-filter"),
-#       # div(
-#         tags$select(
-#           id = "word-type-filter",
-#           onchange = "Reactable.setFilter('word-filter-table', 'Type', this.value)",
-#           tags$option("All", value = ""),
-#           lapply(unique(freqwrds.a$Type), tags$option)
-#         # )
-#       ))
-#     ),
+<!-- # htmltools::browsable( -->
+<!-- #   tagList( -->
+<!-- #     div( -->
+<!-- #       div(class = "charts", tags$label("【Type】", `for` = "word-type-filter"), -->
+<!-- #       # div( -->
+<!-- #         tags$select( -->
+<!-- #           id = "word-type-filter", -->
+<!-- #           onchange = "Reactable.setFilter('word-filter-table', 'Type', this.value)", -->
+<!-- #           tags$option("All", value = ""), -->
+<!-- #           lapply(unique(freqwrds.a$Type), tags$option) -->
+<!-- #         # ) -->
+<!-- #       )) -->
+<!-- #     ), -->
 
-reactable(
-  freqwrds.a,
-  columns = list(
-    Word = colDef(style= list(background = '#DEE0DC'),
-      cell = function(value, index) {
-        Meaning <- freqwrds.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Freq <- freqwrds.a$Freq[index]
-        Freq <- if (!is.na(Freq)) Freq else ""
-        Type <- freqwrds.a$Type[index]
-        Type <- if (!is.na(Type)) Type else ""
-        tagList(
-          div(style = list(fontSize = 32, fontWeight = 500, color = '#0D1D3A', fontFamily = 'RocknRoll One'), value),
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#821e1e', fontFamily = 'Open Sans'), Meaning),
-          # div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Freq),
-          # div(style = list(fontSize = 10, fontWeight = 300, color = '#101010', fontFamily = 'Open Sans'), Type),
-        )
-      },
-      align = "center"
-    ),
-    Type = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Freq = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  # defaultSorted = "Freq",
-  # elementId = "word-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 320),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#000015",
-      color = "hsl(0, 0%, 95%)",
-      fontSize = 0.1,
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0.75rem",
-      letterSpacing = "1px",
-      textTransform = "lowercase",
-      padding = "0px",
-      "&:hover, &:focus" = list(color = '#ffff00')
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-  )
-#   )
-# )
+<!-- reactable( -->
+<!--   freqwrds.a, -->
+<!--   columns = list( -->
+<!--     Word = colDef(style= list(background = '#DEE0DC'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- freqwrds.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Freq <- freqwrds.a$Freq[index] -->
+<!--         Freq <- if (!is.na(Freq)) Freq else "" -->
+<!--         Type <- freqwrds.a$Type[index] -->
+<!--         Type <- if (!is.na(Type)) Type else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 32, fontWeight = 500, color = '#0D1D3A', fontFamily = 'RocknRoll One'), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600, color = '#821e1e', fontFamily = 'Open Sans'), Meaning), -->
+<!--           # div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Freq), -->
+<!--           # div(style = list(fontSize = 10, fontWeight = 300, color = '#101010', fontFamily = 'Open Sans'), Type), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Type = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Freq = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   # defaultSorted = "Freq", -->
+<!--   # elementId = "word-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 320), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#000015", -->
+<!--       color = "hsl(0, 0%, 95%)", -->
+<!--       fontSize = 0.1, -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0.75rem", -->
+<!--       letterSpacing = "1px", -->
+<!--       textTransform = "lowercase", -->
+<!--       padding = "0px", -->
+<!--       "&:hover, &:focus" = list(color = '#ffff00') -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!-- #   ) -->
+<!-- # ) -->
 
-</div>
-<div class = "col-sm-6">
+<!-- ``` -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- </div> -->
+<!-- <div class = "col-sm-6"> -->
 
-freqwrds.a <- freqwrds.a[sample(1:nrow(freqwrds.a)),]
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-# htmltools::browsable(
-#   tagList(
-#     div(
-#       div(class = "charts", tags$label("【Type】", `for` = "words-level-filter"),
-#       # div(
-#         tags$select(
-#           id = "words-level-filter",
-#           onchange = "Reactable.setFilter('words-filter-table', 'Type', this.value)",
-#           tags$option("All", value = ""),
-#           lapply(unique(freqwrds.a$Type), tags$option)
-#         # )
-#       ))
-#     ),
+<!-- freqwrds.a <- freqwrds.a[sample(1:nrow(freqwrds.a)),] -->
 
-reactable(
-  freqwrds.a,
-  columns = list(
-    Meaning = colDef(style= list(background = '#dee7e7'),
-      cell = function(value, index) {
-        Meaning <- freqwrds.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        tagList(
-          div(style = list(fontSize = 13, fontWeight = 600, color = '#0F2040', fontFamily = 'RocknRoll One'), value),
-        )
-      },
-      align = "center"
-    ),
-    Type = colDef(show = FALSE),
-    Word = colDef(show = FALSE),
-    Freq = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  # elementId = "words-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 320),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#000015",
-      color = "hsl(0, 0%, 95%)",
-      fontSize = 0.1,
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0.75rem",
-      letterSpacing = "1px",
-      textTransform = "lowercase",
-      padding = "0px",
-      "&:hover, &:focus" = list(color = '#ffff00')
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
-  )
-#   )
-# )
+<!-- # htmltools::browsable( -->
+<!-- #   tagList( -->
+<!-- #     div( -->
+<!-- #       div(class = "charts", tags$label("【Type】", `for` = "words-level-filter"), -->
+<!-- #       # div( -->
+<!-- #         tags$select( -->
+<!-- #           id = "words-level-filter", -->
+<!-- #           onchange = "Reactable.setFilter('words-filter-table', 'Type', this.value)", -->
+<!-- #           tags$option("All", value = ""), -->
+<!-- #           lapply(unique(freqwrds.a$Type), tags$option) -->
+<!-- #         # ) -->
+<!-- #       )) -->
+<!-- #     ), -->
 
-```
+<!-- reactable( -->
+<!--   freqwrds.a, -->
+<!--   columns = list( -->
+<!--     Meaning = colDef(style= list(background = '#dee7e7'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- freqwrds.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 13, fontWeight = 600, color = '#0F2040', fontFamily = 'RocknRoll One'), value), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Type = colDef(show = FALSE), -->
+<!--     Word = colDef(show = FALSE), -->
+<!--     Freq = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   # elementId = "words-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 320), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#000015", -->
+<!--       color = "hsl(0, 0%, 95%)", -->
+<!--       fontSize = 0.1, -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0.75rem", -->
+<!--       letterSpacing = "1px", -->
+<!--       textTransform = "lowercase", -->
+<!--       padding = "0px", -->
+<!--       "&:hover, &:focus" = list(color = '#ffff00') -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, -->
 
-</div>
-</div>
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!-- #   ) -->
+<!-- # ) -->
+
+<!-- ``` -->
+
+<!-- </div> -->
+<!-- </div> -->
 
 ------------------------------------------------------------------------
 
@@ -3671,78 +3671,78 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-#### Verb-Snt {.tabset}
+<!-- #### Verb-Snt {.tabset} -->
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE} -->
 
-cmmvrb.rc <- cmmvrb
-cmmvrb.rc <- cmmvrb.rc %>% na.omit(cmmvrb.rc)
-cmmvrb.rc <- cmmvrb.rc[sample(1:nrow(cmmvrb.rc)),]
+<!-- cmmvrb.rc <- cmmvrb -->
+<!-- cmmvrb.rc <- cmmvrb.rc %>% na.omit(cmmvrb.rc) -->
+<!-- cmmvrb.rc <- cmmvrb.rc[sample(1:nrow(cmmvrb.rc)),] -->
 
-cmmvrb.rc <- cmmvrb.rc %>% filter(Level==5)
-# cmmvrb.rc
-num.rows.rc = nrow(cmmvrb.rc)
+<!-- cmmvrb.rc <- cmmvrb.rc %>% filter(Level==5) -->
+<!-- # cmmvrb.rc -->
+<!-- num.rows.rc = nrow(cmmvrb.rc) -->
 
-datan.rc.1 <- cmmvrb.rc %>%
-  select(Verbs, Meaning, Sentences, Translation, Level) %>%
-  mutate(
-      x = rnorm(num.rows.rc, 1, 2), 
-      y = rnorm(num.rows.rc, 1, 4),
-      # x = sort(x, decreasing = FALSE),
-      # y = sort(y, decreasing = FALSE),
-  )
-# datan.rc.1
+<!-- datan.rc.1 <- cmmvrb.rc %>% -->
+<!--   select(Verbs, Meaning, Sentences, Translation, Level) %>% -->
+<!--   mutate( -->
+<!--       x = rnorm(num.rows.rc, 1, 2),  -->
+<!--       y = rnorm(num.rows.rc, 1, 4), -->
+<!--       # x = sort(x, decreasing = FALSE), -->
+<!--       # y = sort(y, decreasing = FALSE), -->
+<!--   ) -->
+<!-- # datan.rc.1 -->
 
-num.char.rc = nchar(datan.rc.1$Verbs)
-datan.rc.1 <- data.frame(datan.rc.1, num.char.rc)
-# datan.rc.1
+<!-- num.char.rc = nchar(datan.rc.1$Verbs) -->
+<!-- datan.rc.1 <- data.frame(datan.rc.1, num.char.rc) -->
+<!-- # datan.rc.1 -->
 
-p.rc <- ggplot(datan.rc.1, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Verbs, "<br>","<sup>", Sentences, "<br>","<sup>", Translation))) + geom_point(aes(size = num.char.rc, colour=num.char.rc, aplha=0.6))  + scale_colour_gradient(low="#EB455F", high="#060047")
-# p.rc <- p.rc + geom_point(alpha = 0.5)
-# p.rc <- p.rc + theme_wsj()
-p.rc <- p.rc + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())
+<!-- p.rc <- ggplot(datan.rc.1, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Verbs, "<br>","<sup>", Sentences, "<br>","<sup>", Translation))) + geom_point(aes(size = num.char.rc, colour=num.char.rc, aplha=0.6))  + scale_colour_gradient(low="#EB455F", high="#060047") -->
+<!-- # p.rc <- p.rc + geom_point(alpha = 0.5) -->
+<!-- # p.rc <- p.rc + theme_wsj() -->
+<!-- p.rc <- p.rc + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank()) -->
 
-ggplotly(p.rc, tooltip = c("text"), width=700)  %>% layout(hoverlabel = list(font=list(size=24,family="Zen Kaku Gothic New")))
+<!-- ggplotly(p.rc, tooltip = c("text"), width=700)  %>% layout(hoverlabel = list(font=list(size=24,family="Zen Kaku Gothic New"))) -->
 
-```
+<!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-#### Comm-Snt {.tabset}
+<!-- #### Comm-Snt {.tabset} -->
 
-```{r, echo=FALSE, message=FALSE, warning = FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE, warning = FALSE} -->
 
-ntvspk.a <- ntvspk  %>%  select(Expression, Translation)
+<!-- ntvspk.a <- ntvspk  %>%  select(Expression, Translation) -->
 
-num.rows.n = nrow(ntvspk.a)
+<!-- num.rows.n = nrow(ntvspk.a) -->
 
-ntvspk.a.m <- ntvspk.a %>%
-  select(Expression, Translation) %>%
-  mutate(
-      x = rnorm(num.rows.n, 1, 0.2), 
-      y = rnorm(num.rows.n, 1, 0.3),
-      # x = sort(x, decreasing = FALSE),
-      # y = sort(y, decreasing = FALSE),
-  )
-# ntvspk.a.m
-num.char = nchar(ntvspk.a.m$Expression)
-ntvspk.a.m.v <- data.frame(ntvspk.a.m, num.char)
+<!-- ntvspk.a.m <- ntvspk.a %>% -->
+<!--   select(Expression, Translation) %>% -->
+<!--   mutate( -->
+<!--       x = rnorm(num.rows.n, 1, 0.2),  -->
+<!--       y = rnorm(num.rows.n, 1, 0.3), -->
+<!--       # x = sort(x, decreasing = FALSE), -->
+<!--       # y = sort(y, decreasing = FALSE), -->
+<!--   ) -->
+<!-- # ntvspk.a.m -->
+<!-- num.char = nchar(ntvspk.a.m$Expression) -->
+<!-- ntvspk.a.m.v <- data.frame(ntvspk.a.m, num.char) -->
 
-p.n <- ggplot(ntvspk.a.m.v, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Expression, "<br>","<sup>","<sup>", Translation))) + geom_point(aes(size = num.char, colour=num.char, aplha=0.5))  + scale_colour_gradient(low="#EB455F", high="#060047")
-# p.n <- p.n + labs(title = "Scatter Expressions", 
-#             x = "Random X", 
-#             y = "Random Y")
-# p.n <- p.n + theme(legend.position="left")
-# p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"))
-p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank())
+<!-- p.n <- ggplot(ntvspk.a.m.v, dynamicTicks = TRUE, aes(x=x, y=y, text = paste(Expression, "<br>","<sup>","<sup>", Translation))) + geom_point(aes(size = num.char, colour=num.char, aplha=0.5))  + scale_colour_gradient(low="#EB455F", high="#060047") -->
+<!-- # p.n <- p.n + labs(title = "Scatter Expressions",  -->
+<!-- #             x = "Random X",  -->
+<!-- #             y = "Random Y") -->
+<!-- # p.n <- p.n + theme(legend.position="left") -->
+<!-- # p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd")) -->
+<!-- p.n <- p.n + theme(plot.background = element_rect(fill = "#e0e1dd"), legend.position="none", plot.margin = margin(t = 10, r = 30, b = 15, l = 25), axis.title.x = element_blank(), axis.title.y = element_blank(), axis.text.x = element_blank(),axis.text.y = element_blank(), axis.ticks = element_blank()) -->
 
-ggplotly(p.n, tooltip = c("text"), width=700)  %>% layout(hoverlabel = list(font=list(size=19,family="Zen Kaku Gothic New")))
+<!-- ggplotly(p.n, tooltip = c("text"), width=700)  %>% layout(hoverlabel = list(font=list(size=19,family="Zen Kaku Gothic New"))) -->
 
-# ggplot(ntvspk.a.m, aes(x = x, y = y, text = paste(Expression))) + geom_hex(bins = 50)
+<!-- # ggplot(ntvspk.a.m, aes(x = x, y = y, text = paste(Expression))) + geom_hex(bins = 50) -->
 
-```
+<!-- ``` -->
 
 
 <!-- ------------------------------------------------------------------------ -->
