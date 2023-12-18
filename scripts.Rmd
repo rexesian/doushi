@@ -148,6 +148,7 @@ knjwrdrd <- read_csv("jpim/WRDRD-KNJ.csv")
 knjrcgnz <- read_csv("cpdb/WRDRDLV-KNJ.csv")
 frezknjz <- read_csv("cpdb/KNLE-KNRQZ.csv")
 frezwrds <- read_csv("cpdb/KNLT-KNRSNT.csv")
+pattknjz <- read_csv("cpdb/KNLD-KNRQZ.csv")
 ```
 
 # <b> Scripts: Study </b> {.tabset}
@@ -4000,8 +4001,7 @@ reactable(
 </div>
 
 
-
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
 #### LN {.tabset}
 
@@ -4105,9 +4105,9 @@ reactable(
         tagList(
           # div(style = list(fontSize = 60, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), K.Meaning),
-          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words.B),
-          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words.C),
+          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value),
+          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Words.B),
+          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Words.C),
           # div(style = list(fontSize = 2), "."),
           # div(style = list(fontSize = 2), "."),
           # div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.A),
@@ -4173,7 +4173,7 @@ reactable(
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
 #### LM {.tabset}
 
@@ -4275,9 +4275,9 @@ reactable(
         tagList(
           # div(style = list(fontSize = 60, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), K.Meaning),
-          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words.B),
-          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words.C),
+          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value),
+          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Words.B),
+          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Words.C),
           # div(style = list(fontSize = 2), "."),
           # div(style = list(fontSize = 2), "."),
           # div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.A),
@@ -4343,7 +4343,7 @@ reactable(
 
 ```
 
-<!-- ------------------------------------------------------------------------ -->
+------------------------------------------------------------------------
 
 #### LQ {.tabset}
 
@@ -4445,9 +4445,9 @@ reactable(
         tagList(
           # div(style = list(fontSize = 60, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
           # div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), K.Meaning),
-          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words.B),
-          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Words.C),
+          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value),
+          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Words.B),
+          div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Words.C),
           # div(style = list(fontSize = 2), "."),
           # div(style = list(fontSize = 2), "."),
           # div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.A),
@@ -12155,6 +12155,71 @@ reactable(
       },
       align = "left"
     )
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, resizable = TRUE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### LLE:05 Pattern {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+pattknjz <- pattknjz[sample(1:nrow(pattknjz)),]
+
+reactable(
+  pattknjz,
+  columns = list(
+    Kanji = colDef(style= list(background = '#e0e1dd'), minWidth = 120,
+      cell = function(value, index) {
+        Notes <- pattknjz$Notes[index]
+        Notes <- if (!is.na(Notes)) Notes else ""
+        Meaning <- pattknjz$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 30, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#b00000', fontFamily = 'Open Sans'), Notes),
+          div(style = list(fontSize = 12, fontWeight = 600, color = '#008000', fontFamily = 'Open Sans'), Meaning),
+        )
+      },
+      align = "center"
+    ),
+    Type = colDef(style= list(background = '#edede9'), minWidth = 200,
+      cell = function(value, index) {
+        S1 <- pattknjz$S1[index]
+        S1 <- if (!is.na(S1)) S1 else ""
+        S2 <- pattknjz$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        S3 <- pattknjz$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        tagList(
+          # div(style = list(fontSize = 11, fontWeight = 100, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 19, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), S1,"・", S2,"・", S3),
+        )
+      },
+      align = "left"
+    ),
+    Notes = colDef(show = FALSE),
+    S1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
   ),
   rowClass = "my-row",
   defaultPageSize = 5,
