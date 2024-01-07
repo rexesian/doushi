@@ -958,6 +958,107 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### N2 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+scknj2pt <- scknj2[sample(1:nrow(scknj2)),]
+
+scknj2pt.1 <- scknj2pt %>% select(Kanji, Meaning) %>% rename(K1 = Kanji, M1 = Meaning) %>% slice(1:76)
+scknj2pt.2 <- scknj2pt %>% select(Kanji, Meaning) %>% rename(K2 = Kanji, M2 = Meaning) %>% slice(77:152)
+scknj2pt.3 <- scknj2pt %>% select(Kanji, Meaning) %>% rename(K3 = Kanji, M3 = Meaning) %>% slice(153:228)
+scknj2pt.4 <- scknj2pt %>% select(Kanji, Meaning) %>% rename(K4 = Kanji, M4 = Meaning) %>% slice(229:304)
+scknj2pt.5 <- scknj2pt %>% select(Kanji, Meaning) %>% rename(K5 = Kanji, M5 = Meaning) %>% slice(305:380)
+
+scknj2pt.a <- data.frame(scknj2pt.1, scknj2pt.2, scknj2pt.3, scknj2pt.4, scknj2pt.5)
+
+reactable(
+  scknj2pt.a,
+  columns = list(
+    K1 = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        M1 <- scknj2pt.a$M1[index]
+        M1 <- if (!is.na(M1)) M1 else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000'), M1)
+        )
+      },
+      align = "center"
+    ),
+    K2 = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        M2 <- scknj2pt.a$M2[index]
+        M2 <- if (!is.na(M2)) M2 else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000'), M2)
+        )
+      },
+      align = "center"
+    ),
+    K3 = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        M3 <- scknj2pt.a$M3[index]
+        M3 <- if (!is.na(M3)) M3 else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000'), M3)
+        )
+      },
+      align = "center"
+    ),
+    K4 = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        M4 <- scknj2pt.a$M4[index]
+        M4 <- if (!is.na(M4)) M4 else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000'), M4)
+        )
+      },
+      align = "center"
+    ),
+    K5 = colDef(style= list(background = '#e0e1dd'),
+      cell = function(value, index) {
+        M5 <- scknj2pt.a$M5[index]
+        M5 <- if (!is.na(M5)) M5 else ""
+        tagList(
+          div(style = list(fontSize = 32, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 9, fontWeight = 600, color = '#800000'), M5)
+        )
+      },
+      align = "center"
+    ),
+    
+    M1 = colDef(show = FALSE),
+    M2 = colDef(show = FALSE),
+    M3 = colDef(show = FALSE),
+    M4 = colDef(show = FALSE),
+    M5 = colDef(show = FALSE)
+    
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 100, borderColor = "#f5f5f5"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", outlined = TRUE, borderless = FALSE, striped = FALSE, highlight = TRUE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
 ### SCR:04 Special {.tabset}
 
 <p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Special Characters** chosen to focus.</p>
@@ -13328,11 +13429,13 @@ knjsnt.la <- bind_rows(knjsnt.la, knjsnt.l3)
 knjsnt.la <- bind_rows(knjsnt.la, knjsnt.l2)
 knjsnt.la <- bind_rows(knjsnt.la, knjsnt.l1)
 
+knjsnt.la <- knjsnt.la[sample(1:nrow(knjsnt.la)),]
+
 reactable(
   knjsnt.la,
   columns = list(
-    Sentences = colDef(minWidth = 90,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans', color = '#0F2040', background = '#dee7e7')),
-    Translation = colDef(minWidth = 80,align = "left", style = list(fontSize = 10, color = '#0F2040', background = '#dee7e7'))
+    Sentences = colDef(minWidth = 90,align = "left", style = list(fontSize = 13.5, fontFamily = 'Open Sans', fontWeight = 300, color = '#0F2040', background = '#dee7e7')),
+    Translation = colDef(minWidth = 80,align = "left", style = list(fontSize = 10, fontFamily = 'Open Sans', fontWeight = 300, color = '#0F2040', background = '#dee7e7'))
   ),
   rowClass = "my-row",
   defaultPageSize = 9,
@@ -13345,7 +13448,7 @@ reactable(
       width = "100%"
     )
   ),
-  showPageInfo = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, outlined = TRUE, borderless = FALSE, highlight = TRUE,
+  showPageInfo = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = TRUE, outlined = TRUE, borderless = FALSE, highlight = TRUE, wrap = FALSE, resizable = TRUE,
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
@@ -13370,13 +13473,13 @@ scrptrdng.a <- scrptrdng
 reactable(
   scrptrdng.a,
   columns = list(
-    Script = colDef(style= list(background = '#dee7e7'),
+    Script = colDef(style= list(background = '#dee7e7'), html = TRUE,
       minWidth = 280,
       cell = function(value, index) {
         Translation <- scrptrdng.a$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
         tagList(
-          div(style = list(fontSize = 18, fontWeight = 200, color = '#0F2040', fontFamily = 'Helvetica Neue'), value),
+          div(style = list(fontSize = 17, fontWeight = 200, color = '#0F2040', fontFamily = 'Helvetica Neue'), value),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
@@ -13388,6 +13491,14 @@ reactable(
           div(style = list(fontSize = 2), "."),
           div(style = list(fontSize = 2), "."),
         )
+        
+        # tag_list <- tagList(
+        #   div(style = list(fontSize = 18, fontWeight = 200, color = '#0F2040', fontFamily = 'Helvetica Neue'), HTML(scrptrdng.a$Script[index])),
+        #   div(style = list(fontSize = 2), "."),
+        #   div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Klee One'), HTML(scrptrdng.a$Translation[index])),
+        #   div(style = list(fontSize = 2), "."),
+        # )
+        # as.character(tag_list)
       },
       align = "left"
     ),
