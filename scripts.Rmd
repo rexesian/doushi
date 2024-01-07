@@ -149,6 +149,7 @@ knjrcgnz <- read_csv("cpdb/WRDRDLV-KNJ.csv")
 frezknjz <- read_csv("cpdb/KNLE-KNRQZ.csv")
 frezwrds <- read_csv("cpdb/KNLT-KNRSNT.csv")
 pattknjz <- read_csv("cpdb/KNLD-KNRQZ.csv")
+essncekn <- read_csv("cpdb/ESNCE-ESS.csv")
 ```
 
 # <b> Scripts: Study </b> {.tabset}
@@ -12935,7 +12936,80 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### HLP:02 Sentences {.tabset}
+### HLP:02 Essence {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+essncekn <- essncekn[sample(1:nrow(essncekn)),]
+
+reactable(
+  essncekn,
+  columns = list(
+    Essence = colDef(style= list(background = '#edede9'), minWidth = 310, sticky = "left",
+      cell = function(value, index) {
+        Meaning <- essncekn$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Usage <- essncekn$Usage[index]
+        Usage <- if (!is.na(Usage)) Usage else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 800, color = '#1a313a', fontFamily = 'Zen Kaku Gothic New'), value),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), "▪ ",Meaning),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 11, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Usage),
+          # div(style = list(fontSize = 11, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Remarks.1),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 10, fontWeight = 600, color = '#01161e', fontFamily = 'Roboto Condensed'), Structure),
+          # div(style = list(fontSize = 10, fontWeight = 600, color = '#01161e', fontFamily = 'Roboto Condensed'), Structure.1),
+        )
+      },
+      align = "left"
+    ),
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+      cell = function(value, index) {
+        Translation <- essncekn$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        # English <- essncekn$English[index]
+        # English <- if (!is.na(English)) English else ""
+        # Remarks <- essncekn$Remarks[index]
+        # Remarks <- if (!is.na(Remarks)) Remarks else ""
+        # Spanish <- essncekn$Spanish[index]
+        # Spanish <- if (!is.na(Spanish)) Spanish else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450'), Translation),
+          # div(style = list(fontSize = 10, fontWeight = 400, color = '#026450'), English),
+          # div(style = list(fontSize = 10, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE),
+    Usage = colDef(show = FALSE),
+    Translation = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 130, borderColor = "#f5f5f5", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = TRUE, paginationType = "numbers", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### HLP:03 Sentences {.tabset}
 
 <!-- #### L5 {.tabset} -->
 
@@ -13457,7 +13531,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### HLP:03 Readings {.tabset}
+### HLP:04 Readings {.tabset}
 
 <!-- ### 01 -->
 
@@ -16898,4 +16972,6 @@ reactable(
 <!-- ) -->
 
 <!-- ``` -->
+
+
 
