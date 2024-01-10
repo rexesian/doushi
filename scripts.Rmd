@@ -12936,7 +12936,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### HLP:02 Essence {.tabset}
+### HLP:02 Essences {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -12945,7 +12945,7 @@ essncekn <- essncekn[sample(1:nrow(essncekn)),]
 reactable(
   essncekn,
   columns = list(
-    Essence = colDef(style= list(background = '#edede9'), minWidth = 310, sticky = "left",
+    Essence = colDef(style= list(background = '#edede9'), minWidth = 130, sticky = "left",
       cell = function(value, index) {
         Meaning <- essncekn$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -12965,21 +12965,25 @@ reactable(
       },
       align = "left"
     ),
-    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 400,
       cell = function(value, index) {
         Translation <- essncekn$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
-        # English <- essncekn$English[index]
-        # English <- if (!is.na(English)) English else ""
-        # Remarks <- essncekn$Remarks[index]
-        # Remarks <- if (!is.na(Remarks)) Remarks else ""
-        # Spanish <- essncekn$Spanish[index]
-        # Spanish <- if (!is.na(Spanish)) Spanish else ""
+        Sentence.1 <- essncekn$Sentence.1[index]
+        Sentence.1 <- if (!is.na(Sentence.1)) Sentence.1 else ""
+        Sentence.2 <- essncekn$Sentence.2[index]
+        Sentence.2 <- if (!is.na(Sentence.2)) Sentence.2 else ""
+        Translation.1 <- essncekn$Translation.1[index]
+        Translation.1 <- if (!is.na(Translation.1)) Translation.1 else ""
+        Translation.2 <- essncekn$Translation.2[index]
+        Translation.2 <- if (!is.na(Translation.2)) Translation.2 else ""
         tagList(
-          div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450'), Translation),
-          # div(style = list(fontSize = 10, fontWeight = 400, color = '#026450'), English),
-          # div(style = list(fontSize = 10, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
+          div(style = list(fontSize = 13, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 13, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), Sentence.1),
+          div(style = list(fontSize = 13, fontWeight = 500, color = '#0F2040', fontFamily = 'Open Sans'), Sentence.2),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Translation),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Translation.1),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Translation.2),
         )
       },
       align = "left"
@@ -12987,7 +12991,11 @@ reactable(
     Meaning = colDef(show = FALSE),
     Usage = colDef(show = FALSE),
     Translation = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE)
+    Translation.1 = colDef(show = FALSE),
+    Translation.2 = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Sentence.1 = colDef(show = FALSE),
+    Sentence.2 = colDef(show = FALSE)
   ),
   rowClass = "my-row",
   defaultPageSize = 3,
