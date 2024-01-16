@@ -1297,7 +1297,68 @@ Indicated by no, specialized nouns and phrasal particles in pre-nominal form.
 
 ------------------------------------------------------------------------
 
-### SC:02 Sentences {.tabset}
+### SC:02 Lexicon
+
+```{r, echo=FALSE, message=FALSE}
+
+setwrdcmb <- setwrdcmb[sample(1:nrow(setwrdcmb)),]
+
+reactable(
+  setwrdcmb,
+  columns = list(
+    Words = colDef(style= list(background = '#d3dfdf'), minWidth = 120, 
+      cell = function(value, index) {
+        Sentence <- setwrdcmb$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Translation <- setwrdcmb$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        Meaning <- setwrdcmb$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value,"。"),
+          # div(style = list(fontSize = 11, fontWeight = 500, color = '#800000', fontFamily = 'Zen Kaku Gothic New'), Meaning),
+          # div(style = list(fontSize = 1, color = '#dee7e7'), "."),
+          # div(style = list(fontSize = 1, color = '#dee7e7'), "."),
+          # div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 10, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Translation)
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(minWidth = 170, align = "left", style = list(fontSize = 12, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#dee7e7')),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#f5f5f5", height = 42),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### SC:03 Sentences {.tabset}
 
 #### Level {.tabset}
 
@@ -3102,7 +3163,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### SC:03 Readings {.tabset}
+### SC:04 Readings {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3158,68 +3219,7 @@ reactable(
 
 # <b> Essence </b> {.tabset}
 
-### ES:01 Word.Set.01
-
-```{r, echo=FALSE, message=FALSE}
-
-setwrdcmb <- setwrdcmb[sample(1:nrow(setwrdcmb)),]
-
-reactable(
-  setwrdcmb,
-  columns = list(
-    Words = colDef(style= list(background = '#d3dfdf'), minWidth = 120, 
-      cell = function(value, index) {
-        Sentence <- setwrdcmb$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else ""
-        Translation <- setwrdcmb$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        Meaning <- setwrdcmb$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        tagList(
-          div(style = list(fontSize = 15, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value,"。"),
-          # div(style = list(fontSize = 11, fontWeight = 500, color = '#800000', fontFamily = 'Zen Kaku Gothic New'), Meaning),
-          # div(style = list(fontSize = 1, color = '#dee7e7'), "."),
-          # div(style = list(fontSize = 1, color = '#dee7e7'), "."),
-          # div(style = list(fontSize = 16, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          # div(style = list(fontSize = 10, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Translation)
-        )
-      },
-      align = "left"
-    ),
-    Meaning = colDef(minWidth = 170, align = "left", style = list(fontSize = 12, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#dee7e7')),
-    Sentence = colDef(show = FALSE),
-    Translation = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 8,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#f5f5f5", height = 42),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#dee7e7",
-      color = "#dee7e7",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "simple", highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-### ES:02 Schema.01
+### ES:02 Schema.02
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3319,7 +3319,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### ES:03 Schema.02
+### ES:03 Schema.03
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3351,7 +3351,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### ES:04 Schema.03
+### ES:04 Schema.04
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3383,7 +3383,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### ES:05 Schema.04 {.tabset}
+### ES:05 Schema.05 {.tabset}
 
 #### N3 {.tabset}
 
@@ -3540,7 +3540,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### ES:06 Schema.05
+### ES:06 Schema.06
 
 ```{r, echo=FALSE, message=FALSE}
 
