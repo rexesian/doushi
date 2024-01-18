@@ -254,6 +254,8 @@ gessence02 <- read_csv("cpdb/GRMESSN-QNS.csv")
 gessence03 <- read_csv("cpdb/GRMESSM-QNS.csv")
 notesxm <- read_csv("cpdb/LSTNTS-NTS.csv")
 gessence01 <- read_csv("cpdb/GESSNCES-ETB.csv")
+cvnptn <- read_csv("jpdb/SPKPTNB-GRML.csv")
+syntxm <- read_csv("jpim/SYNTX-SYNX.csv")
 ```
 
 # <b> Composition </b> {.tabset}
@@ -3220,7 +3222,320 @@ reactable(
 
 # <b> Essence </b> {.tabset}
 
-### ES:01 Schema.01 {.tabset}
+### ES:02 Schema.Foundation {.tabset}
+
+#### Core {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# cvnptn <- cvnptn[sample(1:nrow(cvnptn)),]
+
+reactable(
+  cvnptn,
+  columns = list(
+    Concept = colDef(style= list(background = '#edede9'), minWidth = 250,
+      cell = function(value, index) {
+        Meaning <- cvnptn$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Structure <- cvnptn$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        Remarks <- cvnptn$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        S.Remarks <- cvnptn$S.Remarks[index]
+        S.Remarks <- if (!is.na(S.Remarks)) S.Remarks else ""
+        R.Remarks <- cvnptn$R.Remarks[index]
+        R.Remarks <- if (!is.na(R.Remarks)) R.Remarks else ""
+        Info <- cvnptn$Info[index]
+        Info <- if (!is.na(Info)) Info else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 12, fontWeight = 500, color = '#800000', fontFamily = 'Righteous'), Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Remarks),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), S.Remarks),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), R.Remarks),
+          # div(style = list(fontSize = 9, color = '#8C8C8C'), Info),
+          div(style = list(fontSize = 9.5, fontWeight = 600, color = '#026450'), Structure),
+        )
+      },
+      align = "center"
+    ),
+    Sentences = colDef(style= list(background = '#e0e1dd'),
+      minWidth = 400,
+      cell = function(value, index) {
+        T1 <- cvnptn$T1[index]
+        T1 <- if (!is.na(T1)) T1 else ""
+        S2 <- cvnptn$S2[index]
+        S2 <- if (!is.na(S2)) S2 else ""
+        T2 <- cvnptn$T2[index]
+        T2 <- if (!is.na(T2)) T2 else ""
+        S3 <- cvnptn$S3[index]
+        S3 <- if (!is.na(S3)) S3 else ""
+        T3 <- cvnptn$T3[index]
+        T3 <- if (!is.na(T3)) T3 else ""
+        S4 <- cvnptn$S4[index]
+        S4 <- if (!is.na(S4)) S4 else ""
+        T4 <- cvnptn$T4[index]
+        T4 <- if (!is.na(T4)) T4 else ""
+        S5 <- cvnptn$S5[index]
+        S5 <- if (!is.na(S5)) S5 else ""
+        T5 <- cvnptn$T5[index]
+        T5 <- if (!is.na(T5)) T5 else ""
+        tagList(
+          div(style = list(fontSize = 16, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), value),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), T1),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 1), "."),
+          div(style = list(fontSize = 15, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S2),
+          div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), T2),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 15, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S3),
+          # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), T3),
+          # div(style = list(fontSize = 2), "."),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 15, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S4),
+          # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), T4),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 1), "."),
+          # div(style = list(fontSize = 15, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040'), S5),
+          # div(style = list(fontSize = 10, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#026450'), T5),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE),
+    Structure = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    S.Remarks = colDef(show = FALSE),
+    R.Remarks = colDef(show = FALSE),
+    Info = colDef(show = FALSE),
+    Sentences = colDef(show = FALSE),
+    T1 = colDef(show = FALSE),
+    S2 = colDef(show = FALSE),
+    T2 = colDef(show = FALSE),
+    S3 = colDef(show = FALSE),
+    T3 = colDef(show = FALSE),
+    S4 = colDef(show = FALSE),
+    T4 = colDef(show = FALSE),
+    S5 = colDef(show = FALSE),
+    T5 = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 120),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", resizable = TRUE, wrap = FALSE, striped = TRUE, highlight = TRUE,
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Basic {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+syntxm.a <- syntxm
+# syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),]
+
+reactable(
+  syntxm.a,
+  columns = list(
+    Expression = colDef(style= list(background = '#edede9'), minWidth = 320, sticky = "left",
+      cell = function(value, index) {
+        Meaning <- syntxm.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Structure <- syntxm.a$Structure[index]
+        Structure <- if (!is.na(Structure)) Structure else ""
+        Structure.1 <- syntxm.a$Structure.1[index]
+        Structure.1 <- if (!is.na(Structure.1)) Structure.1 else ""
+        Sentence <- syntxm.a$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Korean <- syntxm.a$Korean[index]
+        Korean <- if (!is.na(Korean)) Korean else ""
+        English <- syntxm.a$English[index]
+        English <- if (!is.na(English)) English else ""
+        Remarks <- syntxm.a$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        Remarks.1 <- syntxm.a$Remarks.1[index]
+        Remarks.1 <- if (!is.na(Remarks.1)) Remarks.1 else ""
+        Spanish <- syntxm.a$Spanish[index]
+        Spanish <- if (!is.na(Spanish)) Spanish else ""
+        tagList(
+          # div(span(style = list(fontSize = 12, fontWeight = 600, color = '#1a313a'), value), " ", span(style = list(fontSize = 11, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), Meaning)),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 12.5, fontWeight = 800, color = '#1a313a', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'),Meaning),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 10.5, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Remarks),
+          div(style = list(fontSize = 10.5, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Remarks.1),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 1, color = '#edede9'), "."),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#01161e', fontFamily = 'Roboto Condensed'), Structure),
+          div(style = list(fontSize = 10, fontWeight = 600, color = '#01161e', fontFamily = 'Roboto Condensed'), Structure.1),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 1, color = '#edede9'), "."),
+          # div(style = list(fontSize = 17, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
+          # div(style = list(fontSize = 13, fontWeight = 400, color = '#01161e'), Korean),
+          # div(style = list(fontSize = 10, fontWeight = 400, color = '#026450'), English),
+          # div(style = list(fontSize = 10, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
+        )
+      },
+      align = "center"
+    ),
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+      cell = function(value, index) {
+        Korean <- syntxm.a$Korean[index]
+        Korean <- if (!is.na(Korean)) Korean else ""
+        English <- syntxm.a$English[index]
+        English <- if (!is.na(English)) English else ""
+        Remarks <- syntxm.a$Remarks[index]
+        Remarks <- if (!is.na(Remarks)) Remarks else ""
+        Spanish <- syntxm.a$Spanish[index]
+        Spanish <- if (!is.na(Spanish)) Spanish else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          # div(style = list(fontSize = 12, fontWeight = 400, color = '#01161e'), Korean),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450'), English),
+          # div(style = list(fontSize = 10, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
+        )
+      },
+      align = "left"
+    ),
+    Meaning = colDef(show = FALSE),
+    Structure = colDef(show = FALSE),
+    Structure.1 = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Remarks = colDef(show = FALSE),
+    Remarks.1 = colDef(show = FALSE),
+    Korean = colDef(show = FALSE),
+    English = colDef(show = FALSE),
+    Spanish = colDef(show = FALSE),
+    Level = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 3,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 130, borderColor = "#f5f5f5", fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+#### Level
+
+```{r, echo=FALSE, message=FALSE}
+
+gwrds.n1 <- gwrds %>% slice(573:642)
+gwrds.n1 <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
+gwrds.n2 <- gwrds %>% slice(339:572)
+gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
+gwrds.n3 <- gwrds %>% slice(196:338)
+gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
+gwrds.n4 <- gwrds %>% slice(43:195)
+gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
+gwrds.n5 <- gwrds %>% slice(1:42)
+gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
+gwrds.ex <- gwrds %>% slice(643:691)
+gwrds.ex <- gwrds.ex[sample(1:nrow(gwrds.ex)),]
+
+gwrds.na <- bind_rows(gwrds.n5, gwrds.n4)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n3)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n2)
+gwrds.na <- bind_rows(gwrds.na, gwrds.n1)
+gwrds.na <- bind_rows(gwrds.na, gwrds.ex)
+
+reactable(
+  gwrds.na,
+  columns = list(
+    Words = colDef(style= list(background = '#edede9'), minWidth = 300, sticky = "left",
+      cell = function(value, index) {
+        Meaning <- gwrds.na$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Sentence <- gwrds.na$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Translation <- gwrds.na$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        Level <- gwrds.na$Level[index]
+        Level <- if (!is.na(Level)) Level else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), "▪ ",Meaning),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "▸ Level: ", Level),
+        )
+      },
+      align = "left"
+    ),
+    Sentence = colDef(style= list(background = '#e0e1dd'), minWidth = 450,
+      cell = function(value, index) {
+        Translation <- gwrds.na$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 11, fontWeight = 300, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Translation),
+        )
+      },
+      align = "left"
+    ),    
+    Meaning = colDef(show = FALSE),
+    Level = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 5,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 70, fontSize = "11px"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### ES:01 Schema.Reference {.tabset}
 
 #### Application {.tabset}
 
@@ -3345,107 +3660,7 @@ reactable(
 ------------------------------------------------------------------------
 
 
-### ES:02 Schema.02
-
-```{r, echo=FALSE, message=FALSE}
-
-gwrds.n1 <- gwrds %>% slice(573:642)
-gwrds.n1 <- gwrds.n1[sample(1:nrow(gwrds.n1)),]
-gwrds.n2 <- gwrds %>% slice(339:572)
-gwrds.n2 <- gwrds.n2[sample(1:nrow(gwrds.n2)),]
-gwrds.n3 <- gwrds %>% slice(196:338)
-gwrds.n3 <- gwrds.n3[sample(1:nrow(gwrds.n3)),]
-gwrds.n4 <- gwrds %>% slice(43:195)
-gwrds.n4 <- gwrds.n4[sample(1:nrow(gwrds.n4)),]
-gwrds.n5 <- gwrds %>% slice(1:42)
-gwrds.n5 <- gwrds.n5[sample(1:nrow(gwrds.n5)),]
-gwrds.ex <- gwrds %>% slice(643:691)
-gwrds.ex <- gwrds.ex[sample(1:nrow(gwrds.ex)),]
-
-gwrds.na <- bind_rows(gwrds.n1, gwrds.n2)
-gwrds.na <- bind_rows(gwrds.na, gwrds.n3)
-gwrds.na <- bind_rows(gwrds.na, gwrds.n4)
-gwrds.na <- bind_rows(gwrds.na, gwrds.n5)
-gwrds.na <- bind_rows(gwrds.na, gwrds.ex)
-gwrds.na <- gwrds.na[sample(1:nrow(gwrds.na)),]
-
-reactable(
-  gwrds.na,
-  columns = list(
-    # Words = colDef(style= list(background = '#edede9'), minWidth = 310, sticky = "left",
-    #   cell = function(value, index) {
-    #     Meaning <- gwrds.na$Meaning[index]
-    #     Meaning <- if (!is.na(Meaning)) Meaning else ""
-    #     Sentence <- gwrds.na$Sentence[index]
-    #     Sentence <- if (!is.na(Sentence)) Sentence else ""
-    #     Translation <- gwrds.na$Translation[index]
-    #     Translation <- if (!is.na(Translation)) Translation else ""
-    #     Level <- gwrds.na$Level[index]
-    #     Level <- if (!is.na(Level)) Level else ""
-    #     tagList(
-    #       div(style = list(fontSize = 14, fontWeight = 600, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), value),
-    #       div(style = list(fontSize = 11, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), "▪ ", Meaning),
-    #       div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "▸ Level: ", Level),
-    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
-    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
-    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
-    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
-    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
-    #       # div(style = list(fontSize = 1, color = '#edede9'), "."),
-    #       # div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-    #       # div(style = list(fontSize = 11, fontWeight = 300, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New'), Translation),
-    #     )
-    #   },
-    #   align = "left"
-    # ),
-    Sentence = colDef(style= list(background = '#dee7e7'), minWidth = 450,
-      cell = function(value, index) {
-        Words <- gwrds.na$Words[index]
-        Words <- if (!is.na(Words)) Words else ""
-        Meaning <- gwrds.na$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Level <- gwrds.na$Level[index]
-        Level <- if (!is.na(Level)) Level else ""
-        Translation <- gwrds.na$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(style = list(fontSize = 15, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New' ,fontWeight = 400), value),
-          div(style = list(fontSize = 12, color = '#00202e', fontFamily = 'Zen Kaku Gothic New' ,fontWeight = 300), Translation),
-          div(style = list(fontSize = 11, fontWeight = 600, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Words, "▪ ", Meaning, "▸ Level: ", Level),
-          # div(style = list(fontSize = 11, fontWeight = 500, color = '#941b0c', fontFamily = 'Righteous'), "▪ ", Meaning),
-          # div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), "▸ Level: ", Level),
-        )
-      },
-      align = "left"
-    ),    
-    Words = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Level = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 5,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 77, fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    )
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-### ES:03 Schema.03
+### ES:03 Schema.Refinement
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -3477,39 +3692,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### ES:04 Schema.04
-
-```{r, echo=FALSE, message=FALSE}
-
-# gessence03 <- gessence03[sample(1:nrow(na.omit(gessence03))),]
-# gessence03 <- gessence03[sample(1:nrow(gessence03)),]
-
-reactable(
-  na.omit(gessence03),
-  columns = list(
-    Essence = colDef(style= list(minWidth = 1900, background = '#dee7e7', fontSize = 11.2, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), html = TRUE, align = "left")),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    )
-  ),
-  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE, 
-
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
-
-```
-
-------------------------------------------------------------------------
-
-### ES:05 Schema.05 {.tabset}
+### ES:05 Schema.Acquisition {.tabset}
 
 #### N3 {.tabset}
 
@@ -3666,7 +3849,39 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### ES:06 Schema.06
+#### K3 {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+# gessence03 <- gessence03[sample(1:nrow(na.omit(gessence03))),]
+# gessence03 <- gessence03[sample(1:nrow(gessence03)),]
+
+reactable(
+  na.omit(gessence03),
+  columns = list(
+    Essence = colDef(style= list(minWidth = 1900, background = '#dee7e7', fontSize = 11.2, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), html = TRUE, align = "left")),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE, 
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
+
+### ES:06 Schema.Consolidation
 
 ```{r, echo=FALSE, message=FALSE}
 
