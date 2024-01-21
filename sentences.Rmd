@@ -262,6 +262,7 @@ rvwwrdt <- read_csv("cpdb/RVWMT-QNS.csv")
 rvwwrdr <- read_csv("cpdb/RVWMR-QNS.csv")
 rvwwrdx <- read_csv("cpdb/RVWMX-QNS.csv")
 prgrssint <- read_csv("cpdb/ADVNB-ETB.csv")
+fnctionsc <- read_csv("cpdb/FNCSTC-ETB.csv")
 ```
 
 # <b> Composition </b> {.tabset}
@@ -3390,7 +3391,7 @@ reactable(
 
 # <b> Essence </b> {.tabset}
 
-### ES:02 Schema.Foundation {.tabset}
+### ES:01 Schema.Foundation {.tabset}
 
 #### Core {.tabset}
 
@@ -3703,7 +3704,7 @@ reactable(
 
 ------------------------------------------------------------------------
 
-### ES:01 Schema.Reference {.tabset}
+### ES:02 Schema.Reference {.tabset}
 
 #### Application {.tabset}
 
@@ -3784,6 +3785,42 @@ reactable(
 ------------------------------------------------------------------------
 
 #### Function {.tabset}
+
+##### Criteria
+
+```{r, echo=FALSE, message=FALSE}
+
+# fnctionsc <- fnctionsc[sample(1:nrow(na.omit(fnctionsc))),]
+# fnctionsc <- fnctionsc[sample(1:nrow(fnctionsc)),]
+fnctionsc.a <- fnctionsc %>% slice(1:20)
+
+reactable(
+  na.omit(fnctionsc.a),
+  columns = list(
+    Expression = colDef(minWidth = 75,align = "left", html = TRUE, style = list(background = '#dee7e7', fontSize = 11.2, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040')),
+    Meaning = colDef(minWidth = 60,align = "left", html = TRUE, style = list(background = '#dee7e7', fontSize = 10.5, fontWeight = 600, fontFamily = 'Open Sans', color = '#0F2040')),
+    Usage = colDef(minWidth = 130, align = "left", html = TRUE, style = list(background = '#dee7e7', fontSize = 10.5, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040')),
+    Example = colDef(minWidth = 125, align = "left", html = TRUE, style = list(background = '#dee7e7', fontSize = 10.5, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'))
+  ),
+  
+  rowClass = "my-row",
+  defaultPageSize = 20,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = TRUE, resizable = TRUE, 
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
 
 ------------------------------------------------------------------------
 
@@ -4139,7 +4176,7 @@ notesxm.a <- notesxm.a %>% na.omit(notesxm.a)
 reactable(
   notesxm.a,
   columns = list(
-    GRM.Notes = colDef(minWidth = 600, align = "left", html = TRUE, style = list(fontSize = 11.2, fontWeight = 300, color = '#0F2040', fontFamily = 'Open Sans', background = '#dee7e7'))
+    GRM.Notes = colDef(minWidth = 800, align = "left", html = TRUE, style = list(fontSize = 11.2, fontWeight = 300, color = '#0F2040', fontFamily = 'Open Sans', background = '#dee7e7'))
   ),
   rowClass = "my-row",
   defaultPageSize = 1,
