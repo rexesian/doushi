@@ -22426,61 +22426,61 @@ reactable(
 
 ```
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-#### ModeSetting {.tabset}
+<!-- #### ModeSetting {.tabset} -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-setmodes.a <- setmodes
-setmodes.a <- setmodes.a[sample(1:nrow(setmodes.a)),]
+<!-- setmodes.a <- setmodes -->
+<!-- setmodes.a <- setmodes.a[sample(1:nrow(setmodes.a)),] -->
 
-reactable(
-  setmodes.a,
-  columns = list(
-    Phrase = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
-      cell = function(value, index) {
-        Translate <- setmodes.a$Translate[index]
-        Translate <- if (!is.na(Translate)) Translate else ""
-        Details <- setmodes.a$Details[index]
-        Details <- if (!is.na(Details)) Details else ""
-        tag_list <- tagList(
-          div(class = "detail-des_func_f", HTML(setmodes.a$Phrase[index])),
-          div(class = "detail-des_func_h", HTML(setmodes.a$Translate[index])),
-          div(class = "detail-des_func_g", HTML(setmodes.a$Details[index])),
-        )
-        as.character(tag_list)
-      },
-      align = "left"
-    ),
-    Details = colDef(show = FALSE),
-    Translate = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 3,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#e0e1dd",
-      color = "#e0e1dd",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = FALSE, searchable = TRUE, paginationType = "simple", highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
+<!-- reactable( -->
+<!--   setmodes.a, -->
+<!--   columns = list( -->
+<!--     Phrase = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200, -->
+<!--       cell = function(value, index) { -->
+<!--         Translate <- setmodes.a$Translate[index] -->
+<!--         Translate <- if (!is.na(Translate)) Translate else "" -->
+<!--         Details <- setmodes.a$Details[index] -->
+<!--         Details <- if (!is.na(Details)) Details else "" -->
+<!--         tag_list <- tagList( -->
+<!--           div(class = "detail-des_func_f", HTML(setmodes.a$Phrase[index])), -->
+<!--           div(class = "detail-des_func_h", HTML(setmodes.a$Translate[index])), -->
+<!--           div(class = "detail-des_func_g", HTML(setmodes.a$Details[index])), -->
+<!--         ) -->
+<!--         as.character(tag_list) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ), -->
+<!--     Details = colDef(show = FALSE), -->
+<!--     Translate = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 3, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", fontSize = "11px"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#e0e1dd", -->
+<!--       color = "#e0e1dd", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, outlined = TRUE, borderless = TRUE, bordered = FALSE, searchable = TRUE, paginationType = "simple", highlight = TRUE, -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+
+<!-- ``` -->
 
 ------------------------------------------------------------------------
 
@@ -41829,151 +41829,149 @@ reactable(
 
 ------------------------------------------------------------------------
 
-#### Lexicon {.tabset}
+<!-- #### Lexicon {.tabset} -->
 
-<!-- ##### Words {.tabset} -->
+<!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE} -->
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+<!-- eswrds.a <- eswrds -->
 
-eswrds.a <- eswrds
+<!-- # eswrds.1 <- eswrds %>% select(W1, M1) -->
+<!-- # eswrds.2 <- eswrds %>% select(W2, M2) -->
+<!-- # eswrds.3 <- eswrds %>% select(W3, M3) -->
+<!-- # eswrds.4 <- eswrds %>% select(W4, M4) -->
+<!-- # eswrds.5 <- eswrds %>% select(W5, M5) -->
+<!-- # eswrds.6 <- eswrds %>% select(W6, M6) -->
+<!-- #  -->
+<!-- # eswrds.1 <- eswrds.1[sample(1:nrow(eswrds.1)),] -->
+<!-- # eswrds.2 <- eswrds.2[sample(1:nrow(eswrds.2)),] -->
+<!-- # eswrds.3 <- eswrds.3[sample(1:nrow(eswrds.3)),]  -->
+<!-- # eswrds.4 <- eswrds.4[sample(1:nrow(eswrds.4)),] -->
+<!-- # eswrds.5 <- eswrds.5[sample(1:nrow(eswrds.5)),]  -->
+<!-- # eswrds.6 <- eswrds.6[sample(1:nrow(eswrds.6)),] -->
+<!-- #  -->
+<!-- # eswrds.a <- data.frame(eswrds.1, eswrds.2, eswrds.3, eswrds.4, eswrds.5, eswrds.6) -->
 
-# eswrds.1 <- eswrds %>% select(W1, M1)
-# eswrds.2 <- eswrds %>% select(W2, M2)
-# eswrds.3 <- eswrds %>% select(W3, M3)
-# eswrds.4 <- eswrds %>% select(W4, M4)
-# eswrds.5 <- eswrds %>% select(W5, M5)
-# eswrds.6 <- eswrds %>% select(W6, M6)
-# 
-# eswrds.1 <- eswrds.1[sample(1:nrow(eswrds.1)),]
-# eswrds.2 <- eswrds.2[sample(1:nrow(eswrds.2)),]
-# eswrds.3 <- eswrds.3[sample(1:nrow(eswrds.3)),] 
-# eswrds.4 <- eswrds.4[sample(1:nrow(eswrds.4)),]
-# eswrds.5 <- eswrds.5[sample(1:nrow(eswrds.5)),] 
-# eswrds.6 <- eswrds.6[sample(1:nrow(eswrds.6)),]
-# 
-# eswrds.a <- data.frame(eswrds.1, eswrds.2, eswrds.3, eswrds.4, eswrds.5, eswrds.6)
+<!-- reactable( -->
+<!--   eswrds.a, -->
+<!--   columns = list( -->
+<!--     W1 = colDef(footer = "Total", style= list(background = '#DEE0DC'), -->
+<!--       cell = function(value, index) { -->
+<!--         M1 <- eswrds.a$M1[index] -->
+<!--         M1 <- if (!is.na(M1)) M1 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M1), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     W2 = colDef(style= list(background = '#DEE0DC'), -->
+<!--       cell = function(value, index) { -->
+<!--         M2 <- eswrds.a$M2[index] -->
+<!--         M2 <- if (!is.na(M2)) M2 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M2), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     W3 = colDef(style= list(background = '#DEE0DC'), -->
+<!--       cell = function(value, index) { -->
+<!--         M3 <- eswrds.a$M3[index] -->
+<!--         M3 <- if (!is.na(M3)) M3 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M3), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     W4 = colDef(style= list(background = '#DEE0DC'), -->
+<!--       cell = function(value, index) { -->
+<!--         M4 <- eswrds.a$M4[index] -->
+<!--         M4 <- if (!is.na(M4)) M4 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M4), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     W5 = colDef(style= list(background = '#DEE0DC'), -->
+<!--       cell = function(value, index) { -->
+<!--         M5 <- eswrds.a$M5[index] -->
+<!--         M5 <- if (!is.na(M5)) M5 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M5), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     W6 = colDef(style= list(background = '#DEE0DC'), -->
+<!--       cell = function(value, index) { -->
+<!--         M6 <- eswrds.a$M6[index] -->
+<!--         M6 <- if (!is.na(M6)) M6 else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M6), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     M1 = colDef(show = FALSE), -->
+<!--     M2 = colDef(show = FALSE), -->
+<!--     M3 = colDef(show = FALSE), -->
+<!--     M4 = colDef(show = FALSE), -->
+<!--     M5 = colDef(show = FALSE), -->
+<!--     M6 = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 7, -->
+<!--   # class = "packages-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#DEE0DC", -->
+<!--       color = "hsl(0, 0%, 95%)", -->
+<!--       fontSize = 0, -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0.1rem", -->
+<!--       letterSpacing = "1px", -->
+<!--       textTransform = "uppercase", -->
+<!--       padding = "0px", -->
+<!--       "&:hover, &:focus" = list(color = '#DEE0DC') -->
+<!--     ), -->
+<!--     footerStyle = list( -->
+<!--       backgroundColor = "#DEE0DC", -->
+<!--       color = "hsl(0, 0%, 95%)", -->
+<!--       fontSize = 0, -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0.1rem", -->
+<!--       letterSpacing = "1px", -->
+<!--       textTransform = "uppercase", -->
+<!--       padding = "0px", -->
+<!--       "&:hover, &:focus" = list(color = '#DEE0DC') -->
+<!--     ) -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, wrap = FALSE, highlight = TRUE, -->
 
-reactable(
-  eswrds.a,
-  columns = list(
-    W1 = colDef(footer = "Total", style= list(background = '#DEE0DC'),
-      cell = function(value, index) {
-        M1 <- eswrds.a$M1[index]
-        M1 <- if (!is.na(M1)) M1 else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
-          div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M1),
-        )
-      },
-      align = "center"
-    ),
-    W2 = colDef(style= list(background = '#DEE0DC'),
-      cell = function(value, index) {
-        M2 <- eswrds.a$M2[index]
-        M2 <- if (!is.na(M2)) M2 else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
-          div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M2),
-        )
-      },
-      align = "center"
-    ),
-    W3 = colDef(style= list(background = '#DEE0DC'),
-      cell = function(value, index) {
-        M3 <- eswrds.a$M3[index]
-        M3 <- if (!is.na(M3)) M3 else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
-          div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M3),
-        )
-      },
-      align = "center"
-    ),
-    W4 = colDef(style= list(background = '#DEE0DC'),
-      cell = function(value, index) {
-        M4 <- eswrds.a$M4[index]
-        M4 <- if (!is.na(M4)) M4 else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
-          div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M4),
-        )
-      },
-      align = "center"
-    ),
-    W5 = colDef(style= list(background = '#DEE0DC'),
-      cell = function(value, index) {
-        M5 <- eswrds.a$M5[index]
-        M5 <- if (!is.na(M5)) M5 else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
-          div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M5),
-        )
-      },
-      align = "center"
-    ),
-    W6 = colDef(style= list(background = '#DEE0DC'),
-      cell = function(value, index) {
-        M6 <- eswrds.a$M6[index]
-        M6 <- if (!is.na(M6)) M6 else ""
-        tagList(
-          div(style = list(fontSize = 20, fontWeight = 600, fontFamily = 'Open Sans', color = '#1b1e1e'), value),
-          div(style = list(fontSize = 9, fontWeight = 400, fontFamily = 'Open Sans', color = '#800000'), M6),
-        )
-      },
-      align = "center"
-    ),
-    M1 = colDef(show = FALSE),
-    M2 = colDef(show = FALSE),
-    M3 = colDef(show = FALSE),
-    M4 = colDef(show = FALSE),
-    M5 = colDef(show = FALSE),
-    M6 = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 7,
-  # class = "packages-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 70),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    ),
-    headerStyle = list(
-      backgroundColor = "#DEE0DC",
-      color = "hsl(0, 0%, 95%)",
-      fontSize = 0,
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0.1rem",
-      letterSpacing = "1px",
-      textTransform = "uppercase",
-      padding = "0px",
-      "&:hover, &:focus" = list(color = '#DEE0DC')
-    ),
-    footerStyle = list(
-      backgroundColor = "#DEE0DC",
-      color = "hsl(0, 0%, 95%)",
-      fontSize = 0,
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0.1rem",
-      letterSpacing = "1px",
-      textTransform = "uppercase",
-      padding = "0px",
-      "&:hover, &:focus" = list(color = '#DEE0DC')
-    )
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", striped = FALSE, wrap = FALSE, highlight = TRUE,
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!-- ``` -->
 
-```
-
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
 <!-- #### Semantics {.tabset} -->
 
