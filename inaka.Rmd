@@ -1058,7 +1058,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-learn.form <- learn %>% slice(268:271)
+learn.form <- learn %>% slice(268:274)
 
 reactable(
   learn.form,
@@ -1393,7 +1393,7 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-learn.encours <- learn %>% slice(385:397)
+learn.encours <- learn %>% slice(385:392)
 
 reactable(
   learn.encours,
@@ -2021,258 +2021,244 @@ webshot("tmp.html","fig_1.png", delay =5)
 
 <!-- <h6> </h6> -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-## Focus {.tabset}
+<!-- ## Focus {.tabset} -->
 
-### Kanji {.tabset}
+<!-- ### Kanji {.tabset} -->
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-10"> -->
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-```{r, echo=FALSE, message=FALSE}
-# library(htmlwidgets)
-# webshot::install_phantomjs()
+<!-- # knjwrdrd <- knjwrdrd[sample(1:nrow(knjwrdrd)),] -->
 
-# knjwrdrd <- knjwrdrd[sample(1:nrow(knjwrdrd)),]
+<!-- htmltools::browsable( -->
+<!--   tagList( -->
+<!--     div( -->
+<!--       div(class = "chartz", tags$label("【Level】", `for` = "kanji-level-filter"), -->
+<!--       # div( -->
+<!--         tags$select( -->
+<!--           id = "kanji-level-filter", -->
+<!--           onchange = "Reactable.setFilter('kanji-filter-table', 'Level', this.value)", -->
+<!--           tags$option("All", value = ""), -->
+<!--           lapply(unique(knjwrdrd$Level), tags$option) -->
+<!--         # ) -->
+<!--       )) -->
+<!--     ), -->
+<!--     # tags$hr("aria-hidden" = "true"), -->
 
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chartz", tags$label("【Level】", `for` = "kanji-level-filter"),
-      # div(
-        tags$select(
-          id = "kanji-level-filter",
-          onchange = "Reactable.setFilter('kanji-filter-table', 'Level', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(knjwrdrd$Level), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
+<!-- reactable( -->
+<!--   knjwrdrd, -->
+<!--   columns = list( -->
+<!--     Kanji = colDef(style= list(background = '#060912'), minWidth = 57, -->
+<!--       cell = function(value, index) { -->
+<!--         K.Meaning <- knjwrdrd$K.Meaning[index] -->
+<!--         K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else "" -->
+<!--         # Words.A <- knjwrdrd$Words.A[index] -->
+<!--         # Words.A <- if (!is.na(Words.A)) Words.A else "" -->
+<!--         # Words.B <- knjwrdrd$Words.B[index] -->
+<!--         # Words.B <- if (!is.na(Words.B)) Words.B else "" -->
+<!--         # Words.C <- knjwrdrd$Words.C[index] -->
+<!--         # Words.C <- if (!is.na(Words.C)) Words.C else "" -->
+<!--         # Words.D <- knjwrdrd$Words.D[index] -->
+<!--         # Words.D <- if (!is.na(Words.D)) Words.D else "" -->
+<!--         # W.Meaning.A <- knjwrdrd$W.Meaning.A[index] -->
+<!--         # W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else "" -->
+<!--         # W.Meaning.B <- knjwrdrd$W.Meaning.B[index] -->
+<!--         # W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else "" -->
+<!--         # W.Meaning.C <- knjwrdrd$W.Meaning.C[index] -->
+<!--         # W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 60, fontWeight = 600, color = '#f9f2e5', fontFamily = 'Open Sans'), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600, color = '#7fffff', fontFamily = 'Open Sans'), K.Meaning), -->
+<!--           # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.A), -->
+<!--           # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.B), -->
+<!--           # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.C), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.A), -->
+<!--           # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.B), -->
+<!--           # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.C), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 2), "."), -->
+<!--           # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.D), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
+<!--     Words.A = colDef(style= list(background = '#f9f6ed'), -->
+<!--       cell = function(value, index) { -->
+<!--         # K.Meaning <- knjwrdrd$K.Meaning[index] -->
+<!--         # K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else "" -->
+<!--         Words.A <- knjwrdrd$Words.A[index] -->
+<!--         Words.A <- if (!is.na(Words.A)) Words.A else "" -->
+<!--         Words.B <- knjwrdrd$Words.B[index] -->
+<!--         Words.B <- if (!is.na(Words.B)) Words.B else "" -->
+<!--         Words.C <- knjwrdrd$Words.C[index] -->
+<!--         Words.C <- if (!is.na(Words.C)) Words.C else "" -->
+<!--         Words.D <- knjwrdrd$Words.D[index] -->
+<!--         Words.D <- if (!is.na(Words.D)) Words.D else "" -->
+<!--         W.Meaning.A <- knjwrdrd$W.Meaning.A[index] -->
+<!--         W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else "" -->
+<!--         W.Meaning.B <- knjwrdrd$W.Meaning.B[index] -->
+<!--         W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else "" -->
+<!--         W.Meaning.C <- knjwrdrd$W.Meaning.C[index] -->
+<!--         W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else "" -->
+<!--         S1 <- knjwrdrd$S1[index] -->
+<!--         S1 <- if (!is.na(S1)) S1 else "" -->
+<!--         S2 <- knjwrdrd$S2[index] -->
+<!--         S2 <- if (!is.na(S2)) S2 else "" -->
+<!--         T1 <- knjwrdrd$T1[index] -->
+<!--         T1 <- if (!is.na(T1)) T1 else "" -->
+<!--         T2 <- knjwrdrd$T2[index] -->
+<!--         T2 <- if (!is.na(T2)) T2 else "" -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 60, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), -->
+<!--           # div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), K.Meaning), -->
+<!--           div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), -->
+<!--           div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.B), -->
+<!--           div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.C), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.A), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.B), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.C), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.D), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), S1), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), S2), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 2), "."), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), T1), -->
+<!--           div(style = list(fontSize = 9, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), T2), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ), -->
+<!--     Level = colDef(show = FALSE), -->
+<!--     K.Meaning = colDef(show = FALSE), -->
+<!--     Words.A = colDef(show = FALSE), -->
+<!--     Words.B = colDef(show = FALSE), -->
+<!--     Words.C = colDef(show = FALSE), -->
+<!--     Words.D = colDef(show = FALSE), -->
+<!--     W.Meaning.A = colDef(show = FALSE), -->
+<!--     W.Meaning.B = colDef(show = FALSE), -->
+<!--     W.Meaning.C = colDef(show = FALSE), -->
+<!--     S1 = colDef(show = FALSE), -->
+<!--     S2 = colDef(show = FALSE), -->
+<!--     T1 = colDef(show = FALSE), -->
+<!--     T2 = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   elementId = "kanji-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 350), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#dee7e7", -->
+<!--       color = "#dee7e7", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE, -->
 
-reactable(
-  knjwrdrd,
-  columns = list(
-    Kanji = colDef(style= list(background = '#060912'), minWidth = 57,
-      cell = function(value, index) {
-        K.Meaning <- knjwrdrd$K.Meaning[index]
-        K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
-        # Words.A <- knjwrdrd$Words.A[index]
-        # Words.A <- if (!is.na(Words.A)) Words.A else ""
-        # Words.B <- knjwrdrd$Words.B[index]
-        # Words.B <- if (!is.na(Words.B)) Words.B else ""
-        # Words.C <- knjwrdrd$Words.C[index]
-        # Words.C <- if (!is.na(Words.C)) Words.C else ""
-        # Words.D <- knjwrdrd$Words.D[index]
-        # Words.D <- if (!is.na(Words.D)) Words.D else ""
-        # W.Meaning.A <- knjwrdrd$W.Meaning.A[index]
-        # W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else ""
-        # W.Meaning.B <- knjwrdrd$W.Meaning.B[index]
-        # W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else ""
-        # W.Meaning.C <- knjwrdrd$W.Meaning.C[index]
-        # W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else ""
-        tagList(
-          div(style = list(fontSize = 60, fontWeight = 600, color = '#f9f2e5', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#7fffff', fontFamily = 'Open Sans'), K.Meaning),
-          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.A),
-          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.B),
-          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.C),
-          # div(style = list(fontSize = 2), "."),
-          # div(style = list(fontSize = 2), "."),
-          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.A),
-          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.B),
-          # div(style = list(fontSize = 11, fontWeight = 400, color = '#009A72', fontFamily = 'Open Sans'), W.Meaning.C),
-          # div(style = list(fontSize = 2), "."),
-          # div(style = list(fontSize = 2), "."),
-          # div(style = list(fontSize = 16, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Words.D),
-        )
-      },
-      align = "center"
-    ),
-    Words.A = colDef(style= list(background = '#f9f6ed'),
-      cell = function(value, index) {
-        # K.Meaning <- knjwrdrd$K.Meaning[index]
-        # K.Meaning <- if (!is.na(K.Meaning)) K.Meaning else ""
-        Words.A <- knjwrdrd$Words.A[index]
-        Words.A <- if (!is.na(Words.A)) Words.A else ""
-        Words.B <- knjwrdrd$Words.B[index]
-        Words.B <- if (!is.na(Words.B)) Words.B else ""
-        Words.C <- knjwrdrd$Words.C[index]
-        Words.C <- if (!is.na(Words.C)) Words.C else ""
-        Words.D <- knjwrdrd$Words.D[index]
-        Words.D <- if (!is.na(Words.D)) Words.D else ""
-        W.Meaning.A <- knjwrdrd$W.Meaning.A[index]
-        W.Meaning.A <- if (!is.na(W.Meaning.A)) W.Meaning.A else ""
-        W.Meaning.B <- knjwrdrd$W.Meaning.B[index]
-        W.Meaning.B <- if (!is.na(W.Meaning.B)) W.Meaning.B else ""
-        W.Meaning.C <- knjwrdrd$W.Meaning.C[index]
-        W.Meaning.C <- if (!is.na(W.Meaning.C)) W.Meaning.C else ""
-        S1 <- knjwrdrd$S1[index]
-        S1 <- if (!is.na(S1)) S1 else ""
-        S2 <- knjwrdrd$S2[index]
-        S2 <- if (!is.na(S2)) S2 else ""
-        T1 <- knjwrdrd$T1[index]
-        T1 <- if (!is.na(T1)) T1 else ""
-        T2 <- knjwrdrd$T2[index]
-        T2 <- if (!is.na(T2)) T2 else ""
-        tagList(
-          # div(style = list(fontSize = 60, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
-          # div(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), K.Meaning),
-          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value),
-          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.B),
-          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.C),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.A),
-          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.B),
-          div(style = list(fontSize = 11, fontWeight = 500, color = '#d7305c', fontFamily = 'Open Sans'), W.Meaning.C),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 19, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), Words.D),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), S1),
-          div(style = list(fontSize = 12, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), S2),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 2), "."),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), T1),
-          div(style = list(fontSize = 9, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), T2),
-        )
-      },
-      align = "left"
-    ),
-    Level = colDef(show = FALSE),
-    K.Meaning = colDef(show = FALSE),
-    Words.A = colDef(show = FALSE),
-    Words.B = colDef(show = FALSE),
-    Words.C = colDef(show = FALSE),
-    Words.D = colDef(show = FALSE),
-    W.Meaning.A = colDef(show = FALSE),
-    W.Meaning.B = colDef(show = FALSE),
-    W.Meaning.C = colDef(show = FALSE),
-    S1 = colDef(show = FALSE),
-    S2 = colDef(show = FALSE),
-    T1 = colDef(show = FALSE),
-    T2 = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  elementId = "kanji-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 350),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#dee7e7",
-      color = "#dee7e7",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", striped = TRUE, highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-  )
-  )
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!--   ) -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-<!-- </div> -->
-<!-- <div class = "col-sm-2"> -->
+<!-- ------------------------------------------------------------------------ -->
 
-<!-- ![](chart.png){width=400px} -->
-<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
+<!-- ### Words {.tabset} -->
 
-<!-- </div> -->
-<!-- </div> -->
+<!-- <!-- <div class = "row"> --> -->
+<!-- <!-- <div class = "col-sm-8"> --> -->
 
-------------------------------------------------------------------------
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-### Words {.tabset}
+<!-- dliwrd.a <- dliwrd %>% slice(1:1550) -->
+<!-- dliwrd.a <- dliwrd.a[sample(1:nrow(dliwrd.a)),] -->
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-8"> -->
+<!-- htmltools::browsable( -->
+<!--   tagList( -->
+<!--     div( -->
+<!--       div(class = "chartz", tags$label("【Level】", `for` = "words-level-filter"), -->
+<!--       # div( -->
+<!--         tags$select( -->
+<!--           id = "words-level-filter", -->
+<!--           onchange = "Reactable.setFilter('words-filter-table', 'Level', this.value)", -->
+<!--           tags$option("All", value = ""), -->
+<!--           lapply(unique(dliwrd.a$Level), tags$option) -->
+<!--         # ) -->
+<!--       )) -->
+<!--     ), -->
+<!--     # tags$hr("aria-hidden" = "true"), -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- reactable( -->
+<!--   dliwrd.a, -->
+<!--   columns = list( -->
+<!--     Words = colDef(style= list(background = '#f9f6ed'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- dliwrd.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Sentences <- dliwrd.a$Sentences[index] -->
+<!--         Sentences <- if (!is.na(Sentences)) Sentences else "" -->
+<!--         Translation <- dliwrd.a$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         tagList( -->
+<!--           div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)), -->
+<!--           div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Zen Kaku Gothic New'), Sentences), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 300, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ), -->
+<!--     Level = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Sentences = colDef(show = FALSE), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 35, -->
+<!--   elementId = "words-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#dee7e7", -->
+<!--       color = "#dee7e7", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 372, -->
 
-dliwrd.a <- dliwrd %>% slice(1:1550)
-dliwrd.a <- dliwrd.a[sample(1:nrow(dliwrd.a)),]
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!--   ) -->
+<!-- ) -->
 
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chartz", tags$label("【Level】", `for` = "words-level-filter"),
-      # div(
-        tags$select(
-          id = "words-level-filter",
-          onchange = "Reactable.setFilter('words-filter-table', 'Level', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(dliwrd.a$Level), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
-
-reactable(
-  dliwrd.a,
-  columns = list(
-    Words = colDef(style= list(background = '#f9f6ed'),
-      cell = function(value, index) {
-        Meaning <- dliwrd.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentences <- dliwrd.a$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- dliwrd.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)),
-          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Zen Kaku Gothic New'), Sentences),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Translation),
-        )
-      },
-      align = "left"
-    ),
-    Level = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Sentences = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 35,
-  elementId = "words-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#dee7e7",
-      color = "#dee7e7",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 372,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-  )
-  )
-)
-
-```
+<!-- ``` -->
 
 <!-- </div> -->
 <!-- <div class = "col-sm-4"> -->
@@ -2366,88 +2352,88 @@ reactable(
 <!-- </div> -->
 <!-- </div> -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### Verbs {.tabset}
+<!-- ### Verbs {.tabset} -->
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-8"> -->
+<!-- <!-- <div class = "row"> --> -->
+<!-- <!-- <div class = "col-sm-8"> --> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-cmmvrb.a <- cmmvrb
-cmmvrb.a <- cmmvrb.a %>% na.omit(cmmvrb.a)
-cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),]
+<!-- cmmvrb.a <- cmmvrb -->
+<!-- cmmvrb.a <- cmmvrb.a %>% na.omit(cmmvrb.a) -->
+<!-- cmmvrb.a <- cmmvrb.a[sample(1:nrow(cmmvrb.a)),] -->
 
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chartz", tags$label("【Level】", `for` = "verb-level-filter"),
-      # div(
-        tags$select(
-          id = "verb-level-filter",
-          onchange = "Reactable.setFilter('verb-filter-table', 'Level', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(cmmvrb.a$Level), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
+<!-- htmltools::browsable( -->
+<!--   tagList( -->
+<!--     div( -->
+<!--       div(class = "chartz", tags$label("【Level】", `for` = "verb-level-filter"), -->
+<!--       # div( -->
+<!--         tags$select( -->
+<!--           id = "verb-level-filter", -->
+<!--           onchange = "Reactable.setFilter('verb-filter-table', 'Level', this.value)", -->
+<!--           tags$option("All", value = ""), -->
+<!--           lapply(unique(cmmvrb.a$Level), tags$option) -->
+<!--         # ) -->
+<!--       )) -->
+<!--     ), -->
+<!--     # tags$hr("aria-hidden" = "true"), -->
 
-reactable(
-  cmmvrb.a,
-  columns = list(
-    Verbs = colDef(style= list(background = '#f9f6ed'),
-      cell = function(value, index) {
-        Meaning <- cmmvrb.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentences <- cmmvrb.a$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- cmmvrb.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        Level <- cmmvrb.a$Level[index]
-        Level <- if (!is.na(Level)) Level else ""
-        tagList(
-          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 8, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
-          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentences),
-          div(style = list(fontSize = 10, fontWeight = 300, color = '#026450', fontFamily = 'Open Sans'), Translation),
-        )
-      },
-      align = "left"
-    ),
-    Level = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Sentences = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 10,
-  elementId = "verb-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#dee7e7",
-      color = "#dee7e7",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
-  )
-  )
-)
+<!-- reactable( -->
+<!--   cmmvrb.a, -->
+<!--   columns = list( -->
+<!--     Verbs = colDef(style= list(background = '#f9f6ed'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- cmmvrb.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Sentences <- cmmvrb.a$Sentences[index] -->
+<!--         Sentences <- if (!is.na(Sentences)) Sentences else "" -->
+<!--         Translation <- cmmvrb.a$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         Level <- cmmvrb.a$Level[index] -->
+<!--         Level <- if (!is.na(Level)) Level else "" -->
+<!--         tagList( -->
+<!--           div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 8, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))), -->
+<!--           div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentences), -->
+<!--           div(style = list(fontSize = 10, fontWeight = 300, color = '#026450', fontFamily = 'Open Sans'), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ), -->
+<!--     Level = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Sentences = colDef(show = FALSE), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 10, -->
+<!--   elementId = "verb-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#dee7e7", -->
+<!--       color = "#dee7e7", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365, -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!--   ) -->
+<!-- ) -->
+
+<!-- ``` -->
 
 <!-- </div> -->
 <!-- <div class = "col-sm-4"> -->
@@ -2566,571 +2552,560 @@ reactable(
 
 <!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### Set-Phr {.tabset}
+<!-- ### Set-Phr {.tabset} -->
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-8"> -->
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- dliphr.a <- dliphr -->
+<!-- dliphr.a <- dliphr.a[sample(1:nrow(dliphr.a)),] -->
 
-dliphr.a <- dliphr
-dliphr.a <- dliphr.a[sample(1:nrow(dliphr.a)),]
+<!-- htmltools::browsable( -->
+<!--   tagList( -->
+<!--     div( -->
+<!--       div(class = "chartz", tags$label("【Level】", `for` = "phrases-level-filter"), -->
+<!--       # div( -->
+<!--         tags$select( -->
+<!--           id = "phrases-level-filter", -->
+<!--           onchange = "Reactable.setFilter('phrases-filter-table', 'Level', this.value)", -->
+<!--           tags$option("All", value = ""), -->
+<!--           lapply(unique(dliphr.a$Level), tags$option) -->
+<!--         # ) -->
+<!--       )) -->
+<!--     ), -->
+<!--     # tags$hr("aria-hidden" = "true"), -->
 
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chartz", tags$label("【Level】", `for` = "phrases-level-filter"),
-      # div(
-        tags$select(
-          id = "phrases-level-filter",
-          onchange = "Reactable.setFilter('phrases-filter-table', 'Level', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(dliphr.a$Level), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
+<!-- reactable( -->
+<!--   dliphr.a, -->
+<!--   columns = list( -->
+<!--     Phrases = colDef(style= list(background = '#f9f6ed'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- dliphr.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Sentences <- dliphr.a$Sentences[index] -->
+<!--         Sentences <- if (!is.na(Sentences)) Sentences else "" -->
+<!--         Translation <- dliphr.a$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         tagList( -->
+<!--           div(span(style = list(fontSize = 18, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)), -->
+<!--           div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), Translation), -->
+<!--           div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentences), -->
 
-reactable(
-  dliphr.a,
-  columns = list(
-    Phrases = colDef(style= list(background = '#f9f6ed'),
-      cell = function(value, index) {
-        Meaning <- dliphr.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentences <- dliphr.a$Sentences[index]
-        Sentences <- if (!is.na(Sentences)) Sentences else ""
-        Translation <- dliphr.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        tagList(
-          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning)),
-          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentences),
-          div(style = list(fontSize = 10, fontWeight = 300, color = '#026450', fontFamily = 'Open Sans'), Translation),
-        )
-      },
-      align = "left"
-    ),
-    Level = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Sentences = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 10,
-  elementId = "phrases-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#dee7e7",
-      color = "#dee7e7",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
-  )
-  )
-)
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ), -->
+<!--     Level = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Sentences = colDef(show = FALSE), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 4, -->
+<!--   elementId = "phrases-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#dee7e7", -->
+<!--       color = "#dee7e7", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!--   ) -->
+<!-- ) -->
 
-<!-- </div> -->
-<!-- <div class = "col-sm-4"> -->
+<!-- ``` -->
 
-<!-- ![](chart.png){width=400px} -->
-<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
+<!-- ------------------------------------------------------------------------ -->
 
-<!-- </div> -->
-<!-- </div> -->
+<!-- ### Set-Pat {.tabset} -->
 
-------------------------------------------------------------------------
+<!-- <!-- <div class = "row"> --> -->
+<!-- <!-- <div class = "col-sm-8"> --> -->
 
-### Set-Pat {.tabset}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-8"> -->
+<!-- cmmpnflct.a <- cmmpnflct -->
+<!-- cmmpnflct.a <- cmmpnflct.a %>% na.omit(cmmpnflct.a) -->
+<!-- cmmpnflct.a <- cmmpnflct.a[sample(1:nrow(cmmpnflct.a)),] -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- htmltools::browsable( -->
+<!--   tagList( -->
+<!--     div( -->
+<!--       div(class = "chartz", tags$label("【Level】", `for` = "inflect-level-filter"), -->
+<!--       # div( -->
+<!--         tags$select( -->
+<!--           id = "inflect-level-filter", -->
+<!--           onchange = "Reactable.setFilter('inflect-filter-table', 'Level', this.value)", -->
+<!--           tags$option("All", value = ""), -->
+<!--           lapply(unique(cmmpnflct.a$Level), tags$option) -->
+<!--         # ) -->
+<!--       )) -->
+<!--     ), -->
+<!--     # tags$hr("aria-hidden" = "true"), -->
 
-cmmpnflct.a <- cmmpnflct
-cmmpnflct.a <- cmmpnflct.a %>% na.omit(cmmpnflct.a)
-cmmpnflct.a <- cmmpnflct.a[sample(1:nrow(cmmpnflct.a)),]
+<!-- reactable( -->
+<!--   cmmpnflct.a, filterable = FALSE, -->
+<!--   columns = list( -->
+<!--     Words = colDef(style= list(background = '#f9f6ed'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- cmmpnflct.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Remarks <- cmmpnflct.a$Remarks[index] -->
+<!--         Remarks <- if (!is.na(Remarks)) Remarks else "" -->
+<!--         Sentence <- cmmpnflct.a$Sentence[index] -->
+<!--         Sentence <- if (!is.na(Sentence)) Sentence else "" -->
+<!--         Translation <- cmmpnflct.a$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         Level <- cmmpnflct.a$Level[index] -->
+<!--         Level <- if (!is.na(Level)) Level else "" -->
+<!--         tagList( -->
+<!--           div(span(style = list(fontSize = 22, fontWeight = 600, color = '#122228', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 5, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 600, color = '#009A77', fontFamily = 'Open Sans'), Remarks), -->
+<!--           div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentence), -->
+<!--           div(style = list(fontSize = 10, fontWeight = 300, color = '#026450', fontFamily = 'Open Sans'), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left", minWidth = 550 -->
+<!--     ), -->
+<!--     Level = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Remarks = colDef(show = FALSE), -->
+<!--     Sentence = colDef(show = FALSE), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 10, -->
+<!--   elementId = "inflect-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#dee7e7", -->
+<!--       color = "#dee7e7", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 340, -->
 
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chartz", tags$label("【Level】", `for` = "inflect-level-filter"),
-      # div(
-        tags$select(
-          id = "inflect-level-filter",
-          onchange = "Reactable.setFilter('inflect-filter-table', 'Level', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(cmmpnflct.a$Level), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!--   ) -->
+<!-- ) -->
 
-reactable(
-  cmmpnflct.a, filterable = FALSE,
-  columns = list(
-    Words = colDef(style= list(background = '#f9f6ed'),
-      cell = function(value, index) {
-        Meaning <- cmmpnflct.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Remarks <- cmmpnflct.a$Remarks[index]
-        Remarks <- if (!is.na(Remarks)) Remarks else ""
-        Sentence <- cmmpnflct.a$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else ""
-        Translation <- cmmpnflct.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        Level <- cmmpnflct.a$Level[index]
-        Level <- if (!is.na(Level)) Level else ""
-        tagList(
-          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#122228', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 5, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#009A77', fontFamily = 'Open Sans'), Remarks),
-          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 10, fontWeight = 300, color = '#026450', fontFamily = 'Open Sans'), Translation),
-        )
-      },
-      align = "left", minWidth = 550
-    ),
-    Level = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Remarks = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 10,
-  elementId = "inflect-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#dee7e7",
-      color = "#dee7e7",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 340,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
-  )
-  )
-)
+<!-- ``` -->
 
-```
+<!-- <!-- </div> --> -->
+<!-- <!-- <div class = "col-sm-4"> --> -->
 
-<!-- </div> -->
-<!-- <div class = "col-sm-4"> -->
+<!-- <!-- </div> --> -->
+<!-- <!-- </div> --> -->
 
-<!-- </div> -->
-<!-- </div> -->
+<!-- ------------------------------------------------------------------------ -->
 
-------------------------------------------------------------------------
+<!-- ### Set-Fnc {.tabset} -->
 
-### Set-Fnc {.tabset}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- mstryfunc.a <- mstryfunc -->
+<!-- mstryfunc.a <- mstryfunc.a[sample(1:nrow(mstryfunc.a)),] -->
 
-mstryfunc.a <- mstryfunc
-mstryfunc.a <- mstryfunc.a[sample(1:nrow(mstryfunc.a)),]
+<!-- reactable( -->
+<!--   mstryfunc.a, -->
+<!--   columns = list( -->
+<!--     Function = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200, -->
+<!--       cell = function(value, index) { -->
+<!--         Pattern <- mstryfunc.a$Pattern[index] -->
+<!--         Pattern <- if (!is.na(Pattern)) Pattern else "" -->
+<!--         Details <- mstryfunc.a$Details[index] -->
+<!--         Details <- if (!is.na(Details)) Details else "" -->
+<!--         tag_list <- tagList( -->
+<!--           div(class = "detail-des_func_a", HTML(mstryfunc.a$Function[index])), -->
+<!--           div(class = "detail-des_func_d", HTML(mstryfunc.a$Pattern[index])), -->
+<!--           div(class = "detail-des_func_e", HTML(mstryfunc.a$Details[index])), -->
+<!--         ) -->
+<!--         as.character(tag_list) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ), -->
+<!--     Sample = colDef(style= list(background = '#edede9'), html = TRUE, minWidth = 250, -->
+<!--       cell = function(value, index) { -->
+<!--         Translate <- mstryfunc.a$Translate[index] -->
+<!--         Translate <- if (!is.na(Translate)) Translate else "" -->
+<!--         tag_list <- tagList( -->
+<!--           div(class = "detail-des_func_b", HTML(mstryfunc.a$Sample[index])), -->
+<!--           div(class = "detail-des_func_c", HTML(mstryfunc.a$Translate[index])) -->
+<!--         ) -->
+<!--         as.character(tag_list) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ),  -->
+<!--     Pattern = colDef(show = FALSE), -->
+<!--     Details = colDef(show = FALSE), -->
+<!--     Translate = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", fontSize = "11px"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#edede9", -->
+<!--       color = "#edede9", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, outlined = TRUE, bordered = FALSE, searchable = FALSE, paginationType = "simple", highlight = TRUE, -->
 
-reactable(
-  mstryfunc.a,
-  columns = list(
-    Function = colDef(style= list(background = '#e0e1dd'), html = TRUE, minWidth = 200,
-      cell = function(value, index) {
-        Pattern <- mstryfunc.a$Pattern[index]
-        Pattern <- if (!is.na(Pattern)) Pattern else ""
-        Details <- mstryfunc.a$Details[index]
-        Details <- if (!is.na(Details)) Details else ""
-        tag_list <- tagList(
-          div(class = "detail-des_func_a", HTML(mstryfunc.a$Function[index])),
-          div(class = "detail-des_func_d", HTML(mstryfunc.a$Pattern[index])),
-          div(class = "detail-des_func_e", HTML(mstryfunc.a$Details[index])),
-        )
-        as.character(tag_list)
-      },
-      align = "left"
-    ),
-    Sample = colDef(style= list(background = '#edede9'), html = TRUE, minWidth = 250,
-      cell = function(value, index) {
-        Translate <- mstryfunc.a$Translate[index]
-        Translate <- if (!is.na(Translate)) Translate else ""
-        tag_list <- tagList(
-          div(class = "detail-des_func_b", HTML(mstryfunc.a$Sample[index])),
-          div(class = "detail-des_func_c", HTML(mstryfunc.a$Translate[index]))
-        )
-        as.character(tag_list)
-      },
-      align = "left"
-    ), 
-    Pattern = colDef(show = FALSE),
-    Details = colDef(show = FALSE),
-    Translate = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", padding = "0px", fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#edede9",
-      color = "#edede9",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, outlined = TRUE, bordered = FALSE, searchable = FALSE, paginationType = "simple", highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### Comm-Fnc {.tabset}
+<!-- ### Comm-Fnc {.tabset} -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-comstrgyfnc.b <- comstrgyfnc
-comstrgyfnc.b <- comstrgyfnc.b[sample(1:nrow(comstrgyfnc.b)),]
-comstrgyfnc.b <- comstrgyfnc.b[sample(1:nrow(comstrgyfnc.b)),]
+<!-- comstrgyfnc.b <- comstrgyfnc -->
+<!-- comstrgyfnc.b <- comstrgyfnc.b[sample(1:nrow(comstrgyfnc.b)),] -->
+<!-- comstrgyfnc.b <- comstrgyfnc.b[sample(1:nrow(comstrgyfnc.b)),] -->
 
-row_details <- function(index) {
-  pkg <- comstrgyfnc.b[index, ]
+<!-- row_details <- function(index) { -->
+<!--   pkg <- comstrgyfnc.b[index, ] -->
 
-  pkg_field <- function(name, class_name, ...) {
-    if (any(is.na(...))) NULL
-    else div(class = class_name, ...)
-  }
+<!--   pkg_field <- function(name, class_name, ...) { -->
+<!--     if (any(is.na(...))) NULL -->
+<!--     else div(class = class_name, ...) -->
+<!--   } -->
 
-  detail <- div(
-    # class = "package-detail",
-    pkg_field("S1", "detail-descriptiona" , pkg$S1),
-    pkg_field("T1", "detail-descriptionb" , pkg$T1),
-    pkg_field("S2", "detail-descriptiona" , pkg$S2),
-    pkg_field("T2", "detail-descriptionb" , pkg$T2),
-    pkg_field("S3", "detail-descriptiona" , pkg$S3),
-    pkg_field("T3", "detail-descriptionb" , pkg$T3),
-    pkg_field("S4", "detail-descriptiona" , pkg$S4),
-    pkg_field("T4", "detail-descriptionb" , pkg$T4),
-    pkg_field("S5", "detail-descriptiona" , pkg$S5),
-    pkg_field("T5", "detail-descriptionb" , pkg$T5),
-    pkg_field("S6", "detail-descriptiona" , pkg$S6),
-    pkg_field("T6", "detail-descriptionb" , pkg$T6)
-  )
-  detail
-}
+<!--   detail <- div( -->
+<!--     # class = "package-detail", -->
+<!--     pkg_field("S1", "detail-descriptiona" , pkg$S1), -->
+<!--     pkg_field("T1", "detail-descriptionb" , pkg$T1), -->
+<!--     pkg_field("S2", "detail-descriptiona" , pkg$S2), -->
+<!--     pkg_field("T2", "detail-descriptionb" , pkg$T2), -->
+<!--     pkg_field("S3", "detail-descriptiona" , pkg$S3), -->
+<!--     pkg_field("T3", "detail-descriptionb" , pkg$T3), -->
+<!--     pkg_field("S4", "detail-descriptiona" , pkg$S4), -->
+<!--     pkg_field("T4", "detail-descriptionb" , pkg$T4), -->
+<!--     pkg_field("S5", "detail-descriptiona" , pkg$S5), -->
+<!--     pkg_field("T5", "detail-descriptionb" , pkg$T5), -->
+<!--     pkg_field("S6", "detail-descriptiona" , pkg$S6), -->
+<!--     pkg_field("T6", "detail-descriptionb" , pkg$T6) -->
+<!--   ) -->
+<!--   detail -->
+<!-- } -->
 
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chartz", tags$label("【Category】", `for` = "cat-types-filter"),
-      # div(
-        tags$select(
-          id = "cat-types-filter",
-          onchange = "Reactable.setFilter('cats-filter-table', 'Category', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(comstrgyfnc.b$Category), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
+<!-- htmltools::browsable( -->
+<!--   tagList( -->
+<!--     div( -->
+<!--       div(class = "chartz", tags$label("【Category】", `for` = "cat-types-filter"), -->
+<!--       # div( -->
+<!--         tags$select( -->
+<!--           id = "cat-types-filter", -->
+<!--           onchange = "Reactable.setFilter('cats-filter-table', 'Category', this.value)", -->
+<!--           tags$option("All", value = ""), -->
+<!--           lapply(unique(comstrgyfnc.b$Category), tags$option) -->
+<!--         # ) -->
+<!--       )) -->
+<!--     ), -->
+<!--     # tags$hr("aria-hidden" = "true"), -->
 
-reactable(
-  comstrgyfnc.b,
-  onClick = "expand",
-  columns = list(
-    Function = colDef(minWidth = 300, align = "left", html = TRUE, style = list(fontSize = 16, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#dee7e7')),
-    T1 = colDef(show = FALSE),
-    T2 = colDef(show = FALSE),
-    T3 = colDef(show = FALSE),
-    T4 = colDef(show = FALSE),
-    T5 = colDef(show = FALSE),
-    T6 = colDef(show = FALSE),
-    S1 = colDef(show = FALSE),
-    S2 = colDef(show = FALSE),
-    S3 = colDef(show = FALSE),
-    S4 = colDef(show = FALSE),
-    S5 = colDef(show = FALSE),
-    S6 = colDef(show = FALSE),
-    Category = colDef(show = FALSE)
-  ),
-  details = row_details,
-  rowClass = "my-row",
-  class = "packages-table",
-  defaultPageSize = 8,
-  defaultSorted = "Category",
-  elementId = "cats-filter-table",
-  theme = reactableTheme(
-    backgroundColor = "hsl(213, 20%, 99%)",
-    borderColor = "hsl(213, 20%, 99%)",
-    selectStyle = list(backgroundColor = "#061126"),
-    paginationStyle = list(borderColor = "#061126"),
-    pageButtonActiveStyle = list(background = "#dee7e7"),
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    ),
-    headerStyle = list(
-      backgroundColor = "#dee7e7",
-      color = "#dee7e7",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, highlight = TRUE, paginationType = "numbers", 
+<!-- reactable( -->
+<!--   comstrgyfnc.b, -->
+<!--   onClick = "expand", -->
+<!--   columns = list( -->
+<!--     Function = colDef(minWidth = 300, align = "left", html = TRUE, style = list(fontSize = 16, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#dee7e7')), -->
+<!--     T1 = colDef(show = FALSE), -->
+<!--     T2 = colDef(show = FALSE), -->
+<!--     T3 = colDef(show = FALSE), -->
+<!--     T4 = colDef(show = FALSE), -->
+<!--     T5 = colDef(show = FALSE), -->
+<!--     T6 = colDef(show = FALSE), -->
+<!--     S1 = colDef(show = FALSE), -->
+<!--     S2 = colDef(show = FALSE), -->
+<!--     S3 = colDef(show = FALSE), -->
+<!--     S4 = colDef(show = FALSE), -->
+<!--     S5 = colDef(show = FALSE), -->
+<!--     S6 = colDef(show = FALSE), -->
+<!--     Category = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   details = row_details, -->
+<!--   rowClass = "my-row", -->
+<!--   class = "packages-table", -->
+<!--   defaultPageSize = 8, -->
+<!--   defaultSorted = "Category", -->
+<!--   elementId = "cats-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     backgroundColor = "hsl(213, 20%, 99%)", -->
+<!--     borderColor = "hsl(213, 20%, 99%)", -->
+<!--     selectStyle = list(backgroundColor = "#061126"), -->
+<!--     paginationStyle = list(borderColor = "#061126"), -->
+<!--     pageButtonActiveStyle = list(background = "#dee7e7"), -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#dee7e7", -->
+<!--       color = "#dee7e7", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, highlight = TRUE, paginationType = "numbers",  -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-  )
-  )
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!--   ) -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
-------------------------------------------------------------------------
+<!-- ------------------------------------------------------------------------ -->
 
-### Comm-Ele {.tabset}
+<!-- ### Comm-Ele {.tabset} -->
 
-<!-- <div class = "row"> -->
-<!-- <div class = "col-sm-8"> -->
+<!-- <!-- <div class = "row"> --> -->
+<!-- <!-- <div class = "col-sm-8"> --> -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-cmmptrn.a <- cmmptrn
-cmmptrn.a <- cmmptrn.a %>% na.omit(cmmptrn.a)
-cmmptrn.a <- cmmptrn.a[sample(1:nrow(cmmptrn.a)),]
+<!-- cmmptrn.a <- cmmptrn -->
+<!-- cmmptrn.a <- cmmptrn.a %>% na.omit(cmmptrn.a) -->
+<!-- cmmptrn.a <- cmmptrn.a[sample(1:nrow(cmmptrn.a)),] -->
 
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chartz", tags$label("【Level】", `for` = "element-level-filter"),
-      # div(
-        tags$select(
-          id = "element-level-filter",
-          onchange = "Reactable.setFilter('element-filter-table', 'Level', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(cmmptrn.a$Level), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
+<!-- htmltools::browsable( -->
+<!--   tagList( -->
+<!--     div( -->
+<!--       div(class = "chartz", tags$label("【Level】", `for` = "element-level-filter"), -->
+<!--       # div( -->
+<!--         tags$select( -->
+<!--           id = "element-level-filter", -->
+<!--           onchange = "Reactable.setFilter('element-filter-table', 'Level', this.value)", -->
+<!--           tags$option("All", value = ""), -->
+<!--           lapply(unique(cmmptrn.a$Level), tags$option) -->
+<!--         # ) -->
+<!--       )) -->
+<!--     ), -->
+<!--     # tags$hr("aria-hidden" = "true"), -->
 
-reactable(
-  cmmptrn.a, filterable = FALSE,
-  columns = list(
-    Words = colDef(style= list(background = '#f9f6ed'),
-      cell = function(value, index) {
-        Meaning <- cmmptrn.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentence <- cmmptrn.a$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else ""
-        Translation <- cmmptrn.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        Level <- cmmptrn.a$Level[index]
-        Level <- if (!is.na(Level)) Level else ""
-        tagList(
-          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 7, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
-          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 10, fontWeight = 300, color = '#101010', fontFamily = 'Open Sans'), Translation),
-        )
-      },
-      align = "left", minWidth = 550
-    ),
-    Level = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 10,
-  elementId = "element-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#dee7e7",
-      color = "#dee7e7",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365,
-  
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
-)
-  )
-)
+<!-- reactable( -->
+<!--   cmmptrn.a, filterable = FALSE, -->
+<!--   columns = list( -->
+<!--     Words = colDef(style= list(background = '#f9f6ed'), -->
+<!--       cell = function(value, index) { -->
+<!--         Meaning <- cmmptrn.a$Meaning[index] -->
+<!--         Meaning <- if (!is.na(Meaning)) Meaning else "" -->
+<!--         Sentence <- cmmptrn.a$Sentence[index] -->
+<!--         Sentence <- if (!is.na(Sentence)) Sentence else "" -->
+<!--         Translation <- cmmptrn.a$Translation[index] -->
+<!--         Translation <- if (!is.na(Translation)) Translation else "" -->
+<!--         Level <- cmmptrn.a$Level[index] -->
+<!--         Level <- if (!is.na(Level)) Level else "" -->
+<!--         tagList( -->
+<!--           div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 7, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))), -->
+<!--           div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentence), -->
+<!--           div(style = list(fontSize = 10, fontWeight = 300, color = '#101010', fontFamily = 'Open Sans'), Translation), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left", minWidth = 550 -->
+<!--     ), -->
+<!--     Level = colDef(show = FALSE), -->
+<!--     Meaning = colDef(show = FALSE), -->
+<!--     Sentence = colDef(show = FALSE), -->
+<!--     Translation = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 10, -->
+<!--   elementId = "element-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#dee7e7", -->
+<!--       color = "#dee7e7", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE, height = 365, -->
 
-```
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
+<!--   ) -->
+<!-- ) -->
 
-<!-- </div> -->
-<!-- <div class = "col-sm-4"> -->
+<!-- ``` -->
 
-<!-- ![](chart.png){width=400px} -->
-<!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> -->
+<!-- <!-- </div> --> -->
+<!-- <!-- <div class = "col-sm-4"> --> -->
 
-<!-- </div> -->
-<!-- </div> -->
+<!-- <!-- ![](chart.png){width=400px} --> -->
+<!-- <!-- <center><p style="font-size:11px; line-height: 1; font-family: Noto Sans JP;  color: #202020;">**Word-Diagram**</p></center> --> -->
 
-------------------------------------------------------------------------
+<!-- <!-- </div> --> -->
+<!-- <!-- </div> --> -->
 
-### Comm-Pat {.tabset}
+<!-- ------------------------------------------------------------------------ -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ### Comm-Pat {.tabset} -->
 
-syntxm.a <- syntxm
-# syntxm.a <- syntxm.a %>% slice(196:200)
-# syntxm.a <- syntxm.a %>% na.omit(syntxm.a)
-syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),]
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chartz", tags$label("【Level】", `for` = "pattern-level-filter"),
-      # div(
-        tags$select(
-          id = "pattern-level-filter",
-          onchange = "Reactable.setFilter('pattern-filter-table', 'Level', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(syntxm.a$Level), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
+<!-- syntxm.a <- syntxm -->
+<!-- # syntxm.a <- syntxm.a %>% slice(196:200) -->
+<!-- # syntxm.a <- syntxm.a %>% na.omit(syntxm.a) -->
+<!-- syntxm.a <- syntxm.a[sample(1:nrow(syntxm.a)),] -->
 
-reactable(
-  syntxm.a,
-  columns = list(
-    Meaning = colDef(style= list(background = '#edede9'),
-      cell = function(value, index) {
-        Expression <- syntxm.a$Expression[index]
-        Expression <- if (!is.na(Expression)) Expression else ""
-        Structure <- syntxm.a$Structure[index]
-        Structure <- if (!is.na(Structure)) Structure else ""
-        Structure.1 <- syntxm.a$Structure.1[index]
-        Structure.1 <- if (!is.na(Structure.1)) Structure.1 else ""
-        Sentence <- syntxm.a$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else ""
-        Korean <- syntxm.a$Korean[index]
-        Korean <- if (!is.na(Korean)) Korean else ""
-        English <- syntxm.a$English[index]
-        English <- if (!is.na(English)) English else ""
-        Remarks <- syntxm.a$Remarks[index]
-        Remarks <- if (!is.na(Remarks)) Remarks else ""
-        Remarks.1 <- syntxm.a$Remarks.1[index]
-        Remarks.1 <- if (!is.na(Remarks.1)) Remarks.1 else ""
-        Level <- syntxm.a$Level[index]
-        Level <- if (!is.na(Level)) Level else ""
-        Spanish <- syntxm.a$Spanish[index]
-        Spanish <- if (!is.na(Spanish)) Spanish else ""
-        tagList(
-          div(style = list(fontSize = 17, fontWeight = 900, color = '#0F2040', fontFamily = 'Righteous'), value),
-          div(style = list(fontSize = 12, fontWeight = 500, color = '#941b0c'), Expression),
-          div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure),
-          div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure.1),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks),
-          div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks.1),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 1, color = '#edede9'), "."),
-          div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence),
-          div(style = list(fontSize = 16, fontWeight = 400, color = '#0F2040'), Korean),
-          div(style = list(fontSize = 11, fontWeight = 400, color = '#0F2040'), English),
-          div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish),
-        )
-      },
-      align = "center"
-    ),
-    
-    Expression = colDef(show = FALSE),
-    Structure = colDef(show = FALSE),
-    Structure.1 = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE),
-    Remarks = colDef(show = FALSE),
-    Remarks.1 = colDef(show = FALSE),
-    Korean = colDef(show = FALSE),
-    English = colDef(show = FALSE),
-    Spanish = colDef(show = FALSE),
-    Level = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 1,
-  elementId = "pattern-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 290, fontSize = "11px"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#dee7e7",
-      color = "#dee7e7",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", highlight = TRUE,
-  
-  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
-  )
-)
-)
+<!-- htmltools::browsable( -->
+<!--   tagList( -->
+<!--     div( -->
+<!--       div(class = "chartz", tags$label("【Level】", `for` = "pattern-level-filter"), -->
+<!--       # div( -->
+<!--         tags$select( -->
+<!--           id = "pattern-level-filter", -->
+<!--           onchange = "Reactable.setFilter('pattern-filter-table', 'Level', this.value)", -->
+<!--           tags$option("All", value = ""), -->
+<!--           lapply(unique(syntxm.a$Level), tags$option) -->
+<!--         # ) -->
+<!--       )) -->
+<!--     ), -->
+<!--     # tags$hr("aria-hidden" = "true"), -->
 
-```
+<!-- reactable( -->
+<!--   syntxm.a, -->
+<!--   columns = list( -->
+<!--     Meaning = colDef(style= list(background = '#edede9'), -->
+<!--       cell = function(value, index) { -->
+<!--         Expression <- syntxm.a$Expression[index] -->
+<!--         Expression <- if (!is.na(Expression)) Expression else "" -->
+<!--         Structure <- syntxm.a$Structure[index] -->
+<!--         Structure <- if (!is.na(Structure)) Structure else "" -->
+<!--         Structure.1 <- syntxm.a$Structure.1[index] -->
+<!--         Structure.1 <- if (!is.na(Structure.1)) Structure.1 else "" -->
+<!--         Sentence <- syntxm.a$Sentence[index] -->
+<!--         Sentence <- if (!is.na(Sentence)) Sentence else "" -->
+<!--         Korean <- syntxm.a$Korean[index] -->
+<!--         Korean <- if (!is.na(Korean)) Korean else "" -->
+<!--         English <- syntxm.a$English[index] -->
+<!--         English <- if (!is.na(English)) English else "" -->
+<!--         Remarks <- syntxm.a$Remarks[index] -->
+<!--         Remarks <- if (!is.na(Remarks)) Remarks else "" -->
+<!--         Remarks.1 <- syntxm.a$Remarks.1[index] -->
+<!--         Remarks.1 <- if (!is.na(Remarks.1)) Remarks.1 else "" -->
+<!--         Level <- syntxm.a$Level[index] -->
+<!--         Level <- if (!is.na(Level)) Level else "" -->
+<!--         Spanish <- syntxm.a$Spanish[index] -->
+<!--         Spanish <- if (!is.na(Spanish)) Spanish else "" -->
+<!--         tagList( -->
+<!--           div(style = list(fontSize = 17, fontWeight = 900, color = '#0F2040', fontFamily = 'Righteous'), value), -->
+<!--           div(style = list(fontSize = 12, fontWeight = 500, color = '#941b0c'), Expression), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Structure.1), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 300, color = '#8C8C8C', fontFamily = 'Zen Kaku Gothic New'), Remarks.1), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 1, color = '#edede9'), "."), -->
+<!--           div(style = list(fontSize = 20, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), Sentence), -->
+<!--           div(style = list(fontSize = 16, fontWeight = 400, color = '#0F2040'), Korean), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 400, color = '#0F2040'), English), -->
+<!--           div(style = list(fontSize = 11, fontWeight = 400, color = '#259999', fontFamily = 'Zen Kaku Gothic New'), Spanish), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "center" -->
+<!--     ), -->
 
-------------------------------------------------------------------------
+<!--     Expression = colDef(show = FALSE), -->
+<!--     Structure = colDef(show = FALSE), -->
+<!--     Structure.1 = colDef(show = FALSE), -->
+<!--     Sentence = colDef(show = FALSE), -->
+<!--     Remarks = colDef(show = FALSE), -->
+<!--     Remarks.1 = colDef(show = FALSE), -->
+<!--     Korean = colDef(show = FALSE), -->
+<!--     English = colDef(show = FALSE), -->
+<!--     Spanish = colDef(show = FALSE), -->
+<!--     Level = colDef(show = FALSE) -->
+<!--   ), -->
+<!--   rowClass = "my-row", -->
+<!--   defaultPageSize = 1, -->
+<!--   elementId = "pattern-filter-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", height = 290, fontSize = "11px"), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "#dee7e7", -->
+<!--       color = "#dee7e7", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, -->
+
+<!--   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px") -->
+<!--   ) -->
+<!-- ) -->
+<!-- ) -->
+
+<!-- ``` -->
+
+<!-- ------------------------------------------------------------------------ -->
 
 <!-- ### More {.tabset} -->
 
@@ -3371,71 +3346,71 @@ reactable(
 
 <!-- ------------------------------------------------------------------------ -->
 
-### Comm-Rcl {.tabset}
+<!-- ### Comm-Rcl {.tabset} -->
 
-```{r, echo=FALSE, message=FALSE}
+<!-- ```{r, echo=FALSE, message=FALSE} -->
 
-mstrypatrn.b <- mstrypatrn  %>%  select(Expression, Translation)
-mstrypatrn.b <- mstrypatrn.b[sample(1:nrow(mstrypatrn.b)),]
-mstrypatrn.b <- mstrypatrn.b[sample(1:nrow(mstrypatrn.b)),]
+<!-- mstrypatrn.b <- mstrypatrn  %>%  select(Expression, Translation) -->
+<!-- mstrypatrn.b <- mstrypatrn.b[sample(1:nrow(mstrypatrn.b)),] -->
+<!-- mstrypatrn.b <- mstrypatrn.b[sample(1:nrow(mstrypatrn.b)),] -->
 
-reactable(
-  mstrypatrn.b,
-  onClick = "expand",
-  columns = list(
-    # Expression = colDef(minWidth = 50, align = "left", style = list(fontSize = 17, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#e0e1dd')),
-    # Expression = colDef(style= list(background = '#e8e7e2'),
-    Translation = colDef(style= list(background = '#dee7e7'),
-      cell = function(value, index) {
-        tagList(
-          # div(style = list(fontSize = 19, fontWeight = 400, fontFamily = 'RocknRoll One', color = '#2b3441', background = '#e8e7e2'), value),
-          div(style = list(fontSize = 15, fontWeight = 600, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040', background = '#dee7e7'), value),
-        )
-      },
-      align = "left"
-    ),
-    Expression = colDef(show = FALSE)
-  ),
+<!-- reactable( -->
+<!--   mstrypatrn.b, -->
+<!--   onClick = "expand", -->
+<!--   columns = list( -->
+<!--     # Expression = colDef(minWidth = 50, align = "left", style = list(fontSize = 17, fontWeight = 500, color = '#0F2040', fontFamily = 'Zen Kaku Gothic New', background = '#e0e1dd')), -->
+<!--     # Expression = colDef(style= list(background = '#e8e7e2'), -->
+<!--     Translation = colDef(style= list(background = '#dee7e7'), -->
+<!--       cell = function(value, index) { -->
+<!--         tagList( -->
+<!--           # div(style = list(fontSize = 19, fontWeight = 400, fontFamily = 'RocknRoll One', color = '#2b3441', background = '#e8e7e2'), value), -->
+<!--           div(style = list(fontSize = 15, fontWeight = 600, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040', background = '#dee7e7'), value), -->
+<!--         ) -->
+<!--       }, -->
+<!--       align = "left" -->
+<!--     ), -->
+<!--     Expression = colDef(show = FALSE) -->
+<!--   ), -->
 
-  details = function(index){
-    Expression <- mstrypatrn.b$Expression[index]
-    Expression <- if (!is.na(Expression)) Expression else ""
+<!--   details = function(index){ -->
+<!--     Expression <- mstrypatrn.b$Expression[index] -->
+<!--     Expression <- if (!is.na(Expression)) Expression else "" -->
 
-    tagList(
-      div(
-        # htmltools::div(style = list(padding = 6, fontSize = 15, fontWeight = 400, color = '#1f1e22', fontFamily = 'Zen Kaku Gothic New', background = '#f5f5f5'), "・ ", Translation)
-        htmltools::div(style = list(padding = 6, fontSize = 17, fontWeight = 400, color = '#0F2040', fontFamily = 'RocknRoll One', background = '#f5f5f5'), "・ ", Expression)
-      )
-    )
-  },
-  # rowClass = "my-row",
-  defaultPageSize = 7,
-  # defaultSorted = "Category",
-  # class = "packages-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 45),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%",
-      fontSize = "11px"
-    ),
-    headerStyle = list(
-      backgroundColor = "white",
-      color = "white",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", height = 355,
+<!--     tagList( -->
+<!--       div( -->
+<!--         # htmltools::div(style = list(padding = 6, fontSize = 15, fontWeight = 400, color = '#1f1e22', fontFamily = 'Zen Kaku Gothic New', background = '#f5f5f5'), "・ ", Translation) -->
+<!--         htmltools::div(style = list(padding = 6, fontSize = 17, fontWeight = 400, color = '#0F2040', fontFamily = 'RocknRoll One', background = '#f5f5f5'), "・ ", Expression) -->
+<!--       ) -->
+<!--     ) -->
+<!--   }, -->
+<!--   # rowClass = "my-row", -->
+<!--   defaultPageSize = 7, -->
+<!--   # defaultSorted = "Category", -->
+<!--   # class = "packages-table", -->
+<!--   theme = reactableTheme( -->
+<!--     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", height = 45), -->
+<!--     searchInputStyle = list( -->
+<!--       paddingLeft = "8px", -->
+<!--       paddingTop = "8px", -->
+<!--       paddingBottom = "8px", -->
+<!--       width = "100%", -->
+<!--       fontSize = "11px" -->
+<!--     ), -->
+<!--     headerStyle = list( -->
+<!--       backgroundColor = "white", -->
+<!--       color = "white", -->
+<!--       fontWeight = 100, -->
+<!--       fontFamily = 'Open Sans', -->
+<!--       fontSize = "0rem", -->
+<!--       padding = "0px" -->
+<!--     ), -->
+<!--   ), -->
+<!--   showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = FALSE, searchable = FALSE, sortable = FALSE, paginationType = "numbers", height = 355, -->
 
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
-)
+<!--   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px") -->
+<!-- ) -->
 
-```
+<!-- ``` -->
 
 <!-- ------------------------------------------------------------------------ -->
 
