@@ -155,6 +155,7 @@ verbrev <- read_csv("jpdb/VERBSRVW-VERBS.csv")
 verbphr <- read_csv("jpdb/VERBSPHR-VERBS.csv")
 vrbxte <- read_csv("jpdb/VRBEXT-WRDS.csv")
 vrbexpr <- read_csv("jpdb/VRBEXPR-WRDS.csv")
+msrtywg <- read_csv("cpdb/MSTRYW-QNS.csv")
 ```
 
 # <b> Words </b> {.tabset}
@@ -10233,3 +10234,39 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+# <b> Techniques: Enhanced </b> {.tabset}
+
+### LLE:01 Semantics {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+msrtywg <- msrtywg[sample(1:nrow(na.omit(msrtywg))),]
+msrtywg <- msrtywg[sample(1:nrow(msrtywg)),]
+
+reactable(
+  na.omit(msrtywg),
+  columns = list(
+    Details = colDef(style= list(minWidth = 1900, background = '#dee7e7', fontSize = 11.2, fontWeight = 300, fontFamily = 'Open Sans', color = '#0F2040'), html = TRUE, align = "left")),
+  rowClass = "my-row",
+  defaultPageSize = 1,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%",
+      fontSize = "11px"
+    )
+  ),
+  showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE, 
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
+------------------------------------------------------------------------
