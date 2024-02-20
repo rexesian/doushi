@@ -156,6 +156,8 @@ verbphr <- read_csv("jpdb/VERBSPHR-VERBS.csv")
 vrbxte <- read_csv("jpdb/VRBEXT-WRDS.csv")
 vrbexpr <- read_csv("jpdb/VRBEXPR-WRDS.csv")
 msrtywg <- read_csv("cpdb/MSTRYW-QNS.csv")
+
+utllztn <- read_csv("jpim/LSTJWRD-SNT.csv")
 ```
 
 # <b> Words </b> {.tabset}
@@ -10268,5 +10270,69 @@ reactable(
 )
 
 ```
+
+------------------------------------------------------------------------
+
+### LLE:02 Utilization {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+utllztn.s1 <- utllztn %>% slice(1:30)
+utllztn.s1 <- utllztn.s1[sample(1:nrow(utllztn.s1)),]
+utllztn.s2 <- utllztn %>% slice(132:188)
+utllztn.s2 <- utllztn.s2[sample(1:nrow(utllztn.s2)),]
+utllztn.s3 <- utllztn %>% slice(194:214)
+utllztn.s3 <- utllztn.s3[sample(1:nrow(utllztn.s3)),]
+
+utllztn.lst <- bind_rows(utllztn.s1, utllztn.s2)
+utllztn.lst <- bind_rows(utllztn.lst, utllztn.s3)
+
+reactable(
+  utllztn.lst,
+  columns = list(
+    Words = colDef(minWidth = 160, style= list(background = '#edede9', color = '#0F2040'),
+      cell = function(value, index) {
+        Meaning <- utllztn.lst$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        tagList(
+          div(style = list(fontSize = 15, color = '#0F2040', fontFamily = 'Open Sans' ,fontWeight = 400), value),
+          div(style = list(fontSize = 8, color = '#800000', fontFamily = 'Open Sans' ,fontWeight = 400), Meaning),
+        )
+      },
+      align = "left"
+    ),
+    Sentence = colDef(minWidth = 900, style= list(background = '#e0e1dd', color = '#0F2040'),
+      cell = function(value, index) {
+        Translation <- utllztn.lst$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 15, color = '#0F2040', fontFamily = 'Open Sans' ,fontWeight = 400), value),
+          # div(style = list(fontSize = 8, color = '#026450', fontFamily = 'Open Sans' ,fontWeight = 400), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Words = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 8,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#f5f5f5"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE,
+
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
+)
+
+```
+
 
 ------------------------------------------------------------------------
