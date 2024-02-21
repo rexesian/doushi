@@ -10281,16 +10281,22 @@ utllztn.s1 <- utllztn %>% slice(1:30)
 utllztn.s1 <- utllztn.s1[sample(1:nrow(utllztn.s1)),]
 utllztn.s2 <- utllztn %>% slice(132:188)
 utllztn.s2 <- utllztn.s2[sample(1:nrow(utllztn.s2)),]
-utllztn.s3 <- utllztn %>% slice(194:214)
+utllztn.s3 <- utllztn %>% slice(194:222)
 utllztn.s3 <- utllztn.s3[sample(1:nrow(utllztn.s3)),]
+utllztn.s4 <- utllztn %>% slice(90:120)
+utllztn.s4 <- utllztn.s4[sample(1:nrow(utllztn.s4)),]
+utllztn.s5 <- utllztn %>% slice(320:330)
+utllztn.s5 <- utllztn.s5[sample(1:nrow(utllztn.s5)),]
 
 utllztn.lst <- bind_rows(utllztn.s1, utllztn.s2)
+utllztn.lst <- bind_rows(utllztn.lst, utllztn.s4)
 utllztn.lst <- bind_rows(utllztn.lst, utllztn.s3)
+utllztn.lst <- bind_rows(utllztn.lst, utllztn.s5)
 
 reactable(
   utllztn.lst,
   columns = list(
-    Words = colDef(minWidth = 160, style= list(background = '#edede9', color = '#0F2040'),
+    Words = colDef(minWidth = 180, style= list(background = '#edede9', color = '#0F2040'),
       cell = function(value, index) {
         Meaning <- utllztn.lst$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
