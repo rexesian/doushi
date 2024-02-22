@@ -10277,26 +10277,30 @@ reactable(
 
 ```{r, echo=FALSE, message=FALSE}
 
-utllztn.s1 <- utllztn %>% slice(1:30)
+utllztn.s1 <- utllztn %>% slice(1:45)
+utllztn.s1 <- utllztn.s1[sample(1:nrow(utllztn.s1)),]
 utllztn.s1 <- utllztn.s1[sample(1:nrow(utllztn.s1)),]
 utllztn.s2 <- utllztn %>% slice(132:188)
 utllztn.s2 <- utllztn.s2[sample(1:nrow(utllztn.s2)),]
 utllztn.s3 <- utllztn %>% slice(194:222)
 utllztn.s3 <- utllztn.s3[sample(1:nrow(utllztn.s3)),]
-utllztn.s4 <- utllztn %>% slice(90:120)
+utllztn.s4 <- utllztn %>% slice(46:131)
 utllztn.s4 <- utllztn.s4[sample(1:nrow(utllztn.s4)),]
-utllztn.s5 <- utllztn %>% slice(320:330)
+utllztn.s5 <- utllztn %>% slice(320:334)
 utllztn.s5 <- utllztn.s5[sample(1:nrow(utllztn.s5)),]
+utllztn.s6 <- utllztn %>% slice(501:509)
+utllztn.s6 <- utllztn.s6[sample(1:nrow(utllztn.s6)),]
 
 utllztn.lst <- bind_rows(utllztn.s1, utllztn.s2)
 utllztn.lst <- bind_rows(utllztn.lst, utllztn.s4)
 utllztn.lst <- bind_rows(utllztn.lst, utllztn.s3)
 utllztn.lst <- bind_rows(utllztn.lst, utllztn.s5)
+utllztn.lst <- bind_rows(utllztn.lst, utllztn.s6)
 
 reactable(
   utllztn.lst,
   columns = list(
-    Words = colDef(minWidth = 180, style= list(background = '#edede9', color = '#0F2040'),
+    Words = colDef(minWidth = 200, style= list(background = '#edede9', color = '#0F2040'),
       cell = function(value, index) {
         Meaning <- utllztn.lst$Meaning[index]
         Meaning <- if (!is.na(Meaning)) Meaning else ""
@@ -10307,7 +10311,7 @@ reactable(
       },
       align = "left"
     ),
-    Sentence = colDef(minWidth = 900, style= list(background = '#e0e1dd', color = '#0F2040'),
+    Sentence = colDef(minWidth = 1000, style= list(background = '#e0e1dd', color = '#0F2040'),
       cell = function(value, index) {
         Translation <- utllztn.lst$Translation[index]
         Translation <- if (!is.na(Translation)) Translation else ""
@@ -10333,7 +10337,7 @@ reactable(
       width = "100%"
     )
   ),
-showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE,
+showPageInfo = FALSE, borderless = FALSE, outlined = TRUE, bordered = TRUE, searchable = TRUE, sortable = FALSE, paginationType = "numbers", highlight = TRUE, wrap = FALSE, resizable = TRUE,
 
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro , monospace, Helvetica Neue", fontSize = "11px")
 )
