@@ -270,6 +270,7 @@ fnctionsc <- read_csv("cpdb/FNCSTC-ETB.csv")
 gessence04 <- read_csv("cpdb/GRMESSP-QNS.csv")
 apex <- read_csv("cpdb/ADVSYN-ETB.csv")
 rvws <- read_csv("cpdb/ADVXSM-ETB.csv")
+qckrmw <- read_csv("cpdb/QCKGRM-ETB.csv")
 ```
 
 # <b> Composition </b> {.tabset}
@@ -2629,6 +2630,71 @@ reactable(
   style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
 )
 
+```
+
+------------------------------------------------------------------------
+
+#### Apexn
+
+```{r, echo=FALSE, message=FALSE}
+
+reactable(
+  na.omit(qckrmw),
+  columns = list(
+    # Content = colDef(minWidth = 300,align = "left", html = TRUE, sticky = "left", style = list(background = '#edede9', fontSize = 11.5, fontWeight = 400, fontFamily = 'Open Sans', color = '#0F2040')),
+    # Description = colDef(minWidth = 350,align = "left", html = TRUE, style = list(background = '#e0e1dd', fontSize = 10.5, fontWeight = 400, fontFamily = 'Zen Kaku Gothic New', color = '#0F2040')),
+    Content = colDef(style= list(background = '#edede9'), minWidth = 140,
+      cell = function(value, index) {
+        Interpretation <- qckrmw$Interpretation[index]
+        Interpretation <- if (!is.na(Interpretation)) Interpretation else ""
+        tagList(
+          div(style = list(fontSize = 15, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#026450', fontFamily = 'Zen Kaku Gothic New'), Interpretation),
+        )
+      },
+      align = "left"
+    ), 
+    Meaning = colDef(style= list(background = '#e3e4e0'), minWidth = 260,
+      cell = function(value, index) {
+        Description <- qckrmw$Description[index]
+        Description <- if (!is.na(Description)) Description else ""
+        tagList(
+          div(style = list(fontSize = 11, fontWeight = 700, color = '#510304', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Description),
+        )
+      },
+      align = "left"
+    ), 
+    Example = colDef(style= list(background = '#e0e1dd'), minWidth = 280,
+      cell = function(value, index) {
+        Translation <- qckrmw$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        tagList(
+          div(style = list(fontSize = 13, fontWeight = 600, color = '#0F2040', fontFamily = 'Open Sans'), value),
+          div(style = list(fontSize = 10, fontWeight = 300, color = '#01161e', fontFamily = 'Zen Kaku Gothic New'), Translation),
+        )
+      },
+      align = "left"
+    ),
+    Interpretation = colDef(show = FALSE),
+    Description = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 18,
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", fontSize = "11px", borderColor = "#f5f5f5"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    )
+  ),
+  showPageInfo = FALSE, outlined = TRUE, borderless = FALSE, bordered = TRUE, searchable = TRUE, sortable = FALSE, resizable = TRUE, wrap = FALSE, paginationType = "numbers", highlight = TRUE,
+  
+  style = list(fontFamily = "Noto Sans JP, Hiragino Maru Gothic ProN, Anonymous Pro , Helvetica Neue", fontSize = "11px")
+)
 ```
 
 ------------------------------------------------------------------------
