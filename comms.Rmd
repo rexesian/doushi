@@ -4176,6 +4176,85 @@ reactable(
 
 ------------------------------------------------------------------------
 
+#### Patterns {.tabset}
+
+```{r, echo=FALSE, message=FALSE}
+
+cmmptrn.a <- cmmptrn
+cmmptrn.a <- cmmptrn.a %>% na.omit(cmmptrn.a)
+cmmptrn.a <- cmmptrn.a[sample(1:nrow(cmmptrn.a)),]
+
+htmltools::browsable(
+  tagList(
+    div(
+      div(class = "chartz", tags$label("【Level】", `for` = "element-level-filter"),
+      # div(
+        tags$select(
+          id = "element-level-filter",
+          onchange = "Reactable.setFilter('element-filter-table', 'Level', this.value)",
+          tags$option("All", value = ""),
+          lapply(unique(cmmptrn.a$Level), tags$option)
+        # )
+      ))
+    ),
+    # tags$hr("aria-hidden" = "true"),
+
+reactable(
+  cmmptrn.a, filterable = FALSE,
+  columns = list(
+    Words = colDef(style= list(background = '#f9f6ed'), 
+      cell = function(value, index) {
+        Meaning <- cmmptrn.a$Meaning[index]
+        Meaning <- if (!is.na(Meaning)) Meaning else ""
+        Sentence <- cmmptrn.a$Sentence[index]
+        Sentence <- if (!is.na(Sentence)) Sentence else ""
+        Translation <- cmmptrn.a$Translation[index]
+        Translation <- if (!is.na(Translation)) Translation else ""
+        Level <- cmmptrn.a$Level[index]
+        Level <- if (!is.na(Level)) Level else ""
+        tagList(
+          div(span(style = list(fontSize = 18, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 7, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
+          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), Translation),
+          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentence),
+        )
+      },
+      align = "left", minWidth = 900
+    ),
+    Level = colDef(show = FALSE),
+    Meaning = colDef(show = FALSE),
+    Sentence = colDef(show = FALSE),
+    Translation = colDef(show = FALSE)
+  ),
+  rowClass = "my-row",
+  defaultPageSize = 4,
+  elementId = "element-filter-table",
+  theme = reactableTheme(
+    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"),
+    searchInputStyle = list(
+      paddingLeft = "8px",
+      paddingTop = "8px",
+      paddingBottom = "8px",
+      width = "100%"
+    ),
+    headerStyle = list(
+      backgroundColor = "#dee7e7",
+      color = "#dee7e7",
+      fontWeight = 100,
+      fontFamily = 'Open Sans',
+      fontSize = "0rem",
+      padding = "0px"
+    ),
+  ),
+  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
+  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
+)
+  )
+)
+
+```
+
+------------------------------------------------------------------------
+
 #### Syntax {.tabset}
 
 ```{r, echo=FALSE, message=FALSE}
@@ -4215,8 +4294,8 @@ reactable(
         Level <- cmmpnflct.a$Level[index]
         Level <- if (!is.na(Level)) Level else ""
         tagList(
-          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#122228', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 5, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
-          div(style = list(fontSize = 12, fontWeight = 600, color = '#009A77', fontFamily = 'Open Sans'), Remarks),
+          div(span(style = list(fontSize = 18, fontWeight = 600, color = '#122228', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 5, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
+          div(style = list(fontSize = 11, fontWeight = 600, color = '#009A77', fontFamily = 'Open Sans'), Remarks),
           div(style = list(fontSize = 10.5, fontWeight = 400, color = '#0F2040', fontFamily = 'Open Sans'), Translation),
           div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentence),
         )
@@ -4230,7 +4309,7 @@ reactable(
     Translation = colDef(show = FALSE)
   ),
   rowClass = "my-row",
-  defaultPageSize = 3,
+  defaultPageSize = 4,
   elementId = "inflect-filter-table",
   theme = reactableTheme(
     cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"),
@@ -4253,85 +4332,6 @@ reactable(
   
   style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
   )
-  )
-)
-
-```
-
-------------------------------------------------------------------------
-
-#### Patterns {.tabset}
-
-```{r, echo=FALSE, message=FALSE}
-
-cmmptrn.a <- cmmptrn
-cmmptrn.a <- cmmptrn.a %>% na.omit(cmmptrn.a)
-cmmptrn.a <- cmmptrn.a[sample(1:nrow(cmmptrn.a)),]
-
-htmltools::browsable(
-  tagList(
-    div(
-      div(class = "chartz", tags$label("【Level】", `for` = "element-level-filter"),
-      # div(
-        tags$select(
-          id = "element-level-filter",
-          onchange = "Reactable.setFilter('element-filter-table', 'Level', this.value)",
-          tags$option("All", value = ""),
-          lapply(unique(cmmptrn.a$Level), tags$option)
-        # )
-      ))
-    ),
-    # tags$hr("aria-hidden" = "true"),
-
-reactable(
-  cmmptrn.a, filterable = FALSE,
-  columns = list(
-    Words = colDef(style= list(background = '#f9f6ed'), 
-      cell = function(value, index) {
-        Meaning <- cmmptrn.a$Meaning[index]
-        Meaning <- if (!is.na(Meaning)) Meaning else ""
-        Sentence <- cmmptrn.a$Sentence[index]
-        Sentence <- if (!is.na(Sentence)) Sentence else ""
-        Translation <- cmmptrn.a$Translation[index]
-        Translation <- if (!is.na(Translation)) Translation else ""
-        Level <- cmmptrn.a$Level[index]
-        Level <- if (!is.na(Level)) Level else ""
-        tagList(
-          div(span(style = list(fontSize = 22, fontWeight = 600, color = '#101010', fontFamily = 'Open Sans'), value), " ", span(style = list(fontSize = 12, fontWeight = 600, color = '#800000', fontFamily = 'Open Sans'), Meaning, " ", span(style = list(fontSize = 7, fontWeight = 500, color = '#008000', fontFamily = 'Open Sans'), "L", Level))),
-          div(style = list(fontSize = 10, fontWeight = 400, color = '#026450', fontFamily = 'Open Sans'), Translation),
-          div(style = list(fontSize = 14, fontWeight = 400, color = '#101010', fontFamily = 'Open Sans'), Sentence),
-        )
-      },
-      align = "left", minWidth = 900
-    ),
-    Level = colDef(show = FALSE),
-    Meaning = colDef(show = FALSE),
-    Sentence = colDef(show = FALSE),
-    Translation = colDef(show = FALSE)
-  ),
-  rowClass = "my-row",
-  defaultPageSize = 4,
-  elementId = "element-filter-table",
-  theme = reactableTheme(
-    cellStyle = list(display = "flex", flexDirection = "column", justifyContent = "center", borderColor = "#e0e1dd"),
-    searchInputStyle = list(
-      paddingLeft = "8px",
-      paddingTop = "8px",
-      paddingBottom = "8px",
-      width = "100%"
-    ),
-    headerStyle = list(
-      backgroundColor = "#dee7e7",
-      color = "#dee7e7",
-      fontWeight = 100,
-      fontFamily = 'Open Sans',
-      fontSize = "0rem",
-      padding = "0px"
-    ),
-  ),
-  showPageInfo = FALSE, bordered = TRUE, searchable = FALSE, sortable = FALSE, paginationType = "simple", striped = TRUE, highlight = TRUE,
-  style = list(fontFamily = "Noto Sans JP, Heiti SC, Hiragino Maru Gothic ProN, Anonymous Pro, monospace, Helvetica Neue", fontSize = "11px")
-)
   )
 )
 
